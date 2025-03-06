@@ -25,6 +25,8 @@ public static class AddServicesConfigurationHostBuilderExtensions
 
         builder.AddOptions();
 
+        services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(AppDomain.CurrentDomain.GetAssemblies()));
+
         services.AddSingleton<IPasswordCoder, PasswordCoder>();
 
         services.AddDbConnection(configuration);

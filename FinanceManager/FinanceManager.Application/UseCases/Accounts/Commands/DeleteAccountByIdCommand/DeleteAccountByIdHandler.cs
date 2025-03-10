@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using FinanceManager.Application.UseCases.Base;
+using FinanceManager.Application.UseCases.Commons.Bases;
 using FinanceManager.Domain.Services.Accounts;
 using FinanceManager.Domain.Services.Admins;
 using MediatR;

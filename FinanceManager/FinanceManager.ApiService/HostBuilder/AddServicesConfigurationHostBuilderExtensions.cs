@@ -1,5 +1,6 @@
 ﻿using FinanceManager.Application.Security;
 using FinanceManager.Application.Security.Jwt;
+using FinanceManager.Application.UseCases.Commons.Behaviours;
 using FinanceManager.Domain.Services.Accounts;
 using FinanceManager.Domain.Services.Admins;
 using FinanceManager.Domain.Services.Finances;
@@ -8,6 +9,7 @@ using FinanceManager.ServiceDefaults.Routing;
 using Infrastructure;
 using Infrastructure.Security;
 using Infrastructure.UnitOfWork;
+using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.EntityFrameworkCore;
@@ -25,7 +27,7 @@ public static class AddServicesConfigurationHostBuilderExtensions
 
         builder.AddOptions();
 
-        services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(AppDomain.CurrentDomain.GetAssemblies()));
+        services.AddMediator();
 
         services.AddSingleton<IPasswordCoder, PasswordCoder>();
 
@@ -50,6 +52,15 @@ public static class AddServicesConfigurationHostBuilderExtensions
                         new SlugifyParameterTransformer())));
 
         return builder;
+    }
+
+    private static IServiceCollection AddMediator(this IServiceCollection services)
+    {
+        services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(AppDomain.CurrentDomain.GetAssemblies()));
+
+        services.AddSingleton(typeof(IPipelineBehavior<,>), typeof(LoggingBehaviour<,>));
+
+        return services;
     }
 
     private static IServiceCollection AddDbConnection(this IServiceCollection services, IConfiguration configuration)

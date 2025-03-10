@@ -1,5 +1,4 @@
-﻿using FinanceManager.Application.UseCases.Base;
-using MediatR;
+﻿using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;

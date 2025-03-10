@@ -3,7 +3,7 @@ using FinanceManager.Application.Models;
 using FinanceManager.Application.UseCases.Accounts.Commands.UpdateCommand;
 using FinanceManager.Domain.Models;
 
-namespace FinanceManager.Application.UseCases.Mapping;
+namespace FinanceManager.Application.UseCases.Commons.Mapping;
 
 public class AccountProfile : Profile
 {

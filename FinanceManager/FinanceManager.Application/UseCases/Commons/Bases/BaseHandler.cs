@@ -3,7 +3,7 @@ using FinanceManager.Application.Models;
 using Microsoft.Extensions.Logging;
 using System.Security.Claims;
 
-namespace FinanceManager.Application.UseCases.Base;
+namespace FinanceManager.Application.UseCases.Commons.Bases;
 
 public class BaseHandler
 {

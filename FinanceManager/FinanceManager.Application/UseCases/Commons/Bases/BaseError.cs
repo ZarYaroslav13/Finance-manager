@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FinanceManager.Application.UseCases.Base;
+namespace FinanceManager.Application.UseCases.Commons.Bases;
 
 public class BaseError
 {

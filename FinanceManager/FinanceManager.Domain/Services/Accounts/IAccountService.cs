@@ -4,7 +4,7 @@ namespace FinanceManager.Domain.Services.Accounts;
 
 public interface IAccountService
 {
-    public string GetNameUserRole();
+    public string GetUserRoleName();
 
     public Task<List<AccountModel>> GetAccountsAsync(string adminEmail, int skip = 0, int take = 0);
 

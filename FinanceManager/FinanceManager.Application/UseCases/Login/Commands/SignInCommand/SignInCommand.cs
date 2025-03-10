@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using FinanceManager.Application.UseCases.Base;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FinanceManager.Application.UseCases.Login.Commands.SignInCommand;
 
-public class SignInCommand : IRequest
-{
+//public class SignInCommand : IRequest<BaseResponse<>>
+//{
 
-}
+//}

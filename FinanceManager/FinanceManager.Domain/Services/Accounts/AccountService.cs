@@ -24,9 +24,9 @@ public class AccountService : BaseService, IAccountService
         _repository = _unitOfWork.GetRepository<Account>();
     }
 
-    public const string NameUserRole = "User";
+    public const string UserRoleName = "User";
 
-    public string GetNameUserRole() => NameUserRole;
+    public string GetUserRoleName() => UserRoleName;
 
     public async Task<List<AccountModel>> GetAccountsAsync(string adminEmail, int skip = 0, int take = 0)
     {
@@ -119,10 +119,10 @@ public class AccountService : BaseService, IAccountService
 
         string encodedPassword = _passwordCoder.ComputeSHA256Hash(password);
 
-        var account = (await _repository.GetAllAsync())
-                .FirstOrDefault(a =>
-                    a.Email == email
-                    && a.Password == encodedPassword);
+        var account = (await _repository
+            .GetAllAsync(filter: a =>  a.Email == email 
+                                    && a.Password == encodedPassword))
+            .FirstOrDefault();
 
         var result = _mapper.Map<AccountModel>(account); ;
 

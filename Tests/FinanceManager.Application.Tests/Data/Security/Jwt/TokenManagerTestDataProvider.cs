@@ -55,7 +55,7 @@ public static class TokenManagerTestDataProvider
             {
                 new(nameof(AccountDTO.Id), "1"),
                 new(ClaimsIdentity.DefaultNameClaimType, "Email@gmail.com"),
-                new(ClaimsIdentity.DefaultRoleClaimType, AccountService.NameUserRole)
+                new(ClaimsIdentity.DefaultRoleClaimType, AccountService.UserRoleName)
             }, "Token",
             ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType)
         }

@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace FinanceManager.Application.UseCases.Accounts.Commands.DeleteAccountByIdCommand;
 
-public class DeleteAccountByIdHandler : BaseHandler, IRequestHandler<DeleteAccountByIdCommand>
+public class DeleteAccountByIdHandler : BaseHandler, IRequestHandler<DeleteAccountByIdCommand, BaseResponse<bool>>
 {
     private readonly IAccountService _accountService;
 
@@ -16,27 +16,32 @@ public class DeleteAccountByIdHandler : BaseHandler, IRequestHandler<DeleteAccou
         _accountService = accountService ?? throw new ArgumentNullException(nameof(accountService));
     }
 
-    public Task Handle(DeleteAccountByIdCommand request, CancellationToken cancellationToken)
+    public Task<BaseResponse<bool>> Handle(DeleteAccountByIdCommand request, CancellationToken cancellationToken)
     {
         int userId = request.UserId;
         string userRole = request.UserRole;
-        string logStringInformation = "DeleteById called by user to remove account with Id: {Id}";
+        var response = new BaseResponse<bool>();
 
-        if (userRole == AdminService.AdminRole)
-            logStringInformation = "DeleteById called by admin to remove account with Id: {Id}";
 
-        _logger.LogInformation(logStringInformation, request.Id);
-
-        if (userRole != AdminService.AdminRole && request.Id != userId)
+        try
         {
-            _logger.LogWarning($"Unauthorized access attempt to update account with Id: {request.Id} by user with id: {userId} and role {userRole}");
-            throw new UnauthorizedAccessException($"Access denied");
+
+            if (userRole != AdminService.AdminRole && request.Id != userId)
+            {
+                _logger.LogWarning($"Unauthorized access attempt to update account with Id: {request.Id} by user with id: {userId} and role {userRole}");
+                throw new UnauthorizedAccessException($"Access denied");
+            }
+
+            _accountService.DeleteAccountWithId(request.Id);
+
+            if (response.Data)
+                response.ConvertAsSuccessSuccess("Delete succeed!"); ;
+        }
+        catch (Exception e)
+        {
+            response.Message = e.Message;
         }
 
-        _accountService.DeleteAccountWithId(request.Id);
-
-        _logger.LogInformation("User with role {Role} and Id {IdUser} successfully deleted account with Id: {Id} successfully", userRole, userId, request.Id);
-
-        return Task.CompletedTask;
+        return Task.FromResult(response);
     }
 }

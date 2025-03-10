@@ -26,8 +26,6 @@ public class UpdateAccountCommandHandler : BaseHandler, IRequestHandler<UpdateAc
 
         try
         {
-            _logger.LogInformation("UpdateAsync called to update account with Id: {Id} by user with id: {UserId} and role {UserRole}", request.Id, userId, userRole);
-
             if (userRole != AdminService.AdminRole && request.Id != userId)
             {
                 _logger.LogWarning($"Unauthorized access attempt to update account with Id: {request.Id} by user with id: {userId} and role {userRole}");
@@ -38,13 +36,7 @@ public class UpdateAccountCommandHandler : BaseHandler, IRequestHandler<UpdateAc
                     await _accountService.UpdateAccountAsync(
                         _mapper.Map<AccountModel>(request)));
 
-            if (response.Data != null)
-            {
-                response.Success = true;
-                response.Message = "Updating success!";
-            }
-
-            _logger.LogInformation("Account with id: {Id} updated successfully by user with id: {UserId} and role {UserRole}", response.Data.Id, userId, userRole);
+            response.ConvertAsSuccessSuccess("Updating success!");
         }
         catch (Exception e)
         {

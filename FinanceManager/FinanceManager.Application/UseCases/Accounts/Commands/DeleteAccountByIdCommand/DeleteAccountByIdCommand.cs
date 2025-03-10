@@ -1,10 +1,10 @@
-﻿using MediatR;
+﻿using FinanceManager.Application.UseCases.Commons.Bases;
+using MediatR;
 using System.ComponentModel.DataAnnotations;
-using System.Security.Claims;
 
 namespace FinanceManager.Application.UseCases.Accounts.Commands.DeleteAccountByIdCommand;
 
-public class DeleteAccountByIdCommand : IRequest
+public class DeleteAccountByIdCommand : IRequest<BaseResponse<bool>>
 {
     [Required]
     public int UserId { get; set; }

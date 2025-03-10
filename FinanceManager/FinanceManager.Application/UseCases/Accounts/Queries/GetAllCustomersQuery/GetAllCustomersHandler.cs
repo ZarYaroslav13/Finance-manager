@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace FinanceManager.Application.UseCases.Accounts.Queries.GetAllCustomersQuery;
 
-public class GetAllCustomersHandler : BaseHandler, IRequestHandler<GetAllCustomersQuery, List<AccountDTO>>
+public class GetAllCustomersHandler : BaseHandler, IRequestHandler<GetAllCustomersQuery, BaseResponse<List<AccountDTO>>>
 {
     private readonly IAccountService _accountService;
 
@@ -16,19 +16,21 @@ public class GetAllCustomersHandler : BaseHandler, IRequestHandler<GetAllCustome
         _accountService = accountService ?? throw new ArgumentNullException(nameof(accountService));
     }
 
-    public async Task<List<AccountDTO>> Handle(GetAllCustomersQuery request, CancellationToken cancellationToken)
+    public async Task<BaseResponse<List<AccountDTO>>> Handle(GetAllCustomersQuery request, CancellationToken cancellationToken)
     {
-        var response = new List<AccountDTO>();
+        var response = new BaseResponse<List<AccountDTO>>();
 
         try
         {
             _logger.LogInformation("GetAllAsync called by admin with skip: {Skip}, take: {Take}", request.skip, request.take);
 
-            response = (await _accountService.GetAccountsAsync(request.UserRole, request.skip, request.take))
+            response.Data = (await _accountService.GetAccountsAsync(request.UserRole, request.skip, request.take))
                     .Select(_mapper.Map<AccountDTO>)
                     .ToList();
 
-            _logger.LogInformation("{Count} accounts retrieved successfully", response.Count);
+            response.ConvertAsSuccessSuccess("Accounts retrieved successfully");
+
+            _logger.LogInformation("{Count} accounts retrieved successfully", response.Data.Count);
         }
         catch (Exception e)
         {

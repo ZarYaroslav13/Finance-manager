@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 
 namespace FinanceManager.Application.UseCases.Accounts.Commands.UpdatePasswordAccountCommand;
 
-public class UpdatePasswordAccountCommandHandler : BaseHandler, IRequestHandler<UpdatePasswordAccountCommand, AccountDTO>
+public class UpdatePasswordAccountCommandHandler : BaseHandler, IRequestHandler<UpdatePasswordAccountCommand, BaseResponse<AccountDTO>>
 {
     private readonly IAccountService _accountService;
 
@@ -17,26 +17,24 @@ public class UpdatePasswordAccountCommandHandler : BaseHandler, IRequestHandler<
         _accountService = accountService ?? throw new ArgumentNullException(nameof(accountService));
     }
 
-    public async Task<AccountDTO> Handle(UpdatePasswordAccountCommand request, CancellationToken cancellationToken)
+    public async Task<BaseResponse<AccountDTO>> Handle(UpdatePasswordAccountCommand request, CancellationToken cancellationToken)
     {
-        AccountDTO response = new();
+        BaseResponse<AccountDTO> response = new();
         int userId = request.UserId;
         string userRole = request.UserRole;
 
         try
         {
-            _logger.LogInformation("UpdateAsync called to update account with Id: {Id} by user with id: {UserId} and role {UserRole}", request.Id, userId, userRole);
-
             if (userRole != AdminService.AdminRole && request.Id != userId)
             {
                 _logger.LogWarning($"Unauthorized access attempt to update account with Id: {request.Id} by user with id: {userId} and role {userRole}");
                 throw new UnauthorizedAccessException($"Access denied");
             }
 
-            response = _mapper.Map<AccountDTO>(
+            response.Data = _mapper.Map<AccountDTO>(
                     await _accountService.UpdateAccountPasswordAsync(request.Id, request.OldPassword, request.NewPassword));
 
-            _logger.LogInformation("Account password with id: {Id} updated successfully by user with id: {UserId} and role {UserRole}", response.Id, userId, userRole);
+            response.ConvertAsSuccessSuccess("Updating success!");
         }
         catch (Exception e)
         {

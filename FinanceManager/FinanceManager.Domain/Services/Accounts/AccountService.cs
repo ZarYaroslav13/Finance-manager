@@ -120,7 +120,7 @@ public class AccountService : BaseService, IAccountService
         string encodedPassword = _passwordCoder.ComputeSHA256Hash(password);
 
         var account = (await _repository
-            .GetAllAsync(filter: a =>  a.Email == email 
+            .GetAllAsync(filter: a => a.Email == email
                                     && a.Password == encodedPassword))
             .FirstOrDefault();
 

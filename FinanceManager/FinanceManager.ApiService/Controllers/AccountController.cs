@@ -7,7 +7,6 @@ using FinanceManager.Domain.Services.Admins;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 
 namespace FinanceManager.ApiService.Controllers;
 
@@ -39,7 +38,7 @@ public class AccountController : BaseController
 
         var response = await _mediator.Send(command);
 
-        if(response.Success) return Ok(response);
+        if (response.Success) return Ok(response);
 
         return BadRequest(response);
     }
@@ -53,19 +52,23 @@ public class AccountController : BaseController
 
         var response = await _mediator.Send(command);
 
-        return Ok(response);
+        if (response.Success) return Ok(response);
+
+        return BadRequest(response);
     }
 
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteUserById(int id)
     {
-        await _mediator.Send(new DeleteAccountByIdCommand()
+        var response = await _mediator.Send(new DeleteAccountByIdCommand()
         {
             UserId = GetUserId(),
             UserRole = GetUserRole(),
             Id = id
         });
 
-        return Ok();
+        if (response.Success) return Ok(response);
+
+        return BadRequest(response);
     }
 }

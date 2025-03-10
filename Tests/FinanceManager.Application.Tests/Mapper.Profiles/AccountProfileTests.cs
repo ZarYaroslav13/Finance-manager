@@ -1,8 +1,8 @@
-﻿using FinanceManager.Application.Mapper.Profiles;
+﻿using AutoMapper;
+using FinanceManager.Application.Mapper.Profiles;
 using FinanceManager.Application.Models;
 using FinanceManager.Application.Tests.Data.Mapper.Profiles;
 using FinanceManager.Application.Tests.TestToolExtensions;
-using AutoMapper;
 using FinanceManager.Domain.Models;
 
 namespace FinanceManager.Application.Tests.Mapper.Profiles;

@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
+using FinanceManager.Domain.Models;
 using Infrastructure.Models;
 using Infrastructure.Repository;
 using Infrastructure.UnitOfWork;
-using FinanceManager.Domain.Models;
 
 namespace FinanceManager.Domain.Services.Finances;
 

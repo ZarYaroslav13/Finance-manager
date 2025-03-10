@@ -1,5 +1,5 @@
-﻿using FinanceManager.Application.Models;
-using AutoMapper;
+﻿using AutoMapper;
+using FinanceManager.Application.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;

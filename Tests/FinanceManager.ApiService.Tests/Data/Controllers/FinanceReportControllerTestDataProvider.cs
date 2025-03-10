@@ -1,6 +1,6 @@
-﻿using FinanceManager.Domain.Services.Finances;
+﻿using FakeItEasy;
+using FinanceManager.Domain.Services.Finances;
 using FinanceManager.Domain.Services.Wallets;
-using FakeItEasy;
 
 namespace FinanceManager.ApiService.Tests.Data.Controllers;
 

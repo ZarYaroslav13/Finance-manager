@@ -1,11 +1,11 @@
-﻿using FinanceManager.ApiService.Controllers;
+﻿using AutoMapper;
+using FakeItEasy;
+using FinanceManager.ApiService.Controllers;
 using FinanceManager.Application.Models;
-using AutoMapper;
 using FinanceManager.Domain.Models;
 using FinanceManager.Domain.Services.Accounts;
 using FinanceManager.Domain.Services.Admins;
 using FinanceManager.Domain.Services.Wallets;
-using FakeItEasy;
 using FluentAssertions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -39,7 +39,7 @@ public class WalletControllerTests
         {
             new Claim(nameof(AccountDTO.Id), _userId.ToString()),
             new Claim(ClaimTypes.Name, _email),
-            new Claim(ClaimTypes.Role, AccountService.NameAccountRole)
+            new Claim(ClaimTypes.Role, AccountService.NameUserRole)
 
         }, "mock"));
 
@@ -47,7 +47,7 @@ public class WalletControllerTests
         {
             new Claim(nameof(AccountDTO.Id), _userId.ToString()),
             new Claim(ClaimTypes.Name, _email),
-            new Claim(ClaimTypes.Role, AdminService.NameAdminRole)
+            new Claim(ClaimTypes.Role, AdminService.AdminRole)
 
         }, "mock"));
 

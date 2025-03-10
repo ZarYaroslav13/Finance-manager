@@ -4,13 +4,15 @@ namespace FinanceManager.Domain.Services.Accounts;
 
 public interface IAccountService
 {
-    public string GetNameAccountRole();
+    public string GetNameUserRole();
 
     public Task<List<AccountModel>> GetAccountsAsync(string adminEmail, int skip = 0, int take = 0);
 
     public Task<AccountModel> AddAccountAsync(AccountModel account);
 
     public Task<AccountModel> UpdateAccountAsync(AccountModel updatedAccount);
+
+    public Task<AccountModel> UpdateAccountPasswordAsync(int id, string oldPassword, string newPassword);
 
     public void DeleteAccountWithId(int id);
 

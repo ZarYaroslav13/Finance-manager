@@ -1,78 +1,70 @@
-﻿using FinanceManager.ApiService.Controllers.Base;
-using FinanceManager.Application.Models;
-using AutoMapper;
-using FinanceManager.Domain.Models;
-using FinanceManager.Domain.Services.Accounts;
+﻿using FinanceManager.Application.UseCases.Accounts.Commands.DeleteAccountByIdCommand;
+using FinanceManager.Application.UseCases.Accounts.Commands.UpdateCommand;
+using FinanceManager.Application.UseCases.Accounts.Commands.UpdatePasswordAccountCommand;
+using FinanceManager.Application.UseCases.Accounts.Queries.GetAllCustomersQuery;
 using FinanceManager.Domain.Services.Admins;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace FinanceManager.ApiService.Controllers;
 
-public class AccountController : BaseController
+[Authorize]
+[Route("finance-manager/[controller]s")]
+[ApiController]
+public class AccountController : ControllerBase
 {
-    private readonly IAccountService _accountService;
+    private readonly IMediator _mediator;
 
-    public AccountController(IAccountService service, IMapper mapper, ILogger<AccountController> logger) : base(mapper, logger)
+    public AccountController(IMediator mediator)
     {
-        _accountService = service ?? throw new ArgumentNullException(nameof(service));
+        _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
     }
 
-    [Authorize(Policy = AdminService.NameAdminPolicy)]
+    [Authorize(Policy = AdminService.AdminPolicy)]
     [HttpGet]
     public async Task<IActionResult> GetAllAsync(int skip, int take)
     {
-        _logger.LogInformation("GetAllAsync called by admin with skip: {Skip}, take: {Take}", skip, take);
+        var response = await _mediator.Send(new GetAllCustomersQuery()
+        {
+            Identity = HttpContext.User.Identity as ClaimsIdentity,
+            skip = skip,
+            take = take
+        });
 
-        var accounts = (await _accountService.GetAccountsAsync(GetUserEmail(), skip, take))
-                .Select(_mapper.Map<AccountDTO>)
-                .ToList();
-
-        _logger.LogInformation("{Count} accounts retrieved successfully", accounts.Count);
-
-        return Ok(accounts);
+        return Ok(response);
     }
 
     [HttpPut]
-    public async Task<IActionResult> UpdateAsync([FromBody] AccountDTO account)
+    public async Task<IActionResult> UpdateAsync([FromBody] UpdateAccountCommand command)
     {
-        int userId = GetUserId();
-        string userRole = GetUserRole();
+        command.Identity = HttpContext.User.Identity as ClaimsIdentity;
 
-        _logger.LogInformation("UpdateAsync called to update account with Id: {Id} by user with id: {UserId} and role {UserRole}", account.Id, userId, userRole);
+        var response = await _mediator.Send(command);
 
-        if (userRole != AdminService.NameAdminRole && account.Id != userId)
-        {
-            _logger.LogWarning($"Unauthorized access attempt to update account with Id: {account.Id} by user with id: {userId} and role {userRole}");
-            throw new UnauthorizedAccessException($"Access denied");
-        }
+        return Ok(response);
+    }
 
-        var updatedAccount = _mapper.Map<AccountDTO>(
-                await _accountService.UpdateAccountAsync(
-                    _mapper.Map<AccountModel>(account)));
+    [HttpPut]
+    [Route("change-password")]
+    public async Task<IActionResult> UpdatePasswordAsync([FromBody] UpdatePasswordAccountCommand command)
+    {
+        command.Identity = HttpContext.User.Identity as ClaimsIdentity;
 
-        _logger.LogInformation("Account with id: {Id} updated successfully by user with id: {UserId} and role {UserRole}", updatedAccount.Id, userId, userRole);
+        var response = await _mediator.Send(command);
 
-        return Ok(updatedAccount);
+        return Ok(response);
     }
 
     [HttpDelete("{id}")]
-    public IActionResult DeleteUserById(int id)
+    public async Task<IActionResult> DeleteUserById(int id)
     {
-        int userId = GetUserId();
-        string userRole = GetUserRole();
-
-        _logger.LogInformation("DeleteById called by admin to remove account with Id: {Id}", id);
-
-        if (userRole != AdminService.NameAdminRole && id != userId)
+        await _mediator.Send(new DeleteAccountByIdCommand()
         {
-            _logger.LogWarning($"Unauthorized access attempt to update account with Id: {id} by user with id: {userId} and role {userRole}");
-            throw new UnauthorizedAccessException($"Access denied");
-        }
-
-        _accountService.DeleteAccountWithId(id);
-
-        _logger.LogInformation("Admin deleted account with Id: {Id} successfully", id);
+            Identity = HttpContext.User.Identity as ClaimsIdentity,
+            Id = id
+        });
 
         return Ok();
     }

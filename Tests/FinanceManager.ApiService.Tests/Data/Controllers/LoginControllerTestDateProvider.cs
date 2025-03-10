@@ -1,7 +1,7 @@
-﻿using FinanceManager.Application.Security.Jwt;
+﻿using FakeItEasy;
+using FinanceManager.Application.Security.Jwt;
 using FinanceManager.Domain.Services.Accounts;
 using FinanceManager.Domain.Services.Admins;
-using FakeItEasy;
 
 namespace FinanceManager.ApiService.Tests.Data.Controllers;
 

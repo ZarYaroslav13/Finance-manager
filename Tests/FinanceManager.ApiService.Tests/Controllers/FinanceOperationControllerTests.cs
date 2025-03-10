@@ -1,9 +1,9 @@
-﻿using FinanceManager.ApiService.Controllers;
+﻿using AutoMapper;
+using FakeItEasy;
+using FinanceManager.ApiService.Controllers;
 using FinanceManager.Application.Models;
-using AutoMapper;
 using FinanceManager.Domain.Models;
 using FinanceManager.Domain.Services.Finances;
-using FakeItEasy;
 using FluentAssertions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

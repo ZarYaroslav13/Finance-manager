@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using Infrastructure.Models;
 using FinanceManager.Domain.Models;
+using Infrastructure.Models;
 
 namespace FinanceManager.Domain.Mapper.Profiles;
 

@@ -1,7 +1,7 @@
+using FinanceManager.Infrastructure.Tests.Data;
 using Infrastructure;
 using Infrastructure.Models;
 using Infrastructure.UnitOfWork;
-using FinanceManager.Infrastructure.Tests.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace FinanceManager.Infrastructure.Tests;

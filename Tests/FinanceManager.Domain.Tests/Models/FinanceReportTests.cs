@@ -1,6 +1,6 @@
-﻿using FinanceManager.Domain.Models;
+﻿using FakeItEasy;
+using FinanceManager.Domain.Models;
 using FinanceManager.Domain.Tests.Data.Models;
-using FakeItEasy;
 
 namespace FinanceManager.Domain.Tests.Models;
 

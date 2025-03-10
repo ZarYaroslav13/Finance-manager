@@ -1,7 +1,7 @@
-﻿using FinanceManager.ApiService.Controllers.Base;
+﻿using AutoMapper;
+using FinanceManager.ApiService.Controllers.Base;
 using FinanceManager.Application.Models;
 using FinanceManager.Application.Security.Jwt;
-using AutoMapper;
 using FinanceManager.Domain.Models;
 using FinanceManager.Domain.Services.Accounts;
 using FinanceManager.Domain.Services.Admins;

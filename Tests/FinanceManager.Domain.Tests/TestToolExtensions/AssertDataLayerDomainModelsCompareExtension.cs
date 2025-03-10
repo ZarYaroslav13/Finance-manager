@@ -1,7 +1,7 @@
-﻿using Infrastructure.Models;
-using Infrastructure.Models.Base;
-using FinanceManager.Domain.Models;
+﻿using FinanceManager.Domain.Models;
 using FinanceManager.Domain.Models.Base;
+using Infrastructure.Models;
+using Infrastructure.Models.Base;
 
 namespace FinanceManager.Domain.Tests.TestHelpers;
 

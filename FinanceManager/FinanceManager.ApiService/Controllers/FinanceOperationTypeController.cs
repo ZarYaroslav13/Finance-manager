@@ -1,6 +1,6 @@
-﻿using FinanceManager.ApiService.Controllers.Base;
+﻿using AutoMapper;
+using FinanceManager.ApiService.Controllers.Base;
 using FinanceManager.Application.Models;
-using AutoMapper;
 using FinanceManager.Domain.Models;
 using FinanceManager.Domain.Services.Finances;
 using Microsoft.AspNetCore.Mvc;

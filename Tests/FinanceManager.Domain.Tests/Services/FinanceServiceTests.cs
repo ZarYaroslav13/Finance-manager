@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
-using Infrastructure.Models;
-using Infrastructure.Repository;
-using Infrastructure.UnitOfWork;
+using FakeItEasy;
 using FinanceManager.Domain.Models;
 using FinanceManager.Domain.Services.Finances;
 using FinanceManager.Domain.Tests.Data.Services;
-using FakeItEasy;
+using Infrastructure.Models;
+using Infrastructure.Repository;
+using Infrastructure.UnitOfWork;
 using System.Linq.Expressions;
 
 namespace FinanceManager.Domain.Tests.Services;

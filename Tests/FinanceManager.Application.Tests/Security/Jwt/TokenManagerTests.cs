@@ -1,12 +1,12 @@
-﻿using FinanceManager.Application.Models;
+﻿using AutoMapper;
+using FakeItEasy;
+using FinanceManager.Application.Models;
 using FinanceManager.Application.Security;
 using FinanceManager.Application.Security.Jwt;
 using FinanceManager.Application.Tests.Data.Security.Jwt;
-using AutoMapper;
 using FinanceManager.Domain.Models;
 using FinanceManager.Domain.Services.Accounts;
 using FinanceManager.Domain.Services.Admins;
-using FakeItEasy;
 using Microsoft.Extensions.Options;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -94,8 +94,8 @@ public class TokenManagerTests
                     Password = acc.Password
                 };
             });
-        A.CallTo(() => _accountService.GetNameAccountRole())
-            .Returns(AccountService.NameAccountRole);
+        A.CallTo(() => _accountService.GetNameUserRole())
+            .Returns(AccountService.NameUserRole);
 
         var result = await _tokenManager.GetAccountIdentityAsync(account.Email, account.Password);
 
@@ -148,8 +148,8 @@ public class TokenManagerTests
                     Password = acc.Password
                 };
             });
-        A.CallTo(() => _adminService.GetNameAdminRole())
-            .Returns(AdminService.NameAdminRole);
+        A.CallTo(() => _adminService.GetAdminRoleString())
+            .Returns(AdminService.AdminRole);
 
         var result = await _tokenManager.GetAdminIdentityAsync(admin.Email, admin.Password);
 

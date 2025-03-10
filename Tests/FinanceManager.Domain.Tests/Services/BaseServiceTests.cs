@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
+using FakeItEasy;
+using FinanceManager.Domain.Services.Accounts;
+using FinanceManager.Domain.Services.Admins;
 using Infrastructure.Models;
 using Infrastructure.Security;
 using Infrastructure.UnitOfWork;
-using FinanceManager.Domain.Services.Accounts;
-using FinanceManager.Domain.Services.Admins;
-using FakeItEasy;
 
 namespace FinanceManager.Domain.Tests.Services;
 

@@ -1,5 +1,4 @@
 using FinanceManager.ApiService.HostBuilder;
-using FinanceManager.ApiService.HostBuilder;
 using FinanceManager.ServiceDefaults.Middleware;
 using Microsoft.OpenApi.Models;
 using Serilog;

@@ -1,5 +1,5 @@
-﻿using FinanceManager.Application.Models;
-using AutoMapper;
+﻿using AutoMapper;
+using FinanceManager.Application.Models;
 using FinanceManager.Domain.Services.Accounts;
 using FinanceManager.Domain.Services.Admins;
 using Microsoft.Extensions.Options;
@@ -55,7 +55,7 @@ public class TokenManager : ITokenManager
         {
             new(nameof(AccountDTO.Id), account.Id.ToString()),
             new(ClaimsIdentity.DefaultNameClaimType, account.Email),
-            new(ClaimsIdentity.DefaultRoleClaimType, _accountService.GetNameAccountRole())
+            new(ClaimsIdentity.DefaultRoleClaimType, _accountService.GetNameUserRole())
         };
 
         ClaimsIdentity identity = new(claims, "Token",
@@ -78,7 +78,7 @@ public class TokenManager : ITokenManager
         {
             new(nameof(AdminDTO.Id), account.Id.ToString()),
             new(ClaimsIdentity.DefaultNameClaimType, account.Email),
-            new(ClaimsIdentity.DefaultRoleClaimType, _adminService.GetNameAdminRole())
+            new(ClaimsIdentity.DefaultRoleClaimType, _adminService.GetAdminRoleString())
         };
 
         ClaimsIdentity identity = new(claims, "Token",

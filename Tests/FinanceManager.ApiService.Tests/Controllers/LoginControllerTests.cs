@@ -1,12 +1,12 @@
-﻿using FinanceManager.ApiService.Controllers;
+﻿using AutoMapper;
+using FakeItEasy;
+using FinanceManager.ApiService.Controllers;
+using FinanceManager.ApiService.Tests.Data.Controllers;
 using FinanceManager.Application.Models;
 using FinanceManager.Application.Security.Jwt;
-using FinanceManager.ApiService.Tests.Data.Controllers;
-using AutoMapper;
 using FinanceManager.Domain.Models;
 using FinanceManager.Domain.Services.Accounts;
 using FinanceManager.Domain.Services.Admins;
-using FakeItEasy;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;

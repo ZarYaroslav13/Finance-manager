@@ -1,10 +1,10 @@
-﻿using FinanceManager.Application.Models;
+﻿using AutoMapper;
+using FakeItEasy;
+using FinanceManager.Application.Models;
 using FinanceManager.Application.Security;
-using AutoMapper;
 using FinanceManager.Domain.Models;
 using FinanceManager.Domain.Services.Accounts;
 using FinanceManager.Domain.Services.Admins;
-using FakeItEasy;
 using Microsoft.Extensions.Options;
 using System.Security.Claims;
 
@@ -55,7 +55,7 @@ public static class TokenManagerTestDataProvider
             {
                 new(nameof(AccountDTO.Id), "1"),
                 new(ClaimsIdentity.DefaultNameClaimType, "Email@gmail.com"),
-                new(ClaimsIdentity.DefaultRoleClaimType, AccountService.NameAccountRole)
+                new(ClaimsIdentity.DefaultRoleClaimType, AccountService.NameUserRole)
             }, "Token",
             ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType)
         }
@@ -73,7 +73,7 @@ public static class TokenManagerTestDataProvider
             {
                 new(nameof(AdminDTO.Id), "1"),
                 new(ClaimsIdentity.DefaultNameClaimType, "EmailAdmin@gmail.com"),
-                new(ClaimsIdentity.DefaultRoleClaimType, AdminService.NameAdminRole)
+                new(ClaimsIdentity.DefaultRoleClaimType, AdminService.AdminRole)
             }, "Token",
             ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType)
         }

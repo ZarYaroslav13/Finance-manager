@@ -1,18 +1,18 @@
 ﻿using FinanceManager.Application.Security;
 using FinanceManager.Application.Security.Jwt;
-using Infrastructure;
-using Infrastructure.Security;
-using Infrastructure.UnitOfWork;
 using FinanceManager.Domain.Services.Accounts;
 using FinanceManager.Domain.Services.Admins;
 using FinanceManager.Domain.Services.Finances;
 using FinanceManager.Domain.Services.Wallets;
+using FinanceManager.ServiceDefaults.Routing;
+using Infrastructure;
+using Infrastructure.Security;
+using Infrastructure.UnitOfWork;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
-using FinanceManager.ServiceDefaults.Routing;
 
 namespace FinanceManager.ApiService.HostBuilder;
 
@@ -97,9 +97,9 @@ public static class AddServicesConfigurationHostBuilderExtensions
     {
         services.AddAuthorization(opt =>
         {
-            opt.AddPolicy(AdminService.NameAdminPolicy, policy =>
+            opt.AddPolicy(AdminService.AdminPolicy, policy =>
             {
-                policy.RequireClaim(ClaimTypes.Role, AdminService.NameAdminRole);
+                policy.RequireClaim(ClaimTypes.Role, AdminService.AdminRole);
             });
         });
 

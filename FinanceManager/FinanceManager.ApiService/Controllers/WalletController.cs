@@ -1,6 +1,6 @@
-﻿using FinanceManager.ApiService.Controllers.Base;
+﻿using AutoMapper;
+using FinanceManager.ApiService.Controllers.Base;
 using FinanceManager.Application.Models;
-using AutoMapper;
 using FinanceManager.Domain.Models;
 using FinanceManager.Domain.Services.Admins;
 using FinanceManager.Domain.Services.Wallets;
@@ -26,7 +26,7 @@ public class WalletController : BaseController
         _logger.LogInformation("GetWalletsOfAccountAsync called by user with id: {UserId} and role: {UserRole}, for account Id: {AccountId}",
             userId, userRole, accountId);
 
-        if (userRole != AdminService.NameAdminRole && userId != accountId)
+        if (userRole != AdminService.AdminRole && userId != accountId)
         {
             _logger.LogInformation("Access to get wallets information of account with {AccountId} is denied for  user with id: {UserId} and role: {UserRole}",
                 accountId, userId, userRole);
@@ -108,7 +108,7 @@ public class WalletController : BaseController
 
         _logger.LogInformation("DeleteAsync called to remove wallet Id: {WalletId} for user Id: {UserId} and role: {UserRole}", id, userId, userRole);
 
-        if (userRole != AdminService.NameAdminRole && !await _service.IsAccountOwnerWalletAsync(userId, id))
+        if (userRole != AdminService.AdminRole && !await _service.IsAccountOwnerWalletAsync(userId, id))
         {
             _logger.LogWarning($"Unauthorized access attempt to delete wallet Id: {id} by user Id: {userId} and role: {userRole}");
             throw new UnauthorizedAccessException($"Access to this wallet is denied");

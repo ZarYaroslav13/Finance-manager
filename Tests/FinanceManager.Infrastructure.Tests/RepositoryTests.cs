@@ -1,8 +1,8 @@
-﻿using Infrastructure;
+﻿using FakeItEasy;
+using FinanceManager.Infrastructure.Tests.Data;
+using Infrastructure;
 using Infrastructure.Models;
 using Infrastructure.Repository;
-using FinanceManager.Infrastructure.Tests.Data;
-using FakeItEasy;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 

@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
+using FinanceManager.Domain.Models;
+using FinanceManager.Domain.Services.Admins;
 using Infrastructure.Models;
 using Infrastructure.Repository;
 using Infrastructure.Security;
 using Infrastructure.UnitOfWork;
-using FinanceManager.Domain.Models;
-using FinanceManager.Domain.Services.Admins;
 using System.Net.Mail;
 
 namespace FinanceManager.Domain.Services.Accounts;
@@ -24,9 +24,9 @@ public class AccountService : BaseService, IAccountService
         _repository = _unitOfWork.GetRepository<Account>();
     }
 
-    public const string NameAccountRole = "User";
+    public const string NameUserRole = "User";
 
-    public string GetNameAccountRole() => NameAccountRole;
+    public string GetNameUserRole() => NameUserRole;
 
     public async Task<List<AccountModel>> GetAccountsAsync(string adminEmail, int skip = 0, int take = 0)
     {
@@ -68,8 +68,36 @@ public class AccountService : BaseService, IAccountService
 
         await CanTakeThisEmailAsync(updatedAccount.Id, updatedAccount.Email);
 
+        var account = await _repository.GetByIdAsync(updatedAccount.Id);
+
+        updatedAccount.Password = account.Password;
+
         var repoResult = _repository.Update(
                 _mapper.Map<Account>(updatedAccount));
+
+        var result = _mapper.Map<AccountModel>(repoResult);
+        await _unitOfWork.SaveChangesAsync();
+
+        return result;
+    }
+
+    public async Task<AccountModel> UpdateAccountPasswordAsync(int id, string oldPassword, string newPassword)
+    {
+        ArgumentNullException.ThrowIfNullOrEmpty(oldPassword);
+        ArgumentNullException.ThrowIfNullOrWhiteSpace(newPassword);
+
+        if (id == 0)
+            throw new ArgumentException(nameof(id));
+
+        var account = await _repository.GetByIdAsync(id);
+
+        if (account.Password != _passwordCoder.ComputeSHA256Hash(oldPassword))
+            throw new UnauthorizedAccessException("Incorrect old password.");
+
+        account.Password = _passwordCoder.ComputeSHA256Hash(newPassword);
+
+        var repoResult = _repository.Update(
+                _mapper.Map<Account>(account));
 
         var result = _mapper.Map<AccountModel>(repoResult);
         await _unitOfWork.SaveChangesAsync();

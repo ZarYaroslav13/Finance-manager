@@ -4,9 +4,9 @@ namespace FinanceManager.Domain.Services.Admins;
 
 public interface IAdminService
 {
-    public string GetNameAdminRole();
+    public string GetAdminRoleString();
 
-    public string GetNameAdminPolicy();
+    public string GetAdminPolicyString();
 
     public List<AdminModel> GetAdmins();
 

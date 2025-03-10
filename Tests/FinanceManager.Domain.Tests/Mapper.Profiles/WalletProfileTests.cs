@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
-using Infrastructure;
 using FinanceManager.Domain.Mapper.Profiles;
 using FinanceManager.Domain.Models;
 using FinanceManager.Domain.Tests.Data;
 using FinanceManager.Domain.Tests.TestHelpers;
+using Infrastructure;
 
 namespace FinanceManager.Domain.Tests.Mapper.Profiles;
 

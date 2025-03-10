@@ -18,8 +18,8 @@ public class DeleteAccountByIdHandler : BaseHandler, IRequestHandler<DeleteAccou
 
     public Task Handle(DeleteAccountByIdCommand request, CancellationToken cancellationToken)
     {
-        int userId = GetUserId(request.Identity);
-        string userRole = GetUserRole(request.Identity);
+        int userId = request.UserId;
+        string userRole = request.UserRole;
         string logStringInformation = "DeleteById called by user to remove account with Id: {Id}";
 
         if (userRole == AdminService.AdminRole)

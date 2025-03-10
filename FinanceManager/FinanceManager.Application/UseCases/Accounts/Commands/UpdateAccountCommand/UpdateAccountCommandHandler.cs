@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 
 namespace FinanceManager.Application.UseCases.Accounts.Commands.UpdateCommand;
 
-public class UpdateAccountCommandHandler : BaseHandler, IRequestHandler<UpdateAccountCommand, AccountDTO>
+public class UpdateAccountCommandHandler : BaseHandler, IRequestHandler<UpdateAccountCommand, BaseResponse<AccountDTO>>
 {
     private readonly IAccountService _accountService;
 
@@ -18,11 +18,11 @@ public class UpdateAccountCommandHandler : BaseHandler, IRequestHandler<UpdateAc
         _accountService = accountService ?? throw new ArgumentNullException(nameof(accountService));
     }
 
-    public async Task<AccountDTO> Handle(UpdateAccountCommand request, CancellationToken cancellationToken)
+    public async Task<BaseResponse<AccountDTO>> Handle(UpdateAccountCommand request, CancellationToken cancellationToken)
     {
-        AccountDTO response = new();
-        int userId = GetUserId(request.Identity);
-        string userRole = GetUserRole(request.Identity);
+        BaseResponse<AccountDTO> response = new();
+        int userId = request.UserId;
+        string userRole = request.UserRole;
 
         try
         {
@@ -34,11 +34,17 @@ public class UpdateAccountCommandHandler : BaseHandler, IRequestHandler<UpdateAc
                 throw new UnauthorizedAccessException($"Access denied");
             }
 
-            response = _mapper.Map<AccountDTO>(
+            response.Data = _mapper.Map<AccountDTO>(
                     await _accountService.UpdateAccountAsync(
                         _mapper.Map<AccountModel>(request)));
 
-            _logger.LogInformation("Account with id: {Id} updated successfully by user with id: {UserId} and role {UserRole}", response.Id, userId, userRole);
+            if (response.Data != null)
+            {
+                response.Success = true;
+                response.Message = "Updating success!";
+            }
+
+            _logger.LogInformation("Account with id: {Id} updated successfully by user with id: {UserId} and role {UserRole}", response.Data.Id, userId, userRole);
         }
         catch (Exception e)
         {

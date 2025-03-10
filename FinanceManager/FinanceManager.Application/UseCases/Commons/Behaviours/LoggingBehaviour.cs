@@ -15,9 +15,11 @@ public class LoggingBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest,
 
     public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
     {
-        _logger.LogInformation("Clean Architecture Request Handling: { name } {@request }", typeof(TRequest).Name, JsonSerializer.Serialize(request));
+        var options = new JsonSerializerOptions() { WriteIndented = true };
+
+        _logger.LogInformation("FinanceManagerApi Request Handling: {Name} \n{Request}", typeof(TRequest).Name, JsonSerializer.Serialize(request, options));
         var response = await next();
-        _logger.LogInformation("Clean Architecture Response Handling: { name } {@response }", typeof(TResponse).Name, JsonSerializer.Serialize(response));
+        _logger.LogInformation("FinanceManagerApi Response Handling: {Name} \n{Respose}", typeof(TResponse).Name, JsonSerializer.Serialize(response, options));
 
         return response;
     }

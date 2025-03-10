@@ -1,4 +1,5 @@
-﻿using FinanceManager.Application.UseCases.Accounts.Commands.DeleteAccountByIdCommand;
+﻿using FinanceManager.ApiService.Controllers.Base;
+using FinanceManager.Application.UseCases.Accounts.Commands.DeleteAccountByIdCommand;
 using FinanceManager.Application.UseCases.Accounts.Commands.UpdateCommand;
 using FinanceManager.Application.UseCases.Accounts.Commands.UpdatePasswordAccountCommand;
 using FinanceManager.Application.UseCases.Accounts.Queries.GetAllCustomersQuery;
@@ -10,16 +11,10 @@ using System.Security.Claims;
 
 namespace FinanceManager.ApiService.Controllers;
 
-[Authorize]
-[Route("finance-manager/[controller]s")]
-[ApiController]
-public class AccountController : ControllerBase
+public class AccountController : BaseController
 {
-    private readonly IMediator _mediator;
-
-    public AccountController(IMediator mediator)
+    public AccountController(IMediator mediator) : base(mediator)
     {
-        _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
     }
 
     [Authorize(Policy = AdminService.AdminPolicy)]
@@ -28,7 +23,7 @@ public class AccountController : ControllerBase
     {
         var response = await _mediator.Send(new GetAllCustomersQuery()
         {
-            Identity = HttpContext.User.Identity as ClaimsIdentity,
+            UserRole = GetUserRole(),
             skip = skip,
             take = take
         });
@@ -39,18 +34,22 @@ public class AccountController : ControllerBase
     [HttpPut]
     public async Task<IActionResult> UpdateAsync([FromBody] UpdateAccountCommand command)
     {
-        command.Identity = HttpContext.User.Identity as ClaimsIdentity;
+        command.UserId = GetUserId();
+        command.UserRole = GetUserRole();
 
         var response = await _mediator.Send(command);
 
-        return Ok(response);
+        if(response.Success) return Ok(response);
+
+        return BadRequest(response);
     }
 
     [HttpPut]
     [Route("change-password")]
     public async Task<IActionResult> UpdatePasswordAsync([FromBody] UpdatePasswordAccountCommand command)
     {
-        command.Identity = HttpContext.User.Identity as ClaimsIdentity;
+        command.UserId = GetUserId();
+        command.UserRole = GetUserRole();
 
         var response = await _mediator.Send(command);
 
@@ -62,7 +61,8 @@ public class AccountController : ControllerBase
     {
         await _mediator.Send(new DeleteAccountByIdCommand()
         {
-            Identity = HttpContext.User.Identity as ClaimsIdentity,
+            UserId = GetUserId(),
+            UserRole = GetUserRole(),
             Id = id
         });
 

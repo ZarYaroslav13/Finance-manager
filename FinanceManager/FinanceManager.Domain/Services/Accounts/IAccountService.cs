@@ -6,7 +6,7 @@ public interface IAccountService
 {
     public string GetUserRoleName();
 
-    public Task<List<AccountModel>> GetAccountsAsync(string adminEmail, int skip = 0, int take = 0);
+    public Task<List<AccountModel>> GetAccountsAsync(string userRole, int skip = 0, int take = 0);
 
     public Task<AccountModel> AddAccountAsync(AccountModel account);
 

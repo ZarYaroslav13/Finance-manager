@@ -1,13 +1,16 @@
 ﻿using FinanceManager.Application.Models;
+using FinanceManager.Application.UseCases.Commons.Bases;
 using MediatR;
 using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
 
 namespace FinanceManager.Application.UseCases.Accounts.Commands.UpdateCommand;
 
-public class UpdateAccountCommand : IRequest<AccountDTO>
+public class UpdateAccountCommand : IRequest<BaseResponse<AccountDTO>>
 {
-    public ClaimsIdentity? Identity { get; set; }
+    public int UserId { get; set; }
+
+    public string UserRole { get; set; } = "";
 
     [Required]
     public int Id { get; set; }

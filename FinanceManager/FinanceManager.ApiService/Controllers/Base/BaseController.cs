@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FinanceManager.Application.Models;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -11,6 +12,7 @@ namespace FinanceManager.ApiService.Controllers.Base;
 [ApiController]
 public abstract class BaseController : ControllerBase
 {
+    protected readonly IMediator _mediator;
     protected readonly ILogger<BaseController> _logger;
     protected readonly IMapper _mapper;
 
@@ -18,6 +20,11 @@ public abstract class BaseController : ControllerBase
     {
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+    }
+
+    public BaseController(IMediator mediator)
+    {
+        _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator)); ;
     }
 
     protected string GetUserRole()

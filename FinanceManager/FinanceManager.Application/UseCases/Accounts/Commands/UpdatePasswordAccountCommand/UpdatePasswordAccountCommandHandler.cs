@@ -20,8 +20,8 @@ public class UpdatePasswordAccountCommandHandler : BaseHandler, IRequestHandler<
     public async Task<AccountDTO> Handle(UpdatePasswordAccountCommand request, CancellationToken cancellationToken)
     {
         AccountDTO response = new();
-        int userId = GetUserId(request.Identity);
-        string userRole = GetUserRole(request.Identity);
+        int userId = request.UserId;
+        string userRole = request.UserRole;
 
         try
         {

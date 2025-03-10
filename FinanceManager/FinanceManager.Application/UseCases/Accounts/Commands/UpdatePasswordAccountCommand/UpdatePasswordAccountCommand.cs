@@ -7,8 +7,13 @@ namespace FinanceManager.Application.UseCases.Accounts.Commands.UpdatePasswordAc
 
 public class UpdatePasswordAccountCommand : IRequest<AccountDTO>
 {
-    public ClaimsIdentity? Identity { get; set; }
+    [Required]
+    public int UserId { get; set; }
 
+    [Required]
+    public string UserRole { get; set; }
+
+    [Required]
     public int Id { get; set; }
 
     [Required]

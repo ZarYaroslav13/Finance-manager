@@ -28,9 +28,9 @@ public class AccountService : BaseService, IAccountService
 
     public string GetUserRoleName() => UserRoleName;
 
-    public async Task<List<AccountModel>> GetAccountsAsync(string adminEmail, int skip = 0, int take = 0)
+    public async Task<List<AccountModel>> GetAccountsAsync(string userRole, int skip = 0, int take = 0)
     {
-        if (!_adminService.IsItAdmin(adminEmail))
+        if (userRole != _adminService.GetAdminRoleString())
             throw new UnauthorizedAccessException();
 
         if (skip < 0 || take < 0)

@@ -15,31 +15,4 @@ public class BaseHandler
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
     }
-
-    protected string GetUserRole(ClaimsIdentity identity)
-    {
-        ArgumentNullException.ThrowIfNull(identity);
-
-        return identity.FindFirst(identity.RoleClaimType).Value;
-    }
-
-    protected int GetUserId(ClaimsIdentity identity)
-    {
-        ArgumentNullException.ThrowIfNull(identity);
-
-        string stringId = identity.FindFirst(nameof(AccountDTO.Id)).Value;
-
-        int id = 0;
-
-        if (!int.TryParse(stringId, out id))
-            throw new InvalidOperationException(nameof(stringId));
-        return id;
-    }
-
-    protected string GetUserEmail(ClaimsIdentity identity)
-    {
-        ArgumentNullException.ThrowIfNull(identity);
-
-        return identity.Name;
-    }
 }

@@ -24,7 +24,7 @@ public class GetAllCustomersHandler : BaseHandler, IRequestHandler<GetAllCustome
         {
             _logger.LogInformation("GetAllAsync called by admin with skip: {Skip}, take: {Take}", request.skip, request.take);
 
-            response = (await _accountService.GetAccountsAsync(GetUserEmail(request.Identity), request.skip, request.take))
+            response = (await _accountService.GetAccountsAsync(request.UserRole, request.skip, request.take))
                     .Select(_mapper.Map<AccountDTO>)
                     .ToList();
 

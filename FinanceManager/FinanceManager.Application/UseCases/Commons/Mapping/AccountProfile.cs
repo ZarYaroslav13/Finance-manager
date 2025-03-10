@@ -17,7 +17,5 @@ public class AccountProfile : Profile
         });
 
         CreateMap<AccountDTO, UpdateAccountCommand>();
-
-
     }
 }

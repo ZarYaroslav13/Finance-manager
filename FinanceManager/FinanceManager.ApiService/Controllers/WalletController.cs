@@ -1,22 +1,18 @@
-﻿using AutoMapper;
-using FinanceManager.ApiService.Controllers.Base;
+﻿using FinanceManager.ApiService.Controllers.Base;
 using FinanceManager.Application.UseCases.Wallet.Commands.CreateWalletCommand;
+using FinanceManager.Application.UseCases.Wallet.Commands.DeleteWalletCommand;
 using FinanceManager.Application.UseCases.Wallet.Commands.UpdateWalletCommand;
 using FinanceManager.Application.UseCases.Wallet.Queries.GetByIdWalletQuery;
 using FinanceManager.Application.UseCases.Wallet.Queries.GetWalletsQuery;
-using FinanceManager.Domain.Services.Admins;
-using FinanceManager.Domain.Services.Wallets;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinanceManager.ApiService.Controllers;
 
 public class WalletController : BaseController
 {
-    private readonly IWalletService _service;
-
-    public WalletController(IWalletService service, IMapper mapper, ILogger<WalletController> logger) : base(mapper, logger)
+    public WalletController(IMediator mediator) : base(mediator)
     {
-        _service = service ?? throw new ArgumentNullException(nameof(service));
     }
 
     [HttpGet("~/finance-manager/accounts/{accountId:int}/wallets")]
@@ -67,21 +63,14 @@ public class WalletController : BaseController
     [HttpDelete]
     public async Task<IActionResult> DeleteAsync(int id)
     {
-        int userId = GetUserId();
-        string userRole = GetUserRole();
+        var command = new DeleteWalletCommand() { WalletId = id };
+        command.UsertId = GetUserId();
+        command.UsertRole = GetUserRole();
 
-        _logger.LogInformation("DeleteAsync called to remove wallet Id: {WalletId} for user Id: {UserId} and role: {UserRole}", id, userId, userRole);
+        var response = await _mediator.Send(command);
 
-        if (userRole != AdminService.AdminRole && !await _service.IsAccountOwnerWalletAsync(userId, id))
-        {
-            _logger.LogWarning($"Unauthorized access attempt to delete wallet Id: {id} by user Id: {userId} and role: {userRole}");
-            throw new UnauthorizedAccessException($"Access to this wallet is denied");
-        }
+        if (response.Success) return Ok(response);
 
-        await _service.DeleteWalletByIdAsync(id);
-
-        _logger.LogInformation("Wallet Id: {WalletId} deleted successfully for user Id: {UserId} and role: {UserRole}", id, userId, userRole);
-
-        return Ok();
+        return BadRequest(response);
     }
 }

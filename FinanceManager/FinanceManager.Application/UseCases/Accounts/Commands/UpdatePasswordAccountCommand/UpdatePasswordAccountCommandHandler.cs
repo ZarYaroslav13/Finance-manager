@@ -34,7 +34,7 @@ public class UpdatePasswordAccountCommandHandler : BaseHandler, IRequestHandler<
             response.Data = _mapper.Map<AccountDTO>(
                     await _accountService.UpdateAccountPasswordAsync(request.Id, request.OldPassword, request.NewPassword));
 
-            response.ConvertAsSuccessSuccess("Updating success!");
+            response.MakeAsSuccess("Updating success!");
         }
         catch (Exception e)
         {

@@ -27,7 +27,9 @@ public class AccountController : BaseController
             take = take
         });
 
-        return Ok(response);
+        if (response.Success) return Ok(response);
+
+        return BadRequest(response);
     }
 
     [HttpPut]

@@ -36,7 +36,7 @@ public class UpdateAccountCommandHandler : BaseHandler, IRequestHandler<UpdateAc
                     await _accountService.UpdateAccountAsync(
                         _mapper.Map<AccountModel>(request)));
 
-            response.ConvertAsSuccessSuccess("Updating success!");
+            response.MakeAsSuccess("Updating success!");
         }
         catch (Exception e)
         {

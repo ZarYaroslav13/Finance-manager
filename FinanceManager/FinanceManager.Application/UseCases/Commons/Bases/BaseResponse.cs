@@ -10,7 +10,7 @@ public class BaseResponse<T>
 
     public IEnumerable<BaseError>? Errors { get; set; }
 
-    public void ConvertAsSuccessSuccess(string message = "")
+    public void MakeAsSuccess(string message = "")
     {
         Success = true;
         Message = message;

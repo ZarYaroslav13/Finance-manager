@@ -22,19 +22,15 @@ public class GetAllCustomersHandler : BaseHandler, IRequestHandler<GetAllCustome
 
         try
         {
-            _logger.LogInformation("GetAllAsync called by admin with skip: {Skip}, take: {Take}", request.skip, request.take);
-
             response.Data = (await _accountService.GetAccountsAsync(request.UserRole, request.skip, request.take))
                     .Select(_mapper.Map<AccountDTO>)
                     .ToList();
 
-            response.ConvertAsSuccessSuccess("Accounts retrieved successfully");
-
-            _logger.LogInformation("{Count} accounts retrieved successfully", response.Data.Count);
+            response.MakeAsSuccess("Accounts retrieved successfully");
         }
         catch (Exception e)
         {
-            _logger.LogError(e.Message);
+            response.Message = e.Message;
         }
 
         return response;

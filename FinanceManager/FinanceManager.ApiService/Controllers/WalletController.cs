@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using FinanceManager.ApiService.Controllers.Base;
 using FinanceManager.Application.Models;
+using FinanceManager.Application.UseCases.Wallet.Queries.GetWalletsQuery;
 using FinanceManager.Domain.Models;
 using FinanceManager.Domain.Services.Admins;
 using FinanceManager.Domain.Services.Wallets;
@@ -20,27 +21,12 @@ public class WalletController : BaseController
     [HttpGet("~/finance-manager/accounts/{accountId:int}/wallets")]
     public async Task<IActionResult> GetWalletsAsync(int accountId)
     {
-        int userId = GetUserId();
-        string userRole = GetUserRole();
+        var response = await _mediator.Send(
+            new GetWalletsQuery() { UserId = GetUserId(), UserRole = GetUserRole() , AccountId = accountId});
 
-        _logger.LogInformation("GetWalletsOfAccountAsync called by user with id: {UserId} and role: {UserRole}, for account Id: {AccountId}",
-            userId, userRole, accountId);
+        if (response.Success) return Ok(response);
 
-        if (userRole != AdminService.AdminRole && userId != accountId)
-        {
-            _logger.LogInformation("Access to get wallets information of account with {AccountId} is denied for  user with id: {UserId} and role: {UserRole}",
-                accountId, userId, userRole);
-            throw new UnauthorizedAccessException("Access denied");
-        }
-
-        var wallets = (await _service.GetAllWalletsOfAccountAsync(accountId))
-                .Select(_mapper.Map<WalletDTO>)
-                .ToList();
-
-        _logger.LogInformation("{Count} wallets retrieved for account Id: {AccountId} by user with id: {UserId} and role: {UserRole}",
-            wallets.Count, accountId, userId, userRole);
-
-        return Ok(wallets);
+        return BadRequest(response);
     }
 
     [HttpGet("{id:int}")]

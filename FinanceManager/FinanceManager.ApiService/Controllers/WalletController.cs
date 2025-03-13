@@ -1,11 +1,13 @@
 ﻿using AutoMapper;
 using FinanceManager.ApiService.Controllers.Base;
 using FinanceManager.Application.Models;
+using FinanceManager.Application.UseCases.Wallet.Queries.GetByIdWalletQuery;
 using FinanceManager.Application.UseCases.Wallet.Queries.GetWalletsQuery;
 using FinanceManager.Domain.Models;
 using FinanceManager.Domain.Services.Admins;
 using FinanceManager.Domain.Services.Wallets;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Identity.Client;
 
 namespace FinanceManager.ApiService.Controllers;
 
@@ -32,22 +34,12 @@ public class WalletController : BaseController
     [HttpGet("{id:int}")]
     public async Task<IActionResult> GetByIdAsync(int id)
     {
-        _logger.LogInformation("GetByIdAsync called to retrieve wallet Id: {WalletId}", id);
+        var response = await _mediator.Send(
+            new GetByIdWalletQuery() { UserId = GetUserId(), UserRole = GetUserRole(), WalletId = id });
 
-        int userId = GetUserId();
+        if (response.Success) return Ok(response);
 
-        if (!(await _service.IsAccountOwnerWalletAsync(userId, id)))
-        {
-            _logger.LogWarning($"Unauthorized access attempt to get wallet with Id: {id} by user Id: {userId}");
-            throw new UnauthorizedAccessException($"Access to this wallet is denied");
-        }
-
-        var wallet = _mapper.Map<WalletDTO>(
-                await _service.FindWalletAsync(id));
-
-        _logger.LogInformation("Wallet Id: {WalletId} retrieved successfully", id);
-
-        return Ok(wallet);
+        return BadRequest(response);
     }
 
     [HttpPost]

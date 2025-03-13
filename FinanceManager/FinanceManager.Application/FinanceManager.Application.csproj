@@ -18,6 +18,9 @@
 
   <ItemGroup>
     <Folder Include="UseCases\Admins\Queries\" />
+    <Folder Include="UseCases\Wallet\Commands\CreateWalletCommand\" />
+    <Folder Include="UseCases\Wallet\Commands\DeleteWalletCommand\" />
+    <Folder Include="UseCases\Wallet\Commands\UpdateWalletCommand\" />
   </ItemGroup>
 
   <ItemGroup>

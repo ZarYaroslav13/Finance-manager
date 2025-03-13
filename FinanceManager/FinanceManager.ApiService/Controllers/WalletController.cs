@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using FinanceManager.ApiService.Controllers.Base;
 using FinanceManager.Application.Models;
+using FinanceManager.Application.UseCases.Wallet.Commands.CreateWalletCommand;
 using FinanceManager.Application.UseCases.Wallet.Queries.GetByIdWalletQuery;
 using FinanceManager.Application.UseCases.Wallet.Queries.GetWalletsQuery;
 using FinanceManager.Domain.Models;
@@ -43,18 +44,13 @@ public class WalletController : BaseController
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateAsync([FromBody] WalletDTO wallet)
+    public async Task<IActionResult> CreateAsync([FromBody] CreateWalletCommand command)
     {
-        wallet.AccountId = GetUserId();
-        _logger.LogInformation("CreateAsync called to create wallet for account Id: {AccountId}", wallet.AccountId);
+        var response = await _mediator.Send(command);
 
-        var newWallet = _mapper.Map<WalletDTO>(
-                await _service.AddWalletAsync(
-                    _mapper.Map<WalletModel>(wallet)));
+        if (response.Success) return Ok(response);
 
-        _logger.LogInformation("Wallet created successfully with Id: {WalletId} for account Id: {AccountId}", newWallet.Id, wallet.AccountId);
-
-        return Ok(newWallet);
+        return BadRequest(response);
     }
 
     [HttpPut]

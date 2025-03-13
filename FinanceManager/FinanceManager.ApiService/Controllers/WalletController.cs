@@ -1,14 +1,12 @@
 ﻿using AutoMapper;
 using FinanceManager.ApiService.Controllers.Base;
-using FinanceManager.Application.Models;
 using FinanceManager.Application.UseCases.Wallet.Commands.CreateWalletCommand;
+using FinanceManager.Application.UseCases.Wallet.Commands.UpdateWalletCommand;
 using FinanceManager.Application.UseCases.Wallet.Queries.GetByIdWalletQuery;
 using FinanceManager.Application.UseCases.Wallet.Queries.GetWalletsQuery;
-using FinanceManager.Domain.Models;
 using FinanceManager.Domain.Services.Admins;
 using FinanceManager.Domain.Services.Wallets;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Identity.Client;
 
 namespace FinanceManager.ApiService.Controllers;
 
@@ -25,7 +23,7 @@ public class WalletController : BaseController
     public async Task<IActionResult> GetWalletsAsync(int accountId)
     {
         var response = await _mediator.Send(
-            new GetWalletsQuery() { UserId = GetUserId(), UserRole = GetUserRole() , AccountId = accountId});
+            new GetWalletsQuery() { UserId = GetUserId(), UserRole = GetUserRole(), AccountId = accountId });
 
         if (response.Success) return Ok(response);
 
@@ -54,24 +52,16 @@ public class WalletController : BaseController
     }
 
     [HttpPut]
-    public async Task<IActionResult> UpdateAsync([FromBody] WalletDTO wallet)
+    public async Task<IActionResult> UpdateAsync([FromBody] UpdateWalletCommand command)
     {
-        int userId = GetUserId();
-        _logger.LogInformation("UpdateAsync called to update wallet Id: {WalletId} for user Id: {UserId}", wallet.Id, userId);
+        command.UserId = GetUserId();
+        command.UserRole = GetUserRole();
 
-        if (wallet.AccountId != userId)
-        {
-            _logger.LogWarning($"Unauthorized access attempt to update wallet with Id: {wallet.Id} for user Id: {userId}");
-            throw new UnauthorizedAccessException($"Access to this wallet is denied");
-        }
+        var response = await _mediator.Send(command);
 
-        var updatedWallet = _mapper.Map<WalletDTO>(
-                await _service.UpdateWalletAsync(
-                    _mapper.Map<WalletModel>(wallet)));
+        if (response.Success) return Ok(response);
 
-        _logger.LogInformation("Wallet Id: {WalletId} updated successfully for user Id: {UserId}", updatedWallet.Id, userId);
-
-        return Ok(updatedWallet);
+        return BadRequest(response);
     }
 
     [HttpDelete]

@@ -3,14 +3,8 @@ using FinanceManager.Application.Models;
 using FinanceManager.Application.UseCases.Commons.Bases;
 using FinanceManager.Domain.Models;
 using FinanceManager.Domain.Services.Wallets;
-using Infrastructure.Models;
 using MediatR;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FinanceManager.Application.UseCases.Wallet.Commands.CreateWalletCommand;
 
@@ -27,18 +21,18 @@ public class CreateWalletHandler : BaseHandler, IRequestHandler<CreateWalletComm
     {
         var response = new BaseResponse<WalletDTO>();
 
-		try
-		{
+        try
+        {
             response.Data = _mapper.Map<WalletDTO>(
                 await _service.AddWalletAsync(
                     _mapper.Map<WalletModel>(new WalletDTO() { AccountId = request.AccountId, Name = request.Name })));
 
             response.MakeAsSuccess("Wallet created successfully"); ;
         }
-		catch (Exception e)
-		{
+        catch (Exception e)
+        {
             response.Message = e.Message;
-		}
+        }
 
         return response;
     }

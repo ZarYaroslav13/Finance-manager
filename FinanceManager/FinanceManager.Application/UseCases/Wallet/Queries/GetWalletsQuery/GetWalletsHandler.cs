@@ -5,12 +5,6 @@ using FinanceManager.Domain.Services.Admins;
 using FinanceManager.Domain.Services.Wallets;
 using MediatR;
 using Microsoft.Extensions.Logging;
-using Microsoft.Identity.Client;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FinanceManager.Application.UseCases.Wallet.Queries.GetWalletsQuery;
 

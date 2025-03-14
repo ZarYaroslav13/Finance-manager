@@ -4,11 +4,7 @@ using MediatR;
 
 namespace FinanceManager.Application.UseCases.Wallet.Queries.GetWalletsQuery;
 
-public class GetWalletsQuery : IRequest<BaseResponse<List<WalletDTO>>>
+public class GetWalletsQuery : BaseRequest, IRequest<BaseResponse<List<WalletDTO>>>
 {
-    public int UserId { get; set; }
-
-    public string UserRole { get; set; }
-
     public int AccountId { get; set; }
 }

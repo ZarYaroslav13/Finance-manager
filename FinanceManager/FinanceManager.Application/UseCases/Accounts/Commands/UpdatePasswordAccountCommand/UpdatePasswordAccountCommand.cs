@@ -5,14 +5,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace FinanceManager.Application.UseCases.Accounts.Commands.UpdatePasswordAccountCommand;
 
-public class UpdatePasswordAccountCommand : IRequest<BaseResponse<AccountDTO>>
+public class UpdatePasswordAccountCommand : BaseRequest, IRequest<BaseResponse<AccountDTO>>
 {
-    [Required]
-    public int UserId { get; set; }
-
-    [Required]
-    public string UserRole { get; set; }
-
     [Required]
     public int Id { get; set; }
 

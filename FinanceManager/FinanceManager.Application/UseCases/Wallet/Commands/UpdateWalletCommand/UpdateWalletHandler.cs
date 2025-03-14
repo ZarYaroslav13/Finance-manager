@@ -22,7 +22,7 @@ public class UpdateWalletHandler : BaseHandler, IRequestHandler<UpdateWalletComm
     {
         if (request.AccountId != request.UserId && request.UserRole != AdminService.AdminRole)
         {
-            _logger.LogWarning($"Unauthorized access attempt to update wallet with Id: {request.Id} for user Id: {request.UserId}");
+            _logger.LogWarning($"Unauthorized access attempt to update wallet with Id: {request.Id} for user Id: {request.Id} by user with id: {request.UserId}");
             throw new UnauthorizedAccessException($"Access to this wallet is denied");
         }
 
@@ -32,16 +32,7 @@ public class UpdateWalletHandler : BaseHandler, IRequestHandler<UpdateWalletComm
         {
             response.Data = _mapper.Map<WalletDTO>(
                                 await _service.UpdateWalletAsync(
-                                    _mapper.Map<WalletModel>(new WalletDTO()
-                                    {
-                                        Id = request.Id,
-                                        Name = request.Name,
-                                        AccountId = request.AccountId,
-                                        Balance = request.Balance,
-                                        Expenses = request.Expenses,
-                                        FinanceOperationTypes = request.FinanceOperationTypes,
-                                        Incomes = request.Incomes,
-                                    })));
+                                    _mapper.Map<WalletModel>(request)));
 
             response.MakeAsSuccess("Updated successfully");
         }

@@ -5,12 +5,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace FinanceManager.Application.UseCases.Wallet.Commands.UpdateWalletCommand;
 
-public class UpdateWalletCommand : IRequest<BaseResponse<WalletDTO>>
+public class UpdateWalletCommand : BaseRequest, IRequest<BaseResponse<WalletDTO>>
 {
-    public int UserId { get; set; }
-
-    public string UserRole { get; set; }
-
     public int Id { get; set; }
 
     [Required]

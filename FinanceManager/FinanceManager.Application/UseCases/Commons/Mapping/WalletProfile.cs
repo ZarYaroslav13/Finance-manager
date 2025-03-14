@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FinanceManager.Application.UseCases.Wallet.Commands.CreateWalletCommand;
+using FinanceManager.Application.UseCases.Wallet.Commands.UpdateWalletCommand;
 using FinanceManager.Domain.Models;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,8 @@ public class WalletProfile : Profile
 {
     public WalletProfile()
     {
-        CreateMap<CreateWalletCommand, WalletModel>().ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.AccountId));
+        CreateMap<CreateWalletCommand, WalletModel>();
+
+        CreateMap<UpdateWalletCommand, WalletModel>();
     }
 }

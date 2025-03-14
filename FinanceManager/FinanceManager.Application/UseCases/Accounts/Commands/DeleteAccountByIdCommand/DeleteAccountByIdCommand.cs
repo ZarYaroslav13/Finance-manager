@@ -4,14 +4,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace FinanceManager.Application.UseCases.Accounts.Commands.DeleteAccountByIdCommand;
 
-public class DeleteAccountByIdCommand : IRequest<BaseResponse<bool>>
+public class DeleteAccountByIdCommand : BaseRequest, IRequest<BaseResponse<bool>>
 {
-    [Required]
-    public int UserId { get; set; }
-
-    [Required]
-    public string UserRole { get; set; }
-
     [Required]
     public int Id { get; set; }
 }

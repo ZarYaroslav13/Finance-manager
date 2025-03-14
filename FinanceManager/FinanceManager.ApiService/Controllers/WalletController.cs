@@ -40,6 +40,9 @@ public class WalletController : BaseController
     [HttpPost]
     public async Task<IActionResult> CreateAsync([FromBody] CreateWalletCommand command)
     {
+        command.UserId = GetUserId();
+        command.UserRole = GetUserRole();
+
         var response = await _mediator.Send(command);
 
         if (response.Success) return Ok(response);
@@ -64,8 +67,8 @@ public class WalletController : BaseController
     public async Task<IActionResult> DeleteAsync(int id)
     {
         var command = new DeleteWalletCommand() { WalletId = id };
-        command.UsertId = GetUserId();
-        command.UsertRole = GetUserRole();
+        command.UserId = GetUserId();
+        command.UserRole = GetUserRole();
 
         var response = await _mediator.Send(command);
 

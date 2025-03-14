@@ -31,6 +31,8 @@ public class GetByIdWalletHandler : BaseHandler, IRequestHandler<GetByIdWalletQu
         {
             response.Data = _mapper.Map<WalletDTO>(
                     await _service.FindWalletAsync(request.WalletId));
+
+            response.MakeAsSuccess("Getted wallet successfully!");
         }
         catch (Exception e)
         {

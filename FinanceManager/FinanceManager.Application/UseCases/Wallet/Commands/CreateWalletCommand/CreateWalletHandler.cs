@@ -25,7 +25,7 @@ public class CreateWalletHandler : BaseHandler, IRequestHandler<CreateWalletComm
         {
             response.Data = _mapper.Map<WalletDTO>(
                 await _service.AddWalletAsync(
-                    _mapper.Map<WalletModel>(new WalletDTO() { AccountId = request.AccountId, Name = request.Name })));
+                    _mapper.Map<WalletModel>(request)));
 
             response.MakeAsSuccess("Wallet created successfully"); ;
         }

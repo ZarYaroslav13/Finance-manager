@@ -15,7 +15,5 @@ public class AccountProfile : Profile
             src.FirstName = src.FirstName.Trim();
             src.LastName = src.LastName.Trim();
         });
-
-        CreateMap<AccountDTO, UpdateAccountCommand>();
     }
 }

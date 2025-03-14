@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using FinanceManager.Application.Mapper.Profiles;
+using FinanceManager.Application.Mapping;
 using FinanceManager.Application.Models;
 using FinanceManager.Application.Tests.Data.Mapper.Profiles;
 using FinanceManager.Application.Tests.TestToolExtensions;

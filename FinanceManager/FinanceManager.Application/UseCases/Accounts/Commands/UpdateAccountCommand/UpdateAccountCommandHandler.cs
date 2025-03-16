@@ -25,7 +25,7 @@ public class UpdateAccountCommandHandler : BaseHandler, IRequestHandler<UpdateAc
 
         try
         {
-            AuthorizationCheck(request, r => r.Id);
+            CheckIsUserResourceOwnerOrAdmin(request, idSelector: r => r.Id);
 
             response.Data = _mapper.Map<AccountDTO>(
                     await _accountService.UpdateAccountAsync(

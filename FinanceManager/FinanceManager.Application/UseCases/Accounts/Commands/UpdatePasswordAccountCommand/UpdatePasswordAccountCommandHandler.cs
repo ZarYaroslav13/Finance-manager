@@ -22,7 +22,7 @@ public class UpdatePasswordAccountCommandHandler : BaseHandler, IRequestHandler<
 
         try
         {
-            AuthorizationCheck(request, r => r.Id);
+            CheckIsUserResourceOwnerOrAdmin(request, idSelector: r => r.Id);
 
             response.Data = _mapper.Map<AccountDTO>(
                     await _accountService.UpdateAccountPasswordAsync(request.Id, request.OldPassword, request.NewPassword));

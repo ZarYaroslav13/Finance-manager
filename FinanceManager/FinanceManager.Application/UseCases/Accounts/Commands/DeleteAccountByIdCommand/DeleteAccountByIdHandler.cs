@@ -21,7 +21,7 @@ public class DeleteAccountByIdHandler : BaseHandler, IRequestHandler<DeleteAccou
 
         try
         {
-            AuthorizationCheck(request, r => r.Id);
+            CheckIsUserResourceOwnerOrAdmin(request, idSelector: r => r.Id);
 
             _accountService.DeleteAccountWithId(request.Id);
 

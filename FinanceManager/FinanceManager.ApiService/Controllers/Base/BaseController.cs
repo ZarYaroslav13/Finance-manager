@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using FinanceManager.Application.Models;
+using FinanceManager.Application.UseCases.Commons.Bases;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace FinanceManager.ApiService.Controllers.Base;
 
@@ -25,6 +27,28 @@ public abstract class BaseController : ControllerBase
     public BaseController(IMediator mediator)
     {
         _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator)); ;
+    }
+
+    protected async Task<IActionResult> SendRequestAsync<TCommand>(TCommand command)
+    where TCommand : BaseRequest
+    {
+        command.UserId = GetUserId();
+        command.UserRole = GetUserRole();
+
+        var responseType = typeof(TCommand)
+            .GetInterfaces()
+            .FirstOrDefault(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IRequest<>))
+            ?.GetGenericArguments()
+            .FirstOrDefault();
+
+        if (responseType == null || !typeof(BaseResponse<>).IsAssignableFrom(responseType.GetGenericTypeDefinition()))
+        {
+            return BadRequest("Invalid command response type.");
+        }
+
+        dynamic baseResponse = await _mediator.Send(command);
+
+        return baseResponse.Success ? Ok(baseResponse) : BadRequest(baseResponse);
     }
 
     protected string GetUserRole()

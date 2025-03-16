@@ -23,7 +23,7 @@ public class CreateWalletHandler : BaseHandler, IRequestHandler<CreateWalletComm
 
         try
         {
-            AuthorizationCheck(request, r => r.AccountId);
+            CheckIsUserResourceOwnerOrAdmin(request, idSelector: r => r.AccountId);
 
             response.Data = _mapper.Map<WalletDTO>(
                 await _service.AddWalletAsync(

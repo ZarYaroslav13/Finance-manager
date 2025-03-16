@@ -22,7 +22,7 @@ public class GetWalletsHandler : BaseHandler, IRequestHandler<GetWalletsQuery, B
 
         try
         {
-            AuthorizationCheck(request, r => r.AccountId);
+            CheckIsUserResourceOwnerOrAdmin(request, idSelector: r => r.AccountId);
 
             response.Data = (await _service.GetAllWalletsOfAccountAsync(request.AccountId))
                 .Select(_mapper.Map<WalletDTO>)

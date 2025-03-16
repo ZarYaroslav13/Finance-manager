@@ -2,7 +2,6 @@
 using FinanceManager.Application.Models;
 using FinanceManager.Application.UseCases.Commons.Bases;
 using FinanceManager.Domain.Services.Accounts;
-using FinanceManager.Domain.Services.Admins;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
@@ -20,16 +19,10 @@ public class UpdatePasswordAccountCommandHandler : BaseHandler, IRequestHandler<
     public async Task<BaseResponse<AccountDTO>> Handle(UpdatePasswordAccountCommand request, CancellationToken cancellationToken)
     {
         BaseResponse<AccountDTO> response = new();
-        int userId = request.UserId;
-        string userRole = request.UserRole;
 
         try
         {
-            if (userRole != AdminService.AdminRole && request.Id != userId)
-            {
-                _logger.LogWarning($"Unauthorized access attempt to update account with Id: {request.Id} by user with id: {userId} and role {userRole}");
-                throw new UnauthorizedAccessException($"Access denied");
-            }
+            AuthorizationCheck(request, r => r.Id);
 
             response.Data = _mapper.Map<AccountDTO>(
                     await _accountService.UpdateAccountPasswordAsync(request.Id, request.OldPassword, request.NewPassword));
@@ -39,6 +32,7 @@ public class UpdatePasswordAccountCommandHandler : BaseHandler, IRequestHandler<
         catch (Exception e)
         {
             _logger.LogError(e.Message);
+            response.Message = e.Message;
         }
 
         return response;

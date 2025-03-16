@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using FinanceManager.Application.Models;
 using FinanceManager.Application.UseCases.Accounts.Commands.UpdateCommand;
 using FinanceManager.Domain.Models;
 

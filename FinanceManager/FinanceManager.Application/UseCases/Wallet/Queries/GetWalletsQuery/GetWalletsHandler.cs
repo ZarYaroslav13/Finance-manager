@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using FinanceManager.Application.Models;
 using FinanceManager.Application.UseCases.Commons.Bases;
-using FinanceManager.Domain.Services.Admins;
 using FinanceManager.Domain.Services.Wallets;
 using MediatR;
 using Microsoft.Extensions.Logging;
@@ -19,17 +18,12 @@ public class GetWalletsHandler : BaseHandler, IRequestHandler<GetWalletsQuery, B
 
     public async Task<BaseResponse<List<WalletDTO>>> Handle(GetWalletsQuery request, CancellationToken cancellationToken)
     {
-        if (request.UserRole != AdminService.AdminRole && request.UserId != request.AccountId)
-        {
-            _logger.LogInformation("Access to get wallets information of account with {AccountId} is denied for  user with id: {UserId} and role: {UserRole}",
-                request.AccountId, request.UserId, request.UserRole);
-            throw new UnauthorizedAccessException("Access denied");
-        }
-
         var response = new BaseResponse<List<WalletDTO>>();
 
         try
         {
+            AuthorizationCheck(request, r => r.AccountId);
+
             response.Data = (await _service.GetAllWalletsOfAccountAsync(request.AccountId))
                 .Select(_mapper.Map<WalletDTO>)
                 .ToList();

@@ -2,7 +2,6 @@
 using FinanceManager.Application.Models;
 using FinanceManager.Application.UseCases.Commons.Bases;
 using FinanceManager.Domain.Models;
-using FinanceManager.Domain.Services.Admins;
 using FinanceManager.Domain.Services.Wallets;
 using MediatR;
 using Microsoft.Extensions.Logging;
@@ -24,11 +23,7 @@ public class CreateWalletHandler : BaseHandler, IRequestHandler<CreateWalletComm
 
         try
         {
-            if (request.UserId != request.AccountId && request.UserRole != AdminService.AdminRole)
-            {
-                _logger.LogWarning($"Unauthorized access attempt to create wallet for user Id: {request.AccountId} by user with id: {request.UserId}");
-                throw new UnauthorizedAccessException($"Access to this account is denied");
-            }
+            AuthorizationCheck(request, r => r.AccountId);
 
             response.Data = _mapper.Map<WalletDTO>(
                 await _service.AddWalletAsync(

@@ -18,16 +18,16 @@ public class DeleteWalletHandler : BaseHandler, IRequestHandler<DeleteWalletComm
 
     public async Task<BaseResponse<bool>> Handle(DeleteWalletCommand request, CancellationToken cancellationToken)
     {
-        if (request.UserRole != AdminService.AdminRole && !await _service.IsAccountOwnerWalletAsync(request.UserId, request.WalletId))
-        {
-            _logger.LogWarning($"Unauthorized access attempt to delete wallet Id: {request.WalletId} by user Id: {request.UserId} and role: {request.UserRole}");
-            throw new UnauthorizedAccessException($"Access to this wallet is denied");
-        }
-
         var response = new BaseResponse<bool>();
 
         try
         {
+            if (request.UserRole != AdminService.AdminRole && !await _service.IsAccountOwnerWalletAsync(request.UserId, request.WalletId))
+            {
+                _logger.LogWarning($"Unauthorized access attempt to delete wallet Id: {request.WalletId} by user Id: {request.UserId} and role: {request.UserRole}");
+                throw new UnauthorizedAccessException($"Access to this wallet is denied");
+            }
+
             await _service.DeleteWalletByIdAsync(request.WalletId);
 
             response.Data = true;

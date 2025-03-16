@@ -19,16 +19,16 @@ public class GetByIdWalletHandler : BaseHandler, IRequestHandler<GetByIdWalletQu
 
     public async Task<BaseResponse<WalletDTO>> Handle(GetByIdWalletQuery request, CancellationToken cancellationToken)
     {
-        if (!(await _service.IsAccountOwnerWalletAsync(request.UserId, request.WalletId)) && request.UserRole != AdminService.AdminRole)
-        {
-            _logger.LogWarning($"Unauthorized access attempt to get wallet with Id: {request.WalletId} by user Id: {request.UserId}");
-            throw new UnauthorizedAccessException($"Access to this wallet is denied");
-        }
-
         var response = new BaseResponse<WalletDTO>();
 
         try
         {
+            if (!(await _service.IsAccountOwnerWalletAsync(request.UserId, request.WalletId)) && request.UserRole != AdminService.AdminRole)
+            {
+                _logger.LogWarning($"Unauthorized access attempt to get wallet with Id: {request.WalletId} by user Id: {request.UserId}");
+                throw new UnauthorizedAccessException($"Access to this wallet is denied");
+            }
+
             response.Data = _mapper.Map<WalletDTO>(
                     await _service.FindWalletAsync(request.WalletId));
 

@@ -3,7 +3,6 @@ using FinanceManager.Application.Models;
 using FinanceManager.Application.UseCases.Commons.Bases;
 using FinanceManager.Domain.Models;
 using FinanceManager.Domain.Services.Accounts;
-using FinanceManager.Domain.Services.Admins;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
@@ -26,11 +25,7 @@ public class UpdateAccountCommandHandler : BaseHandler, IRequestHandler<UpdateAc
 
         try
         {
-            if (userRole != AdminService.AdminRole && request.Id != userId)
-            {
-                _logger.LogWarning($"Unauthorized access attempt to update account with Id: {request.Id} by user with id: {userId} and role {userRole}");
-                throw new UnauthorizedAccessException($"Access denied");
-            }
+            AuthorizationCheck(request, r => r.Id);
 
             response.Data = _mapper.Map<AccountDTO>(
                     await _accountService.UpdateAccountAsync(

@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using FinanceManager.Application.UseCases.Commons.Bases;
 using FinanceManager.Domain.Services.Accounts;
-using FinanceManager.Domain.Services.Admins;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
@@ -18,19 +17,11 @@ public class DeleteAccountByIdHandler : BaseHandler, IRequestHandler<DeleteAccou
 
     public Task<BaseResponse<bool>> Handle(DeleteAccountByIdCommand request, CancellationToken cancellationToken)
     {
-        int userId = request.UserId;
-        string userRole = request.UserRole;
         var response = new BaseResponse<bool>();
-
 
         try
         {
-
-            if (userRole != AdminService.AdminRole && request.Id != userId)
-            {
-                _logger.LogWarning($"Unauthorized access attempt to update account with Id: {request.Id} by user with id: {userId} and role {userRole}");
-                throw new UnauthorizedAccessException($"Access denied");
-            }
+            AuthorizationCheck(request, r => r.Id);
 
             _accountService.DeleteAccountWithId(request.Id);
 

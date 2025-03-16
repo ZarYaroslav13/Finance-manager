@@ -26,7 +26,7 @@ public class GetAllCustomersHandler : BaseHandler, IRequestHandler<GetAllCustome
                     .Select(_mapper.Map<AccountDTO>)
                     .ToList();
 
-            response.MakeAsSuccess("Accounts retrieved successfully");
+            response.MakeAsSuccess("Accounts received successfully");
         }
         catch (Exception e)
         {

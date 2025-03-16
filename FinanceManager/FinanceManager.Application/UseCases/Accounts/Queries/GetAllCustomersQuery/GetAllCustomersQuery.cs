@@ -1,7 +1,6 @@
 ﻿using FinanceManager.Application.Models;
 using FinanceManager.Application.UseCases.Commons.Bases;
 using MediatR;
-using System.ComponentModel.DataAnnotations;
 
 namespace FinanceManager.Application.UseCases.Accounts.Queries.GetAllCustomersQuery;
 

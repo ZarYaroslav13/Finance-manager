@@ -45,7 +45,7 @@ public class AccountController : BaseController
         return BadRequest(response);
     }
 
-    [HttpPut]
+    [HttpPatch]
     [Route("change-password")]
     public async Task<IActionResult> UpdatePasswordAsync([FromBody] UpdatePasswordAccountCommand command)
     {

@@ -3,14 +3,8 @@ using FinanceManager.Application.Models;
 using FinanceManager.Application.UseCases.Commons.Bases;
 using FinanceManager.Domain.Services.Finances;
 using FinanceManager.Domain.Services.Wallets;
-using Infrastructure.Models;
 using MediatR;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FinanceManager.Application.UseCases.FinanceReport.Commands.CreateDailyReportCommand;
 
@@ -31,9 +25,9 @@ public class CreateDailyReportHandler : BaseHandler, IRequestHandler<CreateDaily
 
         try
         {
-            await CheckIsUserResourceOwnerOrAdminAsync(request, 
-                addinionallyCondition: 
-                    async () => 
+            await CheckIsUserResourceOwnerOrAdminAsync(request,
+                addinionallyCondition:
+                    async () =>
                         await _walletService.IsAccountOwnerWalletAsync(request.UserId, request.WalletId));
 
             var wallet = await _walletService.FindWalletAsync(request.WalletId);

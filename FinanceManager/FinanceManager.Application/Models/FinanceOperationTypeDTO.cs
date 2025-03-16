@@ -1,12 +1,9 @@
 ﻿using Infrastructure.Models;
-using System.ComponentModel.DataAnnotations;
 
 namespace FinanceManager.Application.Models;
 
 public class FinanceOperationTypeDTO : Base.ModelDTO
 {
-    [Required]
-    [Length(2, 50)]
     public string Name
     {
         get { return _name; }
@@ -15,11 +12,8 @@ public class FinanceOperationTypeDTO : Base.ModelDTO
 
     public string Description { get; set; } = String.Empty;
 
-    [Required]
     public EntryType EntryType { get; set; }
 
-    [Required]
-    [Range(1, int.MaxValue)]
     public int WalletId { get; set; }
 
     public string WalletName

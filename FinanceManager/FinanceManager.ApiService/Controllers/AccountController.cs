@@ -1,5 +1,4 @@
 ﻿using FinanceManager.ApiService.Controllers.Base;
-using FinanceManager.Application.Models;
 using FinanceManager.Application.UseCases.Accounts.Commands.DeleteAccountByIdCommand;
 using FinanceManager.Application.UseCases.Accounts.Commands.UpdateCommand;
 using FinanceManager.Application.UseCases.Accounts.Commands.UpdatePasswordAccountCommand;
@@ -8,8 +7,6 @@ using FinanceManager.Domain.Services.Admins;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace FinanceManager.ApiService.Controllers;
 

@@ -21,16 +21,16 @@ public class BaseHandler
     /// <param name="request"></param>
     /// <exception cref="UnauthorizedAccessException"></exception>
     protected void CheckIsUserResourceOwnerOrAdmin<Request>(
-        Request request, 
-        string loggingMessage = "", 
-        Func<Request, int>? idSelector = null, 
+        Request request,
+        string loggingMessage = "",
+        Func<Request, int>? idSelector = null,
         Func<bool>? addinionallyCondition = null) where Request : BaseRequest
     {
         HandleLoggingMessage(request, loggingMessage);
 
-        bool conditions = request.UserRole != AdminService.AdminRole 
+        bool conditions = request.UserRole != AdminService.AdminRole
                     && (idSelector == null ? true : request.UserId != idSelector(request))
-                    &&  (addinionallyCondition == null ? true : !addinionallyCondition());
+                    && (addinionallyCondition == null ? true : !addinionallyCondition());
 
         CheckIsUserSuitConditions(conditions, loggingMessage);
     }
@@ -45,7 +45,7 @@ public class BaseHandler
 
         bool additionalConditionResult = addinionallyCondition != null ? await addinionallyCondition() : true;
 
-        bool conditions = request.UserRole != AdminService.AdminRole 
+        bool conditions = request.UserRole != AdminService.AdminRole
                          && (idSelector == null || request.UserId != idSelector(request))
                          && !additionalConditionResult;
 

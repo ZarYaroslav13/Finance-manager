@@ -1,18 +1,4 @@
-﻿using AutoMapper;
-using FakeItEasy;
-using FinanceManager.ApiService.Controllers;
-using FinanceManager.Application.Models;
-using FinanceManager.Domain.Models;
-using FinanceManager.Domain.Services.Accounts;
-using FinanceManager.Domain.Services.Admins;
-using FinanceManager.Domain.Services.Wallets;
-using FluentAssertions;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System.Security.Claims;
-
-namespace FinanceManager.ApiService.Tests.Controllers;
+﻿namespace FinanceManager.ApiService.Tests.Controllers;
 
 //[TestClass]
 //public class WalletControllerTests

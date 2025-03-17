@@ -4,11 +4,6 @@ using FinanceManager.Application.UseCases.Commons.Bases;
 using FinanceManager.Domain.Services.Finances;
 using MediatR;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FinanceManager.Application.UseCases.FinanceOperation.Queries.GetAllOperationsOfTypeQuery;
 

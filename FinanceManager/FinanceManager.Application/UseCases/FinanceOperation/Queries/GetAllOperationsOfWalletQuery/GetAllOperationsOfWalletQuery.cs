@@ -1,12 +1,7 @@
 ﻿using FinanceManager.Application.Models;
 using FinanceManager.Application.UseCases.Commons.Bases;
 using MediatR;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FinanceManager.Application.UseCases.FinanceOperation.Queries.GetAllOperationsOfWalletQuery;
 

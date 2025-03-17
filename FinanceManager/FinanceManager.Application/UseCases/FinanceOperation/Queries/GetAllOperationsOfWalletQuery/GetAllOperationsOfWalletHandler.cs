@@ -2,15 +2,8 @@
 using FinanceManager.Application.Models;
 using FinanceManager.Application.UseCases.Commons.Bases;
 using FinanceManager.Domain.Services.Finances;
-using Infrastructure.Models;
 using MediatR;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FinanceManager.Application.UseCases.FinanceOperation.Queries.GetAllOperationsOfWalletQuery;
 
@@ -29,11 +22,11 @@ public class GetAllOperationsOfWalletHandler : BaseHandler, IRequestHandler<GetA
 
         try
         {
-            await CheckIsUserResourceOwnerOrAdminAsync(request, 
-                addinionallyCondition: 
-                    async () => 
+            await CheckIsUserResourceOwnerOrAdminAsync(request,
+                addinionallyCondition:
+                    async () =>
                         await _financeService.IsAccountOwnerOfWalletAsync(request.UserId, request.WalletId));
-            
+
             response.Data = (await _financeService
                 .GetAllFinanceOperationOfWalletAsync(request.WalletId, request.Index, request.Count))
                 .Select(_mapper.Map<FinanceOperationDTO>)

@@ -1,16 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace FinanceManager.Application.Models;
+﻿namespace FinanceManager.Application.Models;
 
 public class FinanceOperationDTO : Base.ModelDTO
 {
-    [Range(0, int.MaxValue)]
     public int Amount { get; set; }
 
-    [Required]
     public DateTime Date { get; set; }
 
-    [Required]
     public FinanceOperationTypeDTO Type { get { return _type; } set { ChangeFinanceOperationType(value); } }
 
     private FinanceOperationTypeDTO _type;

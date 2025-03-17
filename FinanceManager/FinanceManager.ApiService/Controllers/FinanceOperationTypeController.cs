@@ -1,10 +1,8 @@
-﻿using AutoMapper;
-using FinanceManager.ApiService.Controllers.Base;
+﻿using FinanceManager.ApiService.Controllers.Base;
 using FinanceManager.Application.UseCases.FinanceOperationType.Commands.AddFinanceOperationTypeCommand;
 using FinanceManager.Application.UseCases.FinanceOperationType.Commands.DeleteFinanceOperationTypeCommand;
 using FinanceManager.Application.UseCases.FinanceOperationType.Commands.UpdateFinanceOperationTypeCommand;
 using FinanceManager.Application.UseCases.FinanceOperationType.Queries.GetAllFinanceOperationTypesQuery;
-using FinanceManager.Domain.Services.Finances;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

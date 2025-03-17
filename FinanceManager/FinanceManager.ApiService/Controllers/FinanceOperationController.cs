@@ -1,21 +1,18 @@
-﻿using AutoMapper;
-using FinanceManager.ApiService.Controllers.Base;
-using FinanceManager.Application.Models;
+﻿using FinanceManager.ApiService.Controllers.Base;
+using FinanceManager.Application.UseCases.FinanceOperation.Commands.AddFinanceOperationCommand;
+using FinanceManager.Application.UseCases.FinanceOperation.Commands.DeleteFinanceOperationCommand;
+using FinanceManager.Application.UseCases.FinanceOperation.Commands.UpdateFinanceOperationCommand;
 using FinanceManager.Application.UseCases.FinanceOperation.Queries.GetAllOperationsOfTypeQuery;
 using FinanceManager.Application.UseCases.FinanceOperation.Queries.GetAllOperationsOfWalletQuery;
-using FinanceManager.Domain.Models;
-using FinanceManager.Domain.Services.Finances;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinanceManager.ApiService.Controllers;
 
 public class FinanceOperationController : BaseController
 {
-    private readonly IFinanceService _financeService;
-
-    public FinanceOperationController(IFinanceService financeService, IMapper mapper, ILogger<BaseController> logger) : base(mapper, logger)
+    public FinanceOperationController(IMediator mediator) : base(mediator)
     {
-        _financeService = financeService ?? throw new ArgumentNullException(nameof(financeService));
     }
 
     [HttpGet("wallet/{walletId}")]
@@ -31,63 +28,20 @@ public class FinanceOperationController : BaseController
     }
 
     [HttpPost]
-    public async Task<IActionResult> AddAsync([FromBody] FinanceOperationDTO dto)
+    public async Task<IActionResult> AddAsync([FromBody] AddFinanceOperationCommand command)
     {
-        var userId = GetUserId();
-        _logger.LogInformation("AddAsync called to add a new finance operation with type: {@Description}", dto.Type);
-
-        if (!await _financeService.IsAccountOwnerOfWalletAsync(userId, dto.Type.WalletId))
-        {
-            _logger.LogWarning($"Unauthorized access attempt to add finance operation  to wallet with Id: {dto.Type.WalletId} by user with Id: {userId}");
-            throw new UnauthorizedAccessException("Access to this wallet is denied");
-        }
-
-        var newOperation = _mapper.Map<FinanceOperationDTO>(
-                await _financeService.AddFinanceOperationAsync(
-                        _mapper.Map<FinanceOperationModel>(dto)));
-
-        _logger.LogInformation("Finance operation with Id: {Id} added successfully", newOperation.Id);
-
-        return Ok(newOperation);
+        return await SendRequestAsync(command);
     }
 
     [HttpPut]
-    public async Task<IActionResult> UpdateAsync(int id, [FromBody] FinanceOperationDTO dto)
+    public async Task<IActionResult> UpdateAsync([FromBody] UpdateFinanceOperationCommand command)
     {
-        var userId = GetUserId();
-        _logger.LogInformation("UpdateAsync called to update finance operation with Id: {Id}", dto.Id);
-
-        if (!await _financeService.IsAccountOwnerOfFinanceOperationTypeAsync(userId, dto.Type.Id))
-        {
-            _logger.LogWarning($"Unauthorized access attempt to update finance operation of type with Id: {dto.Type.Id} by user with Id: {userId}");
-            throw new UnauthorizedAccessException("Access to this wallet is denied");
-        }
-
-        var updatedOperation = _mapper.Map<FinanceOperationDTO>(
-                await _financeService.UpdateFinanceOperationAsync(
-                        _mapper.Map<FinanceOperationModel>(dto)));
-
-        _logger.LogInformation("Finance operation with Id: {Id} updated successfully", updatedOperation.Id);
-
-        return Ok(updatedOperation);
+        return await SendRequestAsync(command);
     }
 
     [HttpDelete]
     public async Task<IActionResult> DeleteAsync(int id)
     {
-        var userId = GetUserId();
-        _logger.LogInformation("DeleteAsync called to remove finance operation with Id: {Id}", id);
-
-        if (!await _financeService.IsAccountOwnerOfFinanceOperationAsync(userId, id))
-        {
-            _logger.LogWarning($"Unauthorized access attempt to delete finance operation with Id: {id} by user with Id: {userId}");
-            throw new UnauthorizedAccessException("Access to this wallet is denied");
-        }
-
-        await _financeService.DeleteFinanceOperationAsync(id);
-
-        _logger.LogInformation("Finance operation with Id: {Id} deleted successfully", id);
-
-        return Ok();
+        return await SendRequestAsync(new DeleteFinanceOperationCommand() { Id = id });
     }
 }

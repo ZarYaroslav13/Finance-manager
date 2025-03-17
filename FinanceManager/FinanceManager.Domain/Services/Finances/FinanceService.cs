@@ -111,8 +111,8 @@ public class FinanceService : BaseService, IFinanceService
                    includeProperties: nameof(FinanceOperation.Type),
                     filter: fo => fo.Type.WalletId == walletId,
                     orderBy: iQ => iQ.OrderBy(fo => fo.Date),
-                    skip: count,
-                    take: index))
+                    skip: index,
+                    take: count))
                 .Select(_mapper.Map<FinanceOperationModel>)
                 .ToList();
 
@@ -142,16 +142,24 @@ public class FinanceService : BaseService, IFinanceService
         return result;
     }
 
-    public async Task<List<FinanceOperationModel>> GetAllFinanceOperationOfTypeAsync(int TypeId)
+    public async Task<List<FinanceOperationModel>> GetAllFinanceOperationOfTypeAsync(int typeId, int index = 0, int count = 0)
     {
+        if (typeId <= 0)
+            throw new ArgumentOutOfRangeException(nameof(typeId));
 
-        string[] includedProperities =
-        {
-            nameof(FinanceOperation.Type)
-        };
+        if (index < 0)
+            throw new ArgumentOutOfRangeException(nameof(index));
+
+        if (count < 0)
+            throw new ArgumentOutOfRangeException(nameof(count));
 
         return (await _financeOperationRepository
-                .GetAllAsync(filter: fo => fo.TypeId == TypeId, includeProperties: includedProperities))
+                .GetAllAsync(
+                    includeProperties: nameof(FinanceOperation.Type),
+                    filter: fo => fo.Type.WalletId == typeId,
+                    orderBy: iQ => iQ.OrderBy(fo => fo.Date),
+                    skip: index,
+                    take: count))
                 .Select(_mapper.Map<FinanceOperationModel>)
                 .ToList();
     }

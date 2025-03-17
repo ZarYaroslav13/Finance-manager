@@ -20,7 +20,7 @@ public interface IFinanceService
 
     public Task<List<FinanceOperationModel>> GetAllFinanceOperationOfWalletAsync(int walletId, DateTime startDate, DateTime endDate);
 
-    public Task<List<FinanceOperationModel>> GetAllFinanceOperationOfTypeAsync(int TypeId);
+    public Task<List<FinanceOperationModel>> GetAllFinanceOperationOfTypeAsync(int typeId, int index = 0, int count = 0);
 
     public Task<FinanceOperationModel> AddFinanceOperationAsync(FinanceOperationModel financeOperation);
 

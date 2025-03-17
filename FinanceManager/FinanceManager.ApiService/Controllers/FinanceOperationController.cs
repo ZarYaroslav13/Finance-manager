@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using FinanceManager.ApiService.Controllers.Base;
 using FinanceManager.Application.Models;
+using FinanceManager.Application.UseCases.FinanceOperation.Queries.GetAllOperationsOfTypeQuery;
+using FinanceManager.Application.UseCases.FinanceOperation.Queries.GetAllOperationsOfWalletQuery;
 using FinanceManager.Domain.Models;
 using FinanceManager.Domain.Services.Finances;
 using Microsoft.AspNetCore.Mvc;
@@ -17,45 +19,15 @@ public class FinanceOperationController : BaseController
     }
 
     [HttpGet("wallet/{walletId}")]
-    public async Task<IActionResult> GetAllOfWalletAsync(int walletId, int index = 0, int count = 0)
+    public async Task<IActionResult> GetAllOfWalletAsync([FromBody] GetAllOperationsOfWalletQuery query)
     {
-        var userId = GetUserId();
-        _logger.LogInformation("GetAllOfWalletAsync called to retrieve finance operations for wallet Id: {WalletId}, starting at index: {Index}, with count: {Count}", walletId, index, count);
-
-        if (!await _financeService.IsAccountOwnerOfWalletAsync(userId, walletId))
-        {
-            _logger.LogWarning($"Unauthorized access attempt to get wallet with Id: {walletId} information for user Id: {userId}");
-            throw new UnauthorizedAccessException("Access to this wallet is denied");
-        }
-
-        var operations = (await _financeService.GetAllFinanceOperationOfWalletAsync(walletId, index, count))
-            .Select(_mapper.Map<FinanceOperationDTO>)
-            .ToList();
-
-        _logger.LogInformation("{Count} finance operations retrieved for wallet Id: {WalletId}", operations.Count, walletId);
-
-        return Ok(operations);
+        return await SendRequestAsync(query);
     }
 
     [HttpGet("type/{typeId}")]
-    public async Task<IActionResult> GetAllOfTypeAsync(int typeId)
+    public async Task<IActionResult> GetAllOfTypeAsync([FromBody] GetAllOperationsOfTypeQuery query)
     {
-        var userId = GetUserId();
-        _logger.LogInformation("GetAllOfTypeAsync called to retrieve finance operations of type Id: {TypeId}", typeId);
-
-        if (!await _financeService.IsAccountOwnerOfFinanceOperationTypeAsync(userId, typeId))
-        {
-            _logger.LogWarning($"Unauthorized access attempt to get finance operation type with Id: {typeId} information for user Id: {userId}");
-            throw new UnauthorizedAccessException("Access to this wallet is denied");
-        }
-
-        var operations = (await _financeService.GetAllFinanceOperationOfTypeAsync(typeId))
-            .Select(_mapper.Map<FinanceOperationDTO>)
-            .ToList();
-
-        _logger.LogInformation("{Count} finance operations retrieved for type Id: {TypeId}", operations.Count, typeId);
-
-        return Ok(operations);
+        return await SendRequestAsync(query);
     }
 
     [HttpPost]

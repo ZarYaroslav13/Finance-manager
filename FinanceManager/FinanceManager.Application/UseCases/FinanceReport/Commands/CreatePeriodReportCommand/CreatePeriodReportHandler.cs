@@ -8,12 +8,12 @@ using Microsoft.Extensions.Logging;
 
 namespace FinanceManager.Application.UseCases.FinanceReport.Commands.CreatePeriodReportCommand;
 
-public class CreatePeriodReportHandler : BaseHandler, IRequestHandler<CreatePeriodReportCommand, BaseResponse<FinanceReportDTO>>
+public class CreatePeriodReportHandler : BaseRequestHandler, IRequestHandler<CreatePeriodReportCommand, BaseResponse<FinanceReportDTO>>
 {
     private readonly IFinanceReportCreator _creator;
     private readonly IWalletService _walletService;
 
-    public CreatePeriodReportHandler(IFinanceReportCreator financeReportCreator, IWalletService walletService, IMapper mapper, ILogger<BaseHandler> logger) : base(mapper, logger)
+    public CreatePeriodReportHandler(IFinanceReportCreator financeReportCreator, IWalletService walletService, IMapper mapper, ILogger<BaseRequestHandler> logger) : base(mapper, logger)
     {
         _creator = financeReportCreator ?? throw new ArgumentNullException(nameof(financeReportCreator));
         _walletService = walletService ?? throw new ArgumentNullException(nameof(walletService));

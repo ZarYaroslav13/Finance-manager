@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace FinanceManager.Application.UseCases.Accounts.Queries.GetAllCustomersQuery;
 
-public class GetAllCustomersHandler : BaseHandler, IRequestHandler<GetAllCustomersQuery, BaseResponse<List<AccountDTO>>>
+public class GetAllCustomersHandler : BaseRequestHandler, IRequestHandler<GetAllCustomersQuery, BaseResponse<List<AccountDTO>>>
 {
     private readonly IAccountService _accountService;
 

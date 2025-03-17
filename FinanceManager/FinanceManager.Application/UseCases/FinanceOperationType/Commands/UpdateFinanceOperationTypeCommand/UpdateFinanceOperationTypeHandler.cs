@@ -8,11 +8,11 @@ using Microsoft.Extensions.Logging;
 
 namespace FinanceManager.Application.UseCases.FinanceOperationType.Commands.UpdateFinanceOperationTypeCommand;
 
-public class UpdateFinanceOperationTypeHandler : BaseHandler, IRequestHandler<UpdateFinanceOperationTypeCommand, BaseResponse<FinanceOperationTypeDTO>>
+public class UpdateFinanceOperationTypeHandler : BaseRequestHandler, IRequestHandler<UpdateFinanceOperationTypeCommand, BaseResponse<FinanceOperationTypeDTO>>
 {
     private readonly IFinanceService _financeService;
 
-    public UpdateFinanceOperationTypeHandler(IFinanceService financeService, IMapper mapper, ILogger<BaseHandler> logger) : base(mapper, logger)
+    public UpdateFinanceOperationTypeHandler(IFinanceService financeService, IMapper mapper, ILogger<BaseRequestHandler> logger) : base(mapper, logger)
     {
         _financeService = financeService ?? throw new ArgumentNullException(nameof(financeService));
     }

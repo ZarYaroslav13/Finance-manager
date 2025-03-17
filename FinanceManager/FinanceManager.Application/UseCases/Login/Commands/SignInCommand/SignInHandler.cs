@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 
 namespace FinanceManager.Application.UseCases.Login.Commands.SignInCommand;
 
-public class SignInHandler : BaseHandler, IRequestHandler<SignInCommand, BaseResponse<AutentificationTokenDTO>>
+public class SignInHandler : BaseRequestHandler, IRequestHandler<SignInCommand, BaseResponse<AutentificationTokenDTO>>
 {
     private readonly IAccountService _accountService;
     private readonly IAdminService _adminService;
@@ -20,7 +20,7 @@ public class SignInHandler : BaseHandler, IRequestHandler<SignInCommand, BaseRes
         IAccountService accountService,
         ITokenManager tokenManager,
         IMapper mapper,
-        ILogger<BaseHandler> logger) : base(mapper, logger)
+        ILogger<BaseRequestHandler> logger) : base(mapper, logger)
     {
         _accountService = accountService ?? throw new ArgumentNullException(nameof(accountService));
         _adminService = adminService ?? throw new ArgumentNullException(nameof(adminService));

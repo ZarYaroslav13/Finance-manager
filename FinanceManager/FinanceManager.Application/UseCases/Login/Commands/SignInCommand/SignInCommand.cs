@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace FinanceManager.Application.UseCases.Login.Commands.SignInCommand;
 
-public class SignInCommand : BaseRequest, IRequest<BaseResponse<AutentificationTokenDTO>>
+public class SignInCommand : IRequest<BaseResponse<AutentificationTokenDTO>>
 {
     [Required]
     [EmailAddress]

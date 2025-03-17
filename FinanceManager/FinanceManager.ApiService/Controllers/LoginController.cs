@@ -1,5 +1,5 @@
 ﻿using FinanceManager.ApiService.Controllers.Base;
-using FinanceManager.Application.Models;
+using FinanceManager.Application.UseCases.Login.Commands.CreateAccountCommand;
 using FinanceManager.Application.UseCases.Login.Commands.SignInAdminCommand;
 using FinanceManager.Application.UseCases.Login.Commands.SignInCommand;
 using MediatR;
@@ -31,16 +31,9 @@ public class LoginController : BaseController
     }
 
     [HttpPost("sign-up")]
-    public async Task<IActionResult> CreateAsync([FromBody] AccountDTO account)
+    public async Task<IActionResult> CreateAsync([FromBody] CreateAccountCommand command)
     {
-        //_logger.LogInformation("CreateAsync called to create a new account with email: {Email}", account.Email);
-
-        //var newAccount = _mapper.Map<AccountDTO>(
-        //               await _accountService.AddAccountAsync(
-        //                   _mapper.Map<AccountModel>(account)));
-
-        //_logger.LogInformation("Account created successfully with email: {Email} and Id: {Id}", newAccount.Email, newAccount.Id);
-
-        return Ok();
+        var response = await _mediator.Send(command);
+        return response.Success ? Ok(response) : BadRequest(response);
     }
 }

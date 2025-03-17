@@ -6,11 +6,11 @@ using Microsoft.Extensions.Logging;
 
 namespace FinanceManager.Application.UseCases.Accounts.Commands.DeleteAccountByIdCommand;
 
-public class DeleteAccountByIdHandler : BaseHandler, IRequestHandler<DeleteAccountByIdCommand, BaseResponse<bool>>
+public class DeleteAccountByIdHandler : BaseRequestHandler, IRequestHandler<DeleteAccountByIdCommand, BaseResponse<bool>>
 {
     private readonly IAccountService _accountService;
 
-    public DeleteAccountByIdHandler(IAccountService accountService, IMapper mapper, ILogger<BaseHandler> logger) : base(mapper, logger)
+    public DeleteAccountByIdHandler(IAccountService accountService, IMapper mapper, ILogger<BaseRequestHandler> logger) : base(mapper, logger)
     {
         _accountService = accountService ?? throw new ArgumentNullException(nameof(accountService));
     }

@@ -7,11 +7,11 @@ using Microsoft.Extensions.Logging;
 
 namespace FinanceManager.Application.UseCases.Wallet.Commands.DeleteWalletCommand;
 
-public class DeleteWalletHandler : BaseHandler, IRequestHandler<DeleteWalletCommand, BaseResponse<bool>>
+public class DeleteWalletHandler : BaseRequestHandler, IRequestHandler<DeleteWalletCommand, BaseResponse<bool>>
 {
     private readonly IWalletService _service;
 
-    public DeleteWalletHandler(IWalletService service, IMapper mapper, ILogger<BaseHandler> logger) : base(mapper, logger)
+    public DeleteWalletHandler(IWalletService service, IMapper mapper, ILogger<BaseRequestHandler> logger) : base(mapper, logger)
     {
         _service = service ?? throw new ArgumentNullException(nameof(service));
     }

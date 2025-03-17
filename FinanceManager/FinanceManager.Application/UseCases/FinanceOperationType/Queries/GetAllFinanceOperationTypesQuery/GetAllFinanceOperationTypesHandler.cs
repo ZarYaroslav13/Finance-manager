@@ -7,11 +7,11 @@ using Microsoft.Extensions.Logging;
 
 namespace FinanceManager.Application.UseCases.FinanceOperationType.Queries.GetAllFinanceOperationTypesQuery;
 
-public class GetAllFinanceOperationTypesHandler : BaseHandler, IRequestHandler<GetAllFinanceOperationTypesQuery, BaseResponse<List<FinanceOperationTypeDTO>>>
+public class GetAllFinanceOperationTypesHandler : BaseRequestHandler, IRequestHandler<GetAllFinanceOperationTypesQuery, BaseResponse<List<FinanceOperationTypeDTO>>>
 {
     private readonly IFinanceService _financeService;
 
-    public GetAllFinanceOperationTypesHandler(IFinanceService financeService, IMapper mapper, ILogger<BaseHandler> logger) : base(mapper, logger)
+    public GetAllFinanceOperationTypesHandler(IFinanceService financeService, IMapper mapper, ILogger<BaseRequestHandler> logger) : base(mapper, logger)
     {
         _financeService = financeService ?? throw new ArgumentNullException(nameof(financeService));
     }

@@ -6,11 +6,11 @@ using Microsoft.Extensions.Logging;
 
 namespace FinanceManager.Application.UseCases.FinanceOperationType.Commands.DeleteFinanceOperationTypeCommand;
 
-public class DeleteFinanceOperationTypeHandler : BaseHandler, IRequestHandler<DeleteFinanceOperationTypeCommand, BaseResponse<bool>>
+public class DeleteFinanceOperationTypeHandler : BaseRequestHandler, IRequestHandler<DeleteFinanceOperationTypeCommand, BaseResponse<bool>>
 {
     private readonly IFinanceService _financeService;
 
-    public DeleteFinanceOperationTypeHandler(IFinanceService financeService, IMapper mapper, ILogger<BaseHandler> logger) : base(mapper, logger)
+    public DeleteFinanceOperationTypeHandler(IFinanceService financeService, IMapper mapper, ILogger<BaseRequestHandler> logger) : base(mapper, logger)
     {
         _financeService = financeService ?? throw new ArgumentNullException(nameof(financeService));
     }

@@ -9,11 +9,11 @@ using Microsoft.Extensions.Logging;
 
 namespace FinanceManager.Application.UseCases.Wallet.Commands.UpdateWalletCommand;
 
-public class UpdateWalletHandler : BaseHandler, IRequestHandler<UpdateWalletCommand, BaseResponse<WalletDTO>>
+public class UpdateWalletHandler : BaseRequestHandler, IRequestHandler<UpdateWalletCommand, BaseResponse<WalletDTO>>
 {
     private readonly IWalletService _service;
 
-    public UpdateWalletHandler(IWalletService service, IMapper mapper, ILogger<BaseHandler> logger) : base(mapper, logger)
+    public UpdateWalletHandler(IWalletService service, IMapper mapper, ILogger<BaseRequestHandler> logger) : base(mapper, logger)
     {
         _service = service ?? throw new ArgumentNullException(nameof(service));
     }

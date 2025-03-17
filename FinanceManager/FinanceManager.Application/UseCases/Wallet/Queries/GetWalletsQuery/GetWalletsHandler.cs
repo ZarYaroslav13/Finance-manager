@@ -7,11 +7,11 @@ using Microsoft.Extensions.Logging;
 
 namespace FinanceManager.Application.UseCases.Wallet.Queries.GetWalletsQuery;
 
-public class GetWalletsHandler : BaseHandler, IRequestHandler<GetWalletsQuery, BaseResponse<List<WalletDTO>>>
+public class GetWalletsHandler : BaseRequestHandler, IRequestHandler<GetWalletsQuery, BaseResponse<List<WalletDTO>>>
 {
     private readonly IWalletService _service;
 
-    public GetWalletsHandler(IWalletService service, IMapper mapper, ILogger<BaseHandler> logger) : base(mapper, logger)
+    public GetWalletsHandler(IWalletService service, IMapper mapper, ILogger<BaseRequestHandler> logger) : base(mapper, logger)
     {
         _service = service ?? throw new ArgumentNullException(nameof(service));
     }

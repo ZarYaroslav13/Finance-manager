@@ -8,11 +8,11 @@ using Microsoft.Extensions.Logging;
 
 namespace FinanceManager.Application.UseCases.Wallet.Commands.CreateWalletCommand;
 
-public class CreateWalletHandler : BaseHandler, IRequestHandler<CreateWalletCommand, BaseResponse<WalletDTO>>
+public class CreateWalletHandler : BaseRequestHandler, IRequestHandler<CreateWalletCommand, BaseResponse<WalletDTO>>
 {
     private readonly IWalletService _service;
 
-    public CreateWalletHandler(IWalletService service, IMapper mapper, ILogger<BaseHandler> logger) : base(mapper, logger)
+    public CreateWalletHandler(IWalletService service, IMapper mapper, ILogger<BaseRequestHandler> logger) : base(mapper, logger)
     {
         _service = service ?? throw new ArgumentNullException(nameof(service));
     }

@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using FinanceManager.Application.Models;
+﻿using FinanceManager.Application.Models;
 using FinanceManager.Application.UseCases.Commons.Bases;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -14,14 +13,6 @@ namespace FinanceManager.ApiService.Controllers.Base;
 public abstract class BaseController : ControllerBase
 {
     protected readonly IMediator _mediator;
-    protected readonly ILogger<BaseController> _logger;
-    protected readonly IMapper _mapper;
-
-    public BaseController(IMapper mapper, ILogger<BaseController> logger)
-    {
-        _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-        _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
-    }
 
     public BaseController(IMediator mediator)
     {

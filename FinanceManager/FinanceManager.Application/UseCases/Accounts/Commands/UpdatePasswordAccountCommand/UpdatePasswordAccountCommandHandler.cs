@@ -7,11 +7,11 @@ using Microsoft.Extensions.Logging;
 
 namespace FinanceManager.Application.UseCases.Accounts.Commands.UpdatePasswordAccountCommand;
 
-public class UpdatePasswordAccountCommandHandler : BaseHandler, IRequestHandler<UpdatePasswordAccountCommand, BaseResponse<AccountDTO>>
+public class UpdatePasswordAccountCommandHandler : BaseRequestHandler, IRequestHandler<UpdatePasswordAccountCommand, BaseResponse<AccountDTO>>
 {
     private readonly IAccountService _accountService;
 
-    public UpdatePasswordAccountCommandHandler(IAccountService accountService, IMapper mapper, ILogger<BaseHandler> logger) : base(mapper, logger)
+    public UpdatePasswordAccountCommandHandler(IAccountService accountService, IMapper mapper, ILogger<BaseRequestHandler> logger) : base(mapper, logger)
     {
         _accountService = accountService ?? throw new ArgumentNullException(nameof(accountService));
     }

@@ -4,12 +4,12 @@ using Microsoft.Extensions.Logging;
 
 namespace FinanceManager.Application.UseCases.Commons.Bases;
 
-public class BaseHandler
+public class BaseRequestHandler
 {
-    protected readonly ILogger<BaseHandler> _logger;
+    protected readonly ILogger<BaseRequestHandler> _logger;
     protected readonly IMapper _mapper;
 
-    public BaseHandler(IMapper mapper, ILogger<BaseHandler> logger)
+    public BaseRequestHandler(IMapper mapper, ILogger<BaseRequestHandler> logger)
     {
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));

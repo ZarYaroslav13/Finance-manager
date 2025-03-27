@@ -276,22 +276,22 @@ public class FinanceServiceTests
     [DynamicData(nameof(FinanceServiceTestsDataProvider.GetAllFinanceOperationsOfTypeTestData), typeof(FinanceServiceTestsDataProvider))]
     public async Task GetAllFinanceOperationOfTypeAsync_ReceivedExpectedNumberFinanceOperations_FinanceOperationsList(List<FinanceOperation> financeOperations, int typeId)
     {
-        A.CallTo(() => _financeOperationsRepository.GetAllAsync(A<Func<IQueryable<FinanceOperation>, IOrderedQueryable<FinanceOperation>>>._,
-                                                            A<Expression<Func<FinanceOperation, bool>>>.That.Matches(filter =>
-                                                                filter != null && filter.Compile()(new FinanceOperation { TypeId = typeId })),
-                                                             A<int>._, A<int>._,
-                                                            A<string[]>._))
+        A.CallTo(() => _financeOperationsRepository.GetAllAsync(
+        A<Func<IQueryable<FinanceOperation>, IOrderedQueryable<FinanceOperation>>>._,
+        A<Expression<Func<FinanceOperation, bool>>>._,
+        A<int>._, A<int>._,
+        A<string[]>._))
             .Returns(financeOperations);
 
 
         var result = await _service.GetAllFinanceOperationOfTypeAsync(typeId);
 
 
-        A.CallTo(() => _financeOperationsRepository.GetAllAsync(A<Func<IQueryable<FinanceOperation>, IOrderedQueryable<FinanceOperation>>>._,
-                                                            A<Expression<Func<FinanceOperation, bool>>>.That.Matches(filter =>
-                                                                filter != null && filter.Compile()(new FinanceOperation { TypeId = typeId })),
-                                                                A<int>._, A<int>._,
-                                                            A<string[]>._))
+        A.CallTo(() => _financeOperationsRepository.GetAllAsync(
+        A<Func<IQueryable<FinanceOperation>, IOrderedQueryable<FinanceOperation>>>._,
+        A<Expression<Func<FinanceOperation, bool>>>._,
+        A<int>._, A<int>._,
+        A<string[]>._))
            .MustHaveHappenedOnceExactly();
 
         A.CallTo(() => _mapper.Map<FinanceOperationModel>(A<FinanceOperation>._))

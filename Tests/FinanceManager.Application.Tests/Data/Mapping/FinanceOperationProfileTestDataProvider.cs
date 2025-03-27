@@ -1,6 +1,6 @@
 ﻿using FinanceManager.Application.Models;
 
-namespace FinanceManager.Application.Tests.Data.Mapper.Profiles;
+namespace FinanceManager.Application.Tests.Data.Mapping;
 
 public static class FinanceOperationProfileTestDataProvider
 {

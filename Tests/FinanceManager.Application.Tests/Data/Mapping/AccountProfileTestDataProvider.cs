@@ -1,6 +1,6 @@
 ﻿using FinanceManager.Domain.Models;
 
-namespace FinanceManager.Application.Tests.Data.Mapper.Profiles;
+namespace FinanceManager.Application.Tests.Data.Mapping;
 
 public static class AccountProfileTestDataProvider
 {

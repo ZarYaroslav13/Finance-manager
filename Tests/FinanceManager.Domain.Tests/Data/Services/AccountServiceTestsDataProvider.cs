@@ -117,16 +117,14 @@ public static class AccountServiceTestsDataProvider
                 Id = 1,
                 LastName = "LastName",
                 FirstName = "FirstName",
-                Email = "Email@gmail.com",
-                Password = "Password"
+                Email = "Email@gmail.com"
             },
             new Account()
             {
                 Id = 1,
                 LastName = "LastName",
                 FirstName = "FirstName",
-                Email = "Email@gmail.com",
-                Password = "Password"
+                Email = "Email@gmail.com"
             }
         }
     };

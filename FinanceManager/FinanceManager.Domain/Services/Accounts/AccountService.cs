@@ -11,6 +11,7 @@ namespace FinanceManager.Domain.Services.Accounts;
 
 public class AccountService : BaseService, IAccountService
 {
+    private const string _passwordErasor = "-";
     private readonly IPasswordCoder _passwordCoder;
     private readonly IRepository<Account> _repository;
     private readonly IAdminService _adminService;
@@ -30,16 +31,20 @@ public class AccountService : BaseService, IAccountService
 
     public async Task<List<AccountModel>> GetAccountsAsync(string userRole, int skip = 0, int take = 0)
     {
+
         if (userRole != _adminService.GetAdminRoleString())
             throw new UnauthorizedAccessException();
 
         if (skip < 0 || take < 0)
             throw new ArgumentException("skip and take arguments cannot be less 0");
 
-        var accounts = await _repository.GetAllAsync(skip: skip, take: take);
-
-        return accounts.Select(_mapper.Map<AccountModel>)
+        var accounts = (await _repository.GetAllAsync(skip: skip, take: take))
+                .Select(_mapper.Map<AccountModel>)
                 .ToList();
+
+        accounts.ForEach(a => a.Password = _passwordErasor);
+
+        return accounts;
     }
 
     public async Task<AccountModel> AddAccountAsync(AccountModel account)
@@ -75,6 +80,8 @@ public class AccountService : BaseService, IAccountService
         var repoResult = _repository.Update(
                 _mapper.Map<Account>(updatedAccount));
 
+        repoResult.Password = _passwordErasor;
+
         var result = _mapper.Map<AccountModel>(repoResult);
         await _unitOfWork.SaveChangesAsync();
 
@@ -101,6 +108,8 @@ public class AccountService : BaseService, IAccountService
 
         var result = _mapper.Map<AccountModel>(repoResult);
         await _unitOfWork.SaveChangesAsync();
+
+        result.Password = _passwordErasor;
 
         return result;
     }

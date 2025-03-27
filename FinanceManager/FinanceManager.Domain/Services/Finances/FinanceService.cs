@@ -153,6 +153,7 @@ public class FinanceService : BaseService, IFinanceService
         if (count < 0)
             throw new ArgumentOutOfRangeException(nameof(count));
 
+
         return (await _financeOperationRepository
                 .GetAllAsync(
                     includeProperties: nameof(FinanceOperation.Type),

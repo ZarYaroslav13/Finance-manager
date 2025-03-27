@@ -1,7 +1,7 @@
 ﻿using FinanceManager.Domain.Models;
 using Infrastructure.Models;
 
-namespace FinanceManager.Application.Tests.Data.Mapper.Profiles;
+namespace FinanceManager.Application.Tests.Data.Mapping;
 
 public static class WalletProfileTestDataProvider
 {

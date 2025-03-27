@@ -17,16 +17,16 @@ public class LoginController : BaseController
     }
 
     [HttpPost("user/login")]
-    public async Task<IActionResult> SignInAsync(string email, string password)
+    public async Task<IActionResult> SignInAsync([FromBody] SignInCommand command)
     {
-        var response = await _mediator.Send(new SignInCommand() { Email = email, Password = password });
+        var response = await _mediator.Send(command);
         return response.Success ? Ok(response) : BadRequest(response);
     }
 
     [HttpPost("admin/login")]
-    public async Task<IActionResult> SignInAdminAsync(string email, string password)
+    public async Task<IActionResult> SignInAdminAsync([FromBody] SignInAdminCommand command)
     {
-        var response = await _mediator.Send(new SignInAdminCommand() { Email = email, Password = password });
+        var response = await _mediator.Send(command);
         return response.Success ? Ok(response) : BadRequest(response);
     }
 

@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
 using FinanceManager.Application.Mapping;
 using FinanceManager.Application.Models;
-using FinanceManager.Application.Tests.Data.Mapper.Profiles;
+using FinanceManager.Application.Tests.Data.Mapping;
 using FinanceManager.Application.Tests.TestToolExtensions;
 using FinanceManager.Domain.Models;
 
-namespace FinanceManager.Application.Tests.Mapper.Profiles;
+namespace FinanceManager.Application.Tests.Mapping;
 
 [TestClass]
 public class WalletProfileTests

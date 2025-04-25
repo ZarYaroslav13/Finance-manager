@@ -25,5 +25,9 @@ h1:focus {
 }
 
 .page-background-image {
-    background: url("'../media/images/Logo without background.png'")
+    background: url('../media/images/Logo.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+
 }

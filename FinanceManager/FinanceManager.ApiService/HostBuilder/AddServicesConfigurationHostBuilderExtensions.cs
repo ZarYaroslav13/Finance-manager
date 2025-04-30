@@ -5,6 +5,7 @@ using FinanceManager.Domain.Services.Accounts;
 using FinanceManager.Domain.Services.Admins;
 using FinanceManager.Domain.Services.Finances;
 using FinanceManager.Domain.Services.Wallets;
+using FinanceManager.Domain.Authorization;
 using FinanceManager.ServiceDefaults.Routing;
 using Infrastructure;
 using Infrastructure.Security;
@@ -108,9 +109,9 @@ public static class AddServicesConfigurationHostBuilderExtensions
     {
         services.AddAuthorization(opt =>
         {
-            opt.AddPolicy(AdminService.AdminPolicy, policy =>
+            opt.AddPolicy(PolicyManager.AdminPolicy, policy =>
             {
-                policy.RequireClaim(ClaimTypes.Role, AdminService.AdminRole);
+                policy.RequireClaim(ClaimTypes.Role, PolicyManager.AdminRole);
             });
         });
 

@@ -148,8 +148,8 @@ public class TokenManagerTests
                     Password = acc.Password
                 };
             });
-        A.CallTo(() => _adminService.GetAdminRoleString())
-            .Returns(AdminService.AdminRole);
+        A.CallTo(() => PolicyManager.AdminRole)
+            .Returns(PolicyManager.AdminRole);
 
         var result = await _tokenManager.GetAdminIdentityAsync(admin.Email, admin.Password);
 

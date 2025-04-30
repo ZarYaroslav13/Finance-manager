@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FinanceManager.Domain.Authorization;
 using FinanceManager.Domain.Services.Admins;
 using Microsoft.Extensions.Logging;
 
@@ -28,7 +29,7 @@ public class BaseRequestHandler
     {
         HandleLoggingMessage(request, loggingMessage);
 
-        bool conditions = request.UserRole != AdminService.AdminRole
+        bool conditions = request.UserRole != PolicyManager.AdminRole
                     && (idSelector == null ? true : request.UserId != idSelector(request))
                     && (addinionallyCondition == null ? true : !addinionallyCondition());
 
@@ -45,7 +46,7 @@ public class BaseRequestHandler
 
         bool additionalConditionResult = addinionallyCondition != null ? await addinionallyCondition() : true;
 
-        bool conditions = request.UserRole != AdminService.AdminRole
+        bool conditions = request.UserRole != PolicyManager.AdminRole
                          && (idSelector == null || request.UserId != idSelector(request))
                          && !additionalConditionResult;
 

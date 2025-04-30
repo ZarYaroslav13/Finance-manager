@@ -32,7 +32,7 @@
 //        {
 //            new Claim(nameof(AccountDTO.Id), "1"),
 //            new Claim(ClaimTypes.Name, "user@example.com"),
-//            new Claim(ClaimTypes.Role, AdminService.AdminRole)
+//            new Claim(ClaimTypes.Role, PolicyManager.AdminRole)
 //        }, "mock"));
 
 //        var httpContext = A.Fake<HttpContext>();

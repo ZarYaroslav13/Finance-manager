@@ -12,19 +12,11 @@ public class AdminService : BaseService, IAdminService
     private readonly IPasswordCoder _passwordCoder;
     private readonly IRepository<Admin> _repository;
 
-    public const string AdminRole = "Admin";
-    public const string AdminPolicy = "OnlyForAdmins";
-
-
     public AdminService(IPasswordCoder passwordCoder, IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork, mapper)
     {
         _passwordCoder = passwordCoder ?? throw new ArgumentNullException(nameof(passwordCoder));
         _repository = _unitOfWork.GetRepository<Admin>();
     }
-
-    public string GetAdminRoleString() => AdminRole;
-
-    public string GetAdminPolicyString() => AdminPolicy;
 
     public List<AdminModel> GetAdmins()
     {

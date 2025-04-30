@@ -73,7 +73,7 @@ public static class TokenManagerTestDataProvider
             {
                 new(nameof(AdminDTO.Id), "1"),
                 new(ClaimsIdentity.DefaultNameClaimType, "EmailAdmin@gmail.com"),
-                new(ClaimsIdentity.DefaultRoleClaimType, AdminService.AdminRole)
+                new(ClaimsIdentity.DefaultRoleClaimType, PolicyManager.AdminRole)
             }, "Token",
             ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType)
         }

@@ -4,6 +4,7 @@ using FinanceManager.Application.UseCases.Accounts.Commands.UpdateCommand;
 using FinanceManager.Application.UseCases.Accounts.Commands.UpdatePasswordAccountCommand;
 using FinanceManager.Application.UseCases.Accounts.Queries.GetAllCustomersQuery;
 using FinanceManager.Domain.Services.Admins;
+using FinanceManager.Domain.Authorization;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -16,7 +17,7 @@ public class AccountController : BaseController
     {
     }
 
-    [Authorize(Policy = AdminService.AdminPolicy)]
+    [Authorize(Policy = PolicyManager.AdminPolicy)]
     [HttpGet]
     public async Task<IActionResult> GetAllAsync(int skip, int take)
     {

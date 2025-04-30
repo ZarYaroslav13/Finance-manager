@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FinanceManager.Domain.Authorization;
 using FinanceManager.Domain.Models;
 using FinanceManager.Domain.Services.Admins;
 using Infrastructure.Models;
@@ -25,14 +26,10 @@ public class AccountService : BaseService, IAccountService
         _repository = _unitOfWork.GetRepository<Account>();
     }
 
-    public const string UserRoleName = "User";
-
-    public string GetUserRoleName() => UserRoleName;
-
     public async Task<List<AccountModel>> GetAccountsAsync(string userRole, int skip = 0, int take = 0)
     {
 
-        if (userRole != _adminService.GetAdminRoleString())
+        if (userRole != PolicyManager.AdminRole)
             throw new UnauthorizedAccessException();
 
         if (skip < 0 || take < 0)

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FinanceManager.Application.UseCases.Commons.Bases;
+using FinanceManager.Domain.Authorization;
 using FinanceManager.Domain.Services.Admins;
 using FinanceManager.Domain.Services.Wallets;
 using MediatR;
@@ -22,7 +23,7 @@ public class DeleteWalletHandler : BaseRequestHandler, IRequestHandler<DeleteWal
 
         try
         {
-            if (request.UserRole != AdminService.AdminRole && !await _service.IsAccountOwnerWalletAsync(request.UserId, request.WalletId))
+            if (request.UserRole != PolicyManager.AdminRole && !await _service.IsAccountOwnerWalletAsync(request.UserId, request.WalletId))
             {
                 _logger.LogWarning($"Unauthorized access attempt to delete wallet Id: {request.WalletId} by user Id: {request.UserId} and role: {request.UserRole}");
                 throw new UnauthorizedAccessException($"Access to this wallet is denied");

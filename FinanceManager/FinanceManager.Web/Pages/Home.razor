@@ -1,24 +1,6 @@
 ﻿
 @page "/"
 
-<MudContainer MaxWidth="MaxWidth.ExtraSmall" Class="page-background-image">
-    @* <MudPaper Elevation="3" Class="p-6">
-       
-    </MudPaper> *@
-    <MudStack Spacing="3">
-        <MudText Typo="Typo.h5" Align="Align.Center">Login</MudText>
+<MudContainer>
 
-        <MudTextField @bind-Value="TextValue" Label="Username" Variant="Variant.Outlined" />
-        <MudTextField @bind-Value="TextValue" Label="Password" Variant="Variant.Outlined" InputType="InputType.Password" />
-
-        <MudButton Variant="Variant.Filled" Color="Color.Primary" FullWidth="true">
-            Sign In
-        </MudButton>
-    </MudStack>
 </MudContainer>
-
-
-
-@code{
-    public string TextValue;
-}

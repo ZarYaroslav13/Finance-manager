@@ -33,7 +33,7 @@
 //        {
 //            new Claim(nameof(AccountDTO.Id), _userId.ToString()),
 //            new Claim(ClaimTypes.Name, _email),
-//            new Claim(ClaimTypes.Role, AdminService.AdminRole)
+//            new Claim(ClaimTypes.Role, PolicyManager.AdminRole)
 
 //        }, "mock"));
 

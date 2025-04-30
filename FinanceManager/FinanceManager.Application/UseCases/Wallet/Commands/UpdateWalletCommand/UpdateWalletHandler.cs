@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using FinanceManager.Application.Models;
 using FinanceManager.Application.UseCases.Commons.Bases;
+using FinanceManager.Domain.Authorization;
 using FinanceManager.Domain.Models;
 using FinanceManager.Domain.Services.Admins;
 using FinanceManager.Domain.Services.Wallets;
@@ -20,7 +21,7 @@ public class UpdateWalletHandler : BaseRequestHandler, IRequestHandler<UpdateWal
 
     public async Task<BaseResponse<WalletDTO>> Handle(UpdateWalletCommand request, CancellationToken cancellationToken)
     {
-        if (request.AccountId != request.UserId && request.UserRole != AdminService.AdminRole)
+        if (request.AccountId != request.UserId && request.UserRole != PolicyManager.AdminRole)
         {
             _logger.LogWarning($"Unauthorized access attempt to update wallet with Id: {request.Id} for user Id: {request.Id} by user with id: {request.UserId}");
             throw new UnauthorizedAccessException($"Access to this wallet is denied");

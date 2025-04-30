@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using FinanceManager.Application.Models;
 using FinanceManager.Application.UseCases.Commons.Bases;
+using FinanceManager.Domain.Authorization;
 using FinanceManager.Domain.Services.Admins;
 using FinanceManager.Domain.Services.Wallets;
 using MediatR;
@@ -23,7 +24,7 @@ public class GetByIdWalletHandler : BaseRequestHandler, IRequestHandler<GetByIdW
 
         try
         {
-            if (!(await _service.IsAccountOwnerWalletAsync(request.UserId, request.WalletId)) && request.UserRole != AdminService.AdminRole)
+            if (!(await _service.IsAccountOwnerWalletAsync(request.UserId, request.WalletId)) && request.UserRole != PolicyManager.AdminRole)
             {
                 _logger.LogWarning($"Unauthorized access attempt to get wallet with Id: {request.WalletId} by user Id: {request.UserId}");
                 throw new UnauthorizedAccessException($"Access to this wallet is denied");

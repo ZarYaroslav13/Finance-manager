@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using FinanceManager.Domain.Authorization;
-using FinanceManager.Domain.Services.Admins;
 using Microsoft.Extensions.Logging;
 
 namespace FinanceManager.Application.UseCases.Commons.Bases;

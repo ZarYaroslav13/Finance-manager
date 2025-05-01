@@ -13,6 +13,7 @@ builder.Host.UseSerilog((context, configuration) =>
 
 builder.AddServiceDefaults();
 builder.Configure();
+
 builder.AddServices();
 
 // Add services to the container.

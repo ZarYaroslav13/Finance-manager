@@ -1,6 +1,5 @@
 ﻿using FakeItEasy;
 using FinanceManager.ApiService.Controllers;
-using Infrastructure.Security;
 using MediatR;
 
 namespace FinanceManager.ApiService.Tests.Controllers.Base;

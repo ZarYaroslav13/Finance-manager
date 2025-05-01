@@ -1,6 +1,5 @@
 using FinanceManager.Web;
-using FinanceManager.Web.Components;
-using MudBlazor.Services;
+using FinanceManager.Web.HostBuilder;
 
 public class Program
 {
@@ -8,22 +7,7 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
-        // Add service defaults & Aspire components.
-        builder.AddServiceDefaults();
-
-        // Add services to the container.
-        builder.Services.AddRazorComponents()
-            .AddInteractiveServerComponents();
-        builder.Services.AddMudServices();
-
-        builder.Services.AddOutputCache();
-
-        builder.Services.AddHttpClient<HttpClient>(client =>
-            {
-                // This URL uses "https+http://" to indicate HTTPS is preferred over HTTP.
-                // Learn more about service discovery scheme resolution at https://aka.ms/dotnet/sdschemes.
-                client.BaseAddress = new("https://apiservice");
-            });
+        builder.AddServices();
 
         var app = builder.Build();
 

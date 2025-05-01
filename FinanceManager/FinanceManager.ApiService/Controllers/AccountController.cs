@@ -3,7 +3,6 @@ using FinanceManager.Application.UseCases.Accounts.Commands.DeleteAccountByIdCom
 using FinanceManager.Application.UseCases.Accounts.Commands.UpdateCommand;
 using FinanceManager.Application.UseCases.Accounts.Commands.UpdatePasswordAccountCommand;
 using FinanceManager.Application.UseCases.Accounts.Queries.GetAllCustomersQuery;
-using FinanceManager.Domain.Services.Admins;
 using FinanceManager.Domain.Authorization;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;

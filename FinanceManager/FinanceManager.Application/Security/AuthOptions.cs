@@ -5,7 +5,7 @@ namespace FinanceManager.Application.Security;
 
 public class AuthOptions
 {
-    public const string Auth = "Auth";
+    public const string Section = "Auth";
 
     public string ISSUER { get; set; } = "https://localhost:7099";
     public string AUDIENCE { get; set; } = "https://localhost:7099";

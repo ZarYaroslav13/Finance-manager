@@ -1,11 +1,11 @@
 ﻿using FinanceManager.Application.Security;
 using FinanceManager.Application.Security.Jwt;
 using FinanceManager.Application.UseCases.Commons.Behaviours;
+using FinanceManager.Domain.Authorization;
 using FinanceManager.Domain.Services.Accounts;
 using FinanceManager.Domain.Services.Admins;
 using FinanceManager.Domain.Services.Finances;
 using FinanceManager.Domain.Services.Wallets;
-using FinanceManager.Domain.Authorization;
 using FinanceManager.ServiceDefaults.Routing;
 using Infrastructure;
 using Infrastructure.Security;
@@ -81,7 +81,7 @@ public static class AddServicesConfigurationHostBuilderExtensions
 
     private static IServiceCollection AddJwtAuthentication(this IServiceCollection services, IConfiguration configuration)
     {
-        AuthOptions authOptions = configuration.GetSection(AuthOptions.Auth).Get<AuthOptions>();
+        AuthOptions authOptions = configuration.GetSection(AuthOptions.Section).Get<AuthOptions>();
 
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                     .AddJwtBearer(options =>
@@ -121,7 +121,7 @@ public static class AddServicesConfigurationHostBuilderExtensions
     private static IHostApplicationBuilder AddOptions(this IHostApplicationBuilder builder)
     {
         builder.Services.Configure<AuthOptions>(
-            builder.Configuration.GetSection(AuthOptions.Auth));
+            builder.Configuration.GetSection(AuthOptions.Section));
 
         return builder;
     }

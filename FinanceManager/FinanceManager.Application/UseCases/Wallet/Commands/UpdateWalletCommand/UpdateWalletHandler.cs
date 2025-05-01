@@ -3,7 +3,6 @@ using FinanceManager.Application.Models;
 using FinanceManager.Application.UseCases.Commons.Bases;
 using FinanceManager.Domain.Authorization;
 using FinanceManager.Domain.Models;
-using FinanceManager.Domain.Services.Admins;
 using FinanceManager.Domain.Services.Wallets;
 using MediatR;
 using Microsoft.Extensions.Logging;

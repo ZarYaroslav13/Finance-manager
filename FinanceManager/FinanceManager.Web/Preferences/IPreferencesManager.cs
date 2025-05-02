@@ -1,8 +1,10 @@
-﻿namespace FinanceManager.Web.Preferences;
+﻿using FinanceManager.Web.Shared.Wrapper;
+
+namespace FinanceManager.Web.Preferences;
 
 public interface IPreferencesManager
 {
-    Task SetPreference<T>(T preference) where T : class;
+    Task SetPreference(IPreferences preference);
 
-    Task<T> GetPreference<T>() where T : class;
+    Task<IPreferences> GetPreference();
 }

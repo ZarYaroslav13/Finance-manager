@@ -10,7 +10,7 @@
 {
     private async Task ChangeLanguageAsync(string languageCode)
     {
-        var result = await _clientPreferenceManager.ChangeLanguageAsync(languageCode);
+        var result = await _clientPreferencesManager.ChangeLanguageAsync(languageCode);
         if (result.Succeeded)
         {
             _snackBar.Add(result.Messages[0], Severity.Success);

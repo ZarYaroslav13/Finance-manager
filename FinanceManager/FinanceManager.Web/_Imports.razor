@@ -12,12 +12,16 @@
 @using Microsoft.AspNetCore.Identity;
 @using MudBlazor
 
+@*Client Services*@
+@using FinanceManager.Web.Preferences
+@using FinanceManager.Web.Preferences.Client
+
 @*Shared Libraries*@
 @using FinanceManager.Web.ViewModels;
 @using FinanceManager.Web.Shared.Layout;
 
 @inject NavigationManager _navigationManager
-
+@inject ClientPreferencesManager _clientPreferencesManager
 @inject IAuthorizationService _authorizationService
 @inject ISnackbar _snackBar
 @inject IDialogService _dialogService

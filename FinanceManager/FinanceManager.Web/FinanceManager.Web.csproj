@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\FinanceManager.Application\FinanceManager.Application.csproj" />
     <ProjectReference Include="..\FinanceManager.ServiceDefaults\FinanceManager.ServiceDefaults.csproj" />
   </ItemGroup>
 

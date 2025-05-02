@@ -1,6 +1,11 @@
-﻿
-@page "/"
+﻿@page "/"
+@layout MainLayout
+@attribute [AllowAnonymous]
+@inject LoginViewModel _viewModel
 
-<MudContainer>
+<EditForm Model="@_viewModel.LoginModel" OnValidSubmit="@_viewModel.SubmitAsync">
+    <DataAnnotationsValidator/>
+    <MudGrid>
 
-</MudContainer>
+    </MudGrid>
+</EditForm>

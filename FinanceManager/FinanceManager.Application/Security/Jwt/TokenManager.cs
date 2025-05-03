@@ -56,7 +56,7 @@ public class TokenManager : ITokenManager
         {
             new(nameof(AccountDTO.Id), account.Id.ToString()),
             new(ClaimsIdentity.DefaultNameClaimType, account.Email),
-            new(ClaimsIdentity.DefaultRoleClaimType, PolicyManager.AdminRole)
+            new(ClaimsIdentity.DefaultRoleClaimType, PolicyManager.UserRole)
         };
 
         ClaimsIdentity identity = new(claims, "Token",

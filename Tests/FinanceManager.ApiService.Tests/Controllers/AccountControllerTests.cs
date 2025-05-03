@@ -25,7 +25,7 @@
 //        {
 //            new Claim(nameof(AccountDTO.Id), "1"),
 //            new Claim(ClaimTypes.Name, "user@example.com"),
-//            new Claim(ClaimTypes.Role, AccountService.UserRoleName)
+//            new Claim(ClaimTypes.Role, AccountService.UserRole)
 //        }, "mock"));
 
 //        _admin = new ClaimsPrincipal(new ClaimsIdentity(new Claim[]

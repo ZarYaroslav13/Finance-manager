@@ -25,8 +25,7 @@ public class DeleteAccountByIdHandler : BaseRequestHandler, IRequestHandler<Dele
 
             _accountService.DeleteAccountWithId(request.Id);
 
-            if (response.Data)
-                response.MakeAsSuccess("Delete succeed!"); ;
+            response.MakeAsSuccess("Delete succeed!");
         }
         catch (Exception e)
         {

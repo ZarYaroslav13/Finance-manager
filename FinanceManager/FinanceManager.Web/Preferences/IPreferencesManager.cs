@@ -1,6 +1,4 @@
-﻿using FinanceManager.Web.Shared.Wrapper;
-
-namespace FinanceManager.Web.Preferences;
+﻿namespace FinanceManager.Web.Preferences;
 
 public interface IPreferencesManager
 {

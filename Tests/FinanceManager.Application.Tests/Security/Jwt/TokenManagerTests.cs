@@ -4,6 +4,7 @@ using FinanceManager.Application.Models;
 using FinanceManager.Application.Security;
 using FinanceManager.Application.Security.Jwt;
 using FinanceManager.Application.Tests.Data.Security.Jwt;
+using FinanceManager.Domain.Authorization;
 using FinanceManager.Domain.Models;
 using FinanceManager.Domain.Services.Accounts;
 using FinanceManager.Domain.Services.Admins;
@@ -94,8 +95,6 @@ public class TokenManagerTests
                     Password = acc.Password
                 };
             });
-        A.CallTo(() => _accountService.GetUserRoleName())
-            .Returns(AccountService.UserRoleName);
 
         var result = await _tokenManager.GetAccountIdentityAsync(account.Email, account.Password);
 

@@ -25,7 +25,7 @@
 //        {
 //            new Claim(nameof(AccountDTO.Id), _userId.ToString()),
 //            new Claim(ClaimTypes.Name, _email),
-//            new Claim(ClaimTypes.Role, AccountService.UserRoleName)
+//            new Claim(ClaimTypes.Role, AccountService.UserRole)
 
 //        }, "mock"));
 

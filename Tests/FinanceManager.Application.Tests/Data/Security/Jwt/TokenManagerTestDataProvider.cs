@@ -2,6 +2,7 @@
 using FakeItEasy;
 using FinanceManager.Application.Models;
 using FinanceManager.Application.Security;
+using FinanceManager.Domain.Authorization;
 using FinanceManager.Domain.Models;
 using FinanceManager.Domain.Services.Accounts;
 using FinanceManager.Domain.Services.Admins;
@@ -55,7 +56,7 @@ public static class TokenManagerTestDataProvider
             {
                 new(nameof(AccountDTO.Id), "1"),
                 new(ClaimsIdentity.DefaultNameClaimType, "Email@gmail.com"),
-                new(ClaimsIdentity.DefaultRoleClaimType, AccountService.UserRoleName)
+                new(ClaimsIdentity.DefaultRoleClaimType, PolicyManager.UserRole)
             }, "Token",
             ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType)
         }

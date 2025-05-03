@@ -1,6 +1,10 @@
-﻿using FinanceManager.Web.API;
+﻿using Blazored.LocalStorage;
+using FinanceManager.Domain.Authorization;
+using FinanceManager.Web.API;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Options;
 using MudBlazor.Services;
+using System.Security.Claims;
 
 namespace FinanceManager.Web.HostBuilder;
 
@@ -13,7 +17,14 @@ public static class AddServiceConfigurationHostBuilderExtension
 
         builder.AddDefaultServices();
 
-        builder.Services.AddMudServices();
+        services
+            .AddLocalization(options =>
+            {
+                options.ResourcesPath = "Resources";
+            })
+            .AddAuthorization(RegisterPolicies)
+            .AddBlazoredLocalStorage()
+            .AddMudServices();
 
         services.Configure<APIOptions>(configuration.GetSection(APIOptions.Section));
 
@@ -47,5 +58,13 @@ public static class AddServiceConfigurationHostBuilderExtension
         });
 
         return builder;
+    }
+
+    private static void RegisterPolicies(AuthorizationOptions options)
+    {
+        options.AddPolicy(PolicyManager.AdminPolicy, policy =>
+        {
+            policy.RequireClaim(ClaimTypes.Role, PolicyManager.AdminRole);
+        });
     }
 }

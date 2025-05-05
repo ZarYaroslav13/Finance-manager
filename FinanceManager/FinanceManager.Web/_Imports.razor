@@ -11,6 +11,7 @@
 @using Microsoft.JSInterop
 @using Microsoft.AspNetCore.Identity;
 @using MudBlazor
+@using Microsoft.Extensions.Localization
 
 @*Client Services*@
 @using FinanceManager.Web.Preferences
@@ -21,8 +22,8 @@
 @using FinanceManager.Web.Shared.Layout;
 
 @inject NavigationManager _navigationManager
-@inject ClientPreferencesManager _clientPreferencesManager
+@inject IPreferencesManager _clientPreferencesManager
 @inject IAuthorizationService _authorizationService
 @inject ISnackbar _snackBar
 @inject IDialogService _dialogService
-@inject HttpClient _httpClient
+@*inject HttpClient _httpClient*@

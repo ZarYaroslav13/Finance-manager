@@ -1,6 +1,9 @@
 ﻿using Blazored.LocalStorage;
 using FinanceManager.Domain.Authorization;
 using FinanceManager.Web.API;
+using FinanceManager.Web.Preferences;
+using FinanceManager.Web.Preferences.Client;
+using FinanceManager.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Options;
 using MudBlazor.Services;
@@ -25,6 +28,8 @@ public static class AddServiceConfigurationHostBuilderExtension
             .AddAuthorization(RegisterPolicies)
             .AddBlazoredLocalStorage()
             .AddMudServices();
+
+        services.AddClientServices();
 
         services.Configure<APIOptions>(configuration.GetSection(APIOptions.Section));
 
@@ -66,5 +71,21 @@ public static class AddServiceConfigurationHostBuilderExtension
         {
             policy.RequireClaim(ClaimTypes.Role, PolicyManager.AdminRole);
         });
+    }
+
+    private static IServiceCollection AddClientServices(this IServiceCollection services)
+    {
+        services.AddScoped<IPreferencesManager, ClientPreferencesManager>();
+
+        services.AddViewModels();
+
+        return services;
+    }
+
+    private static IServiceCollection AddViewModels(this IServiceCollection services)
+    {
+        services.AddScoped<LoginViewModel>();
+
+        return services;
     }
 }

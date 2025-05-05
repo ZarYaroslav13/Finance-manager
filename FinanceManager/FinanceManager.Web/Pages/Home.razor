@@ -2,10 +2,25 @@
 @layout MainLayout
 @attribute [AllowAnonymous]
 @inject LoginViewModel _viewModel
+@inject IStringLocalizer<Home> _localizer
+
 
 <EditForm Model="@_viewModel.LoginModel" OnValidSubmit="@_viewModel.SubmitAsync">
     <DataAnnotationsValidator/>
     <MudGrid>
-
+        <MudItem>
+            <MudTextField Label="Email"  
+            T="string" Variant="Variant.Outlined"
+            @bind-Text="_viewModel.LoginModel.Email" For="()=>_viewModel.LoginModel.Email"
+                          AdornmentIcon="@CustomIcons.Gmail" Adornment="Adornment.End">
+            </MudTextField>
+        </MudItem>
+        <MudItem>
+            <MudTextField Label="Password"
+            T="string"  Variant="Variant.Outlined" 
+            @bind-Text="_viewModel.LoginModel.Password" For="()=>_viewModel.LoginModel.Password"
+                          AdornmentIcon="@Icons.Material.Filled.VisibilityOff" Adornment="Adornment.End">
+            </MudTextField>
+        </MudItem>
     </MudGrid>
 </EditForm>

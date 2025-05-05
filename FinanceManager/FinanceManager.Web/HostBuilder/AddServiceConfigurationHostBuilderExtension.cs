@@ -3,10 +3,13 @@ using FinanceManager.Domain.Authorization;
 using FinanceManager.Web.API;
 using FinanceManager.Web.Preferences;
 using FinanceManager.Web.Preferences.Client;
+using FinanceManager.Web.Services;
 using FinanceManager.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Options;
 using MudBlazor.Services;
+using System.Globalization;
 using System.Security.Claims;
 
 namespace FinanceManager.Web.HostBuilder;
@@ -55,10 +58,10 @@ public static class AddServiceConfigurationHostBuilderExtension
     {
         var serviceProvider = builder.Services.BuildServiceProvider();
         var options = serviceProvider.GetRequiredService<IOptions<APIOptions>>().Value;
-        builder.Services.AddHttpClient<HttpClient>(client =>
+        builder.Services.AddHttpClient("aaaaa",client =>
         {
-            // This URL uses "https+http://" to indicate HTTPS is preferred over HTTP.
-            // Learn more about service discovery scheme resolution at https://aka.ms/dotnet/sdschemes.
+            client.DefaultRequestHeaders.AcceptLanguage.Clear();
+            client.DefaultRequestHeaders.AcceptLanguage.ParseAdd(CultureInfo.DefaultThreadCurrentCulture?.TwoLetterISOLanguageName);
             client.BaseAddress = new(options.BaseAddress);
         });
 
@@ -76,6 +79,8 @@ public static class AddServiceConfigurationHostBuilderExtension
     private static IServiceCollection AddClientServices(this IServiceCollection services)
     {
         services.AddScoped<IPreferencesManager, ClientPreferencesManager>();
+
+        services.AddScoped<ViewModelServicesLocator>();
 
         services.AddViewModels();
 

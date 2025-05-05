@@ -1,16 +1,21 @@
 using FinanceManager.Web;
 using FinanceManager.Web.HostBuilder;
+using FinanceManager.Web.Preferences;
+using FinanceManager.Web.Preferences.Client;
+using FinanceManager.Web.Shared.Constants.Localization;
+using Google.Protobuf.WellKnownTypes;
+using System.Globalization;
 
 public class Program
 {
-    private static void Main(string[] args)
+    private static async Task Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
 
         builder.AddServices();
 
         var app = builder.Build();
-
+        
         if (!app.Environment.IsDevelopment())
         {
             app.UseExceptionHandler("/Error", createScopeForErrors: true);
@@ -30,6 +35,23 @@ public class Program
 
         app.MapDefaultEndpoints();
 
-        app.Run();
+        await app.RunAsync();
+        await SetPreferences(app);
+    }
+
+    private static async Task SetPreferences(WebApplication app)
+    {
+        var storageService = app.Services.GetRequiredService<IPreferencesManager>();
+        if (storageService != null)
+        {
+            CultureInfo culture;
+            var preference = await storageService.GetPreference() as ClientPreferences;
+            if (preference != null)
+                culture = new CultureInfo(preference.LanguageCode);
+            else
+                culture = new CultureInfo(LocalizationConstants.SupportedLanguages.FirstOrDefault()?.Code ?? "en-US");
+            CultureInfo.DefaultThreadCurrentCulture = culture;
+            CultureInfo.DefaultThreadCurrentUICulture = culture;
+        }
     }
 }

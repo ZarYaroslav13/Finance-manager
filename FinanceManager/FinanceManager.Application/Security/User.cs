@@ -9,12 +9,12 @@ namespace FinanceManager.Application.Security;
 
 public class User
 {
+    public static string AuthenticationType { get; } = "FinanceManager";
+
     public string Email { get; set; }
     public string Password { get; set; } = "";
     public int Id { get; set; }
     public List<string> Roles { get; set; } = new();
-
-    private const string authenticationType = "FinanceManager";
 
     public ClaimsPrincipal ToClaimsPrincipal() => new(new ClaimsIdentity(new Claim[]
     {
@@ -22,7 +22,7 @@ public class User
         new (ClaimTypes.Hash, Password),
         new (nameof(Id), Id.ToString())
     }.Concat(Roles.Select(r => new Claim(ClaimTypes.Role, r)).ToArray()),
-    authenticationType));
+    AuthenticationType));
 
     public static User FromClaimsPrincipal(ClaimsPrincipal principal) => new()
     {

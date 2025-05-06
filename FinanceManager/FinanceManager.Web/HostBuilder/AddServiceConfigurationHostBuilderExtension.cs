@@ -4,6 +4,7 @@ using FinanceManager.Web.API;
 using FinanceManager.Web.Preferences;
 using FinanceManager.Web.Preferences.Client;
 using FinanceManager.Web.Services;
+using FinanceManager.Web.Services.UserService;
 using FinanceManager.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
@@ -79,6 +80,7 @@ public static class AddServiceConfigurationHostBuilderExtension
     private static IServiceCollection AddClientServices(this IServiceCollection services)
     {
         services.AddScoped<IPreferencesManager, ClientPreferencesManager>();
+        services.AddScoped<IUserService, UserService>();
 
         services.AddScoped<ViewModelServicesLocator>();
 

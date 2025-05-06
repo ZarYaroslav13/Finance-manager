@@ -30,7 +30,7 @@ public class LoginController : BaseController
         return response.Success ? Ok(response) : BadRequest(response);
     }
 
-    [HttpPost("sign-up")]
+    [HttpPost("user/sign-up")]
     public async Task<IActionResult> CreateAsync([FromBody] CreateAccountCommand command)
     {
         var response = await _mediator.Send(command);

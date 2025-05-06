@@ -58,7 +58,7 @@ public static class AddServiceConfigurationHostBuilderExtension
     {
         var serviceProvider = builder.Services.BuildServiceProvider();
         var options = serviceProvider.GetRequiredService<IOptions<APIOptions>>().Value;
-        builder.Services.AddHttpClient("aaaaa",client =>
+        builder.Services.AddHttpClient("FMClient",client =>
         {
             client.DefaultRequestHeaders.AcceptLanguage.Clear();
             client.DefaultRequestHeaders.AcceptLanguage.ParseAdd(CultureInfo.DefaultThreadCurrentCulture?.TwoLetterISOLanguageName);
@@ -72,7 +72,7 @@ public static class AddServiceConfigurationHostBuilderExtension
     {
         options.AddPolicy(PolicyManager.AdminPolicy, policy =>
         {
-            policy.RequireClaim(ClaimTypes.Role, PolicyManager.AdminRole);
+            policy.RequireRole(PolicyManager.AdminRole);
         });
     }
 

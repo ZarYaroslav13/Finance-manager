@@ -47,7 +47,7 @@ public class SignInHandler : BaseRequestHandler, IRequestHandler<SignInCommand, 
 
     private async Task<AutentificationTokenDTO> TryLogin(SignInCommand request)
     {
-        var identity = await _tokenManager.GetAccountIdentityAsync(request.Email, request.Password);
+        var identity = await _tokenManager.GetIdentityAsync(request.Email, request.Password);
         if (identity == null)
         {
             _logger.LogWarning("Sign in failed for email: {Email}. Invalid credentials.", request.Email);

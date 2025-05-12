@@ -48,7 +48,7 @@ public class TokenManagerTests
     [DynamicData(nameof(TokenManagerTestDataProvider.GetIdentityAsyncNullOrEmptyEmailOrPasswordThrowsArgumentNullExceptionTestData), typeof(TokenManagerTestDataProvider))]
     public void GetAccountIdentityAsync_NullOrEmptyEmailOrPassword_ThrowsArgumentNullException(string email, string password)
     {
-        Assert.ThrowsExceptionAsync<ArgumentNullException>(() => _tokenManager.GetAccountIdentityAsync(email, password));
+        Assert.ThrowsExceptionAsync<ArgumentNullException>(() => _tokenManager.GetIdentityAsync(email, password));
     }
 
     [TestMethod]
@@ -96,7 +96,7 @@ public class TokenManagerTests
                 };
             });
 
-        var result = await _tokenManager.GetAccountIdentityAsync(account.Email, account.Password);
+        var result = await _tokenManager.GetIdentityAsync(account.Email, account.Password);
 
         Assert.IsNotNull(result);
         Assert.AreEqual(identity.Claims.Count(), result.Claims.Count());
@@ -122,7 +122,7 @@ public class TokenManagerTests
         A.CallTo(() => _mapper.Map<AccountDTO>(null))
             .Returns(null);
 
-        var result = await _tokenManager.GetAccountIdentityAsync(email, password);
+        var result = await _tokenManager.GetIdentityAsync(email, password);
 
         Assert.IsNull(result);
     }

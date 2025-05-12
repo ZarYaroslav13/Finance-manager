@@ -42,7 +42,7 @@ public class TokenManager : ITokenManager
         return new JwtSecurityTokenHandler().WriteToken(jwt);
     }
 
-    public async Task<ClaimsIdentity> GetAccountIdentityAsync(string email, string password)
+    public async Task<ClaimsIdentity> GetIdentityAsync(string email, string password)
     {
         if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
             throw new ArgumentNullException(nameof(email) + "or" + nameof(password));
@@ -86,5 +86,16 @@ public class TokenManager : ITokenManager
             ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
 
         return identity;
+    }
+
+    public ClaimsIdentity GetIdentityFromJwtToken(string jwt)
+    {
+        var handler = new JwtSecurityTokenHandler();
+
+        if (!handler.CanReadToken(jwt)) 
+            return new ClaimsIdentity();
+
+        var token = handler.ReadJwtToken(jwt);
+        return new(token.Claims, "jwt");
     }
 }

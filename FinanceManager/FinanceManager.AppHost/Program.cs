@@ -4,6 +4,7 @@ var apiService = builder.AddProject<Projects.FinanceManager_ApiService>("apiserv
 
 builder.AddProject<Projects.FinanceManager_Web>("webfrontend")
     .WithExternalHttpEndpoints()
-    .WithReference(apiService);
+    .WithReference(apiService)
+    .WaitFor(apiService);
 
 builder.Build().Run();

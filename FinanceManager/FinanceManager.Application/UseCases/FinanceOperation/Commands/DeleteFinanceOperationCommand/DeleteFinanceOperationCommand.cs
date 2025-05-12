@@ -1,6 +1,6 @@
-﻿using FinanceManager.Application.UseCases.Commons.Bases;
+﻿using System.ComponentModel.DataAnnotations;
+using FinanceManager.Application.UseCases.Commons.Bases;
 using MediatR;
-using System.ComponentModel.DataAnnotations;
 
 namespace FinanceManager.Application.UseCases.FinanceOperation.Commands.DeleteFinanceOperationCommand;
 

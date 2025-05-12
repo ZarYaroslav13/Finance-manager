@@ -2,7 +2,6 @@
 using FinanceManager.Web.Pages.Authentication;
 using FinanceManager.Web.Services;
 using FinanceManager.Web.Services.UserService;
-using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Localization;
 using MudBlazor;
 

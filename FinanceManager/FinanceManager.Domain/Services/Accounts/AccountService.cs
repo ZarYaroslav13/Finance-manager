@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Net.Mail;
+using AutoMapper;
 using FinanceManager.Domain.Authorization;
 using FinanceManager.Domain.Models;
 using FinanceManager.Domain.Services.Admins;
@@ -6,7 +7,6 @@ using Infrastructure.Models;
 using Infrastructure.Repository;
 using Infrastructure.Security;
 using Infrastructure.UnitOfWork;
-using System.Net.Mail;
 
 namespace FinanceManager.Domain.Services.Accounts;
 

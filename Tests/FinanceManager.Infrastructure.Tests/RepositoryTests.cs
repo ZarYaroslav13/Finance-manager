@@ -1,10 +1,10 @@
-﻿using FakeItEasy;
+﻿using System.Linq.Expressions;
+using FakeItEasy;
 using FinanceManager.Infrastructure.Tests.Data;
 using Infrastructure;
 using Infrastructure.Models;
 using Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
-using System.Linq.Expressions;
 
 namespace FinanceManager.Infrastructure.Tests;
 

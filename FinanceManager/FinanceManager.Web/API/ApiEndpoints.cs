@@ -14,5 +14,6 @@ public static class ApiEndpoints
         public const string SignIn = _baseControllerUrl + "/user/login";
         public const string SignInAsAdmin = _baseControllerUrl + "/admin/login";
         public const string SignUp = _baseControllerUrl + "/user/sign-up";
+        public const string Refresh = _baseControllerUrl + "/to-do";
     }
 }

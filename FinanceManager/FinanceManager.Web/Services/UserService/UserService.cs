@@ -1,7 +1,7 @@
-﻿using FinanceManager.Application.Security;
+﻿using System.Security.Claims;
+using FinanceManager.Application.Security;
 using FinanceManager.Application.UseCases.Login.Commands.SignInCommand;
 using FinanceManager.Web.API;
-using System.Security.Claims;
 
 namespace FinanceManager.Web.Services.UserService;
 
@@ -18,7 +18,7 @@ public class UserService : IUserService
     {
         var response = await _httpClient.PostAsJsonAsync(ApiEndpoints.Login.SignIn, command);
 
-        if(response.IsSuccessStatusCode)
+        if (response.IsSuccessStatusCode)
         {
             string result = await response.Content.ReadAsStringAsync();
         }

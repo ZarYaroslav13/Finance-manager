@@ -1,11 +1,11 @@
-﻿using FinanceManager.Application.Models;
+﻿using System.ComponentModel.DataAnnotations;
+using FinanceManager.Application.Models;
 using FinanceManager.Application.UseCases.Commons.Bases;
 using MediatR;
-using System.ComponentModel.DataAnnotations;
 
 namespace FinanceManager.Application.UseCases.Login.Commands.SignInCommand;
 
-public class SignInCommand : IRequest<BaseResponse<AutentificationTokenDTO>>
+public class SignInCommand : IRequest<BaseResponse<AutenticationTokenDTO>>
 {
     [Required]
     [EmailAddress]

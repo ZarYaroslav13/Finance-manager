@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 
 namespace FinanceManager.Application.UseCases.Login.Commands.SignInCommand;
 
-public class SignInHandler : BaseRequestHandler, IRequestHandler<SignInCommand, BaseResponse<AutentificationTokenDTO>>
+public class SignInHandler : BaseRequestHandler, IRequestHandler<SignInCommand, BaseResponse<AutenticationTokenDTO>>
 {
     private readonly IAccountService _accountService;
     private readonly IAdminService _adminService;
@@ -27,9 +27,9 @@ public class SignInHandler : BaseRequestHandler, IRequestHandler<SignInCommand, 
         _tokenManager = tokenManager ?? throw new ArgumentNullException(nameof(tokenManager));
     }
 
-    public async Task<BaseResponse<AutentificationTokenDTO>> Handle(SignInCommand request, CancellationToken cancellationToken)
+    public async Task<BaseResponse<AutenticationTokenDTO>> Handle(SignInCommand request, CancellationToken cancellationToken)
     {
-        var response = new BaseResponse<AutentificationTokenDTO>();
+        var response = new BaseResponse<AutenticationTokenDTO>();
 
         try
         {
@@ -45,7 +45,7 @@ public class SignInHandler : BaseRequestHandler, IRequestHandler<SignInCommand, 
         return response;
     }
 
-    private async Task<AutentificationTokenDTO> TryLogin(SignInCommand request)
+    private async Task<AutenticationTokenDTO> TryLogin(SignInCommand request)
     {
         var identity = await _tokenManager.GetIdentityAsync(request.Email, request.Password);
         if (identity == null)
@@ -54,11 +54,10 @@ public class SignInHandler : BaseRequestHandler, IRequestHandler<SignInCommand, 
             throw new UnauthorizedAccessException("Invalid email or username");
         }
 
-        AutentificationTokenDTO token = new()
+        AutenticationTokenDTO token = new()
         {
-            AccessToken = _tokenManager.CreateToken(identity),
-            UserEmail = identity.Name,
-            UserId = identity.FindFirst(nameof(AccountDTO.Id)).Value
+            JWTToken = _tokenManager.CreateToken(identity),
+            RefreshToken = ""
         };
 
         return token;

@@ -1,7 +1,5 @@
-﻿using FinanceManager.Web.Pages;
-using FinanceManager.Web.Services;
+﻿using FinanceManager.Web.Services;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Localization;
 using MudBlazor;
 

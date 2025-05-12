@@ -1,4 +1,5 @@
-﻿using FinanceManager.Application.Security;
+﻿using System.Security.Claims;
+using FinanceManager.Application.Security;
 using FinanceManager.Application.Security.Jwt;
 using FinanceManager.Application.UseCases.Commons.Behaviours;
 using FinanceManager.Domain.Authorization;
@@ -15,7 +16,6 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using System.Security.Claims;
 
 namespace FinanceManager.ApiService.HostBuilder;
 

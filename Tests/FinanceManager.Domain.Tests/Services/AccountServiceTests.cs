@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Linq.Expressions;
+using AutoMapper;
 using FakeItEasy;
 using FinanceManager.Domain.Models;
 using FinanceManager.Domain.Services.Accounts;
@@ -8,7 +9,6 @@ using Infrastructure.Models;
 using Infrastructure.Repository;
 using Infrastructure.Security;
 using Infrastructure.UnitOfWork;
-using System.Linq.Expressions;
 
 namespace FinanceManager.Domain.Tests.Services;
 

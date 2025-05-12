@@ -1,15 +1,14 @@
-﻿using Blazored.LocalStorage;
+﻿using System.Security.Claims;
+using Blazored.LocalStorage;
 using FinanceManager.Application.Security.Jwt;
 using FinanceManager.Web.Shared.Constants.Storage;
 using Microsoft.AspNetCore.Components.Authorization;
-using System.Linq;
-using System.Security.Claims;
 
 namespace FinanceManager.Web.Services.Autorization;
 
 public class FinanceManagerStateProvider : AuthenticationStateProvider
 {
-    public ClaimsPrincipal AuthenticationStateUser {  get; private set; } 
+    public ClaimsPrincipal AuthenticationStateUser { get; private set; }
 
     private readonly HttpClient _httpClient;
     private readonly ILocalStorageService _localStorage;

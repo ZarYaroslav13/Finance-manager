@@ -1,8 +1,8 @@
-﻿using FinanceManager.Application.Models;
+﻿using System.ComponentModel.DataAnnotations;
+using FinanceManager.Application.Models;
 using FinanceManager.Application.UseCases.Commons.Bases;
 using Infrastructure.Models;
 using MediatR;
-using System.ComponentModel.DataAnnotations;
 
 namespace FinanceManager.Application.UseCases.FinanceOperationType.Commands.AddFinanceOperationTypeCommand;
 

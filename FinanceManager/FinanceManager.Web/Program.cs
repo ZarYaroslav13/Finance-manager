@@ -1,10 +1,9 @@
+using System.Globalization;
 using FinanceManager.Web;
 using FinanceManager.Web.HostBuilder;
 using FinanceManager.Web.Preferences;
 using FinanceManager.Web.Preferences.Client;
 using FinanceManager.Web.Shared.Constants.Localization;
-using Google.Protobuf.WellKnownTypes;
-using System.Globalization;
 
 public class Program
 {
@@ -15,7 +14,7 @@ public class Program
         builder.AddServices();
 
         var app = builder.Build();
-        
+
         if (!app.Environment.IsDevelopment())
         {
             app.UseExceptionHandler("/Error", createScopeForErrors: true);

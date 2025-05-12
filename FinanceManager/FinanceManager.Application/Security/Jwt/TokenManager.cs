@@ -1,12 +1,12 @@
-﻿using AutoMapper;
+﻿using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using AutoMapper;
 using FinanceManager.Application.Models;
 using FinanceManager.Domain.Authorization;
 using FinanceManager.Domain.Services.Accounts;
 using FinanceManager.Domain.Services.Admins;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
 
 namespace FinanceManager.Application.Security.Jwt;
 
@@ -92,7 +92,7 @@ public class TokenManager : ITokenManager
     {
         var handler = new JwtSecurityTokenHandler();
 
-        if (!handler.CanReadToken(jwt)) 
+        if (!handler.CanReadToken(jwt))
             return new ClaimsIdentity();
 
         var token = handler.ReadJwtToken(jwt);

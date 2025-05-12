@@ -1,5 +1,5 @@
-﻿using Infrastructure.Models.Base;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
+using Infrastructure.Models.Base;
 
 namespace Infrastructure.Repository;
 

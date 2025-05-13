@@ -1,6 +1,6 @@
 ﻿using System.Security.Claims;
 using Blazored.LocalStorage;
-using FinanceManager.Application.Security.Jwt;
+using FinanceManager.Application.Security.Token;
 using FinanceManager.Web.Shared.Constants.Storage;
 using Microsoft.AspNetCore.Components.Authorization;
 

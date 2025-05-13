@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using FinanceManager.Application.Models;
-using FinanceManager.Application.Security.Jwt;
+using FinanceManager.Application.Security.Token;
 using FinanceManager.Application.UseCases.Commons.Bases;
 using FinanceManager.Domain.Services.Accounts;
 using FinanceManager.Domain.Services.Admins;
@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 
 namespace FinanceManager.Application.UseCases.Login.Commands.SignInAdminCommand;
 
-public class SignInAdminHandler : BaseRequestHandler, IRequestHandler<SignInAdminCommand, BaseResponse<AutenticationTokenDTO>>
+public class SignInAdminHandler : BaseRequestHandler, IRequestHandler<SignInAdminCommand, BaseResponse<TokenDTO>>
 {
     private readonly IAccountService _accountService;
     private readonly IAdminService _adminService;
@@ -27,9 +27,9 @@ public class SignInAdminHandler : BaseRequestHandler, IRequestHandler<SignInAdmi
         _tokenManager = tokenManager ?? throw new ArgumentNullException(nameof(tokenManager));
     }
 
-    public async Task<BaseResponse<AutenticationTokenDTO>> Handle(SignInAdminCommand request, CancellationToken cancellationToken)
+    public async Task<BaseResponse<TokenDTO>> Handle(SignInAdminCommand request, CancellationToken cancellationToken)
     {
-        var response = new BaseResponse<AutenticationTokenDTO>();
+        var response = new BaseResponse<TokenDTO>();
 
         try
         {
@@ -45,7 +45,7 @@ public class SignInAdminHandler : BaseRequestHandler, IRequestHandler<SignInAdmi
         return response;
     }
 
-    private async Task<AutenticationTokenDTO> TryLogin(SignInAdminCommand request)
+    private async Task<TokenDTO> TryLogin(SignInAdminCommand request)
     {
         var identity = await _tokenManager.GetAdminIdentityAsync(request.Email, request.Password);
         if (identity == null)
@@ -54,7 +54,7 @@ public class SignInAdminHandler : BaseRequestHandler, IRequestHandler<SignInAdmi
             throw new UnauthorizedAccessException("Invalid email or username");
         }
 
-        AutenticationTokenDTO token = new()
+        TokenDTO token = new()
         {
             JWTToken = _tokenManager.CreateToken(identity),
             RefreshToken = ""

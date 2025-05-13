@@ -4,7 +4,7 @@ using AutoMapper;
 using FakeItEasy;
 using FinanceManager.Application.Models;
 using FinanceManager.Application.Security;
-using FinanceManager.Application.Security.Jwt;
+using FinanceManager.Application.Security.Token;
 using FinanceManager.Application.Tests.Data.Security.Jwt;
 using FinanceManager.Domain.Authorization;
 using FinanceManager.Domain.Models;

@@ -1,6 +1,6 @@
 ﻿namespace FinanceManager.Application.Models;
 
-public class AutenticationTokenDTO
+public class TokenDTO
 {
     public string JWTToken { get; set; }
 

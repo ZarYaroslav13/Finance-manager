@@ -1,6 +1,6 @@
 ﻿using System.Security.Claims;
 using FinanceManager.Application.Security;
-using FinanceManager.Application.Security.Jwt;
+using FinanceManager.Application.Security.Token;
 using FinanceManager.Application.UseCases.Commons.Behaviours;
 using FinanceManager.Domain.Authorization;
 using FinanceManager.Domain.Services.Accounts;
@@ -9,10 +9,12 @@ using FinanceManager.Domain.Services.Finances;
 using FinanceManager.Domain.Services.Wallets;
 using FinanceManager.ServiceDefaults.Routing;
 using Infrastructure;
+using Infrastructure.Authorization;
 using Infrastructure.Security;
 using Infrastructure.UnitOfWork;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -46,6 +48,8 @@ public static class AddServicesConfigurationHostBuilderExtensions
         services.AddJwtAuthentication(configuration);
 
         services.AddPoliticalAuthorization();
+
+        services.AddIdentity<APIUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 
         services.AddControllers(options =>
             options.Conventions

@@ -1,9 +1,11 @@
-﻿using Infrastructure.Models;
+﻿using Infrastructure.Authorization;
+using Infrastructure.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure;
 
-public class AppDbContext : DbContext
+public class AppDbContext : IdentityDbContext<APIUser>
 {
     public virtual DbSet<Account> Accounts { get; set; } = default!;
     public virtual DbSet<Wallet> Wallets { get; set; } = default!;
@@ -19,5 +21,6 @@ public class AppDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(this.GetType().Assembly);
+        base.OnModelCreating(modelBuilder);
     }
 }

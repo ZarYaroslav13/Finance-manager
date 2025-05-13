@@ -40,7 +40,7 @@ public class AuthenticationService : IAuthenticationService
     public async Task<Shared.Wrapper.IResult> LoginAsync(SignInCommand model)
     {
         var response = await _httpClient.PostAsJsonAsync(ApiEndpoints.Login.SignIn, model);
-        var result = await response.ToResult<BaseResponse<AutenticationTokenDTO>>();
+        var result = await response.ToResult<BaseResponse<TokenDTO>>();
 
         if (result.Succeeded)
         {
@@ -60,7 +60,7 @@ public class AuthenticationService : IAuthenticationService
     public async Task<Shared.Wrapper.IResult> LoginAdminAsync(SignInAdminCommand model)
     {
         var response = await _httpClient.PostAsJsonAsync(ApiEndpoints.Login.SignInAsAdmin, model);
-        var result = await response.ToResult<BaseResponse<AutenticationTokenDTO>>();
+        var result = await response.ToResult<BaseResponse<TokenDTO>>();
 
         if (result.Succeeded)
         {
@@ -83,7 +83,7 @@ public class AuthenticationService : IAuthenticationService
         var refreshToken = await _localStorage.GetItemAsync<string>(StorageConstants.RefreshToken);
 
         var response = await _httpClient.PostAsJsonAsync(ApiEndpoints.Login.Refresh, new CreateRefreshTokenCommand() { JwtToken = token, RefreshToken = refreshToken });
-        var result = await response.ToResult<BaseResponse<AutenticationTokenDTO>>();
+        var result = await response.ToResult<BaseResponse<TokenDTO>>();
 
         if (!result.Succeeded)
         {

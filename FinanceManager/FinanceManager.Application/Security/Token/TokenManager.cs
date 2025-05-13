@@ -8,7 +8,7 @@ using FinanceManager.Domain.Services.Admins;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
-namespace FinanceManager.Application.Security.Jwt;
+namespace FinanceManager.Application.Security.Token;
 
 public class TokenManager : ITokenManager
 {

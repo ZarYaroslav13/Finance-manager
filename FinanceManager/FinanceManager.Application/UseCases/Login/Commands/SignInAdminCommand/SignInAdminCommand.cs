@@ -5,7 +5,7 @@ using MediatR;
 
 namespace FinanceManager.Application.UseCases.Login.Commands.SignInAdminCommand;
 
-public class SignInAdminCommand : IRequest<BaseResponse<AutenticationTokenDTO>>
+public class SignInAdminCommand : IRequest<BaseResponse<TokenDTO>>
 {
     [Required]
     [EmailAddress]

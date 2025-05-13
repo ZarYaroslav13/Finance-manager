@@ -1,6 +1,6 @@
 ﻿using System.Security.Claims;
 
-namespace FinanceManager.Application.Security.Jwt;
+namespace FinanceManager.Application.Security.Token;
 
 public interface ITokenManager
 {

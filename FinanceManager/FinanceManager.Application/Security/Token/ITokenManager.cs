@@ -9,6 +9,4 @@ public interface ITokenManager
     public Task<ClaimsIdentity> GetIdentityAsync(string email, string password);
 
     public Task<ClaimsIdentity> GetAdminIdentityAsync(string email, string password);
-
-    public ClaimsIdentity GetIdentityFromJwtToken(string jwt);
 }

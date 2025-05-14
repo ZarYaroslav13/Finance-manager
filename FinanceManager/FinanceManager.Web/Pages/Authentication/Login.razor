@@ -1,6 +1,42 @@
-﻿
+﻿@page "/"
+@using FinanceManager.Web.ViewModels.Pages
+@layout MainLayout
+@attribute [AllowAnonymous]
+@inject LoginViewModel _viewModel
 
 
-@code {
-
-}
+<EditForm Model="@_viewModel.LoginModel" OnValidSubmit="@_viewModel.SubmitAsync">
+    <DataAnnotationsValidator />
+    <MudGrid>
+        <MudItem xs="12">
+            <div class="d-flex justify-center">
+                <MudText Typo="Typo.h4">@_viewModel.Localizer["Title"]</MudText>
+            </div>
+        </MudItem>
+        <MudItem xs="12">
+            <div class="d-flex justify-center">
+                <MudText>@_viewModel.Localizer["Description"]</MudText>
+            </div>
+        </MudItem>
+        <MudItem xs="12">
+            <div class="d-flex justify-center">
+                <MudText>@_viewModel.Localizer["Don't have an account?"] <MudLink Href="/register">@_viewModel.Localizer["Register here"]</MudLink></MudText>
+            </div>
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField T="string" Label="@_viewModel.Localizer["E-mail"]" Variant="Variant.Outlined"
+                          @bind-Value="_viewModel.LoginModel.Email" For="@(() => _viewModel.LoginModel.Email)" />
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="@_viewModel.Localizer["Password"]" Variant="Variant.Outlined"
+                          @bind-Value="_viewModel.LoginModel.Password" For="@(() => _viewModel.LoginModel.Password)"
+                          InputType="@_viewModel.PasswordInput" Adornment="Adornment.End" AdornmentIcon="@_viewModel.PasswordInputIcon" OnAdornmentClick="_viewModel.TogglePasswordVisibility" />
+        </MudItem>
+        <MudItem xs="12" Class="d-flex justify-space-between align-center">
+            <MudCheckBox T="bool" Label="@_viewModel.Localizer["Remember me?"]" Color="Color.Primary" Class="ml-n1"></MudCheckBox> <MudLink Href="/account/forgot-password">@_viewModel.Localizer["Forgot password?"]</MudLink>
+        </MudItem>
+        <MudItem xs="12" Class="d-flex justify-center">
+            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" Style="width: 100%;">@_viewModel.Localizer["Sign In"]</MudButton>
+        </MudItem>
+    </MudGrid>
+</EditForm>

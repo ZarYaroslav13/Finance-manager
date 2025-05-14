@@ -73,4 +73,14 @@ public class ClientPreferencesManager : IPreferencesManager
     {
         await _localStorageService.SetItemAsync(StorageConstants.Preferences, preference as ClientPreferences);
     }
+
+    public async Task<bool> IsRTL()
+    {
+        var preference = await GetPreference() as ClientPreferences;
+        if (preference != null)
+        {
+            if (preference.IsDarkMode == true) return false;
+        }
+        return preference.IsRTL;
+    }
 }

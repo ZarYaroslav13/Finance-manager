@@ -1,20 +1,46 @@
 ﻿@inherits LayoutComponentBase
+@inject MainLayoutViewModel _viewModel
+@rendermode InteractiveServer
 
 <MudThemeProvider/>
 <MudPopoverProvider/>
 <MudDialogProvider/>
 <MudSnackbarProvider/>
 
-@Body
+<MudRTLProvider RightToLeft="@_viewModel.RightToLeft">
+    <MudThemeProvider Theme="_viewModel.CurrentTheme"/>
+    <MudDialogProvider />
+    <MudSnackbarProvider />
+    <AuthorizeView>
+        <NotAuthorized>
+            <MudAppBar Elevation="4" Color="Color.Primary">
+                <MudSpacer />
+                <FinanceManager.Web.Shared.Components.LanguageSelector />
+                <MudIconButton Icon="@Icons.Material.Filled.Brightness4" Color="Color.Inherit" OnClick="@((e) => _viewModel.DarkMode())" />
+            </MudAppBar>
 
-@* <AuthorizeView>
-    <NotAuthorized>
-        <MudContainer MaxWidth="MaxWidth.Small" Class="d-flex align-center" Style="height: 100vh;">
-            <MudPaper Elevation="25" Class="pa-8" Style="width: 500px;">
-                @Body
-            </MudPaper>
-        </MudContainer>
-    </NotAuthorized>
-</AuthorizeView>
+            <MudContainer MaxWidth="MaxWidth.Small" Class="d-flex align-center" Style="height: 100vh;">
+                <MudPaper Elevation="25" Class="pa-8" Style="width: 500px;">
+                    @Body
+                </MudPaper>
+            </MudContainer>
+        </NotAuthorized>
+        <Authorized>
+            <MudLayout>
+                <MainBody OnDarkModeToggle="@_viewModel.DarkMode" OnRightToLeftToggle="@_viewModel.RightToLeftToggle">
+                    @Body
+                </MainBody>
+            </MudLayout>
+        </Authorized>
+    </AuthorizeView>
+</MudRTLProvider>
 
- *@
+@code{
+    private bool _isInitComplete = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await _viewModel.InitializationAsynk();
+
+    } 
+}

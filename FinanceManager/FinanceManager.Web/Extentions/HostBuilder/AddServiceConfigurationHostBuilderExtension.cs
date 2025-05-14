@@ -5,8 +5,11 @@ using FinanceManager.Web.API;
 using FinanceManager.Web.Preferences;
 using FinanceManager.Web.Preferences.Client;
 using FinanceManager.Web.Services;
+using FinanceManager.Web.Services.Autorization;
 using FinanceManager.Web.ViewModels;
+using FinanceManager.Web.ViewModels.Pages;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Extensions.Options;
 using MudBlazor.Services;
 
@@ -76,7 +79,10 @@ public static class AddServiceConfigurationHostBuilderExtension
 
     private static IServiceCollection AddClientServices(this IServiceCollection services)
     {
-        services.AddScoped<IPreferencesManager, ClientPreferencesManager>();
+        services
+            .AddScoped<IPreferencesManager, ClientPreferencesManager>()
+            .AddScoped<FinanceManagerStateProvider>()
+            .AddScoped<AuthenticationStateProvider, FinanceManagerStateProvider>();
 
         services.AddScoped<ViewModelServicesLocator>();
 
@@ -88,6 +94,7 @@ public static class AddServiceConfigurationHostBuilderExtension
     private static IServiceCollection AddViewModels(this IServiceCollection services)
     {
         services.AddScoped<LoginViewModel>();
+        services.AddScoped<MainLayoutViewModel>();
 
         return services;
     }

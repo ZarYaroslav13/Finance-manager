@@ -1,4 +1,6 @@
-﻿namespace FinanceManager.Web.Preferences;
+﻿using MudBlazor;
+
+namespace FinanceManager.Web.Preferences;
 
 public interface IPreferencesManager
 {
@@ -9,4 +11,8 @@ public interface IPreferencesManager
     Task SetPreference(IPreferences preference);
 
     Task<IPreferences> GetPreference();
+
+    Task<MudTheme> GetCurrentThemeAsync();
+
+    Task<bool> IsRTL();
 }

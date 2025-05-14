@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Localization;
 using MudBlazor;
 
-namespace FinanceManager.Web.ViewModels;
+namespace FinanceManager.Web.ViewModels.Pages;
 
 public abstract class BaseViewModel<T> where T : class
 {

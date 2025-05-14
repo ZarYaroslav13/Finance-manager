@@ -4,7 +4,7 @@ using FinanceManager.Web.Services;
 using Microsoft.Extensions.Localization;
 using MudBlazor;
 
-namespace FinanceManager.Web.ViewModels;
+namespace FinanceManager.Web.ViewModels.Pages;
 
 public class LoginViewModel : BaseViewModel<Login>
 {

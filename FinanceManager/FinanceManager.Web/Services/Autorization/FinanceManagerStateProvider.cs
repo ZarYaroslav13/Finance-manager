@@ -16,12 +16,10 @@ public class FinanceManagerStateProvider : AuthenticationStateProvider
 
     public FinanceManagerStateProvider(
         HttpClient httpClient,
-        ILocalStorageService localStorage,
-        ITokenManager tokenManager)
+        ILocalStorageService localStorage)
     {
         _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
         _localStorage = localStorage ?? throw new ArgumentNullException(nameof(localStorage));
-        _tokenManager = tokenManager ?? throw new ArgumentNullException(nameof(tokenManager));
     }
 
     public async Task StateChangedAsync()
@@ -55,7 +53,7 @@ public class FinanceManagerStateProvider : AuthenticationStateProvider
         }
 
         _httpClient.DefaultRequestHeaders.Authorization = new("Bearer", savedToken);
-        var state = new AuthenticationState(new(_tokenManager.GetIdentityFromJwtToken(savedToken)));
+        var state = new AuthenticationState(new(TokenManager.GetIdentityFromJwtToken(savedToken)));
         AuthenticationStateUser = state.User;
         return state;
     }

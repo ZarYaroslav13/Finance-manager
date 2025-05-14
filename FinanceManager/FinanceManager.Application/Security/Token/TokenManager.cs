@@ -88,7 +88,7 @@ public class TokenManager : ITokenManager
         return identity;
     }
 
-    public ClaimsIdentity GetIdentityFromJwtToken(string jwt)
+    public static ClaimsIdentity GetIdentityFromJwtToken(string jwt)
     {
         var handler = new JwtSecurityTokenHandler();
 

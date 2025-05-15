@@ -2,13 +2,9 @@
 @inject MainLayoutViewModel _viewModel
 @rendermode InteractiveServer
 
-<MudThemeProvider/>
-<MudPopoverProvider/>
-<MudDialogProvider/>
-<MudSnackbarProvider/>
-
 <MudRTLProvider RightToLeft="@_viewModel.RightToLeft">
     <MudThemeProvider Theme="_viewModel.CurrentTheme"/>
+    <MudPopoverProvider />
     <MudDialogProvider />
     <MudSnackbarProvider />
     <AuthorizeView>

@@ -9,11 +9,11 @@ public static class ApiEndpoints
 
     public static class Login
     {
-        private const string _baseControllerUrl = _baseUrl + "/authorization";
+        public const string BaseControllerUrl = _baseUrl + "/authorization";
 
-        public const string SignIn = _baseControllerUrl + "/user/login";
-        public const string SignInAsAdmin = _baseControllerUrl + "/admin/login";
-        public const string SignUp = _baseControllerUrl + "/user/sign-up";
-        public const string Refresh = _baseControllerUrl + "/to-do";
+        public const string SignIn = BaseControllerUrl + "/user/login";
+        public const string SignInAsAdmin = BaseControllerUrl + "/admin/login";
+        public const string SignUp = BaseControllerUrl + "/user/sign-up";
+        public const string Refresh = BaseControllerUrl + "/to-do";
     }
 }

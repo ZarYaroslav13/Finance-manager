@@ -2,7 +2,7 @@
 using FinanceManager.Application.UseCases.Login.Commands.SignInAdminCommand;
 using FinanceManager.Application.UseCases.Login.Commands.SignInCommand;
 
-namespace FinanceManager.Web.Services.Autorization.AuthenticationManager;
+namespace FinanceManager.Web.Services.Autorization.AuthenticationService;
 
 public interface IAuthenticationService
 {

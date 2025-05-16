@@ -1,13 +1,15 @@
-﻿using FinanceManager.Web.Preferences.Client;
+﻿using FinanceManager.Web.Preferences;
+using FinanceManager.Web.Services;
+using FinanceManager.Web.Shared.Components;
+using FinanceManager.Web.ViewModels.Pages;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.Extensions.Localization;
 using MudBlazor;
-using static MudBlazor.CategoryTypes;
 
 namespace FinanceManager.Web.ViewModels;
 
-public class MainBodyViewModel
+public class MainBodyViewModel : BaseViewModel<MainBody>
 {
     [Parameter]
     public RenderFragment ChildContent { get; set; }
@@ -19,8 +21,6 @@ public class MainBodyViewModel
     public EventCallback<bool> OnRightToLeftToggle { get; set; }
 
     public bool DrawerOpen = true;
-    public IRoleManager RoleManager { get; set; }
-
     public string CurrentUserId { get; set; }
     public string ImageDataUrl { get; set; }
     public string FirstName { get; set; }
@@ -29,14 +29,16 @@ public class MainBodyViewModel
     public char FirstLetterOfName { get; set; }
     public bool RightToLeft = false;
 
-    public MainBodyViewModel()
+    private IPreferencesManager _preferencesManager;
+
+    public MainBodyViewModel(IPreferencesManager preferencesManager, ViewModelServicesLocator locator, IStringLocalizer<MainBody> localizer) : base(locator, localizer)
     {
-        
+        _preferencesManager = preferencesManager ?? throw new ArgumentNullException(nameof(preferencesManager));
     }
 
     public async Task RightToLeftToggle()
     {
-        var isRtl = await _clientPreferenceManager.ToggleLayoutDirection();
+        var isRtl = await _preferencesManager.ToggleLayoutDirection();
         RightToLeft = isRtl;
 
         await OnRightToLeftToggle.InvokeAsync(isRtl);
@@ -49,7 +51,7 @@ public class MainBodyViewModel
 
     public async Task OnInitializedAsync()
     {
-        RightToLeft = await _clientPreferenceManager.IsRTL();
+        RightToLeft = await _preferencesManager.IsRTL();
         _interceptor.RegisterEvent();
         hubConnection = hubConnection.TryInitialize(_navigationManager, _localStorage);
         await hubConnection.StartAsync();
@@ -122,7 +124,7 @@ public class MainBodyViewModel
 
         await hubConnection.SendAsync(ApplicationConstants.SignalR.OnConnect, CurrentUserId);
 
-        _snackBar.Add(string.Format(_localizer["Welcome {0}"], FirstName), Severity.Success);
+        _snackBar.Add(string.Format(Localizer["Welcome {0}"], FirstName), Severity.Success);
     }
 
     public async Task OnAfterRenderAsync(bool firstRender)
@@ -161,7 +163,7 @@ public class MainBodyViewModel
                 if (!currentUserResult.Succeeded || currentUserResult.Data == null)
                 {
                     _snackBar.Add(
-                        _localizer["You are logged out because the user with your Token has been deleted."],
+                        Localizer["You are logged out because the user with your Token has been deleted."],
                         Severity.Error);
                     CurrentUserId = string.Empty;
                     ImageDataUrl = string.Empty;
@@ -197,6 +199,7 @@ public class MainBodyViewModel
     }
 
     private HubConnection hubConnection;
+
     public bool IsConnected => hubConnection.State == HubConnectionState.Connected;
 }
 }

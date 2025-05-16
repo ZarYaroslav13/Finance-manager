@@ -7,7 +7,6 @@ using FinanceManager.Application.UseCases.Login.Commands.SignInAdminCommand;
 using FinanceManager.Application.UseCases.Login.Commands.SignInCommand;
 using FinanceManager.Web.API;
 using FinanceManager.Web.Extentions;
-using FinanceManager.Web.Services.Autorization.AuthenticationManager;
 using FinanceManager.Web.Shared.Constants.Storage;
 using FinanceManager.Web.Shared.Wrapper;
 using Microsoft.Extensions.Localization;

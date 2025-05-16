@@ -4,6 +4,8 @@ namespace FinanceManager.Web.Preferences;
 
 public interface IPreferencesManager
 {
+    Task<bool> ToggleLayoutDirection();
+
     Task<bool> ToggleDarkModeAsync();
 
     Task<Shared.Wrapper.IResult> ChangeLanguageAsync(string languageCode);

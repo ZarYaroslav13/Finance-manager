@@ -33,6 +33,18 @@ public class ClientPreferencesManager : IPreferencesManager
         return false;
     }
 
+    public async Task<bool> ToggleLayoutDirection()
+    {
+        var preference = await GetPreference() as ClientPreferences;
+        if (preference != null)
+        {
+            preference.IsRTL = !preference.IsRTL;
+            await SetPreference(preference);
+            return preference.IsRTL;
+        }
+        return false;
+    }
+
     public async Task<Shared.Wrapper.IResult> ChangeLanguageAsync(string languageCode)
     {
         var preference = await GetPreference() as ClientPreferences;

@@ -6,6 +6,7 @@ using FinanceManager.Web.Preferences;
 using FinanceManager.Web.Preferences.Client;
 using FinanceManager.Web.Services;
 using FinanceManager.Web.Services.Autorization;
+using FinanceManager.Web.Services.HttpHandlers;
 using FinanceManager.Web.ViewModels;
 using FinanceManager.Web.ViewModels.Pages;
 using Microsoft.AspNetCore.Authorization;
@@ -59,12 +60,14 @@ public static class AddServiceConfigurationHostBuilderExtension
     {
         var serviceProvider = builder.Services.BuildServiceProvider();
         var options = serviceProvider.GetRequiredService<IOptions<APIOptions>>().Value;
-        builder.Services.AddHttpClient("FMClient", client =>
+        builder.Services.
+        AddHttpClient("FMClient", client =>
         {
             client.DefaultRequestHeaders.AcceptLanguage.Clear();
             client.DefaultRequestHeaders.AcceptLanguage.ParseAdd(CultureInfo.DefaultThreadCurrentCulture?.TwoLetterISOLanguageName);
             client.BaseAddress = new(options.BaseAddress);
-        });
+        })
+        .AddHttpMessageHandler<HttpMessagesHandler>();
 
         return builder;
     }

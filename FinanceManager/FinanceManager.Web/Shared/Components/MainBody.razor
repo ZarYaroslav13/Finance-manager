@@ -35,7 +35,7 @@
             <UserCard Class="mt-n2" />
             <MudDivider Class="mb-2" />
             <MudListItem Text="@_localizer["Account"]" Href="/account" Icon="@Icons.Material.Outlined.Person" />
-            <MudListItem Text="@_localizer["Logout"]" Icon="@Icons..Material.Filled.Logout" OnClick="Logout" />
+            <MudListItem Text="@_localizer["Logout"]" Icon="@Icons..Material.Filled.Logout" OnClick="@(() => _viewModel.Logout())" />
         </ChildContent>
     </MudMenu>
 </MudAppBar>
@@ -44,8 +44,18 @@
 </MudDrawer>
 <MudMainContent>
     <MudContainer MaxWidth="MaxWidth.False" Class="mt-4">
-        <CascadingValue Value="hubConnection">
-            @_viewModel.ChildContent
-        </CascadingValue>
+        @_viewModel.ChildContent
     </MudContainer>
 </MudMainContent>
+
+@code{
+    protected override async Task OnInitializedAsync()
+    {
+        await _viewModel.OnInitializedAsync();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await _viewModel.OnAfterRenderAsync(firstRender);
+    } 
+}

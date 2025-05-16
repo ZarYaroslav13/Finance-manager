@@ -3,6 +3,7 @@ using FinanceManager.Application.UseCases.Accounts.Commands.DeleteAccountByIdCom
 using FinanceManager.Application.UseCases.Accounts.Commands.UpdateCommand;
 using FinanceManager.Application.UseCases.Accounts.Commands.UpdatePasswordAccountCommand;
 using FinanceManager.Application.UseCases.Accounts.Queries.GetAllCustomersQuery;
+using FinanceManager.Application.UseCases.Accounts.Queries.GetCustomerQuery;
 using FinanceManager.Domain.Authorization;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -24,6 +25,17 @@ public class AccountController : BaseController
         {
             skip = skip,
             take = take
+        });
+    }
+
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetAccount(int id)
+    {
+        return await SendRequestAsync(new GetCustomerQuery()
+        {
+            UserId = GetUserId(),
+            UserRole = GetUserRole(),
+            Id = id
         });
     }
 

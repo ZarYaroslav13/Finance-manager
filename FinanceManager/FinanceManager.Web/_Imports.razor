@@ -21,10 +21,11 @@
 @using FinanceManager.Web.Shared;
 @using FinanceManager.Web.ViewModels;
 @using FinanceManager.Web.Shared.Layout;
+@using FinanceManager.Web.Services.Autorization.AuthenticationService;
 
 @inject NavigationManager _navigationManager
 @inject FinanceManager.Web.Services.Autorization.FinanceManagerStateProvider _stateProvider
 @inject IPreferencesManager _clientPreferencesManager
-@inject IAuthorizationService _authorizationService
+@inject IAuthenticationService _authenticationService
 @inject ISnackbar _snackBar
 @inject IDialogService _dialogService

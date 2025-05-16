@@ -5,7 +5,7 @@ using FinanceManager.Web.Shared.Wrapper;
 namespace FinanceManager.Web.Extentions;
 public static class ResultExtension
 {
-    public static async Task<IResult<T>> ToResult<T>(this HttpResponseMessage response)
+    public static async Task<IResult<T>> ToResultAsync<T>(this HttpResponseMessage response)
     {
         var responseAsString = await response.Content.ReadAsStringAsync();
         var responseObject = JsonSerializer.Deserialize<Result<T>>(responseAsString, new JsonSerializerOptions

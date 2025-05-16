@@ -1,9 +1,10 @@
-﻿using FinanceManager.Web.Preferences;
+﻿using FinanceManager.Application.Models;
+using FinanceManager.Web.API;
+using FinanceManager.Web.Extentions;
+using FinanceManager.Web.Preferences;
 using FinanceManager.Web.Services;
 using FinanceManager.Web.Shared.Components;
-using FinanceManager.Web.ViewModels.Pages;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Localization;
 using MudBlazor;
 
@@ -36,6 +37,21 @@ public class MainBodyViewModel : BaseViewModel<MainBody>
         _preferencesManager = preferencesManager ?? throw new ArgumentNullException(nameof(preferencesManager));
     }
 
+    public async Task OnInitializedAsync()
+
+    {
+        RightToLeft = await _preferencesManager.IsRTL();
+
+        _snackBar.Add(string.Format(Localizer["Welcome {0}"], FirstName), Severity.Success);
+    }
+    public async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await LoadDataAsync();
+        }
+    }
+
     public async Task RightToLeftToggle()
     {
         var isRtl = await _preferencesManager.ToggleLayoutDirection();
@@ -49,95 +65,9 @@ public class MainBodyViewModel : BaseViewModel<MainBody>
         await OnDarkModeToggle.InvokeAsync();
     }
 
-    public async Task OnInitializedAsync()
-    {
-        RightToLeft = await _preferencesManager.IsRTL();
-        hubConnection = hubConnection.TryInitialize(_navigationManager, _localStorage);
-        await hubConnection.StartAsync();
-        hubConnection.On<string, string, string>(ApplicationConstants.SignalR.ReceiveChatNotification, (message, receiverUserId, senderUserId) =>
-        {
-            if (CurrentUserId == receiverUserId)
-            {
-                _jsRuntime.InvokeAsync<string>("PlayAudio", "notification");
-                _snackBar.Add(message, Severity.Info, config =>
-                {
-                    config.VisibleStateDuration = 10000;
-                    config.HideTransitionDuration = 500;
-                    config.ShowTransitionDuration = 500;
-                    config.Action = _localizer["Chat?"];
-                    config.ActionColor = Color.Primary;
-                    config.Onclick = snackbar =>
-                    {
-                        _navigationManager.NavigateTo($"chat/{senderUserId}");
-                        return Task.CompletedTask;
-                    };
-                });
-            }
-        });
-        hubConnection.On(ApplicationConstants.SignalR.ReceiveRegenerateTokens, async () =>
-        {
-            try
-            {
-                var token = await _authenticationManager.TryForceRefreshToken();
-                if (!string.IsNullOrEmpty(token))
-                {
-                    _snackBar.Add(_localizer["Refreshed Token."], Severity.Success);
-                    _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                _snackBar.Add(_localizer["You are Logged Out."], Severity.Error);
-                await _authenticationManager.Logout();
-                _navigationManager.NavigateTo("/");
-            }
-        });
-        hubConnection.On<string, string>(ApplicationConstants.SignalR.LogoutUsersByRole, async (userId, roleId) =>
-        {
-            if (CurrentUserId != userId)
-            {
-                var rolesResponse = await RoleManager.GetRolesAsync();
-                if (rolesResponse.Succeeded)
-                {
-                    var role = rolesResponse.Data.FirstOrDefault(x => x.Id == roleId);
-                    if (role != null)
-                    {
-                        var currentUserRolesResponse = await _userManager.GetRolesAsync(CurrentUserId);
-                        if (currentUserRolesResponse.Succeeded && currentUserRolesResponse.Data.UserRoles.Any(x => x.RoleName == role.Name))
-                        {
-                            _snackBar.Add(_localizer["You are logged out because the Permissions of one of your Roles have been updated."], Severity.Error);
-                            await hubConnection.SendAsync(ApplicationConstants.SignalR.OnDisconnect, CurrentUserId);
-                            await _authenticationManager.Logout();
-                            _navigationManager.NavigateTo("/login");
-                        }
-                    }
-                }
-            }
-        });
-        hubConnection.On<string>(ApplicationConstants.SignalR.PingRequest, async (userName) =>
-        {
-            await hubConnection.SendAsync(ApplicationConstants.SignalR.PingResponse, CurrentUserId, userName);
-
-        });
-
-        await hubConnection.SendAsync(ApplicationConstants.SignalR.OnConnect, CurrentUserId);
-
-        _snackBar.Add(string.Format(Localizer["Welcome {0}"], FirstName), Severity.Success);
-    }
-
-    public async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender)
-        {
-            await LoadDataAsync();
-        }
-    }
-
     public async Task LoadDataAsync()
     {
-        var state = await _stateProvider.GetAuthenticationStateAsync();
-        var user = state.User;
+        var user = await _authenticationService.CurrentUserAsync();
         if (user == null) return;
         if (user.Identity?.IsAuthenticated == true)
         {
@@ -152,13 +82,8 @@ public class MainBodyViewModel : BaseViewModel<MainBody>
 
                 SecondName = user.GetLastName();
                 Email = user.GetEmail();
-                var imageResponse = await _accountManager.GetProfilePictureAsync(CurrentUserId);
-                if (imageResponse.Succeeded)
-                {
-                    ImageDataUrl = imageResponse.Data;
-                }
 
-                var currentUserResult = await _userManager.GetAsync(CurrentUserId);
+                var currentUserResult = await (await _httpClient.GetAsync(ApiEndpoints.Accounts.Get(int.Parse(CurrentUserId)))).ToResultAsync<AccountDTO>();
                 if (!currentUserResult.Succeeded || currentUserResult.Data == null)
                 {
                     _snackBar.Add(
@@ -170,7 +95,7 @@ public class MainBodyViewModel : BaseViewModel<MainBody>
                     SecondName = string.Empty;
                     Email = string.Empty;
                     FirstLetterOfName = char.MinValue;
-                    await _authenticationManager.Logout();
+                    await _authenticationService.LogoutAsync();
                 }
             }
         }
@@ -181,24 +106,17 @@ public class MainBodyViewModel : BaseViewModel<MainBody>
         DrawerOpen = !DrawerOpen;
     }
 
-    public void Logout()
+    public async Task LogoutAsync()
     {
         var parameters = new DialogParameters
         {
-                {nameof(Dialogs.Logout.ContentText), $"{_localizer["Logout Confirmation"]}"},
-                {nameof(Dialogs.Logout.ButtonText), $"{_localizer["Logout"]}"},
-                {nameof(Dialogs.Logout.Color), Color.Error},
-                {nameof(Dialogs.Logout.CurrentUserId), CurrentUserId},
-            {nameof(Dialogs.Logout.HubConnection), hubConnection}
+                {nameof(Shared.Dialogs.Logout.Logout.ContentText), $"{Localizer["Logout Confirmation"]}"},
+                {nameof(Shared.Dialogs.Logout.Logout.ButtonText), $"{Localizer["Logout"]}"},
+                {nameof(Shared.Dialogs.Logout.Logout.Color), Color.Error}
             };
 
         var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true };
 
-        _dialogService.Show<Dialogs.Logout>(_localizer["Logout"], parameters, options);
+        await _dialogService.ShowAsync<Shared.Dialogs.Logout.Logout>(Localizer["Logout"], parameters, options);
     }
-
-    private HubConnection hubConnection;
-
-    public bool IsConnected => hubConnection.State == HubConnectionState.Connected;
-}
 }

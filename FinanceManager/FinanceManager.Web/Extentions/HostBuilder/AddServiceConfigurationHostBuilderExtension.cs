@@ -8,7 +8,6 @@ using FinanceManager.Web.Services;
 using FinanceManager.Web.Services.Autorization;
 using FinanceManager.Web.Services.HttpHandlers;
 using FinanceManager.Web.ViewModels;
-using FinanceManager.Web.ViewModels.Pages;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Extensions.Options;

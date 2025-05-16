@@ -1,7 +1,6 @@
 ﻿using FinanceManager.Web.Preferences;
 using FinanceManager.Web.Services.Autorization;
 using FinanceManager.Web.Settings;
-using FinanceManager.Web.ViewModels.Pages;
 using MudBlazor;
 
 namespace FinanceManager.Web.ViewModels;

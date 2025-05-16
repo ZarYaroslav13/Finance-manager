@@ -1,11 +1,12 @@
 ﻿using FinanceManager.Web.Preferences;
 using FinanceManager.Web.Services.Autorization;
 using FinanceManager.Web.Settings;
+using FinanceManager.Web.ViewModels.Pages;
 using MudBlazor;
 
 namespace FinanceManager.Web.ViewModels;
 
-public class MainLayoutViewModel
+public class MainLayoutViewModel : IViewModel
 {
     private readonly IPreferencesManager _preferencesManager;
     private readonly FinanceManagerStateProvider _stateProvider;

@@ -5,7 +5,7 @@ using MudBlazor;
 
 namespace FinanceManager.Web.ViewModels.Pages;
 
-public abstract class BaseViewModel<T> where T : class
+public abstract class BaseViewModel<T> : IViewModel where T : class 
 {
     public IStringLocalizer<T> Localizer { get; }
 

@@ -52,7 +52,6 @@ public class MainBodyViewModel : BaseViewModel<MainBody>
     public async Task OnInitializedAsync()
     {
         RightToLeft = await _preferencesManager.IsRTL();
-        _interceptor.RegisterEvent();
         hubConnection = hubConnection.TryInitialize(_navigationManager, _localStorage);
         await hubConnection.StartAsync();
         hubConnection.On<string, string, string>(ApplicationConstants.SignalR.ReceiveChatNotification, (message, receiverUserId, senderUserId) =>

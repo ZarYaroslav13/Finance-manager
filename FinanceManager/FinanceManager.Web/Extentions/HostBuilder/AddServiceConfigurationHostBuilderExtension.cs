@@ -96,8 +96,16 @@ public static class AddServiceConfigurationHostBuilderExtension
 
     private static IServiceCollection AddViewModels(this IServiceCollection services)
     {
-        services.AddScoped<LoginViewModel>();
-        services.AddScoped<MainLayoutViewModel>();
+        var viewModelsType = typeof(IViewModel);
+
+        var viewModels = viewModelsType.Assembly
+            .GetExportedTypes()
+            .Where(t => t.IsClass && !t.IsAbstract);
+
+        foreach (var viewModel in viewModels)
+        {
+            services.AddScoped(viewModel);
+        }
 
         return services;
     }

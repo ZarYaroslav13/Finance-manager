@@ -1,7 +1,7 @@
 ﻿using FinanceManager.Web.Extentions;
 using Microsoft.AspNetCore.Components;
 
-namespace BlazorHero.CleanArchitecture.Client.Shared.Components;
+namespace FinanceManager.Web.Shared.Components;
 
 public partial class UserCard
 {

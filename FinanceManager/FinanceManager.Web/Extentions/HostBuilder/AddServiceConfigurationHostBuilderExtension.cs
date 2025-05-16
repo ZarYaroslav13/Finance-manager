@@ -6,6 +6,7 @@ using FinanceManager.Web.Preferences;
 using FinanceManager.Web.Preferences.Client;
 using FinanceManager.Web.Services;
 using FinanceManager.Web.Services.Autorization;
+using FinanceManager.Web.Services.Autorization.AuthenticationService;
 using FinanceManager.Web.Services.HttpHandlers;
 using FinanceManager.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -84,7 +85,8 @@ public static class AddServiceConfigurationHostBuilderExtension
         services
             .AddScoped<IPreferencesManager, ClientPreferencesManager>()
             .AddScoped<FinanceManagerStateProvider>()
-            .AddScoped<AuthenticationStateProvider, FinanceManagerStateProvider>();
+            .AddScoped<AuthenticationStateProvider, FinanceManagerStateProvider>()
+            .AddScoped<IAuthenticationService, AuthenticationService>();
 
         services.AddScoped<ViewModelServicesLocator>();
 

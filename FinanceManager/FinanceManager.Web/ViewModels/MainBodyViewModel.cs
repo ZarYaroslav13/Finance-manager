@@ -28,7 +28,10 @@ public class MainBodyViewModel : BaseViewModel<MainBody>
     public string SecondName { get; set; }
     public string Email { get; set; }
     public char FirstLetterOfName { get; set; }
+
     public bool RightToLeft = false;
+
+    public Direction RightToLeftDirrection => RightToLeft ? Direction.Right : Direction.Left;
 
     private IPreferencesManager _preferencesManager;
 

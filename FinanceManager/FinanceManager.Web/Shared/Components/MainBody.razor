@@ -27,15 +27,15 @@
             </div>
         </MudMenu>
     </MudHidden>
-    <MudMenu Direction="@_viewModel.RightToLeft ? Direction.Right : Direction.Left" OffsetX="true" Dense="true" Class="mt-1 ml-4">
+    <MudMenu Direction="@_viewModel.RightToLeftDirrection" OffsetX="true" Dense="true" Class="mt-1 ml-4">
         <ActivatorContent>
             <MudAvatar Color="Color.Tertiary">@_viewModel.FirstLetterOfName</MudAvatar>
         </ActivatorContent>
         <ChildContent>
             <UserCard Class="mt-n2" />
             <MudDivider Class="mb-2" />
-            <MudListItem Text="@_localizer["Account"]" Href="/account" Icon="@Icons.Material.Outlined.Person" />
-            <MudListItem Text="@_localizer["Logout"]" Icon="@Icons..Material.Filled.Logout" OnClick="@(() => _viewModel.Logout())" />
+            <MudListItem T="object" Text="@_localizer["Account"]" Href="/account" Icon="@Icons.Material.Outlined.Person" />
+            <MudListItem T="object" Text="@_localizer["Logout"]" Icon="@Icons.Material.Filled.Logout" OnClick="@(() => _viewModel.LogoutAsync())" />
         </ChildContent>
     </MudMenu>
 </MudAppBar>

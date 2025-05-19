@@ -10,7 +10,7 @@ public static class FinanceOperationDTOTestDataProvider
                 {
                     Id = 3,
                     Description = "Description",
-                    EntryType = Infrastructure.Models.EntryType.Income,
+                    EntryType = FinanceManager.Infrastructure.Models.EntryType.Income,
                     Name = "Name",
                     WalletId = 1,
                     WalletName = "WalletName"
@@ -21,7 +21,7 @@ public static class FinanceOperationDTOTestDataProvider
                 {
                     Id = 4,
                     Description = "Description",
-                    EntryType = Infrastructure.Models.EntryType.Expense,
+                    EntryType = FinanceManager.Infrastructure.Models.EntryType.Expense,
                     Name = "Name",
                     WalletId = 1,
                     WalletName = "WalletName"

@@ -1,15 +1,17 @@
-﻿using Infrastructure.Models;
+﻿using FinanceManager.Infrastructure.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Infrastructure.EntitiesConfiguration;
+namespace FinanceManager.Infrastructure.EntitiesConfiguration;
 
 public class FinanceOperationTypeConfiguration : IEntityTypeConfiguration<FinanceOperationType>
 {
     public void Configure(EntityTypeBuilder<FinanceOperationType> builder)
     {
-        builder
-            .HasData(FillerBbData.FinanceOperationTypes);
+
+        if (Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT") == "Development")
+            builder
+                .HasData(DBFiller.FinanceOperationTypes);
 
         builder
             .HasOne(tt => tt.Wallet)

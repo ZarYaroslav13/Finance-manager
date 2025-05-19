@@ -2,9 +2,9 @@
 using FakeItEasy;
 using FinanceManager.Domain.Services.Accounts;
 using FinanceManager.Domain.Services.Admins;
-using Infrastructure.Models;
-using Infrastructure.Security;
-using Infrastructure.UnitOfWork;
+using FinanceManager.Infrastructure.Models;
+using FinanceManager.Infrastructure.Security;
+using FinanceManager.Infrastructure.UnitOfWork;
 
 namespace FinanceManager.Domain.Tests.Services;
 

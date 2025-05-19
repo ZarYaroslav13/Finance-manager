@@ -1,5 +1,5 @@
-﻿using Infrastructure;
-using Infrastructure.Models;
+﻿using FinanceManager.Infrastructure;
+using FinanceManager.Infrastructure.Models;
 
 namespace FinanceManager.Infrastructure.Tests.Data.Models;
 
@@ -153,7 +153,7 @@ public class FinanceOperationDataProvider
                 Amount = 1000,
                 Date =  DateTime.MinValue,
                 TypeId = 4,
-                Type = FillerBbData.FinanceOperationTypes.FirstOrDefault(fo => fo.Id == 4)
+                Type = DBFiller.FinanceOperationTypes.FirstOrDefault(fo => fo.Id == 4)
             }
         },
         new object[]

@@ -1,6 +1,6 @@
 ﻿using FinanceManager.Application.Models;
 using FinanceManager.Domain.Models;
-using Infrastructure.Models;
+using FinanceManager.Infrastructure.Models;
 
 namespace FinanceManager.Application.Tests.Data.Models;
 

@@ -4,7 +4,7 @@
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace Infrastructure.Migrations
+namespace FinanceManager.Infrastructure.Migrations
 {
     /// <inheritdoc />
     public partial class AddedAdminAccount : Migration

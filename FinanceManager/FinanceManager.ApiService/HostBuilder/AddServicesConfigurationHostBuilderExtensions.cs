@@ -8,16 +8,16 @@ using FinanceManager.Domain.Services.Admins;
 using FinanceManager.Domain.Services.Finances;
 using FinanceManager.Domain.Services.Wallets;
 using FinanceManager.ServiceDefaults.Routing;
-using Infrastructure;
-using Infrastructure.Authorization;
-using Infrastructure.Security;
-using Infrastructure.UnitOfWork;
+using FinanceManager.Infrastructure;
+using FinanceManager.Infrastructure.Security;
+using FinanceManager.Infrastructure.UnitOfWork;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using FinanceManager.Infrastructure.Models.Authorization;
 
 namespace FinanceManager.ApiService.HostBuilder;
 
@@ -49,7 +49,7 @@ public static class AddServicesConfigurationHostBuilderExtensions
 
         services.AddPoliticalAuthorization();
 
-        services.AddIdentity<APIUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
+        services.AddIdentity<FinanceManagerUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 
         services.AddControllers(options =>
             options.Conventions

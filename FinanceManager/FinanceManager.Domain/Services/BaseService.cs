@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Infrastructure.UnitOfWork;
+using FinanceManager.Infrastructure.UnitOfWork;
 
 namespace FinanceManager.Domain.Services;
 

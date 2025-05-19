@@ -3,7 +3,7 @@ using FinanceManager.Domain.Mapper.Profiles;
 using FinanceManager.Domain.Models;
 using FinanceManager.Domain.Tests.Data;
 using FinanceManager.Domain.Tests.TestHelpers;
-using Infrastructure;
+using FinanceManager.Infrastructure;
 
 namespace FinanceManager.Domain.Tests.Mapper.Profiles;
 
@@ -29,7 +29,7 @@ public class WalletProfileTests
     {
         var dbWallet = DbEntitiesTestDataProvider.Wallets.FirstOrDefault();
 
-        dbWallet.FinanceOperationTypes = FillerBbData
+        dbWallet.FinanceOperationTypes = DBFiller
             .FinanceOperationTypes
             .Where(fot => fot.WalletId == dbWallet.Id)
             .ToList();

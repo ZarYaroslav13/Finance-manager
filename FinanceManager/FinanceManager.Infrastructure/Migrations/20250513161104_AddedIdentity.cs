@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace Infrastructure.Migrations
+namespace FinanceManager.Infrastructure.Migrations
 {
     /// <inheritdoc />
     public partial class AddedIdentity : Migration

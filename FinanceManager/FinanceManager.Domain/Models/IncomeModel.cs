@@ -1,4 +1,4 @@
-﻿using Infrastructure.Models;
+﻿using FinanceManager.Infrastructure.Models;
 
 namespace FinanceManager.Domain.Models;
 

@@ -1,4 +1,4 @@
-﻿namespace Infrastructure.Security;
+﻿namespace FinanceManager.Infrastructure.Security;
 
 public interface IPasswordCoder
 {

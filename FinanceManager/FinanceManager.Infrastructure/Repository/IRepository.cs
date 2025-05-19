@@ -1,7 +1,7 @@
 ﻿using System.Linq.Expressions;
-using Infrastructure.Models.Base;
+using FinanceManager.Infrastructure.Models.Base;
 
-namespace Infrastructure.Repository;
+namespace FinanceManager.Infrastructure.Repository;
 
 public interface IRepository<T> where T : Entity
 {

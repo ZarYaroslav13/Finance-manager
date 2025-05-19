@@ -1,12 +1,11 @@
-﻿using FinanceManager.Infrastructure.Authorization;
-using Infrastructure.Authorization;
-using Infrastructure.Models;
+﻿using FinanceManager.Infrastructure.Models;
+using FinanceManager.Infrastructure.Models.Authorization;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infrastructure;
+namespace FinanceManager.Infrastructure;
 
-public class AppDbContext : IdentityDbContext<APIUser, APIRole, string>
+public class AppDbContext : IdentityDbContext<FinanceManagerUser, FinanceManagerRole, Guid>
 {
     public virtual DbSet<Wallet> Wallets { get; set; } = default!;
     public virtual DbSet<FinanceOperation> FinanceOperations { get; set; } = default!;

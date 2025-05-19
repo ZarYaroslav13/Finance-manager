@@ -2,7 +2,7 @@
 using FinanceManager.Application.UseCases.FinanceOperation.Commands.AddFinanceOperationCommand;
 using FinanceManager.Application.UseCases.FinanceOperation.Commands.UpdateFinanceOperationCommand;
 using FinanceManager.Domain.Models;
-using Infrastructure.Models;
+using FinanceManager.Infrastructure.Models;
 
 namespace FinanceManager.Application.UseCases.Commons.Mapping;
 

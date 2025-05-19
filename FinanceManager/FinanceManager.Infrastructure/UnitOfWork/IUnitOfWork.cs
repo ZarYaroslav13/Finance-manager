@@ -1,6 +1,6 @@
-﻿using Infrastructure.Repository;
+﻿using FinanceManager.Infrastructure.Repository;
 
-namespace Infrastructure.UnitOfWork;
+namespace FinanceManager.Infrastructure.UnitOfWork;
 
 public interface IUnitOfWork
 {

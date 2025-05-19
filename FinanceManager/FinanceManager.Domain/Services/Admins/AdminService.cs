@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using FinanceManager.Domain.Models;
-using Infrastructure.Models;
-using Infrastructure.Repository;
-using Infrastructure.Security;
-using Infrastructure.UnitOfWork;
+using FinanceManager.Infrastructure.Models;
+using FinanceManager.Infrastructure.Repository;
+using FinanceManager.Infrastructure.Security;
+using FinanceManager.Infrastructure.UnitOfWork;
 
 namespace FinanceManager.Domain.Services.Admins;
 

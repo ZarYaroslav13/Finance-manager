@@ -3,10 +3,10 @@ using AutoMapper;
 using FinanceManager.Domain.Authorization;
 using FinanceManager.Domain.Models;
 using FinanceManager.Domain.Services.Admins;
-using Infrastructure.Models;
-using Infrastructure.Repository;
-using Infrastructure.Security;
-using Infrastructure.UnitOfWork;
+using FinanceManager.Infrastructure.Models;
+using FinanceManager.Infrastructure.Repository;
+using FinanceManager.Infrastructure.Security;
+using FinanceManager.Infrastructure.UnitOfWork;
 
 namespace FinanceManager.Domain.Services.Accounts;
 

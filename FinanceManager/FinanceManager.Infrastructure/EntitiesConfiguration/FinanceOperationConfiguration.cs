@@ -1,14 +1,15 @@
-﻿using Infrastructure.Models;
+﻿using FinanceManager.Infrastructure.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Infrastructure.EntitiesConfiguration;
+namespace FinanceManager.Infrastructure.EntitiesConfiguration;
 
 public class FinanceOperationConfiguration : IEntityTypeConfiguration<FinanceOperation>
 {
     public void Configure(EntityTypeBuilder<FinanceOperation> builder)
     {
-        builder.HasData(FillerBbData.FinanceOperations);
+        if(Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT") == "Development")
+            builder.HasData(DBFiller.FinanceOperations);
 
         builder.HasOne(t => t.Type).
             WithMany(t => t.FinanceOperations).

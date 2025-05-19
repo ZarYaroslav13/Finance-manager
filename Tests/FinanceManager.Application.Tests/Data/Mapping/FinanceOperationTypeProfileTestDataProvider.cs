@@ -13,7 +13,7 @@ public static class FinanceOperationTypeProfileTestDataProvider
                 Id = 1,
                 Name = "Name",
                 Description = "Description",
-                EntryType = Infrastructure.Models.EntryType.Income,
+                EntryType = FinanceManager.Infrastructure.Models.EntryType.Income,
                 WalletId = 1,
                 WalletName = "WalletName"
             }

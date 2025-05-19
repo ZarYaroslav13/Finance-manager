@@ -1,4 +1,4 @@
-﻿namespace Infrastructure.Models;
+﻿namespace FinanceManager.Infrastructure.Models;
 
 public enum EntryType
 {

@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace Infrastructure.Models.Base;
+namespace FinanceManager.Infrastructure.Models.Base;
 
 public abstract class Entity
 {

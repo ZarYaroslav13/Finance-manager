@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using FinanceManager.Application.Models;
 using FinanceManager.Application.UseCases.Commons.Bases;
-using Infrastructure.Models;
+using FinanceManager.Infrastructure.Models;
 using MediatR;
 
 namespace FinanceManager.Application.UseCases.FinanceOperationType.Commands.UpdateFinanceOperationTypeCommand;

@@ -1,6 +1,7 @@
-﻿using Infrastructure.Models.Base;
+﻿using FinanceManager.Infrastructure.Models.Authorization;
+using FinanceManager.Infrastructure.Models.Base;
 
-namespace Infrastructure.Models;
+namespace FinanceManager.Infrastructure.Models;
 
 public class Wallet : Entity
 {
@@ -12,7 +13,7 @@ public class Wallet : Entity
 
     public int AccountId { get; set; }
 
-    public Account Account { get; set; } = default!;
+    public FinanceManagerUser Account { get; set; } = default!;
 
     public List<FinanceOperation> GetFinanceOperations()
     {

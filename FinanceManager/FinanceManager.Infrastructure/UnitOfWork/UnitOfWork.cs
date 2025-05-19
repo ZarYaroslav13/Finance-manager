@@ -1,7 +1,7 @@
-﻿using Infrastructure.Models.Base;
-using Infrastructure.Repository;
+﻿using FinanceManager.Infrastructure.Models.Base;
+using FinanceManager.Infrastructure.Repository;
 
-namespace Infrastructure.UnitOfWork;
+namespace FinanceManager.Infrastructure.UnitOfWork;
 
 public class UnitOfWork : IUnitOfWork
 {

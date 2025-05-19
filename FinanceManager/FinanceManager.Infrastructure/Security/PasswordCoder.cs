@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace Infrastructure.Security;
+namespace FinanceManager.Infrastructure.Security;
 
 public class PasswordCoder : IPasswordCoder
 {

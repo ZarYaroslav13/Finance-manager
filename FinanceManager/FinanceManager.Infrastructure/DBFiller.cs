@@ -1,11 +1,17 @@
-﻿using Infrastructure.Models;
-using Infrastructure.Security;
+﻿using FinanceManager.Infrastructure.Models;
+using FinanceManager.Infrastructure.Models.Authorization;
+using FinanceManager.Infrastructure.Security;
+using Microsoft.AspNetCore.Identity;
 
-namespace Infrastructure;
+namespace FinanceManager.Infrastructure;
 
-public class FillerBbData
+public class DBFiller
 {
-    public static List<Account> Accounts { get { return _accounts; } }
+    public static List<FinanceManagerUser> Users { get { return _users; } }
+
+    public static List<FinanceManagerRole> Roles { get { return _roles; } }
+
+    public static List<IdentityUserRole<Guid>> UserRoles { get { return _userRoles; } }
 
     public static List<Wallet> Wallets { get { return _wallets; } }
 
@@ -13,53 +19,85 @@ public class FillerBbData
 
     public static List<FinanceOperation> FinanceOperations { get { return _fnanceOperations; } }
 
-    public static List<Admin> Admins { get { return _admins; } }
-
-    private static PasswordCoder _passwordCoder = new();
-
-    private static List<Account> _accounts = new()
+    private static List<FinanceManagerUser> _users = new()
     {
-        new Account()
+        new()
         {
-            Id = 1,
+            Id = Guid.NewGuid(),
             FirstName = "John",
             LastName = "Doe",
             Email = "john.doe@example.com",
-            Password = _passwordCoder.ComputeSHA256Hash("saferPassword123"),
+            PasswordHash = _passwordHasher.HashPassword(null, "saferPassword123")
         },
-        new Account()
+        new()
         {
-            Id = 2,
+            Id = Guid.NewGuid(),
             FirstName = "Jane",
             LastName = "Smith",
             Email = "jane.smith@example.com",
-            Password = _passwordCoder.ComputeSHA256Hash("saferPassword456"),
+            PasswordHash = _passwordHasher.HashPassword(null, "saferPassword456"),
         },
-        new Account()
+        new()
         {
-            Id = 3,
+            Id = Guid.NewGuid(),
             FirstName = "Michael",
             LastName = "Johnson",
             Email = "michael.johnson@example.com",
-            Password = _passwordCoder.ComputeSHA256Hash("saferPassword789"),
+            PasswordHash = _passwordHasher.HashPassword(null, "saferPassword789"),
         },
-        new Account()
+        new()
         {
-            Id = 4,
+            Id = Guid.NewGuid(),
             FirstName = "Emily",
             LastName = "Davis",
             Email = "emily.davis@example.com",
-            Password = _passwordCoder.ComputeSHA256Hash("saferPassword101"),
+            PasswordHash = _passwordHasher.HashPassword(null, "saferPassword101"),
         },
-        new Account()
+        new()
         {
-            Id = 5,
+            Id = Guid.NewGuid(),
             FirstName = "Chris",
             LastName = "Brown",
             Email = "chris.brown@example.com",
-            Password = _passwordCoder.ComputeSHA256Hash("saferPassword102"),
+            PasswordHash = _passwordHasher.HashPassword(null, "saferPassword102"),
+        },
+        new()
+        {
+            Id = Guid.NewGuid(),
+            LastName = "Your best",
+            FirstName = "Admin",
+            Email = "mr.admin.number1@gmail.com",
+            PasswordHash = _passwordHasher.HashPassword(null, "saferAdminParol124")
+        },
+        new()
+        {
+            Id = Guid.NewGuid(),
+            LastName = "Your second best",
+            FirstName = "Admin",
+            Email = "mr.admin.number2@gmail.com",
+            PasswordHash = _passwordHasher.HashPassword(null, "saferPassword456"),
         }
+
     };
+
+    private static List<FinanceManagerRole> _roles = new()
+    {
+        new(){ Id = Guid.NewGuid(), Name = "User", NormalizedName = "USER"},
+        new(){ Id = Guid.NewGuid(), Name = "Admin", NormalizedName = "ADMIN"}
+    };
+
+    private static List<IdentityUserRole<Guid>> _userRoles = new()
+    {
+        new() { UserId = _users[0].Id, RoleId = _roles[0].Id},
+        new() { UserId = _users[1].Id, RoleId = _roles[0].Id},
+        new() { UserId = _users[2].Id, RoleId = _roles[0].Id},
+        new() { UserId = _users[3].Id, RoleId = _roles[0].Id},
+        new() { UserId = _users[4].Id, RoleId = _roles[0].Id},
+        new() { UserId = _users[5].Id, RoleId = _roles[1].Id},
+        new() { UserId = _users[6].Id, RoleId = _roles[1].Id}
+    };
+
+    private static PasswordHasher<FinanceManagerUser> _passwordHasher = new();
 
     private static List<Wallet> _wallets = new()
     {
@@ -464,25 +502,5 @@ public class FillerBbData
         new FinanceOperation() { Id = 102, Amount = 2000, Date = new DateTime(2024, 4, 11, second: 53, minute: 02, hour: 11), TypeId = 1 },
         new FinanceOperation() { Id = 103, Amount = 300, Date = new DateTime(2024, 4, 11, second: 37, minute: 27, hour: 7), TypeId = 1 }
 
-    };
-
-    private static List<Admin> _admins = new()
-    {
-        new()
-        {
-            Id = 6,
-            LastName = "Your best",
-            FirstName = "Admin",
-            Email = "mr.admin.number1@gmail.com",
-            Password= _passwordCoder.ComputeSHA256Hash("saferAdminParol124")
-        },
-        new()
-        {
-            Id = 7,
-            LastName = "Your second best",
-            FirstName = "Admin",
-            Email = "mr.admin.number2@gmail.com",
-            Password= _passwordCoder.ComputeSHA256Hash("saferPassword456"),
-        }
     };
 }

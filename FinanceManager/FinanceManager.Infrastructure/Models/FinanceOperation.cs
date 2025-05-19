@@ -1,6 +1,6 @@
-﻿using Infrastructure.Models.Base;
+﻿using FinanceManager.Infrastructure.Models.Base;
 
-namespace Infrastructure.Models;
+namespace FinanceManager.Infrastructure.Models;
 
 public class FinanceOperation : Entity
 {

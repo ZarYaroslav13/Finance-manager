@@ -3,7 +3,7 @@ using FinanceManager.Application.Models;
 using FinanceManager.Application.UseCases.Commons.Bases;
 using MediatR;
 
-namespace FinanceManager.Application.UseCases.Accounts.Commands.UpdatePasswordAccountCommand;
+namespace FinanceManager.Application.UseCases.Users.Commands.UpdatePasswordAccountCommand;
 
 public class UpdatePasswordAccountCommand : BaseRequest, IRequest<BaseResponse<AccountDTO>>
 {

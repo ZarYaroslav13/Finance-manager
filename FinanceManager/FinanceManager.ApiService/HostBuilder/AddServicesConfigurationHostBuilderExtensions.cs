@@ -7,17 +7,17 @@ using FinanceManager.Domain.Services.Accounts;
 using FinanceManager.Domain.Services.Admins;
 using FinanceManager.Domain.Services.Finances;
 using FinanceManager.Domain.Services.Wallets;
-using FinanceManager.ServiceDefaults.Routing;
 using FinanceManager.Infrastructure;
+using FinanceManager.Infrastructure.Models.Authorization;
 using FinanceManager.Infrastructure.Security;
 using FinanceManager.Infrastructure.UnitOfWork;
+using FinanceManager.ServiceDefaults.Routing;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using FinanceManager.Infrastructure.Models.Authorization;
 
 namespace FinanceManager.ApiService.HostBuilder;
 

@@ -2,7 +2,7 @@
 
 public abstract class Model
 {
-    public int Id { get; set; }
+    public Guid Id { get; set; }
 
     protected bool AreEqualLists<T>(List<T>? list1, List<T>? list2) where T : class
     {

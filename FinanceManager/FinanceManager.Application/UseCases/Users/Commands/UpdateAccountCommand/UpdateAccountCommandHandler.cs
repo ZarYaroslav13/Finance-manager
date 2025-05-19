@@ -6,7 +6,7 @@ using FinanceManager.Domain.Services.Accounts;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace FinanceManager.Application.UseCases.Accounts.Commands.UpdateCommand;
+namespace FinanceManager.Application.UseCases.Users.Commands.UpdateCommand;
 
 public class UpdateAccountCommandHandler : BaseRequestHandler, IRequestHandler<UpdateAccountCommand, BaseResponse<AccountDTO>>
 {

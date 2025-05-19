@@ -1,9 +1,7 @@
 ﻿using System.Linq.Expressions;
 using FakeItEasy;
-using FinanceManager.Infrastructure.Tests.Data;
-using FinanceManager.Infrastructure;
-using FinanceManager.Infrastructure.Models;
 using FinanceManager.Infrastructure.Repository;
+using FinanceManager.Infrastructure.Tests.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace FinanceManager.Infrastructure.Tests;

@@ -1,6 +1,4 @@
-﻿using FinanceManager.Infrastructure.Models;
-
-namespace FinanceManager.Infrastructure.Tests.Data;
+﻿namespace FinanceManager.Infrastructure.Tests.Data;
 
 public static class RepositoryDataProvider
 {

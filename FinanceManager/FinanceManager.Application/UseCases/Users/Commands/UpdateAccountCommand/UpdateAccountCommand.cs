@@ -3,7 +3,7 @@ using FinanceManager.Application.Models;
 using FinanceManager.Application.UseCases.Commons.Bases;
 using MediatR;
 
-namespace FinanceManager.Application.UseCases.Accounts.Commands.UpdateCommand;
+namespace FinanceManager.Application.UseCases.Users.Commands.UpdateCommand;
 
 public class UpdateAccountCommand : BaseRequest, IRequest<BaseResponse<AccountDTO>>
 {

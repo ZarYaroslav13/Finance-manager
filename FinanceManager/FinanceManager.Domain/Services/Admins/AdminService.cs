@@ -1,6 +1,4 @@
 ﻿using AutoMapper;
-using FinanceManager.Domain.Models;
-using FinanceManager.Infrastructure.Models;
 using FinanceManager.Infrastructure.Repository;
 using FinanceManager.Infrastructure.Security;
 using FinanceManager.Infrastructure.UnitOfWork;

@@ -2,7 +2,7 @@
 using FinanceManager.Application.UseCases.Commons.Bases;
 using MediatR;
 
-namespace FinanceManager.Application.UseCases.Accounts.Queries.GetAllCustomersQuery;
+namespace FinanceManager.Application.UseCases.Users.Queries.GetAllCustomersQuery;
 
 public class GetAllCustomersQuery : BaseRequest, IRequest<BaseResponse<List<AccountDTO>>>
 {

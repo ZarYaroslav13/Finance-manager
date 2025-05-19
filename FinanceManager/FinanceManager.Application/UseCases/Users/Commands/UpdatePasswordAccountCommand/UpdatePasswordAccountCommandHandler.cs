@@ -5,7 +5,7 @@ using FinanceManager.Domain.Services.Accounts;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace FinanceManager.Application.UseCases.Accounts.Commands.UpdatePasswordAccountCommand;
+namespace FinanceManager.Application.UseCases.Users.Commands.UpdatePasswordAccountCommand;
 
 public class UpdatePasswordAccountCommandHandler : BaseRequestHandler, IRequestHandler<UpdatePasswordAccountCommand, BaseResponse<AccountDTO>>
 {
@@ -25,7 +25,7 @@ public class UpdatePasswordAccountCommandHandler : BaseRequestHandler, IRequestH
             CheckIsUserResourceOwnerOrAdmin(request, idSelector: r => r.Id);
 
             response.Data = _mapper.Map<AccountDTO>(
-                    await _accountService.UpdateAccountPasswordAsync(request.Id, request.OldPassword, request.NewPassword));
+                    await _accountService.UpdatePasswordAsync(request.Id, request.OldPassword, request.NewPassword));
 
             response.MakeAsSuccess("Updating success!");
         }

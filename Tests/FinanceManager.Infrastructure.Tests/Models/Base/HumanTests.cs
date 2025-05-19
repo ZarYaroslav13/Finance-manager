@@ -1,5 +1,4 @@
 ﻿using FinanceManager.Infrastructure.Tests.Data.Models.Base;
-using FinanceManager.Infrastructure.Models.Base;
 
 namespace FinanceManager.Infrastructure.Tests.Models.Base;
 

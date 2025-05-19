@@ -8,7 +8,7 @@ public class FinanceOperation : Entity
 
     public DateTime Date { get; set; }
 
-    public int TypeId { get; set; }
+    public Guid TypeId { get; set; }
 
     public FinanceOperationType Type { get; set; }
 

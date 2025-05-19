@@ -5,7 +5,6 @@ using FinanceManager.Domain.Models;
 using FinanceManager.Domain.Services.Accounts;
 using FinanceManager.Domain.Services.Admins;
 using FinanceManager.Domain.Tests.Data.Services;
-using FinanceManager.Infrastructure.Models;
 using FinanceManager.Infrastructure.Repository;
 using FinanceManager.Infrastructure.Security;
 using FinanceManager.Infrastructure.UnitOfWork;

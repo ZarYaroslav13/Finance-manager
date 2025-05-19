@@ -11,7 +11,7 @@ public class Wallet : Entity
 
     public List<FinanceOperationType>? FinanceOperationTypes { get; set; } = new();
 
-    public int AccountId { get; set; }
+    public Guid AccountId { get; set; }
 
     public FinanceManagerUser Account { get; set; } = default!;
 

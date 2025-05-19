@@ -1,6 +1,4 @@
 using FinanceManager.Infrastructure.Tests.Data;
-using FinanceManager.Infrastructure;
-using FinanceManager.Infrastructure.Models;
 using FinanceManager.Infrastructure.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 

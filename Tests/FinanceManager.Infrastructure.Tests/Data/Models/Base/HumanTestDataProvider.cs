@@ -1,6 +1,4 @@
-﻿using FinanceManager.Infrastructure.Models.Base;
-
-namespace FinanceManager.Infrastructure.Tests.Data.Models.Base;
+﻿namespace FinanceManager.Infrastructure.Tests.Data.Models.Base;
 
 public static class HumanTestDataProvider
 {

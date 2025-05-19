@@ -1,5 +1,4 @@
 ﻿using FinanceManager.Infrastructure.Tests.Data;
-using FinanceManager.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
 namespace FinanceManager.Infrastructure.Tests;

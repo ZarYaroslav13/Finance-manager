@@ -4,7 +4,7 @@ namespace FinanceManager.Infrastructure.Models.Base;
 
 public abstract class Entity
 {
-    public int Id { get; set; }
+    public Guid Id { get; set; }
 
     protected bool AreEqualLists<T>(List<T>? list1, List<T>? list2) where T : class
     {

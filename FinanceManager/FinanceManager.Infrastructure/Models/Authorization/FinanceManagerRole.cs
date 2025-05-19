@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 
 namespace FinanceManager.Infrastructure.Models.Authorization;
 
@@ -15,7 +10,7 @@ public class FinanceManagerRole : IdentityRole<Guid>, IIdentityEntity
 
     public FinanceManagerRole()
     {
-        
+
     }
 
     public FinanceManagerRole(string roleName, string roleDescription = null) : base(roleName)

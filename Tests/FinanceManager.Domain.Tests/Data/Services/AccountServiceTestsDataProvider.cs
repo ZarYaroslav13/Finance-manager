@@ -1,7 +1,6 @@
 ﻿using FakeItEasy;
 using FinanceManager.Domain.Models;
 using FinanceManager.Domain.Services.Admins;
-using FinanceManager.Infrastructure.Models;
 using FinanceManager.Infrastructure.Security;
 
 namespace FinanceManager.Domain.Tests.Data.Services;

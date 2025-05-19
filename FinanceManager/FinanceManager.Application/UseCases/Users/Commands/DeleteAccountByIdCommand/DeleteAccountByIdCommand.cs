@@ -2,7 +2,7 @@
 using FinanceManager.Application.UseCases.Commons.Bases;
 using MediatR;
 
-namespace FinanceManager.Application.UseCases.Accounts.Commands.DeleteAccountByIdCommand;
+namespace FinanceManager.Application.UseCases.Users.Commands.DeleteAccountByIdCommand;
 
 public class DeleteAccountByIdCommand : BaseRequest, IRequest<BaseResponse<bool>>
 {

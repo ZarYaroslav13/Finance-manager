@@ -3,7 +3,6 @@ using FinanceManager.Domain.Mapper.Profiles;
 using FinanceManager.Domain.Models;
 using FinanceManager.Domain.Tests.Data;
 using FinanceManager.Domain.Tests.TestHelpers;
-using FinanceManager.Infrastructure.Models;
 
 namespace FinanceManager.Domain.Tests.Mapper.Profiles;
 

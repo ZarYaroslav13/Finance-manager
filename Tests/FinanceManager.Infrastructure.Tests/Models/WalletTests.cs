@@ -1,5 +1,5 @@
-﻿using FinanceManager.Infrastructure.Tests.Data.Models;
-using FinanceManager.Infrastructure.Models;
+﻿using FinanceManager.Infrastructure.Models;
+using FinanceManager.Infrastructure.Tests.Data.Models;
 
 namespace FinanceManager.Infrastructure.Tests.Models;
 

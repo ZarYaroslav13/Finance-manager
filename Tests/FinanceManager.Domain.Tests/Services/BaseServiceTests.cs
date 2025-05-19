@@ -2,7 +2,6 @@
 using FakeItEasy;
 using FinanceManager.Domain.Services.Accounts;
 using FinanceManager.Domain.Services.Admins;
-using FinanceManager.Infrastructure.Models;
 using FinanceManager.Infrastructure.Security;
 using FinanceManager.Infrastructure.UnitOfWork;
 

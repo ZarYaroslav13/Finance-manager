@@ -8,7 +8,7 @@ public class FinanceOperationConfiguration : IEntityTypeConfiguration<FinanceOpe
 {
     public void Configure(EntityTypeBuilder<FinanceOperation> builder)
     {
-        if(Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT") == "Development")
+        if (Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT") == "Development")
             builder.HasData(DBFiller.FinanceOperations);
 
         builder.HasOne(t => t.Type).

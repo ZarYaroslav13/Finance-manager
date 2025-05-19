@@ -1,6 +1,4 @@
-﻿using FinanceManager.Domain.Models;
-
-namespace FinanceManager.Domain.Services.Admins;
+﻿namespace FinanceManager.Domain.Services.Admins;
 
 public interface IAdminService
 {

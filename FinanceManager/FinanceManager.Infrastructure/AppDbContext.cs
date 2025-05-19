@@ -18,7 +18,7 @@ public class AppDbContext : IdentityDbContext<FinanceManagerUser, FinanceManager
 
     public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
-        foreach(var user in ChangeTracker.Entries<IIdentityEntity>())
+        foreach (var user in ChangeTracker.Entries<IIdentityEntity>())
         {
             switch (user.State)
             {

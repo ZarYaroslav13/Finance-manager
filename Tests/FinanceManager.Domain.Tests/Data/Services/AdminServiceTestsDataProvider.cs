@@ -1,7 +1,4 @@
-﻿using FinanceManager.Domain.Models;
-using FinanceManager.Infrastructure.Models;
-
-namespace FinanceManager.Domain.Tests.Data.Services;
+﻿namespace FinanceManager.Domain.Tests.Data.Services;
 
 public static class AdminServiceTestsDataProvider
 {

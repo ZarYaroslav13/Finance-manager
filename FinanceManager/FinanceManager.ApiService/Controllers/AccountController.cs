@@ -1,9 +1,9 @@
 ﻿using FinanceManager.ApiService.Controllers.Base;
-using FinanceManager.Application.UseCases.Accounts.Commands.DeleteAccountByIdCommand;
-using FinanceManager.Application.UseCases.Accounts.Commands.UpdateCommand;
-using FinanceManager.Application.UseCases.Accounts.Commands.UpdatePasswordAccountCommand;
-using FinanceManager.Application.UseCases.Accounts.Queries.GetAllCustomersQuery;
-using FinanceManager.Application.UseCases.Accounts.Queries.GetCustomerQuery;
+using FinanceManager.Application.UseCases.Users.Commands.DeleteAccountByIdCommand;
+using FinanceManager.Application.UseCases.Users.Commands.UpdateCommand;
+using FinanceManager.Application.UseCases.Users.Commands.UpdatePasswordAccountCommand;
+using FinanceManager.Application.UseCases.Users.Queries.GetAllCustomersQuery;
+using FinanceManager.Application.UseCases.Users.Queries.GetCustomerQuery;
 using FinanceManager.Domain.Authorization;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;

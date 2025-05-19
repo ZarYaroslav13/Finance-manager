@@ -5,7 +5,7 @@ using FinanceManager.Domain.Services.Accounts;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace FinanceManager.Application.UseCases.Accounts.Queries.GetAllCustomersQuery;
+namespace FinanceManager.Application.UseCases.Users.Queries.GetAllCustomersQuery;
 
 public class GetAllCustomersHandler : BaseRequestHandler, IRequestHandler<GetAllCustomersQuery, BaseResponse<List<AccountDTO>>>
 {

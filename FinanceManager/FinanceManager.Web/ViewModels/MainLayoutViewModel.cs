@@ -33,13 +33,6 @@ public class MainLayoutViewModel : IViewModel
         await Task.CompletedTask;
     }
 
-    public async Task OnInitializedAsync()
-    {
-        CurrentTheme = FinanceManagerThemes.DefaultTheme;
-        CurrentTheme = await _preferencesManager.GetCurrentThemeAsync();
-        RightToLeft = await _preferencesManager.IsRTL();
-    }
-
     public async Task DarkMode()
     {
         bool isDarkMode = await _preferencesManager.ToggleDarkModeAsync();

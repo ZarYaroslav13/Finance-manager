@@ -24,7 +24,7 @@ public class MainBodyViewModel : BaseViewModel<MainBody>
     public bool DrawerOpen = true;
     public string CurrentUserId { get; set; }
     public string ImageDataUrl { get; set; }
-    public string FirstName { get; set; }
+    public string FirstName { get; set; } = String.Empty;
     public string SecondName { get; set; }
     public string Email { get; set; }
     public char FirstLetterOfName { get; set; }
@@ -44,7 +44,6 @@ public class MainBodyViewModel : BaseViewModel<MainBody>
 
     {
         RightToLeft = await _preferencesManager.IsRTL();
-
         _snackBar.Add(string.Format(Localizer["Welcome {0}"], FirstName), Severity.Success);
     }
     public async Task OnAfterRenderAsync(bool firstRender)

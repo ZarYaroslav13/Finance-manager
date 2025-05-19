@@ -1,4 +1,5 @@
-﻿using FinanceManager.Web.Services;
+﻿using Blazored.LocalStorage;
+using FinanceManager.Web.Services;
 using FinanceManager.Web.Services.Autorization.AuthenticationService;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Localization;
@@ -15,6 +16,7 @@ public abstract class BaseViewModel<T> : IViewModel where T : class
     protected readonly ISnackbar _snackBar;
     protected readonly IAuthenticationService _authenticationService;
     protected readonly IDialogService _dialogService;
+    protected readonly ILocalStorageService _localStorage;
 
     protected BaseViewModel(ViewModelServicesLocator locator, IStringLocalizer<T> localizer)
     {
@@ -26,5 +28,6 @@ public abstract class BaseViewModel<T> : IViewModel where T : class
         _snackBar = locator.SnackBar;
         _authenticationService = locator.AuthenticationService;
         _dialogService = locator.DialogService;
+        _localStorage = locator.LocalStorageService;
     }
 }

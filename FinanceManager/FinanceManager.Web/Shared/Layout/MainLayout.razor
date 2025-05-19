@@ -1,6 +1,5 @@
 ﻿@inherits LayoutComponentBase
 @inject MainLayoutViewModel _viewModel
-@rendermode InteractiveServer
 
 <MudRTLProvider RightToLeft="@_viewModel.RightToLeft">
     <MudThemeProvider Theme="_viewModel.CurrentTheme"/>
@@ -14,7 +13,6 @@
                 <FinanceManager.Web.Shared.Components.LanguageSelector />
                 <MudIconButton Icon="@Icons.Material.Filled.Brightness4" Color="Color.Inherit" OnClick="@((e) => _viewModel.DarkMode())" />
             </MudAppBar>
-
             <MudContainer MaxWidth="MaxWidth.Small" Class="d-flex align-center" Style="height: 100vh;">
                 <MudPaper Elevation="25" Class="pa-8" Style="width: 500px;">
                     @Body

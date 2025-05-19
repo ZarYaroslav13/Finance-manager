@@ -36,6 +36,12 @@ public static class AddServiceConfigurationHostBuilderExtension
 
         services.AddClientServices();
 
+        services.AddSignalR(o =>
+            {
+                o.MaximumReceiveMessageSize = 102400000;
+                o.EnableDetailedErrors = true;
+            });
+
         services.Configure<APIOptions>(configuration.GetSection(APIOptions.Section));
 
         builder.AdjustHttpClient();

@@ -44,7 +44,9 @@
 </MudDrawer>
 <MudMainContent>
     <MudContainer MaxWidth="MaxWidth.False" Class="mt-4">
-        @_viewModel.ChildContent
+        <CascadingAuthenticationState>
+            @_viewModel.ChildContent
+        </CascadingAuthenticationState>
     </MudContainer>
 </MudMainContent>
 

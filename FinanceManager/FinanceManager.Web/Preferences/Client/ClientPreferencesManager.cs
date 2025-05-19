@@ -1,7 +1,7 @@
 ﻿using Blazored.LocalStorage;
+using FinanceManager.Domain.Wrapper;
 using FinanceManager.Web.Settings;
 using FinanceManager.Web.Shared.Constants.Storage;
-using FinanceManager.Web.Shared.Wrapper;
 using Microsoft.Extensions.Localization;
 using MudBlazor;
 

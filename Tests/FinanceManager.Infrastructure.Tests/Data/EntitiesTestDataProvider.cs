@@ -1,5 +1,4 @@
 ﻿using FinanceManager.Infrastructure.Models;
-using FinanceManager.Infrastructure.Security;
 
 namespace FinanceManager.Infrastructure.Tests.Data;
 

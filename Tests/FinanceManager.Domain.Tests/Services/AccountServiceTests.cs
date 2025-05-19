@@ -6,7 +6,6 @@ using FinanceManager.Domain.Services.Accounts;
 using FinanceManager.Domain.Services.Admins;
 using FinanceManager.Domain.Tests.Data.Services;
 using FinanceManager.Infrastructure.Repository;
-using FinanceManager.Infrastructure.Security;
 using FinanceManager.Infrastructure.UnitOfWork;
 
 namespace FinanceManager.Domain.Tests.Services;

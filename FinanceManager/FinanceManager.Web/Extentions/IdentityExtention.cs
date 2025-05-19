@@ -1,6 +1,6 @@
 ﻿using System.Security.Claims;
 
-namespace FinanceManager.Web.Extentions;
+namespace FinanceManager.Domain.Extentions;
 
 public static class IdentityExtention
 {

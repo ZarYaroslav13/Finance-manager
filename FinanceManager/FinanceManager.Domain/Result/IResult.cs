@@ -1,4 +1,4 @@
-﻿namespace FinanceManager.Web.Shared.Wrapper;
+﻿namespace FinanceManager.Domain.Wrapper;
 
 public interface IResult
 {

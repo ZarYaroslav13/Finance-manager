@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using FinanceManager.Infrastructure.Repository;
-using FinanceManager.Infrastructure.Security;
 using FinanceManager.Infrastructure.UnitOfWork;
 
 namespace FinanceManager.Domain.Services.Admins;

@@ -5,10 +5,10 @@ using FinanceManager.Application.UseCases.Commons.Bases;
 using FinanceManager.Application.UseCases.Login.Commands.CreateRefreshTokenCommand;
 using FinanceManager.Application.UseCases.Login.Commands.SignInAdminCommand;
 using FinanceManager.Application.UseCases.Login.Commands.SignInCommand;
+using FinanceManager.Domain.Extentions;
+using FinanceManager.Domain.Wrapper;
 using FinanceManager.Web.API;
-using FinanceManager.Web.Extentions;
 using FinanceManager.Web.Shared.Constants.Storage;
-using FinanceManager.Web.Shared.Wrapper;
 using Microsoft.Extensions.Localization;
 
 namespace FinanceManager.Web.Services.Autorization.AuthenticationService;

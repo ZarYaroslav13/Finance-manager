@@ -167,7 +167,7 @@ public class FinanceService : BaseService, IFinanceService
     {
         ArgumentNullException.ThrowIfNull(financeOperation);
 
-        if(financeOperation.Id == Guid.Empty) throw new ArgumentOutOfRangeException(nameof(financeOperation.Id));
+        if (financeOperation.Id == Guid.Empty) throw new ArgumentOutOfRangeException(nameof(financeOperation.Id));
         var dbResult = _financeOperationRepository.Update(
                             _mapper.Map<FinanceOperation>(financeOperation));
         await _unitOfWork.SaveChangesAsync();

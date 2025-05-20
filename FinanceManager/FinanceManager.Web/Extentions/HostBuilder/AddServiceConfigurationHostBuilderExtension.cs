@@ -1,5 +1,6 @@
 ﻿using System.Globalization;
 using Blazored.LocalStorage;
+using FinanceManager.Domain.API;
 using FinanceManager.Domain.Authorization;
 using FinanceManager.Web.Preferences;
 using FinanceManager.Web.Preferences.Client;

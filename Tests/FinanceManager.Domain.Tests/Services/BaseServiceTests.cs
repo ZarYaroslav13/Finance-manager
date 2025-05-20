@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using FakeItEasy;
 using FinanceManager.Domain.Services.Accounts;
-using FinanceManager.Domain.Services.Admins;
 using FinanceManager.Infrastructure.UnitOfWork;
 
 namespace FinanceManager.Domain.Tests.Services;

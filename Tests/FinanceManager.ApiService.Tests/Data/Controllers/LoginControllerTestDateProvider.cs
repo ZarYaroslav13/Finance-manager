@@ -1,7 +1,6 @@
 ﻿using FakeItEasy;
-using FinanceManager.Application.Security.Token;
 using FinanceManager.Domain.Services.Accounts;
-using FinanceManager.Domain.Services.Admins;
+using FinanceManager.Domain.Services.Token;
 
 namespace FinanceManager.ApiService.Tests.Data.Controllers;
 
@@ -10,11 +9,11 @@ public static class LoginControllerTestDateProvider
     public static IEnumerable<object[]> ConstructorArgumentIsEqualNullThrowsArgumentNullExceptionTestData { get; } = new List<object[]>()
     {
         new object[] { A.Fake<IAdminService>(), A.Fake<IAccountService>(), null },
-        new object[] { A.Fake<IAdminService>(), null, A.Fake<ITokenManager>() },
-        new object[] { null, A.Fake<IAccountService>(), A.Fake<ITokenManager>() },
+        new object[] { A.Fake<IAdminService>(), null, A.Fake<ITokenService>() },
+        new object[] { null, A.Fake<IAccountService>(), A.Fake<ITokenService>() },
         new object[] { A.Fake<IAdminService>(), null, null },
         new object[] { null, A.Fake<IAccountService>(), null },
-        new object[] { null, null, A.Fake<ITokenManager>() },
+        new object[] { null, null, A.Fake<ITokenService>() },
         new object[] { null, null, null },
     };
 

@@ -1,11 +1,10 @@
 ﻿using System.Security.Claims;
-using FinanceManager.Application.Security;
-using FinanceManager.Application.Security.Token;
 using FinanceManager.Application.UseCases.Commons.Behaviours;
 using FinanceManager.Domain.Authorization;
+using FinanceManager.Domain.Configurations;
 using FinanceManager.Domain.Services.Accounts;
-using FinanceManager.Domain.Services.Admins;
 using FinanceManager.Domain.Services.Finances;
+using FinanceManager.Domain.Services.Token;
 using FinanceManager.Domain.Services.Wallets;
 using FinanceManager.Infrastructure;
 using FinanceManager.Infrastructure.Models.Authorization;
@@ -31,18 +30,16 @@ public static class AddServicesConfigurationHostBuilderExtensions
 
         services.AddMediator();
 
-        services.AddSingleton<IPasswordCoder, PasswordCoder>();
 
         services.AddDbConnection(configuration);
 
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
         services.AddScoped<IFinanceReportCreator, FinanceReportCreator>();
-        services.AddScoped<IAdminService, AdminService>();
         services.AddScoped<IAccountService, AccountService>();
         services.AddScoped<IWalletService, WalletService>();
         services.AddScoped<IFinanceService, FinanceService>();
-        services.AddScoped<ITokenManager, TokenManager>();
+        services.AddScoped<ITokenService, TokenService>();
 
         services.AddJwtAuthentication(configuration);
 
@@ -84,7 +81,7 @@ public static class AddServicesConfigurationHostBuilderExtensions
 
     private static IServiceCollection AddJwtAuthentication(this IServiceCollection services, IConfiguration configuration)
     {
-        AuthOptions authOptions = configuration.GetSection(AuthOptions.Section).Get<AuthOptions>();
+        AuthConfiguration authOptions = configuration.GetSection(AuthConfiguration.Section).Get<AuthConfiguration>();
 
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                     .AddJwtBearer(options =>
@@ -123,8 +120,8 @@ public static class AddServicesConfigurationHostBuilderExtensions
 
     private static IHostApplicationBuilder AddOptions(this IHostApplicationBuilder builder)
     {
-        builder.Services.Configure<AuthOptions>(
-            builder.Configuration.GetSection(AuthOptions.Section));
+        builder.Services.Configure<AuthConfiguration>(
+            builder.Configuration.GetSection(AuthConfiguration.Section));
 
         return builder;
     }

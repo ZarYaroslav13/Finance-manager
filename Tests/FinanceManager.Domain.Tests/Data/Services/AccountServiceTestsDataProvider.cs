@@ -1,5 +1,4 @@
 ﻿using FakeItEasy;
-using FinanceManager.Domain.Services.Admins;
 
 namespace FinanceManager.Domain.Tests.Data.Services;
 

@@ -1,6 +1,6 @@
 ﻿namespace FinanceManager.Domain.API;
 
-record class APIOptions
+public record class APIOptions
 {
     public static string Section = "APIOptions";
 

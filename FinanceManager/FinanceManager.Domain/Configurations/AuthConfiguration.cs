@@ -1,9 +1,9 @@
 ﻿using System.Text;
 using Microsoft.IdentityModel.Tokens;
 
-namespace FinanceManager.Application.Security;
+namespace FinanceManager.Domain.Configurations;
 
-public class AuthOptions
+public class AuthConfiguration
 {
     public const string Section = "Auth";
 

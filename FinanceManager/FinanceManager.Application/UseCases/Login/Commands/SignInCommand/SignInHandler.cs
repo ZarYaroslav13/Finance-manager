@@ -1,9 +1,8 @@
 ﻿using AutoMapper;
 using FinanceManager.Application.Models;
-using FinanceManager.Application.Security.Token;
 using FinanceManager.Application.UseCases.Commons.Bases;
 using FinanceManager.Domain.Services.Accounts;
-using FinanceManager.Domain.Services.Admins;
+using FinanceManager.Domain.Services.Token;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
@@ -13,12 +12,12 @@ public class SignInHandler : BaseRequestHandler, IRequestHandler<SignInCommand, 
 {
     private readonly IAccountService _accountService;
     private readonly IAdminService _adminService;
-    private readonly ITokenManager _tokenManager;
+    private readonly ITokenService _tokenManager;
 
     public SignInHandler(
         IAdminService adminService,
         IAccountService accountService,
-        ITokenManager tokenManager,
+        ITokenService tokenManager,
         IMapper mapper,
         ILogger<BaseRequestHandler> logger) : base(mapper, logger)
     {
@@ -47,7 +46,7 @@ public class SignInHandler : BaseRequestHandler, IRequestHandler<SignInCommand, 
 
     private async Task<TokenDTO> TryLogin(SignInCommand request)
     {
-        var identity = await _tokenManager.GetIdentityAsync(request.Email, request.Password);
+        var identity = await _tokenManager.LoginAsync(request.Email, request.Password);
         if (identity == null)
         {
             _logger.LogWarning("Sign in failed for email: {Email}. Invalid credentials.", request.Email);
@@ -56,7 +55,7 @@ public class SignInHandler : BaseRequestHandler, IRequestHandler<SignInCommand, 
 
         TokenDTO token = new()
         {
-            JWTToken = _tokenManager.CreateToken(identity),
+            JWTToken = _tokenManager.GetRefreshToken(identity),
             RefreshToken = ""
         };
 

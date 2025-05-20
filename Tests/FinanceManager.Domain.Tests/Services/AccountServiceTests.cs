@@ -2,7 +2,6 @@
 using AutoMapper;
 using FakeItEasy;
 using FinanceManager.Domain.Services.Accounts;
-using FinanceManager.Domain.Services.Admins;
 using FinanceManager.Domain.Tests.Data.Services;
 using FinanceManager.Infrastructure.Repository;
 using FinanceManager.Infrastructure.UnitOfWork;

@@ -36,7 +36,7 @@ public class AuthenticationService : IAuthenticationService
         return (await _authenticationStateProvider.GetAuthenticationStateAsync()).User;
     }
 
-    public async Task<Shared.Wrapper.IResult> LoginAsync(SignInCommand model)
+    public async Task<Domain.Wrapper.IResult> LoginAsync(SignInCommand model)
     {
         var response = await _httpClient.PostAsJsonAsync(ApiEndpoints.Login.SignIn, model);
         var result = await response.ToResultAsync<BaseResponse<TokenDTO>>();
@@ -56,7 +56,7 @@ public class AuthenticationService : IAuthenticationService
         return Result.Fail();
     }
 
-    public async Task<Shared.Wrapper.IResult> LoginAdminAsync(SignInAdminCommand model)
+    public async Task<Domain.Wrapper.IResult> LoginAdminAsync(SignInAdminCommand model)
     {
         var response = await _httpClient.PostAsJsonAsync(ApiEndpoints.Login.SignInAsAdmin, model);
         var result = await response.ToResultAsync<BaseResponse<TokenDTO>>();
@@ -114,7 +114,7 @@ public class AuthenticationService : IAuthenticationService
         return string.Empty;
     }
 
-    public async Task<Shared.Wrapper.IResult> LogoutAsync()
+    public async Task<Domain.Wrapper.IResult> LogoutAsync()
     {
         await _localStorage.RemoveItemAsync(StorageConstants.AuthToken);
         await _localStorage.RemoveItemAsync(StorageConstants.RefreshToken);
@@ -123,7 +123,7 @@ public class AuthenticationService : IAuthenticationService
 
         _httpClient.DefaultRequestHeaders.Authorization = null;
 
-        return Shared.Wrapper.Result.Success();
+        return Result.Success();
     }
 
     private async Task RewriteTokens(string token, string refreshToken)

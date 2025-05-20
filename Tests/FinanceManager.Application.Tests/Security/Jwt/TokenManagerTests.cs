@@ -3,12 +3,11 @@ using System.Security.Claims;
 using AutoMapper;
 using FakeItEasy;
 using FinanceManager.Application.Models;
-using FinanceManager.Application.Security;
-using FinanceManager.Application.Security.Token;
 using FinanceManager.Application.Tests.Data.Security.Jwt;
 using FinanceManager.Domain.Authorization;
+using FinanceManager.Domain.Configurations;
 using FinanceManager.Domain.Services.Accounts;
-using FinanceManager.Domain.Services.Admins;
+using FinanceManager.Domain.Services.Token;
 using Microsoft.Extensions.Options;
 
 namespace FinanceManager.Application.Tests.Security.Jwt;
@@ -19,17 +18,17 @@ public class TokenManagerTests
     private readonly IAccountService _accountService;
     private readonly IAdminService _adminService;
     private readonly IMapper _mapper;
-    private readonly ITokenManager _tokenManager;
-    private readonly IOptions<AuthOptions> _diAuthOptions;
-    private readonly AuthOptions _authOptions;
+    private readonly ITokenService _tokenManager;
+    private readonly IOptions<AuthConfiguration> _diAuthOptions;
+    private readonly AuthConfiguration _authOptions;
 
     public TokenManagerTests()
     {
         _accountService = A.Fake<IAccountService>();
         _adminService = A.Fake<IAdminService>();
         _mapper = A.Fake<IMapper>();
-        _diAuthOptions = A.Fake<IOptions<AuthOptions>>();
-        _authOptions = A.Fake<AuthOptions>();
+        _diAuthOptions = A.Fake<IOptions<AuthConfiguration>>();
+        _authOptions = A.Fake<AuthConfiguration>();
 
         A.CallTo(() => _diAuthOptions.Value).Returns(_authOptions);
 
@@ -38,7 +37,7 @@ public class TokenManagerTests
 
     [TestMethod]
     [DynamicData(nameof(TokenManagerTestDataProvider.ConstructorArgumentsAreNullThrowsArgumentNullExceptionTestData), typeof(TokenManagerTestDataProvider))]
-    public void Constructor_ArgumentsAreNull_ThrowsArgumentNullException(IOptions<AuthOptions> options, IAccountService accountService, IAdminService adminService, IMapper mapper)
+    public void Constructor_ArgumentsAreNull_ThrowsArgumentNullException(IOptions<AuthConfiguration> options, IAccountService accountService, IAdminService adminService, IMapper mapper)
     {
         Assert.ThrowsException<ArgumentNullException>(() => new TokenManager(accountService, adminService, mapper, options));
     }
@@ -47,7 +46,7 @@ public class TokenManagerTests
     [DynamicData(nameof(TokenManagerTestDataProvider.GetIdentityAsyncNullOrEmptyEmailOrPasswordThrowsArgumentNullExceptionTestData), typeof(TokenManagerTestDataProvider))]
     public void GetAccountIdentityAsync_NullOrEmptyEmailOrPassword_ThrowsArgumentNullException(string email, string password)
     {
-        Assert.ThrowsExceptionAsync<ArgumentNullException>(() => _tokenManager.GetIdentityAsync(email, password));
+        Assert.ThrowsExceptionAsync<ArgumentNullException>(() => _tokenManager.LoginAsync(email, password));
     }
 
     [TestMethod]
@@ -65,7 +64,7 @@ public class TokenManagerTests
             new Claim(ClaimsIdentity.DefaultNameClaimType, "test@example.com")
         });
 
-        var token = _tokenManager.CreateToken(identity);
+        var token = _tokenManager.GetRefreshToken(identity);
 
         Assert.IsNotNull(token);
         var handler = new JwtSecurityTokenHandler();
@@ -121,7 +120,7 @@ public class TokenManagerTests
         A.CallTo(() => _mapper.Map<AccountDTO>(null))
             .Returns(null);
 
-        var result = await _tokenManager.GetIdentityAsync(email, password);
+        var result = await _tokenManager.LoginAsync(email, password);
 
         Assert.IsNull(result);
     }

@@ -6,9 +6,9 @@ namespace FinanceManager.Web.Services.Autorization.AuthenticationService;
 
 public interface IAuthenticationService
 {
-    Task<Shared.Wrapper.IResult> LoginAsync(SignInCommand model);
+    Task<Domain.Wrapper.IResult> LoginAsync(SignInCommand model);
 
-    Task<Shared.Wrapper.IResult> LoginAdminAsync(SignInAdminCommand model);
+    Task<Domain.Wrapper.IResult> LoginAdminAsync(SignInAdminCommand model);
 
     Task<string> RefreshTokenAsync();
 
@@ -16,5 +16,5 @@ public interface IAuthenticationService
 
     Task<ClaimsPrincipal> CurrentUserAsync();
 
-    Task<Shared.Wrapper.IResult> LogoutAsync();
+    Task<Domain.Wrapper.IResult> LogoutAsync();
 }

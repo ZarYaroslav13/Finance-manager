@@ -2,10 +2,9 @@
 using AutoMapper;
 using FakeItEasy;
 using FinanceManager.Application.Models;
-using FinanceManager.Application.Security;
 using FinanceManager.Domain.Authorization;
+using FinanceManager.Domain.Configurations;
 using FinanceManager.Domain.Services.Accounts;
-using FinanceManager.Domain.Services.Admins;
 using Microsoft.Extensions.Options;
 
 namespace FinanceManager.Application.Tests.Data.Security.Jwt;
@@ -14,13 +13,13 @@ public static class TokenManagerTestDataProvider
 {
     public static IEnumerable<object[]> ConstructorArgumentsAreNullThrowsArgumentNullExceptionTestData { get; } = new List<object[]>
     {
-        new object[] { A.Fake<IOptions<AuthOptions>>(), null, null, null},
-        new object[] { A.Fake<IOptions<AuthOptions>>(), null, A.Fake<IAdminService>(), A.Fake<IMapper>()},
-        new object[] { A.Fake<IOptions<AuthOptions>>(), A.Fake<IAccountService>(), null, A.Fake<IMapper>()},
-        new object[] { A.Fake<IOptions<AuthOptions>>(), A.Fake<IAccountService>(), A.Fake<IAdminService>(), null},
-        new object[] { A.Fake<IOptions<AuthOptions>>(), A.Fake<IAccountService>(), null, null},
-        new object[] { A.Fake<IOptions<AuthOptions>>(), null, A.Fake<IAdminService>(), null},
-        new object[] { A.Fake<IOptions<AuthOptions>>(), null, null, A.Fake<IMapper>()},
+        new object[] { A.Fake<IOptions<AuthConfiguration>>(), null, null, null},
+        new object[] { A.Fake<IOptions<AuthConfiguration>>(), null, A.Fake<IAdminService>(), A.Fake<IMapper>()},
+        new object[] { A.Fake<IOptions<AuthConfiguration>>(), A.Fake<IAccountService>(), null, A.Fake<IMapper>()},
+        new object[] { A.Fake<IOptions<AuthConfiguration>>(), A.Fake<IAccountService>(), A.Fake<IAdminService>(), null},
+        new object[] { A.Fake<IOptions<AuthConfiguration>>(), A.Fake<IAccountService>(), null, null},
+        new object[] { A.Fake<IOptions<AuthConfiguration>>(), null, A.Fake<IAdminService>(), null},
+        new object[] { A.Fake<IOptions<AuthConfiguration>>(), null, null, A.Fake<IMapper>()},
         new object[] { null, null, null, null},
         new object[] { null, null, A.Fake<IAdminService>(), A.Fake<IMapper>()},
         new object[] { null, A.Fake<IAccountService>(), null, A.Fake<IMapper>()},

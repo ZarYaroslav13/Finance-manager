@@ -1,6 +1,6 @@
 ﻿using System.Security.Claims;
 using Blazored.LocalStorage;
-using FinanceManager.Application.Security.Token;
+using FinanceManager.Domain.Services.Token;
 using FinanceManager.Web.Shared.Constants.Storage;
 using Microsoft.AspNetCore.Components.Authorization;
 
@@ -12,7 +12,7 @@ public class FinanceManagerStateProvider : AuthenticationStateProvider
 
     private readonly HttpClient _httpClient;
     private readonly ILocalStorageService _localStorage;
-    private readonly ITokenManager _tokenManager;
+    private readonly ITokenService _tokenManager;
 
     public FinanceManagerStateProvider(
         HttpClient httpClient,
@@ -53,7 +53,7 @@ public class FinanceManagerStateProvider : AuthenticationStateProvider
         }
 
         _httpClient.DefaultRequestHeaders.Authorization = new("Bearer", savedToken);
-        var state = new AuthenticationState(new(TokenManager.GetIdentityFromJwtToken(savedToken)));
+        var state = new AuthenticationState(new(TokenService.GetIdentityFromJwtToken(savedToken)));
         AuthenticationStateUser = state.User;
         return state;
     }

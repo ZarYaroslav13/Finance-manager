@@ -45,7 +45,7 @@ public class ClientPreferencesManager : IPreferencesManager
         return false;
     }
 
-    public async Task<Shared.Wrapper.IResult> ChangeLanguageAsync(string languageCode)
+    public async Task<Domain.Wrapper.IResult> ChangeLanguageAsync(string languageCode)
     {
         var preference = await GetPreference() as ClientPreferences;
         if (preference != null)

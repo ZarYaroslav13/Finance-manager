@@ -8,7 +8,7 @@ public interface IPreferencesManager
 
     Task<bool> ToggleDarkModeAsync();
 
-    Task<Shared.Wrapper.IResult> ChangeLanguageAsync(string languageCode);
+    Task<Domain.Wrapper.IResult> ChangeLanguageAsync(string languageCode);
 
     Task SetPreference(IPreferences preference);
 

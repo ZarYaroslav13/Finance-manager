@@ -4,7 +4,7 @@ namespace FinanceManager.Domain.Models;
 
 public class FinanceReportModel : Model
 {
-    public int WalletId { get; }
+    public Guid WalletId { get; }
     public string WalletName { get; } = String.Empty;
     public int TotalIncome { get; private set; }
     public int TotalExpense { get; private set; }
@@ -26,7 +26,7 @@ public class FinanceReportModel : Model
 
     private List<FinanceOperationModel> _operations { get; set; } = new();
 
-    public FinanceReportModel(int walletId, string walletName, Period period)
+    public FinanceReportModel(Guid walletId, string walletName, Period period)
     {
         WalletName = walletName ?? throw new ArgumentNullException(nameof(walletName));
         WalletId = walletId;

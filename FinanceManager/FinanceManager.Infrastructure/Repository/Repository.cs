@@ -92,7 +92,7 @@ public class Repository<T> : IRepository<T> where T : Models.Base.Entity
         return entity;
     }
 
-    public void Delete(int id)
+    public void Delete(Guid id)
     {
         var entity = GetByIdAsync(id)
             .GetAwaiter()

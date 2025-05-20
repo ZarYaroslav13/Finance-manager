@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FinanceManager.Domain.Models;
 using FinanceManager.Domain.Wrapper;
 using FinanceManager.Infrastructure.Models.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -18,7 +19,7 @@ public class AccountService : IAccountService
         _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
     }
 
-    public async Task<IResult> UpdateAccountAsync(AccountModel updatedAccount)
+    public async Task<IResult> UpdateAccountAsync(UserModel updatedAccount)
     {
         ArgumentNullException.ThrowIfNull(updatedAccount);
 

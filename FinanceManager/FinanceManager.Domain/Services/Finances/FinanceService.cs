@@ -17,19 +17,9 @@ public class FinanceService : BaseService, IFinanceService
         _financeOperationTypeRepository = _unitOfWork.GetRepository<FinanceOperationType>();
     }
 
-    public async Task<bool> IsAccountOwnerOfWalletAsync(int accountid, int walletId)
-    {
-        if (accountid <= 0 || walletId <= 0)
-            throw new ArgumentOutOfRangeException($"{nameof(accountid)} and {nameof(walletId)} must be above zero");
-
-        var wallet = await _unitOfWork.GetRepository<Wallet>().GetByIdAsync(walletId);
-
-        return wallet.AccountId == accountid;
-    }
-
     #region FinanceOperationTypeMethods
 
-    public async Task<List<FinanceOperationTypeModel>> GetAllFinanceOperationTypesOfWalletAsync(int walletId)
+    public async Task<List<FinanceOperationTypeModel>> GetAllFinanceOperationTypesOfWalletAsync(Guid walletId)
     {
         return (await _financeOperationTypeRepository
                 .GetAllAsync(filter: fot => fot.WalletId == walletId))
@@ -41,7 +31,7 @@ public class FinanceService : BaseService, IFinanceService
     {
         ArgumentNullException.ThrowIfNull(type);
 
-        if (type.Id != 0)
+        if (type.Id != Guid.Empty)
             throw new ArgumentException(nameof(type));
 
         var result = _financeOperationTypeRepository.Insert(
@@ -55,7 +45,7 @@ public class FinanceService : BaseService, IFinanceService
     {
         ArgumentNullException.ThrowIfNull(type);
 
-        if (type.Id == 0)
+        if (type.Id == Guid.Empty)
             throw new ArgumentException(nameof(type));
 
         var result = _mapper.Map<FinanceOperationTypeModel>(
@@ -66,7 +56,7 @@ public class FinanceService : BaseService, IFinanceService
         return result;
     }
 
-    public async Task DeleteFinanceOperationTypeAsync(int id)
+    public async Task DeleteFinanceOperationTypeAsync(Guid id)
     {
         if ((await _financeOperationRepository.GetAllAsync(
                 includeProperties: nameof(FinanceOperation.Type),
@@ -79,25 +69,13 @@ public class FinanceService : BaseService, IFinanceService
         _financeOperationTypeRepository.Delete(id);
         await _unitOfWork.SaveChangesAsync();
     }
-
-    public async Task<bool> IsAccountOwnerOfFinanceOperationTypeAsync(int accountid, int typeId)
-    {
-        if (accountid <= 0 || typeId <= 0)
-            throw new ArgumentOutOfRangeException($"{nameof(accountid)} and {nameof(typeId)} must be above zero");
-
-        var type = await _financeOperationTypeRepository.GetByIdAsync(typeId);
-        var wallet = await _unitOfWork.GetRepository<Wallet>().GetByIdAsync(type.WalletId);
-
-        return wallet.AccountId == accountid;
-    }
-
     #endregion
 
     #region FinanceOperationMethods
 
-    public async Task<List<FinanceOperationModel>> GetAllFinanceOperationOfWalletAsync(int walletId, int index = 0, int count = 0)
+    public async Task<List<FinanceOperationModel>> GetAllFinanceOperationOfWalletAsync(Guid walletId, int index = 0, int count = 0)
     {
-        if (walletId <= 0)
+        if (walletId <= Guid.Empty)
             throw new ArgumentOutOfRangeException(nameof(walletId));
 
         if (count < 0)
@@ -119,9 +97,9 @@ public class FinanceService : BaseService, IFinanceService
         return result;
     }
 
-    public async Task<List<FinanceOperationModel>> GetAllFinanceOperationOfWalletAsync(int walletId, DateTime startDate, DateTime endDate)
+    public async Task<List<FinanceOperationModel>> GetAllFinanceOperationOfWalletAsync(Guid walletId, DateTime startDate, DateTime endDate)
     {
-        if (walletId <= 0)
+        if (walletId <= Guid.Empty)
             throw new ArgumentException(nameof(walletId));
 
         ArgumentOutOfRangeException.ThrowIfGreaterThan(startDate, endDate);
@@ -142,9 +120,9 @@ public class FinanceService : BaseService, IFinanceService
         return result;
     }
 
-    public async Task<List<FinanceOperationModel>> GetAllFinanceOperationOfTypeAsync(int typeId, int index = 0, int count = 0)
+    public async Task<List<FinanceOperationModel>> GetAllFinanceOperationOfTypeAsync(Guid typeId, int index = 0, int count = 0)
     {
-        if (typeId <= 0)
+        if (typeId <= Guid.Empty)
             throw new ArgumentOutOfRangeException(nameof(typeId));
 
         if (index < 0)
@@ -169,7 +147,7 @@ public class FinanceService : BaseService, IFinanceService
     {
         ArgumentNullException.ThrowIfNull(financeOperation);
 
-        if (financeOperation.Id != 0)
+        if (financeOperation.Id != Guid.Empty)
             throw new ArgumentException(nameof(financeOperation));
 
         if (await IsNotExistFinanceOperationTypeWithIdAsync(financeOperation.Type.Id))
@@ -189,7 +167,7 @@ public class FinanceService : BaseService, IFinanceService
     {
         ArgumentNullException.ThrowIfNull(financeOperation);
 
-        ArgumentOutOfRangeException.ThrowIfNegativeOrZero(financeOperation.Id);
+        if(financeOperation.Id == Guid.Empty) throw new ArgumentOutOfRangeException(nameof(financeOperation.Id));
         var dbResult = _financeOperationRepository.Update(
                             _mapper.Map<FinanceOperation>(financeOperation));
         await _unitOfWork.SaveChangesAsync();
@@ -200,25 +178,13 @@ public class FinanceService : BaseService, IFinanceService
         return result;
     }
 
-    public async Task DeleteFinanceOperationAsync(int id)
+    public async Task DeleteFinanceOperationAsync(Guid id)
     {
         _financeOperationRepository.Delete(id);
         await _unitOfWork.SaveChangesAsync();
     }
 
-    public async Task<bool> IsAccountOwnerOfFinanceOperationAsync(int accountid, int operationId)
-    {
-        if (accountid <= 0 || operationId <= 0)
-            throw new ArgumentOutOfRangeException($"{nameof(accountid)} and {nameof(operationId)} must be above zero");
-
-        var operation = await _financeOperationRepository.GetByIdAsync(operationId);
-        var type = await _financeOperationTypeRepository.GetByIdAsync(operation.TypeId);
-        var wallet = await _unitOfWork.GetRepository<Wallet>().GetByIdAsync(type.WalletId);
-
-        return wallet.AccountId == accountid;
-    }
-
-    private async Task<bool> IsNotExistFinanceOperationTypeWithIdAsync(int id)
+    private async Task<bool> IsNotExistFinanceOperationTypeWithIdAsync(Guid id)
     {
         var type = await _financeOperationTypeRepository.GetByIdAsync(id);
 

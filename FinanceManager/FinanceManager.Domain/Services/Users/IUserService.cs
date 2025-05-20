@@ -21,5 +21,7 @@ public interface IUserService
     Task<IResult> ForgotPasswordAsync(string email, string origin);
 
     Task<IResult> ResetPasswordAsync(string email, string password, string token);
+
+    Task<IResult> DeleteUser(string id);
 }
 

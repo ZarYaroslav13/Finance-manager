@@ -1,37 +1,36 @@
 ﻿using AutoMapper;
 using FinanceManager.Application.UseCases.Commons.Bases;
 using FinanceManager.Domain.Services.Accounts;
+using FinanceManager.Domain.Services.CurrentUserService;
+using FinanceManager.Domain.Services.Users;
+using FinanceManager.Domain.Wrapper;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
 namespace FinanceManager.Application.UseCases.Users.Commands.DeleteAccountByIdCommand;
 
-public class DeleteAccountByIdHandler : BaseRequestHandler, IRequestHandler<DeleteAccountByIdCommand, BaseResponse<bool>>
+public class DeleteAccountByIdHandler : BaseRequestHandler, IRequestHandler<DeleteAccountByIdCommand, IResult>
 {
-    private readonly IAccountService _accountService;
+    private readonly IUserService _userService;
 
-    public DeleteAccountByIdHandler(IAccountService accountService, IMapper mapper, ILogger<BaseRequestHandler> logger) : base(mapper, logger)
+    public DeleteAccountByIdHandler(IUserService userService, ICurrentUserService currentUserService, IMapper mapper, ILogger<BaseRequestHandler> logger) : base(currentUserService, mapper, logger)
     {
-        _accountService = accountService ?? throw new ArgumentNullException(nameof(accountService));
+        _userService = userService ?? throw new ArgumentNullException(nameof(userService));
     }
 
-    public Task<BaseResponse<bool>> Handle(DeleteAccountByIdCommand request, CancellationToken cancellationToken)
+    public async Task<IResult> Handle(DeleteAccountByIdCommand request, CancellationToken cancellationToken)
     {
-        var response = new BaseResponse<bool>();
-
         try
         {
-            CheckIsUserResourceOwnerOrAdmin(request, idSelector: r => r.Id);
+            CheckIsUserHaveAccesToResourse(request, idSelector: r => r.Id);
 
-            _accountService.DeleteAccountWithId(request.Id);
+            _userService.DeleteUser(request.Id);
 
-            response.MakeAsSuccess("Delete succeed!");
+            return await Result.SuccessAsync("Delete succeed!");
         }
         catch (Exception e)
         {
-            response.Message = e.Message;
+            return await Result.FailAsync(e.Message);
         }
-
-        return Task.FromResult(response);
     }
 }

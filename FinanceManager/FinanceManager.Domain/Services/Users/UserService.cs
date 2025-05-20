@@ -199,6 +199,24 @@ public class UserService : IUserService
         return await Result.SuccessAsync("Roles Updated");
     }
 
+    public async Task<IResult> DeleteUser(string id)
+    {
+        if (string.IsNullOrWhiteSpace(id))
+            return await Result.FailAsync("Id must be specified");
+
+        try
+        {
+            var user = await _userManager.FindByIdAsync(id);
+            await _userManager.DeleteAsync(user);
+
+            return await Result.SuccessAsync("Deleted successfully!");
+        }
+        catch (Exception e)
+        {
+            return await Result.FailAsync(e.Message);
+        }
+    }
+
     private async Task<string> SendVerificationEmail(FinanceManagerUser user, string origin)
     {
         var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);

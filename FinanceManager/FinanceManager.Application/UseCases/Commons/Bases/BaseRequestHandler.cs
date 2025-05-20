@@ -1,16 +1,19 @@
 ﻿using AutoMapper;
 using FinanceManager.Domain.Authorization;
+using FinanceManager.Domain.Services.CurrentUserService;
 using Microsoft.Extensions.Logging;
 
 namespace FinanceManager.Application.UseCases.Commons.Bases;
 
 public class BaseRequestHandler
 {
+    protected readonly ICurrentUserService _currentUserService;
     protected readonly ILogger<BaseRequestHandler> _logger;
     protected readonly IMapper _mapper;
 
-    public BaseRequestHandler(IMapper mapper, ILogger<BaseRequestHandler> logger)
+    public BaseRequestHandler(ICurrentUserService currentUserService, IMapper mapper, ILogger<BaseRequestHandler> logger)
     {
+        _currentUserService = currentUserService ?? throw new ArgumentNullException(nameof(currentUserService));
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
     }
@@ -20,37 +23,37 @@ public class BaseRequestHandler
     /// </summary>
     /// <param name="request"></param>
     /// <exception cref="UnauthorizedAccessException"></exception>
-    protected void CheckIsUserResourceOwnerOrAdmin<Request>(
+    protected void CheckIsUserHaveAccesToResourse<Request>(
         Request request,
         string loggingMessage = "",
-        Func<Request, int>? idSelector = null,
+        Func<Request, string>? idSelector = null,
         Func<bool>? addinionallyCondition = null) where Request : BaseRequest
     {
         HandleLoggingMessage(request, loggingMessage);
 
-        bool conditions = request.UserRole != PolicyManager.AdminRole
-                    && (idSelector == null ? true : request.UserId != idSelector(request))
+        bool conditions = !_currentUserService.IsAdmin
+                    && (idSelector == null ? true : _currentUserService.UserId != idSelector(request))
                     && (addinionallyCondition == null ? true : !addinionallyCondition());
 
-        CheckIsUserSuitConditions(conditions, loggingMessage);
+        CheckIsUserMustBeDenied(conditions, loggingMessage);
     }
 
-    protected async Task CheckIsUserResourceOwnerOrAdminAsync<Request>(
+    protected async Task CheckIsUserHaveAccesToResourseAsync<Request>(
     Request request,
     string loggingMessage = "",
-    Func<Request, int>? idSelector = null,
+    Func<Request, string>? idSelector = null,
     Func<Task<bool>>? addinionallyCondition = null) where Request : BaseRequest
     {
         HandleLoggingMessage(request, loggingMessage);
 
         bool additionalConditionResult = addinionallyCondition != null ? await addinionallyCondition() : true;
 
-        bool conditions = request.UserRole != PolicyManager.AdminRole
-                         && (idSelector == null || request.UserId != idSelector(request))
+        bool conditions = !_currentUserService.IsAdmin
+                         && (idSelector == null || _currentUserService.UserId != idSelector(request))
                          && !additionalConditionResult;
 
 
-        CheckIsUserSuitConditions(conditions, loggingMessage);
+        CheckIsUserMustBeDenied(conditions, loggingMessage);
     }
 
     private string HandleLoggingMessage<Request>(
@@ -59,13 +62,16 @@ public class BaseRequestHandler
     {
         if (string.IsNullOrWhiteSpace(loggingMessage))
         {
-            loggingMessage = $"Unallowed access attempt to resource in request: {request.GetType()} by user with id: {request.UserId} and role {request.UserRole}";
+            loggingMessage = 
+                $"Unallowed access attempt to resource in request: {request.GetType()} " +
+                $"by user with id: {_currentUserService.UserId} and " +
+                $"roles {_currentUserService.Roles.Aggregate((acc, r) => acc += r + ", ")}";
         }
 
         return loggingMessage;
     }
 
-    private void CheckIsUserSuitConditions(bool conditions, string loggingMessage)
+    private void CheckIsUserMustBeDenied(bool conditions, string loggingMessage)
     {
         if (conditions)
         {

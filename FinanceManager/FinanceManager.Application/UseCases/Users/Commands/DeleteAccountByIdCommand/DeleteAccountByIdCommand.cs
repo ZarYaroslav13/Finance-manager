@@ -1,11 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using FinanceManager.Application.UseCases.Commons.Bases;
+using FinanceManager.Domain.Wrapper;
 using MediatR;
 
 namespace FinanceManager.Application.UseCases.Users.Commands.DeleteAccountByIdCommand;
 
-public class DeleteAccountByIdCommand : BaseRequest, IRequest<BaseResponse<bool>>
+public class DeleteAccountByIdCommand : BaseRequest, IRequest<IResult>
 {
     [Required]
-    public int Id { get; set; }
+    public string Id { get; set; }
 }

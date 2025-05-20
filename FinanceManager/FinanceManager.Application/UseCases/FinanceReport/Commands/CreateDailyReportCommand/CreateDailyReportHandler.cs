@@ -1,47 +1,43 @@
 ﻿using AutoMapper;
 using FinanceManager.Application.Models;
 using FinanceManager.Application.UseCases.Commons.Bases;
+using FinanceManager.Domain.Services.CurrentUserService;
 using FinanceManager.Domain.Services.Finances;
 using FinanceManager.Domain.Services.Wallets;
+using FinanceManager.Domain.Wrapper;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
 namespace FinanceManager.Application.UseCases.FinanceReport.Commands.CreateDailyReportCommand;
 
-public class CreateDailyReportHandler : BaseRequestHandler, IRequestHandler<CreateDailyReportCommand, BaseResponse<FinanceReportDTO>>
+public class CreateDailyReportHandler : BaseRequestHandler, IRequestHandler<CreateDailyReportCommand, Result<FinanceReportDTO>>
 {
     private readonly IFinanceReportCreator _creator;
     private readonly IWalletService _walletService;
 
-    public CreateDailyReportHandler(IFinanceReportCreator financeReportCreator, IWalletService walletService, IMapper mapper, ILogger<BaseRequestHandler> logger) : base(mapper, logger)
+    public CreateDailyReportHandler(ICurrentUserService currentUserService, IMapper mapper, ILogger<BaseRequestHandler> logger) : base(currentUserService, mapper, logger)
     {
-        _creator = financeReportCreator ?? throw new ArgumentNullException(nameof(financeReportCreator));
-        _walletService = walletService ?? throw new ArgumentNullException(nameof(walletService));
     }
 
-    public async Task<BaseResponse<FinanceReportDTO>> Handle(CreateDailyReportCommand request, CancellationToken cancellationToken)
+    public async Task<Result<FinanceReportDTO>> Handle(CreateDailyReportCommand request, CancellationToken cancellationToken)
     {
-        var response = new BaseResponse<FinanceReportDTO>();
-
         try
         {
-            await CheckIsUserResourceOwnerOrAdminAsync(request,
+            await CheckIsUserHaveAccesToResourseAsync(request,
                 addinionallyCondition:
                     async () =>
-                        await _walletService.IsAccountOwnerWalletAsync(request.UserId, request.WalletId));
+                        await _walletService.IsAccountOwnerWalletAsync(_currentUserService.UserId, request.WalletId));
 
             var wallet = await _walletService.FindWalletAsync(request.WalletId);
 
-            response.Data = _mapper.Map<FinanceReportDTO>(
+            var data = _mapper.Map<FinanceReportDTO>(
                     await _creator.CreateFinanceReportAsync(wallet, request.Date));
 
-            response.MakeAsSuccess("Report created successfully!");
+            return Result<FinanceReportDTO>.Success(data, "Report created successfully!");
         }
         catch (Exception e)
         {
-            response.Message = e.Message;
+            return Result<FinanceReportDTO>.Fail(e.Message);
         }
-
-        return response;
     }
 }

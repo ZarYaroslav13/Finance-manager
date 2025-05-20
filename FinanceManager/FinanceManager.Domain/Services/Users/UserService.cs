@@ -1,10 +1,12 @@
 ﻿using System.Text;
 using System.Text.Encodings.Web;
 using AutoMapper;
+using FinanceManager.Domain.API;
 using FinanceManager.Domain.Authorization;
 using FinanceManager.Domain.Models;
 using FinanceManager.Domain.Models.Requests;
 using FinanceManager.Domain.Modelsl;
+using FinanceManager.Domain.Services.CurrentUserService;
 using FinanceManager.Domain.Services.Email;
 using FinanceManager.Domain.Wrapper;
 using FinanceManager.Infrastructure.Models.Authorization;
@@ -114,9 +116,38 @@ public class UserService : IUserService
         return await Result<List<UserRoleModel>>.SuccessAsync(result);
     }
 
-    public Task<IResult> RegisterAsync(UserModel model, string password, string origin)
+    public async Task<IResult> RegisterAsync(UserModel model, string password, string origin)
     {
-        throw new NotImplementedException();
+        var user = _mapper.Map<FinanceManagerUser>(model);
+
+        var userWithSameEmail = await _userManager.FindByEmailAsync(user.Email);
+        if (userWithSameEmail == null)
+        {
+            var result = await _userManager.CreateAsync(user, password);
+            if (result.Succeeded)
+            {
+                await _userManager.AddToRoleAsync(user, PolicyManager.CommonUserRole);
+
+                var verificationUri = await SendVerificationEmail(user, origin);
+                var mailRequest = new MailRequest
+                {
+                    From = "mail@codewithmukesh.com",
+                    To = user.Email,
+                    Body = $"Please confirm your account by <a href='{verificationUri}'>clicking here</a>.",
+                    Subject = "Confirm Registration"
+                };
+                BackgroundJob.Enqueue(() => _emailService.SendAsync(mailRequest));
+                return await Result<string>.SuccessAsync(user.Id.ToString(), $"User {user.UserName} Registered. Please check your Mailbox to verify!");
+            }
+            else
+            {
+                return await Result.FailAsync(result.Errors.Select(a => a.Description).ToList());
+            }
+        }
+        else
+        {
+            return await Result.FailAsync("Email {user.UserName} is already registered.");
+        }
     }
 
     public async Task<IResult> ResetPasswordAsync(string email, string password, string token)
@@ -166,5 +197,15 @@ public class UserService : IUserService
         var result = await _userManager.RemoveFromRolesAsync(user, roles);
         result = await _userManager.AddToRolesAsync(user, selectedRoles.Select(y => y.RoleName));
         return await Result.SuccessAsync("Roles Updated");
+    }
+
+    private async Task<string> SendVerificationEmail(FinanceManagerUser user, string origin)
+    {
+        var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+        code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+        var endpointUri = new Uri(string.Concat($"{origin}/", ApiEndpoints.Users.ConfirmEmail));
+        var verificationUri = QueryHelpers.AddQueryString(endpointUri.ToString(), "userId", user.Id.ToString());
+        verificationUri = QueryHelpers.AddQueryString(verificationUri, "code", code);
+        return verificationUri;
     }
 }

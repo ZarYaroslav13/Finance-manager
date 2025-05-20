@@ -6,5 +6,5 @@ public class PolicyManager
     public const string AdminPolicy = "OnlyForAdmins";
 
     public const string CommonUserPolicy = "ForCommonUsers";
-    public const string UserRole = "User";
+    public const string CommonUserRole = "User";
 }

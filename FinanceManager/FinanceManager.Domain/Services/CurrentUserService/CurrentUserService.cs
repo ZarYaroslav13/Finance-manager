@@ -14,4 +14,3 @@ public class CurrentUserService : ICurrentUserService
     public string UserId { get; }
     public List<KeyValuePair<string, string>> Claims { get; set; }
 }
-}

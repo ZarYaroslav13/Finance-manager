@@ -32,5 +32,7 @@ public static class ApiEndpoints
         public const string BaseControllerUrl = _baseUrl + "/users";
 
         public const string ResetPassword = _baseUrl + "/reset";
+
+        public const string ConfirmEmail = _baseUrl + "/confirm-email";
     }
 }

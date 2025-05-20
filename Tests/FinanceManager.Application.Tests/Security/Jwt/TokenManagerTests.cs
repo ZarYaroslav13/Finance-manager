@@ -7,7 +7,6 @@ using FinanceManager.Application.Security;
 using FinanceManager.Application.Security.Token;
 using FinanceManager.Application.Tests.Data.Security.Jwt;
 using FinanceManager.Domain.Authorization;
-using FinanceManager.Domain.Models;
 using FinanceManager.Domain.Services.Accounts;
 using FinanceManager.Domain.Services.Admins;
 using Microsoft.Extensions.Options;

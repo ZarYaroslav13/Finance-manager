@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FinanceManager.Domain.Modelsl;
+﻿namespace FinanceManager.Domain.Modelsl;
 
 public class UserRoleModel
 {

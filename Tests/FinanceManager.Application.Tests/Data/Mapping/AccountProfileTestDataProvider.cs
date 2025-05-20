@@ -1,6 +1,4 @@
-﻿using FinanceManager.Domain.Models;
-
-namespace FinanceManager.Application.Tests.Data.Mapping;
+﻿namespace FinanceManager.Application.Tests.Data.Mapping;
 
 public static class AccountProfileTestDataProvider
 {

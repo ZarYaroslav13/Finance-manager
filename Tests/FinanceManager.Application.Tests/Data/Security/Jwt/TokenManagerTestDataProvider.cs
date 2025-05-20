@@ -4,7 +4,6 @@ using FakeItEasy;
 using FinanceManager.Application.Models;
 using FinanceManager.Application.Security;
 using FinanceManager.Domain.Authorization;
-using FinanceManager.Domain.Models;
 using FinanceManager.Domain.Services.Accounts;
 using FinanceManager.Domain.Services.Admins;
 using Microsoft.Extensions.Options;

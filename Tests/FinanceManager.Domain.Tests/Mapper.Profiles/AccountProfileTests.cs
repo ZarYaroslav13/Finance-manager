@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using FinanceManager.Domain.Mapper.Profiles;
-using FinanceManager.Domain.Models;
 using FinanceManager.Domain.Tests.Data;
 using FinanceManager.Domain.Tests.TestHelpers;
 

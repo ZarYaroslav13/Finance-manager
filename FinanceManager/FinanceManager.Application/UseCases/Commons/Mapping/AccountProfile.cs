@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using FinanceManager.Application.UseCases.Users.Commands.UpdateCommand;
-using FinanceManager.Domain.Models;
 
 namespace FinanceManager.Application.UseCases.Commons.Mapping;
 

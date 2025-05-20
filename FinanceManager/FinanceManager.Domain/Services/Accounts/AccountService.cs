@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using FinanceManager.Domain.Models;
 using FinanceManager.Domain.Wrapper;
 using FinanceManager.Infrastructure.Models.Authorization;
 using Microsoft.AspNetCore.Identity;

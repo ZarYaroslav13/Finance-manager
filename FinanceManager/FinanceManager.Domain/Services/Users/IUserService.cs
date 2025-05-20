@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using FinanceManager.Domain.Models;
+﻿using FinanceManager.Domain.Models;
 using FinanceManager.Domain.Modelsl;
 using FinanceManager.Domain.Wrapper;
 
@@ -22,7 +21,5 @@ public interface IUserService
     Task<IResult> ForgotPasswordAsync(string email, string origin);
 
     Task<IResult> ResetPasswordAsync(string email, string password, string token);
+}
 
-    Task<string> ExportToExcelAsync(string searchString = "");
-}
-}

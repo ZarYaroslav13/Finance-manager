@@ -15,7 +15,7 @@ public class WalletService : BaseService, IWalletService
         _repository = _unitOfWork.GetRepository<Wallet>();
     }
 
-    public async Task<List<WalletModel>> GetAllWalletsOfAccountAsync(int accountId)
+    public async Task<List<WalletModel>> GetAllWalletsOfAccountAsync(Guid accountId)
     {
         return (await _repository
             .GetAllAsync(filter: w => w.AccountId == accountId))
@@ -27,7 +27,7 @@ public class WalletService : BaseService, IWalletService
     {
         ArgumentNullException.ThrowIfNull(wallet);
 
-        if (wallet.Id != 0)
+        if (wallet.Id != Guid.Empty)
             throw new ArgumentException(nameof(wallet));
 
         if (wallet.AccountId <= 0)
@@ -44,7 +44,7 @@ public class WalletService : BaseService, IWalletService
     {
         ArgumentNullException.ThrowIfNull(updatedWallet);
 
-        if (updatedWallet.Id == 0)
+        if (updatedWallet.Id == Guid.Empty)
             throw new ArgumentException(nameof(updatedWallet));
 
         var result = _mapper.Map<WalletModel>(
@@ -55,26 +55,16 @@ public class WalletService : BaseService, IWalletService
         return result;
     }
 
-    public async Task DeleteWalletByIdAsync(int id)
+    public async Task DeleteWalletByIdAsync(Guid id)
     {
         _repository.Delete(id);
         await _unitOfWork.SaveChangesAsync();
     }
 
-    public async Task<WalletModel> FindWalletAsync(int id)
+    public async Task<WalletModel> FindWalletAsync(Guid id)
     {
         return _mapper
             .Map<WalletModel>(
                await _repository.GetByIdAsync(id));
-    }
-
-    public async Task<bool> IsAccountOwnerWalletAsync(int acountId, int walletId)
-    {
-        if (acountId <= 0 || walletId <= 0)
-            throw new ArgumentOutOfRangeException("account id and wallet id cannot be less or equal 0");
-
-        var wallet = (await _repository.GetByIdAsync(walletId));
-
-        return wallet.AccountId == acountId;
     }
 }

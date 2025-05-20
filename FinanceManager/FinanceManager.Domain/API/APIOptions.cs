@@ -1,4 +1,4 @@
-﻿namespace FinanceManager.Web.API;
+﻿namespace FinanceManager.Domain.API;
 
 record class APIOptions
 {

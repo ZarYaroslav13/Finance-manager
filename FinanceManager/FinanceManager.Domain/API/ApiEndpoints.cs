@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
-namespace FinanceManager.Web.API;
+namespace FinanceManager.Domain.API;
 
 [ExcludeFromCodeCoverage]
 public static class ApiEndpoints
@@ -25,5 +25,12 @@ public static class ApiEndpoints
         {
             return GetCurrent + '/' + Id;
         }
+    }
+
+    public static class Users
+    {
+        public const string BaseControllerUrl = _baseUrl + "/users";
+
+        public const string ResetPassword = _baseUrl + "/reset";
     }
 }

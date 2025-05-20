@@ -6,15 +6,15 @@ namespace FinanceManager.Domain.Services.Users;
 
 public interface IUserService
 {
-    Task<List<UserModel>> GetAllAsync();
+    Task<Result<List<UserModel>>> GetAllAsync();
 
-    Task<UserModel> GetAsync(string userId);
+    Task<Result<UserModel>> GetAsync(Guid userId);
 
     Task<IResult> RegisterAsync(UserModel model, string password, string origin);
 
-    Task<IResult<UserRoleModel>> GetRolesAsync(Guid id);
+    Task<IResult<List<UserRoleModel>>> GetRolesAsync(Guid id);
 
-    Task<IResult> UpdateRolesAsync(Guid id, List<UserRoleModel> roles);
+    Task<IResult> UpdateRolesAsync(Guid id, List<UserRoleModel> newRroles);
 
     Task<IResult<string>> ConfirmEmailAsync(Guid userId, string code);
 

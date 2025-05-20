@@ -5,9 +5,9 @@ using FinanceManager.Application.UseCases.Commons.Bases;
 using FinanceManager.Application.UseCases.Login.Commands.CreateRefreshTokenCommand;
 using FinanceManager.Application.UseCases.Login.Commands.SignInAdminCommand;
 using FinanceManager.Application.UseCases.Login.Commands.SignInCommand;
+using FinanceManager.Domain.API;
 using FinanceManager.Domain.Extentions;
 using FinanceManager.Domain.Wrapper;
-using FinanceManager.Web.API;
 using FinanceManager.Web.Shared.Constants.Storage;
 using Microsoft.Extensions.Localization;
 

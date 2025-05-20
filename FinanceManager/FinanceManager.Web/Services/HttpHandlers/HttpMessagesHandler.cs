@@ -1,5 +1,5 @@
 ﻿using System.Net.Http.Headers;
-using FinanceManager.Web.API;
+using FinanceManager.Domain.API;
 using FinanceManager.Web.Services.Autorization.AuthenticationService;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Localization;

@@ -8,21 +8,21 @@ public class HumanDTOTests
 {
     [TestMethod]
     [DynamicData(nameof(HumantDTOTestDataProvider.MethodEqualsResultTrueData), typeof(HumantDTOTestDataProvider))]
-    public void Equals_HumanDTOsAreEqual_True(HumanDTO human1, HumanDTO human2)
+    public void Equals_HumanDTOsAreEqual_True(UserDTO human1, UserDTO human2)
     {
         Assert.AreEqual(human1, human2);
     }
 
     [TestMethod]
     [DynamicData(nameof(HumantDTOTestDataProvider.MethodEqualsResultFalseData), typeof(HumantDTOTestDataProvider))]
-    public void Equals_HumanDTOsAreNotEqual_False(HumanDTO human1, object human2)
+    public void Equals_HumanDTOsAreNotEqual_False(UserDTO human1, object human2)
     {
         Assert.AreNotEqual(human1, human2);
     }
 
     [TestMethod]
     [DynamicData(nameof(HumantDTOTestDataProvider.MethodEqualsResultTrueData), typeof(HumantDTOTestDataProvider))]
-    public void GetHashCode_SameValues_ReturnsSameHashCode(HumanDTO human1, HumanDTO human2)
+    public void GetHashCode_SameValues_ReturnsSameHashCode(UserDTO human1, UserDTO human2)
     {
         var hash1 = human1.GetHashCode();
         var hash2 = human2.GetHashCode();

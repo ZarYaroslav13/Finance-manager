@@ -13,7 +13,7 @@ public interface IRepository<T> where T : Entity
                 int take = 0,
                 params string[] includeProperties);
 
-    Task<T> GetByIdAsync(int id);
+    Task<T> GetByIdAsync(Guid id);
 
     T Insert(T entity);
 

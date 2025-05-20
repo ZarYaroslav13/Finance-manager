@@ -8,23 +8,23 @@ public static class HumantDTOTestDataProvider
     {
         new object[]
         {
-            new HumanDTO(){ Id = 1, LastName = "LastName", FirstName = "FirstName", Email = "Email", Password = "Password"},
-            new HumanDTO(){ Id = 1, LastName = "LastName", FirstName = "FirstName", Email = "Email", Password = "Password"}
+            new UserDTO(){ Id = 1, LastName = "LastName", FirstName = "FirstName", Email = "Email", Password = "Password"},
+            new UserDTO(){ Id = 1, LastName = "LastName", FirstName = "FirstName", Email = "Email", Password = "Password"}
         },
         new object[]
         {
-            new HumanDTO(){ Id = 1, FirstName = "FirstName", Email = "Email", Password = "Password"},
-            new HumanDTO(){ Id = 1, FirstName = "FirstName", Email = "Email", Password = "Password"}
+            new UserDTO(){ Id = 1, FirstName = "FirstName", Email = "Email", Password = "Password"},
+            new UserDTO(){ Id = 1, FirstName = "FirstName", Email = "Email", Password = "Password"}
         },
         new object[]
         {
-            new HumanDTO(){ Id = 1, LastName = "LastName", FirstName = "FirstName", Password = "Password"},
-            new HumanDTO(){ Id = 1, LastName = "LastName", FirstName = "FirstName", Password = "Password"}
+            new UserDTO(){ Id = 1, LastName = "LastName", FirstName = "FirstName", Password = "Password"},
+            new UserDTO(){ Id = 1, LastName = "LastName", FirstName = "FirstName", Password = "Password"}
         },
         new object[]
         {
-            new HumanDTO(){ Id = 1, FirstName = "FirstName", Email = "Email", Password = "Password"},
-            new HumanDTO(){ Id = 1, FirstName = "FirstName", Email = "Email", Password = "Password"}
+            new UserDTO(){ Id = 1, FirstName = "FirstName", Email = "Email", Password = "Password"},
+            new UserDTO(){ Id = 1, FirstName = "FirstName", Email = "Email", Password = "Password"}
         }
     };
 
@@ -32,37 +32,37 @@ public static class HumantDTOTestDataProvider
     {
         new object[]
         {
-            new HumanDTO(){ Id = 1, LastName = "LastName", FirstName = "FirstName", Email = "Email", Password = "Password"},
-            new HumanDTO(){ Id = 2, LastName = "LastName", FirstName = "FirstName", Email = "Email", Password = "Password"}
+            new UserDTO(){ Id = 1, LastName = "LastName", FirstName = "FirstName", Email = "Email", Password = "Password"},
+            new UserDTO(){ Id = 2, LastName = "LastName", FirstName = "FirstName", Email = "Email", Password = "Password"}
         },
         new object[]
         {
-            new HumanDTO(){ Id = 1, FirstName = "FirstName", Email = "Email", Password = "Password"},
-            new HumanDTO(){ Id = 1, LastName = "LastName", FirstName = "FirstName", Email = "Email", Password = "Password"}
+            new UserDTO(){ Id = 1, FirstName = "FirstName", Email = "Email", Password = "Password"},
+            new UserDTO(){ Id = 1, LastName = "LastName", FirstName = "FirstName", Email = "Email", Password = "Password"}
         },
         new object[]
         {
-            new HumanDTO(),
-            new HumanDTO(){ Id = 1, LastName = "LastName", FirstName = "FirstName", Email = "Email", Password = "Password"}
+            new UserDTO(),
+            new UserDTO(){ Id = 1, LastName = "LastName", FirstName = "FirstName", Email = "Email", Password = "Password"}
         },
         new object[]
         {
-            new HumanDTO(){ Id = 1, LastName = "LastName", FirstName = "FirstName", Email = "Email", Password = "Password"},
-            new HumanDTO()
+            new UserDTO(){ Id = 1, LastName = "LastName", FirstName = "FirstName", Email = "Email", Password = "Password"},
+            new UserDTO()
         },
         new object[]
         {
-            new HumanDTO(){ Id = 1, LastName = "LastName", FirstName = "FirstName", Email = "Email", Password = "Password"},
-            new HumanDTO(){ Id = 1, LastName = "LastName", FirstName = "FirstName", Email = "Email", }
+            new UserDTO(){ Id = 1, LastName = "LastName", FirstName = "FirstName", Email = "Email", Password = "Password"},
+            new UserDTO(){ Id = 1, LastName = "LastName", FirstName = "FirstName", Email = "Email", }
         },
         new object[]
         {
-            new HumanDTO(){ Id = 1, LastName = "LastName", FirstName = "FirstName", Email = "Email", Password = "Password"},
+            new UserDTO(){ Id = 1, LastName = "LastName", FirstName = "FirstName", Email = "Email", Password = "Password"},
             null
         },
         new object[]
         {
-            new HumanDTO(){ Id = 1, LastName = "LastName", FirstName = "FirstName", Email = "Email", Password = "Password"},
+            new UserDTO(){ Id = 1, LastName = "LastName", FirstName = "FirstName", Email = "Email", Password = "Password"},
             new ModelDTO()
         }
     };

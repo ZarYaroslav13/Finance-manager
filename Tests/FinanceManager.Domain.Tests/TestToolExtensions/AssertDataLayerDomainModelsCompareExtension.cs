@@ -1,5 +1,4 @@
 ﻿using FinanceManager.Domain.Models;
-using FinanceManager.Domain.Models.Base;
 using FinanceManager.Infrastructure.Models;
 
 namespace FinanceManager.Domain.Tests.TestHelpers;
@@ -57,7 +56,7 @@ public static class AssertDataLayerDomainModelsCompareExtension
         return AreEqual((Human)dbAdmin, domainAdmin);
     }
 
-    private static bool AreEqual(Human dbHuman, HumanModel domainHuman)
+    private static bool AreEqual(Human dbHuman, UserModel domainHuman)
     {
         return (dbHuman.Id == domainHuman.Id)
        && (dbHuman.LastName == domainHuman.LastName)

@@ -62,12 +62,12 @@ public class Repository<T> : IRepository<T> where T : Models.Base.Entity
         return await query.AsNoTracking().ToListAsync();
     }
 
-    public async Task<T> GetByIdAsync(int id)
+    public async Task<T> GetByIdAsync(Guid id)
     {
         var entity = await _dbSet.FindAsync(id);
 
         if (entity == null)
-            throw new ArgumentException("Entity with id: " + id + " don`t exist in table of " + _dbSet.EntityType + "s");
+            throw new ArgumentException("Entity with id: " + id.ToString() + " don`t exist in table of " + _dbSet.EntityType + "s");
 
         return entity;
     }

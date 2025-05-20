@@ -9,7 +9,7 @@ public static class HumanModelTestsDataProvider
     {
         new object[]
         {
-            new HumanModel
+            new UserModel
             {
                 Id = 1,
                 FirstName = "John",
@@ -17,7 +17,7 @@ public static class HumanModelTestsDataProvider
                 Email = "john.doe@example.com",
                 Password = "password123"
             },
-            new HumanModel
+            new UserModel
             {
                 Id = 1,
                 FirstName = "John",
@@ -32,7 +32,7 @@ public static class HumanModelTestsDataProvider
     {
         new object[]
         {
-            new HumanModel
+            new UserModel
             {
                 Id = 1,
                 FirstName = "John",
@@ -40,7 +40,7 @@ public static class HumanModelTestsDataProvider
                 Email = "john.doe@example.com",
                 Password = "password123"
             },
-            new HumanModel
+            new UserModel
             {
                 Id = 2,
                 FirstName = "John",
@@ -51,7 +51,7 @@ public static class HumanModelTestsDataProvider
         },
         new object[]
         {
-            new HumanModel
+            new UserModel
             {
                 Id = 1,
                 FirstName = "John",
@@ -59,7 +59,7 @@ public static class HumanModelTestsDataProvider
                 Email = "john.doe@example.com",
                 Password = "password123"
             },
-            new HumanModel
+            new UserModel
             {
                 Id = 1,
                 FirstName = "Jane",
@@ -70,7 +70,7 @@ public static class HumanModelTestsDataProvider
         },
         new object[]
         {
-            new HumanModel
+            new UserModel
             {
                 Id = 1,
                 FirstName = "John",
@@ -78,7 +78,7 @@ public static class HumanModelTestsDataProvider
                 Email = "john.doe@example.com",
                 Password = "password123"
             },
-            new HumanModel
+            new UserModel
             {
                 Id = 1,
                 FirstName = "John",
@@ -89,7 +89,7 @@ public static class HumanModelTestsDataProvider
         },
         new object[]
         {
-            new HumanModel
+            new UserModel
             {
                 Id = 1,
                 FirstName = "John",
@@ -97,7 +97,7 @@ public static class HumanModelTestsDataProvider
                 Email = "john.doe@example.com",
                 Password = "password123"
             },
-            new HumanModel
+            new UserModel
             {
                 Id = 1,
                 FirstName = "Jane",
@@ -108,7 +108,7 @@ public static class HumanModelTestsDataProvider
         },
         new object[]
         {
-            new HumanModel
+            new UserModel
             {
                 Id = 1,
                 FirstName = "John",
@@ -116,7 +116,7 @@ public static class HumanModelTestsDataProvider
                 Email = "john.doe@example.com",
                 Password = "password123"
             },
-            new HumanModel
+            new UserModel
             {
                 Id = 1,
                 FirstName = "John",
@@ -127,7 +127,7 @@ public static class HumanModelTestsDataProvider
         },
         new object[]
         {
-            new HumanModel
+            new UserModel
             {
                 Id = 1,
                 FirstName = "John",
@@ -139,7 +139,7 @@ public static class HumanModelTestsDataProvider
         },
         new object[]
         {
-            new HumanModel
+            new UserModel
             {
                 Id = 1,
                 FirstName = "John",

@@ -2,6 +2,6 @@
 
 namespace FinanceManager.Application.Models;
 
-public class AccountDTO : HumanDTO
+public class AccountDTO : UserDTO
 {
 }

@@ -1,7 +1,6 @@
 ﻿using FinanceManager.Application.Models;
 using FinanceManager.Application.Models.Base;
 using FinanceManager.Domain.Models;
-using FinanceManager.Domain.Models.Base;
 
 namespace FinanceManager.Application.Tests.TestToolExtensions;
 
@@ -65,7 +64,7 @@ public static class AssertappApplicationModelsCompareExtension
        && (domainAccount.Password == appAccount.Password);
     }
 
-    private static bool AreEqual(HumanModel domainHuman, HumanDTO appHuman)
+    private static bool AreEqual(UserModel domainHuman, UserDTO appHuman)
     {
         return (domainHuman.Id == appHuman.Id)
        && (domainHuman.LastName == appHuman.LastName)

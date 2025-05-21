@@ -5,7 +5,7 @@ using FinanceManager.Domain.Wrapper;
 using FinanceManager.Infrastructure.Models;
 using MediatR;
 
-namespace FinanceManager.Application.UseCases.FinanceOperationType.Commands.UpdateFinanceOperationTypeCommand;
+namespace FinanceManager.Application.UseCases.FinanceOperationTypes.Commands.UpdateFinanceOperationTypeCommand;
 
 public class UpdateFinanceOperationTypeCommand : IRequest<Result<FinanceOperationTypeDTO>>
 {

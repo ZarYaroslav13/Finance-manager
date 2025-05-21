@@ -8,7 +8,7 @@ using FinanceManager.Domain.Wrapper;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace FinanceManager.Application.UseCases.FinanceOperationType.Commands.UpdateFinanceOperationTypeCommand;
+namespace FinanceManager.Application.UseCases.FinanceOperationTypes.Commands.UpdateFinanceOperationTypeCommand;
 
 public class UpdateFinanceOperationTypeHandler : BaseRequestHandler, IRequestHandler<UpdateFinanceOperationTypeCommand, Result<FinanceOperationTypeDTO>>
 {
@@ -31,7 +31,7 @@ public class UpdateFinanceOperationTypeHandler : BaseRequestHandler, IRequestHan
                                 await _financeService.UpdateFinanceOperationTypeAsync(
                                     _mapper.Map<FinanceOperationTypeModel>(request)));
 
-            return Result<FinanceOperationTypeDTO>.Success(data, "Finance operation created successfully!");
+            return Result<FinanceOperationTypeDTO>.Success(data, "Finance operation type updated successfully!");
         });
     }
 }

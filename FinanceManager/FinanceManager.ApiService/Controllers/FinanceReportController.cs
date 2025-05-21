@@ -1,6 +1,6 @@
 ﻿using FinanceManager.ApiService.Controllers.Base;
-using FinanceManager.Application.UseCases.FinanceReport.Commands.CreateDailyReportCommand;
-using FinanceManager.Application.UseCases.FinanceReport.Commands.CreatePeriodReportCommand;
+using FinanceManager.Application.UseCases.FinanceReports.Commands.CreateDailyReportCommand;
+using FinanceManager.Application.UseCases.FinanceReports.Commands.CreatePeriodReportCommand;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

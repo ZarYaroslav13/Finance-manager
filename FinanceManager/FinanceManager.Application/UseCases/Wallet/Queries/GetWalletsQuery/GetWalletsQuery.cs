@@ -1,9 +1,12 @@
-﻿using FinanceManager.Application.Models;
+﻿using FinanceManager.Application.DataAnnotations.Attributes;
+using FinanceManager.Application.Models;
+using FinanceManager.Domain.Wrapper;
 using MediatR;
 
-namespace FinanceManager.Application.UseCases.Wallet.Queries.GetWalletsQuery;
+namespace FinanceManager.Application.UseCases.Wallets.Queries.GetWalletsQuery;
 
-public class GetWalletsQuery : BaseRequest, IRequest<BaseResponse<List<WalletDTO>>>
+public class GetWalletsQuery : IRequest<Result<List<WalletDTO>>>
 {
-    public int AccountId { get; set; }
+    [GuidRequired]
+    public Guid AccountId { get; set; }
 }

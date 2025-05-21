@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using FinanceManager.Application.UseCases.FinanceOperationType.Commands.AddFinanceOperationTypeCommand;
-using FinanceManager.Application.UseCases.FinanceOperationType.Commands.UpdateFinanceOperationTypeCommand;
+using FinanceManager.Application.UseCases.FinanceOperationTypes.Commands.AddFinanceOperationTypeCommand;
+using FinanceManager.Application.UseCases.FinanceOperationTypes.Commands.UpdateFinanceOperationTypeCommand;
 using FinanceManager.Domain.Models;
 
 namespace FinanceManager.Application.UseCases.Commons.Mapping;

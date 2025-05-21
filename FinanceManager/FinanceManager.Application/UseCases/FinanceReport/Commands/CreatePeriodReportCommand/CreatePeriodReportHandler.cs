@@ -8,7 +8,7 @@ using FinanceManager.Domain.Wrapper;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace FinanceManager.Application.UseCases.FinanceReport.Commands.CreatePeriodReportCommand;
+namespace FinanceManager.Application.UseCases.FinanceReports.Commands.CreatePeriodReportCommand;
 
 public class CreatePeriodReportHandler : BaseRequestHandler, IRequestHandler<CreatePeriodReportCommand, Result<FinanceReportDTO>>
 {

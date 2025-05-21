@@ -1,9 +1,9 @@
 ﻿using FinanceManager.ApiService.Controllers.Base;
-using FinanceManager.Application.UseCases.Wallet.Commands.CreateWalletCommand;
-using FinanceManager.Application.UseCases.Wallet.Commands.DeleteWalletCommand;
-using FinanceManager.Application.UseCases.Wallet.Commands.UpdateWalletCommand;
-using FinanceManager.Application.UseCases.Wallet.Queries.GetByIdWalletQuery;
-using FinanceManager.Application.UseCases.Wallet.Queries.GetWalletsQuery;
+using FinanceManager.Application.UseCases.Wallets.Commands.CreateWalletCommand;
+using FinanceManager.Application.UseCases.Wallets.Commands.DeleteWalletCommand;
+using FinanceManager.Application.UseCases.Wallets.Commands.UpdateWalletCommand;
+using FinanceManager.Application.UseCases.Wallets.Queries.GetByIdWalletQuery;
+using FinanceManager.Application.UseCases.Wallets.Queries.GetWalletsQuery;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

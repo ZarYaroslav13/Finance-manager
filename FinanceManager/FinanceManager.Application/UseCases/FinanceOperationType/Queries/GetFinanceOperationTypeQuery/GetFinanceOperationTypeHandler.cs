@@ -7,7 +7,7 @@ using FinanceManager.Domain.Wrapper;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace FinanceManager.Application.UseCases.FinanceOperationType.Queries.GetFinanceOperationTypeQuery;
+namespace FinanceManager.Application.UseCases.FinanceOperationTypes.Queries.GetFinanceOperationTypeQuery;
 
 public class GetFinanceOperationTypeHandler : BaseRequestHandler, IRequestHandler<GetFinanceOperationTypeQuery, Result<FinanceOperationTypeDTO>>
 {
@@ -28,7 +28,7 @@ public class GetFinanceOperationTypeHandler : BaseRequestHandler, IRequestHandle
             var data = _mapper.Map<FinanceOperationTypeDTO>(
                     await _financeService.GetFinanceOperationType(request.Id));
 
-            return await Result<FinanceOperationTypeDTO>.SuccessAsync(data, "Finance operation created successfully!");
+            return await Result<FinanceOperationTypeDTO>.SuccessAsync(data, "Finance operation type retrived successfully!");
         });
     }
 }

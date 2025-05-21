@@ -2,7 +2,7 @@
 using FinanceManager.Domain.Wrapper;
 using MediatR;
 
-namespace FinanceManager.Application.UseCases.FinanceOperationType.Commands.DeleteFinanceOperationTypeCommand;
+namespace FinanceManager.Application.UseCases.FinanceOperationTypes.Commands.DeleteFinanceOperationTypeCommand;
 
 public class DeleteFinanceOperationTypeCommand : IRequest<IResult>
 {

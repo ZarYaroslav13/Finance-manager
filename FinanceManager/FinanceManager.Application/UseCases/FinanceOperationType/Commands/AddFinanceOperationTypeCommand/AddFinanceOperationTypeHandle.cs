@@ -8,7 +8,7 @@ using FinanceManager.Domain.Wrapper;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace FinanceManager.Application.UseCases.FinanceOperationType.Commands.AddFinanceOperationTypeCommand;
+namespace FinanceManager.Application.UseCases.FinanceOperationTypes.Commands.AddFinanceOperationTypeCommand;
 
 public class AddFinanceOperationTypeHandle : BaseRequestHandler, IRequestHandler<AddFinanceOperationTypeCommand, Result<FinanceOperationTypeDTO>>
 {
@@ -31,7 +31,7 @@ public class AddFinanceOperationTypeHandle : BaseRequestHandler, IRequestHandler
                                 await _financeService.AddFinanceOperationTypeAsync(
                                     _mapper.Map<FinanceOperationTypeModel>(request)));
 
-            return await Result<FinanceOperationTypeDTO>.SuccessAsync(data, "Finance operation created successfully!");
+            return await Result<FinanceOperationTypeDTO>.SuccessAsync(data, "Finance operation type created successfully!");
         });
     }
 }

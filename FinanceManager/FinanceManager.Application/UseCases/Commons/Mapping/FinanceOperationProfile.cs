@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using FinanceManager.Application.UseCases.FinanceOperation.Commands.AddFinanceOperationCommand;
-using FinanceManager.Application.UseCases.FinanceOperation.Commands.UpdateFinanceOperationCommand;
+using FinanceManager.Application.UseCases.FinanceOperations.Commands.AddFinanceOperationCommand;
+using FinanceManager.Application.UseCases.FinanceOperations.Commands.UpdateFinanceOperationCommand;
 using FinanceManager.Domain.Models;
 using FinanceManager.Infrastructure.Models;
 

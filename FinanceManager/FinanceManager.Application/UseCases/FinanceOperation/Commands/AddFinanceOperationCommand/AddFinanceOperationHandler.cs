@@ -8,7 +8,7 @@ using FinanceManager.Domain.Wrapper;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace FinanceManager.Application.UseCases.FinanceOperation.Commands.AddFinanceOperationCommand;
+namespace FinanceManager.Application.UseCases.FinanceOperations.Commands.AddFinanceOperationCommand;
 
 public class AddFinanceOperationHandler : BaseRequestHandler, IRequestHandler<AddFinanceOperationCommand, IResult<FinanceOperationDTO>>
 {

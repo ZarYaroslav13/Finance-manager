@@ -8,7 +8,7 @@ using FinanceManager.Domain.Wrapper;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace FinanceManager.Application.UseCases.FinanceReport.Commands.CreateDailyReportCommand;
+namespace FinanceManager.Application.UseCases.FinanceReports.Commands.CreateDailyReportCommand;
 
 public class CreateDailyReportHandler : BaseRequestHandler, IRequestHandler<CreateDailyReportCommand, Result<FinanceReportDTO>>
 {

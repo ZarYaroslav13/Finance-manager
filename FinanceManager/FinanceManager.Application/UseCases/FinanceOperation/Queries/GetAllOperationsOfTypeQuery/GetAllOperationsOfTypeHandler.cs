@@ -7,7 +7,7 @@ using FinanceManager.Domain.Wrapper;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace FinanceManager.Application.UseCases.FinanceOperation.Queries.GetAllOperationsOfTypeQuery;
+namespace FinanceManager.Application.UseCases.FinanceOperations.Queries.GetAllOperationsOfTypeQuery;
 
 internal class GetAllOperationsOfTypeHandler : BaseRequestHandler, IRequestHandler<GetAllOperationsOfTypeQuery, Result<List<FinanceOperationDTO>>>
 {
@@ -31,7 +31,7 @@ internal class GetAllOperationsOfTypeHandler : BaseRequestHandler, IRequestHandl
                 .Select(_mapper.Map<FinanceOperationDTO>)
                 .ToList();
 
-            return Result<List<FinanceOperationDTO>>.Success(data, "Operations received successfully");
+            return Result<List<FinanceOperationDTO>>.Success(data, "Finance operations retrived successfully");
         });
     }
 }

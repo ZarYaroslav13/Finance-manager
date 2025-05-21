@@ -1,8 +1,11 @@
-﻿using MediatR;
+﻿using FinanceManager.Application.DataAnnotations.Attributes;
+using FinanceManager.Domain.Wrapper;
+using MediatR;
 
-namespace FinanceManager.Application.UseCases.Wallet.Commands.DeleteWalletCommand;
+namespace FinanceManager.Application.UseCases.Wallets.Commands.DeleteWalletCommand;
 
-public class DeleteWalletCommand : BaseRequest, IRequest<BaseResponse<bool>>
+public class DeleteWalletCommand : IRequest<IResult>
 {
-    public int WalletId { get; set; }
+    [GuidRequired]
+    public Guid WalletId { get; set; }
 }

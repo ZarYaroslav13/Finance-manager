@@ -4,7 +4,7 @@ using FinanceManager.Application.Models;
 using FinanceManager.Domain.Wrapper;
 using MediatR;
 
-namespace FinanceManager.Application.UseCases.FinanceReport.Commands.CreatePeriodReportCommand;
+namespace FinanceManager.Application.UseCases.FinanceReports.Commands.CreatePeriodReportCommand;
 
 public class CreatePeriodReportCommand : IRequest<Result<FinanceReportDTO>>
 {

@@ -6,7 +6,7 @@ using FinanceManager.Domain.Wrapper;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace FinanceManager.Application.UseCases.FinanceOperation.Commands.DeleteFinanceOperationCommand;
+namespace FinanceManager.Application.UseCases.FinanceOperations.Commands.DeleteFinanceOperationCommand;
 
 public class DeleteFinanceOperationHandler : BaseRequestHandler, IRequestHandler<DeleteFinanceOperationCommand, IResult>
 {

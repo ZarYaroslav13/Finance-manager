@@ -6,7 +6,7 @@ using FinanceManager.Domain.Wrapper;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace FinanceManager.Application.UseCases.FinanceOperationType.Commands.DeleteFinanceOperationTypeCommand;
+namespace FinanceManager.Application.UseCases.FinanceOperationTypes.Commands.DeleteFinanceOperationTypeCommand;
 
 public class DeleteFinanceOperationTypeHandler : BaseRequestHandler, IRequestHandler<DeleteFinanceOperationTypeCommand, IResult>
 {
@@ -27,7 +27,7 @@ public class DeleteFinanceOperationTypeHandler : BaseRequestHandler, IRequestHan
 
             await _financeService.DeleteFinanceOperationTypeAsync(request.Id);
 
-            return Result.Success("Finance operation created successfully!");
+            return Result.Success("Finance operation type deleted successfully!");
         });
     }
 }

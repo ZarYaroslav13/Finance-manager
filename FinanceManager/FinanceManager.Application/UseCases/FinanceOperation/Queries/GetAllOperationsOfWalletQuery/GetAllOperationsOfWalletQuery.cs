@@ -3,7 +3,7 @@ using FinanceManager.Application.Models;
 using FinanceManager.Domain.Wrapper;
 using MediatR;
 
-namespace FinanceManager.Application.UseCases.FinanceOperation.Queries.GetAllOperationsOfWalletQuery;
+namespace FinanceManager.Application.UseCases.FinanceOperations.Queries.GetAllOperationsOfWalletQuery;
 
 public class GetAllOperationsOfWalletQuery : IRequest<Result<List<FinanceOperationDTO>>>
 {

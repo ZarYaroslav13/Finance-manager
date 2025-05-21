@@ -3,7 +3,7 @@ using FinanceManager.Application.Models;
 using FinanceManager.Domain.Wrapper;
 using MediatR;
 
-namespace FinanceManager.Application.UseCases.FinanceOperationType.Queries.GetAllFinanceOperationTypesQuery;
+namespace FinanceManager.Application.UseCases.FinanceOperationTypes.Queries.GetAllFinanceOperationTypesQuery;
 
 public class GetAllFinanceOperationTypesQuery : IRequest<Result<List<FinanceOperationTypeDTO>>>
 {

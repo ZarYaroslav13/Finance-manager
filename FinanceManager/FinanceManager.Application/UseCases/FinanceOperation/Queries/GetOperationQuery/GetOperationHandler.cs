@@ -7,7 +7,7 @@ using FinanceManager.Domain.Wrapper;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace FinanceManager.Application.UseCases.FinanceOperation.Queries.GetOperationQuery;
+namespace FinanceManager.Application.UseCases.FinanceOperations.Queries.GetOperationQuery;
 
 public class GetOperationHandler : BaseRequestHandler, IRequestHandler<GetOperationQuery, Result<FinanceOperationDTO>>
 {

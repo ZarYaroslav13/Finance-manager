@@ -4,7 +4,7 @@ using FinanceManager.Application.Models;
 using FinanceManager.Domain.Wrapper;
 using MediatR;
 
-namespace FinanceManager.Application.UseCases.FinanceOperation.Commands.AddFinanceOperationCommand;
+namespace FinanceManager.Application.UseCases.FinanceOperations.Commands.AddFinanceOperationCommand;
 
 public class AddFinanceOperationCommand : IRequest<Result<FinanceOperationDTO>>
 {

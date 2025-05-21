@@ -1,13 +1,15 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using FinanceManager.Application.DataAnnotations.Attributes;
 using FinanceManager.Application.Models;
+using FinanceManager.Domain.Wrapper;
 using MediatR;
 
-namespace FinanceManager.Application.UseCases.Wallet.Commands.CreateWalletCommand;
+namespace FinanceManager.Application.UseCases.Wallets.Commands.CreateWalletCommand;
 
-public class CreateWalletCommand : BaseRequest, IRequest<BaseResponse<WalletDTO>>
+public class CreateWalletCommand : IRequest<Result<WalletDTO>>
 {
-    [Required]
-    public int AccountId { get; set; }
+    [GuidRequired]
+    public Guid AccountId { get; set; }
 
     [Required]
     [Length(2, 50)]

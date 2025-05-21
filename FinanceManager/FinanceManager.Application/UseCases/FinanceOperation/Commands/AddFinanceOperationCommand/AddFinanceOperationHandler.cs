@@ -26,7 +26,7 @@ public class AddFinanceOperationHandler : BaseRequestHandler, IRequestHandler<Ad
 
         try
         {
-            await CheckIsUserHaveAccesToResourseAsync(request, 
+            await CheckIsUserHaveAccesToResourseAsync(request,
                 request.TypeId,
 
                 );

@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using FinanceManager.Domain.Models.Base;
 using FinanceManager.Domain.Services.CurrentUserService;
 using MediatR;
 using Microsoft.Extensions.Logging;
@@ -18,41 +17,21 @@ public class BaseRequestHandler
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
     }
-
-    protected async Task CheckIsUserHaveAccesToResourseAsync<Request, TResourse>(
+    protected async Task CheckIsUserHaveAccesToResourseAsync<Request>(
         Request request,
-        string resourseId,
-        Func<TResourse, Guid> getCalleridFromResFunc,
-        Func<Task<TResourse>> getResFunc,
+        Func<Task<bool>> callerIsOwnerPredicate,
         string loggingMessage = "")
         where Request : class, IBaseRequest
-        where TResourse : Model
     {
         HandleLoggingMessage(request, loggingMessage);
 
-        bool IsCallerResourseOwner = await CheckIsCallerResourseOwner(resourseId, getResFunc, getCalleridFromResFunc);
+        bool IsCallerResourseOwner = await callerIsOwnerPredicate();
 
         if (!_currentUserService.IsAdmin && !IsCallerResourseOwner)
         {
             _logger.LogWarning(loggingMessage);
             throw new UnauthorizedAccessException($"Access denied");
         }
-    }
-
-    protected async Task<bool> CheckIsCallerResourseOwner<TResourse>(
-        string resourseId,
-        Func<Task<TResourse>> getResFunc,
-        Func<TResourse, Guid> getCalleridFromResFunc)
-        where TResourse : Model
-    {
-        string callerId = _currentUserService.UserId;
-
-        if (string.IsNullOrEmpty(callerId) || string.IsNullOrEmpty(resourseId))
-            throw new ArgumentOutOfRangeException("caller id and resourse id must be specified");
-
-        var resourse = (await getResFunc());
-
-        return getCalleridFromResFunc(resourse).ToString() == callerId;
     }
 
     private string HandleLoggingMessage<Request>(

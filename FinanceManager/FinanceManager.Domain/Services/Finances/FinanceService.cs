@@ -80,7 +80,7 @@ public class FinanceService : BaseService, IFinanceService
 
     public async Task<bool> IsCallerFinanceOperationTypeOwner(Guid typeId)
     {
-        if(typeId == Guid.Empty)
+        if (typeId == Guid.Empty)
             throw new ArgumentException(nameof(typeId));
 
         var type = await _financeOperationTypeRepository.GetByIdAsync(typeId);

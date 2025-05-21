@@ -75,7 +75,7 @@ public class WalletService : BaseService, IWalletService
 
     public async Task<bool> IsCallerWalletOwner(Guid walletId)
     {
-        if(walletId == Guid.Empty)
+        if (walletId == Guid.Empty)
             throw new ArgumentNullException(nameof(walletId));
 
         var wallet = await _repository.GetByIdAsync(walletId);

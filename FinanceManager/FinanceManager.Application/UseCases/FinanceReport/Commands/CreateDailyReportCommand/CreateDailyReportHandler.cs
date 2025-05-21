@@ -28,9 +28,7 @@ public class CreateDailyReportHandler : BaseRequestHandler, IRequestHandler<Crea
         try
         {
             await CheckIsUserHaveAccesToResourseAsync(request,
-                request.WalletId,
-                w => w.AccountId,
-                async () => await _walletService.FindWalletAsync(Guid.Parse(request.WalletId)));
+                async () => await _walletService.IsCallerWalletOwner(Guid.Parse(request.WalletId)));
 
             var wallet = await _walletService.FindWalletAsync(Guid.Parse(request.WalletId));
 

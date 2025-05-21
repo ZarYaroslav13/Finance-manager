@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using FinanceManager.Application.UseCases.Login.Commands.CreateAccountCommand;
 
 namespace FinanceManager.Application.UseCases.Commons.Mapping;
 

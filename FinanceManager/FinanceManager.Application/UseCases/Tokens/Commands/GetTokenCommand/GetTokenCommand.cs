@@ -1,10 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using FinanceManager.Application.Models;
+using FinanceManager.Domain.Wrapper;
 using MediatR;
 
-namespace FinanceManager.Application.UseCases.Login.Commands.SignInAdminCommand;
+namespace FinanceManager.Application.UseCases.Tokens.Commands.GetTokenCommand;
 
-public class SignInAdminCommand : IRequest<BaseResponse<TokenDTO>>
+public class GetTokenCommand : IRequest<Result<TokenDTO>>
 {
     [Required]
     [EmailAddress]

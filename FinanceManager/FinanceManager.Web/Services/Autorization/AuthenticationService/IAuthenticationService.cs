@@ -1,6 +1,4 @@
 ﻿using System.Security.Claims;
-using FinanceManager.Application.UseCases.Login.Commands.SignInAdminCommand;
-using FinanceManager.Application.UseCases.Login.Commands.SignInCommand;
 
 namespace FinanceManager.Web.Services.Autorization.AuthenticationService;
 

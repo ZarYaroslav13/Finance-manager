@@ -16,7 +16,7 @@ public interface IUserService
 
     Task<IResult> UpdateRolesAsync(Guid id, List<UserRoleModel> newRroles);
 
-    Task<IResult<string>> ConfirmEmailAsync(Guid userId, string code);
+    Task<IResult<Guid>> ConfirmEmailAsync(Guid userId, string code);
 
     Task<IResult> ForgotPasswordAsync(string email, string origin);
 

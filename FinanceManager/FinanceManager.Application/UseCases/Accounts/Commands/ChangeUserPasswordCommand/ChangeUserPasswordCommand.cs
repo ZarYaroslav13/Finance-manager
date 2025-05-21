@@ -19,4 +19,8 @@ public class ChangeUserPasswordCommand : IRequest<IResult>
     [Length(10, 50)]
     [DataType(DataType.Password)]
     public string NewPassword { get; set; }
+
+    [Required]
+    [Compare(nameof(NewPassword))]
+    public string ConfirmNewPassword { get; set; }
 }

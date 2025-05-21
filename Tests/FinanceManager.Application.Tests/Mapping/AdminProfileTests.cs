@@ -1,6 +1,4 @@
 ﻿using AutoMapper;
-using FinanceManager.Application.Mapping;
-using FinanceManager.Application.Models;
 using FinanceManager.Application.Tests.Data.Mapping;
 using FinanceManager.Application.Tests.TestToolExtensions;
 

@@ -39,14 +39,14 @@ public class UserService : IUserService
         _currentUserService = currentUserService;
     }
 
-    public async Task<IResult<string>> ConfirmEmailAsync(Guid userId, string code)
+    public async Task<IResult<Guid>> ConfirmEmailAsync(Guid userId, string code)
     {
         var user = await _userManager.FindByIdAsync(userId.ToString());
         code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code));
         var result = await _userManager.ConfirmEmailAsync(user, code);
         if (result.Succeeded)
         {
-            return await Result<string>.SuccessAsync(user.Id.ToString(), $"Account Confirmed for {user.Email}. You can now use the /api/identity/token endpoint to generate JWT.");
+            return await Result<Guid>.SuccessAsync(user.Id, $"Account Confirmed for {user.Email}. You can now use the /api/identity/token endpoint to generate JWT.");
         }
         else
         {
@@ -141,17 +141,13 @@ public class UserService : IUserService
                     Subject = "Confirm Registration"
                 };
                 BackgroundJob.Enqueue(() => _emailService.SendAsync(mailRequest));
-                return await Result<string>.SuccessAsync(user.Id.ToString(), $"User {user.UserName} Registered. Please check your Mailbox to verify!");
+                return await Result<Guid>.SuccessAsync(user.Id, $"User {user.UserName} Registered. Please check your Emailbox to verify!");
             }
-            else
-            {
-                return await Result.FailAsync(result.Errors.Select(a => a.Description).ToList());
-            }
+
+            return await Result.FailAsync(result.Errors.Select(a => a.Description).ToList());
         }
-        else
-        {
-            return await Result.FailAsync("Email {user.UserName} is already registered.");
-        }
+
+        return await Result.FailAsync($"Email {user.UserName} is already registered.");
     }
 
     public async Task<IResult> ResetPasswordAsync(string email, string password, string token)
@@ -205,7 +201,7 @@ public class UserService : IUserService
 
     public async Task<IResult> DeleteUserAsync(Guid id)
     {
-        if (string.IsNullOrWhiteSpace(id))
+        if (id == Guid.Empty)
             return await Result.FailAsync("Id must be specified");
 
         try
@@ -213,11 +209,11 @@ public class UserService : IUserService
             var user = await _userManager.FindByIdAsync(id.ToString());
             await _userManager.DeleteAsync(user);
 
-            return await Result.SuccessAsync("Deleted successfully!");
+            return Result.Success("Deleted successfully!");
         }
         catch (Exception e)
         {
-            return await Result.FailAsync(e.Message);
+            return Result.Fail(e.Message);
         }
     }
 

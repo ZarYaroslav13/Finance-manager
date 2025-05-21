@@ -1,5 +1,4 @@
-﻿using FinanceManager.Application.Models;
-using FinanceManager.Domain.API;
+﻿using FinanceManager.Domain.API;
 using FinanceManager.Domain.Extentions;
 using FinanceManager.Web.Preferences;
 using FinanceManager.Web.Services;

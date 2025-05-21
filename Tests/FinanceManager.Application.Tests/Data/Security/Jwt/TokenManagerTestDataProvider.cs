@@ -1,7 +1,6 @@
 ﻿using System.Security.Claims;
 using AutoMapper;
 using FakeItEasy;
-using FinanceManager.Application.Models;
 using FinanceManager.Domain.Authorization;
 using FinanceManager.Domain.Configurations;
 using FinanceManager.Domain.Services.Accounts;

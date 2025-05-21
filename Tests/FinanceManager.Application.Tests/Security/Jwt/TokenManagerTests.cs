@@ -2,7 +2,6 @@
 using System.Security.Claims;
 using AutoMapper;
 using FakeItEasy;
-using FinanceManager.Application.Models;
 using FinanceManager.Application.Tests.Data.Security.Jwt;
 using FinanceManager.Domain.Authorization;
 using FinanceManager.Domain.Configurations;

@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using FinanceManager.Application.Mapping;
-using FinanceManager.Application.Models;
 using FinanceManager.Application.Tests.Data.Mapping;
 using FinanceManager.Application.Tests.TestToolExtensions;
 
@@ -16,7 +15,7 @@ public class AccountProfileTests
         _mapper = new MapperConfiguration(
                 cfg =>
                 {
-                    cfg.AddProfile<AccountProfile>();
+                    cfg.AddProfile<UserProfile>();
                     cfg.AddProfile<WalletProfile>();
                     cfg.AddProfile<FinanceOperationTypeProfile>();
                     cfg.AddProfile<FinanceOperationProfile>();

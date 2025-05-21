@@ -180,7 +180,7 @@ public class FinanceService : BaseService, IFinanceService
 
     public async Task DeleteFinanceOperationAsync(Guid id)
     {
-        if(id == Guid.Empty)
+        if (id == Guid.Empty)
             throw new ArgumentNullException(nameof(id));
 
         _financeOperationRepository.Delete(id);

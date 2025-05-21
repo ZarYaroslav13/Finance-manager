@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using FinanceManager.Application.Models;
-using FinanceManager.Application.UseCases.Commons.Bases;
 using MediatR;
 
 namespace FinanceManager.Application.UseCases.Wallet.Commands.CreateWalletCommand;

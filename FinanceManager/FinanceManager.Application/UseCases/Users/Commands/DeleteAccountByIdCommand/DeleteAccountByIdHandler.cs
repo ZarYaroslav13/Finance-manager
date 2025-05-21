@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using FinanceManager.Application.UseCases.Commons.Bases;
-using FinanceManager.Domain.Services.Accounts;
 using FinanceManager.Domain.Services.CurrentUserService;
 using FinanceManager.Domain.Services.Users;
 using FinanceManager.Domain.Wrapper;
@@ -24,7 +23,7 @@ public class DeleteAccountByIdHandler : BaseRequestHandler, IRequestHandler<Dele
         {
             CheckIsUserHaveAccesToResourse(request, idSelector: r => r.Id);
 
-            _userService.DeleteUser(request.Id);
+            await _userService.DeleteUser(request.Id);
 
             return await Result.SuccessAsync("Delete succeed!");
         }

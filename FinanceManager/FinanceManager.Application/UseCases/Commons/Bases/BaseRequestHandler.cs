@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
-using FinanceManager.Domain.Authorization;
+using FinanceManager.Domain.Models.Base;
 using FinanceManager.Domain.Services.CurrentUserService;
+using MediatR;
 using Microsoft.Extensions.Logging;
 
 namespace FinanceManager.Application.UseCases.Commons.Bases;
@@ -18,65 +19,54 @@ public class BaseRequestHandler
         _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
     }
 
-    /// <summary>
-    /// Throw <exception cref="UnauthorizedAccessException"></exception> if user is not suit to permission conditions
-    /// </summary>
-    /// <param name="request"></param>
-    /// <exception cref="UnauthorizedAccessException"></exception>
-    protected void CheckIsUserHaveAccesToResourse<Request>(
+    protected async Task CheckIsUserHaveAccesToResourseAsync<Request, TResourse>(
         Request request,
-        string loggingMessage = "",
-        Func<Request, string>? idSelector = null,
-        Func<bool>? addinionallyCondition = null) where Request : BaseRequest
+        string resourseId,
+        Func<TResourse, Guid> getCalleridFromResFunc,
+        Func<Task<TResourse>> getResFunc,
+        string loggingMessage = "")
+        where Request : class, IBaseRequest
+        where TResourse : Model
     {
         HandleLoggingMessage(request, loggingMessage);
 
-        bool conditions = !_currentUserService.IsAdmin
-                    && (idSelector == null ? true : _currentUserService.UserId != idSelector(request))
-                    && (addinionallyCondition == null ? true : !addinionallyCondition());
+        bool IsCallerResourseOwner = await CheckIsCallerResourseOwner(resourseId, getResFunc, getCalleridFromResFunc);
 
-        CheckIsUserMustBeDenied(conditions, loggingMessage);
+        if (!_currentUserService.IsAdmin && !IsCallerResourseOwner)
+        {
+            _logger.LogWarning(loggingMessage);
+            throw new UnauthorizedAccessException($"Access denied");
+        }
     }
 
-    protected async Task CheckIsUserHaveAccesToResourseAsync<Request>(
-    Request request,
-    string loggingMessage = "",
-    Func<Request, string>? idSelector = null,
-    Func<Task<bool>>? addinionallyCondition = null) where Request : BaseRequest
+    protected async Task<bool> CheckIsCallerResourseOwner<TResourse>(
+        string resourseId,
+        Func<Task<TResourse>> getResFunc,
+        Func<TResourse, Guid> getCalleridFromResFunc)
+        where TResourse : Model
     {
-        HandleLoggingMessage(request, loggingMessage);
+        string callerId = _currentUserService.UserId;
 
-        bool additionalConditionResult = addinionallyCondition != null ? await addinionallyCondition() : true;
+        if (string.IsNullOrEmpty(callerId) || string.IsNullOrEmpty(resourseId))
+            throw new ArgumentOutOfRangeException("caller id and resourse id must be specified");
 
-        bool conditions = !_currentUserService.IsAdmin
-                         && (idSelector == null || _currentUserService.UserId != idSelector(request))
-                         && !additionalConditionResult;
+        var resourse = (await getResFunc());
 
-
-        CheckIsUserMustBeDenied(conditions, loggingMessage);
+        return getCalleridFromResFunc(resourse).ToString() == callerId;
     }
 
     private string HandleLoggingMessage<Request>(
         Request request,
-        string loggingMessage) where Request : BaseRequest
+        string loggingMessage) where Request : class, IBaseRequest
     {
         if (string.IsNullOrWhiteSpace(loggingMessage))
         {
-            loggingMessage = 
+            loggingMessage =
                 $"Unallowed access attempt to resource in request: {request.GetType()} " +
                 $"by user with id: {_currentUserService.UserId} and " +
                 $"roles {_currentUserService.Roles.Aggregate((acc, r) => acc += r + ", ")}";
         }
 
         return loggingMessage;
-    }
-
-    private void CheckIsUserMustBeDenied(bool conditions, string loggingMessage)
-    {
-        if (conditions)
-        {
-            _logger.LogWarning(loggingMessage);
-            throw new UnauthorizedAccessException($"Access denied");
-        }
     }
 }

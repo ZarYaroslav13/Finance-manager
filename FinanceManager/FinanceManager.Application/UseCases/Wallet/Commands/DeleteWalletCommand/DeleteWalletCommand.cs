@@ -1,5 +1,4 @@
-﻿using FinanceManager.Application.UseCases.Commons.Bases;
-using MediatR;
+﻿using MediatR;
 
 namespace FinanceManager.Application.UseCases.Wallet.Commands.DeleteWalletCommand;
 

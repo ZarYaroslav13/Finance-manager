@@ -15,8 +15,12 @@ public class CreateDailyReportHandler : BaseRequestHandler, IRequestHandler<Crea
     private readonly IFinanceReportCreator _creator;
     private readonly IWalletService _walletService;
 
-    public CreateDailyReportHandler(ICurrentUserService currentUserService, IMapper mapper, ILogger<BaseRequestHandler> logger) : base(currentUserService, mapper, logger)
+    public CreateDailyReportHandler(
+        IFinanceReportCreator creator, IWalletService walletService,
+        ICurrentUserService currentUserService, IMapper mapper, ILogger<BaseRequestHandler> logger) : base(currentUserService, mapper, logger)
     {
+        _creator = creator ?? throw new ArgumentNullException(nameof(creator));
+        _walletService = walletService ?? throw new ArgumentNullException(nameof(walletService));
     }
 
     public async Task<Result<FinanceReportDTO>> Handle(CreateDailyReportCommand request, CancellationToken cancellationToken)
@@ -24,11 +28,11 @@ public class CreateDailyReportHandler : BaseRequestHandler, IRequestHandler<Crea
         try
         {
             await CheckIsUserHaveAccesToResourseAsync(request,
-                addinionallyCondition:
-                    async () =>
-                        await _walletService.IsAccountOwnerWalletAsync(_currentUserService.UserId, request.WalletId));
+                request.WalletId,
+                w => w.AccountId,
+                async () => await _walletService.FindWalletAsync(Guid.Parse(request.WalletId)));
 
-            var wallet = await _walletService.FindWalletAsync(request.WalletId);
+            var wallet = await _walletService.FindWalletAsync(Guid.Parse(request.WalletId));
 
             var data = _mapper.Map<FinanceReportDTO>(
                     await _creator.CreateFinanceReportAsync(wallet, request.Date));

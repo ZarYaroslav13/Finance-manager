@@ -12,7 +12,7 @@ public class WalletModel : Base.Model
 
     public List<ExpenseModel> Expenses { get; set; } = new();
 
-    public int AccountId { get; set; }
+    public Guid AccountId { get; set; }
 
     public override bool Equals(object? obj)
     {

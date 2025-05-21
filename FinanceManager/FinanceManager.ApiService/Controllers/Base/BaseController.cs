@@ -1,6 +1,5 @@
 ﻿using System.Security.Claims;
 using FinanceManager.Application.Models;
-using FinanceManager.Application.UseCases.Commons.Bases;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

@@ -1,12 +1,12 @@
 ﻿using FinanceManager.Application.Models;
-using FinanceManager.Application.UseCases.Commons.Bases;
+using FinanceManager.Domain.Wrapper;
 using MediatR;
 
 namespace FinanceManager.Application.UseCases.FinanceReport.Commands.CreatePeriodReportCommand;
 
-public class CreatePeriodReportCommand : BaseRequest, IRequest<BaseResponse<FinanceReportDTO>>
+public class CreatePeriodReportCommand : IRequest<Result<FinanceReportDTO>>
 {
-    public int WalletId { get; set; }
+    public string WalletId { get; set; }
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
 }

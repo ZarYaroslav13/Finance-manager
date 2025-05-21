@@ -21,15 +21,13 @@ internal class GetAllOperationsOfTypeHandler : BaseRequestHandler, IRequestHandl
 
     public async Task<Result<List<FinanceOperationDTO>>> Handle(GetAllOperationsOfTypeQuery request, CancellationToken cancellationToken)
     {
-        var id = Guid.Parse(request.TypeId);
-
         return await HandleAsync(async () =>
         {
             await CheckIsUserHaveAccesToResourseAsync(request,
-                async () => await _financeService.IsCallerFinanceOperationTypeOwner(id));
+                async () => await _financeService.IsCallerFinanceOperationTypeOwner(request.TypeId));
 
             var data = (await _financeService
-                .GetAllFinanceOperationOfTypeAsync(id, request.Index, request.Count))
+                .GetAllFinanceOperationOfTypeAsync(request.TypeId, request.Index, request.Count))
                 .Select(_mapper.Map<FinanceOperationDTO>)
                 .ToList();
 

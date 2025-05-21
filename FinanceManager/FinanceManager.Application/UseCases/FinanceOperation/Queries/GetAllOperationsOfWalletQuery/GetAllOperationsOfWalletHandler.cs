@@ -21,15 +21,13 @@ public class GetAllOperationsOfWalletHandler : BaseRequestHandler, IRequestHandl
 
     public async Task<Result<List<FinanceOperationDTO>>> Handle(GetAllOperationsOfWalletQuery request, CancellationToken cancellationToken)
     {
-        Guid walletId = Guid.Parse(request.WalletId);
-
         return await HandleAsync(async () =>
         {
             await CheckIsUserHaveAccesToResourseAsync(request,
-                async () => await _financeService.IsCallerWallerOwner(walletId));
+                async () => await _financeService.IsCallerWallerOwner(request.WalletId));
 
             var data = (await _financeService
-                .GetAllFinanceOperationOfWalletAsync(walletId, request.Index, request.Count))
+                .GetAllFinanceOperationOfWalletAsync(request.WalletId, request.Index, request.Count))
                 .Select(_mapper.Map<FinanceOperationDTO>)
                 .ToList();
 

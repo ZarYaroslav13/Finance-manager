@@ -26,9 +26,9 @@ public class CreatePeriodReportHandler : BaseRequestHandler, IRequestHandler<Cre
         return await HandleAsync(async () =>
         {
             await CheckIsUserHaveAccesToResourseAsync(request,
-                async () => await _walletService.IsCallerWalletOwner(Guid.Parse(request.WalletId)));
+                async () => await _walletService.IsCallerWalletOwner(request.WalletId));
 
-            var wallet = await _walletService.FindWalletAsync(Guid.Parse(request.WalletId));
+            var wallet = await _walletService.FindWalletAsync(request.WalletId);
 
             var data = _mapper.Map<FinanceReportDTO>(
                     await _creator.CreateFinanceReportAsync(wallet, request.StartDate, request.EndDate));

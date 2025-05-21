@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using FinanceManager.Application.DataAnnotations.Attributes;
 using FinanceManager.Application.Models;
 using FinanceManager.Domain.Wrapper;
 using MediatR;
@@ -13,6 +14,6 @@ public class AddFinanceOperationCommand : IRequest<Result<FinanceOperationDTO>>
     [Required]
     public DateTime Date { get; set; }
 
-    [Required]
-    public string TypeId { get; set; }
+    [GuidRequired]
+    public Guid TypeId { get; set; }
 }

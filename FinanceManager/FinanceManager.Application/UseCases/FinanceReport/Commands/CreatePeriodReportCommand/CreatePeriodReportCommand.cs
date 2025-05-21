@@ -1,4 +1,6 @@
-﻿using FinanceManager.Application.Models;
+﻿using System.ComponentModel.DataAnnotations;
+using FinanceManager.Application.DataAnnotations.Attributes;
+using FinanceManager.Application.Models;
 using FinanceManager.Domain.Wrapper;
 using MediatR;
 
@@ -6,7 +8,12 @@ namespace FinanceManager.Application.UseCases.FinanceReport.Commands.CreatePerio
 
 public class CreatePeriodReportCommand : IRequest<Result<FinanceReportDTO>>
 {
-    public string WalletId { get; set; }
+    [GuidRequired]
+    public Guid WalletId { get; set; }
+
+    [Required]
     public DateTime StartDate { get; set; }
+
+    [Required]
     public DateTime EndDate { get; set; }
 }

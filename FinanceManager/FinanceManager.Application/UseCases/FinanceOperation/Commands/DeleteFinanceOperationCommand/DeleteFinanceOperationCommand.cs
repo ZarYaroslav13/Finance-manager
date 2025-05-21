@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using FinanceManager.Application.DataAnnotations.Attributes;
 using FinanceManager.Domain.Wrapper;
 using MediatR;
 
@@ -6,6 +6,6 @@ namespace FinanceManager.Application.UseCases.FinanceOperation.Commands.DeleteFi
 
 public class DeleteFinanceOperationCommand : IRequest<IResult>
 {
-    [Required]
-    public string Id { get; set; }
+    [GuidRequired]
+    public Guid Id { get; set; }
 }

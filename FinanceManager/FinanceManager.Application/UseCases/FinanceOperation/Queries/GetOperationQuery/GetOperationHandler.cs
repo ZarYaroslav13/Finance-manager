@@ -21,16 +21,14 @@ public class GetOperationHandler : BaseRequestHandler, IRequestHandler<GetOperat
 
     public async Task<Result<FinanceOperationDTO>> Handle(GetOperationQuery request, CancellationToken cancellationToken)
     {
-        var id = Guid.Parse(request.Id);
-
         return await HandleAsync(async () =>
         {
 
             await CheckIsUserHaveAccesToResourseAsync(request,
-                async () => await _financeService.IsCallerFinanceOperationOperationOwner(id));
+                async () => await _financeService.IsCallerFinanceOperationOperationOwner(request.Id));
 
             var data = _mapper.Map<FinanceOperationDTO>(
-                await _financeService.GetFinanceOperation(id));
+                await _financeService.GetFinanceOperation(request.Id));
 
             return Result<FinanceOperationDTO>.Success(data, "Finance operation retrived successfully");
         });

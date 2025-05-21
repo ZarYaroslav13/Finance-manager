@@ -24,9 +24,9 @@ public class DeleteFinanceOperationHandler : BaseRequestHandler, IRequestHandler
         {
             await CheckIsUserHaveAccesToResourseAsync(request,
                 async () =>
-                    await _financeService.IsCallerFinanceOperationOperationOwner(Guid.Parse(request.Id)));
+                    await _financeService.IsCallerFinanceOperationOperationOwner(request.Id));
 
-            await _financeService.DeleteFinanceOperationAsync(Guid.Parse(request.Id));
+            await _financeService.DeleteFinanceOperationAsync(request.Id);
 
             return Result.Success("Finance operation deleted successfully!");
         });

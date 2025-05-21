@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using FinanceManager.Application.DataAnnotations.Attributes;
 using FinanceManager.Application.Models;
 using FinanceManager.Domain.Wrapper;
 using MediatR;
@@ -7,8 +7,8 @@ namespace FinanceManager.Application.UseCases.FinanceOperation.Queries.GetAllOpe
 
 public class GetAllOperationsOfTypeQuery : IRequest<Result<List<FinanceOperationDTO>>>
 {
-    [Required]
-    public string TypeId { get; set; }
+    [GuidRequired]
+    public Guid TypeId { get; set; }
 
     public int Index { get; set; } = 0;
 

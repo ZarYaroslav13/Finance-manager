@@ -17,13 +17,9 @@ public class UserController : BaseController
 
     [Authorize(Policy = PolicyManager.AdminPolicy)]
     [HttpGet]
-    public async Task<IActionResult> GetAllAsync(int pageNumber, int take)
+    public async Task<IActionResult> GetAllAsync([FromBody] GetAllUsersQuery query)
     {
-        return await SendRequestAsync(new GetAllUsersQuery()
-        {
-            pageNumber = pageNumber,
-            take = take
-        });
+        return await SendRequestAsync(query);
     }
 
     [HttpGet("{id}")]

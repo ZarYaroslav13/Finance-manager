@@ -44,7 +44,7 @@ public class AccountService : IAccountService
         }
     }
 
-    public async Task<IResult> UpdatePasswordAsync(Guid id, string oldPassword, string newPassword)
+    public async Task<IResult> ChangePasswordAsync(Guid id, string oldPassword, string newPassword)
     {
         ArgumentNullException.ThrowIfNullOrEmpty(oldPassword);
         ArgumentNullException.ThrowIfNullOrWhiteSpace(newPassword);

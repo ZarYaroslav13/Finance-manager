@@ -7,5 +7,5 @@ public interface IAccountService
 {
     public Task<IResult> UpdateAccountAsync(UserModel updatedAccount);
 
-    public Task<IResult> UpdatePasswordAsync(Guid id, string oldPassword, string newPassword);
+    public Task<IResult> ChangePasswordAsync(Guid id, string oldPassword, string newPassword);
 }

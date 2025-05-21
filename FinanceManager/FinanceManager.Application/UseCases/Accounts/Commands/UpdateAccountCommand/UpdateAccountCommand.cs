@@ -1,12 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using FinanceManager.Application.DataAnnotations.Attributes;
-using FinanceManager.Application.Models;
+using FinanceManager.Application.Models.Base;
 using FinanceManager.Domain.Wrapper;
 using MediatR;
 
 namespace FinanceManager.Application.UseCases.Accounts.Commands.Commands.UpdateAccountCommand;
 
-public class UpdateAccountCommand : IRequest<Result<AccountDTO>>
+public class UpdateAccountCommand : IRequest<Result<UserDTO>>
 {
     [GuidRequired]
     public Guid Id { get; set; }

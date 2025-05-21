@@ -1,8 +1,6 @@
 ﻿using FinanceManager.ApiService.Controllers.Base;
 using FinanceManager.Application.UseCases.Accounts.Commands.Commands.UpdateAccountCommand;
 using FinanceManager.Application.UseCases.Accounts.Commands.Commands.UpdatePasswordAccountCommand;
-using FinanceManager.Application.UseCases.Accounts.Commands.UpdateAccountCommand;
-using FinanceManager.Application.UseCases.Accounts.Commands.UpdatePasswordAccountCommand;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,6 +12,8 @@ public class AccountController : BaseController
     {
     }
 
+
+
     [HttpPut]
     public async Task<IActionResult> UpdateAsync([FromBody] UpdateAccountCommand command)
     {
@@ -22,7 +22,7 @@ public class AccountController : BaseController
 
     [HttpPatch]
     [Route("change-password")]
-    public async Task<IActionResult> UpdatePasswordAsync([FromBody] UpdatePasswordAccountCommand command)
+    public async Task<IActionResult> ChangePasswordAsync([FromBody] ChangeUserPasswordCommand command)
     {
         return await SendRequestAsync(command);
     }

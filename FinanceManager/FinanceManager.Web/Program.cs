@@ -1,6 +1,6 @@
 using System.Globalization;
-using FinanceManager.Domain.Extentions.HostBuilder;
 using FinanceManager.Web;
+using FinanceManager.Web.Extentions.HostBuilder;
 using FinanceManager.Web.Preferences;
 using FinanceManager.Web.Preferences.Client;
 using FinanceManager.Web.Shared.Constants.Localization;

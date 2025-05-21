@@ -1,5 +1,6 @@
-﻿using FinanceManager.Domain.API;
-using FinanceManager.Domain.Extentions;
+﻿using FinanceManager.Application.Models;
+using FinanceManager.Domain.API;
+using FinanceManager.Web.Extentions;
 using FinanceManager.Web.Preferences;
 using FinanceManager.Web.Services;
 using FinanceManager.Web.Shared.Components;
@@ -84,7 +85,7 @@ public class MainBodyViewModel : BaseViewModel<MainBody>
                 SecondName = user.GetLastName();
                 Email = user.GetEmail();
 
-                var currentUserResult = await (await _httpClient.GetAsync(ApiEndpoints.Accounts.Get(int.Parse(CurrentUserId)))).ToResultAsync<AccountDTO>();
+                var currentUserResult = await (await _httpClient.GetAsync(ApiEndpoints.Accounts.Get(CurrentUserId))).ToResultAsync<TokenDTO>();
                 if (!currentUserResult.Succeeded || currentUserResult.Data == null)
                 {
                     _snackBar.Add(

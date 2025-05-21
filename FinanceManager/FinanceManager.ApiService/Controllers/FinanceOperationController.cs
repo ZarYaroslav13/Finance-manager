@@ -40,7 +40,7 @@ public class FinanceOperationController : BaseController
     }
 
     [HttpDelete]
-    public async Task<IActionResult> DeleteAsync(int id)
+    public async Task<IActionResult> DeleteAsync(Guid id)
     {
         return await SendRequestAsync(new DeleteFinanceOperationCommand() { Id = id });
     }

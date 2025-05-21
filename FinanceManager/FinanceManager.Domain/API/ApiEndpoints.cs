@@ -21,7 +21,7 @@ public static class ApiEndpoints
         public const string BaseControllerUrl = _baseUrl + "/accounts";
 
         public const string GetCurrent = BaseControllerUrl;
-        public static string Get(int Id)
+        public static string Get(string Id)
         {
             return GetCurrent + '/' + Id;
         }

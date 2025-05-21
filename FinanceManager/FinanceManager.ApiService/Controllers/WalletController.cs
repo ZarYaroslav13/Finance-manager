@@ -15,14 +15,14 @@ public class WalletController : BaseController
     {
     }
 
-    [HttpGet("~/finance-manager/accounts/{accountId:int}/wallets")]
-    public async Task<IActionResult> GetWalletsAsync(int accountId)
+    [HttpGet("~/finance-manager/accounts/{accountId:guid}/wallets")]
+    public async Task<IActionResult> GetWalletsAsync(Guid accountId)
     {
         return await SendRequestAsync(new GetWalletsQuery() { AccountId = accountId });
     }
 
-    [HttpGet("{id:int}")]
-    public async Task<IActionResult> GetByIdAsync(int id)
+    [HttpGet("{id:guid}")]
+    public async Task<IActionResult> GetByIdAsync(Guid id)
     {
         return await SendRequestAsync(new GetByIdWalletQuery() { WalletId = id });
     }
@@ -40,7 +40,7 @@ public class WalletController : BaseController
     }
 
     [HttpDelete]
-    public async Task<IActionResult> DeleteAsync(int id)
+    public async Task<IActionResult> DeleteAsync(Guid id)
     {
         return await SendRequestAsync(new DeleteWalletCommand() { WalletId = id });
     }

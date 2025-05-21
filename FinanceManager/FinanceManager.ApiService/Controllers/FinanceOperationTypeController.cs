@@ -15,7 +15,7 @@ public class FinanceOperationTypeController : BaseController
     }
 
     [HttpGet("wallet/{walletId}")]
-    public async Task<IActionResult> GetAllAsync(int walletId)
+    public async Task<IActionResult> GetAllAsync(Guid walletId)
     {
         return await SendRequestAsync(new GetAllFinanceOperationTypesQuery() { WalletId = walletId });
     }
@@ -33,7 +33,7 @@ public class FinanceOperationTypeController : BaseController
     }
 
     [HttpDelete]
-    public async Task<IActionResult> DeleteAsync(int id)
+    public async Task<IActionResult> DeleteAsync(Guid id)
     {
         return await SendRequestAsync(new DeleteFinanceOperationTypeCommand() { Id = id });
     }

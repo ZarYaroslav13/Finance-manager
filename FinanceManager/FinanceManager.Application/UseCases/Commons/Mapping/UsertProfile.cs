@@ -1,13 +1,14 @@
 ﻿using AutoMapper;
 using FinanceManager.Application.UseCases.Accounts.Commands.Commands.UpdateAccountCommand;
+using FinanceManager.Domain.Models;
 
 namespace FinanceManager.Application.UseCases.Commons.Mapping;
 
-public class AccountProfile : Profile
+public class UsertProfile : Profile
 {
-    public AccountProfile()
+    public UsertProfile()
     {
-        CreateMap<UpdateAccountCommand, AccountModel>().BeforeMap((src, dest) =>
+        CreateMap<UpdateAccountCommand, UserModel>().BeforeMap((src, dest) =>
         {
             src.Email = src.Email.Trim();
             src.FirstName = src.FirstName.Trim();

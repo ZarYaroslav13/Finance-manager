@@ -4,7 +4,7 @@ namespace FinanceManager.Application.Models;
 
 public class FinanceReportDTO : Base.ModelDTO
 {
-    public int WalletId { get; }
+    public Guid WalletId { get; }
     public string WalletName { get; } = String.Empty;
     public int TotalIncome { get; }
     public int TotalExpense { get; }
@@ -12,7 +12,7 @@ public class FinanceReportDTO : Base.ModelDTO
     public Period Period { get; }
 
     public FinanceReportDTO(
-        int walletId,
+        Guid walletId,
         string walletName,
         int totalIncome,
         int totalExpense,

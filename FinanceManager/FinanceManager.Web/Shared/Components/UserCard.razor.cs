@@ -1,4 +1,4 @@
-﻿using FinanceManager.Domain.Extentions;
+﻿using FinanceManager.Web.Extentions;
 using Microsoft.AspNetCore.Components;
 
 namespace FinanceManager.Web.Shared.Components;

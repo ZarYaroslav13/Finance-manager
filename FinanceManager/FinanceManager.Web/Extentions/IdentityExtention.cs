@@ -1,6 +1,6 @@
 ﻿using System.Security.Claims;
 
-namespace FinanceManager.Domain.Extentions;
+namespace FinanceManager.Web.Extentions;
 
 public static class IdentityExtention
 {
@@ -12,9 +12,6 @@ public static class IdentityExtention
 
     internal static string GetLastName(this ClaimsPrincipal claimsPrincipal)
         => claimsPrincipal.FindFirstValue(ClaimTypes.Surname);
-
-    internal static string GetPhoneNumber(this ClaimsPrincipal claimsPrincipal)
-        => claimsPrincipal.FindFirstValue(ClaimTypes.MobilePhone);
 
     internal static string GetUserId(this ClaimsPrincipal claimsPrincipal)
        => claimsPrincipal.FindFirstValue(ClaimTypes.NameIdentifier);

@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Extensions.Options;
 using MudBlazor.Services;
 
-namespace FinanceManager.Domain.Extentions.HostBuilder;
+namespace FinanceManager.Web.Extentions.HostBuilder;
 
 public static class AddServiceConfigurationHostBuilderExtension
 {

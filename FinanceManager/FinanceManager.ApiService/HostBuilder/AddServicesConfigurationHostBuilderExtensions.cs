@@ -3,8 +3,10 @@ using FinanceManager.Application.UseCases.Commons.Behaviours;
 using FinanceManager.Domain.Authorization;
 using FinanceManager.Domain.Configurations;
 using FinanceManager.Domain.Services.Accounts;
+using FinanceManager.Domain.Services.CurrentUserService;
 using FinanceManager.Domain.Services.Finances;
 using FinanceManager.Domain.Services.Token;
+using FinanceManager.Domain.Services.Users;
 using FinanceManager.Domain.Services.Wallets;
 using FinanceManager.Infrastructure;
 using FinanceManager.Infrastructure.Models.Authorization;
@@ -35,7 +37,9 @@ public static class AddServicesConfigurationHostBuilderExtensions
 
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
+        services.AddScoped<ICurrentUserService, CurrentUserService>();
         services.AddScoped<IFinanceReportCreator, FinanceReportCreator>();
+        services.AddScoped<IUserService, UserService>();
         services.AddScoped<IAccountService, AccountService>();
         services.AddScoped<IWalletService, WalletService>();
         services.AddScoped<IFinanceService, FinanceService>();

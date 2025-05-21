@@ -1,9 +1,11 @@
 ﻿using System.Security.Claims;
 using Blazored.LocalStorage;
 using FinanceManager.Application.Models;
+using FinanceManager.Application.UseCases.Tokens.Commands.CreateRefreshTokenCommand;
+using FinanceManager.Application.UseCases.Tokens.Commands.GetTokenCommand;
 using FinanceManager.Domain.API;
-using FinanceManager.Domain.Extentions;
 using FinanceManager.Domain.Wrapper;
+using FinanceManager.Web.Extentions;
 using FinanceManager.Web.Shared.Constants.Storage;
 using Microsoft.Extensions.Localization;
 
@@ -32,15 +34,15 @@ public class AuthenticationService : IAuthenticationService
         return (await _authenticationStateProvider.GetAuthenticationStateAsync()).User;
     }
 
-    public async Task<Domain.Wrapper.IResult> LoginAsync(SignInCommand model)
+    public async Task<Domain.Wrapper.IResult> LoginAsync(GetTokenCommand model)
     {
         var response = await _httpClient.PostAsJsonAsync(ApiEndpoints.Login.SignIn, model);
-        var result = await response.ToResultAsync<BaseResponse<TokenDTO>>();
+        var result = await response.ToResultAsync<TokenDTO>();
 
         if (result.Succeeded)
         {
-            var jwtToken = result.Data.Data.JWTToken;
-            var refreshToken = result.Data.Data.RefreshToken;
+            var jwtToken = result.Data.Token;
+            var refreshToken = result.Data.RefreshToken;
 
             await RewriteTokens(jwtToken, refreshToken);
 
@@ -52,15 +54,15 @@ public class AuthenticationService : IAuthenticationService
         return Result.Fail();
     }
 
-    public async Task<Domain.Wrapper.IResult> LoginAdminAsync(SignInAdminCommand model)
+    public async Task<Domain.Wrapper.IResult> LoginAdminAsync(GetTokenCommand model)
     {
         var response = await _httpClient.PostAsJsonAsync(ApiEndpoints.Login.SignInAsAdmin, model);
-        var result = await response.ToResultAsync<BaseResponse<TokenDTO>>();
+        var result = await response.ToResultAsync<TokenDTO>();
 
         if (result.Succeeded)
         {
-            var jwtToken = result.Data.Data.JWTToken;
-            var refreshToken = result.Data.Data.RefreshToken;
+            var jwtToken = result.Data.Token;
+            var refreshToken = result.Data.RefreshToken;
 
             await RewriteTokens(jwtToken, refreshToken);
 
@@ -77,16 +79,16 @@ public class AuthenticationService : IAuthenticationService
         var token = await _localStorage.GetItemAsync<string>(StorageConstants.AuthToken);
         var refreshToken = await _localStorage.GetItemAsync<string>(StorageConstants.RefreshToken);
 
-        var response = await _httpClient.PostAsJsonAsync(ApiEndpoints.Login.Refresh, new CreateRefreshTokenCommand() { JwtToken = token, RefreshToken = refreshToken });
-        var result = await response.ToResultAsync<BaseResponse<TokenDTO>>();
+        var response = await _httpClient.PostAsJsonAsync(ApiEndpoints.Login.Refresh, new CreateRefreshTokenCommand() { Token = token, RefreshToken = refreshToken });
+        var result = await response.ToResultAsync<TokenDTO>();
 
         if (!result.Succeeded)
         {
             throw new ApplicationException(_localizer["Something went wrong during the refresh token action"]);
         }
 
-        token = result.Data.Data.JWTToken;
-        refreshToken = result.Data.Data.RefreshToken;
+        token = result.Data.Token;
+        refreshToken = result.Data.RefreshToken;
 
         await RewriteTokens(token, refreshToken);
 

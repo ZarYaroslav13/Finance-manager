@@ -1,4 +1,5 @@
-﻿using FinanceManager.Web.Pages.Authentication;
+﻿using FinanceManager.Application.UseCases.Tokens.Commands.GetTokenCommand;
+using FinanceManager.Web.Pages.Authentication;
 using FinanceManager.Web.Services;
 using Microsoft.Extensions.Localization;
 using MudBlazor;
@@ -7,7 +8,7 @@ namespace FinanceManager.Web.ViewModels.Pages;
 
 public class LoginViewModel : BaseViewModel<Login>
 {
-    public SignInCommand LoginModel { get; set; } = new();
+    public GetTokenCommand LoginModel { get; set; } = new();
 
     public bool PasswordVisibility { get; private set; } = false;
     public InputType PasswordInput { get; private set; } = InputType.Password;

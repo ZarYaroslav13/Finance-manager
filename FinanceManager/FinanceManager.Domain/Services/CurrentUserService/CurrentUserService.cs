@@ -12,7 +12,7 @@ public class CurrentUserService : ICurrentUserService
 
         Roles = httpContextAccessor.HttpContext?.User?.FindAll(ClaimTypes.Role).Select(c => c.Value).ToList();
 
-        isAdmin = Roles.Any(r => r == PolicyManager.AdminRole);
+        IsAdmin = Roles.Any(r => r == PolicyManager.AdminRole);
 
         Claims = httpContextAccessor.HttpContext?.User?.Claims.AsEnumerable().Select(item => new KeyValuePair<string, string>(item.Type, item.Value)).ToList();
     }
@@ -21,7 +21,7 @@ public class CurrentUserService : ICurrentUserService
 
     public List<string> Roles { get; }
 
-    public bool isAdmin { get; }
+    public bool IsAdmin { get; }
 
     public List<KeyValuePair<string, string>> Claims { get; set; }
 }

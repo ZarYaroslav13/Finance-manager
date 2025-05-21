@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using FinanceManager.Application.Models;
 using FinanceManager.Application.UseCases.Commons.Bases;
-using FinanceManager.Domain.Models;
 using FinanceManager.Domain.Services.CurrentUserService;
 using FinanceManager.Domain.Services.Finances;
 using FinanceManager.Domain.Services.Wallets;

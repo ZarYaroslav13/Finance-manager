@@ -24,7 +24,7 @@ public class UpdateFinanceOperationHandler : BaseRequestHandler, IRequestHandler
     {
         return await HandleAsync(async () =>
         {
-            await CheckIsUserHaveAccesToResourseAsync(request, 
+            await CheckIsUserHaveAccesToResourseAsync(request,
                 async () => await _financeService.IsCallerFinanceOperationOperationOwner(Guid.Parse(request.Id)));
 
             var data = _mapper.Map<FinanceOperationDTO>(

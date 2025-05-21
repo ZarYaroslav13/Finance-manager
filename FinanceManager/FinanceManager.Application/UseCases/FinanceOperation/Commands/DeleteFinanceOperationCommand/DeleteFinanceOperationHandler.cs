@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Azure;
 using FinanceManager.Application.UseCases.Commons.Bases;
 using FinanceManager.Domain.Services.Finances;
 using FinanceManager.Domain.Wrapper;
@@ -21,8 +20,8 @@ public class DeleteFinanceOperationHandler : BaseRequestHandler, IRequestHandler
     {
         return await HandleAsync(async () =>
         {
-            await CheckIsUserHaveAccesToResourseAsync(request, 
-                async () => 
+            await CheckIsUserHaveAccesToResourseAsync(request,
+                async () =>
                     await _financeService.IsCallerFinanceOperationOperationOwner(Guid.Parse(request.Id)));
 
             await _financeService.DeleteFinanceOperationAsync(Guid.Parse(request.Id));

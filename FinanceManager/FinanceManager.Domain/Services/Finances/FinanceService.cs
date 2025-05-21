@@ -24,6 +24,10 @@ public class FinanceService : BaseService, IFinanceService
         _financeOperationRepository = _unitOfWork.GetRepository<FinanceOperation>();
         _financeOperationTypeRepository = _unitOfWork.GetRepository<FinanceOperationType>();
     }
+    public async Task<bool> IsCallerWallerOwner(Guid walletId)
+    {
+        return await _walletService.IsCallerWalletOwner(walletId);
+    }
 
     #region FinanceOperationTypeMethods
 
@@ -33,6 +37,15 @@ public class FinanceService : BaseService, IFinanceService
                 .GetAllAsync(filter: fot => fot.WalletId == walletId))
                 .Select(_mapper.Map<FinanceOperationTypeModel>)
                 .ToList();
+    }
+
+    public async Task<FinanceOperationTypeModel> GetFinanceOperationType(Guid id)
+    {
+        if (id == Guid.Empty)
+            throw new ArgumentNullException(nameof(id));
+
+        return _mapper.Map<FinanceOperationTypeModel>(
+            await _financeOperationTypeRepository.GetByIdAsync(id));
     }
 
     public async Task<FinanceOperationTypeModel> AddFinanceOperationTypeAsync(FinanceOperationTypeModel type)
@@ -159,6 +172,15 @@ public class FinanceService : BaseService, IFinanceService
                     take: count))
                 .Select(_mapper.Map<FinanceOperationModel>)
                 .ToList();
+    }
+
+    public async Task<FinanceOperationModel> GetFinanceOperation(Guid id)
+    {
+        if (id == Guid.Empty)
+            throw new ArgumentNullException(nameof(id));
+
+        return _mapper.Map<FinanceOperationModel>(
+            await _financeOperationRepository.GetByIdAsync(id));
     }
 
     public async Task<FinanceOperationModel> AddFinanceOperationAsync(FinanceOperationModel financeOperation)

@@ -1,13 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using FinanceManager.Application.Models;
+using FinanceManager.Domain.Wrapper;
 using MediatR;
 
 namespace FinanceManager.Application.UseCases.FinanceOperation.Queries.GetAllOperationsOfWalletQuery;
 
-public class GetAllOperationsOfWalletQuery : BaseRequest, IRequest<BaseResponse<List<FinanceOperationDTO>>>
+public class GetAllOperationsOfWalletQuery : IRequest<Result<List<FinanceOperationDTO>>>
 {
     [Required]
-    public int WalletId { get; set; }
+    public string WalletId { get; set; }
 
     public int Index { get; set; } = 0;
 

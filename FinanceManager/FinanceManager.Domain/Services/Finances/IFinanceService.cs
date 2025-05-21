@@ -4,7 +4,11 @@ namespace FinanceManager.Domain.Services.Finances;
 
 public interface IFinanceService
 {
+    public Task<bool> IsCallerWallerOwner(Guid walletId);
+
     public Task<List<FinanceOperationTypeModel>> GetAllFinanceOperationTypesOfWalletAsync(Guid walletId);
+
+    public Task<FinanceOperationModel> GetFinanceOperation(Guid id);
 
     public Task<FinanceOperationTypeModel> AddFinanceOperationTypeAsync(FinanceOperationTypeModel type);
 
@@ -19,6 +23,7 @@ public interface IFinanceService
     public Task<List<FinanceOperationModel>> GetAllFinanceOperationOfWalletAsync(Guid walletId, DateTime startDate, DateTime endDate);
 
     public Task<List<FinanceOperationModel>> GetAllFinanceOperationOfTypeAsync(Guid typeId, int index = 0, int count = 0);
+    public Task<FinanceOperationTypeModel> GetFinanceOperationType(Guid id);
 
     public Task<FinanceOperationModel> AddFinanceOperationAsync(FinanceOperationModel financeOperation);
 

@@ -1,44 +1,39 @@
 ﻿using AutoMapper;
 using FinanceManager.Application.Models;
 using FinanceManager.Application.UseCases.Commons.Bases;
+using FinanceManager.Domain.Services.CurrentUserService;
 using FinanceManager.Domain.Services.Finances;
+using FinanceManager.Domain.Wrapper;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
 namespace FinanceManager.Application.UseCases.FinanceOperation.Queries.GetAllOperationsOfWalletQuery;
 
-public class GetAllOperationsOfWalletHandler : BaseRequestHandler, IRequestHandler<GetAllOperationsOfWalletQuery, BaseResponse<List<FinanceOperationDTO>>>
+public class GetAllOperationsOfWalletHandler : BaseRequestHandler, IRequestHandler<GetAllOperationsOfWalletQuery, Result<List<FinanceOperationDTO>>>
 {
     private readonly IFinanceService _financeService;
 
-    public GetAllOperationsOfWalletHandler(IFinanceService financeService, IMapper mapper, ILogger<BaseRequestHandler> logger) : base(mapper, logger)
+    public GetAllOperationsOfWalletHandler(IFinanceService financeService,
+        ICurrentUserService currentUserService, IMapper mapper, ILogger<BaseRequestHandler> logger) : base(currentUserService, mapper, logger)
     {
         _financeService = financeService ?? throw new ArgumentNullException(nameof(financeService));
     }
 
-    public async Task<BaseResponse<List<FinanceOperationDTO>>> Handle(GetAllOperationsOfWalletQuery request, CancellationToken cancellationToken)
+    public async Task<Result<List<FinanceOperationDTO>>> Handle(GetAllOperationsOfWalletQuery request, CancellationToken cancellationToken)
     {
-        var response = new BaseResponse<List<FinanceOperationDTO>>();
+        Guid walletId = Guid.Parse(request.WalletId);
 
-        try
+        return await HandleAsync(async () =>
         {
-            await CheckIsUserResourceOwnerOrAdminAsync(request,
-                addinionallyCondition:
-                    async () =>
-                        await _financeService.IsAccountOwnerOfWalletAsync(request.UserId, request.WalletId));
+            await CheckIsUserHaveAccesToResourseAsync(request,
+                async () => await _financeService.IsCallerWallerOwner(walletId));
 
-            response.Data = (await _financeService
-                .GetAllFinanceOperationOfWalletAsync(request.WalletId, request.Index, request.Count))
+            var data = (await _financeService
+                .GetAllFinanceOperationOfWalletAsync(walletId, request.Index, request.Count))
                 .Select(_mapper.Map<FinanceOperationDTO>)
                 .ToList();
 
-            response.MakeAsSuccess("Operations received successfully");
-        }
-        catch (Exception e)
-        {
-            response.Message = e.Message;
-        }
-
-        return response;
+            return Result<List<FinanceOperationDTO>>.Success(data, "Operations received successfully");
+        });
     }
 }

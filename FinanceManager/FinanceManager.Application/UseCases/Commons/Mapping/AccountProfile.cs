@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
-using FinanceManager.Application.UseCases.Users.Commands.UpdateCommand;
+using FinanceManager.Application.UseCases.Accounts.Commands.Commands.UpdateAccountCommand;
+using FinanceManager.Application.UseCases.Accounts.Commands.UpdateAccountCommand;
 
 namespace FinanceManager.Application.UseCases.Commons.Mapping;
 

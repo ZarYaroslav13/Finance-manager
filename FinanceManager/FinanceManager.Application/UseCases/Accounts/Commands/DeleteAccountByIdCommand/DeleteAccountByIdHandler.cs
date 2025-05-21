@@ -6,7 +6,7 @@ using FinanceManager.Domain.Wrapper;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace FinanceManager.Application.UseCases.Users.Commands.DeleteAccountByIdCommand;
+namespace FinanceManager.Application.UseCases.Accounts.Commands.Commands.DeleteAccountByIdCommand;
 
 public class DeleteAccountByIdHandler : BaseRequestHandler, IRequestHandler<DeleteAccountByIdCommand, IResult>
 {

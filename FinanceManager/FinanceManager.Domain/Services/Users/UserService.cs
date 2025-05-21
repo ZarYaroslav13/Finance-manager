@@ -83,13 +83,17 @@ public class UserService : IUserService
     {
         var users = await _userManager.Users.ToListAsync();
         var result = _mapper.Map<List<UserModel>>(users);
-        return await Result<List<UserModel>>.SuccessAsync(result);
+
+        return await Result<List<UserModel>>.SuccessAsync(result, "Users retrived successfully!");
     }
 
     public async Task<Result<UserModel>> GetAsync(Guid userId)
     {
         var user = await _userManager.Users.Where(u => u.Id == userId).FirstOrDefaultAsync();
         var result = _mapper.Map<UserModel>(user);
+
+        result.Roles = (await _userManager.GetRolesAsync(user)).ToList();
+
         return await Result<UserModel>.SuccessAsync(result);
     }
 
@@ -199,14 +203,14 @@ public class UserService : IUserService
         return await Result.SuccessAsync("Roles Updated");
     }
 
-    public async Task<IResult> DeleteUser(string id)
+    public async Task<IResult> DeleteUserAsync(Guid id)
     {
         if (string.IsNullOrWhiteSpace(id))
             return await Result.FailAsync("Id must be specified");
 
         try
         {
-            var user = await _userManager.FindByIdAsync(id);
+            var user = await _userManager.FindByIdAsync(id.ToString());
             await _userManager.DeleteAsync(user);
 
             return await Result.SuccessAsync("Deleted successfully!");

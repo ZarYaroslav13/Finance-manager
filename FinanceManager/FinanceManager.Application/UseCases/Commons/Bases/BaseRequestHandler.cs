@@ -43,15 +43,32 @@ public class BaseRequestHandler
         }
     }
 
+    protected async Task<PaginatedResult<T>> HandleAsync<T>(Func<Task<PaginatedResult<T>>> handle)
+    {
+        try
+        {
+            return await handle();
+        }
+        catch (Exception e)
+        {
+            return PaginatedResult<T>.Failure(new() { e.Message });
+        }
+    }
+
     protected async Task CheckIsUserHaveAccesToResourseAsync<Request>(
         Request request,
-        Func<Task<bool>> callerIsOwnerPredicate,
+        Func<Task<bool>> callerIsOwnerPredicate = null,
         string loggingMessage = "")
         where Request : class, IBaseRequest
     {
         HandleLoggingMessage(request, loggingMessage);
 
-        bool IsCallerResourseOwner = await callerIsOwnerPredicate();
+        bool IsCallerResourseOwner = true;
+
+        if (callerIsOwnerPredicate != null)
+        {
+            IsCallerResourseOwner = await callerIsOwnerPredicate();
+        }
 
         if (!_currentUserService.IsAdmin && !IsCallerResourseOwner)
         {

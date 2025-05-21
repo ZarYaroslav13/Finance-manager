@@ -20,24 +20,32 @@ public class UserDTO : ModelDTO
         set { _email = value.Trim(); }
     }
 
+    public List<string> Roles
+    {
+        get { return _roles; }
+        set { _roles = value; }
+    }
+
     private string _lastName = string.Empty;
     private string _firstName = string.Empty;
     private string _email = string.Empty;
+    private List<string> _roles;
 
     public override bool Equals(object? obj)
     {
         if (!base.Equals(obj))
             return false;
 
-        UserDTO human = (UserDTO)obj;
+        UserDTO user = (UserDTO)obj;
 
-        return _firstName == human.FirstName
-               && _lastName == human.LastName
-               && _email == human.Email;
+        return _firstName == user.FirstName
+               && _lastName == user.LastName
+               && _email == user.Email
+               && AreEqualLists(_roles, user._roles);
     }
 
     public override int GetHashCode()
     {
-        return HashCode.Combine(base.GetHashCode(), _firstName, _lastName, _email);
+        return HashCode.Combine(base.GetHashCode(), _firstName, _lastName, _email, GetHashCodeOfList(_roles));
     }
 }

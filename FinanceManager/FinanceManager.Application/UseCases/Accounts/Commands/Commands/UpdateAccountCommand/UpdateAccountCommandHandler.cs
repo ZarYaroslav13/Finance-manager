@@ -5,34 +5,36 @@ using FinanceManager.Domain.Services.Accounts;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace FinanceManager.Application.UseCases.Users.Commands.UpdatePasswordAccountCommand;
+namespace FinanceManager.Application.UseCases.Accounts.Commands.UpdateAccountCommand;
 
-public class UpdatePasswordAccountCommandHandler : BaseRequestHandler, IRequestHandler<UpdatePasswordAccountCommand, BaseResponse<AccountDTO>>
+public class UpdateAccountCommandHandler : BaseRequestHandler, IRequestHandler<UpdateAccountCommand, BaseResponse<AccountDTO>>
 {
     private readonly IAccountService _accountService;
 
-    public UpdatePasswordAccountCommandHandler(IAccountService accountService, IMapper mapper, ILogger<BaseRequestHandler> logger) : base(mapper, logger)
+    public UpdateAccountCommandHandler(IAccountService accountService, IMapper mapper, ILogger<BaseRequestHandler> logger) : base(mapper, logger)
     {
         _accountService = accountService ?? throw new ArgumentNullException(nameof(accountService));
     }
 
-    public async Task<BaseResponse<AccountDTO>> Handle(UpdatePasswordAccountCommand request, CancellationToken cancellationToken)
+    public async Task<BaseResponse<AccountDTO>> Handle(UpdateAccountCommand request, CancellationToken cancellationToken)
     {
         BaseResponse<AccountDTO> response = new();
+        int userId = request.UserId;
+        string userRole = request.UserRole;
 
         try
         {
             CheckIsUserResourceOwnerOrAdmin(request, idSelector: r => r.Id);
 
             response.Data = _mapper.Map<AccountDTO>(
-                    await _accountService.UpdatePasswordAsync(request.Id, request.OldPassword, request.NewPassword));
+                    await _accountService.UpdateAccountAsync(
+                        _mapper.Map<AccountModel>(request)));
 
             response.MakeAsSuccess("Updating success!");
         }
         catch (Exception e)
         {
             _logger.LogError(e.Message);
-            response.Message = e.Message;
         }
 
         return response;

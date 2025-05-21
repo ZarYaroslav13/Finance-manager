@@ -1,13 +1,15 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using FinanceManager.Application.DataAnnotations.Attributes;
 using FinanceManager.Application.Models;
+using FinanceManager.Domain.Wrapper;
 using MediatR;
 
-namespace FinanceManager.Application.UseCases.Users.Commands.UpdatePasswordAccountCommand;
+namespace FinanceManager.Application.UseCases.Accounts.Commands.Commands.UpdatePasswordAccountCommand;
 
-public class UpdatePasswordAccountCommand : BaseRequest, IRequest<BaseResponse<AccountDTO>>
+public class UpdatePasswordAccountCommand : IRequest<Result<AccountDTO>>
 {
-    [Required]
-    public int Id { get; set; }
+    [GuidRequired]
+    public Guid Id { get; set; }
 
     [Required]
     [Length(10, 50)]

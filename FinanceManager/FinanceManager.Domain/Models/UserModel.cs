@@ -9,7 +9,10 @@ public class UserModel : Model
     public string FirstName { get; set; } = string.Empty;
 
     public string Email { get; set; } = string.Empty;
+
     public List<WalletModel> Wallets { get; set; } = new();
+
+    public List<string> Roles { get; set; } = new();
 
     public override bool Equals(object? obj)
     {

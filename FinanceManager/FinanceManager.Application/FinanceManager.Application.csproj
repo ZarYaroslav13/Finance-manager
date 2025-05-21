@@ -13,6 +13,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="UseCases\FinanceOperationType\Commands\AddFinanceOperationTypeCommand\f2n0mjon.ln4~" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\FinanceManager.Domain\FinanceManager.Domain.csproj" />
   </ItemGroup>
 

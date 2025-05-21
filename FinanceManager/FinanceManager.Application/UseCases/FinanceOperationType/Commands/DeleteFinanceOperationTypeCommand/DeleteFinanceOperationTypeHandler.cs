@@ -20,24 +20,14 @@ public class DeleteFinanceOperationTypeHandler : BaseRequestHandler, IRequestHan
 
     public async Task<IResult> Handle(DeleteFinanceOperationTypeCommand request, CancellationToken cancellationToken)
     {
-        var response = new BaseResponse<bool>();
-        try
+        return await HandleAsync(async () =>
         {
-            await CheckIsUserResourceOwnerOrAdminAsync(request,
-                addinionallyCondition:
-                    async () =>
-                        await _financeService.IsAccountOwnerOfFinanceOperationTypeAsync(request.UserId, request.Id));
+            await CheckIsUserHaveAccesToResourseAsync(request,
+                async () => await _financeService.IsCallerFinanceOperationTypeOwner(request.Id));
 
             await _financeService.DeleteFinanceOperationTypeAsync(request.Id);
 
-            response.Data = true;
-            response.MakeAsSuccess("Types received successfully!");
-        }
-        catch (Exception e)
-        {
-            response.Message = e.Message;
-        }
-
-        return response;
+            return Result.Success("Finance operation created successfully!");
+        });
     }
 }

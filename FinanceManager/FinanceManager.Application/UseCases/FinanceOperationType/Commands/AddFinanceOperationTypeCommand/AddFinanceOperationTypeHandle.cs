@@ -22,25 +22,16 @@ public class AddFinanceOperationTypeHandle : BaseRequestHandler, IRequestHandler
 
     public async Task<Result<FinanceOperationTypeDTO>> Handle(AddFinanceOperationTypeCommand request, CancellationToken cancellationToken)
     {
-        var response = new BaseResponse<FinanceOperationTypeDTO>();
-        try
+        return await HandleAsync(async () =>
         {
-            await CheckIsUserResourceOwnerOrAdminAsync(request,
-                addinionallyCondition:
-                    async () =>
-                        await _financeService.IsAccountOwnerOfWalletAsync(request.UserId, request.WalletId));
+            await CheckIsUserHaveAccesToResourseAsync(request,
+                async () => await _financeService.IsCallerWallerOwner(request.WalletId));
 
-            response.Data = _mapper.Map<FinanceOperationTypeDTO>(
+            var data = _mapper.Map<FinanceOperationTypeDTO>(
                                 await _financeService.AddFinanceOperationTypeAsync(
                                     _mapper.Map<FinanceOperationTypeModel>(request)));
 
-            response.MakeAsSuccess("Types received successfully!");
-        }
-        catch (Exception e)
-        {
-            response.Message = e.Message;
-        }
-
-        return response;
+            return await Result<FinanceOperationTypeDTO>.SuccessAsync(data, "Finance operation created successfully!");
+        });
     }
 }

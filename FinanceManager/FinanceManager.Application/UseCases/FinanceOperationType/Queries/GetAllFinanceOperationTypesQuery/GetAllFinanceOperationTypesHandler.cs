@@ -21,26 +21,17 @@ public class GetAllFinanceOperationTypesHandler : BaseRequestHandler, IRequestHa
 
     public async Task<Result<List<FinanceOperationTypeDTO>>> Handle(GetAllFinanceOperationTypesQuery request, CancellationToken cancellationToken)
     {
-        var response = new BaseResponse<List<FinanceOperationTypeDTO>>();
-        try
+        return await HandleAsync(async () =>
         {
-            await CheckIsUserResourceOwnerOrAdminAsync(request,
-                addinionallyCondition:
-                    async () =>
-                        await _financeService.IsAccountOwnerOfWalletAsync(request.UserId, request.WalletId));
+            await CheckIsUserHaveAccesToResourseAsync(request,
+                async () => await _financeService.IsCallerWallerOwner(request.WalletId));
 
-            response.Data = (await _financeService.GetAllFinanceOperationTypesOfWalletAsync(request.WalletId))
+            var data = (await _financeService.GetAllFinanceOperationTypesOfWalletAsync(request.WalletId))
                 .Select(_mapper.Map<FinanceOperationTypeDTO>)
                 .ToList();
 
-            response.MakeAsSuccess("Types received successfully!");
-        }
-        catch (Exception e)
-        {
-            response.Message = e.Message;
-        }
-
-        return response;
+            return await Result<List<FinanceOperationTypeDTO>>.SuccessAsync(data, "Finance operation created successfully!");
+        });
     }
 }
 

@@ -1,4 +1,5 @@
-﻿using FinanceManager.Application.Models;
+﻿using FinanceManager.Application.DataAnnotations.Attributes;
+using FinanceManager.Application.Models;
 using FinanceManager.Domain.Wrapper;
 using MediatR;
 
@@ -6,5 +7,6 @@ namespace FinanceManager.Application.UseCases.FinanceOperationType.Queries.GetAl
 
 public class GetAllFinanceOperationTypesQuery : IRequest<Result<List<FinanceOperationTypeDTO>>>
 {
-    public string WalletId { get; set; }
+    [GuidRequired]
+    public Guid WalletId { get; set; }
 }

@@ -23,7 +23,7 @@ public class CreatePeriodReportHandler : BaseRequestHandler, IRequestHandler<Cre
 
     public async Task<Result<FinanceReportDTO>> Handle(CreatePeriodReportCommand request, CancellationToken cancellationToken)
     {
-        try
+        return await HandleAsync(async () =>
         {
             await CheckIsUserHaveAccesToResourseAsync(request,
                 async () => await _walletService.IsCallerWalletOwner(Guid.Parse(request.WalletId)));
@@ -34,10 +34,6 @@ public class CreatePeriodReportHandler : BaseRequestHandler, IRequestHandler<Cre
                     await _creator.CreateFinanceReportAsync(wallet, request.StartDate, request.EndDate));
 
             return Result<FinanceReportDTO>.Success(data, "Report created successfully!");
-        }
-        catch (Exception e)
-        {
-            return Result<FinanceReportDTO>.Fail(e.Message);
-        }
+        });
     }
 }

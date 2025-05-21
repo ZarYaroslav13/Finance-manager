@@ -10,7 +10,7 @@ using Microsoft.Extensions.Logging;
 
 namespace FinanceManager.Application.UseCases.FinanceOperation.Commands.AddFinanceOperationCommand;
 
-public class AddFinanceOperationHandler : BaseRequestHandler, IRequestHandler<AddFinanceOperationCommand, Result<FinanceOperationDTO>>
+public class AddFinanceOperationHandler : BaseRequestHandler, IRequestHandler<AddFinanceOperationCommand, IResult<FinanceOperationDTO>>
 {
     private readonly IFinanceService _financeService;
 
@@ -20,33 +20,18 @@ public class AddFinanceOperationHandler : BaseRequestHandler, IRequestHandler<Ad
         _financeService = financeService ?? throw new ArgumentNullException(nameof(financeService));
     }
 
-    public async Task<Result<FinanceOperationDTO>> Handle(AddFinanceOperationCommand request, CancellationToken cancellationToken)
+    public async Task<IResult<FinanceOperationDTO>> Handle(AddFinanceOperationCommand request, CancellationToken cancellationToken)
     {
-        var response = new Result<FinanceOperationDTO>();
-
-        try
+        return await HandleAsync(async () =>
         {
             await CheckIsUserHaveAccesToResourseAsync(request,
-                request.TypeId,
-
-                );
-
-            await CheckIsUserResourceOwnerOrAdminAsync(request,
-                addinionallyCondition:
-                    async () =>
-                        await _financeService.IsAccountOwnerOfFinanceOperationTypeAsync(request.UserId, request.TypeId));
+                async () => await _financeService.IsCallerFinanceOperationTypeOwner(Guid.Parse(request.TypeId)));
 
             var data = _mapper.Map<FinanceOperationDTO>(
                     await _financeService.AddFinanceOperationAsync(
                             _mapper.Map<FinanceOperationModel>(request)));
 
             return await Result<FinanceOperationDTO>.SuccessAsync(data, "Finance operation created successfully!");
-        }
-        catch (Exception e)
-        {
-            return await Result<FinanceOperationDTO>.FailAsync(e.Message);
-        }
-
-        return response;
+        });
     }
 }

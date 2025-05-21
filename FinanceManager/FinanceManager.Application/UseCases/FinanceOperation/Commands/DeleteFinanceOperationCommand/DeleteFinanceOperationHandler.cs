@@ -1,12 +1,14 @@
 ﻿using AutoMapper;
+using Azure;
 using FinanceManager.Application.UseCases.Commons.Bases;
 using FinanceManager.Domain.Services.Finances;
+using FinanceManager.Domain.Wrapper;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
 namespace FinanceManager.Application.UseCases.FinanceOperation.Commands.DeleteFinanceOperationCommand;
 
-public class DeleteFinanceOperationHandler : BaseRequestHandler, IRequestHandler<DeleteFinanceOperationCommand, BaseResponse<bool>>
+public class DeleteFinanceOperationHandler : BaseRequestHandler, IRequestHandler<DeleteFinanceOperationCommand, IResult>
 {
     private readonly IFinanceService _financeService;
 
@@ -15,28 +17,17 @@ public class DeleteFinanceOperationHandler : BaseRequestHandler, IRequestHandler
         _financeService = financeService ?? throw new ArgumentNullException(nameof(financeService));
     }
 
-    public async Task<BaseResponse<bool>> Handle(DeleteFinanceOperationCommand request, CancellationToken cancellationToken)
+    public async Task<IResult> Handle(DeleteFinanceOperationCommand request, CancellationToken cancellationToken)
     {
-        var response = new BaseResponse<bool>();
-
-        try
+        return await HandleAsync(async () =>
         {
-            await CheckIsUserResourceOwnerOrAdminAsync(request,
-                addinionallyCondition:
-                    async () =>
-                        await _financeService.IsAccountOwnerOfFinanceOperationAsync(request.UserId, request.Id));
+            await CheckIsUserHaveAccesToResourseAsync(request, 
+                async () => 
+                    await _financeService.IsCallerFinanceOperationOperationOwner(Guid.Parse(request.Id)));
 
-            await _financeService.DeleteFinanceOperationAsync(request.Id);
+            await _financeService.DeleteFinanceOperationAsync(Guid.Parse(request.Id));
 
-            response.MakeAsSuccess("Finance operation deleted successfully!");
-
-            response.Data = true;
-        }
-        catch (Exception e)
-        {
-            response.Message = e.Message;
-        }
-
-        return response;
+            return Result.Success("Finance operation deleted successfully!");
+        });
     }
 }

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FinanceManager.Domain.Services.CurrentUserService;
+using FinanceManager.Domain.Wrapper;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
@@ -17,6 +18,31 @@ public class BaseRequestHandler
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
     }
+
+    protected async Task<IResult> HandleAsync(Func<Task<IResult>> handle)
+    {
+        try
+        {
+            return await handle();
+        }
+        catch (Exception e)
+        {
+            return Result.Fail(e.Message);
+        }
+    }
+
+    protected async Task<Result<T>> HandleAsync<T>(Func<Task<Result<T>>> handle)
+    {
+        try
+        {
+            return await handle();
+        }
+        catch (Exception e)
+        {
+            return Result<T>.Fail(e.Message);
+        }
+    }
+
     protected async Task CheckIsUserHaveAccesToResourseAsync<Request>(
         Request request,
         Func<Task<bool>> callerIsOwnerPredicate,

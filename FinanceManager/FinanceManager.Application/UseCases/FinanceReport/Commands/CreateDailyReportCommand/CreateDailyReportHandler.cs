@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using FinanceManager.Application.Models;
 using FinanceManager.Application.UseCases.Commons.Bases;
+using FinanceManager.Domain.Models;
 using FinanceManager.Domain.Services.CurrentUserService;
 using FinanceManager.Domain.Services.Finances;
 using FinanceManager.Domain.Services.Wallets;
@@ -25,7 +26,7 @@ public class CreateDailyReportHandler : BaseRequestHandler, IRequestHandler<Crea
 
     public async Task<Result<FinanceReportDTO>> Handle(CreateDailyReportCommand request, CancellationToken cancellationToken)
     {
-        try
+        return await HandleAsync(async () =>
         {
             await CheckIsUserHaveAccesToResourseAsync(request,
                 async () => await _walletService.IsCallerWalletOwner(Guid.Parse(request.WalletId)));
@@ -36,10 +37,6 @@ public class CreateDailyReportHandler : BaseRequestHandler, IRequestHandler<Crea
                     await _creator.CreateFinanceReportAsync(wallet, request.Date));
 
             return Result<FinanceReportDTO>.Success(data, "Report created successfully!");
-        }
-        catch (Exception e)
-        {
-            return Result<FinanceReportDTO>.Fail(e.Message);
-        }
+        });
     }
 }

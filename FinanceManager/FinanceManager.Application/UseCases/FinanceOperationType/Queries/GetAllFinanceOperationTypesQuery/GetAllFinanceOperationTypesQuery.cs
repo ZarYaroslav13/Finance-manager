@@ -1,9 +1,10 @@
 ﻿using FinanceManager.Application.Models;
+using FinanceManager.Domain.Wrapper;
 using MediatR;
 
 namespace FinanceManager.Application.UseCases.FinanceOperationType.Queries.GetAllFinanceOperationTypesQuery;
 
-public class GetAllFinanceOperationTypesQuery : BaseRequest, IRequest<BaseResponse<List<FinanceOperationTypeDTO>>>
+public class GetAllFinanceOperationTypesQuery : IRequest<Result<List<FinanceOperationTypeDTO>>>
 {
-    public int WalletId { get; set; }
+    public string WalletId { get; set; }
 }

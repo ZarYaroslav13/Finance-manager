@@ -1,11 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using FinanceManager.Application.DataAnnotations.Attributes;
 using FinanceManager.Application.Models;
+using FinanceManager.Domain.Wrapper;
 using FinanceManager.Infrastructure.Models;
 using MediatR;
 
 namespace FinanceManager.Application.UseCases.FinanceOperationType.Commands.AddFinanceOperationTypeCommand;
 
-public class AddFinanceOperationTypeCommand : BaseRequest, IRequest<BaseResponse<FinanceOperationTypeDTO>>
+public class AddFinanceOperationTypeCommand : IRequest<Result<FinanceOperationTypeDTO>>
 {
     [Required]
     [Length(2, 50)]
@@ -16,7 +18,6 @@ public class AddFinanceOperationTypeCommand : BaseRequest, IRequest<BaseResponse
     [Required]
     public EntryType EntryType { get; set; }
 
-    [Required]
-    [Range(1, int.MaxValue)]
-    public int WalletId { get; set; }
+    [GuidRequired]
+    public Guid WalletId { get; set; }
 }

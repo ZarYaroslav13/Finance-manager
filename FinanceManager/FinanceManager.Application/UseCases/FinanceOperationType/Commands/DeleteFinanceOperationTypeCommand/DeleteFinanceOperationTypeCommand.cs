@@ -1,8 +1,9 @@
-﻿using MediatR;
+﻿using FinanceManager.Domain.Wrapper;
+using MediatR;
 
 namespace FinanceManager.Application.UseCases.FinanceOperationType.Commands.DeleteFinanceOperationTypeCommand;
 
-public class DeleteFinanceOperationTypeCommand : BaseRequest, IRequest<BaseResponse<bool>>
+public class DeleteFinanceOperationTypeCommand : IRequest<IResult>
 {
-    public int Id { get; set; }
+    public string Id { get; set; }
 }

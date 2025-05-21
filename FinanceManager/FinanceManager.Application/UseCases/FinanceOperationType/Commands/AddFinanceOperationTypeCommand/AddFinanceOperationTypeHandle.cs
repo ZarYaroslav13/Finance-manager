@@ -2,22 +2,25 @@
 using FinanceManager.Application.Models;
 using FinanceManager.Application.UseCases.Commons.Bases;
 using FinanceManager.Domain.Models;
+using FinanceManager.Domain.Services.CurrentUserService;
 using FinanceManager.Domain.Services.Finances;
+using FinanceManager.Domain.Wrapper;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
 namespace FinanceManager.Application.UseCases.FinanceOperationType.Commands.AddFinanceOperationTypeCommand;
 
-public class AddFinanceOperationTypeHandle : BaseRequestHandler, IRequestHandler<AddFinanceOperationTypeCommand, BaseResponse<FinanceOperationTypeDTO>>
+public class AddFinanceOperationTypeHandle : BaseRequestHandler, IRequestHandler<AddFinanceOperationTypeCommand, Result<FinanceOperationTypeDTO>>
 {
     private readonly IFinanceService _financeService;
 
-    public AddFinanceOperationTypeHandle(IFinanceService financeService, IMapper mapper, ILogger<BaseRequestHandler> logger) : base(mapper, logger)
+    public AddFinanceOperationTypeHandle(IFinanceService financeService,
+        ICurrentUserService currentUserService, IMapper mapper, ILogger<BaseRequestHandler> logger) : base(currentUserService, mapper, logger)
     {
         _financeService = financeService ?? throw new ArgumentNullException(nameof(financeService));
     }
 
-    public async Task<BaseResponse<FinanceOperationTypeDTO>> Handle(AddFinanceOperationTypeCommand request, CancellationToken cancellationToken)
+    public async Task<Result<FinanceOperationTypeDTO>> Handle(AddFinanceOperationTypeCommand request, CancellationToken cancellationToken)
     {
         var response = new BaseResponse<FinanceOperationTypeDTO>();
         try

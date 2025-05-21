@@ -1,9 +1,11 @@
-﻿using System.Reflection;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Reflection;
 
 namespace FinanceManager.Infrastructure.Models.Base;
 
 public abstract class Entity
 {
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public Guid Id { get; set; }
 
     protected bool AreEqualLists<T>(List<T>? list1, List<T>? list2) where T : class

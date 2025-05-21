@@ -1,14 +1,15 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using FinanceManager.Application.Models;
+using FinanceManager.Domain.Wrapper;
 using FinanceManager.Infrastructure.Models;
 using MediatR;
 
 namespace FinanceManager.Application.UseCases.FinanceOperationType.Commands.UpdateFinanceOperationTypeCommand;
 
-public class UpdateFinanceOperationTypeCommand : BaseRequest, IRequest<BaseResponse<FinanceOperationTypeDTO>>
+public class UpdateFinanceOperationTypeCommand : IRequest<Result<FinanceOperationTypeDTO>>
 {
     [Required]
-    public int Id { get; set; }
+    public string Id { get; set; }
 
     [Required]
     [Length(2, 50)]
@@ -21,7 +22,7 @@ public class UpdateFinanceOperationTypeCommand : BaseRequest, IRequest<BaseRespo
 
     [Required]
     [Range(1, int.MaxValue)]
-    public int WalletId { get; set; }
+    public string WalletId { get; set; }
 
     public string WalletName { get; set; }
 }

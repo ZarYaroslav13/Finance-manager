@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FinanceManager.Application.UseCases.Commons.Bases;
+using FinanceManager.Domain.Services.CurrentUserService;
 using FinanceManager.Domain.Services.Finances;
 using FinanceManager.Domain.Wrapper;
 using MediatR;
@@ -11,7 +12,8 @@ public class DeleteFinanceOperationHandler : BaseRequestHandler, IRequestHandler
 {
     private readonly IFinanceService _financeService;
 
-    public DeleteFinanceOperationHandler(IFinanceService financeService, IMapper mapper, ILogger<BaseRequestHandler> logger) : base(mapper, logger)
+    public DeleteFinanceOperationHandler(IFinanceService financeService,
+        ICurrentUserService currentUserService, IMapper mapper, ILogger<BaseRequestHandler> logger) : base(currentUserService, mapper, logger)
     {
         _financeService = financeService ?? throw new ArgumentNullException(nameof(financeService));
     }

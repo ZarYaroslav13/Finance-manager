@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using FinanceManager.Domain.Models;
+using FinanceManager.Domain.Services.CurrentUserService;
+using FinanceManager.Domain.Services.Wallets;
 using FinanceManager.Infrastructure.Models;
 using FinanceManager.Infrastructure.Repository;
 using FinanceManager.Infrastructure.UnitOfWork;
@@ -8,11 +10,17 @@ namespace FinanceManager.Domain.Services.Finances;
 
 public class FinanceService : BaseService, IFinanceService
 {
+    private readonly ICurrentUserService _currentUserService;
+    private readonly IWalletService _walletService;
     private readonly IRepository<FinanceOperation> _financeOperationRepository;
     private readonly IRepository<FinanceOperationType> _financeOperationTypeRepository;
 
-    public FinanceService(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork, mapper)
+    public FinanceService(ICurrentUserService currentUserService, IWalletService walletService,
+        IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork, mapper)
     {
+        _walletService = walletService ?? throw new ArgumentNullException(nameof(walletService));
+        _currentUserService = currentUserService ?? throw new ArgumentNullException(nameof(currentUserService));
+
         _financeOperationRepository = _unitOfWork.GetRepository<FinanceOperation>();
         _financeOperationTypeRepository = _unitOfWork.GetRepository<FinanceOperationType>();
     }
@@ -68,6 +76,16 @@ public class FinanceService : BaseService, IFinanceService
 
         _financeOperationTypeRepository.Delete(id);
         await _unitOfWork.SaveChangesAsync();
+    }
+
+    public async Task<bool> IsCallerFinanceOperationTypeOwner(Guid typeId)
+    {
+        if(typeId == Guid.Empty)
+            throw new ArgumentException(nameof(typeId));
+
+        var type = await _financeOperationTypeRepository.GetByIdAsync(typeId);
+
+        return await _walletService.IsCallerWalletOwner(type.WalletId);
     }
     #endregion
 
@@ -185,6 +203,16 @@ public class FinanceService : BaseService, IFinanceService
 
         _financeOperationRepository.Delete(id);
         await _unitOfWork.SaveChangesAsync();
+    }
+    public async Task<bool> IsCallerFinanceOperationOperationOwner(Guid operationId)
+    {
+        if (operationId == Guid.Empty)
+            throw new ArgumentException(nameof(operationId));
+
+        var operation = await _financeOperationRepository.GetByIdAsync(operationId);
+
+        return await IsCallerFinanceOperationTypeOwner(operation.TypeId);
+
     }
 
     private async Task<bool> IsNotExistFinanceOperationTypeWithIdAsync(Guid id)

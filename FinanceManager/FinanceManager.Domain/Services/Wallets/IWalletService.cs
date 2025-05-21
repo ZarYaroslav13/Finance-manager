@@ -13,4 +13,6 @@ public interface IWalletService
     public Task DeleteWalletByIdAsync(Guid id);
 
     public Task<WalletModel> FindWalletAsync(Guid id);
+
+    public Task<bool> IsCallerWalletOwner(Guid walletId);
 }

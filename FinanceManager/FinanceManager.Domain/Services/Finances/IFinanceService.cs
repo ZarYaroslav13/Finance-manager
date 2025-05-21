@@ -12,6 +12,8 @@ public interface IFinanceService
 
     public Task DeleteFinanceOperationTypeAsync(Guid id);
 
+    public Task<bool> IsCallerFinanceOperationTypeOwner(Guid typeId);
+
     public Task<List<FinanceOperationModel>> GetAllFinanceOperationOfWalletAsync(Guid walletId, int index = 0, int count = 0);
 
     public Task<List<FinanceOperationModel>> GetAllFinanceOperationOfWalletAsync(Guid walletId, DateTime startDate, DateTime endDate);
@@ -23,4 +25,6 @@ public interface IFinanceService
     public Task<FinanceOperationModel> UpdateFinanceOperationAsync(FinanceOperationModel financeOperation);
 
     public Task DeleteFinanceOperationAsync(Guid id);
+
+    public Task<bool> IsCallerFinanceOperationOperationOwner(Guid operationId);
 }

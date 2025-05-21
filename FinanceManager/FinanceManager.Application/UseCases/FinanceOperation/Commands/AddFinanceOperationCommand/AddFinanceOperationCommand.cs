@@ -1,10 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using FinanceManager.Application.Models;
+using FinanceManager.Domain.Wrapper;
 using MediatR;
 
 namespace FinanceManager.Application.UseCases.FinanceOperation.Commands.AddFinanceOperationCommand;
 
-public class AddFinanceOperationCommand : BaseRequest, IRequest<BaseResponse<FinanceOperationDTO>>
+public class AddFinanceOperationCommand : IRequest<Result<FinanceOperationDTO>>
 {
     [Range(0, int.MaxValue)]
     public int Amount { get; set; }
@@ -13,5 +14,5 @@ public class AddFinanceOperationCommand : BaseRequest, IRequest<BaseResponse<Fin
     public DateTime Date { get; set; }
 
     [Required]
-    public int TypeId { get; set; }
+    public string TypeId { get; set; }
 }

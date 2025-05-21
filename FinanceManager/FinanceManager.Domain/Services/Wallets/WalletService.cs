@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FinanceManager.Domain.Models;
+using FinanceManager.Domain.Services.CurrentUserService;
 using FinanceManager.Infrastructure.Models;
 using FinanceManager.Infrastructure.Repository;
 using FinanceManager.Infrastructure.UnitOfWork;
@@ -8,11 +9,15 @@ namespace FinanceManager.Domain.Services.Wallets;
 
 public class WalletService : BaseService, IWalletService
 {
+    private readonly ICurrentUserService _currentUserService;
     private readonly IRepository<Wallet> _repository;
 
-    public WalletService(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork, mapper)
+    public WalletService(ICurrentUserService currentUserService,
+        IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork, mapper)
     {
         _repository = _unitOfWork.GetRepository<Wallet>();
+
+        _currentUserService = currentUserService ?? throw new ArgumentNullException(nameof(currentUserService));
     }
 
     public async Task<List<WalletModel>> GetAllWalletsOfAccountAsync(Guid accountId)
@@ -28,10 +33,10 @@ public class WalletService : BaseService, IWalletService
         ArgumentNullException.ThrowIfNull(wallet);
 
         if (wallet.Id != Guid.Empty)
-            throw new ArgumentException(nameof(wallet));
+            throw new ArgumentException(nameof(wallet.Id));
 
-        if (wallet.AccountId <= 0)
-            throw new ArgumentOutOfRangeException(nameof(wallet));
+        if (wallet.AccountId == Guid.Empty)
+            throw new ArgumentException(nameof(wallet.AccountId));
 
         var result = _repository.Insert(
                                 _mapper.Map<Wallet>(wallet));
@@ -66,5 +71,15 @@ public class WalletService : BaseService, IWalletService
         return _mapper
             .Map<WalletModel>(
                await _repository.GetByIdAsync(id));
+    }
+
+    public async Task<bool> IsCallerWalletOwner(Guid walletId)
+    {
+        if(walletId == Guid.Empty)
+            throw new ArgumentNullException(nameof(walletId));
+
+        var wallet = await _repository.GetByIdAsync(walletId);
+
+        return wallet.AccountId.ToString() == _currentUserService.UserId;
     }
 }

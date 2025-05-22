@@ -1,26 +1,11 @@
 ﻿using FinanceManager.Domain.Models;
 using FinanceManager.Infrastructure.Models;
+using FinanceManager.Infrastructure.Models.Authorization;
 
 namespace FinanceManager.Domain.Tests.TestHelpers;
 
 public static class AssertDataLayerDomainModelsCompareExtension
 {
-    public static void AreEqual(this Assert assert, Account dbAccount, AccountModel domainAccount)
-    {
-        ArgumentNullException.ThrowIfNull(nameof(dbAccount));
-        ArgumentNullException.ThrowIfNull(nameof(domainAccount));
-
-        Assert.IsTrue(AreEqual(dbAccount, domainAccount));
-    }
-
-    public static void AreEqual(this Assert assert, Admin dbAdmin, AdminModel domainAdmin)
-    {
-        ArgumentNullException.ThrowIfNull(nameof(dbAdmin));
-        ArgumentNullException.ThrowIfNull(nameof(domainAdmin));
-
-        Assert.IsTrue(AreEqual(dbAdmin, domainAdmin));
-    }
-
     public static void AreEqual(this Assert assert, Wallet dbWallet, WalletModel domainWallet)
     {
         ArgumentNullException.ThrowIfNull(nameof(dbWallet));
@@ -43,26 +28,6 @@ public static class AssertDataLayerDomainModelsCompareExtension
         ArgumentNullException.ThrowIfNull(nameof(domainFinanceOperation));
 
         Assert.IsTrue(AreEqual(dbFinanceOperation, domainFinanceOperation));
-    }
-
-    private static bool AreEqual(Account dbAccount, AccountModel domainAccount)
-    {
-        return AreEqual((Human)dbAccount, domainAccount)
-       && AreEqualAccountWallets(dbAccount, domainAccount);
-    }
-
-    private static bool AreEqual(Admin dbAdmin, AdminModel domainAdmin)
-    {
-        return AreEqual((Human)dbAdmin, domainAdmin);
-    }
-
-    private static bool AreEqual(Human dbHuman, UserModel domainHuman)
-    {
-        return (dbHuman.Id == domainHuman.Id)
-       && (dbHuman.LastName == domainHuman.LastName)
-       && (dbHuman.FirstName == domainHuman.FirstName)
-       && (dbHuman.Email == domainHuman.Email)
-       && (dbHuman.Password == domainHuman.Password);
     }
 
     private static bool AreEqual(Wallet dbWallet, WalletModel domainWallet)
@@ -106,7 +71,7 @@ public static class AssertDataLayerDomainModelsCompareExtension
         return AreEqual(dbFinanceOperation, (FinanceOperationModel)Expense) && dbFinanceOperation.Type.EntryType == FinanceManager.Infrastructure.Models.EntryType.Expense;
     }
 
-    private static bool AreEqualAccountWallets(Account dbAccount, AccountModel domainAccount)
+    private static bool AreEqualAccountWallets(FinanceManagerUser dbAccount, UserModel domainAccount)
     {
         if (dbAccount.Wallets.Count != domainAccount.Wallets.Count)
             return false;

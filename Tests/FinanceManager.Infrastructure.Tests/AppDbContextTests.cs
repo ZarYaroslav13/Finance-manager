@@ -27,7 +27,6 @@ public class AppDbContextTests
     [TestMethod]
     public void TableInitialization_DbSetsNotNull_DbSet()
     {
-        Assert.IsNotNull(_context.Accounts);
         Assert.IsNotNull(_context.Wallets);
         Assert.IsNotNull(_context.FinanceOperationTypes);
         Assert.IsNotNull(_context.FinanceOperations);
@@ -36,22 +35,18 @@ public class AppDbContextTests
     [TestMethod]
     public void UsedEntityConfiguration_RelatedEntitiesNotNull_RelatedEntities()
     {
-        _context.Accounts.AddRange(EntitiesTestDataProvider.Accounts);
         _context.Wallets.AddRange(EntitiesTestDataProvider.Wallets);
         _context.FinanceOperationTypes.AddRange(EntitiesTestDataProvider.FinanceOperationTypes);
         _context.FinanceOperations.AddRange(EntitiesTestDataProvider.FinanceOperations);
         _context.SaveChanges();
 
-        var accounts = _context.Accounts.
+        var wallets = _context.Wallets.
                             AsQueryable().
-                            Include(a => a.Wallets).
-                            ThenInclude(w => w.FinanceOperationTypes).
+                            Include(w => w.FinanceOperationTypes).
                             ThenInclude(tt => tt.FinanceOperations).
                             AsNoTracking().
                             ToList();
-        var account = accounts.FirstOrDefault();
-        var wallet = account.Wallets.FirstOrDefault();
-        var t = wallet.GetFinanceOperations();
+        var wallet = wallets.FirstOrDefault();
 
         Assert.IsNotNull(wallet);
         Assert.IsNotNull(wallet.GetFinanceOperations());

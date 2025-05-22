@@ -1,26 +1,28 @@
-﻿namespace FinanceManager.Infrastructure.Tests.Data.Models.Base;
+﻿using FinanceManager.Infrastructure.Models.Authorization;
 
-public static class HumanTestDataProvider
+namespace FinanceManager.Infrastructure.Tests.Data.Models.Base;
+
+public static class UserTestDataProvider
 {
     public static IEnumerable<object[]> EqualsSamePropertiesReturnsTrueTestData { get; } = new List<object[]>
     {
         new object[]
         {
-            new Human
+            new FinanceManagerUser
             {
-                Id = 1,
+                Id = Guid.Parse("1"),
                 FirstName = "John",
                 LastName = "Doe",
                 Email = "john.doe@example.com",
-                Password = "password123"
+
             },
-            new Human
+            new FinanceManagerUser
             {
-                Id = 1,
+                Id = Guid.Parse("1"),
                 FirstName = "John",
                 LastName = "Doe",
                 Email = "john.doe@example.com",
-                Password = "password123"
+
             }
         }
     };
@@ -29,97 +31,96 @@ public static class HumanTestDataProvider
     {
         new object[]
         {
-            new Human
+            new FinanceManagerUser
             {
-                Id = 1,
+                Id = Guid.Parse("1"),
                 FirstName = "John",
                 LastName = "Doe",
                 Email = "john.doe@example.com",
-                Password = "password123"
+
             },
-            new Human
+            new FinanceManagerUser
             {
-                Id = 2,
+                Id = Guid.Parse("2"),
                 FirstName = "John",
                 LastName = "Doe",
                 Email = "john.doe@example.com",
-                Password = "password123"
+
             }
         },
         new object[]
         {
-            new Human
+            new FinanceManagerUser
             {
-                Id = 1,
+                Id = Guid.Parse("1"),
                 FirstName = "John",
                 LastName = "Doe",
                 Email = "john.doe@example.com",
-                Password = "password123"
+
             },
-            new Human
+            new FinanceManagerUser
             {
-                Id = 1,
+                Id = Guid.Parse("1"),
                 FirstName = "Jane",
                 LastName = "Doe",
                 Email = "john.doe@example.com",
-                Password = "password123"
+
             }
         },
         new object[]
         {
-            new Human
+            new FinanceManagerUser
             {
-                Id = 1,
+                Id = Guid.Parse("1"),
                 FirstName = "John",
                 LastName = "Doe",
                 Email = "john.doe@example.com",
-                Password = "password123"
+
             },
-            new Human
+            new FinanceManagerUser
             {
-                Id = 1,
+                Id = Guid.Parse("1"),
                 FirstName = "John",
                 LastName = "Smith",
                 Email = "john.doe@example.com",
-                Password = "password123"
+
             }
         },
         new object[]
         {
-            new Human
+            new FinanceManagerUser
             {
-                Id = 1,
+                Id = Guid.Parse("1"),
                 FirstName = "John",
                 LastName = "Doe",
                 Email = "john.doe@example.com",
-                Password = "password123"
+
             },
-            new Human
+            new FinanceManagerUser
             {
-                Id = 1,
+                Id = Guid.Parse("1"),
                 FirstName = "John",
                 LastName = "Doe",
                 Email = "jane.doe@example.com",
-                Password = "password123"
+
             }
         },
         new object[]
         {
-            new Human
+            new FinanceManagerUser
             {
-                Id = 1,
+                Id = Guid.Parse("1"),
                 FirstName = "John",
                 LastName = "Doe",
                 Email = "john.doe@example.com",
-                Password = "password123"
+
             },
-            new Human
+            new FinanceManagerUser
             {
-                Id = 1,
+                Id = Guid.Parse("1"),
                 FirstName = "John",
                 LastName = "Doe",
-                Email = "john.doe@example.com",
-                Password = "password456"
+                Email = "john.doe@example.com"
             }
         }
     };

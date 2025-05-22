@@ -8,22 +8,22 @@ public static class FinanceOperationDTOTestDataProvider
     private static FinanceOperationTypeDTO _randomIncomeType =
                 new FinanceOperationTypeDTO()
                 {
-                    Id = 3,
+                    Id = Guid.Parse("3"),
                     Description = "Description",
                     EntryType = FinanceManager.Infrastructure.Models.EntryType.Income,
                     Name = "Name",
-                    WalletId = 1,
+                    WalletId = Guid.Parse("1"),
                     WalletName = "WalletName"
                 };
 
     private static FinanceOperationTypeDTO _randomExpenseType =
                 new FinanceOperationTypeDTO()
                 {
-                    Id = 4,
+                    Id = Guid.Parse("4"),
                     Description = "Description",
                     EntryType = FinanceManager.Infrastructure.Models.EntryType.Expense,
                     Name = "Name",
-                    WalletId = 1,
+                    WalletId = Guid.Parse("1"),
                     WalletName = "WalletName"
                 };
 
@@ -32,13 +32,13 @@ public static class FinanceOperationDTOTestDataProvider
         new object[]
         {
             new IncomeDTO(){
-                Id = 1,
+                Id = Guid.Parse("1"),
                 Amount = 1000,
                 Date =  DateTime.MinValue,
                 Type = _randomIncomeType
             },
             new IncomeDTO(){
-                Id = 1,
+                Id = Guid.Parse("1"),
                 Amount = 1000,
                 Date =  DateTime.MinValue,
                 Type = _randomIncomeType
@@ -47,13 +47,13 @@ public static class FinanceOperationDTOTestDataProvider
         new object[]
         {
             new IncomeDTO(){
-                Id = 1,
+                Id = Guid.Parse("1"),
                 Amount = 1000,
                 Date =  DateTime.MinValue,
                 Type = _randomIncomeType
             },
             new IncomeDTO(){
-                Id = 1,
+                Id = Guid.Parse("1"),
                 Amount = 1000,
                 Date =  DateTime.MinValue,
                 Type = _randomIncomeType
@@ -77,12 +77,12 @@ public static class FinanceOperationDTOTestDataProvider
         new object[]
         {
             new IncomeDTO(){
-                Id = 1,
+                Id = Guid.Parse("1"),
                 Date =  DateTime.MinValue,
                 Type = _randomIncomeType
             },
             new IncomeDTO(){
-                Id = 1,
+                Id = Guid.Parse("1"),
                 Date =  DateTime.MinValue,
                 Type = _randomIncomeType
 
@@ -91,13 +91,13 @@ public static class FinanceOperationDTOTestDataProvider
         new object[]
         {
             new IncomeDTO(){
-                Id = 1,
+                Id = Guid.Parse("1"),
                 Amount = 1000,
                 Type = _randomIncomeType
 
             },
             new IncomeDTO(){
-                Id = 1,
+                Id = Guid.Parse("1"),
                 Amount = 1000,
                 Type = _randomIncomeType
 
@@ -110,14 +110,14 @@ public static class FinanceOperationDTOTestDataProvider
         new object[]
         {
             new IncomeDTO(){
-                Id = 1,
+                Id = Guid.Parse("1"),
                 Amount = 1000,
                 Date =  DateTime.MinValue,
                 Type = _randomIncomeType
 
             },
             new IncomeDTO(){
-                Id = 2,
+                Id = Guid.Parse("2"),
                 Amount = 1000,
                 Date =  DateTime.MinValue,
                 Type = _randomIncomeType
@@ -127,14 +127,14 @@ public static class FinanceOperationDTOTestDataProvider
         new object[]
         {
             new IncomeDTO(){
-                Id = 1,
+                Id = Guid.Parse("1"),
                 Amount = 1000,
                 Date =  DateTime.MinValue,
                 Type = _randomIncomeType
 
             },
             new IncomeDTO(){
-                Id = 1,
+                Id = Guid.Parse("1"),
                 Amount = 2000,
                 Date =  DateTime.MinValue,
                 Type = _randomIncomeType
@@ -144,14 +144,14 @@ public static class FinanceOperationDTOTestDataProvider
         new object[]
         {
             new IncomeDTO(){
-                Id = 1,
+                Id = Guid.Parse("1"),
                 Amount = 1000,
                 Date =  DateTime.MinValue,
                 Type = _randomIncomeType
 
             },
             new IncomeDTO(){
-                Id = 1,
+                Id = Guid.Parse("1"),
                 Amount = 1000,
                 Date =  DateTime.MaxValue,
                 Type = _randomIncomeType
@@ -161,14 +161,14 @@ public static class FinanceOperationDTOTestDataProvider
         new object[]
         {
             new IncomeDTO(){
-                Id = 1,
+                Id = Guid.Parse("1"),
                 Amount = 1000,
                 Date =  DateTime.MinValue,
                 Type = _randomIncomeType
 
             },
             new ExpenseDTO(){
-                Id = 1,
+                Id = Guid.Parse("1"),
                 Amount = 1000,
                 Date =  DateTime.MinValue,
                 Type = _randomExpenseType
@@ -177,7 +177,7 @@ public static class FinanceOperationDTOTestDataProvider
         new object[]
         {
             new IncomeDTO(){
-                Id = 1,
+                Id = Guid.Parse("1"),
                 Amount = 1000,
                 Type = _randomIncomeType
             },
@@ -186,7 +186,7 @@ public static class FinanceOperationDTOTestDataProvider
         new object[]
         {
             new IncomeDTO(){
-                Id = 1,
+                Id = Guid.Parse("1"),
                 Amount = 1000,
                 Type = _randomIncomeType
             },

@@ -8,23 +8,18 @@ public class AccountDataProvider
     {
         new object[]
         {
-            new AccountModel(){ Id = 1, LastName = "LastName", FirstName = "FirstName", Email = "Email", Password = "Password", Wallets = new()},
-            new AccountModel(){ Id = 1, LastName = "LastName", FirstName = "FirstName", Email = "Email", Password = "Password", Wallets = new()}
+            new UserModel(){ Id = Guid.Parse("1"), LastName = "LastName", FirstName = "FirstName", Email = "Email", Wallets = new()},
+            new UserModel(){ Id = Guid.Parse("1"), LastName = "LastName", FirstName = "FirstName", Email = "Email", Wallets = new()}
         },
         new object[]
         {
-            new AccountModel(){ Id = 1, FirstName = "FirstName", Email = "Email", Password = "Password"},
-            new AccountModel(){ Id = 1, FirstName = "FirstName", Email = "Email", Password = "Password"}
+            new UserModel(){ Id = Guid.Parse("1"), LastName = "LastName", FirstName = "FirstName"},
+            new UserModel(){ Id = Guid.Parse("1"), LastName = "LastName", FirstName = "FirstName"}
         },
         new object[]
         {
-            new AccountModel(){ Id = 1, LastName = "LastName", FirstName = "FirstName", Password = "Password"},
-            new AccountModel(){ Id = 1, LastName = "LastName", FirstName = "FirstName", Password = "Password"}
-        },
-        new object[]
-        {
-            new AccountModel(){ Id = 1, FirstName = "FirstName", Email = "Email", Password = "Password"},
-            new AccountModel(){ Id = 1, FirstName = "FirstName", Email = "Email", Password = "Password"}
+            new UserModel(){ Id = Guid.Parse("1"), FirstName = "FirstName", Email = "Email"},
+            new UserModel(){ Id = Guid.Parse("1"), FirstName = "FirstName", Email = "Email"}
         }
     };
 
@@ -32,37 +27,37 @@ public class AccountDataProvider
     {
         new object[]
         {
-            new AccountModel(){ Id = 1, LastName = "LastName", FirstName = "FirstName", Email = "Email", Password = "Password"},
-            new AccountModel(){ Id = 2, LastName = "LastName", FirstName = "FirstName", Email = "Email", Password = "Password"}
+            new UserModel(){ Id = Guid.Parse("1"), LastName = "LastName", FirstName = "FirstName", Email = "Email"},
+            new UserModel(){ Id = Guid.Parse("2"), LastName = "LastName", FirstName = "FirstName", Email = "Email"}
         },
         new object[]
         {
-            new AccountModel(){ Id = 1, FirstName = "FirstName", Email = "Email", Password = "Password"},
-            new AccountModel(){ Id = 1, LastName = "LastName", FirstName = "FirstName", Email = "Email", Password = "Password"}
+            new UserModel(){ Id = Guid.Parse("1"), FirstName = "FirstName", Email = "Email"},
+            new UserModel(){ Id = Guid.Parse("1"), LastName = "LastName", FirstName = "FirstName", Email = "Email"}
         },
         new object[]
         {
-            new AccountModel(),
-            new AccountModel(){ Id = 1, LastName = "LastName", FirstName = "FirstName", Email = "Email", Password = "Password"}
+            new UserModel(),
+            new UserModel(){ Id = Guid.Parse("1"), LastName = "LastName", FirstName = "FirstName", Email = "Email"}
         },
         new object[]
         {
-            new AccountModel(){ Id = 1, LastName = "LastName", FirstName = "FirstName", Email = "Email", Password = "Password"},
-            new AccountModel()
+            new UserModel(){ Id = Guid.Parse("1"), LastName = "LastName", FirstName = "FirstName", Email = "Email"},
+            new UserModel()
         },
         new object[]
         {
-            new AccountModel(){ Id = 1, LastName = "LastName", FirstName = "FirstName", Email = "Email", Password = "Password"},
-            new AccountModel(){ Id = 1, LastName = "LastName", FirstName = "FirstName", Email = "Email", }
+            new UserModel(){ Id = Guid.Parse("1"), LastName = "LastName", FirstName = "FirstName", Email = "Email"},
+            new UserModel(){ Id = Guid.Parse("1"), LastName = "LastName", FirstName = "FirstName", Email = "Email", }
         },
         new object[]
         {
-            new AccountModel(){ Id = 1, LastName = "LastName", FirstName = "FirstName", Email = "Email", Password = "Password"},
+            new UserModel(){ Id = Guid.Parse("1"), LastName = "LastName", FirstName = "FirstName", Email = "Email"},
             null
         },
         new object[]
         {
-            new AccountModel(){ Id = 1, LastName = "LastName", FirstName = "FirstName", Email = "Email", Password = "Password"},
+            new UserModel(){ Id = Guid.Parse("1"), LastName = "LastName", FirstName = "FirstName", Email = "Email"},
             new WalletModel()
         }
     };

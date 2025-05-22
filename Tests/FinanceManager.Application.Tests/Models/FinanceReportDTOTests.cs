@@ -12,16 +12,16 @@ public class FinanceReportDTOTests
     [DynamicData(nameof(FinanceReportDTOTestsDataProvider.ConstructorThrowExceptionTestData), typeof(FinanceReportDTOTestsDataProvider))]
     public void Constructor_ArgumentsAreNull_ThorwsException(string walletName, List<FinanceOperationDTO> operations)
     {
-        Assert.ThrowsException<ArgumentNullException>(() => new FinanceReportDTO(A.Dummy<int>(), walletName, A.Dummy<int>(), A.Dummy<int>(), operations, A.Dummy<Period>()));
+        Assert.ThrowsException<ArgumentNullException>(() => new FinanceReportDTO(A.Dummy<Guid>(), walletName, A.Dummy<int>(), A.Dummy<int>(), operations, A.Dummy<Period>()));
     }
 
     [TestMethod]
     public void Constructor_ArgumentsArePassedCorrectly_FinanceReport()
     {
-        const int walletId = 1;
         const string walletName = "Name";
         const int totalIncome = 100;
         const int totalExpense = 50;
+        Guid walletId = Guid.Parse("1");
         Period period = new Period() { StartDate = DateTime.MinValue, EndDate = DateTime.MaxValue };
 
         var result = new FinanceReportDTO(walletId, walletName, totalIncome, totalExpense, FinanceReportDTOTestsDataProvider.FinanceOperations, period);

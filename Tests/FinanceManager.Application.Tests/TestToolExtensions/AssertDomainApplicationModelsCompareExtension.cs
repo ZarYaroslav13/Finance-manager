@@ -7,21 +7,14 @@ namespace FinanceManager.Application.Tests.TestToolExtensions;
 public static class AssertappApplicationModelsCompareExtension
 
 {
-    public static void AreEqual(this Assert assert, AccountModel domainAccount, AccountDTO appAccount)
+    public static void AreEqual(this Assert assert, UserModel domainWallet, UserDTO appWallet)
     {
-        ArgumentNullException.ThrowIfNull(nameof(appAccount));
-        ArgumentNullException.ThrowIfNull(nameof(appAccount));
+        ArgumentNullException.ThrowIfNull(nameof(domainWallet));
+        ArgumentNullException.ThrowIfNull(nameof(appWallet));
 
-        Assert.IsTrue(AreEqual(domainAccount, appAccount));
+        Assert.IsTrue(AreEqual(domainWallet, appWallet));
     }
 
-    public static void AreEqual(this Assert assert, AdminModel domainAdmin, AdminDTO appAdmin)
-    {
-        ArgumentNullException.ThrowIfNull(nameof(appAdmin));
-        ArgumentNullException.ThrowIfNull(nameof(appAdmin));
-
-        Assert.IsTrue(AreEqual(domainAdmin, appAdmin));
-    }
 
     public static void AreEqual(this Assert assert, WalletModel domainWallet, WalletDTO appWallet)
     {
@@ -55,22 +48,12 @@ public static class AssertappApplicationModelsCompareExtension
         Assert.IsTrue(AreEqual(domainFinanceReport, appFinanceReport));
     }
 
-    private static bool AreEqual(AccountModel domainAccount, AccountDTO appAccount)
-    {
-        return (domainAccount.Id == appAccount.Id)
-       && (domainAccount.LastName == appAccount.LastName)
-       && (domainAccount.FirstName == appAccount.FirstName)
-       && (domainAccount.Email == appAccount.Email)
-       && (domainAccount.Password == appAccount.Password);
-    }
-
     private static bool AreEqual(UserModel domainHuman, UserDTO appHuman)
     {
         return (domainHuman.Id == appHuman.Id)
        && (domainHuman.LastName == appHuman.LastName)
        && (domainHuman.FirstName == appHuman.FirstName)
-       && (domainHuman.Email == appHuman.Email)
-       && (domainHuman.Password == appHuman.Password);
+       && (domainHuman.Email == appHuman.Email);
     }
 
     private static bool AreEqual(WalletModel domainWallet, WalletDTO appWallet)

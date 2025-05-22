@@ -1,16 +1,18 @@
 ﻿using AutoMapper;
 using FinanceManager.Application.Mapping;
+using FinanceManager.Application.Models.Base;
 using FinanceManager.Application.Tests.Data.Mapping;
 using FinanceManager.Application.Tests.TestToolExtensions;
+using FinanceManager.Domain.Models;
 
 namespace FinanceManager.Application.Tests.Mapping;
 
 [TestClass]
-public class AccountProfileTests
+public class UserProfileTests
 {
     private readonly IMapper _mapper;
 
-    public AccountProfileTests()
+    public UserProfileTests()
     {
         _mapper = new MapperConfiguration(
                 cfg =>
@@ -25,21 +27,21 @@ public class AccountProfileTests
 
     [TestMethod]
     [DynamicData(nameof(AccountProfileTestDataProvider.DomainAccount), typeof(AccountProfileTestDataProvider))]
-    public void Map_AccountDataMappedCorrectly_AccountModels(AccountModel domainAccount)
+    public void Map_AccountDataMappedCorrectly_AccountModels(UserModel domainAccount)
     {
-        var appAccount = _mapper.Map<AccountDTO>(domainAccount);
+        var appAccount = _mapper.Map<UserDTO>(domainAccount);
 
         Assert.That.AreEqual(domainAccount, appAccount);
     }
 
     [TestMethod]
     [DynamicData(nameof(AccountProfileTestDataProvider.DomainAccount), typeof(AccountProfileTestDataProvider))]
-    public void Map_AccountDataAreNotLostAfterMapping_AccountModels(AccountModel domainAccount)
+    public void Map_AccountDataAreNotLostAfterMapping_AccountModels(UserModel domainAccount)
     {
         var mappeddomainAccount = _mapper
-            .Map<AccountModel>(
+            .Map<UserModel>(
                 _mapper
-                    .Map<AccountDTO>(domainAccount));
+                    .Map<UserDTO>(domainAccount));
 
         Assert.AreEqual(domainAccount, mappeddomainAccount);
     }

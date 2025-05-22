@@ -4,6 +4,7 @@ using FinanceManager.Domain.Authorization;
 using FinanceManager.Domain.Configurations;
 using FinanceManager.Domain.Services.Accounts;
 using FinanceManager.Domain.Services.CurrentUserService;
+using FinanceManager.Domain.Services.Email;
 using FinanceManager.Domain.Services.Finances;
 using FinanceManager.Domain.Services.Token;
 using FinanceManager.Domain.Services.Users;
@@ -39,6 +40,7 @@ public static class AddServicesConfigurationHostBuilderExtensions
 
         services.AddScoped<ICurrentUserService, CurrentUserService>();
         services.AddScoped<IFinanceReportCreator, FinanceReportCreator>();
+        services.AddScoped<IEmailService, SMTPEmailService>();
         services.AddScoped<IUserService, UserService>();
         services.AddScoped<IAccountService, AccountService>();
         services.AddScoped<IWalletService, WalletService>();
@@ -49,7 +51,7 @@ public static class AddServicesConfigurationHostBuilderExtensions
 
         services.AddPoliticalAuthorization();
 
-        services.AddIdentity<FinanceManagerUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
+        services.AddIdentity<FinanceManagerUser, FinanceManagerRole>().AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 
         services.AddControllers(options =>
             options.Conventions

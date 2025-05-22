@@ -2,7 +2,7 @@
 
 namespace FinanceManager.Domain.Tests.Data.Models.Base;
 
-public static class HumanModelTestsDataProvider
+public static class UserModelTestsDataProvider
 {
     public static IEnumerable<object[]> EqualsSameValuesReturnsTrueTestData { get; } = new List<object[]>
     {
@@ -10,19 +10,19 @@ public static class HumanModelTestsDataProvider
         {
             new UserModel
             {
-                Id = 1,
+                Id =  Guid.Parse("1"),
                 FirstName = "John",
                 LastName = "Doe",
                 Email = "john.doe@example.com",
-                Password = "password123"
+
             },
             new UserModel
             {
-                Id = 1,
+                Id =  Guid.Parse("1"),
                 FirstName = "John",
                 LastName = "Doe",
                 Email = "john.doe@example.com",
-                Password = "password123"
+
             }
         }
     };
@@ -33,106 +33,87 @@ public static class HumanModelTestsDataProvider
         {
             new UserModel
             {
-                Id = 1,
+                Id =  Guid.Parse("1"),
                 FirstName = "John",
                 LastName = "Doe",
                 Email = "john.doe@example.com",
-                Password = "password123"
+
             },
             new UserModel
             {
-                Id = 2,
+                Id = Guid.Parse("2"),
                 FirstName = "John",
                 LastName = "Doe",
                 Email = "john.doe@example.com",
-                Password = "password123"
+
             }
         },
         new object[]
         {
             new UserModel
             {
-                Id = 1,
+                Id =  Guid.Parse("1"),
                 FirstName = "John",
                 LastName = "Doe",
                 Email = "john.doe@example.com",
-                Password = "password123"
+
             },
             new UserModel
             {
-                Id = 1,
+                Id =  Guid.Parse("1"),
                 FirstName = "Jane",
                 LastName = "Doe",
                 Email = "john.doe@example.com",
-                Password = "password123"
+
             }
         },
         new object[]
         {
             new UserModel
             {
-                Id = 1,
+                Id =  Guid.Parse("1"),
                 FirstName = "John",
                 LastName = "Doe",
                 Email = "john.doe@example.com",
-                Password = "password123"
+
             },
             new UserModel
             {
-                Id = 1,
+                Id =  Guid.Parse("1"),
                 FirstName = "John",
                 LastName = "Smith",
                 Email = "john.doe@example.com",
-                Password = "password123"
+
             }
         },
         new object[]
         {
             new UserModel
             {
-                Id = 1,
+                Id =  Guid.Parse("1"),
                 FirstName = "John",
                 LastName = "Doe",
                 Email = "john.doe@example.com",
-                Password = "password123"
+
             },
             new UserModel
             {
-                Id = 1,
+                Id =  Guid.Parse("1"),
                 FirstName = "Jane",
                 LastName = "Doe",
                 Email = "jane.smith@example.com",
-                Password = "password123"
+
             }
         },
         new object[]
         {
             new UserModel
             {
-                Id = 1,
+                Id =  Guid.Parse("1"),
                 FirstName = "John",
                 LastName = "Doe",
                 Email = "john.doe@example.com",
-                Password = "password123"
-            },
-            new UserModel
-            {
-                Id = 1,
-                FirstName = "John",
-                LastName = "Doe",
-                Email = "john.doe@example.com",
-                Password = "password456"
-            }
-        },
-        new object[]
-        {
-            new UserModel
-            {
-                Id = 1,
-                FirstName = "John",
-                LastName = "Doe",
-                Email = "john.doe@example.com",
-                Password = "password123"
+
             },
             null
         },
@@ -140,19 +121,18 @@ public static class HumanModelTestsDataProvider
         {
             new UserModel
             {
-                Id = 1,
+                Id =  Guid.Parse("1"),
                 FirstName = "John",
                 LastName = "Doe",
                 Email = "john.doe@example.com",
-                Password = "password123"
+
             },
-            new AccountModel
+            new UserModel
             {
-                Id = 1,
+                Id =  Guid.Parse("1"),
                 FirstName = "John",
                 LastName = "Doe",
-                Email = "john.doe@example.com",
-                Password = "password456"
+                Email = "john.doe@example.com"
             }
         }
     };

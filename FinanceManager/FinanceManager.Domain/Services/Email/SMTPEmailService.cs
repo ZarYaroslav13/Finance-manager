@@ -8,12 +8,12 @@ using MimeKit;
 
 namespace FinanceManager.Domain.Services.Email;
 
-public class SMTPMailService : IEmailService
+public class SMTPEmailService : IEmailService
 {
     private readonly MailConfiguration _config;
-    private readonly ILogger<SMTPMailService> _logger;
+    private readonly ILogger<SMTPEmailService> _logger;
 
-    public SMTPMailService(IOptions<MailConfiguration> config, ILogger<SMTPMailService> logger)
+    public SMTPEmailService(IOptions<MailConfiguration> config, ILogger<SMTPEmailService> logger)
     {
         _config = config.Value;
         _logger = logger;

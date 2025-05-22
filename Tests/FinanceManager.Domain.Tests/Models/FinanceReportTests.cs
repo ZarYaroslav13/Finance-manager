@@ -10,13 +10,13 @@ public class FinanceReportTests
     [TestMethod]
     public void Constructor_ArgumentsAreNull_ThorwsException()
     {
-        Assert.ThrowsException<ArgumentNullException>(() => new FinanceReportModel(A.Dummy<int>(), null, A.Dummy<Period>()));
+        Assert.ThrowsException<ArgumentNullException>(() => new FinanceReportModel(A.Dummy<Guid>(), null, A.Dummy<Period>()));
     }
 
     [TestMethod]
     public void Constructor_ArgumentsArePassedCorrectly_FinanceReport()
     {
-        const int walletId = 1;
+        Guid walletId = Guid.Parse("1");
         const string walletName = "Name";
         Period period = new Period() { StartDate = DateTime.MinValue, EndDate = DateTime.MaxValue };
 
@@ -35,7 +35,7 @@ public class FinanceReportTests
         int totalIncome,
         int totalExpense)
     {
-        const int walletId = 1;
+        Guid walletId = Guid.Parse("1");
         const string walletName = "Name";
         Period period = new Period() { StartDate = DateTime.MinValue, EndDate = DateTime.MaxValue };
 

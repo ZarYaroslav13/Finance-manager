@@ -8,23 +8,18 @@ public static class HumantDTOTestDataProvider
     {
         new object[]
         {
-            new UserDTO(){ Id = 1, LastName = "LastName", FirstName = "FirstName", Email = "Email", Password = "Password"},
-            new UserDTO(){ Id = 1, LastName = "LastName", FirstName = "FirstName", Email = "Email", Password = "Password"}
+            new UserDTO(){ Id = Guid.Parse("1"), LastName = "LastName", FirstName = "FirstName", Email = "Email"},
+            new UserDTO(){ Id = Guid.Parse("1"), LastName = "LastName", FirstName = "FirstName", Email = "Email"}
         },
         new object[]
         {
-            new UserDTO(){ Id = 1, FirstName = "FirstName", Email = "Email", Password = "Password"},
-            new UserDTO(){ Id = 1, FirstName = "FirstName", Email = "Email", Password = "Password"}
+            new UserDTO(){ Id = Guid.Parse("1"), FirstName = "FirstName", Email = "Email"},
+            new UserDTO(){ Id = Guid.Parse("1"), FirstName = "FirstName", Email = "Email"}
         },
         new object[]
         {
-            new UserDTO(){ Id = 1, LastName = "LastName", FirstName = "FirstName", Password = "Password"},
-            new UserDTO(){ Id = 1, LastName = "LastName", FirstName = "FirstName", Password = "Password"}
-        },
-        new object[]
-        {
-            new UserDTO(){ Id = 1, FirstName = "FirstName", Email = "Email", Password = "Password"},
-            new UserDTO(){ Id = 1, FirstName = "FirstName", Email = "Email", Password = "Password"}
+            new UserDTO(){ Id = Guid.Parse("1"), LastName = "LastName", FirstName = "FirstName"},
+            new UserDTO(){ Id = Guid.Parse("1"), LastName = "LastName", FirstName = "FirstName"}
         }
     };
 
@@ -32,37 +27,37 @@ public static class HumantDTOTestDataProvider
     {
         new object[]
         {
-            new UserDTO(){ Id = 1, LastName = "LastName", FirstName = "FirstName", Email = "Email", Password = "Password"},
-            new UserDTO(){ Id = 2, LastName = "LastName", FirstName = "FirstName", Email = "Email", Password = "Password"}
+            new UserDTO(){ Id = Guid.Parse("1"), LastName = "LastName", FirstName = "FirstName", Email = "Email"},
+            new UserDTO(){ Id =  Guid.Parse("2"), LastName = "LastName", FirstName = "FirstName", Email = "Email"}
         },
         new object[]
         {
-            new UserDTO(){ Id = 1, FirstName = "FirstName", Email = "Email", Password = "Password"},
-            new UserDTO(){ Id = 1, LastName = "LastName", FirstName = "FirstName", Email = "Email", Password = "Password"}
+            new UserDTO(){ Id = Guid.Parse("1"), FirstName = "FirstName", Email = "Email"},
+            new UserDTO(){ Id = Guid.Parse("1"), LastName = "LastName", FirstName = "FirstName", Email = "Email"}
         },
         new object[]
         {
             new UserDTO(),
-            new UserDTO(){ Id = 1, LastName = "LastName", FirstName = "FirstName", Email = "Email", Password = "Password"}
+            new UserDTO(){ Id = Guid.Parse("1"), LastName = "LastName", FirstName = "FirstName", Email = "Email"}
         },
         new object[]
         {
-            new UserDTO(){ Id = 1, LastName = "LastName", FirstName = "FirstName", Email = "Email", Password = "Password"},
+            new UserDTO(){ Id = Guid.Parse("1"), LastName = "LastName", FirstName = "FirstName", Email = "Email"},
             new UserDTO()
         },
         new object[]
         {
-            new UserDTO(){ Id = 1, LastName = "LastName", FirstName = "FirstName", Email = "Email", Password = "Password"},
-            new UserDTO(){ Id = 1, LastName = "LastName", FirstName = "FirstName", Email = "Email", }
+            new UserDTO(){ Id = Guid.Parse("1"), LastName = "LastName", FirstName = "FirstName", Email = "Email"},
+            new UserDTO(){ Id = Guid.Parse("1"), LastName = "LastName", FirstName = "FirstName", Email = "Email", }
         },
         new object[]
         {
-            new UserDTO(){ Id = 1, LastName = "LastName", FirstName = "FirstName", Email = "Email", Password = "Password"},
+            new UserDTO(){ Id = Guid.Parse("1"), LastName = "LastName", FirstName = "FirstName", Email = "Email"},
             null
         },
         new object[]
         {
-            new UserDTO(){ Id = 1, LastName = "LastName", FirstName = "FirstName", Email = "Email", Password = "Password"},
+            new UserDTO(){ Id = Guid.Parse("1"), LastName = "LastName", FirstName = "FirstName", Email = "Email"},
             new ModelDTO()
         }
     };

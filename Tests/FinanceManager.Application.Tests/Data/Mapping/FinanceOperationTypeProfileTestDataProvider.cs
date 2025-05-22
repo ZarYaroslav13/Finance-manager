@@ -10,11 +10,11 @@ public static class FinanceOperationTypeProfileTestDataProvider
         {
             new FinanceOperationTypeModel()
             {
-                Id = 1,
+                Id = Guid.Parse("1"),
                 Name = "Name",
                 Description = "Description",
                 EntryType = FinanceManager.Infrastructure.Models.EntryType.Income,
-                WalletId = 1,
+                WalletId = Guid.Parse("1"),
                 WalletName = "WalletName"
             }
         }

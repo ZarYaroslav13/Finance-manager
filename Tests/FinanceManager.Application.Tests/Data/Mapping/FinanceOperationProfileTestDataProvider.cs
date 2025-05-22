@@ -10,9 +10,9 @@ public static class FinanceOperationProfileTestDataProvider
         {
             new IncomeDTO()
             {
-                Id = 3, Amount = 713, Date = DateTime.Now, Type = new FinanceOperationTypeDTO()
+                Id = Guid.Parse("3"), Amount = 713, Date = DateTime.Now, Type = new FinanceOperationTypeDTO()
                 {
-                    Id = 1, Name = "TypeName", Description = "Description", EntryType = FinanceManager.Infrastructure.Models.EntryType.Income, WalletId = 2, WalletName = "WalletName"
+                    Id = Guid.Parse("1"), Name = "TypeName", Description = "Description", EntryType = FinanceManager.Infrastructure.Models.EntryType.Income, WalletId = Guid.Parse("2"), WalletName = "WalletName"
                 }
             }
         },
@@ -20,9 +20,9 @@ public static class FinanceOperationProfileTestDataProvider
         {
             new ExpenseDTO()
             {
-                Id = 3, Amount = 713, Date = DateTime.Now, Type = new FinanceOperationTypeDTO()
+                Id = Guid.Parse("3"), Amount = 713, Date = DateTime.Now, Type = new FinanceOperationTypeDTO()
                 {
-                    Id = 1, Name = "TypeName", Description = "Description", EntryType = FinanceManager.Infrastructure.Models.EntryType.Expense, WalletId = 2, WalletName = "WalletName"
+                    Id = Guid.Parse("1"), Name = "TypeName", Description = "Description", EntryType = FinanceManager.Infrastructure.Models.EntryType.Expense, WalletId = Guid.Parse("2"), WalletName = "WalletName"
                 }
             }
         }

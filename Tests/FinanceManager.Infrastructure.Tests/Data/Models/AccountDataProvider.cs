@@ -1,30 +1,26 @@
 ﻿using FinanceManager.Infrastructure.Models;
+using FinanceManager.Infrastructure.Models.Authorization;
 
 namespace FinanceManager.Infrastructure.Tests.Data.Models;
 
-public class AccountDataProvider
+public class FinanceManagerUserDataProvider
 {
     public static IEnumerable<object[]> MethodEqualsResultTrueData { get; } = new List<object[]>
     {
         new object[]
         {
-            new Account(){ Id = 1, LastName = "LastName", FirstName = "FirstName", Email = "Email", Password = "Password"},
-            new Account(){ Id = 1, LastName = "LastName", FirstName = "FirstName", Email = "Email", Password = "Password"}
+            new FinanceManagerUser(){ Id = Guid.Parse("1"), LastName = "LastName", FirstName = "FirstName", Email = "Email", },
+            new FinanceManagerUser(){ Id = Guid.Parse("1"), LastName = "LastName", FirstName = "FirstName", Email = "Email", }
         },
         new object[]
         {
-            new Account(){ Id = 1, FirstName = "FirstName", Email = "Email", Password = "Password"},
-            new Account(){ Id = 1, FirstName = "FirstName", Email = "Email", Password = "Password"}
+            new FinanceManagerUser(){ Id = Guid.Parse("1"), LastName = "LastName", FirstName = "FirstName", },
+            new FinanceManagerUser(){ Id = Guid.Parse("1"), LastName = "LastName", FirstName = "FirstName", }
         },
         new object[]
         {
-            new Account(){ Id = 1, LastName = "LastName", FirstName = "FirstName", Password = "Password"},
-            new Account(){ Id = 1, LastName = "LastName", FirstName = "FirstName", Password = "Password"}
-        },
-        new object[]
-        {
-            new Account(){ Id = 1, FirstName = "FirstName", Email = "Email", Password = "Password"},
-            new Account(){ Id = 1, FirstName = "FirstName", Email = "Email", Password = "Password"}
+            new FinanceManagerUser(){ Id = Guid.Parse("1"), FirstName = "FirstName", Email = "Email", },
+            new FinanceManagerUser(){ Id = Guid.Parse("1"), FirstName = "FirstName", Email = "Email", }
         }
     };
 
@@ -32,37 +28,37 @@ public class AccountDataProvider
     {
         new object[]
         {
-            new Account(){ Id = 1, LastName = "LastName", FirstName = "FirstName", Email = "Email", Password = "Password"},
-            new Account(){ Id = 2, LastName = "LastName", FirstName = "FirstName", Email = "Email", Password = "Password"}
+            new FinanceManagerUser(){ Id = Guid.Parse("1"), LastName = "LastName", FirstName = "FirstName", Email = "Email", },
+            new FinanceManagerUser(){ Id = Guid.Parse("2"), LastName = "LastName", FirstName = "FirstName", Email = "Email", }
         },
         new object[]
         {
-            new Account(){ Id = 1, FirstName = "FirstName", Email = "Email", Password = "Password"},
-            new Account(){ Id = 1, LastName = "LastName", FirstName = "FirstName", Email = "Email", Password = "Password"}
+            new FinanceManagerUser(){ Id = Guid.Parse("1"), FirstName = "FirstName", Email = "Email", },
+            new FinanceManagerUser(){ Id = Guid.Parse("1"), LastName = "LastName", FirstName = "FirstName", Email = "Email", }
         },
         new object[]
         {
-            new Account(),
-            new Account(){ Id = 1, LastName = "LastName", FirstName = "FirstName", Email = "Email", Password = "Password"}
+            new FinanceManagerUser(),
+            new FinanceManagerUser(){ Id = Guid.Parse("1"), LastName = "LastName", FirstName = "FirstName", Email = "Email", }
         },
         new object[]
         {
-            new Account(){ Id = 1, LastName = "LastName", FirstName = "FirstName", Email = "Email", Password = "Password"},
-            new Account()
+            new FinanceManagerUser(){ Id = Guid.Parse("1"), LastName = "LastName", FirstName = "FirstName", Email = "Email", },
+            new FinanceManagerUser()
         },
         new object[]
         {
-            new Account(){ Id = 1, LastName = "LastName", FirstName = "FirstName", Email = "Email", Password = "Password"},
-            new Account(){ Id = 1, LastName = "LastName", FirstName = "FirstName", Email = "Email", }
+            new FinanceManagerUser(){ Id = Guid.Parse("1"), LastName = "LastName", FirstName = "FirstName", Email = "Email", },
+            new FinanceManagerUser(){ Id = Guid.Parse("1"), LastName = "LastName", FirstName = "FirstName", Email = "Email", }
         },
         new object[]
         {
-            new Account(){ Id = 1, LastName = "LastName", FirstName = "FirstName", Email = "Email", Password = "Password"},
+            new FinanceManagerUser(){ Id = Guid.Parse("1"), LastName = "LastName", FirstName = "FirstName", Email = "Email", },
             null
         },
         new object[]
         {
-            new Account(){ Id = 1, LastName = "LastName", FirstName = "FirstName", Email = "Email", Password = "Password"},
+            new FinanceManagerUser(){ Id = Guid.Parse("1"), LastName = "LastName", FirstName = "FirstName", Email = "Email", },
             new Wallet()
         }
     };

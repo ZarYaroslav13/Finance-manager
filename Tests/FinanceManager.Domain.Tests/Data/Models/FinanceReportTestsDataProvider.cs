@@ -5,7 +5,7 @@ namespace FinanceManager.Domain.Tests.Data.Models;
 
 public static class FinanceReportTestsDataProvider
 {
-    private static WalletModel _wallet = new() { Id = 1, Name = "test" };
+    private static WalletModel _wallet = new() { Id = Guid.Parse("1"), Name = "test" };
     private static Period _period = new() { StartDate = DateTime.MinValue, EndDate = DateTime.MaxValue };
     private static List<FinanceOperationModel> _financeOperations = new()
     {
@@ -19,8 +19,8 @@ public static class FinanceReportTestsDataProvider
     {
         new object[]
         {
-            new FinanceReportModel(_wallet.Id, _wallet.Name, _period){ Id = 1, Operations = _financeOperations },
-            new FinanceReportModel(_wallet.Id, _wallet.Name, _period){ Id = 1, Operations = _financeOperations }
+            new FinanceReportModel(_wallet.Id, _wallet.Name, _period){ Id = Guid.Parse("1"), Operations = _financeOperations },
+            new FinanceReportModel(_wallet.Id, _wallet.Name, _period){ Id = Guid.Parse("1"), Operations = _financeOperations }
         },
         new object[]
         {
@@ -29,8 +29,8 @@ public static class FinanceReportTestsDataProvider
         },
         new object[]
         {
-            new FinanceReportModel(_wallet.Id, _wallet.Name, _period){ Id = 1,},
-            new FinanceReportModel(_wallet.Id, _wallet.Name, _period){ Id = 1,}
+            new FinanceReportModel(_wallet.Id, _wallet.Name, _period){ Id = Guid.Parse("1"),},
+            new FinanceReportModel(_wallet.Id, _wallet.Name, _period){ Id = Guid.Parse("1"),}
         }
     };
 
@@ -38,37 +38,37 @@ public static class FinanceReportTestsDataProvider
     {
         new object[]
         {
-            new FinanceReportModel(_wallet.Id, _wallet.Name, _period){ Id = 1, Operations = _financeOperations },
-            new FinanceReportModel(_wallet.Id + 1, _wallet.Name, _period){ Id = 1, Operations = _financeOperations }
+            new FinanceReportModel(_wallet.Id, _wallet.Name, _period){ Id = Guid.Parse("1"), Operations = _financeOperations },
+            new FinanceReportModel(Guid.NewGuid(), _wallet.Name, _period){ Id = Guid.Parse("1"), Operations = _financeOperations }
         },
         new object[]
         {
-            new FinanceReportModel(_wallet.Id, _wallet.Name, _period){ Id = 1, Operations = _financeOperations },
-            new FinanceReportModel(_wallet.Id, _wallet.Name + '1', _period){ Id = 1, Operations = _financeOperations }
+            new FinanceReportModel(_wallet.Id, _wallet.Name, _period){ Id = Guid.Parse("1"), Operations = _financeOperations },
+            new FinanceReportModel(_wallet.Id, _wallet.Name + '1', _period){ Id = Guid.Parse("1"), Operations = _financeOperations }
         },
         new object[]
         {
-            new FinanceReportModel(_wallet.Id, _wallet.Name, _period){ Id = 100, Operations = _financeOperations },
-            new FinanceReportModel(_wallet.Id, _wallet.Name, new Period()){ Id = 100, Operations = _financeOperations }
+            new FinanceReportModel(_wallet.Id, _wallet.Name, _period){ Id = Guid.Parse("100"), Operations = _financeOperations },
+            new FinanceReportModel(_wallet.Id, _wallet.Name, new Period()){ Id = Guid.Parse("100"), Operations = _financeOperations }
         },
         new object[]
         {
-            new FinanceReportModel(_wallet.Id, _wallet.Name, _period){ Id = 1, Operations = _financeOperations },
-            new FinanceReportModel(_wallet.Id, _wallet.Name, _period){ Id = 2, Operations = _financeOperations }
+            new FinanceReportModel(_wallet.Id, _wallet.Name, _period){ Id = Guid.Parse("1"), Operations = _financeOperations },
+            new FinanceReportModel(_wallet.Id, _wallet.Name, _period){ Id = Guid.Parse("2"), Operations = _financeOperations }
         },
         new object[]
         {
-            new FinanceReportModel(_wallet.Id, _wallet.Name, _period){ Id = 1, Operations = _financeOperations },
-            new FinanceReportModel(_wallet.Id, _wallet.Name, _period){ Id = 1, Operations = new() }
+            new FinanceReportModel(_wallet.Id, _wallet.Name, _period){ Id = Guid.Parse("1"), Operations = _financeOperations },
+            new FinanceReportModel(_wallet.Id, _wallet.Name, _period){ Id = Guid.Parse("1"), Operations = new() }
         },
         new object[]
         {
-            new FinanceReportModel(_wallet.Id, _wallet.Name, _period){ Id = 1, Operations = _financeOperations },
+            new FinanceReportModel(_wallet.Id, _wallet.Name, _period){ Id = Guid.Parse("1"), Operations = _financeOperations },
             null
         },
         new object[]
         {
-            new FinanceReportModel(_wallet.Id, _wallet.Name, _period){ Id = 1, Operations = _financeOperations },
+            new FinanceReportModel(_wallet.Id, _wallet.Name, _period){ Id = Guid.Parse("1"), Operations = _financeOperations },
             new WalletModel()
         }
     };

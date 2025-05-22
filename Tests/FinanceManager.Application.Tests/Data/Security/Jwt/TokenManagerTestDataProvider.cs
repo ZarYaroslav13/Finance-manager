@@ -1,8 +1,10 @@
 ﻿using System.Security.Claims;
 using AutoMapper;
 using FakeItEasy;
+using FinanceManager.Application.Models.Base;
 using FinanceManager.Domain.Authorization;
 using FinanceManager.Domain.Configurations;
+using FinanceManager.Domain.Models;
 using FinanceManager.Domain.Services.Accounts;
 using Microsoft.Extensions.Options;
 
@@ -13,18 +15,12 @@ public static class TokenManagerTestDataProvider
     public static IEnumerable<object[]> ConstructorArgumentsAreNullThrowsArgumentNullExceptionTestData { get; } = new List<object[]>
     {
         new object[] { A.Fake<IOptions<AuthConfiguration>>(), null, null, null},
-        new object[] { A.Fake<IOptions<AuthConfiguration>>(), null, A.Fake<IAdminService>(), A.Fake<IMapper>()},
         new object[] { A.Fake<IOptions<AuthConfiguration>>(), A.Fake<IAccountService>(), null, A.Fake<IMapper>()},
-        new object[] { A.Fake<IOptions<AuthConfiguration>>(), A.Fake<IAccountService>(), A.Fake<IAdminService>(), null},
         new object[] { A.Fake<IOptions<AuthConfiguration>>(), A.Fake<IAccountService>(), null, null},
-        new object[] { A.Fake<IOptions<AuthConfiguration>>(), null, A.Fake<IAdminService>(), null},
         new object[] { A.Fake<IOptions<AuthConfiguration>>(), null, null, A.Fake<IMapper>()},
         new object[] { null, null, null, null},
-        new object[] { null, null, A.Fake<IAdminService>(), A.Fake<IMapper>()},
         new object[] { null, A.Fake<IAccountService>(), null, A.Fake<IMapper>()},
-        new object[] { null, A.Fake<IAccountService>(), A.Fake<IAdminService>(), null},
         new object[] { null, A.Fake<IAccountService>(), null, null},
-        new object[] { null, null, A.Fake<IAdminService>(), null},
         new object[] { null, null, null, A.Fake<IMapper>()},
     };
 
@@ -45,33 +41,15 @@ public static class TokenManagerTestDataProvider
     {
         new object[]
         {
-            new AccountModel()
+            new UserModel()
             {
-                Id = 1, LastName = "LastName", FirstName = "FirstName", Email = "Email@gmail.com", Password = "password"
+                Id = Guid.Parse("1"), LastName = "LastName", FirstName = "FirstName", Email = "Email@gmail.com"
             },
             new ClaimsIdentity(new List<Claim>
             {
-                new(nameof(AccountDTO.Id), "1"),
+                new(nameof(UserDTO.Id), "1"),
                 new(ClaimsIdentity.DefaultNameClaimType, "Email@gmail.com"),
                 new(ClaimsIdentity.DefaultRoleClaimType, PolicyManager.CommonUserRole)
-            }, "Token",
-            ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType)
-        }
-    };
-
-    public static IEnumerable<object[]> GetAdminIdentityAsyncValidCredentialsReturnsClaimsIdentityTestData { get; } = new List<object[]>
-    {
-        new object[]
-        {
-            new AdminModel()
-            {
-                Id = 1, LastName = "LastName", FirstName = "FirstName", Email = "EmailAdmin@gmail.com", Password = "password"
-            },
-            new ClaimsIdentity(new List<Claim>
-            {
-                new(nameof(AdminDTO.Id), "1"),
-                new(ClaimsIdentity.DefaultNameClaimType, "EmailAdmin@gmail.com"),
-                new(ClaimsIdentity.DefaultRoleClaimType, PolicyManager.AdminRole)
             }, "Token",
             ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType)
         }

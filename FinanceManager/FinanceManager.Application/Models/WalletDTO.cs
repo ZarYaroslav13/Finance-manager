@@ -20,7 +20,7 @@ public class WalletDTO : Base.ModelDTO
 
     public List<ExpenseDTO> Expenses { get; set; } = new();
 
-    public int AccountId { get; set; }
+    public Guid AccountId { get; set; }
 
     private string _name = string.Empty;
 

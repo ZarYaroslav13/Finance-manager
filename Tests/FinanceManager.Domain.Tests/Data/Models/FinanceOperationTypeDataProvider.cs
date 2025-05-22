@@ -9,38 +9,38 @@ public class FinanceOperationTypeDataProvider
     {
         new object[]
         {
-            new FinanceOperationTypeModel(){ Id = 1, Description = "Description", EntryType = FinanceManager.Infrastructure.Models.EntryType.Expense, Name = "Name", WalletId = 2, WalletName = "WalletName"},
-            new FinanceOperationTypeModel(){ Id = 1, Description = "Description", EntryType = FinanceManager.Infrastructure.Models.EntryType.Expense, Name = "Name", WalletId = 2, WalletName = "WalletName"}
+            new FinanceOperationTypeModel(){Id = Guid.Parse("1"), Description = "Description", EntryType = FinanceManager.Infrastructure.Models.EntryType.Expense, Name = "Name", WalletId = Guid.Parse("2"), WalletName = "WalletName"},
+            new FinanceOperationTypeModel(){Id = Guid.Parse("1"), Description = "Description", EntryType = FinanceManager.Infrastructure.Models.EntryType.Expense, Name = "Name", WalletId = Guid.Parse("2"), WalletName = "WalletName"}
         },
         new object[]
         {
             new FinanceOperationTypeModel(){
-                Id = 1,
+               Id = Guid.Parse("1"),
                 Description = "Description",
                 EntryType = FinanceManager.Infrastructure.Models.EntryType.Expense,
                 Name = "Name",
-                WalletId = 2},
+                WalletId = Guid.Parse("2")},
             new FinanceOperationTypeModel(){
-                Id = 1,
+               Id = Guid.Parse("1"),
                 Description = "Description",
                 EntryType = FinanceManager.Infrastructure.Models.EntryType.Expense,
                 Name = "Name",
-                WalletId = 2}
+                WalletId = Guid.Parse("2")}
         },
         new object[]
         {
-            new FinanceOperationTypeModel(){ Id = 1, Description = "Description", EntryType = FinanceManager.Infrastructure.Models.EntryType.Expense, Name = "Name"},
-            new FinanceOperationTypeModel(){ Id = 1, Description = "Description", EntryType = FinanceManager.Infrastructure.Models.EntryType.Expense, Name = "Name"}
+            new FinanceOperationTypeModel(){Id = Guid.Parse("1"), Description = "Description", EntryType = FinanceManager.Infrastructure.Models.EntryType.Expense, Name = "Name"},
+            new FinanceOperationTypeModel(){Id = Guid.Parse("1"), Description = "Description", EntryType = FinanceManager.Infrastructure.Models.EntryType.Expense, Name = "Name"}
         },
         new object[]
         {
-            new FinanceOperationTypeModel(){ Id = 1, EntryType = FinanceManager.Infrastructure.Models.EntryType.Expense, Name = "Name", WalletId = 2,},
-            new FinanceOperationTypeModel(){ Id = 1, EntryType = FinanceManager.Infrastructure.Models.EntryType.Expense, Name = "Name", WalletId = 2,}
+            new FinanceOperationTypeModel(){Id = Guid.Parse("1"), EntryType = FinanceManager.Infrastructure.Models.EntryType.Expense, Name = "Name", WalletId = Guid.Parse("2"),},
+            new FinanceOperationTypeModel(){Id = Guid.Parse("1"), EntryType = FinanceManager.Infrastructure.Models.EntryType.Expense, Name = "Name", WalletId = Guid.Parse("2"),}
         },
         new object[]
         {
-            new FinanceOperationTypeModel(){ Id = 1, Description = "Description", EntryType = FinanceManager.Infrastructure.Models.EntryType.Expense, WalletId = 2,},
-            new FinanceOperationTypeModel(){ Id = 1, Description = "Description", EntryType = FinanceManager.Infrastructure.Models.EntryType.Expense, WalletId = 2,}
+            new FinanceOperationTypeModel(){Id = Guid.Parse("1"), Description = "Description", EntryType = FinanceManager.Infrastructure.Models.EntryType.Expense, WalletId = Guid.Parse("2"),},
+            new FinanceOperationTypeModel(){Id = Guid.Parse("1"), Description = "Description", EntryType = FinanceManager.Infrastructure.Models.EntryType.Expense, WalletId = Guid.Parse("2"),}
         }
     };
 
@@ -48,32 +48,32 @@ public class FinanceOperationTypeDataProvider
     {
         new object[]
         {
-            new FinanceOperationTypeModel(){ Id = 1, Description = "Description1", EntryType = FinanceManager.Infrastructure.Models.EntryType.Expense, Name = "Name", WalletId = 2,},
-            new FinanceOperationTypeModel(){ Id = 1, Description = "Description", EntryType = FinanceManager.Infrastructure.Models.EntryType.Expense, Name = "Name", WalletId = 2,}
+            new FinanceOperationTypeModel(){Id = Guid.Parse("1"), Description = "Description1", EntryType = FinanceManager.Infrastructure.Models.EntryType.Expense, Name = "Name", WalletId = Guid.Parse("2"),},
+            new FinanceOperationTypeModel(){Id = Guid.Parse("1"), Description = "Description", EntryType = FinanceManager.Infrastructure.Models.EntryType.Expense, Name = "Name", WalletId = Guid.Parse("2"),}
         },
         new object[]
         {
-            new FinanceOperationTypeModel(){ Id = 1, Description = "Description", EntryType = FinanceManager.Infrastructure.Models.EntryType.Expense, Name = "Name1", WalletId = 2,},
-            new FinanceOperationTypeModel(){ Id = 1, Description = "Description", EntryType = FinanceManager.Infrastructure.Models.EntryType.Expense, Name = "Name", WalletId = 2,}
+            new FinanceOperationTypeModel(){Id = Guid.Parse("1"), Description = "Description", EntryType = FinanceManager.Infrastructure.Models.EntryType.Expense, Name = "Name1", WalletId = Guid.Parse("2"),},
+            new FinanceOperationTypeModel(){Id = Guid.Parse("1"), Description = "Description", EntryType = FinanceManager.Infrastructure.Models.EntryType.Expense, Name = "Name", WalletId = Guid.Parse("2"),}
         },
         new object[]
         {
-            new FinanceOperationTypeModel(){ Id = 1, Description = "Description", EntryType = FinanceManager.Infrastructure.Models.EntryType.Expense, Name = "Name", WalletId = 2,},
-            new FinanceOperationTypeModel(){ Id = 1, Description = "Description", EntryType = FinanceManager.Infrastructure.Models.EntryType.Income, Name = "Name", WalletId = 2,}
+            new FinanceOperationTypeModel(){Id = Guid.Parse("1"), Description = "Description", EntryType = FinanceManager.Infrastructure.Models.EntryType.Expense, Name = "Name", WalletId = Guid.Parse("2"),},
+            new FinanceOperationTypeModel(){Id = Guid.Parse("1"), Description = "Description", EntryType = FinanceManager.Infrastructure.Models.EntryType.Income, Name = "Name", WalletId = Guid.Parse("2"),}
         },
         new object[]
         {
-            new FinanceOperationTypeModel(){ Id = 1, Description = "Description", EntryType = FinanceManager.Infrastructure.Models.EntryType.Expense, Name = "Name", WalletId = 2,},
-            new FinanceOperationTypeModel(){ Id = 1, Description = "Description", EntryType = FinanceManager.Infrastructure.Models.EntryType.Expense, Name = "Name", WalletId = 3,}
+            new FinanceOperationTypeModel(){Id = Guid.Parse("1"), Description = "Description", EntryType = FinanceManager.Infrastructure.Models.EntryType.Expense, Name = "Name", WalletId = Guid.Parse("2"),},
+            new FinanceOperationTypeModel(){Id = Guid.Parse("1"), Description = "Description", EntryType = FinanceManager.Infrastructure.Models.EntryType.Expense, Name = "Name", WalletId = Guid.Parse("3"),}
         },
         new object[]
         {
-            new FinanceOperationTypeModel(){ Id = 1, Description = "Description", EntryType = FinanceManager.Infrastructure.Models.EntryType.Expense, Name = "Name", WalletId = 2,},
+            new FinanceOperationTypeModel(){Id = Guid.Parse("1"), Description = "Description", EntryType = FinanceManager.Infrastructure.Models.EntryType.Expense, Name = "Name", WalletId = Guid.Parse("2"),},
             null
         },
         new object[]
         {
-            new FinanceOperationTypeModel(){ Id = 1, Description = "Description", EntryType = FinanceManager.Infrastructure.Models.EntryType.Expense, Name = "Name", WalletId = 2},
+            new FinanceOperationTypeModel(){Id = Guid.Parse("1"), Description = "Description", EntryType = FinanceManager.Infrastructure.Models.EntryType.Expense, Name = "Name", WalletId = Guid.Parse("2")},
             new WalletModel()
         }
     };

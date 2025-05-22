@@ -7,22 +7,22 @@ public class FinanceOperationDataProvider
     private static FinanceOperationTypeModel _randomIncomeType =
                 new FinanceOperationTypeModel()
                 {
-                    Id = 3,
+                    Id = Guid.Parse("3"),
                     Description = "Description",
                     EntryType = FinanceManager.Infrastructure.Models.EntryType.Income,
                     Name = "Name",
-                    WalletId = 1,
+                    WalletId = Guid.Parse("1"),
                     WalletName = "WalletName"
                 };
 
     private static FinanceOperationTypeModel _randomExpenseType =
                 new FinanceOperationTypeModel()
                 {
-                    Id = 4,
+                    Id = Guid.Parse("4"),
                     Description = "Description",
                     EntryType = FinanceManager.Infrastructure.Models.EntryType.Expense,
                     Name = "Name",
-                    WalletId = 1,
+                    WalletId = Guid.Parse("1"),
                     WalletName = "WalletName"
                 };
 
@@ -31,12 +31,12 @@ public class FinanceOperationDataProvider
         new object[]
         {
             new IncomeModel(_randomIncomeType){
-                Id = 1,
+                Id = Guid.Parse("1"),
                 Amount = 1000,
                 Date =  DateTime.MinValue,
             },
             new IncomeModel(_randomIncomeType){
-                Id = 1,
+                Id = Guid.Parse("1"),
                 Amount = 1000,
                 Date =  DateTime.MinValue,
             }
@@ -44,12 +44,12 @@ public class FinanceOperationDataProvider
         new object[]
         {
             new IncomeModel(_randomIncomeType){
-                Id = 1,
+                Id = Guid.Parse("1"),
                 Amount = 1000,
                 Date =  DateTime.MinValue,
             },
             new IncomeModel(_randomIncomeType){
-                Id = 1,
+                Id = Guid.Parse("1"),
                 Amount = 1000,
                 Date =  DateTime.MinValue,
             }
@@ -70,12 +70,12 @@ public class FinanceOperationDataProvider
         new object[]
         {
             new IncomeModel(_randomIncomeType){
-                Id = 1,
+                Id = Guid.Parse("1"),
                 Date =  DateTime.MinValue,
 
             },
             new IncomeModel(_randomIncomeType){
-                Id = 1,
+                Id = Guid.Parse("1"),
                 Date =  DateTime.MinValue,
 
             }
@@ -83,12 +83,12 @@ public class FinanceOperationDataProvider
         new object[]
         {
             new IncomeModel(_randomIncomeType){
-                Id = 1,
+                Id = Guid.Parse("1"),
                 Amount = 1000,
 
             },
             new IncomeModel(_randomIncomeType){
-                Id = 1,
+                Id = Guid.Parse("1"),
                 Amount = 1000,
 
             },
@@ -100,13 +100,13 @@ public class FinanceOperationDataProvider
         new object[]
         {
             new IncomeModel(_randomIncomeType){
-                Id = 1,
+                Id = Guid.Parse("1"),
                 Amount = 1000,
                 Date =  DateTime.MinValue,
 
             },
             new IncomeModel(_randomIncomeType){
-                Id = 2,
+                Id = Guid.Parse("2"),
                 Amount = 1000,
                 Date =  DateTime.MinValue,
 
@@ -115,13 +115,13 @@ public class FinanceOperationDataProvider
         new object[]
         {
             new IncomeModel(_randomIncomeType){
-                Id = 1,
+                Id = Guid.Parse("1"),
                 Amount = 1000,
                 Date =  DateTime.MinValue,
 
             },
             new IncomeModel(_randomIncomeType){
-                Id = 1,
+                Id = Guid.Parse("1"),
                 Amount = 2000,
                 Date =  DateTime.MinValue,
 
@@ -130,13 +130,13 @@ public class FinanceOperationDataProvider
         new object[]
         {
             new IncomeModel(_randomIncomeType){
-                Id = 1,
+                Id = Guid.Parse("1"),
                 Amount = 1000,
                 Date =  DateTime.MinValue,
 
             },
             new IncomeModel(_randomIncomeType){
-                Id = 1,
+                Id = Guid.Parse("1"),
                 Amount = 1000,
                 Date =  DateTime.MaxValue,
 
@@ -145,13 +145,13 @@ public class FinanceOperationDataProvider
         new object[]
         {
             new IncomeModel(_randomIncomeType){
-                Id = 1,
+                Id = Guid.Parse("1"),
                 Amount = 1000,
                 Date =  DateTime.MinValue,
 
             },
             new ExpenseModel(_randomExpenseType){
-                Id = 1,
+                Id = Guid.Parse("1"),
                 Amount = 1000,
                 Date =  DateTime.MinValue,
             }
@@ -159,7 +159,7 @@ public class FinanceOperationDataProvider
         new object[]
         {
             new IncomeModel(_randomIncomeType){
-                Id = 1,
+                Id = Guid.Parse("1"),
                 Amount = 1000,
 
             },
@@ -168,7 +168,7 @@ public class FinanceOperationDataProvider
         new object[]
         {
             new IncomeModel(_randomIncomeType){
-                Id = 1,
+                Id = Guid.Parse("1"),
                 Amount = 1000,
 
             },

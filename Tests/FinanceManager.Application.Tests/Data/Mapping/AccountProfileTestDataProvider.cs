@@ -1,4 +1,6 @@
-﻿namespace FinanceManager.Application.Tests.Data.Mapping;
+﻿using FinanceManager.Domain.Models;
+
+namespace FinanceManager.Application.Tests.Data.Mapping;
 
 public static class AccountProfileTestDataProvider
 {
@@ -6,13 +8,12 @@ public static class AccountProfileTestDataProvider
     {
         new object[]
         {
-            new AccountModel
+            new UserModel
             {
-                Id = 2,
+                Id = Guid.Parse("2"),
                 LastName = "LastName",
                 FirstName = "FirstName",
-                Email = "email@gmail.com",
-                Password = "password"
+                Email = "email@gmail.com"
             }
         }
     };

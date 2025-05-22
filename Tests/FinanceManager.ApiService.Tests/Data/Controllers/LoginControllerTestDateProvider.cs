@@ -8,13 +8,10 @@ public static class LoginControllerTestDateProvider
 {
     public static IEnumerable<object[]> ConstructorArgumentIsEqualNullThrowsArgumentNullExceptionTestData { get; } = new List<object[]>()
     {
-        new object[] { A.Fake<IAdminService>(), A.Fake<IAccountService>(), null },
-        new object[] { A.Fake<IAdminService>(), null, A.Fake<ITokenService>() },
-        new object[] { null, A.Fake<IAccountService>(), A.Fake<ITokenService>() },
-        new object[] { A.Fake<IAdminService>(), null, null },
-        new object[] { null, A.Fake<IAccountService>(), null },
-        new object[] { null, null, A.Fake<ITokenService>() },
-        new object[] { null, null, null },
+        new object[] { A.Fake<IAccountService>(), A.Fake<ITokenService>() },
+        new object[] { A.Fake<IAccountService>(), null },
+        new object[] { null, A.Fake<ITokenService>() },
+        new object[] { null, null },
     };
 
     public static IEnumerable<object[]> SignInAsyncInvalidCredentialReturnsBadRequestTestData { get; } = new List<object[]>()

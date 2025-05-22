@@ -7,7 +7,7 @@ public static class FinanceReportCreatorTestsDataProvider
 {
     private static WalletModel _wallet = new()
     {
-        Id = 1,
+        Id = Guid.Parse("1"),
         Name = "WalletName"
     };
 

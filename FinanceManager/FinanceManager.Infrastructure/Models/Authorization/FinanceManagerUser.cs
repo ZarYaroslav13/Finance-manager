@@ -10,12 +10,11 @@ public class FinanceManagerUser : IdentityUser<Guid>, IIdentityEntity
 
     public List<Wallet> Wallets { get; set; }
 
-    public string RefreshToken { get; set; }
+    public string RefreshToken { get; set; } = "";
 
     public DateTime RefreshTokenExpiryTime { get; set; }
 
     public DateTime CreatedOn { get; set; }
 
     public DateTime? LastModifiedOn { get; set; }
-
 }

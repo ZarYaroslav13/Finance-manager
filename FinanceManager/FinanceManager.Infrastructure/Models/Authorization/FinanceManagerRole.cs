@@ -4,7 +4,7 @@ namespace FinanceManager.Infrastructure.Models.Authorization;
 
 public class FinanceManagerRole : IdentityRole<Guid>, IIdentityEntity
 {
-    public string Description { get; set; }
+    public string Description { get; set; } = "";
     public DateTime CreatedOn { get; set; }
     public DateTime? LastModifiedOn { get; set; }
 

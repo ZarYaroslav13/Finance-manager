@@ -8,7 +8,7 @@ public class FinanceManagerRoleConfiguration : IEntityTypeConfiguration<FinanceM
 {
     public void Configure(EntityTypeBuilder<FinanceManagerRole> builder)
     {
-        if (Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT") == "Development")
-            builder.HasData(DBFiller.Roles);
+        //if (Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT") == "Development")
+            //builder.HasData(DBFiller.Roles);
     }
 }

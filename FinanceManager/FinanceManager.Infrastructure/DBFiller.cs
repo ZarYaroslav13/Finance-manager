@@ -6,23 +6,12 @@ namespace FinanceManager.Infrastructure;
 
 public class DBFiller
 {
-    public static List<FinanceManagerUser> Users { get { return _users; } }
-
-    public static List<FinanceManagerRole> Roles { get { return _roles; } }
-
-    public static List<IdentityUserRole<Guid>> UserRoles { get { return _userRoles; } }
-
-    public static List<Wallet> Wallets { get { return _wallets; } }
-
-    public static List<FinanceOperationType> FinanceOperationTypes { get { return _financeOperationTypes; } }
-
-    public static List<FinanceOperation> FinanceOperations { get { return _fnanceOperations; } }
 
     private static List<FinanceManagerUser> _users = new()
     {
         new()
         {
-            Id = Guid.Parse("1"),
+            Id = Guid.NewGuid(),
             FirstName = "John",
             LastName = "Doe",
             Email = "john.doe@example.com",
@@ -32,7 +21,7 @@ public class DBFiller
         },
         new()
         {
-            Id = Guid.Parse("2"),
+            Id = Guid.NewGuid(),
             FirstName = "Jane",
             LastName = "Smith",
             Email = "jane.smith@example.com",
@@ -42,7 +31,7 @@ public class DBFiller
         },
         new()
         {
-            Id = Guid.Parse("3"),
+            Id = Guid.NewGuid(),
             FirstName = "Michael",
             LastName = "Johnson",
             Email = "michael.johnson@example.com",
@@ -52,7 +41,7 @@ public class DBFiller
         },
         new()
         {
-            Id = Guid.Parse("4"),
+            Id = Guid.NewGuid(),
             FirstName = "Emily",
             LastName = "Davis",
             Email = "emily.davis@example.com",
@@ -62,27 +51,27 @@ public class DBFiller
         },
         new()
         {
-            Id = Guid.Parse("5"),
+            Id = Guid.NewGuid(),
             FirstName = "Chris",
             LastName = "Brown",
             Email = "chris.brown@example.com",
             PasswordHash = _passwordHasher.HashPassword(null, "saferPassword102"),
             CreatedOn = new DateTime(2024,8,1),
-            LastModifiedOn = DateTime.Now.AddDays(-3)
+            LastModifiedOn = new DateTime(2025,5,19)
         },
         new()
         {
-            Id = Guid.Parse("6"),
+            Id = Guid.NewGuid(),
             LastName = "Your best",
             FirstName = "Admin",
             Email = "mr.admin.number1@gmail.com",
             PasswordHash = _passwordHasher.HashPassword(null, "saferAdminParol124"),
             CreatedOn = new DateTime(2023,8,23),
-            LastModifiedOn = DateTime.Now
+            LastModifiedOn = new DateTime(2025,5,22)
         },
         new()
         {
-            Id = Guid.Parse("7"),
+            Id = Guid.NewGuid(),
             LastName = "Your second best",
             FirstName = "Admin",
             Email = "mr.admin.number2@gmail.com",
@@ -118,49 +107,49 @@ public class DBFiller
     {
         Id = Guid.NewGuid(),
         Balance = 1000,
-        AccountId = _users[0].Id,
+        UsertId = _users[0].Id,
         Name = "Primary Wallet"
     },
         new Wallet()
     {
         Id = Guid.NewGuid(),
         Balance = 1500,
-        AccountId = _users[0].Id,
+        UsertId = _users[0].Id,
         Name = "Savings Wallet"
     },
         new Wallet()
     {
         Id = Guid.NewGuid(),
         Balance = 2000,
-        AccountId = _users[1].Id,
+        UsertId = _users[1].Id,
         Name = "Investment Wallet"
     },
         new Wallet()
     {
         Id = Guid.NewGuid(),
         Balance = 2500,
-        AccountId = _users[4].Id,
+        UsertId = _users[4].Id,
         Name = "Vacation Fund"
     },
         new Wallet()
     {
         Id = Guid.NewGuid(),
         Balance = 3000,
-        AccountId = _users[2].Id,
+        UsertId = _users[2].Id,
         Name = "Emergency Fund"
     },
         new Wallet()
     {
         Id = Guid.NewGuid(),
         Balance = 3500,
-        AccountId = _users[3].Id,
+        UsertId = _users[3].Id,
         Name = "Retirement Fund"
     },
         new Wallet()
     {
         Id = Guid.NewGuid(),
         Balance = 4000,
-        AccountId = _users[4].Id,
+        UsertId = _users[4].Id,
         Name = "Education Fund"
     }
     };
@@ -469,7 +458,7 @@ public class DBFiller
         new FinanceOperation() { Id = Guid.NewGuid(), Amount = 100, Date = new DateTime(2025, 2, 26), TypeId = _financeOperationTypes[25].Id },
         new FinanceOperation() { Id = Guid.NewGuid(), Amount = 400, Date = new DateTime(2025, 2, 27), TypeId = _financeOperationTypes[26].Id },
         new FinanceOperation() { Id = Guid.NewGuid(), Amount = 300, Date = new DateTime(2025, 2, 28), TypeId = _financeOperationTypes[27].Id },
-        new FinanceOperation() { Id = Guid.NewGuid(), Amount = 500, Date = new DateTime(2025, 2, 29), TypeId = _financeOperationTypes[28].Id },
+        new FinanceOperation() { Id = Guid.NewGuid(), Amount = 500, Date = new DateTime(2024, 2, 23), TypeId = _financeOperationTypes[28].Id },
         new FinanceOperation() { Id = Guid.NewGuid(), Amount = 20, Date = new DateTime(2025, 3, 1), TypeId = _financeOperationTypes[29].Id },
         new FinanceOperation() { Id = Guid.NewGuid(), Amount = 500, Date = new DateTime(2025, 3, 2), TypeId = _financeOperationTypes[0].Id },
         new FinanceOperation() { Id = Guid.NewGuid(), Amount = 100, Date = new DateTime(2025, 3, 3), TypeId = _financeOperationTypes[1].Id },
@@ -500,7 +489,7 @@ public class DBFiller
         new FinanceOperation() { Id = Guid.NewGuid(), Amount = 400, Date = new DateTime(2025, 3, 28), TypeId = _financeOperationTypes[26].Id },
         new FinanceOperation() { Id = Guid.NewGuid(), Amount = 300, Date = new DateTime(2025, 3, 29), TypeId = _financeOperationTypes[27].Id },
         new FinanceOperation() { Id = Guid.NewGuid(), Amount = 500, Date = new DateTime(2025, 3, 30), TypeId = _financeOperationTypes[28].Id },
-        new FinanceOperation() { Id = Guid.NewGuid(), Amount = 20, Date = new DateTime(2025, 3, 31), TypeId = _financeOperationTypes[29].Id },
+        new FinanceOperation() { Id = Guid.NewGuid(), Amount = 20, Date = new DateTime(2025, 3, 25), TypeId = _financeOperationTypes[29].Id },
         new FinanceOperation() { Id = Guid.NewGuid(), Amount = 500, Date = new DateTime(2025, 4, 1), TypeId = _financeOperationTypes[0].Id },
         new FinanceOperation() { Id = Guid.NewGuid(), Amount = 100, Date = new DateTime(2025, 4, 2), TypeId = _financeOperationTypes[1].Id },
         new FinanceOperation() { Id = Guid.NewGuid(), Amount = 750, Date = new DateTime(2025, 4, 3), TypeId = _financeOperationTypes[2].Id },
@@ -511,9 +500,20 @@ public class DBFiller
         new FinanceOperation() { Id = Guid.NewGuid(), Amount = 100, Date = new DateTime(2025, 4, 8), TypeId = _financeOperationTypes[7].Id },
         new FinanceOperation() { Id = Guid.NewGuid(), Amount = 2000, Date = new DateTime(2025, 4, 9), TypeId = _financeOperationTypes[8].Id },
         new FinanceOperation() { Id = Guid.NewGuid(), Amount = 300, Date = new DateTime(2025, 4, 10), TypeId = _financeOperationTypes[9].Id },
-        new FinanceOperation() { Id = Guid.NewGuid(), Amount = 100, Date = new DateTime(2025, 4, 11, second: 24, minute: 11, hour: 03), TypeId = _financeOperationTypes[0].Id },
-        new FinanceOperation() { Id = Guid.NewGuid(), Amount = 2000, Date = new DateTime(2025, 4, 11, second: 53, minute: 02, hour: 11), TypeId = _financeOperationTypes[0].Id },
-        new FinanceOperation() { Id = Guid.NewGuid(), Amount = 300, Date = new DateTime(2025, 4, 11, second: 37, minute: 27, hour: 7), TypeId = _financeOperationTypes[0].Id }
-
+        new FinanceOperation() { Id = Guid.NewGuid(), Amount = 100, Date = new DateTime(2025, 4, 11), TypeId = _financeOperationTypes[0].Id },
+        new FinanceOperation() { Id = Guid.NewGuid(), Amount = 2000, Date = new DateTime(2025, 4, 11), TypeId = _financeOperationTypes[0].Id },
+        new FinanceOperation() { Id = Guid.NewGuid(), Amount = 300, Date = new DateTime(2025, 4, 11), TypeId = _financeOperationTypes[0].Id }
     };
+
+    public static List<FinanceManagerUser> Users { get { return _users; } }
+
+    public static List<FinanceManagerRole> Roles { get { return _roles; } }
+
+    public static List<IdentityUserRole<Guid>> UserRoles { get { return _userRoles; } }
+
+    public static List<Wallet> Wallets { get { return _wallets; } }
+
+    public static List<FinanceOperationType> FinanceOperationTypes { get { return _financeOperationTypes; } }
+
+    public static List<FinanceOperation> FinanceOperations { get { return _fnanceOperations; } }
 }

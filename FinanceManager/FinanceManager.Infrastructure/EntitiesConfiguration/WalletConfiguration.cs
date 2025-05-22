@@ -9,13 +9,12 @@ public class WalletConfiguration : IEntityTypeConfiguration<Wallet>
     public void Configure(EntityTypeBuilder<Wallet> builder)
     {
 
-        if (Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT") == "Development")
-            builder
-                .HasData(DBFiller.Wallets);
+        ////if (Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT") == "Development")
+            //builder.HasData(DBFiller.Wallets);
 
         builder
-            .HasOne(w => w.Account)
+            .HasOne(w => w.User)
             .WithMany(a => a.Wallets)
-            .HasForeignKey(w => w.AccountId);
+            .HasForeignKey(w => w.UsertId);
     }
 }

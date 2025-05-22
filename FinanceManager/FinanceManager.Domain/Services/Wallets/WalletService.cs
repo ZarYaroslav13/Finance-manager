@@ -23,7 +23,7 @@ public class WalletService : BaseService, IWalletService
     public async Task<List<WalletModel>> GetAllWalletsOfAccountAsync(Guid accountId)
     {
         return (await _repository
-            .GetAllAsync(filter: w => w.AccountId == accountId))
+            .GetAllAsync(filter: w => w.UsertId == accountId))
             .Select(_mapper.Map<WalletModel>)
             .ToList();
     }
@@ -80,6 +80,6 @@ public class WalletService : BaseService, IWalletService
 
         var wallet = await _repository.GetByIdAsync(walletId);
 
-        return wallet.AccountId.ToString() == _currentUserService.UserId;
+        return wallet.UsertId.ToString() == _currentUserService.UserId;
     }
 }

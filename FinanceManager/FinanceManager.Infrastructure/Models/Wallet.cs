@@ -11,9 +11,9 @@ public class Wallet : Entity
 
     public List<FinanceOperationType>? FinanceOperationTypes { get; set; } = new();
 
-    public Guid AccountId { get; set; }
+    public Guid UsertId { get; set; }
 
-    public FinanceManagerUser Account { get; set; } = default!;
+    public FinanceManagerUser User { get; set; } = default!;
 
     public List<FinanceOperation> GetFinanceOperations()
     {
@@ -42,13 +42,13 @@ public class Wallet : Entity
 
         return Name == wallet.Name
                 && Balance == wallet.Balance
-                && AccountId == wallet.AccountId
+                && UsertId == wallet.UsertId
                 && AreEqualLists(FinanceOperationTypes, wallet.FinanceOperationTypes)
                 && AreEqualLists(GetFinanceOperations(), wallet.GetFinanceOperations());
     }
 
     public override int GetHashCode()
     {
-        return HashCode.Combine(base.GetHashCode(), Name, Balance, GetHashCodeOfList(FinanceOperationTypes), AccountId, Account);
+        return HashCode.Combine(base.GetHashCode(), Name, Balance, GetHashCodeOfList(FinanceOperationTypes), UsertId, User);
     }
 }

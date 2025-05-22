@@ -8,7 +8,7 @@ public class FinanceManagerUserRoleConfiguration : IEntityTypeConfiguration<Iden
 {
     public void Configure(EntityTypeBuilder<IdentityUserRole<Guid>> builder)
     {
-        if (Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT") == "Development")
-            builder.HasData(DBFiller.UserRoles);
+        //if (Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT") == "Development")
+            //builder.HasData(DBFiller.UserRoles);
     }
 }

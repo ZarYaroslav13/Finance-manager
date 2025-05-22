@@ -118,49 +118,49 @@ public static class EntitiesTestDataProvider
     {
         Id = Guid.NewGuid(),
         Balance = 1000,
-        AccountId = _users[0].Id,
+        UsertId = _users[0].Id,
         Name = "Primary Wallet"
     },
         new Wallet()
     {
         Id = Guid.NewGuid(),
         Balance = 1500,
-        AccountId = _users[0].Id,
+        UsertId = _users[0].Id,
         Name = "Savings Wallet"
     },
         new Wallet()
     {
         Id = Guid.NewGuid(),
         Balance = 2000,
-        AccountId = _users[1].Id,
+        UsertId = _users[1].Id,
         Name = "Investment Wallet"
     },
         new Wallet()
     {
         Id = Guid.NewGuid(),
         Balance = 2500,
-        AccountId = _users[4].Id,
+        UsertId = _users[4].Id,
         Name = "Vacation Fund"
     },
         new Wallet()
     {
         Id = Guid.NewGuid(),
         Balance = 3000,
-        AccountId = _users[2].Id,
+        UsertId = _users[2].Id,
         Name = "Emergency Fund"
     },
         new Wallet()
     {
         Id = Guid.NewGuid(),
         Balance = 3500,
-        AccountId = _users[3].Id,
+        UsertId = _users[3].Id,
         Name = "Retirement Fund"
     },
         new Wallet()
     {
         Id = Guid.NewGuid(),
         Balance = 4000,
-        AccountId = _users[4].Id,
+        UsertId = _users[4].Id,
         Name = "Education Fund"
     }
     };

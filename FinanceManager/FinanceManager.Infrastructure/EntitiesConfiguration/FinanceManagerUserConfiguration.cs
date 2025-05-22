@@ -8,7 +8,7 @@ public class FinanceManagerUserConfiguration : IEntityTypeConfiguration<FinanceM
 {
     public void Configure(EntityTypeBuilder<FinanceManagerUser> builder)
     {
-        if (Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT") == "Development")
-            builder.HasData(DBFiller.Users);
+        //if (Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT") == "Development")
+            //builder.HasData(DBFiller.Users);
     }
 }

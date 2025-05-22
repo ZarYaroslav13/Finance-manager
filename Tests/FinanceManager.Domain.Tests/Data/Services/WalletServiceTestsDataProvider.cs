@@ -11,8 +11,8 @@ public static class WalletServiceTestsDataProvider
         {
             new List<Wallet>
             {
-                new Wallet { Id = Guid.Parse("1"), Balance = 100, AccountId = Guid.Parse("1"), Name = "Wallet1" },
-                new Wallet { Id = Guid.Parse("2"), Balance = 200, AccountId = Guid.Parse("1"), Name = "Wallet2" }
+                new Wallet { Id = Guid.Parse("1"), Balance = 100, UsertId = Guid.Parse("1"), Name = "Wallet1" },
+                new Wallet { Id = Guid.Parse("2"), Balance = 200, UsertId = Guid.Parse("1"), Name = "Wallet2" }
             },
             1
         }
@@ -32,7 +32,7 @@ public static class WalletServiceTestsDataProvider
             new Wallet()
             {
                 Id = Guid.Parse("0"),
-                AccountId = Guid.Parse("1"),
+                UsertId = Guid.Parse("1"),
                 Balance = 1000,
                 Name = "Test"
             }
@@ -53,7 +53,7 @@ public static class WalletServiceTestsDataProvider
             new Wallet()
             {
                 Id = Guid.Parse("1"),
-                AccountId = Guid.Parse("1"),
+                UsertId = Guid.Parse("1"),
                 Balance = 1000,
                 Name = "Test"
             }

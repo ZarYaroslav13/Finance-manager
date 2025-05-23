@@ -20,8 +20,7 @@ public class AccountController : BaseController
         return await SendRequestAsync(command);
     }
 
-    [HttpPatch]
-    [Route("change-password")]
+    [HttpPatch("change-password")]
     public async Task<IActionResult> ChangePasswordAsync([FromBody] ChangeUserPasswordCommand command)
     {
         return await SendRequestAsync(command);

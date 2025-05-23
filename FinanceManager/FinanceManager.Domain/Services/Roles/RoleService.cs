@@ -54,7 +54,7 @@ public class RoleService : IRoleService
             return Result.Success($"Role {request.Name} Created.");
         }
 
-        return Result.Fail(response.Errors.Select(e => e.Description.ToString()).ToList());
+        return Result.Fail(response.Errors.Select(e => e.Description).ToList());
     }
 
     public async Task<IResult> UpdateAsync(RoleModel request)

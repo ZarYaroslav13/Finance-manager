@@ -6,6 +6,7 @@ using FinanceManager.Domain.Services.Accounts;
 using FinanceManager.Domain.Services.CurrentUserService;
 using FinanceManager.Domain.Services.Email;
 using FinanceManager.Domain.Services.Finances;
+using FinanceManager.Domain.Services.Roles;
 using FinanceManager.Domain.Services.Token;
 using FinanceManager.Domain.Services.Users;
 using FinanceManager.Domain.Services.Wallets;
@@ -42,6 +43,7 @@ public static class AddServicesConfigurationHostBuilderExtensions
         services.AddScoped<IFinanceReportCreator, FinanceReportCreator>();
         services.AddScoped<IEmailService, SMTPEmailService>();
         services.AddScoped<IUserService, UserService>();
+        services.AddScoped<IRoleService, RoleService>();
         services.AddScoped<IAccountService, AccountService>();
         services.AddScoped<IWalletService, WalletService>();
         services.AddScoped<IFinanceService, FinanceService>();

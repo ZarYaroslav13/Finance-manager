@@ -16,9 +16,11 @@ public class DBFiller
                 FirstName = "John",
                 LastName = "Doe",
                 Email = "john.doe@example.com",
-                PasswordHash = _passwordHasher.HashPassword(null, "saferPassword123"),
+                PasswordHash = "AQAAAAIAAYagAAAAEJ0bxR3Dzvtt7W7QNq9mUWHcAdZVGRU7kjhLPm+MjWWtckkRL9Ze3NY52tEwg1PNyQ==",
                 CreatedOn = new DateTime(2024, 1, 3),
-                LastModifiedOn = new DateTime(2025, 3, 8)
+                LastModifiedOn = new DateTime(2025, 3, 8),
+                UserName = "john.doe@example.com",
+                ConcurrencyStamp = "f6ac0aed-48d0-403a-84ff-fac0b3cdb56c"
             },
             new()
             {
@@ -26,9 +28,11 @@ public class DBFiller
                 FirstName = "Jane",
                 LastName = "Smith",
                 Email = "jane.smith@example.com",
-                PasswordHash = _passwordHasher.HashPassword(null, "saferPassword123"),
+                PasswordHash = "AQAAAAIAAYagAAAAEOolFLN+v0umRbQIt+2HH/5KXgJXjvVaIU7BtxuVvN5CbmbeBXFHX2YrpGDO8dJ0FA==",
                 CreatedOn = new DateTime(2024, 11, 13),
-                LastModifiedOn = new DateTime(2025, 1, 17)
+                LastModifiedOn = new DateTime(2025, 1, 17),
+                UserName = "jane.smith@example.com",
+                ConcurrencyStamp = "b98d741f-bc62-4de0-9dd9-8164bfacb0c1"
             },
             new()
             {
@@ -36,9 +40,11 @@ public class DBFiller
                 FirstName = "Michael",
                 LastName = "Johnson",
                 Email = "michael.johnson@example.com",
-                PasswordHash = _passwordHasher.HashPassword(null, "saferPassword123"),
+                PasswordHash = "AQAAAAIAAYagAAAAELfubYPdqFC7LFjBQnmvhcsMTM/upeSnYj2ZsUsno7cpJpoi5+gPd4KdObwQEPPxIQ==",
                 CreatedOn = new DateTime(2024, 2, 8),
-                LastModifiedOn = new DateTime(2025, 2, 21)
+                LastModifiedOn = new DateTime(2025, 2, 21),
+                UserName = "michael.johnson@example.com",
+                ConcurrencyStamp = "386aa3c7-219d-4188-8f10-25781ad43adb"
             },
             new()
             {
@@ -46,9 +52,11 @@ public class DBFiller
                 FirstName = "Emily",
                 LastName = "Davis",
                 Email = "emily.davis@example.com",
-                PasswordHash = _passwordHasher.HashPassword(null, "saferPassword123"),
+                PasswordHash = "AQAAAAIAAYagAAAAEJ4nxhQwS1Pjuk6dKtMFbYJjsdtswzEByBsPW05YqbAXYXIZgQwkoBw1TMIQioO/xw==",
                 CreatedOn = new DateTime(2024, 6, 30),
-                LastModifiedOn = new DateTime(2025, 4, 12)
+                LastModifiedOn = new DateTime(2025, 4, 12),
+                UserName = "emily.davis@example.com",
+                ConcurrencyStamp = "745125d9-7a40-4171-8a6e-631201698242"
             },
             new()
             {
@@ -56,9 +64,11 @@ public class DBFiller
                 FirstName = "Chris",
                 LastName = "Brown",
                 Email = "chris.brown@example.com",
-                PasswordHash = _passwordHasher.HashPassword(null, "saferPassword123"),
+                PasswordHash = "AQAAAAIAAYagAAAAEG75QCPVixEARN2mCiKnufrduxqUSXZSg+8Clc67i5qXAevlFkirFgvYw/Ks900t5Q==",
                 CreatedOn = new DateTime(2024, 8, 1),
-                LastModifiedOn = new DateTime(2025, 5, 19)
+                LastModifiedOn = new DateTime(2025, 5, 19),
+                UserName = "chris.brown@example.com",
+                ConcurrencyStamp = "4eec76f3-eed9-4216-b851-144e46b20513"
             },
             new()
             {
@@ -66,9 +76,11 @@ public class DBFiller
                 FirstName = "Admin",
                 LastName = "Your best",
                 Email = "mr.admin.number1@gmail.com",
-                PasswordHash = _passwordHasher.HashPassword(null, "saferPassword123"),
+                PasswordHash = "AQAAAAIAAYagAAAAELbFVpFy6pvWNErZ2Vaa0NYLxW0YKJfBJQePh4EmkQkc44+bx14HHx20HYq3+agiEg==",
                 CreatedOn = new DateTime(2023, 8, 23),
-                LastModifiedOn = new DateTime(2025, 5, 22)
+                LastModifiedOn = new DateTime(2025, 5, 22),
+                UserName = "mr.admin.number1@gmail.com",
+                ConcurrencyStamp = "b5df547d-f769-49be-ac72-503ae59db092"
             },
             new()
             {
@@ -76,9 +88,11 @@ public class DBFiller
                 FirstName = "Admin",
                 LastName = "Your second best",
                 Email = "mr.admin.number2@gmail.com",
-                PasswordHash = _passwordHasher.HashPassword(null, "saferPassword123"),
+                PasswordHash = "AQAAAAIAAYagAAAAEManMEtAUP9tLCjuddZn3617Wt3hXzc43GGhUn3Rd/zKzP/zs7jHSQASYXL24+rqlQ==",
                 CreatedOn = new DateTime(2023, 5, 13),
-                LastModifiedOn = new DateTime(2025, 1, 1)
+                LastModifiedOn = new DateTime(2025, 1, 1),
+                UserName = "mr.admin.number2@gmail.com",
+                ConcurrencyStamp = "cc7e2550-4167-4ca2-b85a-8255f3cc3d26"
             }
         };
 

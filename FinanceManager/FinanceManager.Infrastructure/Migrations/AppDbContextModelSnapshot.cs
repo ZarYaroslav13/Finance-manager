@@ -169,7 +169,7 @@ namespace FinanceManager.Infrastructure.Migrations
                         {
                             Id = new Guid("06a12d9c-20a2-4f39-8c13-68e0bdddbadb"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f6ac0aed-48d0-403a-84ff-fac0b3cdb56c",
+                            ConcurrencyStamp = "80d4821b-a1af-46c1-9f77-1a5944986781",
                             CreatedOn = new DateTime(2024, 1, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "john.doe@example.com",
                             EmailConfirmed = false,
@@ -177,7 +177,7 @@ namespace FinanceManager.Infrastructure.Migrations
                             LastModifiedOn = new DateTime(2025, 3, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             LastName = "Doe",
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEJ0bxR3Dzvtt7W7QNq9mUWHcAdZVGRU7kjhLPm+MjWWtckkRL9Ze3NY52tEwg1PNyQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEIIxUvMVY6oY0tlAwFQ0HUNxuvIr69wfrlEBJ9f40ZruSVn5rMMO6DGsQXjnxpqd+w==",
                             PhoneNumberConfirmed = false,
                             RefreshToken = "",
                             RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -188,7 +188,7 @@ namespace FinanceManager.Infrastructure.Migrations
                         {
                             Id = new Guid("6085ec7e-1cd3-4302-a51e-0a216c738b79"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b98d741f-bc62-4de0-9dd9-8164bfacb0c1",
+                            ConcurrencyStamp = "ac599c11-794f-467c-bf93-04f9ff4931dc",
                             CreatedOn = new DateTime(2024, 11, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "jane.smith@example.com",
                             EmailConfirmed = false,
@@ -196,7 +196,7 @@ namespace FinanceManager.Infrastructure.Migrations
                             LastModifiedOn = new DateTime(2025, 1, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             LastName = "Smith",
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEOolFLN+v0umRbQIt+2HH/5KXgJXjvVaIU7BtxuVvN5CbmbeBXFHX2YrpGDO8dJ0FA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPDowkUQB13Knk1V4+rnruh2byGx8L8cqKvwQ2+UMOw3JCa9ShqTLmYmA/skAbhOKA==",
                             PhoneNumberConfirmed = false,
                             RefreshToken = "",
                             RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -207,7 +207,7 @@ namespace FinanceManager.Infrastructure.Migrations
                         {
                             Id = new Guid("b9d052fd-c677-4722-85ff-0a2a5aad4af1"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "386aa3c7-219d-4188-8f10-25781ad43adb",
+                            ConcurrencyStamp = "8f5b3868-7240-436c-8483-0607bf9e935e",
                             CreatedOn = new DateTime(2024, 2, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "michael.johnson@example.com",
                             EmailConfirmed = false,
@@ -215,7 +215,7 @@ namespace FinanceManager.Infrastructure.Migrations
                             LastModifiedOn = new DateTime(2025, 2, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             LastName = "Johnson",
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAELfubYPdqFC7LFjBQnmvhcsMTM/upeSnYj2ZsUsno7cpJpoi5+gPd4KdObwQEPPxIQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAECokPx1Uymcti3CW/v3fdFQTpVCOjd7iZT3Ksi5bMhhzgIKgfF2CFLYcwu9zMGjqJw==",
                             PhoneNumberConfirmed = false,
                             RefreshToken = "",
                             RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -226,7 +226,7 @@ namespace FinanceManager.Infrastructure.Migrations
                         {
                             Id = new Guid("47b38d98-ee54-409b-bf0b-2821ca8a20b0"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "745125d9-7a40-4171-8a6e-631201698242",
+                            ConcurrencyStamp = "7138a660-62c7-4ef9-87af-44d5a8550c37",
                             CreatedOn = new DateTime(2024, 6, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "emily.davis@example.com",
                             EmailConfirmed = false,
@@ -234,7 +234,7 @@ namespace FinanceManager.Infrastructure.Migrations
                             LastModifiedOn = new DateTime(2025, 4, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             LastName = "Davis",
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEJ4nxhQwS1Pjuk6dKtMFbYJjsdtswzEByBsPW05YqbAXYXIZgQwkoBw1TMIQioO/xw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEFV/CxCbKIxEXNYGpT6X7cIdakSqh1SVcXCGdHESZNH3XvRSdHbQCITRXUI4RbAm6g==",
                             PhoneNumberConfirmed = false,
                             RefreshToken = "",
                             RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -245,7 +245,7 @@ namespace FinanceManager.Infrastructure.Migrations
                         {
                             Id = new Guid("00039684-7db3-46ff-a0f5-b744f225c30e"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4eec76f3-eed9-4216-b851-144e46b20513",
+                            ConcurrencyStamp = "a890519d-223c-4045-b1b2-9f2cbdc19026",
                             CreatedOn = new DateTime(2024, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "chris.brown@example.com",
                             EmailConfirmed = false,
@@ -253,7 +253,7 @@ namespace FinanceManager.Infrastructure.Migrations
                             LastModifiedOn = new DateTime(2025, 5, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             LastName = "Brown",
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEG75QCPVixEARN2mCiKnufrduxqUSXZSg+8Clc67i5qXAevlFkirFgvYw/Ks900t5Q==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJvOykoneIGxU88zwOYxNt96EkeAcPk7vG1xxISO/4rjfbFuctUXupCikXZlkJr8cQ==",
                             PhoneNumberConfirmed = false,
                             RefreshToken = "",
                             RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -264,7 +264,7 @@ namespace FinanceManager.Infrastructure.Migrations
                         {
                             Id = new Guid("0c2fb4ea-d631-4ce7-9f02-2f4c011c2160"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b5df547d-f769-49be-ac72-503ae59db092",
+                            ConcurrencyStamp = "33ebfde7-a6ce-4046-92b0-4685e201446a",
                             CreatedOn = new DateTime(2023, 8, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "mr.admin.number1@gmail.com",
                             EmailConfirmed = false,
@@ -272,7 +272,7 @@ namespace FinanceManager.Infrastructure.Migrations
                             LastModifiedOn = new DateTime(2025, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             LastName = "Your best",
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAELbFVpFy6pvWNErZ2Vaa0NYLxW0YKJfBJQePh4EmkQkc44+bx14HHx20HYq3+agiEg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEOHpil2TDHMZFj4SOTBmZsHNlLXT8uPAItWOhVbI5DSNr3iUx3NArdiX9ibKVHbmVQ==",
                             PhoneNumberConfirmed = false,
                             RefreshToken = "",
                             RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -283,7 +283,7 @@ namespace FinanceManager.Infrastructure.Migrations
                         {
                             Id = new Guid("1749fadd-b32e-430d-80d4-68b041218bd3"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "cc7e2550-4167-4ca2-b85a-8255f3cc3d26",
+                            ConcurrencyStamp = "4b9d5a46-bc36-4b59-85ec-1b7af917af1d",
                             CreatedOn = new DateTime(2023, 5, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "mr.admin.number2@gmail.com",
                             EmailConfirmed = false,
@@ -291,7 +291,7 @@ namespace FinanceManager.Infrastructure.Migrations
                             LastModifiedOn = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             LastName = "Your second best",
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEManMEtAUP9tLCjuddZn3617Wt3hXzc43GGhUn3Rd/zKzP/zs7jHSQASYXL24+rqlQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEF+8duMuJjfQRTPUnVJetBaLU13SmWKUJVdqj/mvRY67feCA6542H0RCCqjjgRHSKw==",
                             PhoneNumberConfirmed = false,
                             RefreshToken = "",
                             RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -369,56 +369,56 @@ namespace FinanceManager.Infrastructure.Migrations
                             Id = new Guid("685c6761-473a-44e1-aafb-431eb7ff4daa"),
                             Amount = 40L,
                             Date = new DateTime(2025, 1, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TypeId = new Guid("e95da595-58b3-4726-97b7-d752323d594e")
+                            TypeId = new Guid("cc488c25-5e5d-4ae1-9cca-7842effad853")
                         },
                         new
                         {
                             Id = new Guid("de48d422-feb0-4dd3-a4ca-5e85e4f23bfc"),
                             Amount = 100L,
                             Date = new DateTime(2025, 1, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TypeId = new Guid("4b3af6df-8abe-42a1-82e0-ae861a9a33ed")
+                            TypeId = new Guid("e21e180c-29e3-412a-99f3-b7254a6c6a1b")
                         },
                         new
                         {
                             Id = new Guid("18f2a06f-9155-47ac-8a94-51ee0a6f5c55"),
                             Amount = 2000L,
                             Date = new DateTime(2025, 1, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TypeId = new Guid("b3b31e78-aeaf-468e-baca-3367045ae65b")
+                            TypeId = new Guid("e95da595-58b3-4726-97b7-d752323d594e")
                         },
                         new
                         {
                             Id = new Guid("491bb2df-bb14-43a7-93a7-b8cba9d8a486"),
                             Amount = 300L,
                             Date = new DateTime(2025, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TypeId = new Guid("5fd4afed-3409-4e18-8118-d0bcf847f11f")
+                            TypeId = new Guid("afd56f2e-2660-4363-9321-645d93fa0520")
                         },
                         new
                         {
                             Id = new Guid("4b8a4859-6712-4ee9-91b1-1502d20e8a55"),
                             Amount = 150L,
                             Date = new DateTime(2025, 1, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TypeId = new Guid("ce0b9d6d-d470-4cc2-8d3e-5ad21aca29a4")
+                            TypeId = new Guid("4af51eea-e862-4caf-8ce5-9ad6737dbd7b")
                         },
                         new
                         {
                             Id = new Guid("01f3819a-7ba0-419f-95f0-0ac3417b79d4"),
                             Amount = 200L,
                             Date = new DateTime(2025, 1, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TypeId = new Guid("e1941e45-3981-454d-af77-46be20eb8f90")
+                            TypeId = new Guid("eb00cc66-2104-4bc4-9d6b-fc20f2cdc935")
                         },
                         new
                         {
                             Id = new Guid("43b9ab73-31bd-468b-87e7-ccf6c13cf2ba"),
                             Amount = 300L,
                             Date = new DateTime(2025, 1, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TypeId = new Guid("e21e180c-29e3-412a-99f3-b7254a6c6a1b")
+                            TypeId = new Guid("e1941e45-3981-454d-af77-46be20eb8f90")
                         },
                         new
                         {
                             Id = new Guid("a649dea4-79bc-4f2d-bec9-9046b4e5638f"),
                             Amount = 70L,
                             Date = new DateTime(2025, 1, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TypeId = new Guid("6ae5a115-3361-4b6f-84cb-61fd53f18358")
+                            TypeId = new Guid("ce0b9d6d-d470-4cc2-8d3e-5ad21aca29a4")
                         },
                         new
                         {
@@ -467,56 +467,56 @@ namespace FinanceManager.Infrastructure.Migrations
                             Id = new Guid("79b7b04f-135f-4c22-8c03-c36951b7ebce"),
                             Amount = 300L,
                             Date = new DateTime(2025, 1, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TypeId = new Guid("f51e1eb6-539a-4e71-9e12-4d8c50fd92b2")
+                            TypeId = new Guid("6ae5a115-3361-4b6f-84cb-61fd53f18358")
                         },
                         new
                         {
                             Id = new Guid("02cda2d7-4b3e-4ef9-a842-69ed5ec00513"),
                             Amount = 500L,
                             Date = new DateTime(2025, 1, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TypeId = new Guid("afd56f2e-2660-4363-9321-645d93fa0520")
+                            TypeId = new Guid("adcbf657-efee-4666-a179-e5a105a1b99d")
                         },
                         new
                         {
                             Id = new Guid("ce9a4ba0-d603-4f07-bf55-aa5019dddc8d"),
                             Amount = 1500L,
                             Date = new DateTime(2025, 1, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TypeId = new Guid("eb00cc66-2104-4bc4-9d6b-fc20f2cdc935")
+                            TypeId = new Guid("4b3af6df-8abe-42a1-82e0-ae861a9a33ed")
                         },
                         new
                         {
                             Id = new Guid("2c547dc3-9c98-4206-abe7-83610daa04d4"),
                             Amount = 40L,
                             Date = new DateTime(2025, 1, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TypeId = new Guid("4af51eea-e862-4caf-8ce5-9ad6737dbd7b")
+                            TypeId = new Guid("f51e1eb6-539a-4e71-9e12-4d8c50fd92b2")
                         },
                         new
                         {
                             Id = new Guid("c57eae65-99d3-45cc-96e3-85d430cb28e7"),
                             Amount = 600L,
                             Date = new DateTime(2025, 1, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TypeId = new Guid("3cd3e963-5f1c-4026-8cac-f8b097d2be02")
+                            TypeId = new Guid("b3b31e78-aeaf-468e-baca-3367045ae65b")
                         },
                         new
                         {
                             Id = new Guid("1e49d023-ff93-460c-9701-bbdba9499956"),
                             Amount = 100L,
                             Date = new DateTime(2025, 1, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TypeId = new Guid("d849a3fd-5e3a-4365-92df-79e59b732247")
+                            TypeId = new Guid("5fd4afed-3409-4e18-8118-d0bcf847f11f")
                         },
                         new
                         {
                             Id = new Guid("abedd12b-bc63-4045-8209-4775f1cd36eb"),
                             Amount = 400L,
                             Date = new DateTime(2025, 1, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TypeId = new Guid("adcbf657-efee-4666-a179-e5a105a1b99d")
+                            TypeId = new Guid("d849a3fd-5e3a-4365-92df-79e59b732247")
                         },
                         new
                         {
                             Id = new Guid("0067dff5-a986-43f4-8868-ac9b16f2a606"),
                             Amount = 300L,
                             Date = new DateTime(2025, 1, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TypeId = new Guid("cc488c25-5e5d-4ae1-9cca-7842effad853")
+                            TypeId = new Guid("3cd3e963-5f1c-4026-8cac-f8b097d2be02")
                         },
                         new
                         {
@@ -579,56 +579,56 @@ namespace FinanceManager.Infrastructure.Migrations
                             Id = new Guid("ad7a768d-48d7-4205-a867-4c8a22793d2e"),
                             Amount = 40L,
                             Date = new DateTime(2025, 2, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TypeId = new Guid("e95da595-58b3-4726-97b7-d752323d594e")
+                            TypeId = new Guid("cc488c25-5e5d-4ae1-9cca-7842effad853")
                         },
                         new
                         {
                             Id = new Guid("bc670c6d-6bc8-4636-b6aa-191a888d08ed"),
                             Amount = 100L,
                             Date = new DateTime(2025, 2, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TypeId = new Guid("4b3af6df-8abe-42a1-82e0-ae861a9a33ed")
+                            TypeId = new Guid("e21e180c-29e3-412a-99f3-b7254a6c6a1b")
                         },
                         new
                         {
                             Id = new Guid("c4fb9e32-8e3c-4e04-b2e8-8a65b9e6b790"),
                             Amount = 2000L,
                             Date = new DateTime(2025, 2, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TypeId = new Guid("b3b31e78-aeaf-468e-baca-3367045ae65b")
+                            TypeId = new Guid("e95da595-58b3-4726-97b7-d752323d594e")
                         },
                         new
                         {
                             Id = new Guid("89e1888d-977c-4f8a-aa6f-7bbe5b6c249e"),
                             Amount = 300L,
                             Date = new DateTime(2025, 2, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TypeId = new Guid("5fd4afed-3409-4e18-8118-d0bcf847f11f")
+                            TypeId = new Guid("afd56f2e-2660-4363-9321-645d93fa0520")
                         },
                         new
                         {
                             Id = new Guid("a6aff005-135d-49d3-8fad-48da11781fb8"),
                             Amount = 150L,
                             Date = new DateTime(2025, 2, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TypeId = new Guid("ce0b9d6d-d470-4cc2-8d3e-5ad21aca29a4")
+                            TypeId = new Guid("4af51eea-e862-4caf-8ce5-9ad6737dbd7b")
                         },
                         new
                         {
                             Id = new Guid("491af7ec-1020-4fbd-8986-54d8bbd83b26"),
                             Amount = 200L,
                             Date = new DateTime(2025, 2, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TypeId = new Guid("e1941e45-3981-454d-af77-46be20eb8f90")
+                            TypeId = new Guid("eb00cc66-2104-4bc4-9d6b-fc20f2cdc935")
                         },
                         new
                         {
                             Id = new Guid("e55f6c51-07c5-4fd6-8a4c-b01ba99146dd"),
                             Amount = 300L,
                             Date = new DateTime(2025, 2, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TypeId = new Guid("e21e180c-29e3-412a-99f3-b7254a6c6a1b")
+                            TypeId = new Guid("e1941e45-3981-454d-af77-46be20eb8f90")
                         },
                         new
                         {
                             Id = new Guid("c55d9f3c-887e-4ce5-9058-e6d28d357fa5"),
                             Amount = 70L,
                             Date = new DateTime(2025, 2, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TypeId = new Guid("6ae5a115-3361-4b6f-84cb-61fd53f18358")
+                            TypeId = new Guid("ce0b9d6d-d470-4cc2-8d3e-5ad21aca29a4")
                         },
                         new
                         {
@@ -677,56 +677,56 @@ namespace FinanceManager.Infrastructure.Migrations
                             Id = new Guid("1c926c88-a80c-4850-a341-56cab0bc259f"),
                             Amount = 300L,
                             Date = new DateTime(2025, 2, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TypeId = new Guid("f51e1eb6-539a-4e71-9e12-4d8c50fd92b2")
+                            TypeId = new Guid("6ae5a115-3361-4b6f-84cb-61fd53f18358")
                         },
                         new
                         {
                             Id = new Guid("b492ea09-2c11-4933-8eb6-e51442b390d7"),
                             Amount = 500L,
                             Date = new DateTime(2025, 2, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TypeId = new Guid("afd56f2e-2660-4363-9321-645d93fa0520")
+                            TypeId = new Guid("adcbf657-efee-4666-a179-e5a105a1b99d")
                         },
                         new
                         {
                             Id = new Guid("964a41ef-194e-4df6-88ca-4f215de12c5c"),
                             Amount = 1500L,
                             Date = new DateTime(2025, 2, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TypeId = new Guid("eb00cc66-2104-4bc4-9d6b-fc20f2cdc935")
+                            TypeId = new Guid("4b3af6df-8abe-42a1-82e0-ae861a9a33ed")
                         },
                         new
                         {
                             Id = new Guid("06bc9f56-a0af-4f33-9ec2-f8a51b293b3c"),
                             Amount = 40L,
                             Date = new DateTime(2025, 2, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TypeId = new Guid("4af51eea-e862-4caf-8ce5-9ad6737dbd7b")
+                            TypeId = new Guid("f51e1eb6-539a-4e71-9e12-4d8c50fd92b2")
                         },
                         new
                         {
                             Id = new Guid("0f3952ab-f050-45d6-a28b-2a371881f9da"),
                             Amount = 600L,
                             Date = new DateTime(2025, 2, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TypeId = new Guid("3cd3e963-5f1c-4026-8cac-f8b097d2be02")
+                            TypeId = new Guid("b3b31e78-aeaf-468e-baca-3367045ae65b")
                         },
                         new
                         {
                             Id = new Guid("8180b6f9-c0b0-4145-a99c-81ad7d78375a"),
                             Amount = 100L,
                             Date = new DateTime(2025, 2, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TypeId = new Guid("d849a3fd-5e3a-4365-92df-79e59b732247")
+                            TypeId = new Guid("5fd4afed-3409-4e18-8118-d0bcf847f11f")
                         },
                         new
                         {
                             Id = new Guid("10ab94e4-7d92-4c40-bae9-201eca72dce5"),
                             Amount = 400L,
                             Date = new DateTime(2025, 2, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TypeId = new Guid("adcbf657-efee-4666-a179-e5a105a1b99d")
+                            TypeId = new Guid("d849a3fd-5e3a-4365-92df-79e59b732247")
                         },
                         new
                         {
                             Id = new Guid("e67638bc-c719-4c96-9817-fa933522f1e9"),
                             Amount = 300L,
                             Date = new DateTime(2025, 2, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TypeId = new Guid("cc488c25-5e5d-4ae1-9cca-7842effad853")
+                            TypeId = new Guid("3cd3e963-5f1c-4026-8cac-f8b097d2be02")
                         },
                         new
                         {
@@ -782,56 +782,56 @@ namespace FinanceManager.Infrastructure.Migrations
                             Id = new Guid("c57af14d-06b2-47c0-8d43-3f33af46881f"),
                             Amount = 40L,
                             Date = new DateTime(2025, 3, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TypeId = new Guid("e95da595-58b3-4726-97b7-d752323d594e")
+                            TypeId = new Guid("cc488c25-5e5d-4ae1-9cca-7842effad853")
                         },
                         new
                         {
                             Id = new Guid("e9ddf285-8fd4-4d66-8a46-dae1d7648820"),
                             Amount = 100L,
                             Date = new DateTime(2025, 3, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TypeId = new Guid("4b3af6df-8abe-42a1-82e0-ae861a9a33ed")
+                            TypeId = new Guid("e21e180c-29e3-412a-99f3-b7254a6c6a1b")
                         },
                         new
                         {
                             Id = new Guid("a7276103-8168-4f79-98f5-81f8bd87b626"),
                             Amount = 2000L,
                             Date = new DateTime(2025, 3, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TypeId = new Guid("b3b31e78-aeaf-468e-baca-3367045ae65b")
+                            TypeId = new Guid("e95da595-58b3-4726-97b7-d752323d594e")
                         },
                         new
                         {
                             Id = new Guid("a903f194-9377-4329-9158-ead5073a837d"),
                             Amount = 300L,
                             Date = new DateTime(2025, 3, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TypeId = new Guid("5fd4afed-3409-4e18-8118-d0bcf847f11f")
+                            TypeId = new Guid("afd56f2e-2660-4363-9321-645d93fa0520")
                         },
                         new
                         {
                             Id = new Guid("7f9a8913-7f3f-4bb0-9d70-a6e41df6a4ef"),
                             Amount = 150L,
                             Date = new DateTime(2025, 3, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TypeId = new Guid("ce0b9d6d-d470-4cc2-8d3e-5ad21aca29a4")
+                            TypeId = new Guid("4af51eea-e862-4caf-8ce5-9ad6737dbd7b")
                         },
                         new
                         {
                             Id = new Guid("ba18b0e2-f166-4bb8-bc1d-48354b409b85"),
                             Amount = 200L,
                             Date = new DateTime(2025, 3, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TypeId = new Guid("e1941e45-3981-454d-af77-46be20eb8f90")
+                            TypeId = new Guid("eb00cc66-2104-4bc4-9d6b-fc20f2cdc935")
                         },
                         new
                         {
                             Id = new Guid("4b9d9ac3-2d50-42ce-bea4-530dd276b061"),
                             Amount = 300L,
                             Date = new DateTime(2025, 3, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TypeId = new Guid("e21e180c-29e3-412a-99f3-b7254a6c6a1b")
+                            TypeId = new Guid("e1941e45-3981-454d-af77-46be20eb8f90")
                         },
                         new
                         {
                             Id = new Guid("78d9c3d5-7f48-47a0-9aec-af9d1da592bc"),
                             Amount = 70L,
                             Date = new DateTime(2025, 3, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TypeId = new Guid("6ae5a115-3361-4b6f-84cb-61fd53f18358")
+                            TypeId = new Guid("ce0b9d6d-d470-4cc2-8d3e-5ad21aca29a4")
                         },
                         new
                         {
@@ -880,28 +880,28 @@ namespace FinanceManager.Infrastructure.Migrations
                             Id = new Guid("9d56b370-dc8a-427c-bbbb-697e1cb846a8"),
                             Amount = 300L,
                             Date = new DateTime(2025, 3, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TypeId = new Guid("f51e1eb6-539a-4e71-9e12-4d8c50fd92b2")
+                            TypeId = new Guid("6ae5a115-3361-4b6f-84cb-61fd53f18358")
                         },
                         new
                         {
                             Id = new Guid("a686b4a8-70d5-48be-89b5-7e1b7fabe0cc"),
                             Amount = 500L,
                             Date = new DateTime(2025, 3, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TypeId = new Guid("afd56f2e-2660-4363-9321-645d93fa0520")
+                            TypeId = new Guid("adcbf657-efee-4666-a179-e5a105a1b99d")
                         },
                         new
                         {
                             Id = new Guid("7895034f-9c3e-4583-be3d-de3ded0ad5cc"),
                             Amount = 1500L,
                             Date = new DateTime(2025, 3, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TypeId = new Guid("eb00cc66-2104-4bc4-9d6b-fc20f2cdc935")
+                            TypeId = new Guid("4b3af6df-8abe-42a1-82e0-ae861a9a33ed")
                         },
                         new
                         {
                             Id = new Guid("548050b8-0f48-49e4-af12-5b2e5c78d3a1"),
                             Amount = 40L,
                             Date = new DateTime(2025, 3, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TypeId = new Guid("4af51eea-e862-4caf-8ce5-9ad6737dbd7b")
+                            TypeId = new Guid("f51e1eb6-539a-4e71-9e12-4d8c50fd92b2")
                         },
                         new
                         {
@@ -915,28 +915,28 @@ namespace FinanceManager.Infrastructure.Migrations
                             Id = new Guid("6df9fe8c-81f6-4012-9cd1-770db162194c"),
                             Amount = 600L,
                             Date = new DateTime(2025, 3, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TypeId = new Guid("3cd3e963-5f1c-4026-8cac-f8b097d2be02")
+                            TypeId = new Guid("b3b31e78-aeaf-468e-baca-3367045ae65b")
                         },
                         new
                         {
                             Id = new Guid("b6725f2b-1a51-4725-ba39-00cd383cddd4"),
                             Amount = 100L,
                             Date = new DateTime(2025, 3, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TypeId = new Guid("d849a3fd-5e3a-4365-92df-79e59b732247")
+                            TypeId = new Guid("5fd4afed-3409-4e18-8118-d0bcf847f11f")
                         },
                         new
                         {
                             Id = new Guid("5540ed12-0723-4860-8c7b-dc6d6be1476b"),
                             Amount = 400L,
                             Date = new DateTime(2025, 3, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TypeId = new Guid("adcbf657-efee-4666-a179-e5a105a1b99d")
+                            TypeId = new Guid("d849a3fd-5e3a-4365-92df-79e59b732247")
                         },
                         new
                         {
                             Id = new Guid("7de6ee59-d547-4b16-a8a4-3ca184ef4cee"),
                             Amount = 300L,
                             Date = new DateTime(2025, 3, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TypeId = new Guid("cc488c25-5e5d-4ae1-9cca-7842effad853")
+                            TypeId = new Guid("3cd3e963-5f1c-4026-8cac-f8b097d2be02")
                         },
                         new
                         {
@@ -992,28 +992,28 @@ namespace FinanceManager.Infrastructure.Migrations
                             Id = new Guid("9012c5a2-50db-4b0a-a542-d00f350e0858"),
                             Amount = 40L,
                             Date = new DateTime(2025, 4, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TypeId = new Guid("e95da595-58b3-4726-97b7-d752323d594e")
+                            TypeId = new Guid("cc488c25-5e5d-4ae1-9cca-7842effad853")
                         },
                         new
                         {
                             Id = new Guid("88cdf2aa-af1b-48e1-a8d3-706aaebe25bf"),
                             Amount = 100L,
                             Date = new DateTime(2025, 4, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TypeId = new Guid("4b3af6df-8abe-42a1-82e0-ae861a9a33ed")
+                            TypeId = new Guid("e21e180c-29e3-412a-99f3-b7254a6c6a1b")
                         },
                         new
                         {
                             Id = new Guid("232c889e-917a-4224-8e11-c420326ba1bc"),
                             Amount = 2000L,
                             Date = new DateTime(2025, 4, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TypeId = new Guid("b3b31e78-aeaf-468e-baca-3367045ae65b")
+                            TypeId = new Guid("e95da595-58b3-4726-97b7-d752323d594e")
                         },
                         new
                         {
                             Id = new Guid("0da8a758-6b04-4a19-8cca-899c0c69e168"),
                             Amount = 300L,
                             Date = new DateTime(2025, 4, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TypeId = new Guid("5fd4afed-3409-4e18-8118-d0bcf847f11f")
+                            TypeId = new Guid("afd56f2e-2660-4363-9321-645d93fa0520")
                         },
                         new
                         {
@@ -1178,107 +1178,11 @@ namespace FinanceManager.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("eb00cc66-2104-4bc4-9d6b-fc20f2cdc935"),
-                            Description = "Income from software sales",
-                            EntryType = 0,
-                            Name = "Software Sales",
-                            WalletId = new Guid("2cdd231c-4fc1-47ef-be64-c93e2b6aa842")
-                        },
-                        new
-                        {
-                            Id = new Guid("b3b31e78-aeaf-468e-baca-3367045ae65b"),
-                            Description = "Consulting services",
-                            EntryType = 0,
-                            Name = "Consulting",
-                            WalletId = new Guid("2cdd231c-4fc1-47ef-be64-c93e2b6aa842")
-                        },
-                        new
-                        {
-                            Id = new Guid("4af51eea-e862-4caf-8ce5-9ad6737dbd7b"),
-                            Description = "Purchase of household supplies",
-                            EntryType = 1,
-                            Name = "Household Supplies",
-                            WalletId = new Guid("2cdd231c-4fc1-47ef-be64-c93e2b6aa842")
-                        },
-                        new
-                        {
-                            Id = new Guid("5fd4afed-3409-4e18-8118-d0bcf847f11f"),
-                            Description = "Travel expenses",
-                            EntryType = 1,
-                            Name = "Travel",
-                            WalletId = new Guid("2cdd231c-4fc1-47ef-be64-c93e2b6aa842")
-                        },
-                        new
-                        {
-                            Id = new Guid("e1941e45-3981-454d-af77-46be20eb8f90"),
-                            Description = "Stock dividends",
-                            EntryType = 0,
-                            Name = "Dividends",
-                            WalletId = new Guid("537e8323-bdba-41f2-a141-5a3f024978ea")
-                        },
-                        new
-                        {
-                            Id = new Guid("3cd3e963-5f1c-4026-8cac-f8b097d2be02"),
-                            Description = "Income from freelance writing",
-                            EntryType = 0,
-                            Name = "Freelance Writing",
-                            WalletId = new Guid("537e8323-bdba-41f2-a141-5a3f024978ea")
-                        },
-                        new
-                        {
-                            Id = new Guid("ce0b9d6d-d470-4cc2-8d3e-5ad21aca29a4"),
-                            Description = "Stock market investment",
-                            EntryType = 1,
-                            Name = "Investment",
-                            WalletId = new Guid("537e8323-bdba-41f2-a141-5a3f024978ea")
-                        },
-                        new
-                        {
-                            Id = new Guid("d849a3fd-5e3a-4365-92df-79e59b732247"),
-                            Description = "Donation to charity",
-                            EntryType = 1,
-                            Name = "Charity",
-                            WalletId = new Guid("537e8323-bdba-41f2-a141-5a3f024978ea")
-                        },
-                        new
-                        {
-                            Id = new Guid("e21e180c-29e3-412a-99f3-b7254a6c6a1b"),
-                            Description = "Monthly savings",
-                            EntryType = 0,
-                            Name = "Savings",
-                            WalletId = new Guid("ccb6d53b-ae14-44a4-ab75-525b838786fe")
-                        },
-                        new
-                        {
-                            Id = new Guid("cc488c25-5e5d-4ae1-9cca-7842effad853"),
-                            Description = "Income from music sales",
-                            EntryType = 0,
-                            Name = "Music Sales",
-                            WalletId = new Guid("ccb6d53b-ae14-44a4-ab75-525b838786fe")
-                        },
-                        new
-                        {
-                            Id = new Guid("6ae5a115-3361-4b6f-84cb-61fd53f18358"),
-                            Description = "Car repair and maintenance",
-                            EntryType = 1,
-                            Name = "Car Maintenance",
-                            WalletId = new Guid("ccb6d53b-ae14-44a4-ab75-525b838786fe")
-                        },
-                        new
-                        {
-                            Id = new Guid("adcbf657-efee-4666-a179-e5a105a1b99d"),
-                            Description = "Purchase of furniture",
-                            EntryType = 1,
-                            Name = "Furniture",
-                            WalletId = new Guid("ccb6d53b-ae14-44a4-ab75-525b838786fe")
-                        },
-                        new
-                        {
                             Id = new Guid("4b3af6df-8abe-42a1-82e0-ae861a9a33ed"),
                             Description = "Birthday gift",
                             EntryType = 1,
                             Name = "Gift",
-                            WalletId = new Guid("d3d06754-3f13-4cd1-ae8b-4bc95db7490d")
+                            WalletId = new Guid("2cdd231c-4fc1-47ef-be64-c93e2b6aa842")
                         },
                         new
                         {
@@ -1286,7 +1190,7 @@ namespace FinanceManager.Infrastructure.Migrations
                             Description = "Monthly gym membership",
                             EntryType = 1,
                             Name = "Gym Membership",
-                            WalletId = new Guid("d3d06754-3f13-4cd1-ae8b-4bc95db7490d")
+                            WalletId = new Guid("2cdd231c-4fc1-47ef-be64-c93e2b6aa842")
                         },
                         new
                         {
@@ -1294,7 +1198,7 @@ namespace FinanceManager.Infrastructure.Migrations
                             Description = "Payment for medical services",
                             EntryType = 1,
                             Name = "Medical Bills",
-                            WalletId = new Guid("d3d06754-3f13-4cd1-ae8b-4bc95db7490d")
+                            WalletId = new Guid("2cdd231c-4fc1-47ef-be64-c93e2b6aa842")
                         },
                         new
                         {
@@ -1302,6 +1206,102 @@ namespace FinanceManager.Infrastructure.Migrations
                             Description = "Payment for education",
                             EntryType = 1,
                             Name = "Tuition",
+                            WalletId = new Guid("2cdd231c-4fc1-47ef-be64-c93e2b6aa842")
+                        },
+                        new
+                        {
+                            Id = new Guid("eb00cc66-2104-4bc4-9d6b-fc20f2cdc935"),
+                            Description = "Income from software sales",
+                            EntryType = 0,
+                            Name = "Software Sales",
+                            WalletId = new Guid("537e8323-bdba-41f2-a141-5a3f024978ea")
+                        },
+                        new
+                        {
+                            Id = new Guid("b3b31e78-aeaf-468e-baca-3367045ae65b"),
+                            Description = "Consulting services",
+                            EntryType = 0,
+                            Name = "Consulting",
+                            WalletId = new Guid("537e8323-bdba-41f2-a141-5a3f024978ea")
+                        },
+                        new
+                        {
+                            Id = new Guid("4af51eea-e862-4caf-8ce5-9ad6737dbd7b"),
+                            Description = "Purchase of household supplies",
+                            EntryType = 1,
+                            Name = "Household Supplies",
+                            WalletId = new Guid("537e8323-bdba-41f2-a141-5a3f024978ea")
+                        },
+                        new
+                        {
+                            Id = new Guid("5fd4afed-3409-4e18-8118-d0bcf847f11f"),
+                            Description = "Travel expenses",
+                            EntryType = 1,
+                            Name = "Travel",
+                            WalletId = new Guid("537e8323-bdba-41f2-a141-5a3f024978ea")
+                        },
+                        new
+                        {
+                            Id = new Guid("e1941e45-3981-454d-af77-46be20eb8f90"),
+                            Description = "Stock dividends",
+                            EntryType = 0,
+                            Name = "Dividends",
+                            WalletId = new Guid("ccb6d53b-ae14-44a4-ab75-525b838786fe")
+                        },
+                        new
+                        {
+                            Id = new Guid("3cd3e963-5f1c-4026-8cac-f8b097d2be02"),
+                            Description = "Income from freelance writing",
+                            EntryType = 0,
+                            Name = "Freelance Writing",
+                            WalletId = new Guid("ccb6d53b-ae14-44a4-ab75-525b838786fe")
+                        },
+                        new
+                        {
+                            Id = new Guid("ce0b9d6d-d470-4cc2-8d3e-5ad21aca29a4"),
+                            Description = "Stock market investment",
+                            EntryType = 1,
+                            Name = "Investment",
+                            WalletId = new Guid("ccb6d53b-ae14-44a4-ab75-525b838786fe")
+                        },
+                        new
+                        {
+                            Id = new Guid("d849a3fd-5e3a-4365-92df-79e59b732247"),
+                            Description = "Donation to charity",
+                            EntryType = 1,
+                            Name = "Charity",
+                            WalletId = new Guid("ccb6d53b-ae14-44a4-ab75-525b838786fe")
+                        },
+                        new
+                        {
+                            Id = new Guid("e21e180c-29e3-412a-99f3-b7254a6c6a1b"),
+                            Description = "Monthly savings",
+                            EntryType = 0,
+                            Name = "Savings",
+                            WalletId = new Guid("d3d06754-3f13-4cd1-ae8b-4bc95db7490d")
+                        },
+                        new
+                        {
+                            Id = new Guid("cc488c25-5e5d-4ae1-9cca-7842effad853"),
+                            Description = "Income from music sales",
+                            EntryType = 0,
+                            Name = "Music Sales",
+                            WalletId = new Guid("d3d06754-3f13-4cd1-ae8b-4bc95db7490d")
+                        },
+                        new
+                        {
+                            Id = new Guid("6ae5a115-3361-4b6f-84cb-61fd53f18358"),
+                            Description = "Car repair and maintenance",
+                            EntryType = 1,
+                            Name = "Car Maintenance",
+                            WalletId = new Guid("d3d06754-3f13-4cd1-ae8b-4bc95db7490d")
+                        },
+                        new
+                        {
+                            Id = new Guid("adcbf657-efee-4666-a179-e5a105a1b99d"),
+                            Description = "Purchase of furniture",
+                            EntryType = 1,
+                            Name = "Furniture",
                             WalletId = new Guid("d3d06754-3f13-4cd1-ae8b-4bc95db7490d")
                         });
                 });
@@ -1466,27 +1466,7 @@ namespace FinanceManager.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = new Guid("00039684-7db3-46ff-a0f5-b744f225c30e"),
-                            RoleId = new Guid("2da1dfa4-5d4d-45eb-895c-1c82b5971b85")
-                        },
-                        new
-                        {
                             UserId = new Guid("06a12d9c-20a2-4f39-8c13-68e0bdddbadb"),
-                            RoleId = new Guid("2da1dfa4-5d4d-45eb-895c-1c82b5971b85")
-                        },
-                        new
-                        {
-                            UserId = new Guid("0c2fb4ea-d631-4ce7-9f02-2f4c011c2160"),
-                            RoleId = new Guid("db3e695c-2f84-47ec-8a36-8e2c51b7a53f")
-                        },
-                        new
-                        {
-                            UserId = new Guid("1749fadd-b32e-430d-80d4-68b041218bd3"),
-                            RoleId = new Guid("db3e695c-2f84-47ec-8a36-8e2c51b7a53f")
-                        },
-                        new
-                        {
-                            UserId = new Guid("47b38d98-ee54-409b-bf0b-2821ca8a20b0"),
                             RoleId = new Guid("2da1dfa4-5d4d-45eb-895c-1c82b5971b85")
                         },
                         new
@@ -1498,6 +1478,26 @@ namespace FinanceManager.Infrastructure.Migrations
                         {
                             UserId = new Guid("b9d052fd-c677-4722-85ff-0a2a5aad4af1"),
                             RoleId = new Guid("2da1dfa4-5d4d-45eb-895c-1c82b5971b85")
+                        },
+                        new
+                        {
+                            UserId = new Guid("47b38d98-ee54-409b-bf0b-2821ca8a20b0"),
+                            RoleId = new Guid("2da1dfa4-5d4d-45eb-895c-1c82b5971b85")
+                        },
+                        new
+                        {
+                            UserId = new Guid("00039684-7db3-46ff-a0f5-b744f225c30e"),
+                            RoleId = new Guid("2da1dfa4-5d4d-45eb-895c-1c82b5971b85")
+                        },
+                        new
+                        {
+                            UserId = new Guid("0c2fb4ea-d631-4ce7-9f02-2f4c011c2160"),
+                            RoleId = new Guid("db3e695c-2f84-47ec-8a36-8e2c51b7a53f")
+                        },
+                        new
+                        {
+                            UserId = new Guid("1749fadd-b32e-430d-80d4-68b041218bd3"),
+                            RoleId = new Guid("db3e695c-2f84-47ec-8a36-8e2c51b7a53f")
                         });
                 });
 

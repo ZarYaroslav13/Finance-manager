@@ -8,7 +8,6 @@ public class FinanceManagerUserRoleConfiguration : IEntityTypeConfiguration<Iden
 {
     public void Configure(EntityTypeBuilder<IdentityUserRole<Guid>> builder)
     {
-        
-            builder.HasData(DBFiller.UserRoles);
+        // builder.HasData(DBFiller.UserRoles);
     }
 }

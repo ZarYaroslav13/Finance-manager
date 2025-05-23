@@ -8,7 +8,6 @@ public class FinanceManagerUserConfiguration : IEntityTypeConfiguration<FinanceM
 {
     public void Configure(EntityTypeBuilder<FinanceManagerUser> builder)
     {
-        
-            builder.HasData(DBFiller.Users);
+        builder.HasData(DBFiller.Users);
     }
 }

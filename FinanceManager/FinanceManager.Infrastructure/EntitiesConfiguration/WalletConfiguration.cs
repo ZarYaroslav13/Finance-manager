@@ -8,9 +8,7 @@ public class WalletConfiguration : IEntityTypeConfiguration<Wallet>
 {
     public void Configure(EntityTypeBuilder<Wallet> builder)
     {
-
-        
-            builder.HasData(DBFiller.Wallets);
+        /// builder.HasData(DBFiller.Wallets);
 
         builder
             .HasOne(w => w.User)

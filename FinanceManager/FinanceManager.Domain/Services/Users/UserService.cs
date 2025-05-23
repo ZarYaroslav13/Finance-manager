@@ -127,6 +127,8 @@ public class UserService : IUserService
         var userWithSameEmail = await _userManager.FindByEmailAsync(user.Email);
         if (userWithSameEmail == null)
         {
+            user.UserName = user.Email;
+
             var result = await _userManager.CreateAsync(user, password);
             if (result.Succeeded)
             {

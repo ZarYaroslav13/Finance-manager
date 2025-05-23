@@ -8,8 +8,7 @@ public class FinanceOperationConfiguration : IEntityTypeConfiguration<FinanceOpe
 {
     public void Configure(EntityTypeBuilder<FinanceOperation> builder)
     {
-        
-            builder.HasData(DBFiller.FinanceOperations);
+        //builder.HasData(DBFiller.FinanceOperations);
 
         builder.HasOne(t => t.Type).
             WithMany(t => t.FinanceOperations).

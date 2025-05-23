@@ -9,8 +9,8 @@ public class FinanceOperationTypeConfiguration : IEntityTypeConfiguration<Financ
     public void Configure(EntityTypeBuilder<FinanceOperationType> builder)
     {
 
-        
-            builder.HasData(DBFiller.FinanceOperationTypes);
+
+        //builder.HasData(DBFiller.FinanceOperationTypes);
 
         builder
             .HasOne(tt => tt.Wallet)

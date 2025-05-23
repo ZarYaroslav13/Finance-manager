@@ -4,6 +4,7 @@ using FinanceManager.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FinanceManager.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250523075641_AddedDemoDataMigration")]
+    partial class AddedDemoDataMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -294,7 +297,7 @@ namespace FinanceManager.Infrastructure.Migrations
 
                     b.HasIndex("TypeId");
 
-                    b.ToTable("FinanceOperations", (string)null);
+                    b.ToTable("FinanceOperations");
                 });
 
             modelBuilder.Entity("FinanceManager.Infrastructure.Models.FinanceOperationType", b =>
@@ -320,7 +323,7 @@ namespace FinanceManager.Infrastructure.Migrations
 
                     b.HasIndex("WalletId");
 
-                    b.ToTable("FinanceOperationTypes", (string)null);
+                    b.ToTable("FinanceOperationTypes");
                 });
 
             modelBuilder.Entity("FinanceManager.Infrastructure.Models.Wallet", b =>
@@ -343,7 +346,7 @@ namespace FinanceManager.Infrastructure.Migrations
 
                     b.HasIndex("UsertId");
 
-                    b.ToTable("Wallets", (string)null);
+                    b.ToTable("Wallets");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>

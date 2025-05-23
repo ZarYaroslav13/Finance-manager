@@ -8,6 +8,6 @@ public class FinanceManagerRoleConfiguration : IEntityTypeConfiguration<FinanceM
 {
     public void Configure(EntityTypeBuilder<FinanceManagerRole> builder)
     {
-            builder.HasData(DBFiller.Roles);
+        //builder.HasData(DBFiller.Roles);
     }
 }

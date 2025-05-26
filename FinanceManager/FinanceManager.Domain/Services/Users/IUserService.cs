@@ -18,7 +18,7 @@ public interface IUserService
 
     Task<IResult<Guid>> ConfirmEmailAsync(Guid userId, string code);
 
-    Task<IResult> ForgotPasswordAsync(string email, string origin);
+    Task<IResult> ForgotPasswordAsync(string email);
 
     Task<IResult> ResetPasswordAsync(string email, string password, string token);
 

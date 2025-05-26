@@ -36,7 +36,7 @@ public class AuthenticationService : IAuthenticationService
 
     public async Task<Domain.Wrapper.IResult> LoginAsync(GetTokenCommand model)
     {
-        var response = await _httpClient.PostAsJsonAsync(ApiEndpoints.Login.SignIn, model);
+        var response = await _httpClient.PostAsJsonAsync(APIEndpoints.Token.SignIn, model);
         var result = await response.ToResultAsync<TokenDTO>();
 
         if (result.Succeeded)
@@ -56,7 +56,7 @@ public class AuthenticationService : IAuthenticationService
 
     public async Task<Domain.Wrapper.IResult> LoginAdminAsync(GetTokenCommand model)
     {
-        var response = await _httpClient.PostAsJsonAsync(ApiEndpoints.Login.SignInAsAdmin, model);
+        var response = await _httpClient.PostAsJsonAsync(APIEndpoints.Token.SignInAsAdmin, model);
         var result = await response.ToResultAsync<TokenDTO>();
 
         if (result.Succeeded)
@@ -79,7 +79,7 @@ public class AuthenticationService : IAuthenticationService
         var token = await _localStorage.GetItemAsync<string>(StorageConstants.AuthToken);
         var refreshToken = await _localStorage.GetItemAsync<string>(StorageConstants.RefreshToken);
 
-        var response = await _httpClient.PostAsJsonAsync(ApiEndpoints.Login.Refresh, new CreateRefreshTokenCommand() { Token = token, RefreshToken = refreshToken });
+        var response = await _httpClient.PostAsJsonAsync(APIEndpoints.Token.Refresh, new CreateRefreshTokenCommand() { Token = token, RefreshToken = refreshToken });
         var result = await response.ToResultAsync<TokenDTO>();
 
         if (!result.Succeeded)

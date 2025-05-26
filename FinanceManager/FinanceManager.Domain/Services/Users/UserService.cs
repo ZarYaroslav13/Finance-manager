@@ -54,7 +54,7 @@ public class UserService : IUserService
         }
     }
 
-    public async Task<IResult> ForgotPasswordAsync(string email, string origin)
+    public async Task<IResult> ForgotPasswordAsync(string email)
     {
         var user = await _userManager.FindByEmailAsync(email);
         if (user == null || !(await _userManager.IsEmailConfirmedAsync(user)))
@@ -66,9 +66,7 @@ public class UserService : IUserService
         // visit https://go.microsoft.com/fwlink/?LinkID=532713
         var code = await _userManager.GeneratePasswordResetTokenAsync(user);
         code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-        var route = "users/reset";
-        var endpointUri = new Uri(string.Concat($"{origin}/", route));
-        var passwordResetURL = QueryHelpers.AddQueryString(endpointUri.ToString(), "Token", code);
+        var passwordResetURL = QueryHelpers.AddQueryString(APIEndpoints.Users.ResetPassword, "Token", code);
         var mailRequest = new MailRequest
         {
             Body = string.Format("Please reset your password by <a href='{0}'>clicking here</a>.", HtmlEncoder.Default.Encode(passwordResetURL)),
@@ -223,7 +221,7 @@ public class UserService : IUserService
     {
         var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
         code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-        var verificationUri = QueryHelpers.AddQueryString(ApiEndpoints.Users.ConfirmEmail, "userId", user.Id.ToString());
+        var verificationUri = QueryHelpers.AddQueryString(APIEndpoints.Users.ConfirmEmail, "userId", user.Id.ToString());
         verificationUri = QueryHelpers.AddQueryString(verificationUri, "code", code);
         return verificationUri;
     }

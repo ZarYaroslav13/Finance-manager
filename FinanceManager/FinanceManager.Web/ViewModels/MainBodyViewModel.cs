@@ -22,7 +22,7 @@ public class MainBodyViewModel : BaseViewModel<MainBody>
     public EventCallback<bool> OnRightToLeftToggle { get; set; }
 
     public bool DrawerOpen = true;
-    public string CurrentUserId { get; set; }
+    public Guid CurrentUserId { get; set; }
     public string ImageDataUrl { get; set; }
     public string FirstName { get; set; } = String.Empty;
     public string SecondName { get; set; }
@@ -73,9 +73,9 @@ public class MainBodyViewModel : BaseViewModel<MainBody>
         if (user == null) return;
         if (user.Identity?.IsAuthenticated == true)
         {
-            if (string.IsNullOrEmpty(CurrentUserId))
+            if (CurrentUserId == Guid.Empty)
             {
-                CurrentUserId = user.GetUserId();
+                CurrentUserId = new(user.GetUserId());
                 FirstName = user.GetFirstName();
                 if (FirstName.Length > 0)
                 {
@@ -85,13 +85,13 @@ public class MainBodyViewModel : BaseViewModel<MainBody>
                 SecondName = user.GetLastName();
                 Email = user.GetEmail();
 
-                var currentUserResult = await (await _httpClient.GetAsync(ApiEndpoints.Accounts.Get(CurrentUserId))).ToResultAsync<TokenDTO>();
+                var currentUserResult = await (await _httpClient.GetAsync(APIEndpoints.Users.GetUser(CurrentUserId))).ToResultAsync<TokenDTO>();
                 if (!currentUserResult.Succeeded || currentUserResult.Data == null)
                 {
                     _snackBar.Add(
                         Localizer["You are logged out because the user with your Token has been deleted."],
                         Severity.Error);
-                    CurrentUserId = string.Empty;
+                    CurrentUserId = Guid.Empty;
                     ImageDataUrl = string.Empty;
                     FirstName = string.Empty;
                     SecondName = string.Empty;

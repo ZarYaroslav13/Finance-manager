@@ -3,6 +3,7 @@ using FinanceManager.Application.UseCases.FinanceOperationTypes.Commands.AddFina
 using FinanceManager.Application.UseCases.FinanceOperationTypes.Commands.DeleteFinanceOperationTypeCommand;
 using FinanceManager.Application.UseCases.FinanceOperationTypes.Commands.UpdateFinanceOperationTypeCommand;
 using FinanceManager.Application.UseCases.FinanceOperationTypes.Queries.GetAllFinanceOperationTypesQuery;
+using FinanceManager.Application.UseCases.FinanceOperationTypes.Queries.GetFinanceOperationTypeQuery;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,6 +19,12 @@ public class FinanceOperationTypeController : BaseController
     public async Task<IActionResult> GetAllAsync(Guid walletId)
     {
         return await SendRequestAsync(new GetAllFinanceOperationTypesQuery() { WalletId = walletId });
+    }
+
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetAsync(Guid Id)
+    {
+        return await SendRequestAsync(new GetFinanceOperationTypeQuery() { Id = Id });
     }
 
     [HttpPost]

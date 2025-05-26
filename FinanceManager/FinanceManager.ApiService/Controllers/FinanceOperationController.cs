@@ -4,6 +4,7 @@ using FinanceManager.Application.UseCases.FinanceOperations.Commands.DeleteFinan
 using FinanceManager.Application.UseCases.FinanceOperations.Commands.UpdateFinanceOperationCommand;
 using FinanceManager.Application.UseCases.FinanceOperations.Queries.GetAllOperationsOfTypeQuery;
 using FinanceManager.Application.UseCases.FinanceOperations.Queries.GetAllOperationsOfWalletQuery;
+using FinanceManager.Application.UseCases.FinanceOperations.Queries.GetOperationQuery;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -25,6 +26,12 @@ public class FinanceOperationController : BaseController
     public async Task<IActionResult> GetAllOfTypeAsync([FromBody] GetAllOperationsOfTypeQuery query)
     {
         return await SendRequestAsync(query);
+    }
+
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetAllOfTypeAsync(Guid id)
+    {
+        return await SendRequestAsync(new GetOperationQuery() { Id = id});
     }
 
     [HttpPost]

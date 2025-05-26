@@ -22,7 +22,7 @@ public class ForgotPasswordHandler : BaseRequestHandler, IRequestHandler<ForgotP
     {
         return await HandleAsync(async () =>
         {
-            return await _userService.ForgotPasswordAsync(request.Email, request.Origin);
+            return await _userService.ForgotPasswordAsync(request.Email);
         });
     }
 }

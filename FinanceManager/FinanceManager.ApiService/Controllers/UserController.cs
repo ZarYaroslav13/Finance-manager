@@ -36,6 +36,22 @@ public class UserController : BaseController
     }
 
     /// <summary>
+    /// Confirm Email
+    /// </summary>
+    /// <param name="query"></param>
+    /// <returns>Status 200 OK</returns>
+    [HttpGet("confirm-email")]
+    [AllowAnonymous]
+    public async Task<IActionResult> ConfirmEmailAsync([FromQuery] Guid userId, [FromQuery] string code)
+    {
+        return await SendRequestAsync(new ConfirmEmailQuery
+        {
+            UserId = userId,
+            Code = code
+        });
+    }
+
+    /// <summary>
     /// Register a User
     /// </summary>
     /// <param name="command"></param>
@@ -54,13 +70,9 @@ public class UserController : BaseController
     /// <returns>Status 200 OK</returns>
     [HttpPost("forgot-password")]
     [AllowAnonymous]
-    public async Task<IActionResult> ForgotPasswordAsync(string email)
+    public async Task<IActionResult> ForgotPasswordAsync([FromBody] ForgotPasswordCommand command)
     {
-        return await SendRequestAsync(new ForgotPasswordCommand()
-        {
-            Email = email,
-            Origin = Request.Headers["origin"]
-        });
+        return await SendRequestAsync(command);
     }
 
     /// <summary>
@@ -73,22 +85,6 @@ public class UserController : BaseController
     public async Task<IActionResult> ResetPasswordAsync(ResetPasswordCommand command)
     {
         return await SendRequestAsync(command);
-    }
-
-    /// <summary>
-    /// Confirm Email
-    /// </summary>
-    /// <param name="query"></param>
-    /// <returns>Status 200 OK</returns>
-    [HttpGet("confirm-email")]
-    [AllowAnonymous]
-    public async Task<IActionResult> ConfirmEmailAsync([FromQuery] Guid userId, [FromQuery] string code)
-    {
-        return await SendRequestAsync(new ConfirmEmailQuery
-        {
-            UserId = userId,
-            Code = code
-        });
     }
 
     [HttpDelete("{id}")]

@@ -6,7 +6,7 @@ using MediatR;
 
 namespace FinanceManager.Application.UseCases.FinanceOperations.Commands.AddFinanceOperationCommand;
 
-public class AddFinanceOperationCommand : IRequest<Result<FinanceOperationDTO>>
+public class AddFinanceOperationCommand : IRequest<IResult<FinanceOperationDTO>>
 {
     [Range(0, int.MaxValue)]
     public int Amount { get; set; }

@@ -9,23 +9,23 @@ public static class WalletDTOTestDataProvider
     {
         new object[]
         {
-            new WalletDTO(){ Id = Guid.Parse("1"), Name = "Name", Balance = 100, AccountId = Guid.Parse("1"), Expenses = new(), FinanceOperationTypes = new(), Incomes = new()},
-            new WalletDTO(){ Id = Guid.Parse("1"), Name = "Name", Balance = 100, AccountId = Guid.Parse("1"), Expenses = new(), FinanceOperationTypes = new(), Incomes = new()}
+            new WalletDTO(){ Id = Guid.Parse("1"), Name = "Name", Balance = 100, UserId = Guid.Parse("1"), Expenses = new(), FinanceOperationTypes = new(), Incomes = new()},
+            new WalletDTO(){ Id = Guid.Parse("1"), Name = "Name", Balance = 100, UserId = Guid.Parse("1"), Expenses = new(), FinanceOperationTypes = new(), Incomes = new()}
         },
         new object[]
         {
-            new WalletDTO(){ Id = Guid.Parse("1"), Name = "Name", Balance = 100, AccountId = Guid.Parse("1"), Expenses = new(), FinanceOperationTypes = new()},
-            new WalletDTO(){ Id = Guid.Parse("1"), Name = "Name", Balance = 100, AccountId = Guid.Parse("1"), Expenses = new(), FinanceOperationTypes = new()}
+            new WalletDTO(){ Id = Guid.Parse("1"), Name = "Name", Balance = 100, UserId = Guid.Parse("1"), Expenses = new(), FinanceOperationTypes = new()},
+            new WalletDTO(){ Id = Guid.Parse("1"), Name = "Name", Balance = 100, UserId = Guid.Parse("1"), Expenses = new(), FinanceOperationTypes = new()}
         },
         new object[]
         {
-            new WalletDTO(){ Id = Guid.Parse("1"), Name = "Name", Balance = 100, AccountId = Guid.Parse("1"), Expenses = new(), Incomes = new()},
-            new WalletDTO(){ Id = Guid.Parse("1"), Name = "Name", Balance = 100, AccountId = Guid.Parse("1"), Expenses = new(), Incomes = new()}
+            new WalletDTO(){ Id = Guid.Parse("1"), Name = "Name", Balance = 100, UserId = Guid.Parse("1"), Expenses = new(), Incomes = new()},
+            new WalletDTO(){ Id = Guid.Parse("1"), Name = "Name", Balance = 100, UserId = Guid.Parse("1"), Expenses = new(), Incomes = new()}
         },
         new object[]
         {
-            new WalletDTO(){ Id = Guid.Parse("1"), Name = "Name", Balance = 100, AccountId = Guid.Parse("1"), FinanceOperationTypes = new(), Incomes = new()},
-            new WalletDTO(){ Id = Guid.Parse("1"), Name = "Name", Balance = 100, AccountId = Guid.Parse("1"), FinanceOperationTypes = new(), Incomes = new()}
+            new WalletDTO(){ Id = Guid.Parse("1"), Name = "Name", Balance = 100, UserId = Guid.Parse("1"), FinanceOperationTypes = new(), Incomes = new()},
+            new WalletDTO(){ Id = Guid.Parse("1"), Name = "Name", Balance = 100, UserId = Guid.Parse("1"), FinanceOperationTypes = new(), Incomes = new()}
         },
         new object[]
         {
@@ -34,18 +34,18 @@ public static class WalletDTOTestDataProvider
         },
         new object[]
         {
-            new WalletDTO(){ Id = Guid.Parse("1"), Name = "Name", AccountId = Guid.Parse("1"), Expenses = new(), FinanceOperationTypes = new(), Incomes = new()},
-            new WalletDTO(){ Id = Guid.Parse("1"), Name = "Name", AccountId = Guid.Parse("1"), Expenses = new(), FinanceOperationTypes = new(), Incomes = new()}
+            new WalletDTO(){ Id = Guid.Parse("1"), Name = "Name", UserId = Guid.Parse("1"), Expenses = new(), FinanceOperationTypes = new(), Incomes = new()},
+            new WalletDTO(){ Id = Guid.Parse("1"), Name = "Name", UserId = Guid.Parse("1"), Expenses = new(), FinanceOperationTypes = new(), Incomes = new()}
         },
         new object[]
         {
-            new WalletDTO(){ Id = Guid.Parse("1"), Balance = 100, AccountId = Guid.Parse("1"), Expenses = new(), FinanceOperationTypes = new(), Incomes = new()},
-            new WalletDTO(){ Id = Guid.Parse("1"), Balance = 100, AccountId = Guid.Parse("1"), Expenses = new(), FinanceOperationTypes = new(), Incomes = new()}
+            new WalletDTO(){ Id = Guid.Parse("1"), Balance = 100, UserId = Guid.Parse("1"), Expenses = new(), FinanceOperationTypes = new(), Incomes = new()},
+            new WalletDTO(){ Id = Guid.Parse("1"), Balance = 100, UserId = Guid.Parse("1"), Expenses = new(), FinanceOperationTypes = new(), Incomes = new()}
         },
         new object[]
         {
-            new WalletDTO(){ Name = "Name", Balance = 100, AccountId = Guid.Parse("1"), Expenses = new(), FinanceOperationTypes = new(), Incomes = new()},
-            new WalletDTO(){ Name = "Name", Balance = 100, AccountId = Guid.Parse("1"), Expenses = new(), FinanceOperationTypes = new(), Incomes = new()}
+            new WalletDTO(){ Name = "Name", Balance = 100, UserId = Guid.Parse("1"), Expenses = new(), FinanceOperationTypes = new(), Incomes = new()},
+            new WalletDTO(){ Name = "Name", Balance = 100, UserId = Guid.Parse("1"), Expenses = new(), FinanceOperationTypes = new(), Incomes = new()}
         }
     };
 
@@ -53,37 +53,37 @@ public static class WalletDTOTestDataProvider
     {
         new object[]
         {
-            new WalletDTO(){ Id = Guid.Parse("1"), Name = "Name", Balance = 100, AccountId = Guid.Parse("1")},
-            new WalletDTO(){ Id = Guid.Parse("2"), Name = "Name", Balance = 100, AccountId = Guid.Parse("1")}
+            new WalletDTO(){ Id = Guid.Parse("1"), Name = "Name", Balance = 100, UserId = Guid.Parse("1")},
+            new WalletDTO(){ Id = Guid.Parse("2"), Name = "Name", Balance = 100, UserId = Guid.Parse("1")}
         },
         new object[]
         {
-            new WalletDTO(){ Id = Guid.Parse("1"), Name = "Name", Balance = 100, AccountId = Guid.Parse("1")},
-            new WalletDTO(){ Id = Guid.Parse("1"), Name = "Name1", Balance = 100, AccountId = Guid.Parse("1")}
+            new WalletDTO(){ Id = Guid.Parse("1"), Name = "Name", Balance = 100, UserId = Guid.Parse("1")},
+            new WalletDTO(){ Id = Guid.Parse("1"), Name = "Name1", Balance = 100, UserId = Guid.Parse("1")}
         },
         new object[]
         {
-            new WalletDTO(){ Id = Guid.Parse("1"), Name = "Name", Balance = 100, AccountId = Guid.Parse("1")},
-            new WalletDTO(){ Id = Guid.Parse("1"), Name = "Name", Balance = 200, AccountId = Guid.Parse("1")}
+            new WalletDTO(){ Id = Guid.Parse("1"), Name = "Name", Balance = 100, UserId = Guid.Parse("1")},
+            new WalletDTO(){ Id = Guid.Parse("1"), Name = "Name", Balance = 200, UserId = Guid.Parse("1")}
         },
         new object[]
         {
-            new WalletDTO(){ Id = Guid.Parse("1"), Name = "Name", Balance = 100, AccountId = Guid.Parse("1")},
-            new WalletDTO(){ Id = Guid.Parse("1"), Name = "Name", Balance = 100, AccountId = Guid.Parse("2")}
+            new WalletDTO(){ Id = Guid.Parse("1"), Name = "Name", Balance = 100, UserId = Guid.Parse("1")},
+            new WalletDTO(){ Id = Guid.Parse("1"), Name = "Name", Balance = 100, UserId = Guid.Parse("2")}
         },
         new object[]
         {
-            new WalletDTO(){ Id = Guid.Parse("1"), Name = "fName", Balance = 100, AccountId = Guid.Parse("1"), Expenses = new(), FinanceOperationTypes = new(), Incomes = new()},
-            new WalletDTO(){ Id = Guid.Parse("1"), Name = "fName", Balance = 100, AccountId = Guid.Parse("1"), Expenses = new(), FinanceOperationTypes = new() { new FinanceOperationTypeDTO()}, Incomes = new()}
+            new WalletDTO(){ Id = Guid.Parse("1"), Name = "fName", Balance = 100, UserId = Guid.Parse("1"), Expenses = new(), FinanceOperationTypes = new(), Incomes = new()},
+            new WalletDTO(){ Id = Guid.Parse("1"), Name = "fName", Balance = 100, UserId = Guid.Parse("1"), Expenses = new(), FinanceOperationTypes = new() { new FinanceOperationTypeDTO()}, Incomes = new()}
         },
         new object[]
         {
-            new WalletDTO(){ Id = Guid.Parse("1"), Name = "Name", Balance = 100, AccountId = Guid.Parse("1"), Expenses = new(), FinanceOperationTypes = new(), Incomes = new()},
+            new WalletDTO(){ Id = Guid.Parse("1"), Name = "Name", Balance = 100, UserId = Guid.Parse("1"), Expenses = new(), FinanceOperationTypes = new(), Incomes = new()},
             null
         },
         new object[]
         {
-            new WalletDTO(){ Id = Guid.Parse("1"), Name = "Name", Balance = 100, AccountId = Guid.Parse("1"), Expenses = new(), FinanceOperationTypes = new(), Incomes = new()},
+            new WalletDTO(){ Id = Guid.Parse("1"), Name = "Name", Balance = 100, UserId = Guid.Parse("1"), Expenses = new(), FinanceOperationTypes = new(), Incomes = new()},
             new UserModel()
         }
     };

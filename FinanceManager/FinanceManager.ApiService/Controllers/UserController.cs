@@ -21,9 +21,13 @@ public class UserController : BaseController
 
     [Authorize(Policy = PolicyManager.AdminPolicy)]
     [HttpGet]
-    public async Task<IActionResult> GetAllAsync([FromBody] GetAllUsersQuery query)
+    public async Task<IActionResult> GetAllAsync(int pageNumber, int take)
     {
-        return await SendRequestAsync(query);
+        return await SendRequestAsync(new GetAllUsersQuery
+        {
+            PageNumber = pageNumber,
+            Take = take
+        });
     }
 
     [HttpGet("{id}")]
@@ -66,7 +70,7 @@ public class UserController : BaseController
     /// <summary>
     /// Forgot Password
     /// </summary>
-    /// <param name="email"></param>
+    /// <param name="command"></param>
     /// <returns>Status 200 OK</returns>
     [HttpPost("forgot-password")]
     [AllowAnonymous]

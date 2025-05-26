@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FinanceManager.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250526074828_AddedDemoData")]
+    [Migration("20250526180318_AddedDemoData")]
     partial class AddedDemoData
     {
         /// <inheritdoc />
@@ -1336,12 +1336,12 @@ namespace FinanceManager.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("UsertId")
+                    b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UsertId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Wallets");
 
@@ -1351,49 +1351,49 @@ namespace FinanceManager.Infrastructure.Migrations
                             Id = new Guid("d8d6f6da-cd32-4c0c-9f16-d9c362f2f4c1"),
                             Balance = 1000,
                             Name = "Primary Wallet",
-                            UsertId = new Guid("06a12d9c-20a2-4f39-8c13-68e0bdddbadb")
+                            UserId = new Guid("06a12d9c-20a2-4f39-8c13-68e0bdddbadb")
                         },
                         new
                         {
                             Id = new Guid("2dd4c61c-b85b-48d7-a746-da3f67900aaf"),
                             Balance = 1500,
                             Name = "Savings Wallet",
-                            UsertId = new Guid("06a12d9c-20a2-4f39-8c13-68e0bdddbadb")
+                            UserId = new Guid("06a12d9c-20a2-4f39-8c13-68e0bdddbadb")
                         },
                         new
                         {
                             Id = new Guid("9d536894-4aca-4df0-bdf4-8096fd142de9"),
                             Balance = 2000,
                             Name = "Investment Wallet",
-                            UsertId = new Guid("6085ec7e-1cd3-4302-a51e-0a216c738b79")
+                            UserId = new Guid("6085ec7e-1cd3-4302-a51e-0a216c738b79")
                         },
                         new
                         {
                             Id = new Guid("2cdd231c-4fc1-47ef-be64-c93e2b6aa842"),
                             Balance = 3000,
                             Name = "Emergency Fund",
-                            UsertId = new Guid("b9d052fd-c677-4722-85ff-0a2a5aad4af1")
+                            UserId = new Guid("b9d052fd-c677-4722-85ff-0a2a5aad4af1")
                         },
                         new
                         {
                             Id = new Guid("537e8323-bdba-41f2-a141-5a3f024978ea"),
                             Balance = 3500,
                             Name = "Retirement Fund",
-                            UsertId = new Guid("47b38d98-ee54-409b-bf0b-2821ca8a20b0")
+                            UserId = new Guid("47b38d98-ee54-409b-bf0b-2821ca8a20b0")
                         },
                         new
                         {
                             Id = new Guid("ccb6d53b-ae14-44a4-ab75-525b838786fe"),
                             Balance = 4000,
                             Name = "Education Fund",
-                            UsertId = new Guid("00039684-7db3-46ff-a0f5-b744f225c30e")
+                            UserId = new Guid("00039684-7db3-46ff-a0f5-b744f225c30e")
                         },
                         new
                         {
                             Id = new Guid("d3d06754-3f13-4cd1-ae8b-4bc95db7490d"),
                             Balance = 2500,
                             Name = "Vacation Fund",
-                            UsertId = new Guid("00039684-7db3-46ff-a0f5-b744f225c30e")
+                            UserId = new Guid("00039684-7db3-46ff-a0f5-b744f225c30e")
                         });
                 });
 
@@ -1563,7 +1563,7 @@ namespace FinanceManager.Infrastructure.Migrations
                 {
                     b.HasOne("FinanceManager.Infrastructure.Models.Authorization.FinanceManagerUser", "User")
                         .WithMany("Wallets")
-                        .HasForeignKey("UsertId")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

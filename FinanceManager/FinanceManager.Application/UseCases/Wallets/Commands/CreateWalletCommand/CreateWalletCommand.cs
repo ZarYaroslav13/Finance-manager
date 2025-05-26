@@ -9,7 +9,7 @@ namespace FinanceManager.Application.UseCases.Wallets.Commands.CreateWalletComma
 public class CreateWalletCommand : IRequest<Result<WalletDTO>>
 {
     [GuidRequired]
-    public Guid AccountId { get; set; }
+    public Guid UserId { get; set; }
 
     [Required]
     [Length(2, 50)]

@@ -36,7 +36,7 @@ public class AuthenticationService : IAuthenticationService
 
     public async Task<Domain.Wrapper.IResult> LoginAsync(GetTokenCommand model)
     {
-        var response = await _httpClient.PostAsJsonAsync(APIEndpoints.Token.SignIn, model);
+        var response = await _httpClient.PostAsJsonAsync(APIEndpoints.Token.Get, model);
         var result = await response.ToResultAsync<TokenDTO>();
 
         if (result.Succeeded)
@@ -56,7 +56,7 @@ public class AuthenticationService : IAuthenticationService
 
     public async Task<Domain.Wrapper.IResult> LoginAdminAsync(GetTokenCommand model)
     {
-        var response = await _httpClient.PostAsJsonAsync(APIEndpoints.Token.SignInAsAdmin, model);
+        var response = await _httpClient.PostAsJsonAsync(APIEndpoints.Token.Get, model);
         var result = await response.ToResultAsync<TokenDTO>();
 
         if (result.Succeeded)

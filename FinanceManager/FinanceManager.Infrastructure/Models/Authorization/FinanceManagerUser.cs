@@ -8,7 +8,7 @@ public class FinanceManagerUser : IdentityUser<Guid>, IIdentityEntity
 
     public string FirstName { get; set; } = "";
 
-    public List<Wallet> Wallets { get; set; }
+    public List<Wallet>? Wallets { get; set; }
 
     public string RefreshToken { get; set; } = "";
 

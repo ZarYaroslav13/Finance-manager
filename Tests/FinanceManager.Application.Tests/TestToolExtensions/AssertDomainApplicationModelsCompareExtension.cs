@@ -60,7 +60,7 @@ public static class AssertappApplicationModelsCompareExtension
     {
         return (domainWallet.Id == appWallet.Id)
         && (domainWallet.Balance == appWallet.Balance)
-        && (domainWallet.AccountId == appWallet.AccountId)
+        && (domainWallet.UserId == appWallet.UserId)
         && (domainWallet.Name == appWallet.Name)
         && AreEqualWalletOperationTypes(domainWallet, appWallet)
         && AreEqualWalletFinanceOperations(domainWallet, appWallet);

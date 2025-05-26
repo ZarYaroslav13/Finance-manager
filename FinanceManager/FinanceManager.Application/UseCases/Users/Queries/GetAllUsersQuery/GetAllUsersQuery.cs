@@ -6,7 +6,7 @@ namespace FinanceManager.Application.UseCases.Users.Queries.GetAllUsersQuery;
 
 public class GetAllUsersQuery : IRequest<PaginatedResult<UserDTO>>
 {
-    public int pageNumber { get; set; } = 0;
+    public int PageNumber { get; set; } = 0;
 
-    public int take { get; set; } = 0;
+    public int Take { get; set; } = 0;
 }

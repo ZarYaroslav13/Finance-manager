@@ -85,7 +85,7 @@ public class MainBodyViewModel : BaseViewModel<MainBody>
                 SecondName = user.GetLastName();
                 Email = user.GetEmail();
 
-                var currentUserResult = await (await _httpClient.GetAsync(APIEndpoints.Users.GetUser(CurrentUserId))).ToResultAsync<TokenDTO>();
+                var currentUserResult = await (await _httpClient.GetAsync(APIEndpoints.Users.Get(CurrentUserId))).ToResultAsync<TokenDTO>();
                 if (!currentUserResult.Succeeded || currentUserResult.Data == null)
                 {
                     _snackBar.Add(

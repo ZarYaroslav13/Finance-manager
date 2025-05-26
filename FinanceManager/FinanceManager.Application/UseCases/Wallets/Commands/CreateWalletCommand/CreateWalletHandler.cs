@@ -25,7 +25,7 @@ public class CreateWalletHandler : BaseRequestHandler, IRequestHandler<CreateWal
         return await HandleAsync(async () =>
         {
             await CheckIsUserHaveAccesToResourseAsync(request,
-                async () => await Task.FromResult(_currentUserService.UserId == request.AccountId.ToString()));
+                async () => await Task.FromResult(_currentUserService.UserId == request.UserId.ToString()));
 
             var data = _mapper.Map<WalletDTO>(
                 await _service.AddWalletAsync(

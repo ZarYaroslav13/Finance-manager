@@ -6,7 +6,7 @@ using MediatR;
 
 namespace FinanceManager.Application.UseCases.Accounts.Commands.Commands.UpdateAccountCommand;
 
-public class UpdateAccountCommand : IRequest<Result<UserDTO>>
+public class UpdateAccountCommand : IRequest<IResult>
 {
     [GuidRequired]
     public Guid Id { get; set; }

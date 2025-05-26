@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -12,6 +13,20 @@ namespace FinanceManager.Infrastructure.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropForeignKey(
+                name: "FK_Wallets_AspNetUsers_UsertId",
+                table: "Wallets");
+
+            migrationBuilder.RenameColumn(
+                name: "UsertId",
+                table: "Wallets",
+                newName: "UserId");
+
+            migrationBuilder.RenameIndex(
+                name: "IX_Wallets_UsertId",
+                table: "Wallets",
+                newName: "IX_Wallets_UserId");
+
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "CreatedOn", "Description", "LastModifiedOn", "Name", "NormalizedName" },
@@ -51,7 +66,7 @@ namespace FinanceManager.Infrastructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "Wallets",
-                columns: new[] { "Id", "Balance", "Name", "UsertId" },
+                columns: new[] { "Id", "Balance", "Name", "UserId" },
                 values: new object[,]
                 {
                     { new Guid("2cdd231c-4fc1-47ef-be64-c93e2b6aa842"), 3000, "Emergency Fund", new Guid("b9d052fd-c677-4722-85ff-0a2a5aad4af1") },
@@ -208,11 +223,23 @@ namespace FinanceManager.Infrastructure.Migrations
                     { new Guid("f7120ee1-8f4b-49c5-876f-b212e283e95d"), 50L, new DateTime(2025, 2, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("3d033511-8700-4f2a-a6f2-e47ce51e2bf3") },
                     { new Guid("fa521fcc-3fc5-4952-9a88-3eddb8e40d5d"), 200L, new DateTime(2025, 2, 17, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("76dda505-b8db-4980-8156-ce3056018b97") }
                 });
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Wallets_AspNetUsers_UserId",
+                table: "Wallets",
+                column: "UserId",
+                principalTable: "AspNetUsers",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Cascade);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropForeignKey(
+                name: "FK_Wallets_AspNetUsers_UserId",
+                table: "Wallets");
+
             migrationBuilder.DeleteData(
                 table: "AspNetUserRoles",
                 keyColumns: new[] { "RoleId", "UserId" },
@@ -987,6 +1014,24 @@ namespace FinanceManager.Infrastructure.Migrations
                 table: "AspNetUsers",
                 keyColumn: "Id",
                 keyValue: new Guid("b9d052fd-c677-4722-85ff-0a2a5aad4af1"));
+
+            migrationBuilder.RenameColumn(
+                name: "UserId",
+                table: "Wallets",
+                newName: "UsertId");
+
+            migrationBuilder.RenameIndex(
+                name: "IX_Wallets_UserId",
+                table: "Wallets",
+                newName: "IX_Wallets_UsertId");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Wallets_AspNetUsers_UsertId",
+                table: "Wallets",
+                column: "UsertId",
+                principalTable: "AspNetUsers",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Cascade);
         }
     }
 }

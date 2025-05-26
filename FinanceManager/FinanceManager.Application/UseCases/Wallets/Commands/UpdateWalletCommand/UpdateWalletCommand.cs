@@ -26,5 +26,5 @@ public class UpdateWalletCommand : IRequest<Result<WalletDTO>>
     public List<ExpenseDTO> Expenses { get; set; } = new();
 
     [GuidRequired]
-    public Guid AccountId { get; set; }
+    public Guid UserId { get; set; }
 }

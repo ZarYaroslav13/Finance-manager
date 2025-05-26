@@ -10,7 +10,7 @@ using Microsoft.Extensions.Logging;
 
 namespace FinanceManager.Application.UseCases.Accounts.Commands.Commands.UpdateAccountCommand;
 
-public class UpdateAccountCommandHandler : BaseRequestHandler, IRequestHandler<UpdateAccountCommand, Result<UserDTO>>
+public class UpdateAccountCommandHandler : BaseRequestHandler, IRequestHandler<UpdateAccountCommand, IResult>
 {
     private readonly IAccountService _accountService;
 
@@ -20,18 +20,17 @@ public class UpdateAccountCommandHandler : BaseRequestHandler, IRequestHandler<U
         _accountService = accountService ?? throw new ArgumentNullException(nameof(accountService));
     }
 
-    public async Task<Result<UserDTO>> Handle(UpdateAccountCommand request, CancellationToken cancellationToken)
+    public async Task<IResult> Handle(UpdateAccountCommand request, CancellationToken cancellationToken)
     {
         return await HandleAsync(async () =>
         {
             await CheckIsUserHaveAccesToResourseAsync(request,
                 async () => await Task.FromResult(request.Id.ToString() == _currentUserService.UserId));
 
-            var data = _mapper.Map<UserDTO>(
-                    await _accountService.UpdateAccountAsync(
-                        _mapper.Map<UserModel>(request)));
+            var result = await _accountService.UpdateAccountAsync(
+                        _mapper.Map<UserModel>(request));
 
-            return Result<UserDTO>.Success(data, "User updated succcessfully!");
+            return result;
         });
     }
 }

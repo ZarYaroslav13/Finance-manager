@@ -13,6 +13,6 @@ public class WalletConfiguration : IEntityTypeConfiguration<Wallet>
         builder
             .HasOne(w => w.User)
             .WithMany(a => a.Wallets)
-            .HasForeignKey(w => w.UsertId);
+            .HasForeignKey(w => w.UserId);
     }
 }

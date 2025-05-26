@@ -26,9 +26,9 @@ public static class APIEndpoints
 
         public const string Register = BaseControllerUrl;
 
-        public const string ForgotPassword = _baseUrl + "/forgot-password";
+        public const string ForgotPassword = BaseControllerUrl + "/forgot-password";
 
-        public const string ResetPassword = _baseUrl + "/reset-password";
+        public const string ResetPassword = BaseControllerUrl + "/reset-password";
         public static string DeleteUser(Guid id) => BaseControllerUrl + '/' + id.ToString();
     }
 

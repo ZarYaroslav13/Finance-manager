@@ -12,7 +12,7 @@ public class WalletModel : Base.Model
 
     public List<ExpenseModel> Expenses { get; set; } = new();
 
-    public Guid AccountId { get; set; }
+    public Guid UserId { get; set; }
 
     public override bool Equals(object? obj)
     {
@@ -23,7 +23,7 @@ public class WalletModel : Base.Model
 
         return Name == wallet.Name
                 && Balance == wallet.Balance
-                && AccountId == wallet.AccountId
+                && UserId == wallet.UserId
                 && AreEqualLists(FinanceOperationTypes, wallet.FinanceOperationTypes)
                 && AreEqualLists(Incomes, wallet.Incomes)
                 && AreEqualLists(Expenses, wallet.Expenses);
@@ -35,6 +35,6 @@ public class WalletModel : Base.Model
         var incomesHashValue = GetHashCodeOfList(Incomes);
         var expensesHashValue = GetHashCodeOfList(Expenses);
 
-        return HashCode.Combine(base.GetHashCode(), Name, Balance, AccountId, financeOperationTypesHashValue, incomesHashValue, expensesHashValue);
+        return HashCode.Combine(base.GetHashCode(), Name, Balance, UserId, financeOperationTypesHashValue, incomesHashValue, expensesHashValue);
     }
 }

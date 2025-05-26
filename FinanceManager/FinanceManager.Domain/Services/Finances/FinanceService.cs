@@ -162,11 +162,10 @@ public class FinanceService : BaseService, IFinanceService
         if (count < 0)
             throw new ArgumentOutOfRangeException(nameof(count));
 
-
         return (await _financeOperationRepository
                 .GetAllAsync(
                     includeProperties: nameof(FinanceOperation.Type),
-                    filter: fo => fo.Type.WalletId == typeId,
+                    filter: fo => fo.Type.Id == typeId,
                     orderBy: iQ => iQ.OrderBy(fo => fo.Date),
                     skip: index,
                     take: count))

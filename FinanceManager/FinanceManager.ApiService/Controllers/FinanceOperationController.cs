@@ -16,13 +16,13 @@ public class FinanceOperationController : BaseController
     {
     }
 
-    [HttpGet("wallet/{walletId}")]
+    [HttpGet("wallet/{query.WalletId}")]
     public async Task<IActionResult> GetAllOfWalletAsync([FromBody] GetAllOperationsOfWalletQuery query)
     {
         return await SendRequestAsync(query);
     }
 
-    [HttpGet("type/{typeId}")]
+    [HttpGet("type/{query.TypeId}")]
     public async Task<IActionResult> GetAllOfTypeAsync([FromBody] GetAllOperationsOfTypeQuery query)
     {
         return await SendRequestAsync(query);

@@ -34,7 +34,7 @@ public static class AssertDataLayerDomainModelsCompareExtension
     {
         return (dbWallet.Id == domainWallet.Id)
         && (dbWallet.Balance == domainWallet.Balance)
-        && (dbWallet.UsertId == domainWallet.AccountId)
+        && (dbWallet.UserId == domainWallet.UserId)
         && (dbWallet.Name == domainWallet.Name)
         && AreEqualWalletOperationTypes(dbWallet, domainWallet)
         && AreEqualFinanceWalletOperationTypes(dbWallet, domainWallet);

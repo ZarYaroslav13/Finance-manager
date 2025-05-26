@@ -24,24 +24,22 @@ public class AccountService : IAccountService
         ArgumentNullException.ThrowIfNull(updatedAccount);
 
         if (updatedAccount.Id == Guid.Empty)
-            throw new ArgumentException(nameof(updatedAccount));
+            return Result.Fail("Id must be specified");
 
         var userWithSameEmail = await _userManager.FindByEmailAsync(updatedAccount.Email);
         if (userWithSameEmail == null || userWithSameEmail.Id == updatedAccount.Id)
         {
-            var user = await _userManager.FindByIdAsync(updatedAccount.Id.ToString());
+            var user = userWithSameEmail ?? await _userManager.FindByIdAsync(updatedAccount.Id.ToString());
 
-            user = _mapper.Map<FinanceManagerUser>(updatedAccount);
+            CopyProperities(user, _mapper.Map<FinanceManagerUser>(updatedAccount));
 
             var identityResult = await _userManager.UpdateAsync(user);
             var errors = identityResult.Errors.Select(e => e.Description).ToList();
             await _signInManager.RefreshSignInAsync(user);
-            return identityResult.Succeeded ? await Result.SuccessAsync() : await Result.FailAsync(errors);
+            return identityResult.Succeeded ? await Result.SuccessAsync("Account updated successfully!") : await Result.FailAsync(errors);
         }
-        else
-        {
-            return await Result.FailAsync($"Email {userWithSameEmail.Email} is already used.");
-        }
+
+        return await Result.FailAsync($"Email {userWithSameEmail.Email} is already used.");
     }
 
     public async Task<IResult> ChangePasswordAsync(Guid id, string oldPassword, string newPassword)
@@ -63,6 +61,13 @@ public class AccountService : IAccountService
             oldPassword,
             newPassword);
         var errors = identityResult.Errors.Select(e => e.Description).ToList();
-        return identityResult.Succeeded ? await Result.SuccessAsync() : await Result.FailAsync(errors);
+        return identityResult.Succeeded ? await Result.SuccessAsync("Password changed successfully!") : await Result.FailAsync(errors);
+    }
+
+    private void CopyProperities(FinanceManagerUser user, FinanceManagerUser modifiedUser)
+    {
+        user.Email = modifiedUser.Email;
+        user.LastName = modifiedUser.LastName;
+        user.FirstName = modifiedUser.FirstName;
     }
 }

@@ -23,7 +23,7 @@ public class WalletService : BaseService, IWalletService
     public async Task<List<WalletModel>> GetAllWalletsOfAccountAsync(Guid accountId)
     {
         return (await _repository
-            .GetAllAsync(filter: w => w.UsertId == accountId))
+            .GetAllAsync(filter: w => w.UserId == accountId))
             .Select(_mapper.Map<WalletModel>)
             .ToList();
     }
@@ -35,8 +35,8 @@ public class WalletService : BaseService, IWalletService
         if (wallet.Id != Guid.Empty)
             throw new ArgumentException(nameof(wallet.Id));
 
-        if (wallet.AccountId == Guid.Empty)
-            throw new ArgumentException(nameof(wallet.AccountId));
+        if (wallet.UserId == Guid.Empty)
+            throw new ArgumentException(nameof(wallet.UserId));
 
         var result = _repository.Insert(
                                 _mapper.Map<Wallet>(wallet));
@@ -80,6 +80,6 @@ public class WalletService : BaseService, IWalletService
 
         var wallet = await _repository.GetByIdAsync(walletId);
 
-        return wallet.UsertId.ToString() == _currentUserService.UserId;
+        return wallet.UserId.ToString() == _currentUserService.UserId;
     }
 }

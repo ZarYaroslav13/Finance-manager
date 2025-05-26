@@ -33,7 +33,7 @@ public class GetAllUsersHandler : BaseRequestHandler, IRequestHandler<GetAllUser
 
             var result = response.Data
                         .Select(_mapper.Map<UserDTO>)
-                        .ToPaginatedList(request.pageNumber, request.take);
+                        .ToPaginatedList(request.PageNumber, request.Take);
             result.Messages = response.Messages;
 
             return result;

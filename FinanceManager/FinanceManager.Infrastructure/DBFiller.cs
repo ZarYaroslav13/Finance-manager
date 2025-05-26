@@ -151,13 +151,13 @@ public class DBFiller
 
     private static List<Wallet> _wallets = new List<Wallet>
         {
-            new() { Id = new Guid("d8d6f6da-cd32-4c0c-9f16-d9c362f2f4c1"), Name = "Primary Wallet", Balance = 1000, UsertId = _users[0].Id },
-            new() { Id = new Guid("2dd4c61c-b85b-48d7-a746-da3f67900aaf"), Name = "Savings Wallet", Balance = 1500, UsertId = _users[0].Id },
-            new() { Id = new Guid("9d536894-4aca-4df0-bdf4-8096fd142de9"), Name = "Investment Wallet", Balance = 2000, UsertId = _users[1].Id  },
-            new() { Id = new Guid("2cdd231c-4fc1-47ef-be64-c93e2b6aa842"), Name = "Emergency Fund", Balance = 3000, UsertId = _users[2].Id  },
-            new() { Id = new Guid("537e8323-bdba-41f2-a141-5a3f024978ea"), Name = "Retirement Fund", Balance = 3500, UsertId = _users[3].Id  },
-            new() { Id = new Guid("ccb6d53b-ae14-44a4-ab75-525b838786fe"), Name = "Education Fund", Balance = 4000, UsertId =_users[4].Id },
-            new() { Id = new Guid("d3d06754-3f13-4cd1-ae8b-4bc95db7490d"), Name = "Vacation Fund", Balance = 2500, UsertId = _users[4].Id}
+            new() { Id = new Guid("d8d6f6da-cd32-4c0c-9f16-d9c362f2f4c1"), Name = "Primary Wallet", Balance = 1000, UserId = _users[0].Id },
+            new() { Id = new Guid("2dd4c61c-b85b-48d7-a746-da3f67900aaf"), Name = "Savings Wallet", Balance = 1500, UserId = _users[0].Id },
+            new() { Id = new Guid("9d536894-4aca-4df0-bdf4-8096fd142de9"), Name = "Investment Wallet", Balance = 2000, UserId = _users[1].Id  },
+            new() { Id = new Guid("2cdd231c-4fc1-47ef-be64-c93e2b6aa842"), Name = "Emergency Fund", Balance = 3000, UserId = _users[2].Id  },
+            new() { Id = new Guid("537e8323-bdba-41f2-a141-5a3f024978ea"), Name = "Retirement Fund", Balance = 3500, UserId = _users[3].Id  },
+            new() { Id = new Guid("ccb6d53b-ae14-44a4-ab75-525b838786fe"), Name = "Education Fund", Balance = 4000, UserId =_users[4].Id },
+            new() { Id = new Guid("d3d06754-3f13-4cd1-ae8b-4bc95db7490d"), Name = "Vacation Fund", Balance = 2500, UserId = _users[4].Id}
         };
 
     private static List<FinanceOperationType> _financeOperationTypes = new()

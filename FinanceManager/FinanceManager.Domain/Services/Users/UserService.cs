@@ -54,29 +54,6 @@ public class UserService : IUserService
         }
     }
 
-    public async Task<IResult> ForgotPasswordAsync(string email)
-    {
-        var user = await _userManager.FindByEmailAsync(email);
-        if (user == null || !(await _userManager.IsEmailConfirmedAsync(user)))
-        {
-            // Don't reveal that the user does not exist or is not confirmed
-            return await Result.FailAsync("An Error has occurred!");
-        }
-        // For more information on how to enable account confirmation and password reset please
-        // visit https://go.microsoft.com/fwlink/?LinkID=532713
-        var code = await _userManager.GeneratePasswordResetTokenAsync(user);
-        code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-        var passwordResetURL = QueryHelpers.AddQueryString(APIEndpoints.Users.ResetPassword, "Token", code);
-        var mailRequest = new MailRequest
-        {
-            Body = string.Format("Please reset your password by <a href='{0}'>clicking here</a>.", HtmlEncoder.Default.Encode(passwordResetURL)),
-            Subject = "Reset Password",
-            To = email
-        };
-        BackgroundJob.Enqueue(() => _emailService.SendAsync(mailRequest));
-        return await Result.SuccessAsync("Password Reset Mail has been sent to your authorized Email.");
-    }
-
     public async Task<Result<List<UserModel>>> GetAllAsync()
     {
         var users = await _userManager.Users.ToListAsync();
@@ -148,6 +125,29 @@ public class UserService : IUserService
         }
 
         return await Result.FailAsync($"Email {user.UserName} is already registered.");
+    }
+
+    public async Task<IResult> ForgotPasswordAsync(string email)
+    {
+        var user = await _userManager.FindByEmailAsync(email);
+        if (user == null || !(await _userManager.IsEmailConfirmedAsync(user)))
+        {
+            // Don't reveal that the user does not exist or is not confirmed
+            return await Result.FailAsync("An Error has occurred!");
+        }
+        // For more information on how to enable account confirmation and password reset please
+        // visit https://go.microsoft.com/fwlink/?LinkID=532713
+        var code = await _userManager.GeneratePasswordResetTokenAsync(user);
+        code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+        var passwordResetURL = QueryHelpers.AddQueryString(APIEndpoints.Users.ResetPassword, "Token", code);
+        var mailRequest = new MailRequest
+        {
+            Body = string.Format("Please reset your password by <a href='{0}'>clicking here</a>.", HtmlEncoder.Default.Encode(passwordResetURL)),
+            Subject = "Reset Password",
+            To = email
+        };
+        BackgroundJob.Enqueue(() => _emailService.SendAsync(mailRequest));
+        return await Result.SuccessAsync("Password Reset Mail has been sent to your authorized Email.");
     }
 
     public async Task<IResult> ResetPasswordAsync(string email, string password, string token)

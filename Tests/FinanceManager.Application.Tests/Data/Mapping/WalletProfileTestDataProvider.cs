@@ -30,7 +30,7 @@ public static class WalletProfileTestDataProvider
         Id = Guid.Parse("1"),
         Name = "WalletName",
         Balance = 200,
-        AccountId = Guid.Parse("1"),
+        UserId = Guid.Parse("1"),
         Incomes = _incomeModels,
         Expenses = _expenseModels,
         FinanceOperationTypes = _financeOperationTypes

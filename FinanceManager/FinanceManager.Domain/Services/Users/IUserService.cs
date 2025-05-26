@@ -10,7 +10,7 @@ public interface IUserService
 
     Task<Result<UserModel>> GetAsync(Guid userId);
 
-    Task<IResult> RegisterAsync(UserModel model, string password, string origin);
+    Task<IResult> RegisterAsync(UserModel model, string password);
 
     Task<IResult<List<UserRoleModel>>> GetRolesAsync(Guid id);
 

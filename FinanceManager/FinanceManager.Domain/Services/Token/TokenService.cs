@@ -61,7 +61,7 @@ public class TokenService : ITokenService
         await _userManager.UpdateAsync(user);
 
         var token = await GenerateJwtAsync(user);
-        var response = new TokenModel { Token = token, RefreshToken = user.RefreshToken };
+        var response = new TokenModel { Token = token, RefreshToken = user.RefreshToken, RefreshTokenExpiryTime = user.RefreshTokenExpiryTime };
         return await Result<TokenModel>.SuccessAsync(response);
     }
 

@@ -46,7 +46,7 @@ public class UserService : IUserService
         var result = await _userManager.ConfirmEmailAsync(user, code);
         if (result.Succeeded)
         {
-            return await Result<Guid>.SuccessAsync(user.Id, $"Account Confirmed for {user.Email}. You can now use the /api/identity/token endpoint to generate JWT.");
+            return await Result<Guid>.SuccessAsync(user.Id, $"Account Confirmed for {user.Email}. You can now use the /api/token endpoint to generate JWT.");
         }
         else
         {
@@ -120,7 +120,7 @@ public class UserService : IUserService
         return await Result<List<UserRoleModel>>.SuccessAsync(result);
     }
 
-    public async Task<IResult> RegisterAsync(UserModel model, string password, string origin)
+    public async Task<IResult> RegisterAsync(UserModel model, string password)
     {
         var user = _mapper.Map<FinanceManagerUser>(model);
 
@@ -134,7 +134,7 @@ public class UserService : IUserService
             {
                 await _userManager.AddToRoleAsync(user, PolicyManager.CommonUserRole);
 
-                var verificationUri = await SendVerificationEmail(user, origin);
+                var verificationUri = await SendVerificationEmail(user);
                 var mailRequest = new MailRequest
                 {
                     From = "mail@codewithmukesh.com",
@@ -219,12 +219,11 @@ public class UserService : IUserService
         }
     }
 
-    private async Task<string> SendVerificationEmail(FinanceManagerUser user, string origin)
+    private async Task<string> SendVerificationEmail(FinanceManagerUser user)
     {
         var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
         code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-        var endpointUri = new Uri(string.Concat($"{origin}/", ApiEndpoints.Users.ConfirmEmail));
-        var verificationUri = QueryHelpers.AddQueryString(endpointUri.ToString(), "userId", user.Id.ToString());
+        var verificationUri = QueryHelpers.AddQueryString(ApiEndpoints.Users.ConfirmEmail, "userId", user.Id.ToString());
         verificationUri = QueryHelpers.AddQueryString(verificationUri, "code", code);
         return verificationUri;
     }

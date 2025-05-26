@@ -9,97 +9,118 @@ public class DBFiller
     private static PasswordHasher<FinanceManagerUser> _passwordHasher = new();
 
     private static List<FinanceManagerUser> _users = new List<FinanceManagerUser>
-        {
-            new()
-            {
-                Id = new Guid("06a12d9c-20a2-4f39-8c13-68e0bdddbadb"),
-                FirstName = "John",
-                LastName = "Doe",
-                Email = "john.doe@example.com",
-                PasswordHash = "AQAAAAIAAYagAAAAEIIxUvMVY6oY0tlAwFQ0HUNxuvIr69wfrlEBJ9f40ZruSVn5rMMO6DGsQXjnxpqd+w==", // protectedPassword123
-                CreatedOn = new DateTime(2024, 1, 3),
-                LastModifiedOn = new DateTime(2025, 3, 8),
-                UserName = "john.doe@example.com",
-                ConcurrencyStamp = "80d4821b-a1af-46c1-9f77-1a5944986781"
-            },
-            new()
-            {
-                Id = new Guid("6085ec7e-1cd3-4302-a51e-0a216c738b79"),
-                FirstName = "Jane",
-                LastName = "Smith",
-                Email = "jane.smith@example.com",
-                PasswordHash = "AQAAAAIAAYagAAAAEPDowkUQB13Knk1V4+rnruh2byGx8L8cqKvwQ2+UMOw3JCa9ShqTLmYmA/skAbhOKA==", // protectedPassword456
-                CreatedOn = new DateTime(2024, 11, 13),
-                LastModifiedOn = new DateTime(2025, 1, 17),
-                UserName = "jane.smith@example.com",
-                ConcurrencyStamp = "ac599c11-794f-467c-bf93-04f9ff4931dc"
+{
+    new()
+    {
+        Id = new Guid("06a12d9c-20a2-4f39-8c13-68e0bdddbadb"),
+        FirstName = "John",
+        LastName = "Doe",
+        Email = "john.doe@example.com",
+        NormalizedEmail = "JOHN.DOE@EXAMPLE.COM", // Added NormalizedEmail
+        EmailConfirmed = true,
+        PasswordHash = "AQAAAAIAAYagAAAAEIIxUvMVY6oY0tlAwFQ0HUNxuvIr69wfrlEBJ9f40ZruSVn5rMMO6DGsQXjnxpqd+w==", // protectedPassword123
+        CreatedOn = new DateTime(2024, 1, 3),
+        LastModifiedOn = new DateTime(2025, 3, 8),
+        UserName = "john.doe@example.com",
+        ConcurrencyStamp = "80d4821b-a1af-46c1-9f77-1a5944986781",
+        SecurityStamp = "c97bbf70-a83e-473a-af00-04c15aa3cccb"
+    },
+    new()
+    {
+        Id = new Guid("6085ec7e-1cd3-4302-a51e-0a216c738b79"),
+        FirstName = "Jane",
+        LastName = "Smith",
+        Email = "jane.smith@example.com",
+        NormalizedEmail = "JANE.SMITH@EXAMPLE.COM", // Added NormalizedEmail
+        EmailConfirmed = true,
+        PasswordHash = "AQAAAAIAAYagAAAAEPDowkUQB13Knk1V4+rnruh2byGx8L8cqKvwQ2+UMOw3JCa9ShqTLmYmA/skAbhOKA==", // protectedPassword456
+        CreatedOn = new DateTime(2024, 11, 13),
+        LastModifiedOn = new DateTime(2025, 1, 17),
+        UserName = "jane.smith@example.com",
+        ConcurrencyStamp = "ac599c11-794f-467c-bf93-04f9ff4931dc",
+        SecurityStamp = "60b771a0-af7e-4527-a114-dfb8b30e472b"
 
-            },
-            new()
-            {
-                Id = new Guid("b9d052fd-c677-4722-85ff-0a2a5aad4af1"),
-                FirstName = "Michael",
-                LastName = "Johnson",
-                Email = "michael.johnson@example.com",
-                PasswordHash = "AQAAAAIAAYagAAAAECokPx1Uymcti3CW/v3fdFQTpVCOjd7iZT3Ksi5bMhhzgIKgfF2CFLYcwu9zMGjqJw==", // protectedPassword789
-                CreatedOn = new DateTime(2024, 2, 8),
-                LastModifiedOn = new DateTime(2025, 2, 21),
-                UserName = "michael.johnson@example.com",
-                ConcurrencyStamp = "8f5b3868-7240-436c-8483-0607bf9e935e"
+    },
+    new()
+    {
+        Id = new Guid("b9d052fd-c677-4722-85ff-0a2a5aad4af1"),
+        FirstName = "Michael",
+        LastName = "Johnson",
+        Email = "michael.johnson@example.com",
+        NormalizedEmail = "MICHAEL.JOHNSON@EXAMPLE.COM", // Added NormalizedEmail
+        EmailConfirmed = true,
+        PasswordHash = "AQAAAAIAAYagAAAAECokPx1Uymcti3CW/v3fdFQTpVCOjd7iZT3Ksi5bMhhzgIKgfF2CFLYcwu9zMGjqJw==", // protectedPassword789
+        CreatedOn = new DateTime(2024, 2, 8),
+        LastModifiedOn = new DateTime(2025, 2, 21),
+        UserName = "michael.johnson@example.com",
+        ConcurrencyStamp = "8f5b3868-7240-436c-8483-0607bf9e935e",
+        SecurityStamp = "3057898e-7200-475b-9083-9d1e7142268a"
 
-            },
-            new()
-            {
-                Id = new Guid("47b38d98-ee54-409b-bf0b-2821ca8a20b0"),
-                FirstName = "Emily",
-                LastName = "Davis",
-                Email = "emily.davis@example.com",
-                PasswordHash = "AQAAAAIAAYagAAAAEFV/CxCbKIxEXNYGpT6X7cIdakSqh1SVcXCGdHESZNH3XvRSdHbQCITRXUI4RbAm6g==", // protectedPassword012
-                CreatedOn = new DateTime(2024, 6, 30),
-                LastModifiedOn = new DateTime(2025, 4, 12),
-                UserName = "emily.davis@example.com",
-                ConcurrencyStamp = "7138a660-62c7-4ef9-87af-44d5a8550c37"
+    },
+    new()
+    {
+        Id = new Guid("47b38d98-ee54-409b-bf0b-2821ca8a20b0"),
+        FirstName = "Emily",
+        LastName = "Davis",
+        Email = "emily.davis@example.com",
+        NormalizedEmail = "EMILY.DAVIS@EXAMPLE.COM", // Added NormalizedEmail
+        EmailConfirmed = true,
+        PasswordHash = "AQAAAAIAAYagAAAAEFV/CxCbKIxEXNYGpT6X7cIdakSqh1SVcXCGdHESZNH3XvRSdHbQCITRXUI4RbAm6g==", // protectedPassword012
+        CreatedOn = new DateTime(2024, 6, 30),
+        LastModifiedOn = new DateTime(2025, 4, 12),
+        UserName = "emily.davis@example.com",
+        ConcurrencyStamp = "7138a660-62c7-4ef9-87af-44d5a8550c37",
+        SecurityStamp = "385b0441-84e4-4f0a-8752-495f2f4d005a"
 
-            },
-            new()
-            {
-                Id = new Guid("00039684-7db3-46ff-a0f5-b744f225c30e"),
-                FirstName = "Chris",
-                LastName = "Brown",
-                Email = "chris.brown@example.com",
-                PasswordHash = "AQAAAAIAAYagAAAAEJvOykoneIGxU88zwOYxNt96EkeAcPk7vG1xxISO/4rjfbFuctUXupCikXZlkJr8cQ==", // protectedPassword345
-                CreatedOn = new DateTime(2024, 8, 1),
-                LastModifiedOn = new DateTime(2025, 5, 19),
-                UserName = "chris.brown@example.com",
-                ConcurrencyStamp = "a890519d-223c-4045-b1b2-9f2cbdc19026"
+    },
+    new()
+    {
+        Id = new Guid("00039684-7db3-46ff-a0f5-b744f225c30e"),
+        FirstName = "Chris",
+        LastName = "Brown",
+        Email = "chris.brown@example.com",
+        NormalizedEmail = "CHRIS.BROWN@EXAMPLE.COM", // Added NormalizedEmail
+        EmailConfirmed = true,
+        PasswordHash = "AQAAAAIAAYagAAAAEJvOykoneIGxU88zwOYxNt96EkeAcPk7vG1xxISO/4rjfbFuctUXupCikXZlkJr8cQ==", // protectedPassword345
+        CreatedOn = new DateTime(2024, 8, 1),
+        LastModifiedOn = new DateTime(2025, 5, 19),
+        UserName = "chris.brown@example.com",
+        ConcurrencyStamp = "a890519d-223c-4045-b1b2-9f2cbdc19026",
+        SecurityStamp = "a18de4ad-5064-49ac-b5ef-81cde6d2827a"
 
-            },
-            new()
-            {
-                Id = new Guid("0c2fb4ea-d631-4ce7-9f02-2f4c011c2160"),
-                FirstName = "Admin",
-                LastName = "Your best",
-                Email = "mr.admin.number1@gmail.com",
-                PasswordHash = "AQAAAAIAAYagAAAAEOHpil2TDHMZFj4SOTBmZsHNlLXT8uPAItWOhVbI5DSNr3iUx3NArdiX9ibKVHbmVQ==", // protectedAdminPassword123
-                CreatedOn = new DateTime(2023, 8, 23),
-                LastModifiedOn = new DateTime(2025, 5, 22),
-                UserName = "mr.admin.number1@gmail.com",
-                ConcurrencyStamp = "33ebfde7-a6ce-4046-92b0-4685e201446a"
+    },
+    new()
+    {
+        Id = new Guid("0c2fb4ea-d631-4ce7-9f02-2f4c011c2160"),
+        FirstName = "Admin",
+        LastName = "Your best",
+        Email = "mr.admin.number1@gmail.com",
+        NormalizedEmail = "MR.ADMIN.NUMBER1@GMAIL.COM", // Added NormalizedEmail
+        EmailConfirmed = true,
+        PasswordHash = "AQAAAAIAAYagAAAAEOHpil2TDHMZFj4SOTBmZsHNlLXT8uPAItWOhVbI5DSNr3iUx3NArdiX9ibKVHbmVQ==", // protectedAdminPassword123
+        CreatedOn = new DateTime(2023, 8, 23),
+        LastModifiedOn = new DateTime(2025, 5, 22),
+        UserName = "mr.admin.number1@gmail.com",
+        ConcurrencyStamp = "33ebfde7-a6ce-4046-92b0-4685e201446a",
+        SecurityStamp = "5a0b7512-1f5e-499e-af17-8cb21455020e"
 
-            },
-            new()
-            {
-                Id = new Guid("1749fadd-b32e-430d-80d4-68b041218bd3"),
-                FirstName = "Admin",
-                LastName = "Your second best",
-                Email = "mr.admin.number2@gmail.com",
-                PasswordHash = "AQAAAAIAAYagAAAAEF+8duMuJjfQRTPUnVJetBaLU13SmWKUJVdqj/mvRY67feCA6542H0RCCqjjgRHSKw==", // protectedAdminPassword456
-                CreatedOn = new DateTime(2023, 5, 13),
-                LastModifiedOn = new DateTime(2025, 1, 1),
-                UserName = "mr.admin.number2@gmail.com",
-                ConcurrencyStamp = "4b9d5a46-bc36-4b59-85ec-1b7af917af1d"
-            }
-        };
+    },
+    new()
+    {
+        Id = new Guid("1749fadd-b32e-430d-80d4-68b041218bd3"),
+        FirstName = "Admin",
+        LastName = "Your second best",
+        Email = "mr.admin.number2@gmail.com",
+        NormalizedEmail = "MR.ADMIN.NUMBER2@GMAIL.COM", // Added NormalizedEmail
+        EmailConfirmed = true,
+        PasswordHash = "AQAAAAIAAYagAAAAEF+8duMuJjfQRTPUnVJetBaLU13SmWKUJVdqj/mvRY67feCA6542H0RCCqjjgRHSKw==", // protectedAdminPassword456
+        CreatedOn = new DateTime(2023, 5, 13),
+        LastModifiedOn = new DateTime(2025, 1, 1),
+        UserName = "mr.admin.number2@gmail.com",
+        ConcurrencyStamp = "4b9d5a46-bc36-4b59-85ec-1b7af917af1d",
+        SecurityStamp = "02d399e5-bd6f-4d76-bde1-162e2b4c9074"
+    }
+};
 
     private static List<FinanceManagerRole> _roles = new List<FinanceManagerRole>
         {

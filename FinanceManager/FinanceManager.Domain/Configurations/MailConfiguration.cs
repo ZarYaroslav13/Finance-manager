@@ -2,6 +2,8 @@
 
 public class MailConfiguration
 {
+    public static string Section = "MailConfiguration";
+
     public string From { get; set; }
     public string Host { get; set; }
     public int Port { get; set; }

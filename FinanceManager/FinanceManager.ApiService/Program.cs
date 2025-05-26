@@ -27,8 +27,8 @@ builder.Services.AddSwaggerGen(option =>
     option.SwaggerDoc("v1", new OpenApiInfo { Title = "FinanceManagerApi", Version = "v1" });
     option.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
-        In = ParameterLocation.Header,
         Name = "Authorization",
+        In = ParameterLocation.Header,
         Type = SecuritySchemeType.Http,
         BearerFormat = "JWT",
         Scheme = "Bearer"
@@ -40,11 +40,13 @@ builder.Services.AddSwaggerGen(option =>
             {
                 Reference = new OpenApiReference
                 {
-                    Type=ReferenceType.SecurityScheme,
-                    Id="Bearer"
-                }
-            },
-            new string[]{}
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer",
+                },
+                Scheme = "Bearer",
+                Name = "Bearer",
+                In = ParameterLocation.Header,
+            }, new List<string>()
         }
     });
 });

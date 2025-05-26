@@ -23,7 +23,7 @@ public class RegisterHandler : BaseRequestHandler, IRequestHandler<RegisterComma
     {
         return await HandleAsync(async () =>
         {
-            return await _userService.RegisterAsync(_mapper.Map<UserModel>(request), request.Password, request.Origin);
+            return await _userService.RegisterAsync(_mapper.Map<UserModel>(request), request.Password);
         });
     }
 }

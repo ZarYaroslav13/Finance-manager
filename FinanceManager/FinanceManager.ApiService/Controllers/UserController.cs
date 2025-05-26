@@ -82,9 +82,13 @@ public class UserController : BaseController
     /// <returns>Status 200 OK</returns>
     [HttpGet("confirm-email")]
     [AllowAnonymous]
-    public async Task<IActionResult> ConfirmEmailAsync([FromQuery] ConfirmEmailQuery query)
+    public async Task<IActionResult> ConfirmEmailAsync([FromQuery] Guid userId, [FromQuery] string code)
     {
-        return await SendRequestAsync(query);
+        return await SendRequestAsync(new ConfirmEmailQuery
+        {
+            UserId = userId,
+            Code = code
+        });
     }
 
     [HttpDelete("{id}")]

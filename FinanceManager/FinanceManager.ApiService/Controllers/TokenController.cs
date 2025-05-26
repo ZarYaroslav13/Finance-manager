@@ -2,6 +2,7 @@
 using FinanceManager.Application.UseCases.Tokens.Commands.CreateRefreshTokenCommand;
 using FinanceManager.Application.UseCases.Tokens.Commands.GetTokenCommand;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinanceManager.ApiService.Controllers;
@@ -13,6 +14,7 @@ public class TokenController : BaseController
     }
 
     [HttpPost]
+    [AllowAnonymous]
     public async Task<IActionResult> Get([FromBody] GetTokenCommand command)
     {
         return await SendRequestAsync(command);
@@ -26,7 +28,6 @@ public class TokenController : BaseController
     [HttpPost("refresh")]
     public async Task<IActionResult> Refresh([FromBody] CreateRefreshTokenCommand command)
     {
-        var response = await _mediator.Send(command);
-        return response.Succeeded ? Ok(response) : BadRequest(response);
+        return await SendRequestAsync(command);
     }
 }

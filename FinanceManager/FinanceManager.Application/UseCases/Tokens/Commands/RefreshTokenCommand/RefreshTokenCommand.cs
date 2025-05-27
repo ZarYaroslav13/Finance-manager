@@ -2,9 +2,9 @@
 using FinanceManager.Domain.Wrapper;
 using MediatR;
 
-namespace FinanceManager.Application.UseCases.Tokens.Commands.CreateRefreshTokenCommand;
+namespace FinanceManager.Application.UseCases.Tokens.Commands.RefreshTokenCommand;
 
-public class CreateRefreshTokenCommand : IRequest<Result<TokenDTO>>
+public class RefreshTokenCommand : IRequest<Result<TokenDTO>>
 {
     public string Token { get; set; }
     public string RefreshToken { get; set; }

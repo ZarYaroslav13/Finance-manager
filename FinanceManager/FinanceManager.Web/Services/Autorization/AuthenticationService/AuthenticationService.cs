@@ -1,7 +1,7 @@
 ﻿using System.Security.Claims;
 using Blazored.LocalStorage;
 using FinanceManager.Application.Models;
-using FinanceManager.Application.UseCases.Tokens.Commands.CreateRefreshTokenCommand;
+using FinanceManager.Application.UseCases.Tokens.Commands.RefreshTokenCommand;
 using FinanceManager.Application.UseCases.Tokens.Commands.GetTokenCommand;
 using FinanceManager.Domain.API;
 using FinanceManager.Domain.Wrapper;
@@ -43,6 +43,7 @@ public class AuthenticationService : IAuthenticationService
         {
             var jwtToken = result.Data.Token;
             var refreshToken = result.Data.RefreshToken;
+            
 
             await RewriteTokens(jwtToken, refreshToken);
 
@@ -79,7 +80,7 @@ public class AuthenticationService : IAuthenticationService
         var token = await _localStorage.GetItemAsync<string>(StorageConstants.AuthToken);
         var refreshToken = await _localStorage.GetItemAsync<string>(StorageConstants.RefreshToken);
 
-        var response = await _httpClient.PostAsJsonAsync(APIEndpoints.Token.Refresh, new CreateRefreshTokenCommand() { Token = token, RefreshToken = refreshToken });
+        var response = await _httpClient.PostAsJsonAsync(APIEndpoints.Token.Refresh, new RefreshTokenCommand() { Token = token, RefreshToken = refreshToken });
         var result = await response.ToResultAsync<TokenDTO>();
 
         if (!result.Succeeded)

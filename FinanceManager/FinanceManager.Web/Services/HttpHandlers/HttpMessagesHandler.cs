@@ -60,6 +60,9 @@ public class HttpMessagesHandler : DelegatingHandler
 
     private bool IsEndpointNeedToken(string path)
     {
-        return !path.Contains(APIEndpoints.Token.BaseControllerUrl);
+        return !path.Contains(APIEndpoints.Token.BaseControllerUrl) 
+            && !path.Contains(APIEndpoints.Users.ForgotPassword)
+            && !path.Contains(APIEndpoints.Users.ResetPassword)
+            && !path.Contains(APIEndpoints.Users.ConfirmEmail);
     }
 }

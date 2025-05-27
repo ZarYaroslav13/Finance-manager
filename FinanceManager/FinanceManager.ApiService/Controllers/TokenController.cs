@@ -1,5 +1,5 @@
 ﻿using FinanceManager.ApiService.Controllers.Base;
-using FinanceManager.Application.UseCases.Tokens.Commands.CreateRefreshTokenCommand;
+using FinanceManager.Application.UseCases.Tokens.Commands.RefreshTokenCommand;
 using FinanceManager.Application.UseCases.Tokens.Commands.GetTokenCommand;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -26,7 +26,7 @@ public class TokenController : BaseController
     /// <param name="model"></param>
     /// <returns>Status 200 OK</returns>
     [HttpPost("refresh")]
-    public async Task<IActionResult> Refresh([FromBody] CreateRefreshTokenCommand command)
+    public async Task<IActionResult> Refresh([FromBody] RefreshTokenCommand command)
     {
         return await SendRequestAsync(command);
     }

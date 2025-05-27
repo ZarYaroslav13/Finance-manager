@@ -29,7 +29,7 @@ public class FinanceOperationController : BaseController
     }
 
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetAllOfTypeAsync(Guid id)
+    public async Task<IActionResult> GetOperationAsync(Guid id)
     {
         return await SendRequestAsync(new GetOperationQuery() { Id = id});
     }

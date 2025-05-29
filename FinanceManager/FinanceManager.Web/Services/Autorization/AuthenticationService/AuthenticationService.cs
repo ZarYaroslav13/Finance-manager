@@ -36,8 +36,8 @@ public class AuthenticationService : IAuthenticationService
 
     public async Task<Domain.Wrapper.IResult> LoginAsync(GetTokenCommand model)
     {
-        var response = await _httpClient.PostAsJsonAsync(APIEndpoints.Token.Get, model);
-        var result = await response.ToResultAsync<TokenDTO>();
+        //var response = await _httpClient.PostAsJsonAsync(APIEndpoints.Token.Get, model);
+        var result = Result<TokenDTO>.Success();//await response.ToResultAsync<TokenDTO>()
 
         if (result.Succeeded)
         {
@@ -55,33 +55,13 @@ public class AuthenticationService : IAuthenticationService
         return Result.Fail();
     }
 
-    public async Task<Domain.Wrapper.IResult> LoginAdminAsync(GetTokenCommand model)
-    {
-        var response = await _httpClient.PostAsJsonAsync(APIEndpoints.Token.Get, model);
-        var result = await response.ToResultAsync<TokenDTO>();
-
-        if (result.Succeeded)
-        {
-            var jwtToken = result.Data.Token;
-            var refreshToken = result.Data.RefreshToken;
-
-            await RewriteTokens(jwtToken, refreshToken);
-
-            await _authenticationStateProvider.StateChangedAsync();
-
-            return Result.Success();
-        }
-
-        return Result.Fail();
-    }
-
     public async Task<string> RefreshTokenAsync()
     {
         var token = await _localStorage.GetItemAsync<string>(StorageConstants.AuthToken);
         var refreshToken = await _localStorage.GetItemAsync<string>(StorageConstants.RefreshToken);
 
-        var response = await _httpClient.PostAsJsonAsync(APIEndpoints.Token.Refresh, new RefreshTokenCommand() { Token = token, RefreshToken = refreshToken });
-        var result = await response.ToResultAsync<TokenDTO>();
+        // var response = await _httpClient.PostAsJsonAsync(APIEndpoints.Token.Refresh, new RefreshTokenCommand() { Token = token, RefreshToken = refreshToken });
+        var result = Result<TokenDTO>.Success();// await response.ToResultAsync<TokenDTO>();
 
         if (!result.Succeeded)
         {

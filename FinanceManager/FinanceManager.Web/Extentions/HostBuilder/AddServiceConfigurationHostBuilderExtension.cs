@@ -5,6 +5,7 @@ using FinanceManager.Domain.Authorization;
 using FinanceManager.Web.Preferences;
 using FinanceManager.Web.Preferences.Client;
 using FinanceManager.Web.Services;
+using FinanceManager.Web.Services.APIHttpClient;
 using FinanceManager.Web.Services.Autorization;
 using FinanceManager.Web.Services.Autorization.AuthenticationService;
 using FinanceManager.Web.Services.HttpHandlers;
@@ -36,12 +37,6 @@ public static class AddServiceConfigurationHostBuilderExtension
 
         services.AddClientServices();
 
-        services.AddSignalR(o =>
-            {
-                o.MaximumReceiveMessageSize = 102400000;
-                o.EnableDetailedErrors = true;
-            });
-
         services.Configure<APIOptions>(configuration.GetSection(APIOptions.Section));
 
         builder.AdjustHttpClient();
@@ -64,15 +59,7 @@ public static class AddServiceConfigurationHostBuilderExtension
 
     private static IHostApplicationBuilder AdjustHttpClient(this IHostApplicationBuilder builder)
     {
-        var serviceProvider = builder.Services.BuildServiceProvider();
-        var options = serviceProvider.GetRequiredService<IOptions<APIOptions>>().Value;
-        builder.Services.
-        AddHttpClient("FMClient", client =>
-        {
-            client.DefaultRequestHeaders.AcceptLanguage.Clear();
-            client.DefaultRequestHeaders.AcceptLanguage.ParseAdd(CultureInfo.DefaultThreadCurrentCulture?.TwoLetterISOLanguageName);
-            client.BaseAddress = new(options.BaseAddress);
-        })
+        builder.Services.AddHttpClient<FinanceManagerApiHttpClient>()
         .AddHttpMessageHandler<HttpMessagesHandler>();
 
         return builder;

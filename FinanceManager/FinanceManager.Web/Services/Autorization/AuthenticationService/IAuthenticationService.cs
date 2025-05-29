@@ -7,8 +7,6 @@ public interface IAuthenticationService
 {
     Task<Domain.Wrapper.IResult> LoginAsync(GetTokenCommand model);
 
-    Task<Domain.Wrapper.IResult> LoginAdminAsync(GetTokenCommand model);
-
     Task<string> RefreshTokenAsync();
 
     Task<string> TryRefreshTokenAsync();

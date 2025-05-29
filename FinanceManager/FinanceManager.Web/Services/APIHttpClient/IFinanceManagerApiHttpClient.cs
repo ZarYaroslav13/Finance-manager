@@ -21,7 +21,7 @@ using FinanceManager.Domain.Wrapper;
 
 namespace FinanceManager.Web.Services.APIHttpClient;
 
-public interface IAPIHttpClient
+public interface IFinanceManagerApiHttpClient
 {
     #region Tokens
     public Task<Result<TokenDTO>> GetTokenAsync(GetTokenCommand command);
@@ -83,6 +83,7 @@ public interface IAPIHttpClient
 
     #region FinanceOperations
     public Task<Result<List<FinanceOperationDTO>>> GetAllFinanceOperationsOfWalletAsync(GetAllOperationsOfWalletQuery query);
+
     public Task<Result<List<FinanceOperationDTO>>> GetAllFinanceOperationsOfTypeAsync(GetAllOperationsOfTypeQuery query);
 
     public Task<Result<FinanceOperationDTO>> GetFinanceOperationAsync(Guid userId);

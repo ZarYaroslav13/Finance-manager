@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using FinanceManager.Application.Models.Base;
 using FinanceManager.Application.UseCases.Commons.Bases;
 using FinanceManager.Domain.Models;
 using FinanceManager.Domain.Services.Accounts;

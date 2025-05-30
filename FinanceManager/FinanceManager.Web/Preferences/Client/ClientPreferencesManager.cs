@@ -52,18 +52,10 @@ public class ClientPreferencesManager : IPreferencesManager
         {
             preference.LanguageCode = languageCode;
             await SetPreference(preference);
-            return new Result
-            {
-                Succeeded = true,
-                Messages = new List<string> { _localizer["Client Language has been changed"] }
-            };
+            return Result.Success(_localizer["Client Language has been changed"]);
         }
 
-        return new Result
-        {
-            Succeeded = false,
-            Messages = new List<string> { _localizer["Failed to get client preferences"] }
-        };
+        return Result.Fail(_localizer["Failed to get client preferences"]);
     }
 
     public async Task<MudTheme> GetCurrentThemeAsync()

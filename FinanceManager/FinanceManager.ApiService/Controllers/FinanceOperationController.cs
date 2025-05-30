@@ -16,22 +16,32 @@ public class FinanceOperationController : BaseController
     {
     }
 
-    [HttpGet("wallet/{query.WalletId}")]
-    public async Task<IActionResult> GetAllOfWalletAsync([FromBody] GetAllOperationsOfWalletQuery query)
+    [HttpGet("wallet/{walletId}")]
+    public async Task<IActionResult> GetAllOfWalletAsync(Guid walletId, [FromQuery] int index, [FromQuery] int count)
     {
-        return await SendRequestAsync(query);
+        return await SendRequestAsync(new GetAllOperationsOfWalletQuery
+        {
+            WalletId = walletId,
+            Index = index,
+            Count = count
+        });
     }
 
     [HttpGet("type/{query.TypeId}")]
-    public async Task<IActionResult> GetAllOfTypeAsync([FromBody] GetAllOperationsOfTypeQuery query)
+    public async Task<IActionResult> GetAllOfTypeAsync(Guid typeId, [FromQuery] int index, [FromQuery] int count)
     {
-        return await SendRequestAsync(query);
+        return await SendRequestAsync(new GetAllOperationsOfTypeQuery
+        {
+            TypeId = typeId,
+            Index = index,
+            Count = count
+        });
     }
 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetOperationAsync(Guid id)
     {
-        return await SendRequestAsync(new GetOperationQuery() { Id = id});
+        return await SendRequestAsync(new GetOperationQuery() { Id = id });
     }
 
     [HttpPost]

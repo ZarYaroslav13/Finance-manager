@@ -35,6 +35,11 @@ public static class LocalizationConstants
             },
             new LanguageCode
             {
+                Code = "uk-UA",
+                DisplayName= "Українська"
+            },
+            new LanguageCode
+            {
                 Code = "sv-SE",
                 DisplayName = "Swedish"
             },

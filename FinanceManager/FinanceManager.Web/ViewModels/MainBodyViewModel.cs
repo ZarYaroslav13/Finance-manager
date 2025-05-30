@@ -1,5 +1,4 @@
 ﻿using FinanceManager.Application.Models;
-using FinanceManager.Domain.API;
 using FinanceManager.Domain.Wrapper;
 using FinanceManager.Web.Extentions;
 using FinanceManager.Web.Preferences;
@@ -45,7 +44,7 @@ public class MainBodyViewModel : BaseViewModel<MainBody>
 
     {
         RightToLeft = await _preferencesManager.IsRTL();
-        _snackBar.Add(string.Format(Localizer["Welcome {0}"], FirstName), Severity.Success);
+        //_snackBar.Add(string.Format(Localizer["Welcome {0}"], FirstName), Severity.Success);
     }
     public async Task OnAfterRenderAsync(bool firstRender)
     {

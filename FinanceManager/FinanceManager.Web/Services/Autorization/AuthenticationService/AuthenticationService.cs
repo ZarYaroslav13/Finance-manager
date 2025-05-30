@@ -1,11 +1,8 @@
 ﻿using System.Security.Claims;
 using Blazored.LocalStorage;
 using FinanceManager.Application.Models;
-using FinanceManager.Application.UseCases.Tokens.Commands.RefreshTokenCommand;
 using FinanceManager.Application.UseCases.Tokens.Commands.GetTokenCommand;
-using FinanceManager.Domain.API;
 using FinanceManager.Domain.Wrapper;
-using FinanceManager.Web.Extentions;
 using FinanceManager.Web.Shared.Constants.Storage;
 using Microsoft.Extensions.Localization;
 
@@ -43,7 +40,7 @@ public class AuthenticationService : IAuthenticationService
         {
             var jwtToken = result.Data.Token;
             var refreshToken = result.Data.RefreshToken;
-            
+
 
             await RewriteTokens(jwtToken, refreshToken);
 

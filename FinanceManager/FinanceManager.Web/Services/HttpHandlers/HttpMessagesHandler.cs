@@ -10,20 +10,20 @@ namespace FinanceManager.Web.Services.HttpHandlers;
 public class HttpMessagesHandler : DelegatingHandler
 {
     private readonly IAuthenticationService _authenticationService;
-    private readonly ISnackbar _snackBar;
+    private readonly IServiceScopeFactory _serviceScopeFactory;
     private readonly IStringLocalizer<HttpMessagesHandler> _localizer;
     private readonly NavigationManager _navigationManager;
     private readonly ILogger<HttpMessagesHandler> _logger;
 
     public HttpMessagesHandler(
         IAuthenticationService authenticationService,
-        ISnackbar snackBar,
+        IServiceScopeFactory serviceScopeFactory,
         IStringLocalizer<HttpMessagesHandler> localizer,
         NavigationManager navigationManager,
         ILogger<HttpMessagesHandler> logger)
     {
         _authenticationService = authenticationService ?? throw new ArgumentNullException(nameof(authenticationService));
-        _snackBar = snackBar ?? throw new ArgumentNullException(nameof(_snackBar));
+        _serviceScopeFactory = serviceScopeFactory ?? throw new ArgumentNullException(nameof(serviceScopeFactory));
         _localizer = localizer ?? throw new ArgumentNullException(nameof(localizer));
         _navigationManager = navigationManager ?? throw new ArgumentNullException(nameof(navigationManager));
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
@@ -32,6 +32,7 @@ public class HttpMessagesHandler : DelegatingHandler
     protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
     {
         var path = request.RequestUri.AbsolutePath;
+        var _snackBar = _serviceScopeFactory.CreateScope().ServiceProvider.GetService<ISnackbar>();
 
         if (IsEndpointNeedToken(path))
         {
@@ -40,7 +41,7 @@ public class HttpMessagesHandler : DelegatingHandler
                 var token = await _authenticationService.TryRefreshTokenAsync();
                 if (!string.IsNullOrEmpty(token))
                 {
-                    _snackBar.Add(_localizer["Refreshed Token."], Severity.Success);
+                    //_snackBar.Add(_localizer["Refreshed Token."], Severity.Success);
                     request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
                 }
 
@@ -48,7 +49,7 @@ public class HttpMessagesHandler : DelegatingHandler
             catch (Exception ex)
             {
                 _logger.LogError(ex.Message);
-                _snackBar.Add(_localizer["You are Logged Out."], Severity.Error);
+                //_snackBar.Add(_localizer["You are Logged Out."], Severity.Error);
                 await _authenticationService.LogoutAsync();
                 _navigationManager.NavigateTo("/");
             }
@@ -60,7 +61,7 @@ public class HttpMessagesHandler : DelegatingHandler
 
     private bool IsEndpointNeedToken(string path)
     {
-        return !path.Contains(APIEndpoints.Token.BaseControllerUrl) 
+        return !path.Contains(APIEndpoints.Token.BaseControllerUrl)
             && !path.Contains(APIEndpoints.Users.ForgotPassword)
             && !path.Contains(APIEndpoints.Users.ResetPassword)
             && !path.Contains(APIEndpoints.Users.ConfirmEmail);

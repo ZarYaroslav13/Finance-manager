@@ -5,15 +5,17 @@ using FinanceManager.Domain.Authorization;
 using FinanceManager.Web.Preferences;
 using FinanceManager.Web.Preferences.Client;
 using FinanceManager.Web.Services;
-using FinanceManager.Web.Services.APIHttpClient;
+using FinanceManager.Web.Services.APIServices.APIHttpClient;
+using FinanceManager.Web.Services.APIServices.TokenManager;
 using FinanceManager.Web.Services.Autorization;
 using FinanceManager.Web.Services.Autorization.AuthenticationService;
 using FinanceManager.Web.Services.HttpHandlers;
+using FinanceManager.Web.Shared.Constants.Localization;
 using FinanceManager.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components.Authorization;
-using Microsoft.Extensions.Options;
 using MudBlazor.Services;
+using Refit;
 
 namespace FinanceManager.Web.Extentions.HostBuilder;
 
@@ -24,22 +26,19 @@ public static class AddServiceConfigurationHostBuilderExtension
         var services = builder.Services;
         var configuration = builder.Configuration as IConfiguration;
 
+        services.Configure<APIOptions>(configuration.GetSection(APIOptions.Section));
+
         builder.AddDefaultServices();
 
         services
-            .AddLocalization(options =>
-            {
-                options.ResourcesPath = "Resources";
-            })
+            .ConfigureLocalization()
             .AddAuthorization(RegisterPolicies)
             .AddBlazoredLocalStorage()
             .AddMudServices();
 
-        services.AddClientServices();
-
-        services.Configure<APIOptions>(configuration.GetSection(APIOptions.Section));
-
         builder.AdjustHttpClient();
+
+        services.AddClientServices();
 
         return builder;
     }
@@ -57,9 +56,42 @@ public static class AddServiceConfigurationHostBuilderExtension
         return builder;
     }
 
+    private static IServiceCollection ConfigureLocalization(this IServiceCollection services)
+    {
+        services.Configure<RequestLocalizationOptions>(opt =>
+        {
+            var suportedCultures = LocalizationConstants.SupportedLanguages.
+                Select(l => new CultureInfo(l.Code))
+                .ToList();
+
+            opt.SupportedCultures = suportedCultures;
+            opt.SupportedUICultures = suportedCultures;
+
+            opt.DefaultRequestCulture = new("en-US");
+        });
+
+        services.AddLocalization(options =>
+            {
+                options.ResourcesPath = "Resources";
+            });
+
+        return services;
+    }
+
     private static IHostApplicationBuilder AdjustHttpClient(this IHostApplicationBuilder builder)
     {
-        builder.Services.AddHttpClient<FinanceManagerApiHttpClient>()
+        var configuration = builder.Configuration as IConfiguration;
+        var options = configuration.GetSection(APIOptions.Section).Get<APIOptions>();
+
+        builder.Services
+        .AddTransient<HttpMessagesHandler>()
+        .AddRefitClient<IFinanceManagerApiHttpClient>()
+        .ConfigureHttpClient(opt =>
+            {
+                opt.BaseAddress = new(options.BaseAddress);
+                opt.DefaultRequestHeaders.AcceptLanguage.Clear();
+                opt.DefaultRequestHeaders.AcceptLanguage.ParseAdd(CultureInfo.DefaultThreadCurrentCulture?.TwoLetterISOLanguageName);
+            })
         .AddHttpMessageHandler<HttpMessagesHandler>();
 
         return builder;
@@ -82,6 +114,8 @@ public static class AddServiceConfigurationHostBuilderExtension
             .AddScoped<IAuthenticationService, AuthenticationService>();
 
         services.AddScoped<ViewModelServicesLocator>();
+
+        services.AddScoped<ITokenManager, TokenManager>();
 
         services.AddViewModels();
 

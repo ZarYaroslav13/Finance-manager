@@ -1,6 +1,7 @@
 ﻿using FinanceManager.Application.UseCases.Tokens.Commands.GetTokenCommand;
 using FinanceManager.Web.Pages.Authentication;
 using FinanceManager.Web.Services;
+using FinanceManager.Web.Services.APIServices.TokenManager;
 using Microsoft.Extensions.Localization;
 using MudBlazor;
 
@@ -14,14 +15,22 @@ public class LoginViewModel : BaseViewModel<Login>
     public InputType PasswordInput { get; private set; } = InputType.Password;
     public string PasswordInputIcon { get; private set; } = Icons.Material.Filled.VisibilityOff;
 
-    public LoginViewModel(ViewModelServicesLocator locator, IStringLocalizer<Login> localizer) : base(locator, localizer)
+    private readonly ITokenManager _tokenManager;
+
+    public LoginViewModel(ViewModelServicesLocator locator, ITokenManager tokenManager, IStringLocalizer<Login> localizer) : base(locator, localizer)
     {
+        _tokenManager = tokenManager ?? throw new ArgumentNullException(nameof(tokenManager));
     }
 
     public async Task SubmitAsync()
     {
-        _snackBar.Add(string.Format(Localizer["Welcome {0}"], LoginModel.Email), Severity.Success);
-        _navigationManager.NavigateTo("/");
+        //var result = await _apiClient.GetTokenAsync(LoginModel);
+        //if(result.Succeeded)
+        //    _snackBar.Add(string.Format(Localizer["Welcome {0}"], LoginModel.Email), Severity.Success);
+        //else
+        //    _snackBar.Add(string.Format(Localizer["Sorry {0}, I don`t recognize you!"], LoginModel.Email), Severity.Error);
+
+        //_navigationManager.NavigateTo("/");
     }
 
     public void TogglePasswordVisibility()

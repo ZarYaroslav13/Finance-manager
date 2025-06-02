@@ -1,7 +1,7 @@
 ﻿@inject Microsoft.Extensions.Localization.IStringLocalizer<FinanceManager.Web.Shared.Layout.MainLayout> _localizer
 @inject FinanceManager.Web.ViewModels.MainBodyViewModel _viewModel;
 
-<MudAppBar Elevation="25">
+<MudAppBar Elevation="25" Style="background-image: linear-gradient(109.6deg, rgba(22,126,91,1) 11.2%, rgba(223,82,36,1) 91.1%);">
     <MudIcon Icon="@FinanceManager.Web.CustomIcons.FinanceManager" Size="Size.Large" ViewBox="0 0 500 500" />
     <MudText Typo="Typo.h6" Class="ml-4">Finance Manager</MudText>
     <MudToolBar DisableGutters="true">
@@ -51,6 +51,22 @@
 </MudMainContent>
 
 @code{
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public EventCallback OnDarkModeToggle { 
+        get => _viewModel.OnDarkModeToggle; 
+        set => _viewModel.OnDarkModeToggle = value; }
+
+    [Parameter]
+    public EventCallback<bool> OnRightToLeftToggle
+    {
+        get => _viewModel.OnRightToLeftToggle;
+        set => _viewModel.OnRightToLeftToggle = value;
+    }
+
+
     protected override async Task OnInitializedAsync()
     {
         await _viewModel.OnInitializedAsync();

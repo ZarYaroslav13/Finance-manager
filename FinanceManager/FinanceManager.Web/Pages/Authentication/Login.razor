@@ -1,12 +1,13 @@
-﻿@page "/"
+﻿@page "/login"
 @using FinanceManager.Web.ViewModels.Pages
+@using FinanceManager.Web.ViewModels.Pages.Authorization
 @layout MainLayout
 @attribute [AllowAnonymous]
 @inject LoginViewModel _viewModel
 
 
-<EditForm Model="@_viewModel.LoginModel" OnValidSubmit="@_viewModel.SubmitAsync">
-    <DataAnnotationsValidator />
+<EditForm EditContext="@_viewModel.EditContext" OnValidSubmit="@_viewModel.SubmitAsync">
+    <DataAnnotationsValidator/>
     <MudItem xs="12">
         <div class="d-flex justify-center">
             <MudIcon Icon="@CustomIcons.FinanceManager" Color="Color.Primary" Size="Size.Large" ViewBox="0 0 500 500" Style="width: 100px; height: 100px;" />
@@ -29,19 +30,19 @@
             </div>
         </MudItem>
         <MudItem xs="12">
-            <MudTextField T="string" Label="@_viewModel.Localizer["E-mail"]" Variant="Variant.Outlined"
-                          @bind-Value="_viewModel.LoginModel.Email" For="@(() => _viewModel.LoginModel.Email)" />
+            <MudTextField T="string" Label="@_viewModel.Localizer["E-mail"]" Variant="Variant.Outlined" Adornment="Adornment.End" AdornmentIcon="@CustomIcons.Gmail"
+                          @bind-Value="_viewModel.LoginModel.Email" For="@(() => _viewModel.LoginModel.Email)" Immediate="true" />
         </MudItem>
         <MudItem xs="12">
             <MudTextField Label="@_viewModel.Localizer["Password"]" Variant="Variant.Outlined"
                           @bind-Value="_viewModel.LoginModel.Password" For="@(() => _viewModel.LoginModel.Password)"
-                          InputType="@_viewModel.PasswordInput" Adornment="Adornment.End" AdornmentIcon="@_viewModel.PasswordInputIcon" OnAdornmentClick="_viewModel.TogglePasswordVisibility" />
+                          InputType="@_viewModel.PasswordInput" Adornment="Adornment.End" AdornmentIcon="@_viewModel.PasswordInputIcon" OnAdornmentClick="_viewModel.TogglePasswordVisibility" Immediate="true" />
         </MudItem>
         <MudItem xs="12" Class="d-flex justify-space-between align-center">
             <MudCheckBox T="bool" Label="@_viewModel.Localizer["Remember me?"]" Color="Color.Primary" Class="ml-n1"></MudCheckBox> <MudLink Href="/account/forgot-password">@_viewModel.Localizer["Forgot password?"]</MudLink>
         </MudItem>
         <MudItem xs="12" Class="d-flex justify-center">
-            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" Style="width: 100%;">@_viewModel.Localizer["Sign In"]</MudButton>
+            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" Disabled="@(!_viewModel.IsLoginModelValid)" Style="width: 100%;">@_viewModel.Localizer["Sign In"]</MudButton>
         </MudItem>
     </MudGrid>
 </EditForm>

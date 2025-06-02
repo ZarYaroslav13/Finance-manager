@@ -11,6 +11,8 @@ public class ResetPasswordCommand : IRequest<IResult>
     public string Email { get; set; }
 
     [Required]
+    [Length(10, 50)]
+    [DataType(DataType.Password)]
     public string Password { get; set; }
 
     [Required]

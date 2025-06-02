@@ -1,6 +1,9 @@
-﻿using FinanceManager.Web.Preferences;
+﻿using System.Globalization;
+using FinanceManager.Web.Preferences;
+using FinanceManager.Web.Preferences.Client;
 using FinanceManager.Web.Services.Autorization;
 using FinanceManager.Web.Settings;
+using FinanceManager.Web.Shared.Constants.Localization;
 using MudBlazor;
 
 namespace FinanceManager.Web.ViewModels;
@@ -20,9 +23,7 @@ public class MainLayoutViewModel : IViewModel
 
     public async Task InitializationAsynk()
     {
-        CurrentTheme = FinanceManagerThemes.DefaultTheme;
-        CurrentTheme = await _preferencesManager.GetCurrentThemeAsync();
-        RightToLeft = await _preferencesManager.IsRTL();
+        await SetPreferences();
 
         await _stateProvider.GetAuthenticationStateProviderUserAsync();
     }
@@ -39,5 +40,21 @@ public class MainLayoutViewModel : IViewModel
         CurrentTheme = isDarkMode
             ? FinanceManagerThemes.DefaultTheme
             : FinanceManagerThemes.DarkTheme;
+    }
+
+    private async Task SetPreferences()
+    {
+        CurrentTheme = FinanceManagerThemes.DefaultTheme;
+        CurrentTheme = await _preferencesManager.GetCurrentThemeAsync();
+        RightToLeft = await _preferencesManager.IsRTL();
+
+        CultureInfo culture;
+        var preference = await _preferencesManager.GetPreference() as ClientPreferences;
+        if (preference != null)
+            culture = new CultureInfo(preference.LanguageCode);
+        else
+            culture = new CultureInfo(LocalizationConstants.SupportedLanguages.FirstOrDefault()?.Code ?? "en-US");
+        CultureInfo.DefaultThreadCurrentCulture = culture;
+        CultureInfo.DefaultThreadCurrentUICulture = culture;
     }
 }

@@ -12,13 +12,10 @@ namespace FinanceManager.Web.ViewModels;
 
 public class MainBodyViewModel : BaseViewModel<MainBody>
 {
-    [Parameter]
     public RenderFragment ChildContent { get; set; }
 
-    [Parameter]
     public EventCallback OnDarkModeToggle { get; set; }
 
-    [Parameter]
     public EventCallback<bool> OnRightToLeftToggle { get; set; }
 
     public bool DrawerOpen = true;

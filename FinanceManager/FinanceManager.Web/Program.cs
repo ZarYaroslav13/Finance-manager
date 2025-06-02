@@ -25,6 +25,8 @@ public class Program
         app.UseHttpsRedirection();
 
         app.UseStaticFiles();
+
+        app.UseRequestLocalization();
         app.UseAntiforgery();
 
         app.UseOutputCache();
@@ -35,22 +37,5 @@ public class Program
         app.MapDefaultEndpoints();
 
         await app.RunAsync();
-        await SetPreferences(app);
-    }
-
-    private static async Task SetPreferences(WebApplication app)
-    {
-        var storageService = app.Services.GetRequiredService<IPreferencesManager>();
-        if (storageService != null)
-        {
-            CultureInfo culture;
-            var preference = await storageService.GetPreference() as ClientPreferences;
-            if (preference != null)
-                culture = new CultureInfo(preference.LanguageCode);
-            else
-                culture = new CultureInfo(LocalizationConstants.SupportedLanguages.FirstOrDefault()?.Code ?? "en-US");
-            CultureInfo.DefaultThreadCurrentCulture = culture;
-            CultureInfo.DefaultThreadCurrentUICulture = culture;
-        }
     }
 }

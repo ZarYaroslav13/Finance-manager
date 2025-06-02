@@ -2,14 +2,19 @@
 using FinanceManager.Web.Pages.Authentication;
 using FinanceManager.Web.Services;
 using FinanceManager.Web.Services.Autorization.AuthenticationService;
+using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.Extensions.Localization;
 using MudBlazor;
 
-namespace FinanceManager.Web.ViewModels.Pages;
+namespace FinanceManager.Web.ViewModels.Pages.Authorization;
 
 public class LoginViewModel : BaseViewModel<Login>
 {
     public GetTokenCommand LoginModel { get; set; } = new();
+
+    public EditContext EditContext { get; set; }
+
+    public bool IsLoginModelValid => EditContext.Validate();
 
     public bool PasswordVisibility { get; private set; } = false;
     public InputType PasswordInput { get; private set; } = InputType.Password;
@@ -20,6 +25,8 @@ public class LoginViewModel : BaseViewModel<Login>
     public LoginViewModel(ViewModelServicesLocator locator, IAuthenticationService autenticationService, IStringLocalizer<Login> localizer) : base(locator, localizer)
     {
         _autenticationService = autenticationService ?? throw new ArgumentNullException(nameof(autenticationService));
+
+        EditContext = new(LoginModel);
     }
 
     public async Task SubmitAsync()

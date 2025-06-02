@@ -11,7 +11,6 @@ public abstract class BaseViewModel<T> : IViewModel where T : class
 {
     public IStringLocalizer<T> Localizer { get; }
 
-    protected readonly HttpClient _httpClient;
     protected readonly NavigationManager _navigationManager;
     protected readonly ISnackbar _snackBar;
     protected readonly IAuthenticationService _authenticationService;
@@ -23,7 +22,7 @@ public abstract class BaseViewModel<T> : IViewModel where T : class
         ArgumentNullException.ThrowIfNull(locator);
         Localizer = localizer ?? throw new ArgumentNullException(nameof(locator));
 
-        _httpClient = locator.HttpClient;
+        //_httpClient = locator.HttpClient;
         _navigationManager = locator.NavigationManager;
         _snackBar = locator.SnackBar;
         _authenticationService = locator.AuthenticationService;

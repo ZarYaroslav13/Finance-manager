@@ -3,26 +3,22 @@ using FinanceManager.Domain.API;
 using FinanceManager.Web.Services.Autorization.AuthenticationService;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Localization;
-using MudBlazor;
 
 namespace FinanceManager.Web.Services.HttpHandlers;
 
 public class HttpMessagesHandler : DelegatingHandler
 {
-    private readonly IAuthenticationService _authenticationService;
     private readonly IServiceScopeFactory _serviceScopeFactory;
     private readonly IStringLocalizer<HttpMessagesHandler> _localizer;
     private readonly NavigationManager _navigationManager;
     private readonly ILogger<HttpMessagesHandler> _logger;
 
     public HttpMessagesHandler(
-        IAuthenticationService authenticationService,
         IServiceScopeFactory serviceScopeFactory,
         IStringLocalizer<HttpMessagesHandler> localizer,
         NavigationManager navigationManager,
         ILogger<HttpMessagesHandler> logger)
     {
-        _authenticationService = authenticationService ?? throw new ArgumentNullException(nameof(authenticationService));
         _serviceScopeFactory = serviceScopeFactory ?? throw new ArgumentNullException(nameof(serviceScopeFactory));
         _localizer = localizer ?? throw new ArgumentNullException(nameof(localizer));
         _navigationManager = navigationManager ?? throw new ArgumentNullException(nameof(navigationManager));
@@ -32,28 +28,29 @@ public class HttpMessagesHandler : DelegatingHandler
     protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
     {
         var path = request.RequestUri.AbsolutePath;
-        var _snackBar = _serviceScopeFactory.CreateScope().ServiceProvider.GetService<ISnackbar>();
 
         if (IsEndpointNeedToken(path))
         {
-            try
+            using (var scope = _serviceScopeFactory.CreateScope())
             {
-                var token = await _authenticationService.TryRefreshTokenAsync();
-                if (!string.IsNullOrEmpty(token))
+                var authenticationService = scope.ServiceProvider.GetService<IAuthenticationService>();
+
+                try
                 {
-                    //_snackBar.Add(_localizer["Refreshed Token."], Severity.Success);
-                    request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                    var token = await authenticationService.TryRefreshTokenAsync();
+                    if (!string.IsNullOrEmpty(token))
+                    {
+                        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                    }
+
                 }
-
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex.Message);
+                    await authenticationService.LogoutAsync();
+                    _navigationManager.NavigateTo("/");
+                }
             }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex.Message);
-                //_snackBar.Add(_localizer["You are Logged Out."], Severity.Error);
-                await _authenticationService.LogoutAsync();
-                _navigationManager.NavigateTo("/");
-            }
-
         }
 
         return await base.SendAsync(request, cancellationToken);

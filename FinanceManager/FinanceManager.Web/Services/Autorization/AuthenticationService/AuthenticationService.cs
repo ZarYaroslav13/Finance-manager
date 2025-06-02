@@ -1,8 +1,9 @@
 ﻿using System.Security.Claims;
 using Blazored.LocalStorage;
-using FinanceManager.Application.Models;
 using FinanceManager.Application.UseCases.Tokens.Commands.GetTokenCommand;
+using FinanceManager.Application.UseCases.Tokens.Commands.RefreshTokenCommand;
 using FinanceManager.Domain.Wrapper;
+using FinanceManager.Web.Services.APIServices.APIHttpClient;
 using FinanceManager.Web.Shared.Constants.Storage;
 using Microsoft.Extensions.Localization;
 
@@ -11,16 +12,19 @@ namespace FinanceManager.Web.Services.Autorization.AuthenticationService;
 public class AuthenticationService : IAuthenticationService
 {
     private readonly HttpClient _httpClient;
+    private readonly IFinanceManagerApiHttpClient _apiHttpClient;
     private readonly ILocalStorageService _localStorage;
     private readonly FinanceManagerStateProvider _authenticationStateProvider;
     private readonly IStringLocalizer<AuthenticationService> _localizer;
     public AuthenticationService(
             HttpClient httpClient,
+            IFinanceManagerApiHttpClient apiHttpClient,
             ILocalStorageService localStorage,
             FinanceManagerStateProvider authenticationStateProvider,
             IStringLocalizer<AuthenticationService> localizer)
     {
         _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+        _apiHttpClient = apiHttpClient ?? throw new ArgumentNullException(nameof(apiHttpClient));
         _localStorage = localStorage ?? throw new ArgumentNullException(nameof(localStorage));
         _authenticationStateProvider = authenticationStateProvider ?? throw new ArgumentNullException(nameof(authenticationStateProvider));
         _localizer = localizer ?? throw new ArgumentNullException(nameof(localizer));
@@ -33,13 +37,12 @@ public class AuthenticationService : IAuthenticationService
 
     public async Task<Domain.Wrapper.IResult> LoginAsync(GetTokenCommand model)
     {
-        //var response = await _httpClient.PostAsJsonAsync(APIEndpoints.Token.Get, model);
-        var result = Result<TokenDTO>.Success();//await response.ToResultAsync<TokenDTO>()
+        var response = await _apiHttpClient.GetTokenAsync(model);
 
-        if (result.Succeeded)
+        if (response.Succeeded)
         {
-            var jwtToken = result.Data.Token;
-            var refreshToken = result.Data.RefreshToken;
+            var jwtToken = response.Data.Token;
+            var refreshToken = response.Data.RefreshToken;
 
 
             await RewriteTokens(jwtToken, refreshToken);
@@ -57,16 +60,19 @@ public class AuthenticationService : IAuthenticationService
         var token = await _localStorage.GetItemAsync<string>(StorageConstants.AuthToken);
         var refreshToken = await _localStorage.GetItemAsync<string>(StorageConstants.RefreshToken);
 
-        // var response = await _httpClient.PostAsJsonAsync(APIEndpoints.Token.Refresh, new RefreshTokenCommand() { Token = token, RefreshToken = refreshToken });
-        var result = Result<TokenDTO>.Success();// await response.ToResultAsync<TokenDTO>();
+        var response = await _apiHttpClient.RefreshTokenAsync(new RefreshTokenCommand()
+        {
+            Token = token,
+            RefreshToken = refreshToken
+        });
 
-        if (!result.Succeeded)
+        if (!response.Succeeded)
         {
             throw new ApplicationException(_localizer["Something went wrong during the refresh token action"]);
         }
 
-        token = result.Data.Token;
-        refreshToken = result.Data.RefreshToken;
+        token = response.Data.Token;
+        refreshToken = response.Data.RefreshToken;
 
         await RewriteTokens(token, refreshToken);
 

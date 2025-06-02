@@ -6,7 +6,6 @@ using FinanceManager.Web.Preferences;
 using FinanceManager.Web.Preferences.Client;
 using FinanceManager.Web.Services;
 using FinanceManager.Web.Services.APIServices.APIHttpClient;
-using FinanceManager.Web.Services.APIServices.TokenManager;
 using FinanceManager.Web.Services.Autorization;
 using FinanceManager.Web.Services.Autorization.AuthenticationService;
 using FinanceManager.Web.Services.HttpHandlers;
@@ -114,8 +113,6 @@ public static class AddServiceConfigurationHostBuilderExtension
             .AddScoped<IAuthenticationService, AuthenticationService>();
 
         services.AddScoped<ViewModelServicesLocator>();
-
-        services.AddScoped<ITokenManager, TokenManager>();
 
         services.AddViewModels();
 

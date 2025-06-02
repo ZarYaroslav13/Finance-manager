@@ -7,7 +7,7 @@ namespace FinanceManager.Web.Services;
 
 public class ViewModelServicesLocator
 {
-    public HttpClient HttpClient { get; }
+    //public HttpClient HttpClient { get; }
 
     public NavigationManager NavigationManager { get; }
 
@@ -20,14 +20,14 @@ public class ViewModelServicesLocator
     public ILocalStorageService LocalStorageService { get; }
 
     public ViewModelServicesLocator(
-        HttpClient httpClient,
+        //HttpClient httpClient,
         NavigationManager navigationManager,
         ISnackbar snackBar,
         IAuthenticationService authenticationService,
         IDialogService dialogService,
         ILocalStorageService localStorageService)
     {
-        HttpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+        //HttpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
         NavigationManager = navigationManager ?? throw new ArgumentNullException(nameof(navigationManager));
         SnackBar = snackBar ?? throw new ArgumentNullException(nameof(snackBar));
         AuthenticationService = authenticationService ?? throw new ArgumentNullException(nameof(authenticationService));

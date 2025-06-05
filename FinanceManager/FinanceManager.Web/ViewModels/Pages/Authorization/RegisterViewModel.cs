@@ -1,6 +1,7 @@
 ﻿using FinanceManager.Application.UseCases.Users.Commands.RegisterCommand;
 using FinanceManager.Web.Pages.Authentication;
 using FinanceManager.Web.Services;
+using FinanceManager.Web.Services.APIServices.Managers.IUserManager;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.Extensions.Localization;
 using MudBlazor;
@@ -18,16 +19,31 @@ public class RegisterViewModel : BaseViewModel<Register>
     public InputType PasswordInput { get; private set; } = InputType.Password;
     public string PasswordInputIcon { get; private set; } = Icons.Material.Filled.VisibilityOff;
 
-    public RegisterViewModel(ViewModelServicesLocator locator, IStringLocalizer<Register> localizer) : base(locator, localizer)
+    private readonly IUserManager _userManager;
+
+    public RegisterViewModel(IUserManager userManager, ViewModelServicesLocator locator, IStringLocalizer<Register> localizer) : base(locator, localizer)
     {
+        _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
+
         EditContext = new(RegistrationModel);
     }
 
     public async Task SubmitAsync()
     {
-        _snackBar.Add(string.Format(Localizer["Welcome {0}"], RegistrationModel.Email), Severity.Success);
-
-        _navigationManager.NavigateTo("/login");
+        var response = await _userManager.RegisterUserAsync(RegistrationModel);
+        if (response.Succeeded)
+        {
+            _snackBar.Add(response.Messages[0], Severity.Success);
+            _navigationManager.NavigateTo("/login");
+            RegistrationModel = new();
+        }
+        else
+        {
+            foreach (var message in response.Messages)
+            {
+                _snackBar.Add(message, Severity.Error);
+            }
+        }
     }
 
     public void TogglePasswordVisibility()

@@ -1,6 +1,6 @@
 ﻿using Blazored.LocalStorage;
 using FinanceManager.Web.Services;
-using FinanceManager.Web.Services.Autorization.AuthenticationService;
+using FinanceManager.Web.Services.APIServices.Managers.TokenManager;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Localization;
 using MudBlazor;
@@ -11,9 +11,10 @@ public abstract class BaseViewModel<T> : IViewModel where T : class
 {
     public IStringLocalizer<T> Localizer { get; }
 
+    protected readonly HttpClient _httpClient;
     protected readonly NavigationManager _navigationManager;
     protected readonly ISnackbar _snackBar;
-    protected readonly IAuthenticationService _authenticationService;
+    protected readonly ITokenManager _tokenManager;
     protected readonly IDialogService _dialogService;
     protected readonly ILocalStorageService _localStorage;
 
@@ -22,10 +23,10 @@ public abstract class BaseViewModel<T> : IViewModel where T : class
         ArgumentNullException.ThrowIfNull(locator);
         Localizer = localizer ?? throw new ArgumentNullException(nameof(locator));
 
-        //_httpClient = locator.HttpClient;
+        _httpClient = locator.HttpClient;
         _navigationManager = locator.NavigationManager;
         _snackBar = locator.SnackBar;
-        _authenticationService = locator.AuthenticationService;
+        _tokenManager = locator.TokenManager;
         _dialogService = locator.DialogService;
         _localStorage = locator.LocalStorageService;
     }

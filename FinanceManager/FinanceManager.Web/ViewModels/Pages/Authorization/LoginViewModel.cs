@@ -1,7 +1,8 @@
 ﻿using FinanceManager.Application.UseCases.Tokens.Commands.GetTokenCommand;
+using FinanceManager.Web.Extentions;
+using FinanceManager.Web.Extentions.HostBuilder.MinimalApi;
 using FinanceManager.Web.Pages.Authentication;
 using FinanceManager.Web.Services;
-using FinanceManager.Web.Services.Autorization.AuthenticationService;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.Extensions.Localization;
 using MudBlazor;
@@ -20,24 +21,30 @@ public class LoginViewModel : BaseViewModel<Login>
     public InputType PasswordInput { get; private set; } = InputType.Password;
     public string PasswordInputIcon { get; private set; } = Icons.Material.Filled.VisibilityOff;
 
-    private readonly IAuthenticationService _autenticationService;
-
-    public LoginViewModel(ViewModelServicesLocator locator, IAuthenticationService autenticationService, IStringLocalizer<Login> localizer) : base(locator, localizer)
+    public LoginViewModel(ViewModelServicesLocator locator, IStringLocalizer<Login> localizer) : base(locator, localizer)
     {
-        _autenticationService = autenticationService ?? throw new ArgumentNullException(nameof(autenticationService));
-
         EditContext = new(LoginModel);
     }
 
     public async Task SubmitAsync()
     {
-        var result = await _autenticationService.LoginAsync(LoginModel);
+        var result = await (await _httpClient.PostAsJsonAsync(
+                                MinimalApiEndpoints.BaseUrl + MinimalApiEndpoints.Authentication.Login,
+                                LoginModel))
+                                .ToResultAsync();
+
         if (result.Succeeded)
             _snackBar.Add(string.Format(Localizer["Welcome {0}"], LoginModel.Email), Severity.Success);
         else
             _snackBar.Add(string.Format(Localizer["Sorry {0}, I don`t recognize you!"], LoginModel.Email), Severity.Error);
 
-        _navigationManager.NavigateTo("/");
+        _navigationManager.NavigateTo("/home");
+    }
+
+    public void FillUserAsync()
+    {
+        LoginModel.Email = "john.doe@example.com";
+        LoginModel.Password = "protectedPassword123";
     }
 
     public void TogglePasswordVisibility()

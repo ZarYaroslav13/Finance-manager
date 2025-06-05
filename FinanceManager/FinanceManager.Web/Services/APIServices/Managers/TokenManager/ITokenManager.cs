@@ -1,11 +1,13 @@
 ﻿using System.Security.Claims;
+using FinanceManager.Application.Models;
 using FinanceManager.Application.UseCases.Tokens.Commands.GetTokenCommand;
+using FinanceManager.Domain.Wrapper;
 
-namespace FinanceManager.Web.Services.Autorization.AuthenticationService;
+namespace FinanceManager.Web.Services.APIServices.Managers.TokenManager;
 
-public interface IAuthenticationService
+public interface ITokenManager : IManager
 {
-    Task<Domain.Wrapper.IResult> LoginAsync(GetTokenCommand model);
+    Task<Result<TokenDTO>> LoginAsync(GetTokenCommand model);
 
     Task<string> RefreshTokenAsync();
 

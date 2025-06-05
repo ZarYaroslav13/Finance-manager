@@ -1,6 +1,7 @@
 ﻿using System.Net.Http.Headers;
 using FinanceManager.Domain.API;
-using FinanceManager.Web.Services.Autorization.AuthenticationService;
+using FinanceManager.Web.Extentions;
+using FinanceManager.Web.Services.APIServices.Managers.TokenManager;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Localization;
 
@@ -33,21 +34,22 @@ public class HttpMessagesHandler : DelegatingHandler
         {
             using (var scope = _serviceScopeFactory.CreateScope())
             {
-                var authenticationService = scope.ServiceProvider.GetService<IAuthenticationService>();
+                var user = scope.ServiceProvider.GetService<IHttpContextAccessor>().HttpContext.User;
+                var tokenManager = scope.ServiceProvider.GetService<ITokenManager>();
 
                 try
                 {
-                    var token = await authenticationService.TryRefreshTokenAsync();
+                    var token = await tokenManager.TryRefreshTokenAsync();
                     if (!string.IsNullOrEmpty(token))
                     {
-                        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", user.GetExpireToken());
                     }
 
                 }
                 catch (Exception ex)
                 {
                     _logger.LogError(ex.Message);
-                    await authenticationService.LogoutAsync();
+                    await tokenManager.LogoutAsync();
                     _navigationManager.NavigateTo("/");
                 }
             }
@@ -58,9 +60,9 @@ public class HttpMessagesHandler : DelegatingHandler
 
     private bool IsEndpointNeedToken(string path)
     {
-        return !path.Contains(APIEndpoints.Token.BaseControllerUrl)
-            && !path.Contains(APIEndpoints.Users.ForgotPassword)
-            && !path.Contains(APIEndpoints.Users.ResetPassword)
-            && !path.Contains(APIEndpoints.Users.ConfirmEmail);
+        return !(path.Contains(APIEndpoints.Token.BaseControllerUrl)
+            || path.Contains(APIEndpoints.Users.ForgotPassword)
+            || path.Contains(APIEndpoints.Users.ResetPassword)
+            || path.Contains(APIEndpoints.Users.ConfirmEmail));
     }
 }

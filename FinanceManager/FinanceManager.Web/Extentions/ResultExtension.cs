@@ -16,7 +16,7 @@ public static class ResultExtension
         return responseObject;
     }
 
-    public static async Task<Domain.Wrapper.IResult> ToResult(this HttpResponseMessage response)
+    public static async Task<Domain.Wrapper.IResult> ToResultAsync(this HttpResponseMessage response)
     {
         var responseAsString = await response.Content.ReadAsStringAsync();
         var responseObject = JsonSerializer.Deserialize<Domain.Wrapper.Result>(responseAsString, new JsonSerializerOptions

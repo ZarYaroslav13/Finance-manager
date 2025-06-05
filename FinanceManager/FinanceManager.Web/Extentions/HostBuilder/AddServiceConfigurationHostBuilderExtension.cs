@@ -6,11 +6,12 @@ using FinanceManager.Web.Preferences;
 using FinanceManager.Web.Preferences.Client;
 using FinanceManager.Web.Services;
 using FinanceManager.Web.Services.APIServices.APIHttpClient;
+using FinanceManager.Web.Services.APIServices.Managers;
 using FinanceManager.Web.Services.Autorization;
-using FinanceManager.Web.Services.Autorization.AuthenticationService;
 using FinanceManager.Web.Services.HttpHandlers;
 using FinanceManager.Web.Shared.Constants.Localization;
 using FinanceManager.Web.ViewModels;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components.Authorization;
 using MudBlazor.Services;
@@ -31,7 +32,10 @@ public static class AddServiceConfigurationHostBuilderExtension
 
         services
             .ConfigureLocalization()
-            .AddAuthorization(RegisterPolicies)
+            .ConfigureAuthentication();
+
+        services.AddAuthorization(RegisterPolicies)
+            .AddHttpContextAccessor()
             .AddBlazoredLocalStorage()
             .AddMudServices();
 
@@ -77,6 +81,22 @@ public static class AddServiceConfigurationHostBuilderExtension
         return services;
     }
 
+    private static void ConfigureAuthentication(this IServiceCollection services)
+    {
+        var t = services.AddAuthentication(options =>
+                {
+                    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                })
+            .AddCookie(options =>
+            {
+                options.LoginPath = "/login";
+                options.Cookie.Name = "FMAuthCookie";
+                options.Cookie.HttpOnly = true;
+                options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+            });
+    }
+
     private static IHostApplicationBuilder AdjustHttpClient(this IHostApplicationBuilder builder)
     {
         var configuration = builder.Configuration as IConfiguration;
@@ -109,12 +129,36 @@ public static class AddServiceConfigurationHostBuilderExtension
         services
             .AddScoped<IPreferencesManager, ClientPreferencesManager>()
             .AddScoped<FinanceManagerStateProvider>()
-            .AddScoped<AuthenticationStateProvider, FinanceManagerStateProvider>()
-            .AddScoped<IAuthenticationService, AuthenticationService>();
+            .AddScoped<AuthenticationStateProvider, FinanceManagerStateProvider>();
 
         services.AddScoped<ViewModelServicesLocator>();
 
-        services.AddViewModels();
+        services
+            .AddManagers()
+            .AddViewModels();
+
+        return services;
+    }
+
+    private static IServiceCollection AddManagers(this IServiceCollection services)
+    {
+        var managersTypes = typeof(IManager);
+
+        var managers = managersTypes.Assembly
+            .GetExportedTypes()
+            .Where(t => t.IsClass && !t.IsAbstract)
+            .Select(t => new
+            {
+                Service = t.GetInterface($"I{t.Name}"),
+                Implementation = t
+            })
+            .Where(t => t != null);
+
+        foreach (var manager in managers)
+        {
+            if (managersTypes.IsAssignableFrom(manager.Service))
+                services.AddTransient(manager.Service, manager.Implementation);
+        }
 
         return services;
     }
@@ -129,7 +173,7 @@ public static class AddServiceConfigurationHostBuilderExtension
 
         foreach (var viewModel in viewModels)
         {
-            services.AddScoped(viewModel);
+            services.AddTransient(viewModel);
         }
 
         return services;

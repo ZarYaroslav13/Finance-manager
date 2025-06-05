@@ -1,7 +1,8 @@
 ﻿using System.Security.Claims;
 using Blazored.LocalStorage;
-using FinanceManager.Domain.Services.Token;
-using FinanceManager.Web.Shared.Constants.Storage;
+using FinanceManager.Web.Extentions;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Components.Authorization;
 
 namespace FinanceManager.Web.Services.Autorization;
@@ -11,15 +12,15 @@ public class FinanceManagerStateProvider : AuthenticationStateProvider
     public ClaimsPrincipal AuthenticationStateUser { get; private set; }
 
     private readonly HttpClient _httpClient;
-    private readonly ILocalStorageService _localStorage;
-    private readonly ITokenService _tokenManager;
+    private readonly IHttpContextAccessor _httpContextAccessor;
 
     public FinanceManagerStateProvider(
+        IHttpContextAccessor httpContextAccessor,
         HttpClient httpClient,
         ILocalStorageService localStorage)
     {
+        _httpContextAccessor = httpContextAccessor ?? throw new ArgumentNullException(nameof(httpContextAccessor));
         _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
-        _localStorage = localStorage ?? throw new ArgumentNullException(nameof(localStorage));
     }
 
     public async Task StateChangedAsync()
@@ -31,6 +32,11 @@ public class FinanceManagerStateProvider : AuthenticationStateProvider
 
     public void MarkUserAsLoggedOut()
     {
+        if (_httpContextAccessor.HttpContext != null)
+        {
+            _httpContextAccessor.HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+        }
+
         var anonymousUser = new ClaimsPrincipal(new ClaimsIdentity());
         var authState = Task.FromResult(new AuthenticationState(anonymousUser));
 
@@ -46,15 +52,21 @@ public class FinanceManagerStateProvider : AuthenticationStateProvider
 
     public override async Task<AuthenticationState> GetAuthenticationStateAsync()
     {
-        var savedToken = await _localStorage.GetItemAsync<string>(StorageConstants.AuthToken);
-        if (string.IsNullOrWhiteSpace(savedToken))
+        var user = _httpContextAccessor.HttpContext?.User;
+
+        if (user != null && user.Identity?.IsAuthenticated == true)
         {
-            return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity()));
+            AuthenticationStateUser = user;
+
+            var savedToken = user.GetExpireToken();
+            if (!string.IsNullOrWhiteSpace(savedToken))
+            {
+                _httpClient.DefaultRequestHeaders.Authorization = new("Bearer", savedToken);
+            }
+
+            return new AuthenticationState(user);
         }
 
-        _httpClient.DefaultRequestHeaders.Authorization = new("Bearer", savedToken);
-        var state = new AuthenticationState(new(TokenService.GetIdentityFromJwtToken(savedToken)));
-        AuthenticationStateUser = state.User;
-        return state;
+        return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity()));
     }
 }

@@ -7,11 +7,11 @@
 @using Microsoft.AspNetCore.Components.Routing
 @using Microsoft.AspNetCore.Components.Web
 @using Microsoft.AspNetCore.Components.Web.Virtualization
-@using static Microsoft.AspNetCore.Components.Web.RenderMode
-@using Microsoft.JSInterop
 @using Microsoft.AspNetCore.Identity;
-@using MudBlazor
 @using Microsoft.Extensions.Localization
+@using Microsoft.JSInterop
+@using MudBlazor
+@using static Microsoft.AspNetCore.Components.Web.RenderMode
 
 @*Client Services*@
 @using FinanceManager.Web.Preferences
@@ -22,11 +22,11 @@
 @using FinanceManager.Web.Shared.Components;
 @using FinanceManager.Web.ViewModels;
 @using FinanceManager.Web.Shared.Layout;
-@using FinanceManager.Web.Services.Autorization.AuthenticationService;
+@using FinanceManager.Web.Services.APIServices.Managers.TokenManager;
 
 @inject NavigationManager _navigationManager
 @inject FinanceManager.Web.Services.Autorization.FinanceManagerStateProvider _stateProvider
 @inject IPreferencesManager _clientPreferencesManager
-@inject IAuthenticationService _authenticationService
+@inject ITokenManager _tokenManager
 @inject ISnackbar _snackBar
 @inject IDialogService _dialogService

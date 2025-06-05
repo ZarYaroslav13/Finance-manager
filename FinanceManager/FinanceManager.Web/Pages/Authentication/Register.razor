@@ -1,4 +1,5 @@
 ﻿@page "/register"
+@using FinanceManager.Web.Services.APIServices.Managers.TokenManager
 @layout MainLayout
 @attribute [AllowAnonymous]
 @inject FinanceManager.Web.ViewModels.Pages.Authorization.RegisterViewModel _viewModel
@@ -22,19 +23,19 @@
             </div>
         </MudItem>
         <MudItem  xs="12" sm="6" md="6">
-            <MudTextField For="@(() => _viewModel.RegistrationModel.FirstName)" @bind-Value="_viewModel.RegistrationModel.FirstName" Label="@_viewModel.Localizer["First Name"]" />
+            <MudTextField Immediate=true For="@(() => _viewModel.RegistrationModel.FirstName)" @bind-Value="_viewModel.RegistrationModel.FirstName" Label="@_viewModel.Localizer["First Name"]" />
         </MudItem>
         <MudItem  xs="12" sm="6" md="6">
-            <MudTextField For="@(() => _viewModel.RegistrationModel.LastName)" @bind-Value="_viewModel.RegistrationModel.LastName" Label="@_viewModel.Localizer["Last Name"]" />
+            <MudTextField Immediate=true For="@(() => _viewModel.RegistrationModel.LastName)" @bind-Value="_viewModel.RegistrationModel.LastName" Label="@_viewModel.Localizer["Last Name"]" />
         </MudItem>
         <MudItem  xs="12" sm="6" md="6">
-            <MudTextField T="string" Label="@_viewModel.Localizer["E-mail"]" Adornment="Adornment.End" AdornmentIcon="@CustomIcons.Gmail" @bind-Value="_viewModel.RegistrationModel.Email" For="@(() => _viewModel.RegistrationModel.Email)" />
+            <MudTextField Immediate=true T="string" Label="@_viewModel.Localizer["E-mail"]" Adornment="Adornment.End" AdornmentIcon="@CustomIcons.Gmail" @bind-Value="_viewModel.RegistrationModel.Email" For="@(() => _viewModel.RegistrationModel.Email)" />
         </MudItem>
         <MudItem  xs="12" sm="6" md="6">
-            <MudTextField For="@(() => _viewModel.RegistrationModel.Password)" InputType="@_viewModel.PasswordInput" Adornment="Adornment.End" AdornmentIcon="@_viewModel.PasswordInputIcon" OnAdornmentClick="_viewModel.TogglePasswordVisibility" @bind-Value="_viewModel.RegistrationModel.Password" Label="@_viewModel.Localizer["Password"]" />
+            <MudTextField Immediate=true For="@(() => _viewModel.RegistrationModel.Password)" InputType="@_viewModel.PasswordInput" Adornment="Adornment.End" AdornmentIcon="@_viewModel.PasswordInputIcon" OnAdornmentClick="_viewModel.TogglePasswordVisibility" @bind-Value="_viewModel.RegistrationModel.Password" Label="@_viewModel.Localizer["Password"]" />
         </MudItem>
         <MudItem  xs="12" sm="6" md="6">
-            <MudTextField For="@(() => _viewModel.RegistrationModel.ConfirmPassword)" InputType="InputType.Password" @bind-Value="_viewModel.RegistrationModel.ConfirmPassword" Label="@_viewModel.Localizer["Confirm Password"]" />
+            <MudTextField Immediate=true For="@(() => _viewModel.RegistrationModel.ConfirmPassword)" InputType="InputType.Password" @bind-Value="_viewModel.RegistrationModel.ConfirmPassword" Label="@_viewModel.Localizer["Confirm Password"]" />
         </MudItem>
         <MudItem xs="12" Class="d-flex justify-center">
             <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" Disabled="@(!_viewModel.IsRegistrationModelValid)" Style="width: 100%;">@_viewModel.Localizer["Register"]</MudButton>

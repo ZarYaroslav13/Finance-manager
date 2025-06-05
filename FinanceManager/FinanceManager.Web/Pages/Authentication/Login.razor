@@ -1,5 +1,4 @@
 ﻿@page "/login"
-@using FinanceManager.Web.ViewModels.Pages
 @using FinanceManager.Web.ViewModels.Pages.Authorization
 @layout MainLayout
 @attribute [AllowAnonymous]
@@ -40,6 +39,9 @@
         </MudItem>
         <MudItem xs="12" Class="d-flex justify-space-between align-center">
             <MudCheckBox T="bool" Label="@_viewModel.Localizer["Remember me?"]" Color="Color.Primary" Class="ml-n1"></MudCheckBox> <MudLink Href="/account/forgot-password">@_viewModel.Localizer["Forgot password?"]</MudLink>
+        </MudItem>
+        <MudItem xs="12" Class="d-flex justify-center">
+            <MudButton ButtonType="ButtonType.Button" OnClick="@_viewModel.FillUserAsync" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" Style="width: 100%;">@_viewModel.Localizer["Fill by user credentional"]</MudButton>
         </MudItem>
         <MudItem xs="12" Class="d-flex justify-center">
             <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" Disabled="@(!_viewModel.IsLoginModelValid)" Style="width: 100%;">@_viewModel.Localizer["Sign In"]</MudButton>

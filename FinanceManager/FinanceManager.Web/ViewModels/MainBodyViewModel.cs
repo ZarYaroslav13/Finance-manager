@@ -66,7 +66,7 @@ public class MainBodyViewModel : BaseViewModel<MainBody>
 
     public async Task LoadDataAsync()
     {
-        var user = await _authenticationService.CurrentUserAsync();
+        var user = await _tokenManager.CurrentUserAsync();
         if (user == null) return;
         if (user.Identity?.IsAuthenticated == true)
         {
@@ -94,7 +94,7 @@ public class MainBodyViewModel : BaseViewModel<MainBody>
                     SecondName = string.Empty;
                     Email = string.Empty;
                     FirstLetterOfName = char.MinValue;
-                    await _authenticationService.LogoutAsync();
+                    await _tokenManager.LogoutAsync();
                 }
             }
         }

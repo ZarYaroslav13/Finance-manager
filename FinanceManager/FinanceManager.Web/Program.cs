@@ -1,9 +1,6 @@
-using System.Globalization;
 using FinanceManager.Web;
 using FinanceManager.Web.Extentions.HostBuilder;
-using FinanceManager.Web.Preferences;
-using FinanceManager.Web.Preferences.Client;
-using FinanceManager.Web.Shared.Constants.Localization;
+using FinanceManager.Web.Extentions.HostBuilder.MinimalApi;
 
 public class Program
 {
@@ -27,14 +24,20 @@ public class Program
         app.UseStaticFiles();
 
         app.UseRequestLocalization();
-        app.UseAntiforgery();
 
         app.UseOutputCache();
+
+        app.UseRouting();
+        app.UseAuthentication();
+        app.UseAuthorization();
+        app.UseAntiforgery();
 
         app.MapRazorComponents<App>()
             .AddInteractiveServerRenderMode();
 
         app.MapDefaultEndpoints();
+
+        app.AddMinimalApi();
 
         await app.RunAsync();
     }

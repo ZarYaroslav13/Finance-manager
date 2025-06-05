@@ -1,1 +1,27 @@
-﻿
+﻿@inject NavMenuViewModel _viewModel
+
+<UserCard />
+<MudNavMenu>
+    <MudNavLink Href="/" Match="NavLinkMatch.All" Icon="@Icons.Material.Outlined.Home">@_viewModel.Localizer["Home"]</MudNavLink>
+
+
+    <MudListSubheader Class="mt-2 mb-n2">@_viewModel.Localizer["Personal"]</MudListSubheader>
+    <MudNavLink Href="@PagesHref.Personal.Account" Icon="@Icons.Material.Filled.Person"> @_viewModel.Localizer["Account"] </MudNavLink>
+    <MudNavLink Href="@PagesHref.Personal.Wallet.Wallets" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Outlined.AccountBalanceWallet"> @_viewModel.Localizer["Wallets"] </MudNavLink>
+    <MudNavLink Href="@PagesHref.Personal.FinanceOperationType.FinanceOperationTypes" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Outlined.ListAlt"> @_viewModel.Localizer["FincanceOperationTypes"] </MudNavLink>
+    <MudNavLink Href="@PagesHref.Personal.FinanceOperation.FinanceOperations" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.AttachMoney"> @_viewModel.Localizer["FincanceOperations"] </MudNavLink>
+    <MudNavLink Href="@PagesHref.Personal.FinanceReports" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Outlined.AddChart"> @_viewModel.Localizer["Reports"] </MudNavLink>
+
+
+    @if (_viewModel.CanViewAdminMenu)
+    {
+        <MudListSubheader Class="mt-2 mb-n2">@_viewModel.Localizer["Administrator"]</MudListSubheader>
+        <MudNavLink Href="@PagesHref.Admin.Users" Icon="@Icons.Material.Filled.PersonSearch"> @_viewModel.Localizer["Users"] </MudNavLink>
+        <MudNavLink Href="@PagesHref.Admin.Roles" Icon="@Icons.Material.Filled.PersonAddAlt1">@_viewModel.Localizer["Roles"]</MudNavLink>
+    }
+
+    <MudListSubheader Class="mt-2 mb-n2">@_viewModel.Localizer["Exit"]</MudListSubheader>
+    <MudNavLink Href="@PagesHref.Logout" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Logout"> @_viewModel.Localizer["logout"] </MudNavLink>
+
+
+</MudNavMenu>

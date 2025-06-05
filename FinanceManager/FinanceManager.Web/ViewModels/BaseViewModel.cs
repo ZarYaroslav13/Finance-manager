@@ -10,7 +10,7 @@ namespace FinanceManager.Web.ViewModels;
 public abstract class BaseViewModel<T> : IViewModel where T : class
 {
     public IStringLocalizer<T> Localizer { get; }
-
+    protected readonly IHttpContextAccessor _httpContextAccessor;
     protected readonly HttpClient _httpClient;
     protected readonly NavigationManager _navigationManager;
     protected readonly ISnackbar _snackBar;
@@ -22,7 +22,7 @@ public abstract class BaseViewModel<T> : IViewModel where T : class
     {
         ArgumentNullException.ThrowIfNull(locator);
         Localizer = localizer ?? throw new ArgumentNullException(nameof(locator));
-
+        _httpContextAccessor = locator.HttpContextAccessor;
         _httpClient = locator.HttpClient;
         _navigationManager = locator.NavigationManager;
         _snackBar = locator.SnackBar;

@@ -3,6 +3,7 @@ using FinanceManager.Application.UseCases.Tokens.Commands.GetTokenCommand;
 using FinanceManager.Domain.Services.Token;
 using FinanceManager.Domain.Wrapper;
 using FinanceManager.Web.Services.APIServices.Managers.TokenManager;
+using FinanceManager.Web.Services.Autorization;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
@@ -14,6 +15,7 @@ public static class AddMinimalApiHostExtention
     {
         app.MapPost(MinimalApiEndpoints.Authentication.Login,
             async (GetTokenCommand model,
+                FinanceManagerStateProvider stateProvider,
                 ITokenManager tokenManager,
                 IHttpContextAccessor httpContextAccessor,
                 ILogger<Program> logger) =>
@@ -44,6 +46,8 @@ public static class AddMinimalApiHostExtention
                         CookieAuthenticationDefaults.AuthenticationScheme,
                         claimPrincipal,
                         authProperities);
+
+                    await stateProvider.StateChangedAsync();
 
                     return Results.Ok(Result.Success());
                 }

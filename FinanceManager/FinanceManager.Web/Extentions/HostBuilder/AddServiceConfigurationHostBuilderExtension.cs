@@ -2,6 +2,7 @@
 using Blazored.LocalStorage;
 using FinanceManager.Domain.API;
 using FinanceManager.Domain.Authorization;
+using FinanceManager.Web.Pages;
 using FinanceManager.Web.Preferences;
 using FinanceManager.Web.Preferences.Client;
 using FinanceManager.Web.Services;
@@ -88,12 +89,13 @@ public static class AddServiceConfigurationHostBuilderExtension
                     options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                     options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 })
-            .AddCookie(options =>
+            .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
             {
-                options.LoginPath = "/login";
+                options.LoginPath = PagesHref.Authentication.Login;
                 options.Cookie.Name = "FMAuthCookie";
                 options.Cookie.HttpOnly = true;
                 options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+                
             });
     }
 

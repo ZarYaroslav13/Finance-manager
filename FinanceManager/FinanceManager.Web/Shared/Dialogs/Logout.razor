@@ -1,4 +1,5 @@
 ﻿@namespace FinanceManager.Web.Shared.Dialogs.Logout
+@using FinanceManager.Web.Pages
 @using FinanceManager.Web.Services.APIServices.Managers.TokenManager
 @inject Microsoft.Extensions.Localization.IStringLocalizer<Logout> localizer
 <MudDialog>
@@ -28,7 +29,7 @@
     async Task Submit()
     {
         await _tokenManager.LogoutAsync();
-        _navigationManager.NavigateTo("/login");
+        _navigationManager.NavigateTo(PagesHref.Authentication.Login);
         MudDialog.Close(DialogResult.Ok(true));
     }
     void Cancel() => MudDialog.Cancel();

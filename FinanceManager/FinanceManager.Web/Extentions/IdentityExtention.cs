@@ -18,6 +18,9 @@ public static class IdentityExtention
     internal static string GetUserId(this ClaimsPrincipal claimsPrincipal)
        => claimsPrincipal.FindFirstValue(ClaimTypes.NameIdentifier);
 
+    internal static List<string> GetUserRoles(this ClaimsPrincipal claimsPrincipal)
+        => claimsPrincipal.FindAll(ClaimTypes.Role).Select(r => r.Value).ToList();
+
     internal static string GetExpireToken(this ClaimsPrincipal claimsPrincipal)
         => claimsPrincipal.FindFirstValue(IdentityConstants.AuthToken);
 

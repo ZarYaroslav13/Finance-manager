@@ -1,4 +1,5 @@
 ﻿using FinanceManager.Application.UseCases.Users.Commands.RegisterCommand;
+using FinanceManager.Web.Pages;
 using FinanceManager.Web.Pages.Authentication;
 using FinanceManager.Web.Services;
 using FinanceManager.Web.Services.APIServices.Managers.IUserManager;
@@ -34,7 +35,7 @@ public class RegisterViewModel : BaseViewModel<Register>
         if (response.Succeeded)
         {
             _snackBar.Add(response.Messages[0], Severity.Success);
-            _navigationManager.NavigateTo("/login");
+            _navigationManager.NavigateTo(PagesHref.Authentication.Login);
             RegistrationModel = new();
         }
         else

@@ -34,11 +34,14 @@ public class LoginViewModel : BaseViewModel<Login>
                                 .ToResultAsync();
 
         if (result.Succeeded)
+        {
             _snackBar.Add(string.Format(Localizer["Welcome {0}"], LoginModel.Email), Severity.Success);
+            var t = _httpContextAccessor.HttpContext.User.GetEmail();
+        }
         else
             _snackBar.Add(string.Format(Localizer["Sorry {0}, I don`t recognize you!"], LoginModel.Email), Severity.Error);
 
-        _navigationManager.NavigateTo("/home");
+        _navigationManager.NavigateTo("/home", forceLoad: true);
     }
 
     public void FillUserAsync()

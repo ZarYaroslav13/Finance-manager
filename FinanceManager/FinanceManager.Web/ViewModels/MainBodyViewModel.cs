@@ -20,7 +20,6 @@ public class MainBodyViewModel : BaseViewModel<MainBody>
 
     public bool DrawerOpen = true;
     public Guid CurrentUserId { get; set; }
-    public string ImageDataUrl { get; set; }
     public string FirstName { get; set; } = String.Empty;
     public string SecondName { get; set; }
     public string Email { get; set; }
@@ -89,7 +88,6 @@ public class MainBodyViewModel : BaseViewModel<MainBody>
                         Localizer["You are logged out because the user with your Token has been deleted."],
                         Severity.Error);
                     CurrentUserId = Guid.Empty;
-                    ImageDataUrl = string.Empty;
                     FirstName = string.Empty;
                     SecondName = string.Empty;
                     Email = string.Empty;

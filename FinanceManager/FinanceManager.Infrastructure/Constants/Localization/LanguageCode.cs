@@ -1,4 +1,4 @@
-﻿namespace FinanceManager.Web.Shared.Constants.Localization;
+﻿namespace FinanceManager.Infrastructure.Constants.Localization;
 
 public sealed class LanguageCode
 {

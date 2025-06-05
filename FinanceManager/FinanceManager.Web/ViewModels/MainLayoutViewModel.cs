@@ -1,9 +1,9 @@
 ﻿using System.Globalization;
+using FinanceManager.Infrastructure.Constants.Localization;
 using FinanceManager.Web.Preferences;
 using FinanceManager.Web.Preferences.Client;
 using FinanceManager.Web.Services.Autorization;
 using FinanceManager.Web.Settings;
-using FinanceManager.Web.Shared.Constants.Localization;
 using MudBlazor;
 
 namespace FinanceManager.Web.ViewModels;
@@ -53,7 +53,7 @@ public class MainLayoutViewModel : IViewModel
         if (preference != null)
             culture = new CultureInfo(preference.LanguageCode);
         else
-            culture = new CultureInfo(LocalizationConstants.SupportedLanguages.FirstOrDefault()?.Code ?? "en-US");
+            culture = new CultureInfo(LocalizationConstants.SupportedLanguages.FirstOrDefault()?.Code ?? LocalizationConstants.EnglishLanguage.Code);
         CultureInfo.DefaultThreadCurrentCulture = culture;
         CultureInfo.DefaultThreadCurrentUICulture = culture;
     }

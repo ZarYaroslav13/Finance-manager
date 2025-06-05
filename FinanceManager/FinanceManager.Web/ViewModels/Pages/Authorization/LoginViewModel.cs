@@ -36,7 +36,7 @@ public class LoginViewModel : BaseViewModel<Login>
         if (result.Succeeded)
         {
             _snackBar.Add(string.Format(Localizer["Welcome {0}"], LoginModel.Email), Severity.Success);
-            var t = _httpContextAccessor.HttpContext.User.GetEmail();
+
         }
         else
             _snackBar.Add(string.Format(Localizer["Sorry {0}, I don`t recognize you!"], LoginModel.Email), Severity.Error);

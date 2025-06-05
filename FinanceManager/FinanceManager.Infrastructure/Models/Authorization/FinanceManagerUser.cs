@@ -17,4 +17,7 @@ public class FinanceManagerUser : IdentityUser<Guid>, IIdentityEntity
     public DateTime CreatedOn { get; set; }
 
     public DateTime? LastModifiedOn { get; set; }
+
+    public Guid PreferencesId { get; set; }
+    public UserPreferences Preferences { get; set; }
 }

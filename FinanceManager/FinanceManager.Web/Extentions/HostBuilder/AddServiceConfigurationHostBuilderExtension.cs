@@ -2,6 +2,7 @@
 using Blazored.LocalStorage;
 using FinanceManager.Domain.API;
 using FinanceManager.Domain.Authorization;
+using FinanceManager.Infrastructure.Constants.Localization;
 using FinanceManager.Web.Pages;
 using FinanceManager.Web.Preferences;
 using FinanceManager.Web.Preferences.Client;
@@ -10,7 +11,6 @@ using FinanceManager.Web.Services.APIServices.APIHttpClient;
 using FinanceManager.Web.Services.APIServices.Managers;
 using FinanceManager.Web.Services.Autorization;
 using FinanceManager.Web.Services.HttpHandlers;
-using FinanceManager.Web.Shared.Constants.Localization;
 using FinanceManager.Web.ViewModels;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
@@ -84,7 +84,7 @@ public static class AddServiceConfigurationHostBuilderExtension
 
     private static void ConfigureAuthentication(this IServiceCollection services)
     {
-        var t = services.AddAuthentication(options =>
+        services.AddAuthentication(options =>
                 {
                     options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                     options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
@@ -95,8 +95,10 @@ public static class AddServiceConfigurationHostBuilderExtension
                 options.Cookie.Name = "FMAuthCookie";
                 options.Cookie.HttpOnly = true;
                 options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
-                
+
             });
+
+        services.AddCascadingAuthenticationState();
     }
 
     private static IHostApplicationBuilder AdjustHttpClient(this IHostApplicationBuilder builder)

@@ -1,4 +1,5 @@
-﻿using FinanceManager.Infrastructure.Models.Authorization;
+﻿using FinanceManager.Infrastructure.Models;
+using FinanceManager.Infrastructure.Models.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -9,5 +10,9 @@ public class FinanceManagerUserConfiguration : IEntityTypeConfiguration<FinanceM
     public void Configure(EntityTypeBuilder<FinanceManagerUser> builder)
     {
         builder.HasData(DBFiller.Users);
+
+        builder.HasOne(u => u.Preferences)
+            .WithOne(up => up.User)
+            .HasForeignKey<UserPreferences>(u => u.UserId);
     }
 }

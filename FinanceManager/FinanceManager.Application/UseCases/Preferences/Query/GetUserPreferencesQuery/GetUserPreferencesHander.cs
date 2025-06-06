@@ -11,9 +11,9 @@ namespace FinanceManager.Application.UseCases.Preferences.Query.GetUserPreferenc
 {
     public class GetUserPreferencesHander : BaseRequestHandler, IRequestHandler<GetUserPreferencesQuery, Result<UserPreferencesDTO>>
     {
-        private readonly IPreferenceService _preferenceService;
+        private readonly IPreferencesService _preferenceService;
 
-        public GetUserPreferencesHander(IPreferenceService preferenceService,
+        public GetUserPreferencesHander(IPreferencesService preferenceService,
             ICurrentUserService currentUserService, IMapper mapper, ILogger<BaseRequestHandler> logger) : base(currentUserService, mapper, logger)
         {
             _preferenceService = preferenceService ?? throw new ArgumentNullException(nameof(preferenceService));

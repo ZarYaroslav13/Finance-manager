@@ -7,6 +7,7 @@ using FinanceManager.Domain.Services.Accounts;
 using FinanceManager.Domain.Services.CurrentUserService;
 using FinanceManager.Domain.Services.Email;
 using FinanceManager.Domain.Services.Finances;
+using FinanceManager.Domain.Services.Preferences;
 using FinanceManager.Domain.Services.Roles;
 using FinanceManager.Domain.Services.Token;
 using FinanceManager.Domain.Services.Users;
@@ -58,6 +59,7 @@ public static class AddServicesConfigurationHostBuilderExtensions
         services.AddScoped<IWalletService, WalletService>();
         services.AddScoped<IFinanceService, FinanceService>();
         services.AddScoped<ITokenService, TokenService>();
+        services.AddScoped<IPreferencesService, PreferencesService>();
 
         services.AddJwtAuthentication(configuration);
 

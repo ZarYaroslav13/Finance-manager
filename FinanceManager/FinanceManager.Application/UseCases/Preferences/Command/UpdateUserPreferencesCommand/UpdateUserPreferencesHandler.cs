@@ -11,9 +11,9 @@ namespace FinanceManager.Application.UseCases.Preferences.Command.UpdateUserPref
 
 public class UpdateUserPreferencesHandler : BaseRequestHandler, IRequestHandler<UpdateUserPreferencesCommand, IResult>
 {
-    private readonly IPreferenceService _preferenceService;
+    private readonly IPreferencesService _preferenceService;
 
-    public UpdateUserPreferencesHandler(IPreferenceService preferenceService,
+    public UpdateUserPreferencesHandler(IPreferencesService preferenceService,
         ICurrentUserService currentUserService, IMapper mapper, ILogger<BaseRequestHandler> logger) : base(currentUserService, mapper, logger)
     {
         _preferenceService = preferenceService ?? throw new ArgumentNullException(nameof(preferenceService));
@@ -24,10 +24,10 @@ public class UpdateUserPreferencesHandler : BaseRequestHandler, IRequestHandler<
         return await HandleAsync(async () =>
         {
             await CheckIsUserHaveAccesToResourse(request,
-                () => _currentUserService.UserId == request.UserPreferences.UserId.ToString());
+                () => _currentUserService.UserId == request.UserId.ToString());
 
             var result = await _preferenceService.UpdatePreferncesAsync(
-                    _mapper.Map<UserPreferencesModel>(request.UserPreferences));
+                    _mapper.Map<UserPreferencesModel>(request));
 
             return result;
         });

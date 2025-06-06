@@ -1,21 +1,22 @@
 ﻿using AutoMapper;
 using FinanceManager.Domain.Models;
 using FinanceManager.Domain.Wrapper;
+using FinanceManager.Infrastructure.Constants.Localization;
 using FinanceManager.Infrastructure.Models;
 using FinanceManager.Infrastructure.Repository;
 using FinanceManager.Infrastructure.UnitOfWork;
 
 namespace FinanceManager.Domain.Services.Preferences;
 
-public class PreferenceService : BaseService, IPreferenceService
+public class PreferencesService : BaseService, IPreferencesService
 {
     private readonly IRepository<UserPreference> _repository;
-    public PreferenceService(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork, mapper)
+    public PreferencesService(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork, mapper)
     {
         _repository = _unitOfWork.GetRepository<UserPreference>();
     }
 
-    public async Task<IResult<UserPreferencesModel>> GetPreferencesOfUserAsync(Guid userId)
+    public async Task<Result<UserPreferencesModel>> GetPreferencesOfUserAsync(Guid userId)
     {
         try
         {
@@ -36,8 +37,13 @@ public class PreferenceService : BaseService, IPreferenceService
         {
             ArgumentNullException.ThrowIfNull(preferences);
 
-            if (preferences.Id == Guid.Empty || preferences.UserId == Guid.Empty)
+            if (preferences.UserId == Guid.Empty)
                 throw new ArgumentException("Id and UserId must be specified");
+
+            if (!LocalizationConstants.SupportedLanguages.Any(l => l.Code == preferences.LanguageCode))
+                throw new ArgumentException("Invalid language code!");
+
+            preferences.Id = preferences.UserId;
 
             _repository.Update(_mapper.Map<UserPreference>(preferences));
 

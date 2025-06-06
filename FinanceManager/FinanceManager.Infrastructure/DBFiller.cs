@@ -124,13 +124,13 @@ public class DBFiller
 
     private static List<UserPreference> _userPreferencess = new List<UserPreference>
     {
-        new() { Id = new Guid("75c1b007-ae73-4332-a74c-693c40c1dc23"), UserId=_users[0].Id, DarkMode = true, LanguageCode = Constants.Localization.LocalizationConstants.EnglishLanguage.Code, RightToLeft = false },
-        new() { Id = new Guid("96a5f51c-436e-46ea-a07d-451b6b620c61"), UserId=_users[1].Id, DarkMode = true, LanguageCode = Constants.Localization.LocalizationConstants.UkrainianLanguage.Code, RightToLeft = false },
-        new() { Id = new Guid("d432c173-ac20-4017-99dc-24f71266e19f"), UserId=_users[2].Id, DarkMode = true, LanguageCode = Constants.Localization.LocalizationConstants.FrenchLanguage.Code, RightToLeft = false },
-        new() { Id = new Guid("ca1172ae-492d-4551-88f8-b3f23316b457"), UserId=_users[3].Id, DarkMode = false, LanguageCode = Constants.Localization.LocalizationConstants.EnglishLanguage.Code, RightToLeft = false },
-        new() { Id = new Guid("e19ea988-0611-40b4-aaaa-77216a985eb0"), UserId=_users[4].Id, DarkMode = false, LanguageCode = Constants.Localization.LocalizationConstants.ItalianLanguage.Code, RightToLeft = false },
-        new() { Id = new Guid("51f56c96-1b11-4ea7-882b-c708e9ed2f6d"), UserId=_users[5].Id, DarkMode = false, LanguageCode = Constants.Localization.LocalizationConstants.KhmerLanguage.Code, RightToLeft = true },
-        new() { Id = new Guid("5eaac367-0358-44c2-a6a6-86d283a21c7c"), UserId=_users[6].Id, DarkMode = false, LanguageCode = Constants.Localization.LocalizationConstants.GermanLanguage.Code, RightToLeft = false },
+        new() {Id = _users[0].Id, UserId=_users[0].Id, DarkMode = true, LanguageCode = Constants.Localization.LocalizationConstants.EnglishLanguage.Code, RightToLeft = false },
+        new() {Id = _users[1].Id, UserId=_users[1].Id, DarkMode = true, LanguageCode = Constants.Localization.LocalizationConstants.UkrainianLanguage.Code, RightToLeft = false },
+        new() {Id = _users[2].Id, UserId=_users[2].Id, DarkMode = true, LanguageCode = Constants.Localization.LocalizationConstants.FrenchLanguage.Code, RightToLeft = false },
+        new() {Id = _users[3].Id, UserId=_users[3].Id, DarkMode = false, LanguageCode = Constants.Localization.LocalizationConstants.EnglishLanguage.Code, RightToLeft = false },
+        new() {Id = _users[4].Id, UserId=_users[4].Id, DarkMode = false, LanguageCode = Constants.Localization.LocalizationConstants.ItalianLanguage.Code, RightToLeft = false },
+        new() {Id = _users[5].Id, UserId=_users[5].Id, DarkMode = false, LanguageCode = Constants.Localization.LocalizationConstants.KhmerLanguage.Code, RightToLeft = true },
+        new() {Id = _users[6].Id, UserId=_users[6].Id, DarkMode = false, LanguageCode = Constants.Localization.LocalizationConstants.GermanLanguage.Code, RightToLeft = false },
     };
 
     private static List<FinanceManagerRole> _roles = new List<FinanceManagerRole>

@@ -8,5 +8,7 @@ public class ResultProflle : Profile
     public ResultProflle()
     {
         CreateMap<Result, Result>();
+
+        CreateMap(typeof(Result<>), typeof(Result<>)).ConvertUsing(typeof(ResultConverter<,>));
     }
 }

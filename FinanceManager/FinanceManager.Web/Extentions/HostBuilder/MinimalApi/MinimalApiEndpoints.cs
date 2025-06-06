@@ -2,7 +2,7 @@
 
 public static class MinimalApiEndpoints
 {
-    public const string BaseUrl = "http://localhost:5066";
+    public const string BaseUrl = "https://localhost:5066";
 
     public static class Authentication
     {

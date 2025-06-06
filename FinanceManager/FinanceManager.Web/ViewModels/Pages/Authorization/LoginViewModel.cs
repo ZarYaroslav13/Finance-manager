@@ -1,14 +1,20 @@
-﻿using FinanceManager.Application.UseCases.Tokens.Commands.GetTokenCommand;
+﻿using Azure;
+using System.Security.Claims;
+using FinanceManager.Application.UseCases.Tokens.Commands.GetTokenCommand;
+using FinanceManager.Domain.Services.Token;
+using FinanceManager.Domain.Wrapper;
 using FinanceManager.Web.Extentions;
 using FinanceManager.Web.Extentions.HostBuilder.MinimalApi;
 using FinanceManager.Web.Pages.Authentication;
 using FinanceManager.Web.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Components.Forms;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Localization;
 using MudBlazor;
 
 namespace FinanceManager.Web.ViewModels.Pages.Authorization;
-
 public class LoginViewModel : BaseViewModel<Login>
 {
     public GetTokenCommand LoginModel { get; set; } = new();
@@ -66,3 +72,4 @@ public class LoginViewModel : BaseViewModel<Login>
         }
     }
 }
+

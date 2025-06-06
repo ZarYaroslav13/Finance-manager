@@ -44,6 +44,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinanceManager.Application.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{D69D9939-3FF4-4626-921E-18296DC2C6BB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibrary1", "ClassLibrary1\ClassLibrary1.csproj", "{77562B14-DCD6-4318-9733-A76BCD8CB178}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -94,6 +96,10 @@ Global
 		{0490F6D9-CED3-4EA4-AA4C-8061A7D49653}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0490F6D9-CED3-4EA4-AA4C-8061A7D49653}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0490F6D9-CED3-4EA4-AA4C-8061A7D49653}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77562B14-DCD6-4318-9733-A76BCD8CB178}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77562B14-DCD6-4318-9733-A76BCD8CB178}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77562B14-DCD6-4318-9733-A76BCD8CB178}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77562B14-DCD6-4318-9733-A76BCD8CB178}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

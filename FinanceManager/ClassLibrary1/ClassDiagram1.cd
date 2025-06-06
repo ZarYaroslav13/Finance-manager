@@ -1,0 +1,915 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="FinanceManager.Infrastructure.Constants.Localization.LanguageCode" Collapsed="true">
+    <Position X="9" Y="2" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Infrastructure.Constants.Localization.LocalizationConstants" Collapsed="true">
+    <Position X="10.75" Y="2" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Infrastructure.EntitiesConfiguration.FinanceManagerRoleConfiguration" Collapsed="true">
+    <Position X="13" Y="1" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Infrastructure.EntitiesConfiguration.FinanceManagerUserConfiguration" Collapsed="true">
+    <Position X="14.75" Y="1" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Infrastructure.EntitiesConfiguration.FinanceManagerUserRoleConfiguration" Collapsed="true">
+    <Position X="16.5" Y="1" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Infrastructure.EntitiesConfiguration.FinanceOperationConfiguration" Collapsed="true">
+    <Position X="13" Y="2" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Infrastructure.EntitiesConfiguration.FinanceOperationTypeConfiguration" Collapsed="true">
+    <Position X="14.75" Y="2" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Infrastructure.EntitiesConfiguration.UserPreferencesConfiguration" Collapsed="true">
+    <Position X="16.5" Y="2" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Infrastructure.EntitiesConfiguration.WalletConfiguration" Collapsed="true">
+    <Position X="13" Y="3" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Infrastructure.Models.Authorization.FinanceManagerRole" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="28.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="FinanceManager.Infrastructure.Models.Authorization.FinanceManagerUser" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="26.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="FinanceManager.Infrastructure.Models.Base.Entity" Collapsed="true">
+    <Position X="20.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Infrastructure.Models.EntryType" Collapsed="true">
+    <Position X="26.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Infrastructure.Models.FinanceOperation" Collapsed="true">
+    <Position X="22" Y="2.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Infrastructure.Models.FinanceOperationType" Collapsed="true">
+    <Position X="17.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Infrastructure.Models.UserPreference" Collapsed="true">
+    <Position X="19.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Infrastructure.Models.Wallet" Collapsed="true">
+    <Position X="24.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Infrastructure.Repository.Repository&lt;T&gt;" Collapsed="true">
+    <Position X="28" Y="3" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FinanceManager.Infrastructure.UnitOfWork.UnitOfWork" Collapsed="true">
+    <Position X="23.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FinanceManager.Infrastructure.AppDbContext" Collapsed="true">
+    <Position X="25.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Infrastructure.DBFiller" Collapsed="true">
+    <Position X="20.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Domain.API.APIEndpoints" Collapsed="true">
+    <Position X="32" Y="4.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Domain.Authorization.PolicyManager" Collapsed="true">
+    <Position X="32" Y="6.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Domain.Configurations.AppConfiguration" Collapsed="true">
+    <Position X="33.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Domain.Configurations.AuthConfiguration" Collapsed="true">
+    <Position X="35.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Domain.Configurations.MailConfiguration" Collapsed="true">
+    <Position X="35.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Domain.Mapper.Profiles.FinanceOperationProfile" Collapsed="true">
+    <Position X="30.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Domain.Mapper.Profiles.FinanceOperationTypeProfile" Collapsed="true">
+    <Position X="32" Y="5.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Domain.Mapper.Profiles.PreferencesProfile" Collapsed="true">
+    <Position X="33.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Domain.Mapper.Profiles.ResultConverter&lt;TSource, TDestination&gt;" Collapsed="true">
+    <Position X="35.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Domain.Mapper.Profiles.ResultProflle" Collapsed="true">
+    <Position X="37.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Domain.Mapper.Profiles.RoleProfile" Collapsed="true">
+    <Position X="32" Y="7.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Domain.Mapper.Profiles.UserProfile" Collapsed="true">
+    <Position X="32" Y="8.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Domain.Mapper.Profiles.WalletProfile" Collapsed="true">
+    <Position X="35.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Domain.Models.Base.Model" Collapsed="true">
+    <Position X="21" Y="8.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Domain.Models.Requests.MailRequest" Collapsed="true">
+    <Position X="37.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Domain.Models.ExpenseModel" Collapsed="true">
+    <Position X="16.5" Y="11.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Domain.Models.FinanceOperationModel" Collapsed="true">
+    <Position X="15.5" Y="10" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Domain.Models.FinanceOperationTypeModel" Collapsed="true">
+    <Position X="21" Y="10" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Domain.Models.FinanceReportModel" Collapsed="true">
+    <Position X="25.25" Y="9.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Domain.Models.IncomeModel" Collapsed="true">
+    <Position X="14.25" Y="11.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Domain.Models.Period" Collapsed="true">
+    <Position X="30.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Domain.Models.RoleModel" Collapsed="true">
+    <Position X="30.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Domain.Models.TokenModel" Collapsed="true">
+    <Position X="37.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Domain.Models.UserModel" Collapsed="true">
+    <Position X="27.75" Y="10" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Domain.Models.UserPreferencesModel" Collapsed="true">
+    <Position X="18.75" Y="10" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Domain.Models.WalletModel" Collapsed="true">
+    <Position X="23.25" Y="10" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Domain.Modelsl.UserRoleModel" Collapsed="true">
+    <Position X="33.75" Y="8.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Domain.Services.Accounts.AccountService" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="30.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="FinanceManager.Domain.Services.CurrentUserService.CurrentUserService" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="37.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="FinanceManager.Domain.Services.Email.SMTPEmailService" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="35.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="FinanceManager.Domain.Services.Finances.FinanceReportCreator" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="33.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="FinanceManager.Domain.Services.Finances.FinanceService" Collapsed="true">
+    <Position X="20" Y="13" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FinanceManager.Domain.Services.Preferences.PreferencesService" Collapsed="true">
+    <Position X="24.5" Y="13" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FinanceManager.Domain.Services.Roles.RoleService" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="33.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="FinanceManager.Domain.Services.Token.TokenService" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="30.25" Y="8.75" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="FinanceManager.Domain.Services.Users.UserService" Collapsed="true">
+    <Position X="22.25" Y="13" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FinanceManager.Domain.Services.Wallets.WalletService" Collapsed="true">
+    <Position X="26.75" Y="13" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FinanceManager.Domain.Services.BaseService" Collapsed="true">
+    <Position X="23.25" Y="11.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Domain.Wrapper.PaginatedResult&lt;T&gt;" Collapsed="true">
+    <Position X="13.75" Y="6" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Domain.Wrapper.Result" Collapsed="true">
+    <Position X="15" Y="4.75" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FinanceManager.Domain.Wrapper.Result&lt;T&gt;" Collapsed="true">
+    <Position X="16" Y="6" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FinanceManager.Application.DataAnnotations.Attributes.GuidRequiredAttribute" Collapsed="true">
+    <Position X="33.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.Extentions.EnumerableExtentions" Collapsed="true">
+    <Position X="31.5" Y="12.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.Extensions.QueryableExtensions" Collapsed="true">
+    <Position X="33.25" Y="12.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.Mapping.FinanceOperationProfile" Collapsed="true">
+    <Position X="7.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.Mapping.FinanceOperationTypeProfile" Collapsed="true">
+    <Position X="9.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.Mapping.FinanceReportProfile" Collapsed="true">
+    <Position X="11.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.Mapping.TokenProfile" Collapsed="true">
+    <Position X="7.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.Mapping.UserPreferencesProfile" Collapsed="true">
+    <Position X="9.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.Mapping.UserProfile" Collapsed="true">
+    <Position X="11.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.Mapping.WalletProfile" Collapsed="true">
+    <Position X="7.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.Models.Base.ModelDTO" Collapsed="true">
+    <Position X="7.25" Y="13" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.Models.Base.UserDTO" Collapsed="true">
+    <Position X="2.75" Y="14.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.Models.ExpenseDTO" Collapsed="true">
+    <Position X="11.75" Y="15.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.Models.FinanceOperationDTO" Collapsed="true">
+    <Position X="13" Y="14.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.Models.FinanceOperationTypeDTO" Collapsed="true">
+    <Position X="0.5" Y="14.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.Models.FinanceReportDTO" Collapsed="true">
+    <Position X="5" Y="14.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.Models.IncomeDTO" Collapsed="true">
+    <Position X="14" Y="15.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.Models.RoleDTO" Collapsed="true">
+    <Position X="16.5" Y="13" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.Models.TokenDTO" Collapsed="true">
+    <Position X="18.25" Y="13" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.Models.UserPreferencesDTO" Collapsed="true">
+    <Position X="7.25" Y="14.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.Models.WalletDTO" Collapsed="true">
+    <Position X="9.5" Y="14.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.Accounts.Commands.Commands.UpdatePasswordAccountCommand.ChangeUserPasswordCommand" Collapsed="true">
+    <Position X="36.25" Y="16.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.Accounts.Commands.Commands.UpdatePasswordAccountCommand.ChangeUserPasswordHandler" Collapsed="true">
+    <Position X="38" Y="16.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.Accounts.Commands.Commands.UpdateAccountCommand.UpdateAccountCommand" Collapsed="true">
+    <Position X="36.25" Y="17.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.Accounts.Commands.Commands.UpdateAccountCommand.UpdateAccountCommandHandler" Collapsed="true">
+    <Position X="38" Y="17.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.Commons.Bases.BaseRequestHandler" Collapsed="true">
+    <Position X="40" Y="12.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.Commons.Behaviours.LoggingBehaviour&lt;TRequest, TResponse&gt;" Collapsed="true">
+    <Position X="46" Y="12.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.Commons.Mapping.FinanceOperationProfile" Collapsed="true">
+    <Position X="42.5" Y="12.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.Commons.Mapping.FinanceOperationTypeProfile" Collapsed="true">
+    <Position X="44.25" Y="12.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.Commons.Mapping.PreferencesProfile" Collapsed="true">
+    <Position X="42.5" Y="13.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.Commons.Mapping.RoleProfile" Collapsed="true">
+    <Position X="44.25" Y="13.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.Commons.Mapping.UsertProfile" Collapsed="true">
+    <Position X="46" Y="13.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.Commons.Mapping.WalletProfile" Collapsed="true">
+    <Position X="42.5" Y="14.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.FinanceOperations.Commands.AddFinanceOperationCommand.AddFinanceOperationCommand" Collapsed="true">
+    <Position X="56.75" Y="16.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.FinanceOperations.Commands.AddFinanceOperationCommand.AddFinanceOperationHandler" Collapsed="true">
+    <Position X="46" Y="16.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.FinanceOperations.Commands.DeleteFinanceOperationCommand.DeleteFinanceOperationCommand" Collapsed="true">
+    <Position X="58.5" Y="16.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.FinanceOperations.Commands.DeleteFinanceOperationCommand.DeleteFinanceOperationHandler" Collapsed="true">
+    <Position X="43.75" Y="16.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.FinanceOperations.Commands.UpdateFinanceOperationCommand.UpdateFinanceOperationCommand" Collapsed="true">
+    <Position X="56.75" Y="17.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.FinanceOperations.Commands.UpdateFinanceOperationCommand.UpdateFinanceOperationHandler" Collapsed="true">
+    <Position X="54.25" Y="16.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.FinanceOperations.Queries.GetAllOperationsOfWalletQuery.GetAllOperationsOfWalletHandler" Collapsed="true">
+    <Position X="9" Y="37.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.FinanceOperations.Queries.GetAllOperationsOfWalletQuery.GetAllOperationsOfWalletQuery" Collapsed="true">
+    <Position X="11.5" Y="37.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.FinanceOperations.Queries.GetOperationQuery.GetOperationHandler" Collapsed="true">
+    <Position X="3.25" Y="35.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.FinanceOperations.Queries.GetOperationQuery.GetOperationQuery" Collapsed="true">
+    <Position X="5.75" Y="35.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.FinanceOperations.Queries.GetAllOperationsOfTypeQuery.GetAllOperationsOfTypeQuery" Collapsed="true">
+    <Position X="6.5" Y="32.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.FinanceOperationTypes.Commands.AddFinanceOperationTypeCommand.AddFinanceOperationTypeCommand" Collapsed="true">
+    <Position X="13.75" Y="37" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.FinanceOperationTypes.Commands.AddFinanceOperationTypeCommand.AddFinanceOperationTypeHandle" Collapsed="true">
+    <Position X="49" Y="23.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.FinanceOperationTypes.Commands.DeleteFinanceOperationTypeCommand.DeleteFinanceOperationTypeCommand" Collapsed="true">
+    <Position X="13.75" Y="38" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.FinanceOperationTypes.Commands.DeleteFinanceOperationTypeCommand.DeleteFinanceOperationTypeHandler" Collapsed="true">
+    <Position X="9" Y="37" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.FinanceOperationTypes.Commands.UpdateFinanceOperationTypeCommand.UpdateFinanceOperationTypeCommand" Collapsed="true">
+    <Position X="15.5" Y="39" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.FinanceOperationTypes.Commands.UpdateFinanceOperationTypeCommand.UpdateFinanceOperationTypeHandler" Collapsed="true">
+    <Position X="39.5" Y="23.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.FinanceOperationTypes.Queries.GetAllFinanceOperationTypesQuery.GetAllFinanceOperationTypesHandler" Collapsed="true">
+    <Position X="59.25" Y="23.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.FinanceOperationTypes.Queries.GetAllFinanceOperationTypesQuery.GetAllFinanceOperationTypesQuery" Collapsed="true">
+    <Position X="15.5" Y="38" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.FinanceOperationTypes.Queries.GetFinanceOperationTypeQuery.GetFinanceOperationTypeHandler" Collapsed="true">
+    <Position X="11.25" Y="37" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.FinanceOperationTypes.Queries.GetFinanceOperationTypeQuery.GetFinanceOperationTypeQuery" Collapsed="true">
+    <Position X="17.25" Y="38" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.Preferences.Command.UpdateUserPreferencesCommand.UpdateUserPreferencesCommand" Collapsed="true">
+    <Position X="17.25" Y="39" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.Preferences.Command.UpdateUserPreferencesCommand.UpdateUserPreferencesHandler" Collapsed="true">
+    <Position X="2.25" Y="37" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.Preferences.Query.GetUserPreferencesQuery.GetUserPreferencesHander" Collapsed="true">
+    <Position X="4.5" Y="37" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.Preferences.Query.GetUserPreferencesQuery.GetUserPreferencesQuery" Collapsed="true">
+    <Position X="13.75" Y="39" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.FinanceReports.Commands.CreateDailyReportCommand.CreateDailyReportCommand" Collapsed="true">
+    <Position X="15.5" Y="37" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.FinanceReports.Commands.CreateDailyReportCommand.CreateDailyReportHandler" Collapsed="true">
+    <Position X="46.75" Y="23.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.FinanceReports.Commands.CreatePeriodReportCommand.CreatePeriodReportCommand" Collapsed="true">
+    <Position X="17.25" Y="37" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.FinanceReports.Commands.CreatePeriodReportCommand.CreatePeriodReportHandler" Collapsed="true">
+    <Position X="6.75" Y="37" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.Tokens.Commands.GetTokenCommand.GetTokenCommand" Collapsed="true">
+    <Position X="43.5" Y="33.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.Tokens.Commands.GetTokenCommand.GetTokenHandler" Collapsed="true">
+    <Position X="54.5" Y="17.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.Tokens.Commands.RefreshTokenCommand.RefreshTokenCommand" Collapsed="true">
+    <Position X="48.75" Y="33.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.Tokens.Commands.RefreshTokenCommand.RefreshTokenHandler" Collapsed="true">
+    <Position X="16.75" Y="31.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.Roles.Commands.CreateRoleCommand.CreateRoleCommand" Collapsed="true">
+    <Position X="43.5" Y="31.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.Roles.Commands.CreateRoleCommand.CreateRoleHandler" Collapsed="true">
+    <Position X="28" Y="31.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.Roles.Commands.DeleteRoleCommand.DeleteRoleCommand" Collapsed="true">
+    <Position X="47" Y="31.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.Roles.Commands.DeleteRoleCommand.DeleteRoleHandler" Collapsed="true">
+    <Position X="52" Y="17.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.Roles.Commands.UpdateRoleCommand.UpdateRoleCommand" Collapsed="true">
+    <Position X="45.25" Y="34.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.Roles.Commands.UpdateRoleCommand.UpdateRoleHandler" Collapsed="true">
+    <Position X="14.5" Y="31.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.Roles.Queries.GetAllRolesQuery.GetAllRolesHandler" Collapsed="true">
+    <Position X="19" Y="31.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.Roles.Queries.GetAllRolesQuery.GetAllRolesQuery" Collapsed="true">
+    <Position X="45.25" Y="32.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.Roles.Queries.GetRoleQuery.GetRoleHandler" Collapsed="true">
+    <Position X="30.25" Y="31.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.Roles.Queries.GetRoleQuery.GetRoleQuery" Collapsed="true">
+    <Position X="41.75" Y="33.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.Users.Commands.DeleteAccountByIdCommand.DeleteUserCommand" Collapsed="true">
+    <Position X="48.75" Y="31.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.Users.Commands.DeleteAccountByIdCommand.DeleteUserHandler" Collapsed="true">
+    <Position X="5.5" Y="31.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.Users.Commands.ForgotPasswordCommand.ForgotPasswordCommand" Collapsed="true">
+    <Position X="43.5" Y="32.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.Users.Commands.ForgotPasswordCommand.ForgotPasswordHandler" Collapsed="true">
+    <Position X="21.25" Y="31.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.Users.Commands.RegisterCommand.RegisterCommand" Collapsed="true">
+    <Position X="41.75" Y="34.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.Users.Commands.RegisterCommand.RegisterHandler" Collapsed="true">
+    <Position X="32.5" Y="31.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.Users.Commands.ResetPasswordCommand.ResetPasswordCommand" Collapsed="true">
+    <Position X="43.5" Y="34.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.Users.Commands.ResetPasswordCommand.ResetPasswordHandler" Collapsed="true">
+    <Position X="45.25" Y="17.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.Users.Queries.ConfirmEmailQuery.ConfirmEmailHandler" Collapsed="true">
+    <Position X="7.75" Y="31.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.Users.Queries.ConfirmEmailQuery.ConfirmEmailQuery" Collapsed="true">
+    <Position X="41.75" Y="31.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.Users.Queries.GetAllUsersQuery.GetAllUsersHandler" Collapsed="true">
+    <Position X="23.5" Y="31.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.Users.Queries.GetAllUsersQuery.GetAllUsersQuery" Collapsed="true">
+    <Position X="47" Y="32.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.Users.Queries.GetUserQuery.GetUserHandler" Collapsed="true">
+    <Position X="34.75" Y="31.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.Users.Queries.GetUserQuery.GetUserQuery" Collapsed="true">
+    <Position X="45.25" Y="33.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.Wallets.Commands.CreateWalletCommand.CreateWalletCommand" Collapsed="true">
+    <Position X="45.25" Y="31.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.Wallets.Commands.CreateWalletCommand.CreateWalletHandler" Collapsed="true">
+    <Position X="10" Y="31.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.Wallets.Commands.DeleteWalletCommand.DeleteWalletCommand" Collapsed="true">
+    <Position X="41.75" Y="32.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.Wallets.Commands.DeleteWalletCommand.DeleteWalletHandler" Collapsed="true">
+    <Position X="25.75" Y="31.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.Wallets.Commands.UpdateWalletCommand.UpdateWalletCommand" Collapsed="true">
+    <Position X="47" Y="34.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.Wallets.Commands.UpdateWalletCommand.UpdateWalletHandler" Collapsed="true">
+    <Position X="37" Y="31.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.Wallets.Queries.GetByIdWalletQuery.GetByIdWalletHandler" Collapsed="true">
+    <Position X="39.25" Y="31.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.Wallets.Queries.GetByIdWalletQuery.GetByIdWalletQuery" Collapsed="true">
+    <Position X="48.75" Y="32.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.Wallets.Queries.GetWalletsQuery.GetWalletsHandler" Collapsed="true">
+    <Position X="12.25" Y="31.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Application.UseCases.Wallets.Queries.GetWalletsQuery.GetWalletsQuery" Collapsed="true">
+    <Position X="47" Y="33.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.ApiService.Controllers.Base.BaseController" Collapsed="true">
+    <Position X="75.75" Y="8.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.ApiService.Controllers.AccountController" Collapsed="true">
+    <Position X="71.25" Y="10" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.ApiService.Controllers.FinanceOperationController" Collapsed="true">
+    <Position X="78" Y="10" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.ApiService.Controllers.FinanceOperationTypeController" Collapsed="true">
+    <Position X="82.5" Y="10" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.ApiService.Controllers.FinanceReportController" Collapsed="true">
+    <Position X="66.75" Y="10" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.ApiService.Controllers.RoleController" Collapsed="true">
+    <Position X="73.5" Y="10" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.ApiService.Controllers.TokenController" Collapsed="true">
+    <Position X="80.25" Y="10" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.ApiService.Controllers.UserController" Collapsed="true">
+    <Position X="84.75" Y="10" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.ApiService.Controllers.UserPreferenceController" Collapsed="true">
+    <Position X="69" Y="10" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.ApiService.Controllers.WalletController" Collapsed="true">
+    <Position X="75.75" Y="10" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.ApiService.HostBuilder.AddConfigurationHostBuilderExtensions" Collapsed="true">
+    <Position X="52.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.ApiService.HostBuilder.AddServicesConfigurationHostBuilderExtensions" Collapsed="true">
+    <Position X="54.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Web.Extentions.HostBuilder.MinimalApi.AddMinimalApiHostExtention" Collapsed="true">
+    <Position X="63.25" Y="12.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Web.Extentions.HostBuilder.MinimalApi.MinimalApiEndpoints" Collapsed="true">
+    <Position X="65.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Web.Extentions.HostBuilder.AddServiceConfigurationHostBuilderExtension" Collapsed="true">
+    <Position X="61.25" Y="6" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Web.Pages.PagesHref" Collapsed="true">
+    <Position X="48.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Web.Preferences.Client.ClientPreferences" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="43.5" Y="7.25" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="FinanceManager.Web.Preferences.Client.ClientPreferencesManager" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="45.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="FinanceManager.Web.Services.APIServices.Managers.IAccountManager.AccountManager" Collapsed="true">
+    <Position X="13.25" Y="25.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FinanceManager.Web.Services.APIServices.Managers.TokenManager.TokenManager" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="20.5" Y="22.25" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="FinanceManager.Web.Services.APIServices.Managers.IUserManager.UserManager" Collapsed="true">
+    <Position X="15.5" Y="25.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FinanceManager.Web.Services.APIServices.Managers.BaseManager" Collapsed="true">
+    <Position X="14.5" Y="24.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Web.Services.Autorization.FinanceManagerStateProvider" Collapsed="true">
+    <Position X="20.5" Y="21.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Web.Services.HttpHandlers.HttpMessagesHandler" Collapsed="true">
+    <Position X="22.25" Y="21.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Web.Services.ViewModelServicesLocator" Collapsed="true">
+    <Position X="22.25" Y="22.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Web.Settings.FinanceManagerThemes" Collapsed="true">
+    <Position X="24.5" Y="25.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Web.Shared.Components.UserCard" Collapsed="true">
+    <Position X="25.75" Y="25.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Web.Shared.Constants.Identity.IdentityConstants" Collapsed="true">
+    <Position X="25.75" Y="24.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Web.Shared.Constants.Storage.StorageConstants" Collapsed="true">
+    <Position X="27.5" Y="24.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Web.ViewModels.Pages.Authorization.LoginViewModel" Collapsed="true">
+    <Position X="0.75" Y="23.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Web.ViewModels.Pages.Authorization.RegisterViewModel" Collapsed="true">
+    <Position X="5.25" Y="23.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Web.ViewModels.BaseViewModel&lt;T&gt;" Collapsed="true">
+    <Position X="4" Y="22.25" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FinanceManager.Web.ViewModels.MainBodyViewModel" Collapsed="true">
+    <Position X="7.5" Y="23.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Web.ViewModels.MainLayoutViewModel" Collapsed="true">
+    <Position X="10" Y="22.25" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FinanceManager.Web.ViewModels.NavMenuViewModel" Collapsed="true">
+    <Position X="3" Y="23.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="FinanceManager.Web.CustomIcons" Collapsed="true">
+    <Position X="29.75" Y="29.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Program" Collapsed="true">
+    <Position X="35.75" Y="24.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Interface Name="FinanceManager.Infrastructure.Models.Authorization.IIdentityEntity" Collapsed="true">
+    <Position X="26.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="FinanceManager.Infrastructure.Repository.IRepository&lt;T&gt;" Collapsed="true">
+    <Position X="28" Y="4.25" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="FinanceManager.Infrastructure.UnitOfWork.IUnitOfWork" Collapsed="true">
+    <Position X="23.5" Y="5" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="FinanceManager.Domain.Services.Accounts.IAccountService" Collapsed="true">
+    <Position X="30.25" Y="10" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="FinanceManager.Domain.Services.CurrentUserService.ICurrentUserService" Collapsed="true">
+    <Position X="32" Y="10" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="FinanceManager.Domain.Services.Email.IEmailService" Collapsed="true">
+    <Position X="33.75" Y="10" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="FinanceManager.Domain.Services.Finances.IFinanceReportCreator" Collapsed="true">
+    <Position X="35.5" Y="10" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="FinanceManager.Domain.Services.Finances.IFinanceService" Collapsed="true">
+    <Position X="37.25" Y="10" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="FinanceManager.Domain.Services.Preferences.IPreferencesService" Collapsed="true">
+    <Position X="30.25" Y="10.75" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="FinanceManager.Domain.Services.Roles.IRoleService" Collapsed="true">
+    <Position X="32" Y="10.75" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="FinanceManager.Domain.Services.Token.ITokenService" Collapsed="true">
+    <Position X="33.75" Y="10.75" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="FinanceManager.Domain.Services.Users.IUserService" Collapsed="true">
+    <Position X="35.5" Y="10.75" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="FinanceManager.Domain.Services.Wallets.IWalletService" Collapsed="true">
+    <Position X="37.25" Y="10.75" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="FinanceManager.Domain.Wrapper.IResult" Collapsed="true">
+    <Position X="18.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="FinanceManager.Domain.Wrapper.IResult&lt;T&gt;" Collapsed="true">
+    <Position X="18.75" Y="6" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="FinanceManager.Web.Preferences.IPreferences" Collapsed="true">
+    <Position X="43.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="FinanceManager.Web.Preferences.IPreferencesManager" Collapsed="true">
+    <Position X="45.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="FinanceManager.Web.Services.APIServices.APIHttpClient.IFinanceManagerApiHttpClient" Collapsed="true">
+    <Position X="20.5" Y="23.5" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="FinanceManager.Web.Services.APIServices.Managers.IAccountManager.IAccountManager" Collapsed="true">
+    <Position X="15.75" Y="22.5" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="FinanceManager.Web.Services.APIServices.Managers.TokenManager.ITokenManager" Collapsed="true">
+    <Position X="18" Y="22.5" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="FinanceManager.Web.Services.APIServices.Managers.IUserManager.IUserManager" Collapsed="true">
+    <Position X="13.5" Y="22.5" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="FinanceManager.Web.Services.APIServices.Managers.IManager" Collapsed="true">
+    <Position X="15.75" Y="21.25" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="FinanceManager.Web.ViewModels.IViewModel" Collapsed="true">
+    <Position X="10" Y="23.5" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

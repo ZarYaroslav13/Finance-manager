@@ -11,6 +11,7 @@ namespace FinanceManager.Web.Extentions.HostBuilder.MinimalApi;
 
 public static class AddMinimalApiHostExtention
 {
+
     public static void AddMinimalApi(this WebApplication? app)
     {
         app.MapPost(MinimalApiEndpoints.Authentication.Login,

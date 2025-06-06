@@ -25,3 +25,10 @@
 
 
 </MudNavMenu>
+
+@code{
+    protected override async Task OnInitializedAsync()
+    {
+        await _viewModel.InitializationAsync();
+    }
+}

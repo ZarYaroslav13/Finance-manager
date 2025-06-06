@@ -46,14 +46,18 @@
 <MudMainContent>
     <MudContainer MaxWidth="MaxWidth.False" Class="mt-4">
         <CascadingAuthenticationState>
-            @_viewModel.ChildContent
+            ChildContent
         </CascadingAuthenticationState>
     </MudContainer>
 </MudMainContent>
 
 @code{
     [Parameter]
-    public RenderFragment ChildContent { get; set; }
+    public RenderFragment ChildContent
+    {
+        get => _viewModel.ChildContent;
+        set => _viewModel.ChildContent = value;
+    }
 
     [Parameter]
     public EventCallback OnDarkModeToggle { 

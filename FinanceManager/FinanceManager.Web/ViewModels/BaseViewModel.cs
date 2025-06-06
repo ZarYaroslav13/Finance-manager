@@ -1,6 +1,7 @@
 ﻿using Blazored.LocalStorage;
 using FinanceManager.Web.Services;
 using FinanceManager.Web.Services.APIServices.Managers.TokenManager;
+using FinanceManager.Web.Services.Autorization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Localization;
 using MudBlazor;
@@ -10,6 +11,7 @@ namespace FinanceManager.Web.ViewModels;
 public abstract class BaseViewModel<T> : IViewModel where T : class
 {
     public IStringLocalizer<T> Localizer { get; }
+    protected readonly FinanceManagerStateProvider _stateProvider;
     protected readonly IHttpContextAccessor _httpContextAccessor;
     protected readonly HttpClient _httpClient;
     protected readonly NavigationManager _navigationManager;
@@ -22,6 +24,7 @@ public abstract class BaseViewModel<T> : IViewModel where T : class
     {
         ArgumentNullException.ThrowIfNull(locator);
         Localizer = localizer ?? throw new ArgumentNullException(nameof(locator));
+        _stateProvider = locator.StateProvider;
         _httpContextAccessor = locator.HttpContextAccessor;
         _httpClient = locator.HttpClient;
         _navigationManager = locator.NavigationManager;

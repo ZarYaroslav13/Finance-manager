@@ -15,13 +15,15 @@ public class MainLayoutViewModel : IViewModel
     public MudTheme CurrentTheme { get; set; }
     public bool RightToLeft { get; set; } = false;
 
+    public string ThemeIcon { get; set; }
+
     public MainLayoutViewModel(FinanceManagerStateProvider stateProvider, IPreferencesManager preferencesManager)
     {
         _preferencesManager = preferencesManager ?? throw new ArgumentNullException(nameof(preferencesManager));
         _stateProvider = stateProvider;
     }
 
-    public async Task InitializationAsynk()
+    public async Task InitializationAsync()
     {
         await SetPreferences();
 
@@ -40,6 +42,10 @@ public class MainLayoutViewModel : IViewModel
         CurrentTheme = isDarkMode
             ? FinanceManagerThemes.DefaultTheme
             : FinanceManagerThemes.DarkTheme;
+
+        ThemeIcon = !isDarkMode ?
+            Icons.Material.Filled.Brightness2 :
+            Icons.Material.Filled.BrightnessLow;
     }
 
     private async Task SetPreferences()
@@ -47,6 +53,10 @@ public class MainLayoutViewModel : IViewModel
         CurrentTheme = FinanceManagerThemes.DefaultTheme;
         CurrentTheme = await _preferencesManager.GetCurrentThemeAsync();
         RightToLeft = await _preferencesManager.IsRTL();
+
+        ThemeIcon = CurrentTheme == FinanceManagerThemes.DarkTheme ? 
+            Icons.Material.Filled.Brightness2 :
+            Icons.Material.Filled.BrightnessLow;
 
         CultureInfo culture;
         var preference = await _preferencesManager.GetPreference() as ClientPreferences;

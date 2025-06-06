@@ -6,6 +6,7 @@ using FinanceManager.Application.UseCases.FinanceOperationTypes.Commands.AddFina
 using FinanceManager.Application.UseCases.FinanceOperationTypes.Commands.UpdateFinanceOperationTypeCommand;
 using FinanceManager.Application.UseCases.FinanceReports.Commands.CreateDailyReportCommand;
 using FinanceManager.Application.UseCases.FinanceReports.Commands.CreatePeriodReportCommand;
+using FinanceManager.Application.UseCases.Preferences.Command.UpdateUserPreferencesCommand;
 using FinanceManager.Application.UseCases.Tokens.Commands.GetTokenCommand;
 using FinanceManager.Application.UseCases.Tokens.Commands.RefreshTokenCommand;
 using FinanceManager.Application.UseCases.Users.Commands.ForgotPasswordCommand;
@@ -51,6 +52,14 @@ public interface IFinanceManagerApiHttpClient
 
     [Delete(APIEndpoints.Users.DeleteUser)]
     public Task<Domain.Wrapper.IResult> DeleteUserdAsync(Guid id);
+    #endregion
+
+    #region 
+    [Get(APIEndpoints.UserPreferences.GetUserPreferences)]
+    public Task<Result<UserPreferencesDTO>> GetUserPreferences(Guid id);
+
+    [Put(APIEndpoints.UserPreferences.Update)]
+    public Task<Result<UserPreferencesDTO>> UpdateUserPreferences([Body] UpdateUserPreferencesCommand command);
     #endregion
 
     #region Accounts

@@ -23,7 +23,7 @@ public static class APIEndpoints
     public static class Users
     {
         public const string BaseControllerUrl = "/users";
-        public const string FullBaseControllerUrl = _baseUrl + "/users";
+        public const string FullBaseControllerUrl = _baseUrl + BaseControllerUrl;
 
         public const string GetAll = BaseControllerUrl;
         public const string GetAllFull = FullBaseControllerUrl;
@@ -59,10 +59,29 @@ public static class APIEndpoints
         public const string DeleteUserFull = FullBaseControllerUrl + "/{id}";
     }
 
+    public static class UserPreferences
+    {
+        public const string BaseControllerUrl = "/user-preferences";
+        public const string FullBaseControllerUrl = _baseUrl + BaseControllerUrl;
+
+        /// <summary>
+        /// method where are you using that endpoint must take id with name id
+        /// </summary>
+        public const string GetUserPreferences = BaseControllerUrl + "/{id}";
+        /// <summary>
+        /// method where are you using that endpoint must take id with name id
+        /// </summary>
+        public const string GetUserPreferencesFull = FullBaseControllerUrl + "/{id}";
+
+
+        public const string Update = BaseControllerUrl;
+        public const string UpdateFull = FullBaseControllerUrl;
+    }
+
     public static class Accounts
     {
         public const string BaseControllerUrl = "/accounts";
-        public const string FullBaseControllerUrl = _baseUrl + "/accounts";
+        public const string FullBaseControllerUrl = _baseUrl + BaseControllerUrl;
 
         public const string Update = BaseControllerUrl;
         public const string UpdateFull = FullBaseControllerUrl;
@@ -74,7 +93,7 @@ public static class APIEndpoints
     public static class Wallets
     {
         public const string BaseControllerUrl = "/wallets";
-        public const string FullBaseControllerUrl = _baseUrl + "/wallets";
+        public const string FullBaseControllerUrl = _baseUrl + BaseControllerUrl;
 
         /// <summary>
         /// method where are you using that endpoint must take id with name accountId
@@ -113,7 +132,7 @@ public static class APIEndpoints
     public static class FinanceReport
     {
         public const string BaseControllerUrl = "/finance-reports";
-        public const string FullBaseControllerUrl = _baseUrl + "/finance-reports";
+        public const string FullBaseControllerUrl = _baseUrl + BaseControllerUrl;
 
         public const string CreateDaily = BaseControllerUrl + "/daily";
         public const string CreateDailyFull = FullBaseControllerUrl + "/daily";
@@ -125,7 +144,7 @@ public static class APIEndpoints
     public static class FinanceOperationType
     {
         public const string BaseControllerUrl = "/finance-operation-types";
-        public const string FullBaseControllerUrl = _baseUrl + "/finance-operation-types";
+        public const string FullBaseControllerUrl = _baseUrl + BaseControllerUrl;
 
         /// <summary>
         /// method where are you using that endpoint must take id with name walletId
@@ -164,7 +183,7 @@ public static class APIEndpoints
     public static class FinanceOperation
     {
         public const string BaseControllerUrl = "/finance-operations";
-        public const string FullBaseControllerUrl = _baseUrl + "/finance-operations";
+        public const string FullBaseControllerUrl = _baseUrl + BaseControllerUrl;
 
         /// <summary>
         /// method where are you using that endpoint must take id with name walletId

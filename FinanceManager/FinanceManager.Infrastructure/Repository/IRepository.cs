@@ -15,6 +15,8 @@ public interface IRepository<T> where T : Entity
 
     Task<T> GetByIdAsync(Guid id);
 
+    Task<T> FindBy(Expression<Func<T, bool>> filter, params string[] includeProperties);
+
     T Insert(T entity);
 
     T Update(T entity);

@@ -11,8 +11,9 @@ public class FinanceManagerUserConfiguration : IEntityTypeConfiguration<FinanceM
     {
         builder.HasData(DBFiller.Users);
 
-        builder.HasOne(u => u.Preferences)
+        builder.HasOne(u => u.Preference)
             .WithOne(up => up.User)
-            .HasForeignKey<UserPreferences>(u => u.UserId);
+            .HasForeignKey<UserPreference>(u => u.UserId)
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }

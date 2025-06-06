@@ -10,7 +10,7 @@ public class AppDbContext : IdentityDbContext<FinanceManagerUser, FinanceManager
     public virtual DbSet<Wallet> Wallets { get; set; } = default!;
     public virtual DbSet<FinanceOperation> FinanceOperations { get; set; } = default!;
     public virtual DbSet<FinanceOperationType> FinanceOperationTypes { get; set; } = default!;
-    public virtual DbSet<UserPreferences> UserPreferences { get; set; } = default!;
+    public virtual DbSet<UserPreference> UserPreferences { get; set; } = default!;
 
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
     {

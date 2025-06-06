@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FinanceManager.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250605231028_AddedUserPreferences")]
+    [Migration("20250606085838_AddedUserPreferences")]
     partial class AddedUserPreferences
     {
         /// <inheritdoc />
@@ -1333,7 +1333,7 @@ namespace FinanceManager.Infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("FinanceManager.Infrastructure.Models.UserPreferences", b =>
+            modelBuilder.Entity("FinanceManager.Infrastructure.Models.UserPreference", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -1654,11 +1654,11 @@ namespace FinanceManager.Infrastructure.Migrations
                     b.Navigation("Wallet");
                 });
 
-            modelBuilder.Entity("FinanceManager.Infrastructure.Models.UserPreferences", b =>
+            modelBuilder.Entity("FinanceManager.Infrastructure.Models.UserPreference", b =>
                 {
                     b.HasOne("FinanceManager.Infrastructure.Models.Authorization.FinanceManagerUser", "User")
-                        .WithOne("Preferences")
-                        .HasForeignKey("FinanceManager.Infrastructure.Models.UserPreferences", "UserId")
+                        .WithOne("Preference")
+                        .HasForeignKey("FinanceManager.Infrastructure.Models.UserPreference", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1729,7 +1729,7 @@ namespace FinanceManager.Infrastructure.Migrations
 
             modelBuilder.Entity("FinanceManager.Infrastructure.Models.Authorization.FinanceManagerUser", b =>
                 {
-                    b.Navigation("Preferences")
+                    b.Navigation("Preference")
                         .IsRequired();
 
                     b.Navigation("Wallets");

@@ -72,6 +72,25 @@ public class Repository<T> : IRepository<T> where T : Models.Base.Entity
         return entity;
     }
 
+    public async Task<T> FindBy(Expression<Func<T, bool>> filter, params string[] includeProperties)
+    {
+        IQueryable<T> query = _dbSet;
+
+        foreach (var includeProperty in includeProperties)
+        {
+            query = query.Include(includeProperty);
+        }
+
+        if (filter != null)
+        {
+            query = query.Where(filter);
+        }
+
+        query.Take(1);
+
+        return await query.FirstOrDefaultAsync();
+    }
+
     public T Insert(T entity)
     {
         _dbSet.Add(entity);

@@ -4,7 +4,7 @@ using FinanceManager.Infrastructure.Models.Base;
 
 namespace FinanceManager.Infrastructure.Models;
 
-public class UserPreferences : Entity
+public class UserPreference : Entity
 {
     public bool DarkMode { get; set; }
 

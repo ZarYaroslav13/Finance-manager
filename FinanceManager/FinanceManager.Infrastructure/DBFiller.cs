@@ -122,7 +122,7 @@ public class DBFiller
     }
 };
 
-    private static List<UserPreferences> _userPreferencess = new List<UserPreferences>
+    private static List<UserPreference> _userPreferencess = new List<UserPreference>
     {
         new() { Id = new Guid("75c1b007-ae73-4332-a74c-693c40c1dc23"), UserId=_users[0].Id, DarkMode = true, LanguageCode = Constants.Localization.LocalizationConstants.EnglishLanguage.Code, RightToLeft = false },
         new() { Id = new Guid("96a5f51c-436e-46ea-a07d-451b6b620c61"), UserId=_users[1].Id, DarkMode = true, LanguageCode = Constants.Localization.LocalizationConstants.UkrainianLanguage.Code, RightToLeft = false },
@@ -328,7 +328,7 @@ public class DBFiller
     };
 
     public static List<FinanceManagerUser> Users { get { return _users; } }
-    public static List<UserPreferences> UserPreferencess { get { return _userPreferencess; } }
+    public static List<UserPreference> UserPreferencess { get { return _userPreferencess; } }
 
     public static List<FinanceManagerRole> Roles { get { return _roles; } }
 

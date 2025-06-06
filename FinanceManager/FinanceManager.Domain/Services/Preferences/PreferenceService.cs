@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using FinanceManager.Domain.Models;
 using FinanceManager.Domain.Wrapper;
 using FinanceManager.Infrastructure.Models;
@@ -20,7 +15,7 @@ public class PreferenceService : BaseService, IPreferenceService
         _repository = _unitOfWork.GetRepository<UserPreference>();
     }
 
-    public async Task<IResult<UserPreferencesModel>> GetPreferencesOfUser(Guid userId)
+    public async Task<IResult<UserPreferencesModel>> GetPreferencesOfUserAsync(Guid userId)
     {
         try
         {
@@ -35,33 +30,7 @@ public class PreferenceService : BaseService, IPreferenceService
         }
     }
 
-    public async Task<IResult<UserPreferencesModel>> AddPreferences(UserPreferencesModel preferences)
-    {
-        try
-        {
-            ArgumentNullException.ThrowIfNull(preferences);
-
-            if (preferences.Id != Guid.Empty)
-                throw new ArgumentException("id cannot be specified ");
-
-            if (preferences.UserId == Guid.Empty)
-                throw new ArgumentException("UserId must be specified ");
-
-            var data = _mapper.Map<UserPreferencesModel>(
-                        _repository.Insert(
-                            _mapper.Map<UserPreference>(preferences)));
-
-            await _unitOfWork.SaveChangesAsync();
-
-            return Result<UserPreferencesModel>.Success(data, "Added preferencess successfully!");
-        }
-        catch (Exception e)
-        {
-            return Result<UserPreferencesModel>.Fail(e.Message);
-        }
-    }
-
-    public async Task<IResult> UpdatePrefernces(UserPreferencesModel preferences)
+    public async Task<IResult> UpdatePreferncesAsync(UserPreferencesModel preferences)
     {
         try
         {
@@ -72,7 +41,7 @@ public class PreferenceService : BaseService, IPreferenceService
 
             _repository.Update(_mapper.Map<UserPreference>(preferences));
 
-           await _unitOfWork.SaveChangesAsync();
+            await _unitOfWork.SaveChangesAsync();
 
             return Result.Success("Preferences updated successfully!");
         }

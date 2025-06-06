@@ -6,9 +6,9 @@ namespace FinanceManager.Infrastructure.Models;
 
 public class UserPreference : Entity
 {
-    public bool DarkMode { get; set; }
+    public bool DarkMode { get; set; } = false;
 
-    public bool RightToLeft { get; set; }
+    public bool RightToLeft { get; set; } = false;
 
     public string LanguageCode { get; set; } = LocalizationConstants.EnglishLanguage.Code;
 

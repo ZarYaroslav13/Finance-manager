@@ -1,9 +1,9 @@
-﻿using FinanceManager.Domain.Models.Base;
+﻿using FinanceManager.Application.Models.Base;
 using FinanceManager.Infrastructure.Constants.Localization;
 
-namespace FinanceManager.Domain.Models;
+namespace FinanceManager.Application.Models;
 
-public class UserPreferencesModel : Model
+public class UserPreferencesDTO : ModelDTO
 {
     public bool DarkMode { get; set; }
 

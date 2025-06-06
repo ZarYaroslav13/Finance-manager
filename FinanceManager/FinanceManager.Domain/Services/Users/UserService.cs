@@ -9,7 +9,9 @@ using FinanceManager.Domain.Modelsl;
 using FinanceManager.Domain.Services.CurrentUserService;
 using FinanceManager.Domain.Services.Email;
 using FinanceManager.Domain.Wrapper;
+using FinanceManager.Infrastructure.Models;
 using FinanceManager.Infrastructure.Models.Authorization;
+using FinanceManager.Infrastructure.UnitOfWork;
 using Hangfire;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.WebUtilities;
@@ -17,23 +19,21 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FinanceManager.Domain.Services.Users;
 
-public class UserService : IUserService
+public class UserService : BaseService, IUserService
 {
     private readonly UserManager<FinanceManagerUser> _userManager;
     private readonly RoleManager<FinanceManagerRole> _roleManager;
     private readonly IEmailService _emailService;
     private readonly ICurrentUserService _currentUserService;
-    private readonly IMapper _mapper;
 
     public UserService(
-            UserManager<FinanceManagerUser> userManager,
-            IMapper mapper,
-            RoleManager<FinanceManagerRole> roleManager,
-            IEmailService mailService,
-            ICurrentUserService currentUserService)
+           UserManager<FinanceManagerUser> userManager,
+           RoleManager<FinanceManagerRole> roleManager,
+           IEmailService mailService,
+           ICurrentUserService currentUserService,
+        IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork, mapper)
     {
         _userManager = userManager;
-        _mapper = mapper;
         _roleManager = roleManager;
         _emailService = mailService;
         _currentUserService = currentUserService;
@@ -107,7 +107,10 @@ public class UserService : IUserService
             var result = await _userManager.CreateAsync(user, password);
             if (result.Succeeded)
             {
-                await _userManager.AddToRoleAsync(user, PolicyManager.CommonUserRole);
+                var updateResult = await UpdateOtherTables(user);
+
+                if (!updateResult.Succeeded)
+                    return updateResult;
 
                 var verificationUri = await SendVerificationEmail(user);
                 var mailRequest = new MailRequest
@@ -210,6 +213,24 @@ public class UserService : IUserService
             await _userManager.DeleteAsync(user);
 
             return Result.Success("Deleted successfully!");
+        }
+        catch (Exception e)
+        {
+            return Result.Fail(e.Message);
+        }
+    }
+
+    public async Task<IResult> UpdateOtherTables(FinanceManagerUser user)
+    {
+        try
+        {
+            await _userManager.AddToRoleAsync(user, PolicyManager.CommonUserRole);
+
+            _unitOfWork.GetRepository<UserPreference>().Insert(new() { UserId = user.Id });
+
+            await _unitOfWork.SaveChangesAsync();
+
+            return Result.Success();
         }
         catch (Exception e)
         {

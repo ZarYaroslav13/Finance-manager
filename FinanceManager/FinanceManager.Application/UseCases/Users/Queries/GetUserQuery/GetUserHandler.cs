@@ -27,12 +27,7 @@ public class GetUserHandler : BaseRequestHandler, IRequestHandler<GetUserQuery, 
 
             var response = await _userService.GetAsync(request.Id);
 
-            return new Result<UserDTO>()
-            {
-                Succeeded = response.Succeeded,
-                Data = _mapper.Map<UserDTO>(response.Data),
-                Messages = response.Messages
-            };
+            return _mapper.Map<Result<UserDTO>>(response);
         });
     }
 }

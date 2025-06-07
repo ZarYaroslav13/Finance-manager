@@ -1,4 +1,5 @@
-﻿using MudBlazor;
+﻿using FinanceManager.Application.Models;
+using MudBlazor;
 
 namespace FinanceManager.Web.Preferences;
 
@@ -10,9 +11,9 @@ public interface IPreferencesManager
 
     Task<Domain.Wrapper.IResult> ChangeLanguageAsync(string languageCode);
 
-    Task SetPreference(IPreferences preference);
+    Task SetPreference(UserPreferencesDTO preference);
 
-    Task<IPreferences> GetPreference();
+    Task<UserPreferencesDTO> GetPreference();
 
     Task<MudTheme> GetCurrentThemeAsync();
 

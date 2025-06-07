@@ -118,42 +118,42 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Description" xml:space="preserve">
-    <value>Login with your Credentials.</value>
+    <value>Logga in med dina uppgifter</value>
   </data>
   <data name="Don't have an account?" xml:space="preserve">
-    <value>Don't have an account?</value>
+    <value>Har du inget konto?</value>
   </data>
   <data name="Email" xml:space="preserve">
-    <value>Email</value>
+    <value>Epost</value>
   </data>
   <data name="Email is required!" xml:space="preserve">
-    <value>Email is required!</value>
+    <value>Epost är obligatoriskt</value>
   </data>
   <data name="Forgot password?" xml:space="preserve">
-    <value>Forgot password?</value>
+    <value>Glömt Lösenord?</value>
   </data>
   <data name="Password" xml:space="preserve">
-    <value>Password</value>
+    <value>Lösenord</value>
   </data>
   <data name="Password is required!" xml:space="preserve">
-    <value>Password is required!</value>
+    <value>Lösenord är obligatoriskt!</value>
   </data>
   <data name="Register here" xml:space="preserve">
-    <value>Register here</value>
+    <value>Registrera här</value>
   </data>
   <data name="Remember me?" xml:space="preserve">
-    <value>Remember me?</value>
+    <value>Kom ihåg mig?</value>
   </data>
   <data name="Sign In" xml:space="preserve">
-    <value>Sign In</value>
+    <value>Logga In</value>
   </data>
   <data name="Sorry {0}" xml:space="preserve">
-    <value>Sorry {0}</value>
+    <value>Tyvärr {0}</value>
   </data>
   <data name="Title" xml:space="preserve">
-    <value>Sign In</value>
+    <value>Logga In</value>
   </data>
   <data name="Welcome {0}" xml:space="preserve">
-    <value>Welcome {0}</value>
+    <value>Välkommen {0}</value>
   </data>
 </root>

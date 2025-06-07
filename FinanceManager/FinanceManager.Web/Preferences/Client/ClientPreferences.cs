@@ -4,7 +4,7 @@ namespace FinanceManager.Web.Preferences.Client;
 
 public class ClientPreferences : IPreferences
 {
-    public bool IsDarkMode { get; set; }
-    public bool IsRTL { get; set; }
+    public bool DarkMode { get; set; }
+    public bool RightToLeft { get; set; }
     public string LanguageCode { get; set; } = LocalizationConstants.EnglishLanguage.Code;
 }

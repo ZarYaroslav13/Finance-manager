@@ -12,6 +12,9 @@ public static class LocalizationConstants
     public static readonly LanguageCode SwedishLanguage = new() { Code = "sv-SE", DisplayName = "Swedish" };
     public static readonly LanguageCode IndonesianLanguage = new() { Code = "id-ID", DisplayName = "Indonesia" };
     public static readonly LanguageCode ItalianLanguage = new() { Code = "it-IT", DisplayName = "Italian" };
+    public static readonly LanguageCode ArabicLanguage = new() { Code = "ar-SA", DisplayName = "عربي" };
+    public static readonly LanguageCode NederlandsLanguage = new() { Code = "nl-NL", DisplayName = "Nederlands" };
+
 
     public static readonly LanguageCode[] SupportedLanguages = {
         EnglishLanguage,
@@ -23,6 +26,8 @@ public static class LocalizationConstants
         UkrainianLanguage,
         SwedishLanguage,
         IndonesianLanguage,
-        ItalianLanguage
+        ItalianLanguage,
+        ArabicLanguage,
+        NederlandsLanguage
 };
 }

@@ -29,7 +29,7 @@
             <MudTextField Immediate=true For="@(() => _viewModel.RegistrationModel.LastName)" @bind-Value="_viewModel.RegistrationModel.LastName" Label="@_viewModel.Localizer["Last Name"]" />
         </MudItem>
         <MudItem  xs="12" sm="6" md="6">
-            <MudTextField Immediate=true T="string" Label="@_viewModel.Localizer["E-mail"]" Adornment="Adornment.End" AdornmentIcon="@CustomIcons.Gmail" @bind-Value="_viewModel.RegistrationModel.Email" For="@(() => _viewModel.RegistrationModel.Email)" />
+            <MudTextField Immediate=true T="string" Label="@_viewModel.Localizer["Email"]" Adornment="Adornment.End" AdornmentIcon="@CustomIcons.Gmail" @bind-Value="_viewModel.RegistrationModel.Email" For="@(() => _viewModel.RegistrationModel.Email)" />
         </MudItem>
         <MudItem  xs="12" sm="6" md="6">
             <MudTextField Immediate=true For="@(() => _viewModel.RegistrationModel.Password)" InputType="@_viewModel.PasswordInput" Adornment="Adornment.End" AdornmentIcon="@_viewModel.PasswordInputIcon" OnAdornmentClick="_viewModel.TogglePasswordVisibility" @bind-Value="_viewModel.RegistrationModel.Password" Label="@_viewModel.Localizer["Password"]" />

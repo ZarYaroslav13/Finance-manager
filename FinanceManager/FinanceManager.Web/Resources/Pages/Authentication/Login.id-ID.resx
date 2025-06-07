@@ -118,42 +118,42 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Description" xml:space="preserve">
-    <value>Login with your Credentials.</value>
+    <value>Masuk dengan Kredensial Anda.</value>
   </data>
   <data name="Don't have an account?" xml:space="preserve">
-    <value>Don't have an account?</value>
+    <value>Tidak punya akun?</value>
   </data>
   <data name="Email" xml:space="preserve">
     <value>Email</value>
   </data>
   <data name="Email is required!" xml:space="preserve">
-    <value>Email is required!</value>
+    <value>Email wajib diisi!</value>
   </data>
   <data name="Forgot password?" xml:space="preserve">
-    <value>Forgot password?</value>
+    <value>Lupa sandi?</value>
   </data>
   <data name="Password" xml:space="preserve">
-    <value>Password</value>
+    <value>Sandi</value>
   </data>
   <data name="Password is required!" xml:space="preserve">
-    <value>Password is required!</value>
+    <value>Sandi wajib diisi!</value>
   </data>
   <data name="Register here" xml:space="preserve">
-    <value>Register here</value>
+    <value>Daftar di sini</value>
   </data>
   <data name="Remember me?" xml:space="preserve">
-    <value>Remember me?</value>
+    <value>Ingat saya?</value>
   </data>
   <data name="Sign In" xml:space="preserve">
-    <value>Sign In</value>
+    <value>Masuk</value>
   </data>
   <data name="Sorry {0}" xml:space="preserve">
-    <value>Sorry {0}</value>
+    <value>Maaf {0}</value>
   </data>
   <data name="Title" xml:space="preserve">
-    <value>Sign In</value>
+    <value>Masuk</value>
   </data>
   <data name="Welcome {0}" xml:space="preserve">
-    <value>Welcome {0}</value>
+    <value>Selamat datang {0}</value>
   </data>
 </root>

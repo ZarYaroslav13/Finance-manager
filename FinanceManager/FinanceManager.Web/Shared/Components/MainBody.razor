@@ -27,10 +27,10 @@
                         <LanguageSelector />
                     </MudTooltip>
                     <MudTooltip Text="@_viewModel.Localizer["Toggle right-to-left/left-to-right"]">
-                        <MudIconButton Icon="@ThemeIcon" OnClick="@(() => _viewModel.RightToLeftToggle())" />
+                        <MudIconButton Icon="@Icons.Material.Filled.FormatTextdirectionRToL" OnClick="@(() => _viewModel.RightToLeftToggle())" />
                     </MudTooltip>
                     <MudTooltip Text="@_viewModel.Localizer["Toggle Dark Mode"]">
-                        <MudIconButton Icon="@Icons.Material.Filled.Brightness4" Color="Color.Inherit" OnClick="@(() => _viewModel.ToggleDarkMode())" />
+                        <MudIconButton Icon="@ThemeIcon" Color="Color.Inherit" OnClick="@(() => _viewModel.ToggleDarkMode())" />
                     </MudTooltip>
                 </div>
             </MudMenu>

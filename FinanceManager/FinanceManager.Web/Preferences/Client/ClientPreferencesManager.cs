@@ -1,9 +1,12 @@
 ﻿using Blazored.LocalStorage;
+using FinanceManager.Application.Models;
 using FinanceManager.Domain.Wrapper;
 using FinanceManager.Web.Settings;
 using FinanceManager.Web.Shared.Constants.Storage;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Localization;
 using MudBlazor;
+using System.Globalization;
 
 namespace FinanceManager.Web.Preferences.Client;
 
@@ -11,23 +14,26 @@ public class ClientPreferencesManager : IPreferencesManager
 {
     private readonly ILocalStorageService _localStorageService;
     private readonly IStringLocalizer<ClientPreferencesManager> _localizer;
+    private readonly IHttpContextAccessor _contextAccessor;
 
     public ClientPreferencesManager(
         ILocalStorageService localStorageService,
-        IStringLocalizer<ClientPreferencesManager> localizer)
+        IStringLocalizer<ClientPreferencesManager> localizer,
+        IHttpContextAccessor contextAccessor)
     {
         _localStorageService = localStorageService;
         _localizer = localizer;
+        _contextAccessor = contextAccessor;
     }
 
     public async Task<bool> ToggleDarkModeAsync()
     {
-        var preferences = await GetPreference() as ClientPreferences;
+        var preferences = await GetPreference() as UserPreferencesDTO;
         if (preferences != null)
         {
-            preferences.IsDarkMode = !preferences.IsDarkMode;
+            preferences.DarkMode = !preferences.DarkMode;
             await SetPreference(preferences);
-            return !preferences.IsDarkMode;
+            return !preferences.DarkMode;
         }
 
         return false;
@@ -35,21 +41,27 @@ public class ClientPreferencesManager : IPreferencesManager
 
     public async Task<bool> ToggleLayoutDirection()
     {
-        var preference = await GetPreference() as ClientPreferences;
+        var preference = await GetPreference() as UserPreferencesDTO;
         if (preference != null)
         {
-            preference.IsRTL = !preference.IsRTL;
+            preference.RightToLeft = !preference.RightToLeft;
             await SetPreference(preference);
-            return preference.IsRTL;
+            return preference.RightToLeft;
         }
         return false;
     }
 
     public async Task<Domain.Wrapper.IResult> ChangeLanguageAsync(string languageCode)
     {
-        var preference = await GetPreference() as ClientPreferences;
+        var preference = await GetPreference() as UserPreferencesDTO;
         if (preference != null)
         {
+            var cultureInfo = new CultureInfo(languageCode);
+            CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+            CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
+
+            _contextAccessor.HttpContext.Response.Headers.AcceptLanguage.Append(languageCode);
+
             preference.LanguageCode = languageCode;
             await SetPreference(preference);
             return Result.Success(_localizer["Client Language has been changed"]);
@@ -60,31 +72,31 @@ public class ClientPreferencesManager : IPreferencesManager
 
     public async Task<MudTheme> GetCurrentThemeAsync()
     {
-        var preference = await GetPreference() as ClientPreferences;
+        var preference = await GetPreference() as UserPreferencesDTO;
         if (preference != null)
         {
-            if (preference.IsDarkMode == true) return FinanceManagerThemes.DarkTheme;
+            if (preference.DarkMode == true) return FinanceManagerThemes.DarkTheme;
         }
         return FinanceManagerThemes.DefaultTheme;
     }
 
-    public async Task<IPreferences> GetPreference()
+    public async Task<UserPreferencesDTO> GetPreference()
     {
-        return await _localStorageService.GetItemAsync<ClientPreferences>(StorageConstants.Preferences) ?? new ClientPreferences();
+        return await _localStorageService.GetItemAsync<UserPreferencesDTO>(StorageConstants.Preferences) ?? new UserPreferencesDTO();
     }
 
-    public async Task SetPreference(IPreferences preference)
+    public async Task SetPreference(UserPreferencesDTO preference)
     {
-        await _localStorageService.SetItemAsync(StorageConstants.Preferences, preference as ClientPreferences);
+        await _localStorageService.SetItemAsync(StorageConstants.Preferences, preference as UserPreferencesDTO);
     }
 
     public async Task<bool> IsRTL()
     {
-        var preference = await GetPreference() as ClientPreferences;
+        var preference = await GetPreference() as UserPreferencesDTO;
         if (preference != null)
         {
-            if (preference.IsDarkMode == true) return false;
+            if (preference.DarkMode == true) return false;
         }
-        return preference.IsRTL;
+        return preference.RightToLeft;
     }
 }

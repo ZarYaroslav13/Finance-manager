@@ -1,4 +1,5 @@
-﻿using FinanceManager.Infrastructure.Constants.Localization;
+﻿using FinanceManager.Application.Models;
+using FinanceManager.Infrastructure.Constants.Localization;
 using FinanceManager.Web.Preferences;
 using FinanceManager.Web.Preferences.Client;
 using FinanceManager.Web.Services.Autorization;
@@ -43,9 +44,9 @@ public class MainLayoutViewModel : IViewModel
             ? FinanceManagerThemes.DefaultTheme
             : FinanceManagerThemes.DarkTheme;
 
-        ThemeIcon = !isDarkMode ?
-            Icons.Material.Filled.Brightness2 :
-            Icons.Material.Filled.BrightnessLow;
+        ThemeIcon = isDarkMode ?
+            Icons.Material.Filled.WbSunny :
+            Icons.Material.Filled.Brightness2;
     }
 
     private async Task SetPreferences()
@@ -55,11 +56,11 @@ public class MainLayoutViewModel : IViewModel
         RightToLeft = await _preferencesManager.IsRTL();
 
         ThemeIcon = CurrentTheme == FinanceManagerThemes.DarkTheme ?
-            Icons.Material.Filled.Brightness2 :
-            Icons.Material.Filled.BrightnessLow;
+            Icons.Material.Filled.WbSunny :
+           Icons.Material.Filled.Brightness2;
 
         CultureInfo culture;
-        var preference = await _preferencesManager.GetPreference() as ClientPreferences;
+        var preference = await _preferencesManager.GetPreference();
         if (preference != null)
             culture = new CultureInfo(preference.LanguageCode);
         else

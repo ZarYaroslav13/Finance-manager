@@ -71,7 +71,7 @@ public static class AddServiceConfigurationHostBuilderExtension
             opt.SupportedCultures = suportedCultures;
             opt.SupportedUICultures = suportedCultures;
 
-            opt.DefaultRequestCulture = new("en-US");
+            opt.DefaultRequestCulture = new(LocalizationConstants.EnglishLanguage.Code);
         });
 
         services.AddLocalization(options =>

@@ -118,42 +118,27 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Description" xml:space="preserve">
-    <value>Login with your Credentials.</value>
-  </data>
-  <data name="Don't have an account?" xml:space="preserve">
-    <value>Don't have an account?</value>
-  </data>
-  <data name="Email" xml:space="preserve">
-    <value>Email</value>
+    <value>ឡុកចូលប្រព័ន្ធជាមួយលេខកូដសម្ងាត់អ្នក</value>
   </data>
   <data name="Email is required!" xml:space="preserve">
-    <value>Email is required!</value>
+    <value>ត្រូវការបំពេញអ៊ីម៉ែល</value>
   </data>
   <data name="Forgot password?" xml:space="preserve">
-    <value>Forgot password?</value>
+    <value>ភ្លេចលេខកូដសម្ងាត់?</value>
   </data>
   <data name="Password" xml:space="preserve">
-    <value>Password</value>
+    <value>លេខកូដសម្ងាត់</value>
   </data>
   <data name="Password is required!" xml:space="preserve">
-    <value>Password is required!</value>
-  </data>
-  <data name="Register here" xml:space="preserve">
-    <value>Register here</value>
+    <value>ត្រូវការបំពេញលេខកូដសម្ងាត់</value>
   </data>
   <data name="Remember me?" xml:space="preserve">
-    <value>Remember me?</value>
+    <value>ចងចាំក្នុងប្រព័ន្ធ?</value>
   </data>
   <data name="Sign In" xml:space="preserve">
-    <value>Sign In</value>
-  </data>
-  <data name="Sorry {0}" xml:space="preserve">
-    <value>Sorry {0}</value>
+    <value>ឡុកចូល</value>
   </data>
   <data name="Title" xml:space="preserve">
-    <value>Sign In</value>
-  </data>
-  <data name="Welcome {0}" xml:space="preserve">
-    <value>Welcome {0}</value>
+    <value>ឡុកចូល</value>
   </data>
 </root>

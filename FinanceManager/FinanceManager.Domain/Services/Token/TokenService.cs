@@ -1,13 +1,13 @@
-﻿using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Security.Cryptography;
-using FinanceManager.Domain.Configurations;
+﻿using FinanceManager.Domain.Configurations;
 using FinanceManager.Domain.Models;
 using FinanceManager.Domain.Wrapper;
 using FinanceManager.Infrastructure.Models.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Security.Cryptography;
 
 namespace FinanceManager.Domain.Services.Token;
 

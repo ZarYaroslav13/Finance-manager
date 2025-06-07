@@ -1,11 +1,11 @@
-﻿using System.Security.Claims;
-using FinanceManager.Application.UseCases.Tokens.Commands.GetTokenCommand;
+﻿using FinanceManager.Application.UseCases.Tokens.Commands.GetTokenCommand;
 using FinanceManager.Domain.Services.Token;
 using FinanceManager.Domain.Wrapper;
 using FinanceManager.Web.Services.APIServices.Managers.TokenManager;
 using FinanceManager.Web.Services.Autorization;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using System.Security.Claims;
 
 namespace FinanceManager.Web.Extentions.HostBuilder.MinimalApi;
 
@@ -18,7 +18,7 @@ public static class AddMinimalApiHostExtention
             async (GetTokenCommand model,
                 FinanceManagerStateProvider stateProvider,
                 ITokenManager tokenManager,
-                IHttpContextAccessor httpContextAccessor,
+                HttpContext context,
                 ILogger<Program> logger) =>
         {
             try
@@ -40,15 +40,12 @@ public static class AddMinimalApiHostExtention
                         IsPersistent = true,
                         ExpiresUtc = response.Data.RefreshTokenExpiryTime,
                         AllowRefresh = true,
-
                     };
 
-                    await httpContextAccessor.HttpContext.SignInAsync(
+                    await context.SignInAsync(
                         CookieAuthenticationDefaults.AuthenticationScheme,
                         claimPrincipal,
                         authProperities);
-
-                    await stateProvider.StateChangedAsync();
 
                     return Results.Ok(Result.Success());
                 }

@@ -1,7 +1,7 @@
-﻿using System.Security.Claims;
-using FinanceManager.Application.Models;
+﻿using FinanceManager.Application.Models;
 using FinanceManager.Application.UseCases.Tokens.Commands.GetTokenCommand;
 using FinanceManager.Domain.Wrapper;
+using System.Security.Claims;
 
 namespace FinanceManager.Web.Services.APIServices.Managers.TokenManager;
 

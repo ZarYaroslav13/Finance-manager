@@ -1,6 +1,4 @@
-﻿using System.Net;
-using System.Security.Claims;
-using FinanceManager.Application.UseCases.Commons.Behaviours;
+﻿using FinanceManager.Application.UseCases.Commons.Behaviours;
 using FinanceManager.Domain.Authorization;
 using FinanceManager.Domain.Configurations;
 using FinanceManager.Domain.Services.Accounts;
@@ -25,6 +23,8 @@ using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
+using System.Net;
+using System.Security.Claims;
 
 namespace FinanceManager.ApiService.HostBuilder;
 

@@ -1,9 +1,9 @@
-﻿using System.Security.Claims;
-using Blazored.LocalStorage;
+﻿using Blazored.LocalStorage;
 using FinanceManager.Web.Extentions;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Components.Authorization;
+using System.Security.Claims;
 
 namespace FinanceManager.Web.Services.Autorization;
 

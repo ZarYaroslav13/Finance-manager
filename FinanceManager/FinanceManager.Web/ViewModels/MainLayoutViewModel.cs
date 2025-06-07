@@ -1,10 +1,10 @@
-﻿using System.Globalization;
-using FinanceManager.Infrastructure.Constants.Localization;
+﻿using FinanceManager.Infrastructure.Constants.Localization;
 using FinanceManager.Web.Preferences;
 using FinanceManager.Web.Preferences.Client;
 using FinanceManager.Web.Services.Autorization;
 using FinanceManager.Web.Settings;
 using MudBlazor;
+using System.Globalization;
 
 namespace FinanceManager.Web.ViewModels;
 
@@ -54,7 +54,7 @@ public class MainLayoutViewModel : IViewModel
         CurrentTheme = await _preferencesManager.GetCurrentThemeAsync();
         RightToLeft = await _preferencesManager.IsRTL();
 
-        ThemeIcon = CurrentTheme == FinanceManagerThemes.DarkTheme ? 
+        ThemeIcon = CurrentTheme == FinanceManagerThemes.DarkTheme ?
             Icons.Material.Filled.Brightness2 :
             Icons.Material.Filled.BrightnessLow;
 

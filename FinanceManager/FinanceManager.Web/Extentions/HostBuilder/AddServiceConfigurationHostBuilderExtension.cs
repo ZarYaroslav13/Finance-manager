@@ -1,5 +1,4 @@
-﻿using System.Globalization;
-using Blazored.LocalStorage;
+﻿using Blazored.LocalStorage;
 using FinanceManager.Domain.API;
 using FinanceManager.Domain.Authorization;
 using FinanceManager.Infrastructure.Constants.Localization;
@@ -17,6 +16,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components.Authorization;
 using MudBlazor.Services;
 using Refit;
+using System.Globalization;
 
 namespace FinanceManager.Web.Extentions.HostBuilder;
 
@@ -95,7 +95,9 @@ public static class AddServiceConfigurationHostBuilderExtension
                 options.Cookie.Name = "FMAuthCookie";
                 options.Cookie.HttpOnly = true;
                 options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
-
+                options.SlidingExpiration = true;
+                options.ExpireTimeSpan = TimeSpan.FromDays(7);
+                options.LoginPath = PagesHref.Authentication.Login;
             });
 
         services.AddCascadingAuthenticationState();

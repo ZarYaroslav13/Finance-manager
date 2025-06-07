@@ -1,6 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
-using FinanceManager.Domain.Wrapper;
+﻿using FinanceManager.Domain.Wrapper;
 using MediatR;
+using System.ComponentModel.DataAnnotations;
 
 namespace FinanceManager.Application.UseCases.Users.Commands.ForgotPasswordCommand;
 

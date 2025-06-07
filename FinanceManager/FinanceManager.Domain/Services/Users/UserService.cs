@@ -1,6 +1,4 @@
-﻿using System.Text;
-using System.Text.Encodings.Web;
-using AutoMapper;
+﻿using AutoMapper;
 using FinanceManager.Domain.API;
 using FinanceManager.Domain.Authorization;
 using FinanceManager.Domain.Models;
@@ -16,6 +14,8 @@ using Hangfire;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.EntityFrameworkCore;
+using System.Text;
+using System.Text.Encodings.Web;
 
 namespace FinanceManager.Domain.Services.Users;
 

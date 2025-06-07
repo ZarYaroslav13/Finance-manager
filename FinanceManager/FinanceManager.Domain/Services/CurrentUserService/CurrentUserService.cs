@@ -1,6 +1,6 @@
-﻿using System.Security.Claims;
-using FinanceManager.Domain.Authorization;
+﻿using FinanceManager.Domain.Authorization;
 using Microsoft.AspNetCore.Http;
+using System.Security.Claims;
 
 namespace FinanceManager.Domain.Services.CurrentUserService;
 

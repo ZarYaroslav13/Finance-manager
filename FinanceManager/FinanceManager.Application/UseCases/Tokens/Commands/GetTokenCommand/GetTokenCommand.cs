@@ -1,7 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-using FinanceManager.Application.Models;
+﻿using FinanceManager.Application.Models;
 using FinanceManager.Domain.Wrapper;
 using MediatR;
+using System.ComponentModel.DataAnnotations;
 
 namespace FinanceManager.Application.UseCases.Tokens.Commands.GetTokenCommand;
 

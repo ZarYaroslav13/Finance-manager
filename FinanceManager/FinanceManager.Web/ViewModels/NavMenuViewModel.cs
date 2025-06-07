@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using FinanceManager.Domain.Authorization;
+﻿using FinanceManager.Domain.Authorization;
 using FinanceManager.Web.Extentions;
 using FinanceManager.Web.Services;
 using FinanceManager.Web.Services.Autorization;
@@ -15,7 +14,7 @@ public class NavMenuViewModel : BaseViewModel<NavMenu>
 
     public NavMenuViewModel(FinanceManagerStateProvider stateProvider, ViewModelServicesLocator locator, IStringLocalizer<NavMenu> localizer) : base(locator, localizer)
     {
-        stateProvider = stateProvider ?? throw new ArgumentNullException(nameof(stateProvider));
+        _stateProvider = stateProvider ?? throw new ArgumentNullException(nameof(stateProvider));
     }
 
     public async Task InitializationAsync()

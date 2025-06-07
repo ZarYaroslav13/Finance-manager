@@ -1,6 +1,6 @@
-﻿using System.Security.Claims;
-using FinanceManager.Application.Models;
+﻿using FinanceManager.Application.Models;
 using FinanceManager.Web.Shared.Constants.Identity;
+using System.Security.Claims;
 
 namespace FinanceManager.Web.Extentions;
 

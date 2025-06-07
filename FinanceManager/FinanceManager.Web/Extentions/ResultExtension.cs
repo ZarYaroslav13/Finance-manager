@@ -1,6 +1,6 @@
-﻿using System.Text.Json;
+﻿using FinanceManager.Domain.Wrapper;
+using System.Text.Json;
 using System.Text.Json.Serialization;
-using FinanceManager.Domain.Wrapper;
 
 namespace FinanceManager.Web.Extentions;
 public static class ResultExtension

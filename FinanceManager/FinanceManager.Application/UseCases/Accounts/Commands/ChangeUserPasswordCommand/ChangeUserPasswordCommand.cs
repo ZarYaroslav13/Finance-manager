@@ -1,7 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-using FinanceManager.Application.DataAnnotations.Attributes;
+﻿using FinanceManager.Application.DataAnnotations.Attributes;
 using FinanceManager.Domain.Wrapper;
 using MediatR;
+using System.ComponentModel.DataAnnotations;
 
 namespace FinanceManager.Application.UseCases.Accounts.Commands.Commands.UpdatePasswordAccountCommand;
 

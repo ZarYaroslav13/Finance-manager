@@ -1,5 +1,5 @@
-﻿using System.Linq.Expressions;
-using FinanceManager.Infrastructure.Models.Base;
+﻿using FinanceManager.Infrastructure.Models.Base;
+using System.Linq.Expressions;
 
 namespace FinanceManager.Infrastructure.Repository;
 

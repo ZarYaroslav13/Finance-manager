@@ -1,5 +1,4 @@
-﻿using System.Security.Claims;
-using FinanceManager.Application.Models;
+﻿using FinanceManager.Application.Models;
 using FinanceManager.Application.UseCases.Tokens.Commands.GetTokenCommand;
 using FinanceManager.Application.UseCases.Tokens.Commands.RefreshTokenCommand;
 using FinanceManager.Domain.Wrapper;
@@ -9,6 +8,7 @@ using FinanceManager.Web.Services.Autorization;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.Extensions.Localization;
+using System.Security.Claims;
 
 namespace FinanceManager.Web.Services.APIServices.Managers.TokenManager;
 

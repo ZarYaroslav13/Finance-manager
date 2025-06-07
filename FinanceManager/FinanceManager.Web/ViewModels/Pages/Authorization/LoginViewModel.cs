@@ -12,7 +12,6 @@ public class LoginViewModel : BaseViewModel<Login>
     public GetTokenCommand LoginModel { get; set; } = new();
 
     public EditContext EditContext { get; set; }
-
     public bool IsLoginModelValid => EditContext.Validate();
 
     public bool PasswordVisibility { get; private set; } = false;
@@ -22,7 +21,7 @@ public class LoginViewModel : BaseViewModel<Login>
     private readonly IJSRuntime _jSRuntime;
     public LoginViewModel(IJSRuntime jSRuntime, ViewModelServicesLocator locator, IStringLocalizer<Login> localizer) : base(locator, localizer)
     {
-        _jSRuntime = jSRuntime;
+        _jSRuntime = jSRuntime ?? throw new ArgumentNullException(nameof(jSRuntime));
         EditContext = new(LoginModel);
     }
 

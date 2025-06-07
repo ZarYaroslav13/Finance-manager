@@ -1,6 +1,4 @@
-﻿@using FinanceManager.Web.Services.APIServices.Managers.TokenManager
-@inject Microsoft.Extensions.Localization.IStringLocalizer<FinanceManager.Web.Shared.Layout.MainLayout> _localizer
-@inject FinanceManager.Web.ViewModels.MainBodyViewModel _viewModel;
+﻿@inject FinanceManager.Web.ViewModels.MainBodyViewModel _viewModel;
 
 <MudAppBar Elevation="25" Style="background-image: linear-gradient(109.6deg, rgba(22,126,91,1) 11.2%, rgba(223,82,36,1) 91.1%);">
     <MudIcon Icon="@FinanceManager.Web.CustomIcons.FinanceManager" Size="Size.Large" ViewBox="0 0 500 500" />
@@ -11,22 +9,32 @@
     <MudSpacer />
     <MudHidden Breakpoint="Breakpoint.MdAndUp" Invert="true">
         <MudDivider Vertical="true" FlexItem="true" DividerType="DividerType.Middle" Class="mx-4 my-5" />
-        <LanguageSelector />
-        <MudTooltip Text="@_localizer["Toggle right-to-left/left-to-right"]">
+        <MudTooltip Text="@_viewModel.Localizer["Change language"]">
+            <LanguageSelector />
+        </MudTooltip>
+        <MudTooltip Text="@_viewModel.Localizer["Toggle right-to-left/left-to-right"]">
             <MudIconButton Icon="@Icons.Material.Filled.FormatTextdirectionRToL" Color="Color.Inherit" OnClick="@(() => _viewModel.RightToLeftToggle())" />
         </MudTooltip>
-        <MudTooltip Text="@_localizer["Toggle Dark Mode"]">
-            <MudIconButton Icon="@Icons.Material.Filled.Brightness4" Color="Color.Inherit" OnClick="@(() => _viewModel.ToggleDarkMode())" />
+        <MudTooltip Text="@_viewModel.Localizer["Toggle Dark Mode"]">
+            <MudIconButton Icon="@ThemeIcon" Color="Color.Inherit" OnClick="@(() => _viewModel.ToggleDarkMode())" />
         </MudTooltip>
     </MudHidden>
     <MudHidden Breakpoint="Breakpoint.SmAndDown" Invert="true">
-        <LanguageSelector />
-        <MudMenu Icon="@Icons.Material.Filled.Settings" Color="Color.Inherit" Dense="true" Direction="Direction.Right" OffsetY="true">
-            <div class="px-2">
-                <MudIconButton Icon="@Icons.Material.Filled.FormatTextdirectionRToL" Color="Color.Inherit" OnClick="@(() => _viewModel.RightToLeftToggle())" />
-                <MudIconButton Icon="@Icons.Material.Filled.Brightness4" Color="Color.Inherit" OnClick="@(() => _viewModel.ToggleDarkMode())" />
-            </div>
-        </MudMenu>
+        <MudTooltip Text="@_viewModel.Localizer["User preferences settings"]">
+            <MudMenu Icon="@Icons.Material.Filled.Settings" Color="Color.Inherit" Dense="true" Direction="Direction.Right" OffsetY="true">
+                <div class="px-2">
+                    <MudTooltip Text="@_viewModel.Localizer["Change language"]">
+                        <LanguageSelector />
+                    </MudTooltip>
+                    <MudTooltip Text="@_viewModel.Localizer["Toggle right-to-left/left-to-right"]">
+                        <MudIconButton Icon="@ThemeIcon" OnClick="@(() => _viewModel.RightToLeftToggle())" />
+                    </MudTooltip>
+                    <MudTooltip Text="@_viewModel.Localizer["Toggle Dark Mode"]">
+                        <MudIconButton Icon="@Icons.Material.Filled.Brightness4" Color="Color.Inherit" OnClick="@(() => _viewModel.ToggleDarkMode())" />
+                    </MudTooltip>
+                </div>
+            </MudMenu>
+        </MudTooltip>
     </MudHidden>
     <MudMenu Direction="@_viewModel.RightToLeftDirrection" OffsetX="true" Dense="true" Class="mt-1 ml-4">
         <ActivatorContent>
@@ -35,8 +43,8 @@
         <ChildContent>
             <UserCard Class="mt-n2" />
             <MudDivider Class="mb-2" />
-            <MudListItem T="object" Text="@_localizer["Account"]" Href="/account" Icon="@Icons.Material.Outlined.Person" />
-            <MudListItem T="object" Text="@_localizer["Logout"]" Icon="@Icons.Material.Filled.Logout" OnClick="@(() => _viewModel.LogoutAsync())" />
+            <MudListItem T="object" Text="@_viewModel.Localizer["Account"]" Href="/account" Icon="@Icons.Material.Outlined.Person" />
+            <MudListItem T="object" Text="@_viewModel.Localizer["Logout"]" Icon="@Icons.Material.Filled.Logout" OnClick="@(() => _viewModel.LogoutAsync())" />
         </ChildContent>
     </MudMenu>
 </MudAppBar>
@@ -46,7 +54,7 @@
 <MudMainContent>
     <MudContainer MaxWidth="MaxWidth.False" Class="mt-4">
         <CascadingAuthenticationState>
-            ChildContent
+            @ChildContent
         </CascadingAuthenticationState>
     </MudContainer>
 </MudMainContent>
@@ -70,6 +78,9 @@
         get => _viewModel.OnRightToLeftToggle;
         set => _viewModel.OnRightToLeftToggle = value;
     }
+
+    [Parameter]
+    public string ThemeIcon { get; set; } = Icons.Material.Filled.Brightness4;
 
 
     protected override async Task OnInitializedAsync()

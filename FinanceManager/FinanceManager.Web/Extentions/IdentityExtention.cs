@@ -42,7 +42,7 @@ public static class IdentityExtention
     internal static void AddToken(this ClaimsIdentity claimsIdentity, TokenDTO token)
         => claimsIdentity.AddClaims(new List<Claim>
         {
-            new(IdentityConstants.ExpireTime, token.Token),
+            new(IdentityConstants.AuthToken, token.Token),
             new(IdentityConstants.RefreshToken, token.RefreshToken),
             new(IdentityConstants.ExpireTime, token.RefreshTokenExpiryTime.ToString())
         });

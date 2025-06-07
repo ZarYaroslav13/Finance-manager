@@ -11,7 +11,7 @@ public interface IUserManager : IManager
 {
     Task<PaginatedResult<UserDTO>> GetAllAsync(GetAllUsersQuery query);
 
-    Task<Domain.Wrapper.IResult<UserDTO>> GetAsync(string userId);
+    Task<Domain.Wrapper.IResult<UserDTO>> GetAsync(Guid userId);
 
     Task<Domain.Wrapper.IResult> ForgotPasswordAsync(ForgotPasswordCommand request);
 

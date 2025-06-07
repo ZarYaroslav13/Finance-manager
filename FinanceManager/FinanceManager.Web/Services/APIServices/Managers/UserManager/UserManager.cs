@@ -21,9 +21,9 @@ public class UserManager : BaseManager, IUserManager
         return result;
     }
 
-    public async Task<IResult<UserDTO>> GetAsync(string userId)
+    public async Task<IResult<UserDTO>> GetAsync(Guid userId)
     {
-        var result = await _httpClient.GetUserAsync(new Guid(userId));
+        var result = await _httpClient.GetUserAsync(userId);
 
         return result;
     }

@@ -52,8 +52,7 @@ public class TokenManager : ITokenManager
 
         var authState = await _authenticationStateProvider.GetAuthenticationStateAsync();
         var user = authState.User;
-        var exp = user.GetExpireTime();
-        var expTime = DateTimeOffset.FromUnixTimeSeconds(Convert.ToInt64(exp));
+        var expTime = DateTime.Parse(user.GetExpireTime());
         var timeUTC = DateTime.UtcNow;
         var diff = expTime - timeUTC;
 

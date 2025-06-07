@@ -1,5 +1,6 @@
 ﻿using FinanceManager.Domain.API;
 using FinanceManager.Web.Extentions;
+using FinanceManager.Web.Pages;
 using FinanceManager.Web.Services.APIServices.Managers.TokenManager;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Localization;
@@ -50,7 +51,7 @@ public class HttpMessagesHandler : DelegatingHandler
                 {
                     _logger.LogError(ex.Message);
                     await tokenManager.LogoutAsync();
-                    _navigationManager.NavigateTo("/");
+                    _navigationManager.NavigateTo(PagesHref.Authentication.Login);
                 }
             }
         }

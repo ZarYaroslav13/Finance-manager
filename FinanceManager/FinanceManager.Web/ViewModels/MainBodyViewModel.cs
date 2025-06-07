@@ -3,6 +3,7 @@ using FinanceManager.Domain.Wrapper;
 using FinanceManager.Web.Extentions;
 using FinanceManager.Web.Preferences;
 using FinanceManager.Web.Services;
+using FinanceManager.Web.Services.APIServices.Managers.IUserManager;
 using FinanceManager.Web.Shared.Components;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Localization;
@@ -18,6 +19,8 @@ public class MainBodyViewModel : BaseViewModel<MainBody>
 
     public EventCallback<bool> OnRightToLeftToggle { get; set; }
 
+    public string ThemeIcon { get; set; }
+
     public bool DrawerOpen = true;
     public Guid CurrentUserId { get; set; }
     public string FirstName { get; set; } = String.Empty;
@@ -29,10 +32,14 @@ public class MainBodyViewModel : BaseViewModel<MainBody>
 
     public Direction RightToLeftDirrection => RightToLeft ? Direction.Right : Direction.Left;
 
-    private IPreferencesManager _preferencesManager;
+    private readonly IUserManager _userManager;
 
-    public MainBodyViewModel(IPreferencesManager preferencesManager, ViewModelServicesLocator locator, IStringLocalizer<MainBody> localizer) : base(locator, localizer)
+    private readonly IPreferencesManager _preferencesManager;
+
+    public MainBodyViewModel(IPreferencesManager preferencesManager, IUserManager userManager,
+        ViewModelServicesLocator locator, IStringLocalizer<MainBody> localizer) : base(locator, localizer)
     {
+        _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
         _preferencesManager = preferencesManager ?? throw new ArgumentNullException(nameof(preferencesManager));
     }
 
@@ -40,7 +47,7 @@ public class MainBodyViewModel : BaseViewModel<MainBody>
 
     {
         RightToLeft = await _preferencesManager.IsRTL();
-        //_snackBar.Add(string.Format(Localizer["Welcome {0}"], FirstName), Severity.Success);
+        _snackBar.Add(string.Format(Localizer["Welcome {0}"], FirstName), Severity.Success);
     }
     public async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -81,7 +88,7 @@ public class MainBodyViewModel : BaseViewModel<MainBody>
                 SecondName = user.GetLastName();
                 Email = user.GetEmail();
 
-                var currentUserResult = Result<TokenDTO>.Success();
+                var currentUserResult = await _userManager.GetAsync(CurrentUserId);
                 if (!currentUserResult.Succeeded || currentUserResult.Data == null)
                 {
                     _snackBar.Add(

@@ -39,4 +39,10 @@ public class AccountViewModel : BaseViewModel<Account>
 
         await _dialogService.ShowAsync<UpdateAccountDialog>("Update", parameters);
     }
+
+    public async Task ChangeUserPassword()
+    {
+        var parameters = new DialogParameters<ChangePasswordDialog>() { { x => x.UserId, AccountModel.Id } };
+        await _dialogService.ShowAsync<ChangePasswordDialog>("Update", parameters);
+    }
 }

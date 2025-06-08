@@ -39,22 +39,22 @@ public interface IFinanceManagerApiHttpClient
     public Task<Result<UserDTO>> GetUserAsync(Guid id);
 
     [Get(APIEndpoints.Users.ConfirmEmail)]
-    public Task<Domain.Wrapper.IResult> ConfirmEmailAsync([Query] Guid userId, [Query] string code);
+    public Task<Result> ConfirmEmailAsync([Query] Guid userId, [Query] string code);
 
     [Post(APIEndpoints.Users.Register)]
-    public Task<Domain.Wrapper.IResult> RegisterUserAsync([Body] RegisterCommand command);
+    public Task<Result> RegisterUserAsync([Body] RegisterCommand command);
 
     [Post(APIEndpoints.Users.ForgotPassword)]
-    public Task<Domain.Wrapper.IResult> ForgotPasswordAsync([Body] ForgotPasswordCommand command);
+    public Task<Result> ForgotPasswordAsync([Body] ForgotPasswordCommand command);
 
     [Post(APIEndpoints.Users.ResetPassword)]
-    public Task<Domain.Wrapper.IResult> ResetPasswordAsync([Body] ResetPasswordCommand command);
+    public Task<Result> ResetPasswordAsync([Body] ResetPasswordCommand command);
 
     [Delete(APIEndpoints.Users.DeleteUser)]
-    public Task<Domain.Wrapper.IResult> DeleteUserdAsync(Guid id);
+    public Task<Result> DeleteUserdAsync(Guid id);
     #endregion
 
-    #region 
+    #region UserPreferences
     [Get(APIEndpoints.UserPreferences.GetUserPreferences)]
     public Task<Result<UserPreferencesDTO>> GetUserPreferences(Guid id);
 
@@ -84,7 +84,7 @@ public interface IFinanceManagerApiHttpClient
     public Task<Result<WalletDTO>> UpdateWallet([Body] UpdateWalletCommand command);
 
     [Delete(APIEndpoints.Wallets.DeleteWallet)]
-    public Task<Domain.Wrapper.IResult> DeleteWallet(Guid id);
+    public Task<Result> DeleteWallet(Guid id);
     #endregion
 
     #region Reports
@@ -109,7 +109,7 @@ public interface IFinanceManagerApiHttpClient
     public Task<Result<FinanceOperationTypeDTO>> UpdateFinanceOperationTypeAsync([Body] UpdateFinanceOperationTypeCommand command);
 
     [Get(APIEndpoints.FinanceOperationType.Delete)]
-    public Task<Domain.Wrapper.IResult> DeleteFinanceOperationTypeAsync(Guid id);
+    public Task<Result> DeleteFinanceOperationTypeAsync(Guid id);
     #endregion
 
     #region FinanceOperations
@@ -135,6 +135,6 @@ public interface IFinanceManagerApiHttpClient
     public Task<Result<FinanceOperationDTO>> UpdateFinanceOperationAsync([Body] UpdateFinanceOperationTypeCommand command);
 
     [Post(APIEndpoints.FinanceOperation.DeleteOperation)]
-    public Task<Domain.Wrapper.IResult> DeleteFinanceOperationAsync(Guid id);
+    public Task<Result> DeleteFinanceOperationAsync(Guid id);
     #endregion
 }

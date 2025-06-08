@@ -3,7 +3,6 @@ using FinanceManager.Application.Models;
 using FinanceManager.Domain.Wrapper;
 using FinanceManager.Web.Settings;
 using FinanceManager.Web.Shared.Constants.Storage;
-using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Localization;
 using MudBlazor;
 using System.Globalization;

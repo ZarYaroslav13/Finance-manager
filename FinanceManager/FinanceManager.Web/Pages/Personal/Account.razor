@@ -2,7 +2,7 @@
 @attribute [Authorize]
 @inject FinanceManager.Web.ViewModels.Pages.Personal.AccountViewModel _viewModel
 
-<MudPaper>
+<MudPaper Class="px-4" Style="padding-bottom: 20px;">
     <MudStack Spacing="5">
         <MudText Typo="Typo.h3" Align="Align.Center">@_viewModel.Localizer["Your account"]</MudText>
 

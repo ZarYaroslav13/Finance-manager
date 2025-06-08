@@ -3,8 +3,6 @@ using FinanceManager.Application.UseCases.Wallets.Commands.CreateWalletCommand;
 using FinanceManager.Application.UseCases.Wallets.Commands.UpdateWalletCommand;
 using FinanceManager.Domain.Wrapper;
 using FinanceManager.Web.Services.APIServices.APIHttpClient;
-using static FinanceManager.Domain.API.APIEndpoints;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace FinanceManager.Web.Services.APIServices.Managers.WalletManager;
 

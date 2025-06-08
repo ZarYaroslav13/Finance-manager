@@ -5,7 +5,7 @@ using FinanceManager.Domain.Wrapper;
 
 namespace FinanceManager.Web.Services.APIServices.Managers.WalletManager;
 
-public interface IWalletManager
+public interface IWalletManager  : IManager
 {
     public Task<Result<List<WalletDTO>>> GetWalletsAsync(Guid userId);
 

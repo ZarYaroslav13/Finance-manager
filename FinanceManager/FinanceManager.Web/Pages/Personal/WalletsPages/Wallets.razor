@@ -4,5 +4,39 @@
 
 
 <MudContainer>
-    
+    <MudGrid>
+        @foreach (var wallet in _viewModel.Wallets)
+        {
+            <MudItem xs="12" sm="6" md="4" Class="card">
+                <MudCard>
+                    <MudCardHeader>
+                        <CardHeaderContent>
+                            <MudText Typo="Typo.h3">@wallet.Name</MudText>
+                        </CardHeaderContent>
+                        <CardHeaderActions>
+                            <MudIconButton Icon="@Icons.Material.Rounded.Edit" Style="background-color:lightseagreen" />
+                            <MudIconButton Icon="@CustomIcons.ActionIcons.Delete" Color="Color.Error" Style="background-color:rgb(#fce4ec)" />
+                        </CardHeaderActions>
+                    </MudCardHeader>
+                    <MudCardContent>
+                        <MudIcon Icon="@CustomIcons.Wallets.BlackWallet" Color="Color.Primary" Size="Size.Large" ViewBox="0 0 500 500" Style="width: 250px; height: 250px; align-self:center" />
+                        <MudTextField ReadOnly="true" Value="@wallet.Balance" Typo="Typo.h4" Adornment="Adornment.End" AdornmentIcon="@CustomIcons.Money.Banknote"></MudTextField>
+                    </MudCardContent>
+                </MudCard>
+            </MudItem>
+        }
+    </MudGrid>
+
+    <MudFab 
+        Color="Color.Tertiary" 
+        StartIcon="@Icons.Material.Filled.Add" 
+        DropShadow="true" 
+        Style="position: fixed; bottom: 24px; right: 24px;" />
 </MudContainer>
+
+@code{
+    protected override async Task OnInitializedAsync()
+    {
+        await _viewModel.OnIntinalAsync();
+    }
+}

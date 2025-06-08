@@ -1,7 +1,5 @@
-﻿using FinanceManager.Application.Models;
-using FinanceManager.Infrastructure.Constants.Localization;
+﻿using FinanceManager.Infrastructure.Constants.Localization;
 using FinanceManager.Web.Preferences;
-using FinanceManager.Web.Preferences.Client;
 using FinanceManager.Web.Services.Autorization;
 using FinanceManager.Web.Settings;
 using MudBlazor;

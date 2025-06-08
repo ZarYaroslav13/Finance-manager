@@ -3,8 +3,8 @@
 @inject FinanceManager.Web.ViewModels.Pages.Personal.WalletsPages.WalletsViewModel _viewModel
 
 
-<MudContainer>
-    <MudGrid>
+<MudContainer Class="p-4" Style="padding-bottom: 20px;">
+    <MudGrid Spacing="5">
         @foreach (var wallet in _viewModel.Wallets)
         {
             <MudItem xs="12" sm="6" md="4" Class="card">
@@ -15,12 +15,12 @@
                         </CardHeaderContent>
                         <CardHeaderActions>
                             <MudIconButton Icon="@Icons.Material.Rounded.Edit" Style="background-color:lightseagreen" />
-                            <MudIconButton Icon="@CustomIcons.ActionIcons.Delete" Color="Color.Error" Style="background-color:rgb(#fce4ec)" />
+                            <MudIconButton Icon="@CustomIcons.ActionIcons.Delete" Color="Color.Error" Style="background-color:#fce4ec" />
                         </CardHeaderActions>
                     </MudCardHeader>
-                    <MudCardContent>
-                        <MudIcon Icon="@CustomIcons.Wallets.BlackWallet" Color="Color.Primary" Size="Size.Large" ViewBox="0 0 500 500" Style="width: 250px; height: 250px; align-self:center" />
-                        <MudTextField ReadOnly="true" Value="@wallet.Balance" Typo="Typo.h4" Adornment="Adornment.End" AdornmentIcon="@CustomIcons.Money.Banknote"></MudTextField>
+                    <MudCardContent Class="p-3 hover-elevation-6" Elevation="2">
+                        <MudIcon Icon="@CustomIcons.Wallets.BlackWallet" Color="Color.Primary" Size="Size.Large" ViewBox="0 0 500 500" Style="width: 250px; height: 250px; display: flex; justify-content: center;" />
+                        <MudTextField ReadOnly="true" Value="@wallet.Balance" Typo="Typo.h4" Adornment="Adornment.End" AdornmentIcon="@CustomIcons.Money.Banknote" Margin=" Margin.Normal"></MudTextField>
                     </MudCardContent>
                 </MudCard>
             </MudItem>

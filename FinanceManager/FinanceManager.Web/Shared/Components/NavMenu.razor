@@ -10,7 +10,10 @@
     <MudNavLink Href="@PagesHref.Personal.Wallet.Wallets" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Outlined.AccountBalanceWallet"> @_viewModel.Localizer["Wallets"] </MudNavLink>
     <MudNavLink Href="@PagesHref.Personal.FinanceOperationType.FinanceOperationTypes" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Outlined.ListAlt"> @_viewModel.Localizer["FincanceOperationTypes"] </MudNavLink>
     <MudNavLink Href="@PagesHref.Personal.FinanceOperation.FinanceOperations" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.AttachMoney"> @_viewModel.Localizer["FincanceOperations"] </MudNavLink>
-    <MudNavLink Href="@PagesHref.Personal.FinanceReports" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Outlined.AddChart"> @_viewModel.Localizer["Reports"] </MudNavLink>
+
+
+    <MudListSubheader Class="mt-2 mb-n2">@_viewModel.Localizer["Tools"]</MudListSubheader>
+    <MudNavLink Href="@PagesHref.Tools.FinanceReportsCreator" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Outlined.AddChart"> @_viewModel.Localizer["Reports"] </MudNavLink>
 
 
     @if (_viewModel.CanViewAdminMenu)

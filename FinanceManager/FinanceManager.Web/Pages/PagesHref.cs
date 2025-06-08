@@ -29,8 +29,11 @@ public static class PagesHref
         {
             public const string FinanceOperations = "finance-operations";
         }
+    }
 
-        public const string FinanceReports = "finance-reports";
+    public static class Tools
+    {
+        public const string FinanceReportsCreator = "report-creator";
     }
 
     public static class Admin

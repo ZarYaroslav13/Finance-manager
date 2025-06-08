@@ -1,0 +1,23 @@
+﻿@page "/report-creator"
+@attribute [Authorize]
+@using FinanceManager.Web.ViewModels.Pages.Tools.ReportCreator;
+@inject ReportCreatorViewModel _viewModel
+
+
+<MudContainer>
+    <MudSelect T="FinancialReportVariant" 
+        Label="@_viewModel.Localizer["Variant of financial report"]"
+               @bind-Value="_viewModel.SelectedReportVariant"
+               AdornmentIcon="@CustomIcons.Reports.Icons[_viewModel.SelectedReportVariant]" Adornment=" Adornment.End">
+        @foreach (var item in _viewModel.ReportVariants)
+        {
+            <MudSelectItem T="FinancialReportVariant" Value="@item">
+                @item.GetDescription()
+            </MudSelectItem>
+        }
+    </MudSelect>
+</MudContainer>
+
+@code {
+
+}

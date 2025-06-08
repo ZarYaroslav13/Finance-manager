@@ -1,0 +1,48 @@
+﻿@namespace FinanceManager.Web.Shared.Dialogs.Account
+@using FinanceManager.Application.UseCases.Accounts.Commands.Commands.UpdateAccountCommand
+@attribute [Authorize]
+@inject FinanceManager.Web.ViewModels.Dialogs.Account.UpdateAccountDialogViewModel _viewModel;
+<MudDialog>
+    <TitleContent>
+        <div class="d-flex justify-center">
+            <MudIcon Icon="@Icons.Material.Sharp.PersonAddAlt1" Class="mr-3 mb-n1" />
+            <MudText Typo="Typo.h4"> @_viewModel.Localizer["Update account"]</MudText>
+        </div>
+    </TitleContent>
+    <DialogContent>
+        <EditForm EditContext="@_viewModel.EditContext" OnValidSubmit="@Submit">
+            <DataAnnotationsValidator />
+            <MudGrid>
+                <MudItem xs="12">
+                    <MudTextField Immediate=true For="@(() => _viewModel.UpdateModel.FirstName)" @bind-Value="_viewModel.UpdateModel.FirstName" Label="@_viewModel.Localizer["First Name"]" />
+                </MudItem>
+                <MudItem xs="12">
+                    <MudTextField Immediate=true For="@(() => _viewModel.UpdateModel.LastName)" @bind-Value="_viewModel.UpdateModel.LastName" Label="@_viewModel.Localizer["Last Name"]" />
+                </MudItem>
+                <MudItem xs="12">
+                    <MudTextField Immediate=true T="string" Label="@_viewModel.Localizer["Email"]" Adornment="Adornment.End" AdornmentIcon="@CustomIcons.Gmail" @bind-Value="_viewModel.UpdateModel.Email" For="@(() => _viewModel.UpdateModel.Email)" />
+                </MudItem>
+            </MudGrid>
+        </EditForm>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">@_viewModel.Localizer["Cancel"]</MudButton>
+        <MudButton Variant="Variant.Filled" OnClick="Submit" Disabled="!_viewModel.IsModelValid">@_viewModel.Localizer["Update"]</MudButton>
+    </DialogActions>
+</MudDialog>
+@code {
+    [CascadingParameter] IMudDialogInstance MudDialog { get; set; }
+
+    [Parameter] 
+    public UpdateAccountCommand CurrentInfo{ get => _viewModel.UpdateModel; set=> _viewModel.UpdateModel = value; }
+
+    async Task Submit()
+    {
+        await _viewModel.TryToUpdate(() =>
+        {
+            _navigationManager.NavigateTo(PagesHref.Personal.Account);
+            MudDialog.Close(DialogResult.Ok(true));
+        });
+    }
+    void Cancel() => MudDialog.Cancel();
+}

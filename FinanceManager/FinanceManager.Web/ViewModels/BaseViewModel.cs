@@ -1,4 +1,5 @@
-﻿using Blazored.LocalStorage;
+﻿using AutoMapper;
+using Blazored.LocalStorage;
 using FinanceManager.Web.Services;
 using FinanceManager.Web.Services.APIServices.Managers.TokenManager;
 using FinanceManager.Web.Services.Autorization;
@@ -19,6 +20,7 @@ public abstract class BaseViewModel<T> : IViewModel where T : class
     protected readonly ITokenManager _tokenManager;
     protected readonly IDialogService _dialogService;
     protected readonly ILocalStorageService _localStorage;
+    protected readonly IMapper _mapper;
 
     protected BaseViewModel(ViewModelServicesLocator locator, IStringLocalizer<T> localizer)
     {
@@ -32,5 +34,6 @@ public abstract class BaseViewModel<T> : IViewModel where T : class
         _tokenManager = locator.TokenManager;
         _dialogService = locator.DialogService;
         _localStorage = locator.LocalStorageService;
+        _mapper = locator.Mapper;
     }
 }

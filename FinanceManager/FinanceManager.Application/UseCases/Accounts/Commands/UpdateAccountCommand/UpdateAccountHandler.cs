@@ -9,11 +9,11 @@ using Microsoft.Extensions.Logging;
 
 namespace FinanceManager.Application.UseCases.Accounts.Commands.Commands.UpdateAccountCommand;
 
-public class UpdateAccountCommandHandler : BaseRequestHandler, IRequestHandler<UpdateAccountCommand, IResult>
+public class UpdateAccountHandler : BaseRequestHandler, IRequestHandler<UpdateAccountCommand, IResult>
 {
     private readonly IAccountService _accountService;
 
-    public UpdateAccountCommandHandler(IAccountService accountService,
+    public UpdateAccountHandler(IAccountService accountService,
         ICurrentUserService currentUserService, IMapper mapper, ILogger<BaseRequestHandler> logger) : base(currentUserService, mapper, logger)
     {
         _accountService = accountService ?? throw new ArgumentNullException(nameof(accountService));

@@ -1,4 +1,5 @@
 ﻿using Blazored.LocalStorage;
+using FinanceManager.Application.UseCases.Commons.Mapping;
 using FinanceManager.Domain.API;
 using FinanceManager.Domain.Authorization;
 using FinanceManager.Infrastructure.Constants.Localization;
@@ -132,6 +133,9 @@ public static class AddServiceConfigurationHostBuilderExtension
 
     private static IServiceCollection AddClientServices(this IServiceCollection services)
     {
+        services.AddAutoMapper(typeof(UsertProfile).Assembly);
+        services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
         services
             .AddScoped<IPreferencesManager, ClientPreferencesManager>()
             .AddScoped<FinanceManagerStateProvider>()

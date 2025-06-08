@@ -64,10 +64,10 @@ public interface IFinanceManagerApiHttpClient
 
     #region Accounts
     [Put(APIEndpoints.Accounts.Update)]
-    public Task<Domain.Wrapper.IResult> UpdateAccountAsync([Body] UpdateAccountCommand command);
+    public Task<Domain.Wrapper.Result> UpdateAccountAsync([Body] UpdateAccountCommand command);
 
     [Patch(APIEndpoints.Accounts.ChangePassword)]
-    public Task<Domain.Wrapper.IResult> ChangeAccountPasswordAsync([Body] ChangeUserPasswordCommand command);
+    public Task<Domain.Wrapper.Result> ChangeAccountPasswordAsync([Body] ChangeUserPasswordCommand command);
     #endregion
 
     #region Wallets

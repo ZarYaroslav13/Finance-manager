@@ -1,4 +1,5 @@
-﻿using Blazored.LocalStorage;
+﻿using AutoMapper;
+using Blazored.LocalStorage;
 using FinanceManager.Web.Services.APIServices.Managers.TokenManager;
 using FinanceManager.Web.Services.Autorization;
 using Microsoft.AspNetCore.Components;
@@ -23,6 +24,8 @@ public class ViewModelServicesLocator
 
     public ILocalStorageService LocalStorageService { get; }
 
+    public IMapper Mapper { get; }
+
     public ViewModelServicesLocator(
         FinanceManagerStateProvider stateProvider,
         IHttpContextAccessor httpContextAccessor,
@@ -31,7 +34,8 @@ public class ViewModelServicesLocator
         ISnackbar snackBar,
         ITokenManager tokenManager,
         IDialogService dialogService,
-        ILocalStorageService localStorageService)
+        ILocalStorageService localStorageService,
+        IMapper mapper)
     {
         StateProvider = stateProvider ?? throw new ArgumentNullException(nameof(stateProvider));
         HttpContextAccessor = httpContextAccessor ?? throw new ArgumentNullException(nameof(httpContextAccessor));
@@ -41,5 +45,6 @@ public class ViewModelServicesLocator
         TokenManager = tokenManager ?? throw new ArgumentNullException(nameof(tokenManager));
         DialogService = dialogService ?? throw new ArgumentNullException(nameof(dialogService));
         LocalStorageService = localStorageService ?? throw new ArgumentNullException(nameof(localStorageService));
+        Mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
     }
 }

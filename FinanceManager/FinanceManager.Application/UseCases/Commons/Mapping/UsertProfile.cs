@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FinanceManager.Application.Models.Base;
 using FinanceManager.Application.UseCases.Accounts.Commands.Commands.UpdateAccountCommand;
 using FinanceManager.Application.UseCases.Users.Commands.RegisterCommand;
 using FinanceManager.Domain.Models;
@@ -9,6 +10,8 @@ public class UsertProfile : Profile
 {
     public UsertProfile()
     {
+        CreateMap<UserDTO, UpdateAccountCommand>();
+
         CreateMap<UpdateAccountCommand, UserModel>().BeforeMap((src, dest) =>
         {
             src.Email = src.Email.Trim();

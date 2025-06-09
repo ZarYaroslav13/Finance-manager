@@ -20,19 +20,11 @@ public class ReportCreatorViewModel : BaseViewModel<ReportsCreator>
     public FinancialReportVariant SelectedReportVariant { get; set; }
     #endregion
 
-    public bool ShowReport { get; set; } = false;
 
     public List<WalletDTO> Wallets { get; set; } = new();
 
     #region DailyReport
     public CreateDailyReportCommand DailyReportRequestModel { get; set; } = new();
-
-    public async Task CreateDailyReport()
-    {
-        Report = (await _financeReportManager.CreateDailyReportAsync(DailyReportRequestModel)).Data;
-        await SetChartData();
-        ShowReport = true;
-    }
     #endregion
 
     #region PeriodReport
@@ -40,6 +32,16 @@ public class ReportCreatorViewModel : BaseViewModel<ReportsCreator>
     #endregion
 
     #region Report
+
+    public async Task CreateReport(FinancialReportVariant variant)
+    {
+
+        Report = await _reportRequests[variant].Invoke() ;
+        await SetChartData();
+        ShowReport = true;
+    }
+
+    public bool ShowReport { get; set; } = false;
     public FinanceReportDTO Report { get; set; }
 
     #region Opeations history chart (Mixed)
@@ -101,13 +103,15 @@ public class ReportCreatorViewModel : BaseViewModel<ReportsCreator>
     public List<ApexChartValue<int>> EntryTypesApexValues { get; set; } = new();
     #endregion
 
-
     #region Types amount chart (Donut)
 
     public bool ShowTypesAmountChart { get; set; } = true;
 
     public List<ApexChartValue<int>> TypesApexValues { get; set; } = new();
     #endregion
+
+    private Dictionary<FinancialReportVariant, Func<Task<FinanceReportDTO>>> _reportRequests = new();
+
     #endregion
 
     private readonly IWalletManager _walletManager;
@@ -117,6 +121,8 @@ public class ReportCreatorViewModel : BaseViewModel<ReportsCreator>
     {
         _walletManager = walletManager ?? throw new ArgumentNullException(nameof(walletManager));
         _financeReportManager = financeReportManager ?? throw new ArgumentNullException(nameof(financeReportManager));
+
+        BuildReportRequests();
     }
 
     public async Task OnInitialized()
@@ -130,6 +136,12 @@ public class ReportCreatorViewModel : BaseViewModel<ReportsCreator>
 
         PeriodReportRequestModel.StartDate = DateTime.Now;
         PeriodReportRequestModel.EndDate = DateTime.Now;
+    }
+
+    private void BuildReportRequests()
+    {
+        _reportRequests.Add(FinancialReportVariant.Daily, async () => (await _financeReportManager.CreateDailyReportAsync(DailyReportRequestModel)).Data);
+        _reportRequests.Add(FinancialReportVariant.Period, async () => (await _financeReportManager.CreatePeriodReportAsync(PeriodReportRequestModel)).Data);
     }
 
     private async Task SetChartData()

@@ -1,9 +1,9 @@
-﻿using FinanceManager.Application.Models;
+﻿using ApexCharts;
+using FinanceManager.Application.Models;
 using FinanceManager.Application.UseCases.FinanceReports.Commands.CreateDailyReportCommand;
 using FinanceManager.Application.UseCases.FinanceReports.Commands.CreatePeriodReportCommand;
 using FinanceManager.Web.Extentions;
 using FinanceManager.Web.Helpers;
-using FinanceManager.Web.Pages.Personal;
 using FinanceManager.Web.Pages.Tools;
 using FinanceManager.Web.Services;
 using FinanceManager.Web.Services.APIServices.Managers.FinanceReportManager;
@@ -42,9 +42,55 @@ public class ReportCreatorViewModel : BaseViewModel<ReportsCreator>
     #region Report
     public FinanceReportDTO Report { get; set; }
 
-    #region Wallet balance changes chart (Mixed)
+    #region Opeations history chart (Mixed)
 
-    public bool ShowWalletBalanceChangesChart { get; set; } = true;
+    public bool ShowOperationshistoryChart { get; set; } = true;
+
+    public List<ApexChartValue<DateTime, int>> OperationsHistoryValues { get; set; } = new();
+
+    public ApexChartOptions<ApexChartValue<DateTime, int>> OperationsHistoryChartOptions { get; } = new()
+    {
+        Yaxis = new List<YAxis>
+        {
+            new YAxis
+            {
+                Labels = new YAxisLabels
+                {
+                    Formatter = @"function(value) {
+                        return '¤' + value.toLocaleString(); 
+                    }"
+                }
+            }
+        },
+        Xaxis = new XAxis
+        {
+            Labels = new XAxisLabels
+            {
+                Formatter = @"function(value) {
+                if (!value) return '';
+                return value.toUpperCase(); 
+            }"
+            }
+        },
+        DataLabels = new DataLabels
+        {
+            Enabled = true,
+            Formatter = @"function(value) {
+            return value.toLocaleString(); 
+        }"
+        },
+        Tooltip = new Tooltip
+        {
+            Enabled = true,
+            Y = new()
+            {
+                Formatter = @"function(value, opts) {
+        const point = opts.w.config.series[opts.seriesIndex].data[opts.dataPointIndex];
+        return point.label + ': $' + point.y + ' on ' + new Date(point.x).toLocaleDateString();
+    }"
+            }
+        }
+    };
 
     #endregion
 
@@ -94,9 +140,39 @@ public class ReportCreatorViewModel : BaseViewModel<ReportsCreator>
             new() { Label="Expenses", Value=Report.TotalExpense, Color="#dc3545"}
         };
 
-        var types = FindAllTypesWithAmounts();
+        SetOperationHistoryValues();
 
         SetTypesApexValues();
+    }
+
+    private void SetOperationHistoryValues()
+    {
+        OperationsHistoryValues = Report.Operations.Select(op => new ApexChartValue<DateTime, int>()
+        {
+            Label = op.Type.Name,
+            ValueX = op.Date,
+            ValueY = op.Amount,
+            Color = op.Type.EntryType == Infrastructure.Models.EntryType.Income ? "#28a745" : "#dc3545"
+
+        }).ToList();
+    }
+
+    private void SetTypesApexValues()
+    {
+        var types = FindAllTypesWithAmounts();
+        TypesApexValues = new();
+
+        foreach (var type in types)
+        {
+            TypesApexValues.Add(
+                new()
+                {
+                    Label = type.Key.Name,
+                    Value = type.Value,
+                    Color =
+                        type.Key.EntryType == Infrastructure.Models.EntryType.Income ? ColorRandomizer.GetRandomGreenColor() : ColorRandomizer.GetRandomRedColor()
+                });
+        }
     }
 
     private Dictionary<FinanceOperationTypeDTO, int> FindAllTypesWithAmounts()
@@ -116,19 +192,4 @@ public class ReportCreatorViewModel : BaseViewModel<ReportsCreator>
         return result;
     }
 
-    private void SetTypesApexValues()
-    {
-        var types = FindAllTypesWithAmounts();
-        TypesApexValues = new();
-
-        foreach (var type in types)
-        {
-            TypesApexValues.Add(
-                new() { 
-                    Label = type.Key.Name, 
-                    Value = type.Value, 
-                    Color = 
-                        type.Key.EntryType == Infrastructure.Models.EntryType.Income?ColorRandomizer.GetRandomGreenColor() : ColorRandomizer.GetRandomRedColor()});
-        }
-    }
 }

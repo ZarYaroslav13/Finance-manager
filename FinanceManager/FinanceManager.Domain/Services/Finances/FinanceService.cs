@@ -144,7 +144,9 @@ public class FinanceService : BaseService, IFinanceService
                 filter: fo =>
                        fo.Type.WalletId == walletId
                     && fo.Date <= dayAfterEndDate
-                    && fo.Date >= dayBeforeStartDate))
+                    && fo.Date >= dayBeforeStartDate,
+                orderBy: foO => 
+                       foO.OrderBy(fo => fo.Date)))
                 .Select(_mapper.Map<FinanceOperationModel>)
                 .ToList();
 

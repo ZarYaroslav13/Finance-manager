@@ -9,7 +9,7 @@
                Label="@_viewModel.Localizer["Variant of financial report"]"
                @bind-Value="_viewModel.SelectedReportVariant"
                AdornmentIcon="@CustomIcons.Reports.Icons[_viewModel.SelectedReportVariant]" Adornment=" Adornment.End"
-               FitContent="true" Placeholder="true">
+               Placeholder="true">
         @foreach (var item in _viewModel.ReportVariants)
         {
             <MudSelectItem T="FinancialReportVariant" Value="@item">
@@ -65,6 +65,10 @@
         <MudCard Class="mx-auto my-4 p-4" Style="max-width: 800px;">
             <MudCardHeader>
                 <MudText Align="MudBlazor.Align.Center" Typo="Typo.h4"><strong>@_viewModel.Localizer["Report for Wallet"] (@_viewModel.Report.WalletName)</strong></MudText>
+
+                <MudCardActions>
+
+                </MudCardActions>
             </MudCardHeader>
 
             <MudCardContent>
@@ -117,9 +121,9 @@
                         <MudItem xs="4" md="4" Class="d-flex justify-center align-center my-auto">
                             <MudSwitch 
                                 T="bool" 
-                                @bind-Value="_viewModel.ShowWalletBalanceChangesChart" 
+                                @bind-Value="_viewModel.ShowOperationshistoryChart" 
                                 LabelPlacement="@Placement.Left" 
-                                Color="MudBlazor.Color.Success" UncheckedColor="MudBlazor.Color.Error">@_viewModel.Localizer["Show wallet balance changes chart"]</MudSwitch>
+                                Color="MudBlazor.Color.Success" UncheckedColor="MudBlazor.Color.Error">@_viewModel.Localizer["Show operation history chart"]</MudSwitch>
                         </MudItem>
                         <MudItem xs="4" md="4" Class="d-flex justify-center align-center my-auto">
                             <MudSwitch 
@@ -137,10 +141,21 @@
                         </MudItem>
                     </MudGrid>
 
-                    if (_viewModel.ShowWalletBalanceChangesChart)
+                    if (_viewModel.ShowOperationshistoryChart)
                     {
-                        <MudText Typo="Typo.h6" Class="mt-2"><strong>@_viewModel.Localizer["Wallet balance changes chart"]</strong></MudText>
+                        <MudText Typo="Typo.h6" Class="mt-2"><strong>@_viewModel.Localizer["Operation history chart"]</strong></MudText>
                         <MudDivider Class="my-2" Style="height: 3px;"/>
+
+                        <ApexChart 
+                            TItem="ApexChartValue<DateTime, int>"
+                            Options="@_viewModel.OperationsHistoryChartOptions" >
+                            <ApexPointSeries TItem="ApexChartValue<DateTime, int>"
+                                Items="_viewModel.OperationsHistoryValues"
+                                SeriesType="SeriesType.Bar"
+                                XValue="@(e => e.ValueX)"
+                                YValue="@(e => e.ValueY)"
+                                PointColor="e=> e.Color" ShowDataLabels />
+                        </ApexChart>
                     }
                     
                     if (@_viewModel.ShowEntryTypesAmountChart)

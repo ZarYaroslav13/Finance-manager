@@ -114,7 +114,7 @@ public class MainBodyViewModel : BaseViewModel<MainBody>
         {
                 {nameof(Shared.Dialogs.Logout.Logout.ContentText), $"{Localizer["Logout Confirmation"]}"},
                 {nameof(Shared.Dialogs.Logout.Logout.ButtonText), $"{Localizer["Logout"]}"},
-                {nameof(Shared.Dialogs.Logout.Logout.Color), Color.Error}
+                {nameof(Shared.Dialogs.Logout.Logout.Color), MudBlazor.Color.Error}
             };
 
         var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true };

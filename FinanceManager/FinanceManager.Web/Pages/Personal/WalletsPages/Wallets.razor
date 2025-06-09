@@ -15,11 +15,11 @@
                         </CardHeaderContent>
                         <CardHeaderActions>
                             <MudIconButton Icon="@Icons.Material.Rounded.Edit" Style="background-color:lightseagreen" />
-                            <MudIconButton Icon="@CustomIcons.ActionIcons.Delete" Color="Color.Error" Style="background-color:#fce4ec" />
+                            <MudIconButton Icon="@CustomIcons.ActionIcons.Delete" Color="MudBlazor.Color.Error" Style="background-color:#fce4ec" />
                         </CardHeaderActions>
                     </MudCardHeader>
                     <MudCardContent Class="p-3 hover-elevation-6" Elevation="2">
-                        <MudIcon Icon="@CustomIcons.Wallets.BlackWallet" Color="Color.Primary" Size="Size.Large" ViewBox="0 0 500 500" Style="width: 250px; height: 250px; display: flex; justify-content: center;" />
+                        <MudIcon Icon="@CustomIcons.Wallets.BlackWallet" Color="MudBlazor.Color.Primary" Size="MudBlazor.Size.Large" ViewBox="0 0 500 500" Style="width: 250px; height: 250px; display: flex; justify-content: center;" />
                         <MudTextField ReadOnly="true" Value="@wallet.Balance" Typo="Typo.h4" Adornment="Adornment.End" AdornmentIcon="@CustomIcons.Money.Banknote" Margin=" Margin.Normal"></MudTextField>
                     </MudCardContent>
                 </MudCard>
@@ -28,7 +28,7 @@
     </MudGrid>
 
     <MudFab 
-        Color="Color.Tertiary" 
+        Color="MudBlazor.Color.Tertiary" 
         StartIcon="@Icons.Material.Filled.Add" 
         DropShadow="true" 
         Style="position: fixed; bottom: 24px; right: 24px;" />

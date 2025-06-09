@@ -9,7 +9,7 @@
     <MudGrid>
         <MudItem xs="12">
             <div class="d-flex justify-center">
-                <MudIcon Icon="@CustomIcons.FinanceManager" Color="Color.Primary" Size="Size.Large" ViewBox="0 0 500 500" Style="width: 100px; height: 100px;" />
+                <MudIcon Icon="@CustomIcons.FinanceManager" Color="MudBlazor.Color.Primary" Size="MudBlazor.Size.Large" ViewBox="0 0 500 500" Style="width: 100px; height: 100px;" />
             </div>
         </MudItem>
         <MudItem xs="12">
@@ -38,7 +38,7 @@
             <MudTextField Immediate=true For="@(() => _viewModel.RegistrationModel.ConfirmPassword)" InputType="InputType.Password" @bind-Value="_viewModel.RegistrationModel.ConfirmPassword" Label="@_viewModel.Localizer["Confirm Password"]" />
         </MudItem>
         <MudItem xs="12" Class="d-flex justify-center">
-            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" Disabled="@(!_viewModel.IsRegistrationModelValid)" Style="width: 100%;">@_viewModel.Localizer["Register"]</MudButton>
+            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="MudBlazor.Color.Primary" Size="MudBlazor.Size.Large" Disabled="@(!_viewModel.IsRegistrationModelValid)" Style="width: 100%;">@_viewModel.Localizer["Register"]</MudButton>
         </MudItem>
     </MudGrid>
 </EditForm>

@@ -4,12 +4,20 @@ namespace FinanceManager.Application.Models;
 
 public class FinanceReportDTO : Base.ModelDTO
 {
-    public Guid WalletId { get; }
-    public string WalletName { get; } = String.Empty;
-    public int TotalIncome { get; }
-    public int TotalExpense { get; }
-    public List<FinanceOperationDTO> Operations { get; }
-    public Period Period { get; }
+    public Guid WalletId { get; set; }
+    public string WalletName { get; set; } = String.Empty;
+
+    public int Balance { get; set; }
+
+    public int TotalIncome { get; set; }
+    public int TotalExpense { get; set; }
+    public List<FinanceOperationDTO> Operations { get; set; }
+    public Period Period { get; set; }
+
+    public FinanceReportDTO()
+    {
+            
+    }
 
     public FinanceReportDTO(
         Guid walletId,

@@ -9,10 +9,10 @@
     <MudSnackbarProvider />
     <AuthorizeView>
         <NotAuthorized>
-            <MudAppBar Elevation="4" Color="Color.Primary">
+            <MudAppBar Elevation="4" Color="MudBlazor.Color.Primary">
                 <MudSpacer />
                 <LanguageSelector />
-                <MudIconButton Icon="@_viewModel.ThemeIcon" Color="Color.Inherit" OnClick="@((e) => _viewModel.DarkMode())" />
+                <MudIconButton Icon="@_viewModel.ThemeIcon" Color="MudBlazor.Color.Inherit" OnClick="@((e) => _viewModel.DarkMode())" />
             </MudAppBar>
             <MudContainer MaxWidth="MaxWidth.Small" Class="d-flex align-center" Style="height: 100vh;">
                 <MudPaper Elevation="25" Class="pa-8" Style="width: 500px;">

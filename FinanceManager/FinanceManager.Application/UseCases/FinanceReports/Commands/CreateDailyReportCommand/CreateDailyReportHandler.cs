@@ -30,10 +30,14 @@ public class CreateDailyReportHandler : BaseRequestHandler, IRequestHandler<Crea
             await CheckIsUserHaveAccesToResourseAsync(request,
                 async () => await _walletService.IsCallerWalletOwner(request.WalletId));
 
+            DateTime date = request.Date ?? throw new ArgumentNullException(nameof(request.Date));
+
             var wallet = await _walletService.FindWalletAsync(request.WalletId);
 
             var data = _mapper.Map<FinanceReportDTO>(
-                    await _creator.CreateFinanceReportAsync(wallet, request.Date));
+                    await _creator.CreateFinanceReportAsync(wallet, date));
+
+            data.Balance = wallet.Balance;
 
             return Result<FinanceReportDTO>.Success(data, "Report created successfully!");
         });

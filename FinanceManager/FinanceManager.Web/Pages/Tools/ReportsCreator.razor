@@ -5,10 +5,11 @@
 
 
 <MudContainer>
-    <MudSelect T="FinancialReportVariant" 
-        Label="@_viewModel.Localizer["Variant of financial report"]"
+    <MudSelect T="FinancialReportVariant"
+               Label="@_viewModel.Localizer["Variant of financial report"]"
                @bind-Value="_viewModel.SelectedReportVariant"
-               AdornmentIcon="@CustomIcons.Reports.Icons[_viewModel.SelectedReportVariant]" Adornment=" Adornment.End">
+               AdornmentIcon="@CustomIcons.Reports.Icons[_viewModel.SelectedReportVariant]" Adornment=" Adornment.End"
+               FitContent="true" Placeholder="true">
         @foreach (var item in _viewModel.ReportVariants)
         {
             <MudSelectItem T="FinancialReportVariant" Value="@item">
@@ -16,8 +17,109 @@
             </MudSelectItem>
         }
     </MudSelect>
+
+    @if (_viewModel.SelectedReportVariant == FinancialReportVariant.Daily)
+    {
+        <MudPaper Class="pa-4" Elevation="1">
+            <EditForm Model="@_viewModel.DailyReportRequestModel" OnValidSubmit="@_viewModel.CreateDailyReport">
+                <DataAnnotationsValidator />
+
+                <MudStack Spacing="3">
+
+                    <MudSelect Label="@_viewModel.Localizer["Wallet"]"
+                               @bind-Value="_viewModel.DailyReportRequestModel.WalletId"
+                               T="Guid"
+                               Placeholder="true">
+                        @foreach (var wallet in _viewModel.Wallets)
+                        {
+                            <MudSelectItem T="Guid" Value="@wallet.Id">@wallet.Name</MudSelectItem>
+                        }
+                    </MudSelect>
+
+                    <MudDatePicker Label="@_viewModel.Localizer["Date"]"
+                                   @bind-Date="_viewModel.DailyReportRequestModel.Date"
+                                   Culture="@System.Globalization.CultureInfo.CurrentCulture"
+                                   MaxDate="@DateTime.Today"
+                                   Style=" background: linear-gradient(109.6deg, rgba(22,126,91,1) 11.2%, rgba(223,82,36,1) 91.1%) !important;
+                color: white" important />
+
+
+                    <MudButton ButtonType="@ButtonType.Submit" Color="MudBlazor.Color.Primary" Variant="Variant.Filled">
+                        @_viewModel.Localizer["Generate Report"]
+                    </MudButton>
+                </MudStack>
+            </EditForm>
+        </MudPaper>
+    }
+    else
+    {
+
+    }
+
+@if(_viewModel.ShowReport)
+    {
+        <MudCard Class="mx-auto my-4 p-4" Style="max-width: 800px;">
+            <MudCardHeader>
+                <MudText Typo="Typo.h6">Report for Wallet (@_viewModel.Report.WalletName)</MudText>
+            </MudCardHeader>
+
+            <MudCardContent>
+                <MudStack Spacing="2">
+                    <MudText><strong>_viewModel.Localizer["Wallet Name:"]</strong> @_viewModel.Report.WalletName</MudText>
+                    <MudText><strong>_viewModel.Localizer["Balance:"]</strong> @_viewModel.Report.Balance <MudIcon Icon="@CustomIcons.Money.Banknote" /></MudText>
+                    <MudText><strong>_viewModel.Localizer["Total Income:"]</strong> @_viewModel.Report.TotalIncome <MudIcon Icon="@CustomIcons.Money.Banknote" /></MudText>
+                    <MudText><strong>_viewModel.Localizer["Total Expense:"]</strong> @_viewModel.Report.TotalExpense <MudIcon Icon="@CustomIcons.Money.Banknote" /></MudText>
+                    <MudText><strong>_viewModel.Localizer["Period:"]</strong> @_viewModel.Report.Period.StartDate.ToShortDateString() - @_viewModel.Report.Period.EndDate.ToShortDateString()</MudText>
+                </MudStack>
+
+                <MudDivider Class="my-2" />
+
+                <MudText Typo="Typo.subtitle1" Class="mt-2">Operations</MudText>
+
+                @if (_viewModel.Report.Operations is not null && _viewModel.Report.Operations.Any())
+                {
+                    <MudGrid Class="mt-2" GutterSize="3">
+                        <MudItem xs="3"><MudText Typo="Typo.subtitle2">Name</MudText></MudItem>
+                        <MudItem xs="2"><MudText Typo="Typo.subtitle2">Profit</MudText></MudItem>
+                        <MudItem xs="3"><MudText Typo="Typo.subtitle2">Amount</MudText></MudItem>
+                        <MudItem xs="4"><MudText Typo="Typo.subtitle2">Date</MudText></MudItem>
+
+                        @foreach (var op in _viewModel.Report.Operations)
+                        {
+                            var isProfit = op.Type.EntryType == EntryType.Income;
+                            var colorClass = isProfit ? "text-success" : "text-danger";
+                            var sign = isProfit ? "+" : "-";
+
+                            <MudItem xs="3">
+                                <MudText Class="@colorClass">@op.Type.Name</MudText>
+                            </MudItem>
+                            <MudItem xs="2">
+                                <MudText Class="@colorClass">@((isProfit) ? "Yes" : "No")</MudText>
+                            </MudItem>
+                            <MudItem xs="3">
+                                <MudText Class="@colorClass">@($"{sign}{op.Amount}") ₽</MudText>
+                            </MudItem>
+                            <MudItem xs="4">
+                                <MudText Class="@colorClass">@op.Date.ToShortDateString()</MudText>
+                            </MudItem>
+                        }
+                    </MudGrid>
+
+
+                }
+                else
+                {
+                    <MudText>No operations available.</MudText>
+                }
+            </MudCardContent>
+        </MudCard>
+    }
 </MudContainer>
 
 @code {
+    protected override async Task OnInitializedAsync()
+{
+    await _viewModel.OnInitialized();
+}
 
 }

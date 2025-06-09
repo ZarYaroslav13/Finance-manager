@@ -1,10 +1,10 @@
 ﻿@inject FinanceManager.Web.ViewModels.MainBodyViewModel _viewModel;
 
 <MudAppBar Elevation="25" Style="background-image: linear-gradient(109.6deg, rgba(22,126,91,1) 11.2%, rgba(223,82,36,1) 91.1%);">
-    <MudIcon Icon="@FinanceManager.Web.CustomIcons.FinanceManager" Size="Size.Large" ViewBox="0 0 500 500" />
+    <MudIcon Icon="@FinanceManager.Web.CustomIcons.FinanceManager" Size="MudBlazor.Size.Large" ViewBox="0 0 500 500" />
     <MudText Typo="Typo.h6" Class="ml-4">Finance Manager</MudText>
     <MudToolBar DisableGutters="true">
-        <MudIconButton Icon="@Icons.Material.Outlined.Menu" Color="Color.Inherit" OnClick="@(() => @_viewModel.DrawerToggle())" Class="ml-3" />
+        <MudIconButton Icon="@Icons.Material.Outlined.Menu" Color="MudBlazor.Color.Inherit" OnClick="@(() => @_viewModel.DrawerToggle())" Class="ml-3" />
     </MudToolBar>
     <MudSpacer />
     <MudHidden Breakpoint="Breakpoint.MdAndUp" Invert="true">
@@ -13,15 +13,15 @@
             <LanguageSelector />
         </MudTooltip>
         <MudTooltip Text="@_viewModel.Localizer["Toggle right-to-left/left-to-right"]">
-            <MudIconButton Icon="@Icons.Material.Filled.FormatTextdirectionRToL" Color="Color.Inherit" OnClick="@(() => _viewModel.RightToLeftToggle())" />
+            <MudIconButton Icon="@Icons.Material.Filled.FormatTextdirectionRToL" Color="MudBlazor.Color.Inherit" OnClick="@(() => _viewModel.RightToLeftToggle())" />
         </MudTooltip>
         <MudTooltip Text="@_viewModel.Localizer["Toggle Dark Mode"]">
-            <MudIconButton Icon="@ThemeIcon" Color="Color.Inherit" OnClick="@(() => _viewModel.ToggleDarkMode())" />
+            <MudIconButton Icon="@ThemeIcon" Color="MudBlazor.Color.Inherit" OnClick="@(() => _viewModel.ToggleDarkMode())" />
         </MudTooltip>
     </MudHidden>
     <MudHidden Breakpoint="Breakpoint.SmAndDown" Invert="true">
         <MudTooltip Text="@_viewModel.Localizer["User preferences settings"]">
-            <MudMenu Icon="@Icons.Material.Filled.Settings" Color="Color.Inherit" Dense="true" Direction="Direction.Right" OffsetY="true">
+            <MudMenu Icon="@Icons.Material.Filled.Settings" Color="MudBlazor.Color.Inherit" Dense="true" Direction="Direction.Right" OffsetY="true">
                 <div class="px-2">
                     <MudTooltip Text="@_viewModel.Localizer["Change language"]">
                         <LanguageSelector />
@@ -30,7 +30,7 @@
                         <MudIconButton Icon="@Icons.Material.Filled.FormatTextdirectionRToL" OnClick="@(() => _viewModel.RightToLeftToggle())" />
                     </MudTooltip>
                     <MudTooltip Text="@_viewModel.Localizer["Toggle Dark Mode"]">
-                        <MudIconButton Icon="@ThemeIcon" Color="Color.Inherit" OnClick="@(() => _viewModel.ToggleDarkMode())" />
+                        <MudIconButton Icon="@ThemeIcon" Color="MudBlazor.Color.Inherit" OnClick="@(() => _viewModel.ToggleDarkMode())" />
                     </MudTooltip>
                 </div>
             </MudMenu>
@@ -38,7 +38,7 @@
     </MudHidden>
     <MudMenu Direction="@_viewModel.RightToLeftDirrection" OffsetX="true" Dense="true" Class="mt-1 ml-4">
         <ActivatorContent>
-            <MudAvatar Color="Color.Tertiary">@_viewModel.FirstLetterOfName</MudAvatar>
+            <MudAvatar Color="MudBlazor.Color.Tertiary">@_viewModel.FirstLetterOfName</MudAvatar>
         </ActivatorContent>
         <ChildContent>
             <UserCard Class="mt-n2" />

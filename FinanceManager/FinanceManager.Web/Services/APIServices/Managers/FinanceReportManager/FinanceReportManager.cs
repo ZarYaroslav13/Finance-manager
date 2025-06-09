@@ -12,16 +12,16 @@ public class FinanceReportManager : BaseManager, IFinanceReportManager
     {
     }
 
-    public Task<Result<FinanceReportDTO>> CreateDailyReportAsync(CreateDailyReportCommand command)
+    public async Task<Result<FinanceReportDTO>> CreateDailyReportAsync(CreateDailyReportCommand command)
     {
-        var result = _httpClient.CreateDailyReport(command);
+        var result = await _httpClient.CreateDailyReport(command);
 
         return result;
     }
 
-    public Task<Result<FinanceReportDTO>> CreatePeriodReportAsync(CreatePeriodReportCommand command)
+    public async Task<Result<FinanceReportDTO>> CreatePeriodReportAsync(CreatePeriodReportCommand command)
     {
-        var result = _httpClient.CreatePeriodReport(command);
+        var result = await _httpClient.CreatePeriodReport(command);
 
         return result;
     }

@@ -12,5 +12,5 @@ public class CreateDailyReportCommand : IRequest<Result<FinanceReportDTO>>
     public Guid WalletId { get; set; }
 
     [Required]
-    public DateTime Date { get; set; }
+    public DateTime? Date { get; set; }
 }

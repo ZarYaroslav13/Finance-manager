@@ -11,6 +11,7 @@
 @using Microsoft.Extensions.Localization
 @using Microsoft.JSInterop
 @using MudBlazor
+@using ApexCharts
 @using static Microsoft.AspNetCore.Components.Web.RenderMode
 
 @*Client Services*@
@@ -24,6 +25,8 @@
 @using FinanceManager.Web.ViewModels;
 @using FinanceManager.Web.Shared.Layout;
 @using FinanceManager.Web.Services.APIServices.Managers.TokenManager;
+@using FinanceManager.Web.Helpers;
+@using FinanceManager.Infrastructure.Models;
 
 @inject NavigationManager _navigationManager
 @inject FinanceManager.Web.Services.Autorization.FinanceManagerStateProvider _stateProvider

@@ -4,7 +4,7 @@
 
 <MudPaper Class="px-4" Style="padding-bottom: 20px;">
     <MudStack Spacing="5">
-        <MudText Typo="Typo.h3" Align="Align.Center">@_viewModel.Localizer["Your account"]</MudText>
+        <MudText Typo="Typo.h3" Align="MudBlazor.Align.Center">@_viewModel.Localizer["Your account"]</MudText>
 
         <MudGrid Spacing="3">
             <MudItem xs="12">
@@ -22,7 +22,7 @@
             <MudItem xs="6">
                 <MudButton ButtonType="ButtonType.Button"
                            Variant="Variant.Filled"
-                           Color="Color.Primary" Size="Size.Large"
+                           Color="MudBlazor.Color.Primary" Size="MudBlazor.Size.Large"
                            Style="width: 100%;"
                            OnClick="_viewModel.UpdateAccount">
                     @_viewModel.Localizer["Update credential"]
@@ -31,7 +31,7 @@
             <MudItem xs="6">
                 <MudButton ButtonType="ButtonType.Button"
                            Variant="Variant.Filled"
-                           Color="Color.Primary" Size="Size.Large"
+                           Color="MudBlazor.Color.Primary" Size="MudBlazor.Size.Large"
                            Style="width: 100%;"
                            OnClick="_viewModel.ChangeUserPassword">
                     @_viewModel.Localizer["Change Password"]

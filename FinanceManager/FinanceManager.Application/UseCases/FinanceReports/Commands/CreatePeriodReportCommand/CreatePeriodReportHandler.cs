@@ -33,6 +33,8 @@ public class CreatePeriodReportHandler : BaseRequestHandler, IRequestHandler<Cre
             var data = _mapper.Map<FinanceReportDTO>(
                     await _creator.CreateFinanceReportAsync(wallet, request.StartDate, request.EndDate));
 
+            data.Balance = wallet.Balance;
+
             return Result<FinanceReportDTO>.Success(data, "Report created successfully!");
         });
     }

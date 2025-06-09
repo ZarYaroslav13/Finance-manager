@@ -9,7 +9,7 @@
     <DataAnnotationsValidator/>
     <MudItem xs="12">
         <div class="d-flex justify-center">
-            <MudIcon Icon="@CustomIcons.FinanceManager" Color="Color.Primary" Size="Size.Large" ViewBox="0 0 500 500" Style="width: 100px; height: 100px;" />
+            <MudIcon Icon="@CustomIcons.FinanceManager" Color="MudBlazor.Color.Primary" Size="MudBlazor.Size.Large" ViewBox="0 0 500 500" Style="width: 100px; height: 100px;" />
         </div>
     </MudItem>
     <MudGrid>
@@ -38,13 +38,13 @@
                           InputType="@_viewModel.PasswordInput" Adornment="Adornment.End" AdornmentIcon="@_viewModel.PasswordInputIcon" OnAdornmentClick="_viewModel.TogglePasswordVisibility" Immediate="true" />
         </MudItem>
         <MudItem xs="12" Class="d-flex justify-space-between align-center">
-            <MudCheckBox T="bool" Label="@_viewModel.Localizer["Remember me?"]" Color="Color.Primary" Class="ml-n1"></MudCheckBox> <MudLink Href="/account/forgot-password">@_viewModel.Localizer["Forgot password?"]</MudLink>
+            <MudCheckBox T="bool" Label="@_viewModel.Localizer["Remember me?"]" Color="MudBlazor.Color.Primary" Class="ml-n1"></MudCheckBox> <MudLink Href="/account/forgot-password">@_viewModel.Localizer["Forgot password?"]</MudLink>
         </MudItem>
         <MudItem xs="12" Class="d-flex justify-center">
-            <MudButton ButtonType="ButtonType.Button" OnClick="@_viewModel.FillUserAsync" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" Style="width: 100%;">@_viewModel.Localizer["Fill by user credentional"]</MudButton>
+            <MudButton ButtonType="ButtonType.Button" OnClick="@_viewModel.FillUserAsync" Variant="Variant.Filled" Color="MudBlazor.Color.Primary" Size="MudBlazor.Size.Large" Style="width: 100%;">@_viewModel.Localizer["Fill by user credentional"]</MudButton>
         </MudItem>
         <MudItem xs="12" Class="d-flex justify-center">
-            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" Disabled="@(!_viewModel.IsLoginModelValid)" Style="width: 100%;">@_viewModel.Localizer["Sign In"]</MudButton>
+            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="MudBlazor.Color.Primary" Size="MudBlazor.Size.Large" Disabled="@(!_viewModel.IsLoginModelValid)" Style="width: 100%;">@_viewModel.Localizer["Sign In"]</MudButton>
         </MudItem>
     </MudGrid>
 </EditForm>

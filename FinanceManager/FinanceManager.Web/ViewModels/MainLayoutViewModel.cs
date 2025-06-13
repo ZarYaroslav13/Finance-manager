@@ -2,6 +2,7 @@
 using FinanceManager.Web.Preferences;
 using FinanceManager.Web.Services.Autorization;
 using FinanceManager.Web.Settings;
+using Microsoft.Extensions.Localization;
 using MudBlazor;
 using System.Globalization;
 
@@ -16,10 +17,14 @@ public class MainLayoutViewModel : IViewModel
 
     public string ThemeIcon { get; set; }
 
-    public MainLayoutViewModel(FinanceManagerStateProvider stateProvider, IPreferencesManager preferencesManager)
+    public IStringLocalizer<MainLayoutViewModel> Localizer { get; set; }
+
+    public MainLayoutViewModel(FinanceManagerStateProvider stateProvider, IPreferencesManager preferencesManager, IStringLocalizer<MainLayoutViewModel> localizer)
     {
         _preferencesManager = preferencesManager ?? throw new ArgumentNullException(nameof(preferencesManager));
         _stateProvider = stateProvider;
+
+        Localizer = localizer ?? throw new ArgumentNullException(nameof(localizer));
     }
 
     public async Task InitializationAsync()
@@ -53,7 +58,7 @@ public class MainLayoutViewModel : IViewModel
         CurrentTheme = await _preferencesManager.GetCurrentThemeAsync();
         RightToLeft = await _preferencesManager.IsRTL();
 
-        ThemeIcon = CurrentTheme == FinanceManagerThemes.DarkTheme ?
+        ThemeIcon = CurrentTheme == FinanceManagerThemes.DefaultTheme ?
             Icons.Material.Filled.WbSunny :
            Icons.Material.Filled.Brightness2;
 

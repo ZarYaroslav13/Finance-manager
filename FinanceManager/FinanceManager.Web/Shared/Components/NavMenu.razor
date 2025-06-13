@@ -7,13 +7,13 @@
 
     <MudListSubheader Class="mt-2 mb-n2">@_viewModel.Localizer["Personal"]</MudListSubheader>
     <MudNavLink Href="@PagesHref.Personal.Account" Icon="@Icons.Material.Filled.Person"> @_viewModel.Localizer["Account"] </MudNavLink>
-    <MudNavLink Href="@PagesHref.Personal.Wallet.Wallets" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Outlined.AccountBalanceWallet"> @_viewModel.Localizer["Wallets"] </MudNavLink>
-    <MudNavLink Href="@PagesHref.Personal.FinanceOperationType.FinanceOperationTypes" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Outlined.ListAlt"> @_viewModel.Localizer["FincanceOperationTypes"] </MudNavLink>
-    <MudNavLink Href="@PagesHref.Personal.FinanceOperation.FinanceOperations" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.AttachMoney"> @_viewModel.Localizer["FincanceOperations"] </MudNavLink>
+    <MudNavLink Href="@PagesHref.Personal.Wallet.Wallets" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Outlined.AccountBalanceWallet"> @_viewModel.Localizer["Virtual Wallets"] </MudNavLink>
+    <MudNavLink Href="@PagesHref.Personal.FinanceOperationType.FinanceOperationTypes" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Outlined.ListAlt"> @_viewModel.Localizer["Financial operation types"] </MudNavLink>
+    <MudNavLink Href="@PagesHref.Personal.FinanceOperation.FinanceOperations" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.AttachMoney"> @_viewModel.Localizer["Financial operations"] </MudNavLink>
 
 
     <MudListSubheader Class="mt-2 mb-n2">@_viewModel.Localizer["Tools"]</MudListSubheader>
-    <MudNavLink Href="@PagesHref.Tools.FinanceReportsCreator" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Outlined.AddChart"> @_viewModel.Localizer["Reports"] </MudNavLink>
+    <MudNavLink Href="@PagesHref.Tools.FinanceReportsCreator" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Outlined.AddChart"> @_viewModel.Localizer["Financial reports"] </MudNavLink>
 
 
     @if (_viewModel.CanViewAdminMenu)
@@ -24,7 +24,7 @@
     }
 
     <MudListSubheader Class="mt-2 mb-n2">@_viewModel.Localizer["Exit"]</MudListSubheader>
-    <MudNavLink Href="@PagesHref.Logout" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Logout"> @_viewModel.Localizer["logout"] </MudNavLink>
+    <MudNavLink Href="@PagesHref.Logout" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Logout"> @_viewModel.Localizer["Logout"] </MudNavLink>
 
 
 </MudNavMenu>

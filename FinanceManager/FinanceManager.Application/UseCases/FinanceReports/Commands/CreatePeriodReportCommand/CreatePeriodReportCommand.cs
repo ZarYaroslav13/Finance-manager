@@ -12,8 +12,8 @@ public class CreatePeriodReportCommand : IRequest<Result<FinanceReportDTO>>
     public Guid WalletId { get; set; }
 
     [Required]
-    public DateTime StartDate { get; set; }
+    public DateTime? StartDate { get; set; }
 
     [Required]
-    public DateTime EndDate { get; set; }
+    public DateTime? EndDate { get; set; }
 }

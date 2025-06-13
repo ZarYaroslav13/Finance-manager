@@ -28,10 +28,13 @@ public class CreatePeriodReportHandler : BaseRequestHandler, IRequestHandler<Cre
             await CheckIsUserHaveAccesToResourseAsync(request,
                 async () => await _walletService.IsCallerWalletOwner(request.WalletId));
 
+            DateTime startDate = request.StartDate ?? throw new ArgumentNullException(nameof(request.StartDate));
+            DateTime endDate = request.EndDate ?? throw new ArgumentNullException(nameof(request.EndDate));
+
             var wallet = await _walletService.FindWalletAsync(request.WalletId);
 
             var data = _mapper.Map<FinanceReportDTO>(
-                    await _creator.CreateFinanceReportAsync(wallet, request.StartDate, request.EndDate));
+                    await _creator.CreateFinanceReportAsync(wallet, startDate, endDate));
 
             data.Balance = wallet.Balance;
 

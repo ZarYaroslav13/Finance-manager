@@ -1,5 +1,5 @@
 ﻿using FinanceManager.Web.Services.Report;
-using FinanceManager.Web.ViewModels.Pages.Tools.ReportCreator;
+using FinanceManager.Web.ViewModels.Components.Pages.Tools.ReportCreator;
 using System.Diagnostics.CodeAnalysis;
 
 namespace FinanceManager.Web;

@@ -6,7 +6,7 @@
                 <NotAuthorized>
                     @if(!context.User.Identity?.IsAuthenticated ?? true)
                     {
-                        <FinanceManager.Web.Pages.Authentication.Login />
+                        <FinanceManager.Web.Components.Pages.Authentication.Login />
                     }
                     else
                     {

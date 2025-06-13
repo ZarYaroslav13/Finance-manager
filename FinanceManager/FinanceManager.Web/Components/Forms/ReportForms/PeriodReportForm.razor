@@ -1,0 +1,54 @@
+﻿@using FinanceManager.Application.Models
+@using FinanceManager.Application.UseCases.FinanceReports.Commands.CreatePeriodReportCommand
+@inject IStringLocalizer<PeriodReportForm> Localizer
+
+
+<MudPaper Class="pa-4" Elevation="1">
+    <EditForm Model="@Model" OnValidSubmit="@(() => SubmitMethod.Invoke())">
+        <DataAnnotationsValidator />
+
+        <MudStack Spacing="3">
+
+            <MudSelect Label="@Localizer["Wallet"]"
+                       @bind-Value="Model.WalletId"
+                       T="Guid"
+                       Placeholder="true">
+                @foreach (var wallet in Wallets)
+                {
+                    <MudSelectItem T="Guid" Value="@wallet.Id">@wallet.Name</MudSelectItem>
+                }
+            </MudSelect>
+
+            <MudDatePicker Label="@Localizer["Start date"]"
+                           @bind-Date="Model.StartDate"
+                           Culture="@System.Globalization.CultureInfo.CurrentCulture"
+                           MaxDate="@DateTime.Today"
+                           Style=" background: linear-gradient(109.6deg, rgba(22,126,91,1) 11.2%, rgba(223,82,36,1) 91.1%) !important;
+                color: white" important />
+
+            <MudDatePicker Label="@Localizer["End date"]"
+                           @bind-Date="Model.EndDate"
+                           Culture="@System.Globalization.CultureInfo.CurrentCulture"
+                           MaxDate="@DateTime.Today"
+                           Style=" background: linear-gradient(109.6deg, rgba(22,126,91,1) 11.2%, rgba(223,82,36,1) 91.1%) !important;
+                color: white" important />
+
+
+            <MudButton ButtonType="@ButtonType.Submit" Color="MudBlazor.Color.Primary" Variant="Variant.Filled">
+                @Localizer["Generate Report"]
+            </MudButton>
+        </MudStack>
+    </EditForm>
+</MudPaper>
+
+@code{
+
+    [Parameter]
+    public List<WalletDTO> Wallets { get; set; } = new();
+
+    [Parameter]
+    public CreatePeriodReportCommand Model { get; set; } = new();
+
+    [Parameter]
+    public Func<Task> SubmitMethod { get; set; }
+}

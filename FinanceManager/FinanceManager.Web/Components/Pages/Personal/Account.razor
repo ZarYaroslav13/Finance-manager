@@ -1,0 +1,60 @@
+﻿@page "/account"
+@using FinanceManager.Web.ViewModels.Components.Pages.Personal
+@attribute [Authorize]
+@inject AccountViewModel _viewModel
+
+<MudPaper Class="px-4" Style="padding-bottom: 20px;">
+    <MudStack Spacing="5">
+        <MudText Typo="Typo.h3" Align="MudBlazor.Align.Center">@_viewModel.Localizer["Your account"]</MudText>
+
+        <MudGrid Spacing="3">
+            <MudItem xs="12">
+                <MudTextField ReadOnly="true" Value="_viewModel.AccountModel.FirstName" Label="@_viewModel.Localizer["First Name"]" />
+            </MudItem>
+            <MudItem xs="12">
+                <MudTextField ReadOnly="true" Value="_viewModel.AccountModel.LastName" Label="@_viewModel.Localizer["Last Name"]" />
+            </MudItem>
+            <MudItem xs="12">
+                <MudTextField ReadOnly="true" T="string" Label="@_viewModel.Localizer["Email"]" Adornment="Adornment.End" AdornmentIcon="@CustomIcons.Gmail" Value="_viewModel.AccountModel.Email" />
+            </MudItem>
+            <MudItem xs="12">
+                <MudTextField ReadOnly="true" T="string" Label="@_viewModel.Localizer["Roles"]" Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Outlined.Person" Value="_viewModel.AccountModel.Roles.Aggregate((sum, next) => sum += next + ' ')" />
+            </MudItem>
+            <MudItem xs="6">
+                <MudButton ButtonType="ButtonType.Button"
+                           Variant="Variant.Filled"
+                           Color="MudBlazor.Color.Primary" Size="MudBlazor.Size.Large"
+                           Style="width: 100%;"
+                           OnClick="_viewModel.UpdateAccount">
+                    @_viewModel.Localizer["Update credential"]
+                </MudButton>
+            </MudItem>
+            <MudItem xs="6">
+                <MudButton ButtonType="ButtonType.Button"
+                           Variant="Variant.Filled"
+                           Color="MudBlazor.Color.Primary" Size="MudBlazor.Size.Large"
+                           Style="width: 100%;"
+                           OnClick="_viewModel.ChangeUserPassword">
+                    @_viewModel.Localizer["Change Password"]
+                </MudButton>
+            </MudItem><MudItem xs="3"/>
+            <MudItem xs="6">
+                <MudButton ButtonType="ButtonType.Button"
+                           Variant="Variant.Filled"
+                           Color="MudBlazor.Color.Error" Size="MudBlazor.Size.Large"
+                           Style="width: 100%;"
+                           OnClick="_viewModel.ChangeUserPassword">
+                    @_viewModel.Localizer["Delete account"]
+                </MudButton>
+            </MudItem>
+        </MudGrid>
+    </MudStack>
+</MudPaper>
+
+@code{
+    protected override void OnInitialized()
+    {
+        _viewModel.OnInitialized();
+    }
+
+}

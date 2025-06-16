@@ -1,6 +1,5 @@
 ﻿using FinanceManager.Application.Models;
 using FinanceManager.Web.Extentions;
-using FinanceManager.Web.Components.Pages.Personal.WalletsPages;
 using FinanceManager.Web.Services;
 using FinanceManager.Web.Services.APIServices.Managers.WalletManager;
 using Microsoft.Extensions.Localization;

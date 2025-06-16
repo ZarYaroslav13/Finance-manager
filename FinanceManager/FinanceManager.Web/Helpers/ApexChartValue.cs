@@ -1,6 +1,4 @@
-﻿using ApexCharts;
-
-namespace FinanceManager.Web.Helpers;
+﻿namespace FinanceManager.Web.Helpers;
 
 public class ApexChartValue<T>
 {
@@ -11,7 +9,7 @@ public class ApexChartValue<T>
 
     public ApexChartValue()
     {
-        
+
     }
 }
 

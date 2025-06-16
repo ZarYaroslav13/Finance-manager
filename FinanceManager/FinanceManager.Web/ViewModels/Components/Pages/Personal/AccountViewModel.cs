@@ -1,7 +1,7 @@
 ﻿using FinanceManager.Application.Models.Base;
 using FinanceManager.Application.UseCases.Accounts.Commands.Commands.UpdateAccountCommand;
-using FinanceManager.Web.Extentions;
 using FinanceManager.Web.Components.Pages.Personal;
+using FinanceManager.Web.Extentions;
 using FinanceManager.Web.Services;
 using FinanceManager.Web.Shared.Dialogs.Account;
 using Microsoft.Extensions.Localization;

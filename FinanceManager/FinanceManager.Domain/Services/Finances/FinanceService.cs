@@ -34,7 +34,7 @@ public class FinanceService : BaseService, IFinanceService
     public async Task<List<FinanceOperationTypeModel>> GetAllFinanceOperationTypesOfWalletAsync(Guid walletId)
     {
         return (await _financeOperationTypeRepository
-                .GetAllAsync(filter: fot => fot.WalletId == walletId))
+                .GetAllAsync(includeProperties: nameof(FinanceOperationType.Wallet), filter: fot => fot.WalletId == walletId))
                 .Select(_mapper.Map<FinanceOperationTypeModel>)
                 .ToList();
     }
@@ -145,7 +145,7 @@ public class FinanceService : BaseService, IFinanceService
                        fo.Type.WalletId == walletId
                     && fo.Date <= dayAfterEndDate
                     && fo.Date >= dayBeforeStartDate,
-                orderBy: foO => 
+                orderBy: foO =>
                        foO.OrderBy(fo => fo.Date)))
                 .Select(_mapper.Map<FinanceOperationModel>)
                 .ToList();

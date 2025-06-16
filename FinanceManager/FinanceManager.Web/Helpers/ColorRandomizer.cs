@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace FinanceManager.Web.Helpers;
+﻿namespace FinanceManager.Web.Helpers;
 
 public static class ColorRandomizer
 {

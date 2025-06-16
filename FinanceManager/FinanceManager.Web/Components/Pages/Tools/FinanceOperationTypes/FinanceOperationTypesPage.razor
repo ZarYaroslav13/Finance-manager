@@ -1,0 +1,56 @@
+﻿@page "/finance-operation-types"
+@page "/finance-operation-types/{WalletId:guid}"
+@using FinanceManager.Web.ViewModels.Components.Pages.Tools.FinanceOperationTypes
+@using FinanceManager.Application.Models
+@inject FinanceOperationTypesPageViewModel _viewModel
+
+
+<MudTable Items="@_viewModel.TableData" Hover="true" Dense="true">
+    <ToolBarContent>
+        @if (_viewModel.WalletId == Guid.Empty)
+        {
+            <MudText Typo=" Typo.h3">@_viewModel.Localizer["Your finincial types"]</MudText>
+        }
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh><MudTableSortLabel SortBy=@_viewModel.SortFunctions[FinanceOperationTypesPageViewModel.SortLabels.Name] T="FinanceOperationTypeDTO">@_viewModel.Localizer["Name"]</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortBy=@_viewModel.SortFunctions[FinanceOperationTypesPageViewModel.SortLabels.Description] T="FinanceOperationTypeDTO">@_viewModel.Localizer["Description"]</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortBy=@_viewModel.SortFunctions[FinanceOperationTypesPageViewModel.SortLabels.EntryType] T="FinanceOperationTypeDTO">@_viewModel.Localizer["Income/Expense"]</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortBy=@_viewModel.SortFunctions[FinanceOperationTypesPageViewModel.SortLabels.WalletName] T="FinanceOperationTypeDTO">@_viewModel.Localizer["Wallet name"]</MudTableSortLabel></MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="@FinanceOperationTypesPageViewModel.SortLabels.Name">@context.Name</MudTd>
+        <MudTd DataLabel="@FinanceOperationTypesPageViewModel.SortLabels.Description">@context.Description</MudTd>
+        <MudTd DataLabel="@FinanceOperationTypesPageViewModel.SortLabels.EntryType"><MudText Color="@GetColor(context)">@context.EntryType</MudText></MudTd>
+        <MudTd DataLabel="@FinanceOperationTypesPageViewModel.SortLabels.WalletName">@context.WalletName</MudTd>
+    </RowTemplate>
+    <LoadingContent>
+        <MudText>@_viewModel.Localizer["Loading..."]</MudText>
+    </LoadingContent>
+    <NoRecordsContent>
+        <MudText>No matching records found</MudText>
+    </NoRecordsContent>
+    <PagerContent>
+        <MudTablePager/>
+    </PagerContent>
+</MudTable>
+
+
+@code {
+    [Parameter]
+    public Guid WalletId
+    {
+        get => _viewModel.WalletId;
+        set => _viewModel.WalletId = value;
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await _viewModel.OnInitializedAsync();
+    }
+
+    protected MudBlazor.Color GetColor(FinanceOperationTypeDTO item)
+    {
+        return item.EntryType == EntryType.Income ? MudBlazor.Color.Success : MudBlazor.Color.Error;
+    }
+}

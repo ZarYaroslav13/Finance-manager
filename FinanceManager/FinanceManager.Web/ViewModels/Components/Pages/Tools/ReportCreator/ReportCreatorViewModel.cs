@@ -36,7 +36,7 @@ public class ReportCreatorViewModel : BaseViewModel<ReportsCreator>
     public async Task CreateReport(FinancialReportVariant variant)
     {
 
-        Report = await _reportRequests[variant].Invoke() ;
+        Report = await _reportRequests[variant].Invoke();
         await SetChartData();
         ShowReport = true;
     }
@@ -192,7 +192,7 @@ public class ReportCreatorViewModel : BaseViewModel<ReportsCreator>
         var result = new Dictionary<FinanceOperationTypeDTO, int>();
         FinanceOperationTypeDTO type = new();
 
-        foreach(var operation in Report.Operations)
+        foreach (var operation in Report.Operations)
         {
             type = result.FirstOrDefault(r => r.Key.Id == operation.Type.Id).Key;
             if (type == null)

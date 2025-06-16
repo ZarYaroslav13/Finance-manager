@@ -1,6 +1,6 @@
 ﻿using FinanceManager.Application.UseCases.Users.Commands.RegisterCommand;
-using FinanceManager.Web.Pages;
 using FinanceManager.Web.Components.Pages.Authentication;
+using FinanceManager.Web.Pages;
 using FinanceManager.Web.Services;
 using FinanceManager.Web.Services.APIServices.Managers.IUserManager;
 using Microsoft.AspNetCore.Components.Forms;

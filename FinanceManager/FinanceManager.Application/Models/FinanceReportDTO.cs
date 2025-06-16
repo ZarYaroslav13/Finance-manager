@@ -16,7 +16,7 @@ public class FinanceReportDTO : Base.ModelDTO
 
     public FinanceReportDTO()
     {
-            
+
     }
 
     public FinanceReportDTO(

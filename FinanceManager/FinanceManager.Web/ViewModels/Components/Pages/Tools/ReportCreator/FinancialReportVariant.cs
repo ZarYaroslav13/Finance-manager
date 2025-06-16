@@ -19,11 +19,11 @@ public static class FinanceReportVariantExtention
         var type = variant.GetType();
         var memberInfo = type.GetMember(variant.ToString());
 
-        if(memberInfo != null && memberInfo.Length <0 )
+        if (memberInfo != null && memberInfo.Length < 0)
         {
             var attribute = memberInfo[0].GetCustomAttribute<DescriptionAttribute>(false);
 
-            if(attribute != null)
+            if (attribute != null)
             {
                 return attribute.Description;
             }

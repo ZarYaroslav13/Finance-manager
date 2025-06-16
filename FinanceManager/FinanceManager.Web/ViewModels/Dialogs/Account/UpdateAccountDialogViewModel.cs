@@ -20,7 +20,7 @@ public class UpdateAccountDialogViewModel : BaseViewModel<UpdateAccountDialog>
 
     public bool IsModelValid => EditContext.Validate();
 
-    public bool Updating {  get; set; } = false;
+    public bool Updating { get; set; } = false;
 
     private readonly IAccountManager _accountManager;
 

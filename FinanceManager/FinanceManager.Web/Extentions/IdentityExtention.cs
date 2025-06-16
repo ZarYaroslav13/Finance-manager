@@ -1,4 +1,6 @@
 ﻿using FinanceManager.Application.Models;
+using FinanceManager.Application.Models.Base;
+using FinanceManager.Application.UseCases.Accounts.Commands.Commands.UpdateAccountCommand;
 using FinanceManager.Web.Shared.Constants.Identity;
 using System.Security.Claims;
 
@@ -30,6 +32,26 @@ public static class IdentityExtention
     internal static string GetExpireTime(this ClaimsPrincipal claimsPrincipal)
         => claimsPrincipal.FindFirstValue(IdentityConstants.ExpireTime);
 
+    internal static void SetUserInformatiom(this ClaimsIdentity claimsIdentity, UserDTO user)
+    {
+        claimsIdentity.RemoveUserInformation();
+
+        claimsIdentity.AddClaim(new(ClaimTypes.NameIdentifier, user.Id.ToString()));
+        claimsIdentity.AddClaim(new(ClaimTypes.Name, user.FirstName));
+        claimsIdentity.AddClaim(new(ClaimTypes.Surname, user.LastName));
+        claimsIdentity.AddClaim(new(ClaimTypes.Email, user.Email));
+    }
+
+    internal static void SetUserInformatiom(this ClaimsIdentity claimsIdentity, UpdateAccountCommand command)
+    {
+        claimsIdentity.RemoveUserInformation();
+
+        claimsIdentity.AddClaim(new(ClaimTypes.NameIdentifier, command.Id.ToString()));
+        claimsIdentity.AddClaim(new(ClaimTypes.Name, command.FirstName));
+        claimsIdentity.AddClaim(new(ClaimTypes.Surname, command.LastName));
+        claimsIdentity.AddClaim(new(ClaimTypes.Email, command.Email));
+    }
+
     internal static void SetExpireToken(this ClaimsIdentity claimsIdentity, string token)
         => claimsIdentity.AddClaim(new(IdentityConstants.AuthToken, token));
 
@@ -52,5 +74,13 @@ public static class IdentityExtention
         claimsIdentity.RemoveClaim(claimsIdentity.FindFirst(IdentityConstants.ExpireTime));
         claimsIdentity.RemoveClaim(claimsIdentity.FindFirst(IdentityConstants.RefreshToken));
         claimsIdentity.RemoveClaim(claimsIdentity.FindFirst(IdentityConstants.ExpireTime));
+    }
+
+    private static void RemoveUserInformation(this ClaimsIdentity claimsIdentity)
+    {
+        claimsIdentity.RemoveClaim(claimsIdentity.FindFirst(ClaimTypes.Email));
+        claimsIdentity.RemoveClaim(claimsIdentity.FindFirst(ClaimTypes.NameIdentifier));
+        claimsIdentity.RemoveClaim(claimsIdentity.FindFirst(ClaimTypes.Name));
+        claimsIdentity.RemoveClaim(claimsIdentity.FindFirst(ClaimTypes.Surname));
     }
 }

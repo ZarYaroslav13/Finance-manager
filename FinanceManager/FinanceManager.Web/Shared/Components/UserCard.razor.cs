@@ -1,5 +1,7 @@
 ﻿using FinanceManager.Web.Extentions;
+using FinanceManager.Web.Services.Autorization;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 
 namespace FinanceManager.Web.Shared.Components;
 
@@ -9,14 +11,26 @@ public partial class UserCard
     private string FirstName { get; set; }
     private string SecondName { get; set; }
     private string Email { get; set; }
-    private char FirstLetterOfName { get; set; }
+    private char FirstLetterOfName { get; set; } = '-';
+
+    protected override void OnInitialized()
+    {
+        _stateProvider.AuthenticationStateChanged += OnAuthenticationStateChanged;
+    }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        if (firstRender)
+        await LoadDataAsync();
+    }
+
+    private async void OnAuthenticationStateChanged(Task<AuthenticationState> state)
+    {
+        await InvokeAsync(async () =>
         {
             await LoadDataAsync();
-        }
+
+            StateHasChanged();
+        });
     }
 
     private async Task LoadDataAsync()

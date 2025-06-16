@@ -6,6 +6,8 @@ using FinanceManager.Web.Services;
 using FinanceManager.Web.Shared.Dialogs.Account;
 using Microsoft.Extensions.Localization;
 using MudBlazor;
+using System.Security.Claims;
+using static FinanceManager.Domain.API.APIEndpoints;
 
 namespace FinanceManager.Web.ViewModels.Components.Pages.Personal;
 
@@ -34,7 +36,24 @@ public class AccountViewModel : BaseViewModel<Account>
     {
         var parameters = new DialogParameters<UpdateAccountDialog>() { { x => x.CurrentInfo, _mapper.Map<UpdateAccountCommand>(AccountModel) } };
 
-        await _dialogService.ShowAsync<UpdateAccountDialog>("Update", parameters);
+        var dialog = (DialogReference)await _dialogService.ShowAsync<UpdateAccountDialog>("Update", parameters);
+
+        var result = await dialog.Result;
+
+        if (!result.Canceled)
+        {
+            _snackBar.Add(string.Format(Localizer["Information updated successfully!"]), Severity.Success);
+            var user = _httpContextAccessor.HttpContext.User;
+            AccountModel = new()
+            {
+                Id = new(user.GetUserId()),
+                FirstName = user.GetFirstName(),
+                LastName = user.GetLastName(),
+                Email = user.GetEmail(),
+                Roles = user.GetUserRoles()
+            };
+            
+        }
     }
 
     public async Task ChangeUserPassword()

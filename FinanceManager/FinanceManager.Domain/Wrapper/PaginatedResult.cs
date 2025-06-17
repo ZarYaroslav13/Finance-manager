@@ -25,7 +25,7 @@ public class PaginatedResult<T> : Result
 
     public static PaginatedResult<T> Failure(string message)
     {
-        return new PaginatedResult<T>(false, default, new(){ message });
+        return new PaginatedResult<T>(false, default, new() { message });
     }
 
     public static PaginatedResult<T> Failure(List<string> messages)

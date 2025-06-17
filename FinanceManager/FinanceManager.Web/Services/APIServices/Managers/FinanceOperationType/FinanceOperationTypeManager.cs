@@ -3,15 +3,12 @@ using FinanceManager.Application.UseCases.FinanceOperationTypes.Commands.AddFina
 using FinanceManager.Application.UseCases.FinanceOperationTypes.Commands.UpdateFinanceOperationTypeCommand;
 using FinanceManager.Domain.Wrapper;
 using FinanceManager.Web.Services.APIServices.APIHttpClient;
-using FinanceManager.Web.Services.APIServices.Managers.IAccountManager;
-using System;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace FinanceManager.Web.Services.APIServices.Managers.FinanceOperationType
 {
     public class FinanceOperationTypeManager : BaseManager, IFinanceOperationTypeManager
     {
-        public FinanceOperationTypeManager(IFinanceManagerApiHttpClient httpClient, 
+        public FinanceOperationTypeManager(IFinanceManagerApiHttpClient httpClient,
             ILogger<FinanceOperationTypeManager> logger) : base(httpClient, logger)
         {
         }

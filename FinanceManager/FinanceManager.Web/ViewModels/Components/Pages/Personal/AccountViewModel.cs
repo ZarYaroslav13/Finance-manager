@@ -6,8 +6,6 @@ using FinanceManager.Web.Services;
 using FinanceManager.Web.Shared.Dialogs.Accounts;
 using Microsoft.Extensions.Localization;
 using MudBlazor;
-using System.Security.Claims;
-using static FinanceManager.Domain.API.APIEndpoints;
 
 namespace FinanceManager.Web.ViewModels.Components.Pages.Personal;
 
@@ -52,7 +50,7 @@ public class AccountViewModel : BaseViewModel<Account>
                 Email = user.GetEmail(),
                 Roles = user.GetUserRoles()
             };
-            
+
         }
     }
 

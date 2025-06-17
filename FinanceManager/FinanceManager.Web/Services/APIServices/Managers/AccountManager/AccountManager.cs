@@ -1,7 +1,6 @@
 ﻿using FinanceManager.Application.UseCases.Accounts.Commands.Commands.UpdateAccountCommand;
 using FinanceManager.Application.UseCases.Accounts.Commands.Commands.UpdatePasswordAccountCommand;
 using FinanceManager.Web.Services.APIServices.APIHttpClient;
-using FinanceManager.Web.Services.APIServices.Managers.FinanceOperationType;
 using FinanceManager.Web.Services.Autorization;
 
 namespace FinanceManager.Web.Services.APIServices.Managers.IAccountManager
@@ -9,7 +8,7 @@ namespace FinanceManager.Web.Services.APIServices.Managers.IAccountManager
     public class AccountManager : BaseManager, IAccountManager
     {
         private readonly FinanceManagerStateProvider _stateProvider;
-        public AccountManager(FinanceManagerStateProvider stateProvider, 
+        public AccountManager(FinanceManagerStateProvider stateProvider,
             IFinanceManagerApiHttpClient httpClient, ILogger<AccountManager> logger) : base(httpClient, logger)
         {
             _stateProvider = stateProvider ?? throw new ArgumentNullException(nameof(stateProvider));

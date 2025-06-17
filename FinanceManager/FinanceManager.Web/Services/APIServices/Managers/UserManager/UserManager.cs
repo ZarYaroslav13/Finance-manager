@@ -5,7 +5,6 @@ using FinanceManager.Application.UseCases.Users.Commands.ResetPasswordCommand;
 using FinanceManager.Application.UseCases.Users.Queries.GetAllUsersQuery;
 using FinanceManager.Domain.Wrapper;
 using FinanceManager.Web.Services.APIServices.APIHttpClient;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace FinanceManager.Web.Services.APIServices.Managers.IUserManager;
 

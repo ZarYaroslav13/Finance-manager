@@ -1,13 +1,10 @@
 ﻿using FinanceManager.Application.UseCases.Wallets.Commands.CreateWalletCommand;
 using FinanceManager.Web.Extentions;
 using FinanceManager.Web.Services;
-using FinanceManager.Web.Services.APIServices.Managers.IAccountManager;
 using FinanceManager.Web.Services.APIServices.Managers.WalletManager;
-using FinanceManager.Web.Shared.Dialogs.Accounts;
 using FinanceManager.Web.Shared.Dialogs.Wallets;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.Extensions.Localization;
-using System.Security.Claims;
 
 namespace FinanceManager.Web.ViewModels.Dialogs.Wallets;
 
@@ -38,7 +35,7 @@ public class AddWalletDialogViewModel : BaseViewModel<AddWalletDialog>
         EditContext = new(_createModel);
     }
 
-    public async Task TryToCreate(Action navigateIsSuccess)
+    public async Task TryToCreate()
     {
         Adding = true;
 
@@ -47,10 +44,6 @@ public class AddWalletDialogViewModel : BaseViewModel<AddWalletDialog>
         Adding = false;
 
         if (result.Succeeded)
-        {
             _snackBar.Add(Localizer["Wallet added successfully!"], MudBlazor.Severity.Success);
-
-            navigateIsSuccess();
-        }
     }
 }

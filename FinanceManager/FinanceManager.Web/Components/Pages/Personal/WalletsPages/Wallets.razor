@@ -15,7 +15,7 @@
                             <MudText Typo="Typo.h3">@wallet.Name</MudText>
                         </CardHeaderContent>
                         <CardHeaderActions>
-                            <MudIconButton Icon="@Icons.Material.Rounded.Edit" Style="background-color:lightseagreen"/>
+                            <MudIconButton Icon="@Icons.Material.Rounded.Edit" Style="background-color:lightseagreen" OnClick="@(() => _viewModel.UpdateWallet(wallet))" />
                             <MudIconButton Icon="@CustomIcons.ActionIcons.Delete" Color="MudBlazor.Color.Error" Style="background-color:#fce4ec" OnClick="@(() => _viewModel.DeleteWallet(wallet.Id))"/>
                         </CardHeaderActions>
                     </MudCardHeader>

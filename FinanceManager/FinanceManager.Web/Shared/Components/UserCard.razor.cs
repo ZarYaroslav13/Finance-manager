@@ -1,5 +1,4 @@
 ﻿using FinanceManager.Web.Extentions;
-using FinanceManager.Web.Services.Autorization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 

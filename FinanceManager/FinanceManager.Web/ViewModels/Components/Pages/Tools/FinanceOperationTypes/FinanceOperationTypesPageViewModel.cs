@@ -1,6 +1,5 @@
 ﻿using FinanceManager.Application.Models;
 using FinanceManager.Application.UseCases.FinanceOperationTypes.Commands.UpdateFinanceOperationTypeCommand;
-using FinanceManager.Domain.Wrapper;
 using FinanceManager.Web.Components.Pages.Personal.FinanceOperationTypes;
 using FinanceManager.Web.Extentions;
 using FinanceManager.Web.Services;
@@ -80,7 +79,7 @@ public class FinanceOperationTypesPageViewModel : BaseViewModel<FinanceOperation
     #endregion
 
     #region Updating
-    private FinanceOperationTypeDTO _typeBackup {  get; set; }
+    private FinanceOperationTypeDTO _typeBackup { get; set; }
 
 
     #endregion
@@ -133,7 +132,7 @@ public class FinanceOperationTypesPageViewModel : BaseViewModel<FinanceOperation
 
     public void Filter()
     {
-        if(FilterValue == String.Empty || FilterProperty == String.Empty)
+        if (FilterValue == String.Empty || FilterProperty == String.Empty)
         {
             TableData.Items = _tableData;
             return;
@@ -145,7 +144,7 @@ public class FinanceOperationTypesPageViewModel : BaseViewModel<FinanceOperation
                     var t = type.GetType();
                     var field = LocalizedTableLabels.FirstOrDefault(l => l.Value == _filterProperty).Key;
                     var value = t.GetProperty(field).GetValue(type).ToString().ToLower();
-                    
+
                     return value.Contains(_filterValue.ToLower());
                 })
             .ToList();
@@ -167,7 +166,7 @@ public class FinanceOperationTypesPageViewModel : BaseViewModel<FinanceOperation
 
     public async Task OnRowEditCommit(FinanceOperationTypeDTO type)
     {
-        if(type.WalletName != _typeBackup.WalletName)
+        if (type.WalletName != _typeBackup.WalletName)
             type.WalletId = Wallets.First(w => w.Name == type.WalletName).Id;
 
         var result = await _financeOperationTypeManager.UpdateTypeAsync(
@@ -199,7 +198,7 @@ public class FinanceOperationTypesPageViewModel : BaseViewModel<FinanceOperation
             Localizer["Are you realy want to delete this financial type?"],
             yesText: Localizer["Delete!"], cancelText: Localizer["Cancel"]) ?? false;
 
-        if(!confirm)
+        if (!confirm)
             return;
 
         var result = await _financeOperationTypeManager.DeleteTypeAsync(type.Id);

@@ -1,5 +1,6 @@
 ﻿using FinanceManager.Application.Models;
 using FinanceManager.Application.UseCases.Accounts.Commands.Commands.UpdateAccountCommand;
+using FinanceManager.Application.UseCases.Wallets.Commands.UpdateWalletCommand;
 using FinanceManager.Web.Extentions;
 using FinanceManager.Web.Pages;
 using FinanceManager.Web.Services;
@@ -59,6 +60,24 @@ public class WalletsViewModel : BaseViewModel<Web.Components.Pages.Personal.Wall
             var user = _httpContextAccessor.HttpContext.User;
 
             _wallets = (await _walletManager.GetWalletsAsync(new(user.GetUserId()))).Data;
+        }
+    }
+
+    public async Task UpdateWallet(WalletDTO wallet)
+    {
+        var parameters = new DialogParameters<UpdateWalletDialog>() { { x => x.CurrentInfo, _mapper.Map<UpdateWalletCommand>(wallet) } };
+
+        var dialog = (DialogReference)await _dialogService.ShowAsync<UpdateWalletDialog>(Localizer["Update"], parameters);
+
+        var result = await dialog.Result;
+
+        if (!result.Canceled)
+        {
+            _snackBar.Add(string.Format(Localizer["Wallet updated successfully!"]), Severity.Success);
+            var updatedWallet = _mapper.Map<WalletDTO>((UpdateWalletCommand)result.Data);
+
+            var index = _wallets.IndexOf(wallet);
+            _wallets[index] = updatedWallet;
         }
     }
 

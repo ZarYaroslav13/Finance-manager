@@ -5,30 +5,75 @@
 @inject FinanceOperationTypesPageViewModel _viewModel
 
 
-<MudTable Items="@_viewModel.TableData" Hover="true" Dense="true">
+<style>
+    .mud-table-cell-custom-group {
+        font-weight: 500;
+    }
+
+    .mud-table-cell-custom-group-footer {
+        padding-bottom: 50px;
+        text-align: right;
+    }
+</style>
+
+<MudTable Items="@_viewModel.TableData" Hover="true" Dense="true" 
+          GroupBy="@_viewModel.GroupDefinition"
+          GroupHeaderStyle="background-color:var(--mud-palette-background-gray)"
+          HeaderClass="mt-8"
+          GroupFooterClass="mb-4"
+          Class="my-5 pt-10">
     <ToolBarContent>
-        @if (_viewModel.WalletId == Guid.Empty)
-        {
-            <MudText Typo=" Typo.h3">@_viewModel.Localizer["Your finincial types"]</MudText>
-        }
+        <div class="d-flex align-center justify-space-between mud-width-full py-4">
+            <MudText Typo="Typo.h3">@_viewModel.Localizer["Your finincial types"]</MudText>
+            <MudSpacer />
+            <MudStack Row="true">
+                <MudSelect T="string" Label="@_viewModel.Localizer["Filter properity"]" @bind-Value="@_viewModel.FilterProperty" Immediate="true"
+                           Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.FilterList">
+                    @foreach (var item in _viewModel.LocalizedTableLabels)
+                    {
+                        <MudSelectItem Value="item.Value" />
+                    }
+                </MudSelect>
+
+                <MudTextField T="string" Label="@_viewModel.Localizer["Filter value"]" Immediate="true"
+                              Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Sharp.FilterAlt" @bind-Value="@_viewModel.FilterValue" />
+            </MudStack>
+        </div>
     </ToolBarContent>
     <HeaderContent>
-        <MudTh><MudTableSortLabel SortBy=@_viewModel.SortFunctions[FinanceOperationTypesPageViewModel.SortLabels.Name] T="FinanceOperationTypeDTO">@_viewModel.Localizer["Name"]</MudTableSortLabel></MudTh>
-        <MudTh><MudTableSortLabel SortBy=@_viewModel.SortFunctions[FinanceOperationTypesPageViewModel.SortLabels.Description] T="FinanceOperationTypeDTO">@_viewModel.Localizer["Description"]</MudTableSortLabel></MudTh>
-        <MudTh><MudTableSortLabel SortBy=@_viewModel.SortFunctions[FinanceOperationTypesPageViewModel.SortLabels.EntryType] T="FinanceOperationTypeDTO">@_viewModel.Localizer["Income/Expense"]</MudTableSortLabel></MudTh>
-        <MudTh><MudTableSortLabel SortBy=@_viewModel.SortFunctions[FinanceOperationTypesPageViewModel.SortLabels.WalletName] T="FinanceOperationTypeDTO">@_viewModel.Localizer["Wallet name"]</MudTableSortLabel></MudTh>
+        @foreach (var item in _viewModel.SortFunctions)
+        {
+            <MudTh><MudTableSortLabel SortBy=@item.Value T="FinanceOperationTypeDTO">@_viewModel.Localizer[item.Key]</MudTableSortLabel></MudTh>
+        }
     </HeaderContent>
+    <GroupHeaderTemplate>
+        <MudTh Class="mud-table-cell-custom-group" colspan="5">@($"{context.GroupName}: {context.Key}") </MudTh>
+    </GroupHeaderTemplate>
+    <ColGroup>
+        <col style="width: 60px;" />
+        <col />
+        <col />
+        <col />
+        <col />
+        <col />
+    </ColGroup>
+    <GroupFooterTemplate>
+        <MudTh Class="mud-table-cell-custom-group mud-table-cell-custom-group-footer" colspan="5">
+            @_viewModel.Localizer["Total types:"] @context.Items.Count()
+            </MudTh>
+    </GroupFooterTemplate>
     <RowTemplate>
-        <MudTd DataLabel="@FinanceOperationTypesPageViewModel.SortLabels.Name">@context.Name</MudTd>
-        <MudTd DataLabel="@FinanceOperationTypesPageViewModel.SortLabels.Description">@context.Description</MudTd>
-        <MudTd DataLabel="@FinanceOperationTypesPageViewModel.SortLabels.EntryType"><MudText Color="@GetColor(context)">@context.EntryType</MudText></MudTd>
-        <MudTd DataLabel="@FinanceOperationTypesPageViewModel.SortLabels.WalletName">@context.WalletName</MudTd>
+        @foreach (var item in _viewModel.SortFunctions)
+        {
+            var color = GetColor(context);
+            <MudTd DataLabel="@item.Key"><MudText Color="@GetColor(context)">@context.GetType().GetProperty(item.Key).GetValue(context)</MudText></MudTd>
+        }
     </RowTemplate>
     <LoadingContent>
         <MudText>@_viewModel.Localizer["Loading..."]</MudText>
     </LoadingContent>
     <NoRecordsContent>
-        <MudText>No matching records found</MudText>
+        <MudText>@_viewModel.Localizer["No matching records found"]</MudText>
     </NoRecordsContent>
     <PagerContent>
         <MudTablePager/>
@@ -53,4 +98,5 @@
     {
         return item.EntryType == EntryType.Income ? MudBlazor.Color.Success : MudBlazor.Color.Error;
     }
+
 }

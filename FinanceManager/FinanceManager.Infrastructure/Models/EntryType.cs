@@ -5,3 +5,4 @@ public enum EntryType
     Income,
     Expense
 }
+

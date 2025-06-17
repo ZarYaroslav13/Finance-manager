@@ -13,14 +13,14 @@ public partial class UserCard
     private string Email { get; set; }
     private char FirstLetterOfName { get; set; } = '-';
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        _stateProvider.AuthenticationStateChanged += OnAuthenticationStateChanged;
+        //_stateProvider.AuthenticationStateChanged += OnAuthenticationStateChanged;
+        await LoadDataAsync();
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        await LoadDataAsync();
     }
 
     private async void OnAuthenticationStateChanged(Task<AuthenticationState> state)
@@ -36,6 +36,7 @@ public partial class UserCard
     private async Task LoadDataAsync()
     {
         var state = await _stateProvider.GetAuthenticationStateAsync();
+        var f = _httpContextAccessor.HttpContext;
         var user = state.User;
 
         Email = user.GetEmail().Replace(".com", string.Empty);

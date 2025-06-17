@@ -35,7 +35,9 @@ public class HttpMessagesHandler : DelegatingHandler
         {
             using (var scope = _serviceScopeFactory.CreateScope())
             {
-                var user = scope.ServiceProvider.GetService<IHttpContextAccessor>().HttpContext.User;
+                var accessor = scope.ServiceProvider.GetService<IHttpContextAccessor>();
+                var context = accessor.HttpContext;
+                var user = context.User;//////
                 var tokenManager = scope.ServiceProvider.GetService<ITokenManager>();
 
                 try

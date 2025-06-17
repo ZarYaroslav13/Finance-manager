@@ -122,11 +122,11 @@ public static class APIEndpoints
         /// <summary>
         /// method where are you using that endpoint must take id with name id
         /// </summary>
-        public const string DeleteWallet = BaseControllerUrl + "/{id}";
+        public const string DeleteWallet = BaseControllerUrl;
         /// <summary>
         /// method where are you using that endpoint must take id with name id
         /// </summary>
-        public const string DeleteWalletFull = FullBaseControllerUrl + "/{id}";
+        public const string DeleteWalletFull = FullBaseControllerUrl;
     }
 
     public static class FinanceReport

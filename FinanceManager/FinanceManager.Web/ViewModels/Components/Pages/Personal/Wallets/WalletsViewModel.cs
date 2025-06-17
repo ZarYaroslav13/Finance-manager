@@ -1,9 +1,13 @@
 ﻿using FinanceManager.Application.Models;
+using FinanceManager.Application.UseCases.Accounts.Commands.Commands.UpdateAccountCommand;
 using FinanceManager.Web.Extentions;
 using FinanceManager.Web.Pages;
 using FinanceManager.Web.Services;
 using FinanceManager.Web.Services.APIServices.Managers.WalletManager;
+using FinanceManager.Web.Shared.Dialogs.Accounts;
+using FinanceManager.Web.Shared.Dialogs.Wallets;
 using Microsoft.Extensions.Localization;
+using MudBlazor;
 
 namespace FinanceManager.Web.ViewModels.Components.Pages.Personal.Wallets;
 
@@ -42,5 +46,42 @@ public class WalletsViewModel : BaseViewModel<Web.Components.Pages.Personal.Wall
     public void ShowWalletTypes(WalletDTO wallet)
     {
         _navigationManager.NavigateTo(PagesHref.Personal.FinanceOperationType.FinanceOperationTypes + '/' + wallet.Id);
+    }
+    public async Task CreateWallet()
+    {
+        var dialog = (DialogReference)await _dialogService.ShowAsync<AddWalletDialog>("Create");
+
+        var result = await dialog.Result;
+
+        if (!result.Canceled)
+        {
+            _snackBar.Add(string.Format(Localizer["Wallet added successfully!"]), Severity.Success);
+            var user = _httpContextAccessor.HttpContext.User;
+
+            _wallets = (await _walletManager.GetWalletsAsync(new(user.GetUserId()))).Data;
+        }
+    }
+
+    public async Task DeleteWallet(Guid id)
+    {
+        bool confirm = await _dialogService.ShowMessageBox(
+            Localizer["Warning"],
+            Localizer["Are you realy want to delete this wallet?"],
+            yesText: Localizer["Delete!"], cancelText: Localizer["Cancel"]) ?? false;
+
+        if (!confirm)
+            return;
+
+        var result = await _walletManager.DeleteWalletAsync(id);
+
+        if (!result.Succeeded)
+        {
+            _snackBar.Add(Localizer["Deleting failed"], Severity.Error);
+            return;
+        }
+
+        _wallets.Remove(_wallets.First(w => w.Id == id));
+
+        _snackBar.Add(Localizer["Deleting successfully"], Severity.Success);
     }
 }

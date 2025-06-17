@@ -2,13 +2,13 @@
 using FinanceManager.Web.Extentions;
 using FinanceManager.Web.Services;
 using FinanceManager.Web.Services.APIServices.Managers.IAccountManager;
-using FinanceManager.Web.Shared.Dialogs.Account;
+using FinanceManager.Web.Shared.Dialogs.Accounts;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.Extensions.Localization;
 using MudBlazor;
 using System.Security.Claims;
 
-namespace FinanceManager.Web.ViewModels.Dialogs.Account;
+namespace FinanceManager.Web.ViewModels.Dialogs.Accounts;
 
 public class UpdateAccountDialogViewModel : BaseViewModel<UpdateAccountDialog>
 {

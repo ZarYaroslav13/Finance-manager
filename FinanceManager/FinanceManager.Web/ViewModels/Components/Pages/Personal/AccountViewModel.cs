@@ -3,7 +3,7 @@ using FinanceManager.Application.UseCases.Accounts.Commands.Commands.UpdateAccou
 using FinanceManager.Web.Components.Pages.Personal;
 using FinanceManager.Web.Extentions;
 using FinanceManager.Web.Services;
-using FinanceManager.Web.Shared.Dialogs.Account;
+using FinanceManager.Web.Shared.Dialogs.Accounts;
 using Microsoft.Extensions.Localization;
 using MudBlazor;
 using System.Security.Claims;

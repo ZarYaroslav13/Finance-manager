@@ -1,0 +1,51 @@
+﻿@namespace FinanceManager.Web.Shared.Dialogs.Wallets
+@using FinanceManager.Application.UseCases.Wallets.Commands.CreateWalletCommand
+@attribute [Authorize]
+@inject FinanceManager.Web.ViewModels.Dialogs.Wallets.AddWalletDialogViewModel _viewModel;
+<MudDialog>
+    <TitleContent>
+        <div class="d-flex justify-center">
+            <MudText Typo="Typo.h4"> <MudIcon Icon="@Icons.Material.Sharp.PersonAddAlt1" Class="mr-3 mb-n1" /> @_viewModel.Localizer["Update account"]</MudText>
+        </div>
+    </TitleContent>
+    <DialogContent>
+        <EditForm EditContext="@_viewModel.EditContext" OnValidSubmit="@Submit">
+            <DataAnnotationsValidator />
+            <MudGrid>
+                <MudItem xs="12">
+                    <MudTextField Immediate=true For="@(() => _viewModel.CreationModel.Name)" @bind-Value="_viewModel.CreationModel.Name" Label="@_viewModel.Localizer["Name"]" />
+                </MudItem>
+                <MudItem xs="12">
+                    <MudTextField Immediate=true For="@(() => _viewModel.CreationModel.Balance)" @bind-Value="_viewModel.CreationModel.Balance" Label="@_viewModel.Localizer["Balance"]" />
+                </MudItem>
+            </MudGrid>
+        </EditForm>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">@_viewModel.Localizer["Cancel"]</MudButton>
+        <MudButton Variant="Variant.Filled" OnClick="Submit" Disabled="!_viewModel.IsModelValid">
+            @if (_viewModel.Adding)
+            {
+                <MudProgressCircular Class="ms-n1" Size="MudBlazor.Size.Small" Indeterminate="true" />
+                <MudText Class="ms-2">@_viewModel.Localizer["Adding..."]</MudText>
+            }
+            else
+            {
+                <MudText>@_viewModel.Localizer["Add"]</MudText>
+            }
+        </MudButton>
+    </DialogActions>
+</MudDialog>
+@code {
+    [CascadingParameter] IMudDialogInstance MudDialog { get; set; }
+
+    async Task Submit()
+    {
+        await _viewModel.TryToCreate(() =>
+        {
+            _navigationManager.NavigateTo(PagesHref.Personal.Wallet.Wallets);
+            MudDialog.Close(DialogResult.Ok(true));
+        });
+    }
+    void Cancel() => MudDialog.Cancel();
+}

@@ -14,5 +14,5 @@ public interface IFinanceOperationTypeManager : IManager
 
     public Task<Result<FinanceOperationTypeDTO>> UpdateTypeAsync(UpdateFinanceOperationTypeCommand command);
 
-    public Task<Result> DeleteTypeAsync(Guid id);
+    public Task<Domain.Wrapper.IResult> DeleteTypeAsync(Guid id);
 }

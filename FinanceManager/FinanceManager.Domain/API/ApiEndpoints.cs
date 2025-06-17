@@ -143,41 +143,41 @@ public static class APIEndpoints
 
     public static class FinanceOperationType
     {
-        public const string BaseControllerUrl = "/finance-operation-types";
-        public const string FullBaseControllerUrl = _baseUrl + BaseControllerUrl;
+        public const string ControllerUrl = "/finance-operation-types";
+        public const string FullControllerUrl = _baseUrl + ControllerUrl;
 
         /// <summary>
         /// method where are you using that endpoint must take id with name walletId
         /// </summary>
-        public const string GetAll = BaseControllerUrl + "/wallet/{walletId}";
+        public const string GetAll = ControllerUrl + "/wallet/{walletId}";
         /// <summary>
         /// method where are you using that endpoint must take id with name walletId
         /// </summary>
-        public const string GetAllFull = FullBaseControllerUrl + "/wallet/{walletId}";
+        public const string GetAllFull = FullControllerUrl + "/wallet/{walletId}";
 
         /// <summary>
         /// method where are you using that endpoint must take id with name id
         /// </summary>
-        public const string Get = BaseControllerUrl + "/{id}";
+        public const string Get = ControllerUrl + "/{id}";
         /// <summary>
         /// method where are you using that endpoint must take id with name id
         /// </summary>
-        public const string GetFull = FullBaseControllerUrl + "/{id}";
+        public const string GetFull = FullControllerUrl + "/{id}";
 
-        public const string Create = BaseControllerUrl;
-        public const string CreateFull = FullBaseControllerUrl;
+        public const string Create = ControllerUrl;
+        public const string CreateFull = FullControllerUrl;
 
-        public const string Update = BaseControllerUrl;
-        public const string UpdateFull = FullBaseControllerUrl;
+        public const string Update = ControllerUrl;
+        public const string UpdateFull = FullControllerUrl;
 
         /// <summary>
         /// method where are you using that endpoint must take id with name id
         /// </summary>
-        public const string Delete = BaseControllerUrl + "/{id}";
+        public const string Delete = ControllerUrl;
         /// <summary>
         /// method where are you using that endpoint must take id with name id
         /// </summary>
-        public const string DeleteFull = FullBaseControllerUrl + "/{id}";
+        public const string DeleteFull = FullControllerUrl;
     }
 
     public static class FinanceOperation

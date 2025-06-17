@@ -5,47 +5,39 @@ using FinanceManager.Application.UseCases.Users.Commands.ResetPasswordCommand;
 using FinanceManager.Application.UseCases.Users.Queries.GetAllUsersQuery;
 using FinanceManager.Domain.Wrapper;
 using FinanceManager.Web.Services.APIServices.APIHttpClient;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace FinanceManager.Web.Services.APIServices.Managers.IUserManager;
 
 public class UserManager : BaseManager, IUserManager
 {
-    public UserManager(IFinanceManagerApiHttpClient httpClient) : base(httpClient)
+    public UserManager(
+        IFinanceManagerApiHttpClient httpClient, ILogger<UserManager> logger) : base(httpClient, logger)
     {
     }
 
     public async Task<PaginatedResult<UserDTO>> GetAllAsync(GetAllUsersQuery query)
     {
-        var result = await _httpClient.GetAllUsersAsync(query.PageNumber, query.Take);
-
-        return result;
+        return await SendRequest(async () => await _apiHttpClient.GetAllUsersAsync(query.PageNumber, query.Take));
     }
 
     public async Task<IResult<UserDTO>> GetAsync(Guid userId)
     {
-        var result = await _httpClient.GetUserAsync(userId);
-
-        return result;
+        return await SendRequest(async () => await _apiHttpClient.GetUserAsync(userId));
     }
 
     public async Task<Domain.Wrapper.IResult> ForgotPasswordAsync(ForgotPasswordCommand request)
     {
-        var result = await _httpClient.ForgotPasswordAsync(request);
-
-        return result;
+        return await SendRequest(async () => await _apiHttpClient.ForgotPasswordAsync(request));
     }
     public async Task<Domain.Wrapper.IResult> ResetPasswordAsync(ResetPasswordCommand request)
     {
-        var result = await _httpClient.ResetPasswordAsync(request);
-
-        return result;
+        return await SendRequest(async () => await _apiHttpClient.ResetPasswordAsync(request));
     }
 
     public async Task<Domain.Wrapper.IResult> RegisterUserAsync(RegisterCommand request)
     {
-        var result = await _httpClient.RegisterUserAsync(request);
-
-        return result;
+        return await SendRequest(async () => await _apiHttpClient.RegisterUserAsync(request));
     }
 
     //public Task<Domain.Wrapper.IResult> ResendConfirmationMailAsync(string userId)

@@ -9,7 +9,7 @@
         @foreach (var wallet in _viewModel.Wallets)
         {
             <MudItem xs="12" sm="6" md="4" Class="card">
-                <MudCard>
+                <MudCard ondblclick="@(() => _viewModel.ShowWalletTypes(wallet))">
                     <MudCardHeader>
                         <CardHeaderContent>
                             <MudText Typo="Typo.h3">@wallet.Name</MudText>

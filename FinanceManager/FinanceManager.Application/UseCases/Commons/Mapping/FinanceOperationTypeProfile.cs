@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FinanceManager.Application.Models;
 using FinanceManager.Application.UseCases.FinanceOperationTypes.Commands.AddFinanceOperationTypeCommand;
 using FinanceManager.Application.UseCases.FinanceOperationTypes.Commands.UpdateFinanceOperationTypeCommand;
 using FinanceManager.Domain.Models;
@@ -9,6 +10,8 @@ public class FinanceOperationTypeProfile : Profile
 {
     public FinanceOperationTypeProfile()
     {
+        CreateMap<FinanceOperationTypeDTO, UpdateFinanceOperationTypeCommand>();
+
         CreateMap<AddFinanceOperationTypeCommand, FinanceOperationTypeModel>();
 
         CreateMap<UpdateFinanceOperationTypeCommand, FinanceOperationTypeModel>();

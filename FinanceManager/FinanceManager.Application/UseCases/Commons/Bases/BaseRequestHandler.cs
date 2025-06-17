@@ -51,7 +51,7 @@ public class BaseRequestHandler
         }
         catch (Exception e)
         {
-            return PaginatedResult<T>.Failure(new() { e.Message });
+            return PaginatedResult<T>.Failure(e.Message);
         }
     }
 

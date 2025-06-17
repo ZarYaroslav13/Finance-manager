@@ -12,23 +12,21 @@ using System.Security.Claims;
 
 namespace FinanceManager.Web.Services.APIServices.Managers.TokenManager;
 
-public class TokenManager : ITokenManager
+public class TokenManager : BaseManager, ITokenManager
 {
     private readonly HttpClient _httpClient;
     private readonly IHttpContextAccessor _httpContextAccessor;
-    private readonly IFinanceManagerApiHttpClient _apiHttpClient;
     private readonly FinanceManagerStateProvider _authenticationStateProvider;
     private readonly IStringLocalizer<TokenManager> _localizer;
     public TokenManager(
             HttpClient httpClient,
             IHttpContextAccessor httpContextAccessor,
-            IFinanceManagerApiHttpClient apiHttpClient,
             FinanceManagerStateProvider authenticationStateProvider,
-            IStringLocalizer<TokenManager> localizer)
+            IStringLocalizer<TokenManager> localizer,
+            IFinanceManagerApiHttpClient apiHttpClient, ILogger<TokenManager> logger) : base(apiHttpClient, logger)
     {
         _httpContextAccessor = httpContextAccessor ?? throw new ArgumentNullException(nameof(httpContextAccessor));
         _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
-        _apiHttpClient = apiHttpClient ?? throw new ArgumentNullException(nameof(apiHttpClient));
         _authenticationStateProvider = authenticationStateProvider ?? throw new ArgumentNullException(nameof(authenticationStateProvider));
         _localizer = localizer ?? throw new ArgumentNullException(nameof(localizer));
     }
@@ -40,8 +38,7 @@ public class TokenManager : ITokenManager
 
     public async Task<Result<TokenDTO>> LoginAsync(GetTokenCommand model)
     {
-        var response = await _apiHttpClient.GetTokenAsync(model);
-        return response;
+        return await SendRequest(async () => await _apiHttpClient.GetTokenAsync(model));
     }
 
     public async Task<string> TryRefreshTokenAsync()
@@ -71,11 +68,11 @@ public class TokenManager : ITokenManager
         ArgumentNullException.ThrowIfNullOrWhiteSpace(token);
         ArgumentNullException.ThrowIfNullOrWhiteSpace(refreshToken);
 
-        var response = await _apiHttpClient.RefreshTokenAsync(new RefreshTokenCommand()
+        var response = await SendRequest(async () => await _apiHttpClient.RefreshTokenAsync(new RefreshTokenCommand()
         {
             Token = token,
             RefreshToken = refreshToken
-        });
+        }));
 
         if (!response.Succeeded)
         {

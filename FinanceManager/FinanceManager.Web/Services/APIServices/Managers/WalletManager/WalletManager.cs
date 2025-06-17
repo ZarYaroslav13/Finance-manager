@@ -3,46 +3,39 @@ using FinanceManager.Application.UseCases.Wallets.Commands.CreateWalletCommand;
 using FinanceManager.Application.UseCases.Wallets.Commands.UpdateWalletCommand;
 using FinanceManager.Domain.Wrapper;
 using FinanceManager.Web.Services.APIServices.APIHttpClient;
+using static FinanceManager.Domain.API.APIEndpoints;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace FinanceManager.Web.Services.APIServices.Managers.WalletManager;
 
 public class WalletManager : BaseManager, IWalletManager
 {
-    public WalletManager(IFinanceManagerApiHttpClient httpClient) : base(httpClient)
+    public WalletManager(
+        IFinanceManagerApiHttpClient httpClient, ILogger<WalletManager> logger) : base(httpClient, logger)
     {
     }
     public async Task<Result<List<WalletDTO>>> GetWalletsAsync(Guid userId)
     {
-        var result = await _httpClient.GetWalletsAsync(userId);
-
-        return result;
+        return await SendRequest(async () => await _apiHttpClient.GetWalletsAsync(userId));
     }
 
     public async Task<Result<WalletDTO>> GetWalletAsync(Guid id)
     {
-        var result = await _httpClient.GetWalletAsync(id);
-
-        return result;
+        return await SendRequest(async () => await _apiHttpClient.GetWalletAsync(id));
     }
 
     public async Task<Result<WalletDTO>> AddWallet(CreateWalletCommand command)
     {
-        var result = await _httpClient.CreateWallet(command);
-
-        return result;
+        return await SendRequest(async () => await _apiHttpClient.CreateWallet(command));
     }
 
     public async Task<Result<WalletDTO>> UpdateWallet(UpdateWalletCommand command)
     {
-        var result = await _httpClient.UpdateWallet(command);
-
-        return result;
+        return await SendRequest(async () => await _apiHttpClient.UpdateWallet(command));
     }
 
-    public async Task<Result> DeleteWalletAsync(Guid id)
+    public async Task<Domain.Wrapper.IResult> DeleteWalletAsync(Guid id)
     {
-        var result = await _httpClient.DeleteWallet(id);
-
-        return result;
+        return await SendRequest(async () => await _apiHttpClient.DeleteWallet(id));
     }
 }

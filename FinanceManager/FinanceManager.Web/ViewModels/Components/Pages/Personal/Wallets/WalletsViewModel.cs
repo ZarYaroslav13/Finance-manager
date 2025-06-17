@@ -1,5 +1,6 @@
 ﻿using FinanceManager.Application.Models;
 using FinanceManager.Web.Extentions;
+using FinanceManager.Web.Pages;
 using FinanceManager.Web.Services;
 using FinanceManager.Web.Services.APIServices.Managers.WalletManager;
 using Microsoft.Extensions.Localization;
@@ -36,5 +37,10 @@ public class WalletsViewModel : BaseViewModel<Web.Components.Pages.Personal.Wall
         {
             new() { Name = "Error, wallets not retrived", Balance = -1000}
         };
+    }
+
+    public void ShowWalletTypes(WalletDTO wallet)
+    {
+        _navigationManager.NavigateTo(PagesHref.Personal.FinanceOperationType.FinanceOperationTypes + '/' + wallet.Id);
     }
 }

@@ -3,39 +3,43 @@ using FinanceManager.Application.UseCases.FinanceOperationTypes.Commands.AddFina
 using FinanceManager.Application.UseCases.FinanceOperationTypes.Commands.UpdateFinanceOperationTypeCommand;
 using FinanceManager.Domain.Wrapper;
 using FinanceManager.Web.Services.APIServices.APIHttpClient;
+using FinanceManager.Web.Services.APIServices.Managers.IAccountManager;
+using System;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace FinanceManager.Web.Services.APIServices.Managers.FinanceOperationType
 {
     public class FinanceOperationTypeManager : BaseManager, IFinanceOperationTypeManager
     {
-        public FinanceOperationTypeManager(IFinanceManagerApiHttpClient httpClient) : base(httpClient)
+        public FinanceOperationTypeManager(IFinanceManagerApiHttpClient httpClient, 
+            ILogger<FinanceOperationTypeManager> logger) : base(httpClient, logger)
         {
         }
 
         public async Task<Result<List<FinanceOperationTypeDTO>>> GetAllTypesOfWalletAsync(Guid walletId)
         {
-            return await _httpClient.GetAllFinanceOperationTypesAsync(walletId);
+            return await SendRequest(async () => await _apiHttpClient.GetAllFinanceOperationTypesAsync(walletId));
         }
 
         public async Task<Result<List<FinanceOperationTypeDTO>>> GetTypeAsync(Guid id)
         {
-            return await _httpClient.GetAllFinanceOperationTypesAsync(id);
+            return await SendRequest(async () => await _apiHttpClient.GetAllFinanceOperationTypesAsync(id));
         }
 
         public async Task<Result<FinanceOperationTypeDTO>> AddTypeAsync(AddFinanceOperationTypeCommand command)
         {
-            return await _httpClient.AddFinanceOperationTypeAsync(command);
+            return await SendRequest(async () => await _apiHttpClient.AddFinanceOperationTypeAsync(command));
         }
 
         public async Task<Result<FinanceOperationTypeDTO>> UpdateTypeAsync(UpdateFinanceOperationTypeCommand command)
         {
-            return await _httpClient.UpdateFinanceOperationTypeAsync(command);
+            return await SendRequest(async () => await _apiHttpClient.UpdateFinanceOperationTypeAsync(command));
         }
 
 
-        public async Task<Result> DeleteTypeAsync(Guid id)
+        public async Task<Domain.Wrapper.IResult> DeleteTypeAsync(Guid id)
         {
-            return await _httpClient.DeleteFinanceOperationTypeAsync(id);
+            return await SendRequest(async () => await _apiHttpClient.DeleteFinanceOperationTypeAsync(id));
         }
     }
 }

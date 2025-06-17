@@ -8,21 +8,18 @@ namespace FinanceManager.Web.Services.APIServices.Managers.FinanceReportManager;
 
 public class FinanceReportManager : BaseManager, IFinanceReportManager
 {
-    public FinanceReportManager(IFinanceManagerApiHttpClient httpClient) : base(httpClient)
+    public FinanceReportManager(
+        IFinanceManagerApiHttpClient httpClient, ILogger<FinanceReportManager> logger) : base(httpClient, logger)
     {
     }
 
     public async Task<Result<FinanceReportDTO>> CreateDailyReportAsync(CreateDailyReportCommand command)
     {
-        var result = await _httpClient.CreateDailyReport(command);
-
-        return result;
+        return await SendRequest(async () => await _apiHttpClient.CreateDailyReport(command));
     }
 
     public async Task<Result<FinanceReportDTO>> CreatePeriodReportAsync(CreatePeriodReportCommand command)
     {
-        var result = await _httpClient.CreatePeriodReport(command);
-
-        return result;
+        return await SendRequest(async () => await _apiHttpClient.CreatePeriodReport(command));
     }
 }

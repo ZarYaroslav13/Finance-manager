@@ -1,5 +1,7 @@
 ﻿using FinanceManager.Application.Models;
-using FinanceManager.Web.Components.Pages.Tools.FinanceOperationTypes;
+using FinanceManager.Application.UseCases.FinanceOperationTypes.Commands.UpdateFinanceOperationTypeCommand;
+using FinanceManager.Domain.Wrapper;
+using FinanceManager.Web.Components.Pages.Personal.FinanceOperationTypes;
 using FinanceManager.Web.Extentions;
 using FinanceManager.Web.Services;
 using FinanceManager.Web.Services.APIServices.Managers.FinanceOperationType;
@@ -26,8 +28,10 @@ public class FinanceOperationTypesPageViewModel : BaseViewModel<FinanceOperation
 
     public Guid WalletId { get; set; }
 
+    public List<WalletDTO> Wallets { get; private set; } = new();
+
     private List<FinanceOperationTypeDTO> _tableData = new();
-    public List<FinanceOperationTypeDTO> TableData { get; set; } = new();
+    public MudTable<FinanceOperationTypeDTO> TableData { get; set; } = new();
 
     public Dictionary<string, Func<FinanceOperationTypeDTO, object>> SortFunctions { get; } = new()
     {
@@ -39,13 +43,14 @@ public class FinanceOperationTypesPageViewModel : BaseViewModel<FinanceOperation
 
     public Dictionary<string, string> LocalizedTableLabels { get; } = new();
 
+    #region Filtering
     private string _filterProperty = String.Empty;
     public string FilterProperty
     {
         get => _filterProperty;
         set
         {
-            if(_filterProperty == value) return;
+            if (_filterProperty == value) return;
 
             _filterProperty = value;
 
@@ -66,10 +71,17 @@ public class FinanceOperationTypesPageViewModel : BaseViewModel<FinanceOperation
             Filter();
         }
     }
+    #endregion
 
     #region Grouping
 
     public TableGroupDefinition<FinanceOperationTypeDTO> GroupDefinition { get; }
+
+    #endregion
+
+    #region Updating
+    private FinanceOperationTypeDTO _typeBackup {  get; set; }
+
 
     #endregion
 
@@ -99,56 +111,35 @@ public class FinanceOperationTypesPageViewModel : BaseViewModel<FinanceOperation
         }
     }
 
-    public async Task<TableData<FinanceOperationTypeDTO>> LoadData(TableState state, CancellationToken token)
-    {
-        var result = new List<FinanceOperationTypeDTO>();
-
-        if (WalletId == Guid.Empty)
-        {
-            var wallets = await _walletManager.GetWalletsAsync(new(_httpContextAccessor.HttpContext.User.GetUserId()));
-
-            foreach (var wallet in wallets.Data)
-            {
-                result.AddRange((await _financeOperationTypeManager.GetAllTypesOfWalletAsync(wallet.Id)).Data);
-            }
-         }
-        else
-        {
-            result = (await _financeOperationTypeManager.GetAllTypesOfWalletAsync(WalletId)).Data;
-        }
-
-        return new() { TotalItems = result.Count, Items = result };
-    }
-
     public async Task OnInitializedAsync()
     {
         _tableData = new();
-        if (WalletId == Guid.Empty)
-        {
-            var wallets = await _walletManager.GetWalletsAsync(new(_httpContextAccessor.HttpContext.User.GetUserId()));
 
-            foreach (var wallet in wallets.Data)
-            {
-                _tableData.AddRange((await _financeOperationTypeManager.GetAllTypesOfWalletAsync(wallet.Id)).Data);
-            }
-        }
-        else
+        Wallets = (await _walletManager.GetWalletsAsync(new(_httpContextAccessor.HttpContext.User.GetUserId()))).Data;
+
+        foreach (var wallet in Wallets)
         {
-            _tableData = (await _financeOperationTypeManager.GetAllTypesOfWalletAsync(WalletId)).Data;
+            _tableData.AddRange((await _financeOperationTypeManager.GetAllTypesOfWalletAsync(wallet.Id)).Data);
         }
 
-        TableData.AddRange(_tableData);
+        if (WalletId != Guid.Empty)
+        {
+            TableData.Items = _tableData.Where(t => t.WalletId == WalletId);
+            return;
+        }
+
+        TableData.Items = _tableData;
     }
 
     public void Filter()
     {
         if(FilterValue == String.Empty || FilterProperty == String.Empty)
         {
-            TableData = _tableData;
+            TableData.Items = _tableData;
             return;
         }
 
-        TableData = _tableData.Where(
+        TableData.Items = _tableData.Where(
                 type =>
                 {
                     var t = type.GetType();
@@ -159,5 +150,70 @@ public class FinanceOperationTypesPageViewModel : BaseViewModel<FinanceOperation
                 })
             .ToList();
 
+    }
+
+    public async Task OnRowEditPreview(FinanceOperationTypeDTO type)
+    {
+        _typeBackup = new()
+        {
+            Name = type.Name,
+            Description = type.Description,
+            EntryType = type.EntryType,
+            Id = type.Id,
+            WalletId = type.WalletId,
+            WalletName = type.WalletName,
+        };
+    }
+
+    public async Task OnRowEditCommit(FinanceOperationTypeDTO type)
+    {
+        if(type.WalletName != _typeBackup.WalletName)
+            type.WalletId = Wallets.First(w => w.Name == type.WalletName).Id;
+
+        var result = await _financeOperationTypeManager.UpdateTypeAsync(
+                        _mapper.Map<UpdateFinanceOperationTypeCommand>(type));
+
+        if (!result.Succeeded)
+        {
+            await OnRowEditCancel(type);
+        }
+
+        _snackBar.Add(Localizer["Financial type updated successfully!"], Severity.Success);
+    }
+
+    public async Task OnRowEditCancel(FinanceOperationTypeDTO type)
+    {
+        type.WalletId = _typeBackup.WalletId;
+        type.WalletName = _typeBackup.WalletName;
+        type.Name = _typeBackup.Name;
+        type.EntryType = _typeBackup.EntryType;
+        type.Description = _typeBackup.Description;
+
+        _snackBar.Add(Localizer["Updating canceled"], Severity.Warning);
+    }
+
+    public async Task DeleteItem(FinanceOperationTypeDTO type)
+    {
+        bool confirm = await _dialogService.ShowMessageBox(
+            Localizer["Warning"],
+            Localizer["Are you realy want to delete this financial type?"],
+            yesText: Localizer["Delete!"], cancelText: Localizer["Cancel"]) ?? false;
+
+        if(!confirm)
+            return;
+
+        var result = await _financeOperationTypeManager.DeleteTypeAsync(type.Id);
+
+        if (!result.Succeeded)
+        {
+            _snackBar.Add(Localizer["Deleting failed"], Severity.Error);
+            return;
+        }
+
+        _tableData.Remove(type);
+
+        TableData.Items = _tableData;
+
+        _snackBar.Add(Localizer["Deleting successfully"], Severity.Success);
     }
 }

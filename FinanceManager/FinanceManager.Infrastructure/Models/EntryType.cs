@@ -1,5 +1,10 @@
-﻿namespace FinanceManager.Infrastructure.Models;
+﻿using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
+using System.Text.Json.Serialization;
 
+namespace FinanceManager.Infrastructure.Models;
+
+
+[JsonConverter(typeof(JsonStringEnumConverter))]
 public enum EntryType
 {
     Income,

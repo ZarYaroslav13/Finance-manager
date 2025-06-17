@@ -102,13 +102,13 @@ public interface IFinanceManagerApiHttpClient
     [Get(APIEndpoints.FinanceOperationType.Get)]
     public Task<Result<FinanceOperationTypeDTO>> GetFinanceOperationTypeAsync(Guid id, CancellationToken cancellationToken = default);
 
-    [Get(APIEndpoints.FinanceOperationType.Create)]
+    [Post(APIEndpoints.FinanceOperationType.Create)]
     public Task<Result<FinanceOperationTypeDTO>> AddFinanceOperationTypeAsync([Body] AddFinanceOperationTypeCommand command, CancellationToken cancellationToken = default);
 
-    [Get(APIEndpoints.FinanceOperationType.Update)]
+    [Put(APIEndpoints.FinanceOperationType.Update)]
     public Task<Result<FinanceOperationTypeDTO>> UpdateFinanceOperationTypeAsync([Body] UpdateFinanceOperationTypeCommand command, CancellationToken cancellationToken = default);
 
-    [Get(APIEndpoints.FinanceOperationType.Delete)]
+    [Delete(APIEndpoints.FinanceOperationType.Delete)]
     public Task<Result> DeleteFinanceOperationTypeAsync(Guid id, CancellationToken cancellationToken = default);
     #endregion
 
@@ -131,10 +131,10 @@ public interface IFinanceManagerApiHttpClient
     [Post(APIEndpoints.FinanceOperation.Create)]
     public Task<Result<FinanceOperationDTO>> AddFinanceOperationAsync([Body] AddFinanceOperationTypeCommand command, CancellationToken cancellationToken = default);
 
-    [Post(APIEndpoints.FinanceOperation.Update)]
+    [Put(APIEndpoints.FinanceOperation.Update)]
     public Task<Result<FinanceOperationDTO>> UpdateFinanceOperationAsync([Body] UpdateFinanceOperationTypeCommand command, CancellationToken cancellationToken = default);
 
-    [Post(APIEndpoints.FinanceOperation.DeleteOperation)]
+    [Delete(APIEndpoints.FinanceOperation.DeleteOperation)]
     public Task<Result> DeleteFinanceOperationAsync(Guid id, CancellationToken cancellationToken = default);
     #endregion
 }

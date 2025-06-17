@@ -15,5 +15,5 @@ public interface IWalletManager : IManager
 
     public Task<Result<WalletDTO>> UpdateWallet(UpdateWalletCommand command);
 
-    public Task<Result> DeleteWalletAsync(Guid id);
+    public Task<Domain.Wrapper.IResult> DeleteWalletAsync(Guid id);
 }

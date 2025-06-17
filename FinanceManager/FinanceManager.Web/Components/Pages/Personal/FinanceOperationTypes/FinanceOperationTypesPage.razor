@@ -1,5 +1,6 @@
 ﻿@page "/finance-operation-types"
 @page "/finance-operation-types/{WalletId:guid}"
+@using FinanceManager.Application.UseCases.FinanceOperationTypes.Commands.UpdateFinanceOperationTypeCommand
 @using FinanceManager.Web.ViewModels.Components.Pages.Tools.FinanceOperationTypes
 @using FinanceManager.Application.Models
 @inject FinanceOperationTypesPageViewModel _viewModel
@@ -16,11 +17,25 @@
     }
 </style>
 
-<MudTable Items="@_viewModel.TableData" Hover="true" Dense="true" 
+<MudTable Items="@_viewModel.TableData.Items"
+          @ref="_viewModel.TableData"
+           
+          Hover="true" Dense="true" Striped="true" FixedHeader="true" FixedFooter="true"
+
+          IsEditRowSwitchingBlocked="true" 
+          CanCancelEdit="true" 
+          EditTrigger="TableEditTrigger.EditButton" 
+          EditButtonPosition="TableEditButtonPosition.End"
+
+          RowEditPreview="@((type) => _viewModel.OnRowEditPreview((FinanceOperationTypeDTO)type))"
+          RowEditCommit="@((type) => _viewModel.OnRowEditCommit((FinanceOperationTypeDTO)type))"
+          RowEditCancel="@((type) => _viewModel.OnRowEditCancel((FinanceOperationTypeDTO)type))"
+
+          GroupFooterClass="mb-4"
           GroupBy="@_viewModel.GroupDefinition"
           GroupHeaderStyle="background-color:var(--mud-palette-background-gray)"
+
           HeaderClass="mt-8"
-          GroupFooterClass="mb-4"
           Class="my-5 pt-10">
     <ToolBarContent>
         <div class="d-flex align-center justify-space-between mud-width-full py-4">
@@ -45,12 +60,14 @@
         {
             <MudTh><MudTableSortLabel SortBy=@item.Value T="FinanceOperationTypeDTO">@_viewModel.Localizer[item.Key]</MudTableSortLabel></MudTh>
         }
+        <MudTh/>
     </HeaderContent>
     <GroupHeaderTemplate>
         <MudTh Class="mud-table-cell-custom-group" colspan="5">@($"{context.GroupName}: {context.Key}") </MudTh>
     </GroupHeaderTemplate>
     <ColGroup>
         <col style="width: 60px;" />
+        <col />
         <col />
         <col />
         <col />
@@ -66,9 +83,48 @@
         @foreach (var item in _viewModel.SortFunctions)
         {
             var color = GetColor(context);
-            <MudTd DataLabel="@item.Key"><MudText Color="@GetColor(context)">@context.GetType().GetProperty(item.Key).GetValue(context)</MudText></MudTd>
+            <MudTd DataLabel="@item.Key"><MudText Color="@color">@context.GetType().GetProperty(item.Key).GetValue(context)</MudText></MudTd>
         }
+        <MudTd/>
     </RowTemplate>
+    <RowEditingTemplate>
+        <MudTd><MudTextField T="string" @bind-Value="context.Name"></MudTextField></MudTd>
+        <MudTd><MudTextField T="string" @bind-Value="context.Description"></MudTextField></MudTd>
+        <MudTd>
+            <MudSelect T="@EntryType" @bind-Value="context.EntryType">
+                @foreach (EntryType item in typeof(EntryType).GetEnumValues())
+                {
+                    <MudSelectItem T="@EntryType" Value="item">@_viewModel.Localizer[$"{item.ToString()}"]</MudSelectItem>
+                }
+            </MudSelect>
+        </MudTd>
+        <MudTd>
+            <MudSelect T="string" @bind-Value="context.WalletName" Class="py-8" Label="@_viewModel.Localizer["Select Wallet"]">
+                @foreach (var item in _viewModel.Wallets)
+                {
+                    <MudSelectItem T="string" Value="@item.Name">
+                        <MudText Class="mud-text-body2 mb-0">@_viewModel.Localizer["Wallet name:"] @item.Name</MudText>
+                        <MudText Class="mud-text-caption">@_viewModel.Localizer["balance:"] @item.Balance</MudText>
+                    </MudSelectItem>
+                }
+            </MudSelect>
+        </MudTd>
+    </RowEditingTemplate>
+    <EditButtonContent Context="button">
+        <MudIconButton 
+            Icon="@Icons.Material.Rounded.Edit"
+            Style="background-color:lightseagreen"
+            Size=" MudBlazor.Size.Small"
+            OnClick="@button.ButtonAction"
+            Disabled="@button.ButtonDisabled"/>
+
+
+        <MudIconButton Icon="@CustomIcons.ActionIcons.Delete" 
+                       Color="MudBlazor.Color.Error" 
+                       Style="background-color:#fce4ec"
+                       Size=" MudBlazor.Size.Small"
+                       OnClick="@(() => _viewModel.DeleteItem((FinanceOperationTypeDTO)button.Item))" />
+    </EditButtonContent>
     <LoadingContent>
         <MudText>@_viewModel.Localizer["Loading..."]</MudText>
     </LoadingContent>

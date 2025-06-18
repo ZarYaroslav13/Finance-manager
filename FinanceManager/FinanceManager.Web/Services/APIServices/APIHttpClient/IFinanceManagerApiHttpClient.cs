@@ -2,6 +2,8 @@
 using FinanceManager.Application.Models.Base;
 using FinanceManager.Application.UseCases.Accounts.Commands.Commands.UpdateAccountCommand;
 using FinanceManager.Application.UseCases.Accounts.Commands.Commands.UpdatePasswordAccountCommand;
+using FinanceManager.Application.UseCases.FinanceOperations.Commands.AddFinanceOperationCommand;
+using FinanceManager.Application.UseCases.FinanceOperations.Commands.UpdateFinanceOperationCommand;
 using FinanceManager.Application.UseCases.FinanceOperationTypes.Commands.AddFinanceOperationTypeCommand;
 using FinanceManager.Application.UseCases.FinanceOperationTypes.Commands.UpdateFinanceOperationTypeCommand;
 using FinanceManager.Application.UseCases.FinanceReports.Commands.CreateDailyReportCommand;
@@ -116,23 +118,23 @@ public interface IFinanceManagerApiHttpClient
     [Get(APIEndpoints.FinanceOperation.GetAllByWallet)]
     public Task<Result<List<FinanceOperationDTO>>> GetAllOfWalletAsync(
         Guid walletId,
-        [Query] int index,
-        [Query] int count, CancellationToken cancellationToken = default);
+        [Query] int index = 0,
+        [Query] int count = 0, CancellationToken cancellationToken = default);
 
     [Get(APIEndpoints.FinanceOperation.GetAllByType)]
     public Task<Result<List<FinanceOperationDTO>>> GetAllFinanceOperationsOfTypeAsync(
         Guid typeId,
-        [Query] int index,
-        [Query] int count, CancellationToken cancellationToken = default);
+        [Query] int index = 0,
+        [Query] int count = 0, CancellationToken cancellationToken = default);
 
     [Get(APIEndpoints.FinanceOperation.GetOperation)]
     public Task<Result<FinanceOperationDTO>> GetFinanceOperationAsync(Guid id, CancellationToken cancellationToken = default);
 
     [Post(APIEndpoints.FinanceOperation.Create)]
-    public Task<Result<FinanceOperationDTO>> AddFinanceOperationAsync([Body] AddFinanceOperationTypeCommand command, CancellationToken cancellationToken = default);
+    public Task<Result<FinanceOperationDTO>> AddFinanceOperationAsync([Body] AddFinanceOperationCommand command, CancellationToken cancellationToken = default);
 
     [Put(APIEndpoints.FinanceOperation.Update)]
-    public Task<Result<FinanceOperationDTO>> UpdateFinanceOperationAsync([Body] UpdateFinanceOperationTypeCommand command, CancellationToken cancellationToken = default);
+    public Task<Result<FinanceOperationDTO>> UpdateFinanceOperationAsync([Body] UpdateFinanceOperationCommand command, CancellationToken cancellationToken = default);
 
     [Delete(APIEndpoints.FinanceOperation.DeleteOperation)]
     public Task<Result> DeleteFinanceOperationAsync(Guid id, CancellationToken cancellationToken = default);

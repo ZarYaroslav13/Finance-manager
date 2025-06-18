@@ -27,9 +27,9 @@
           EditTrigger="TableEditTrigger.EditButton" 
           EditButtonPosition="TableEditButtonPosition.End"
 
-          RowEditPreview="@((type) => _viewModel.OnRowEditPreview((FinanceOperationTypeDTO)type))"
-          RowEditCommit="@((type) => _viewModel.OnRowEditCommit((FinanceOperationTypeDTO)type))"
-          RowEditCancel="@((type) => _viewModel.OnRowEditCancel((FinanceOperationTypeDTO)type))"
+          RowEditPreview="@((type) => _viewModel.OnRowEditPreview((FinanceOperationDTO)type))"
+          RowEditCommit="@((type) => _viewModel.OnRowEditCommit((FinanceOperationDTO)type))"
+          RowEditCancel="@((type) => _viewModel.OnRowEditCancel((FinanceOperationDTO)type))"
 
           GroupFooterClass="mb-4"
           GroupBy="@_viewModel.GroupDefinition"

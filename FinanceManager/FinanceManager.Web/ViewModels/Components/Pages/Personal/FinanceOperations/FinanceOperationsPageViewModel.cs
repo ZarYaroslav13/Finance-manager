@@ -80,7 +80,7 @@ public class FinanceOperationsPageViewModel : BaseViewModel<FinanceOperationsPag
     #endregion
 
     #region Updating
-    private FinanceOperationTypeDTO _typeBackup { get; set; }
+    private FinanceOperationDTO _typeBackup { get; set; }
 
 
     #endregion
@@ -172,7 +172,7 @@ public class FinanceOperationsPageViewModel : BaseViewModel<FinanceOperationsPag
 
     #region Editing
 
-    public async Task OnRowEditPreview(FinanceOperationTypeDTO type)
+    public async Task OnRowEditPreview(FinanceOperationDTO type)
     {
         _typeBackup = new()
         {
@@ -185,7 +185,7 @@ public class FinanceOperationsPageViewModel : BaseViewModel<FinanceOperationsPag
         };
     }
 
-    public async Task OnRowEditCommit(FinanceOperationTypeDTO type)
+    public async Task OnRowEditCommit(FinanceOperationDTO type)
     {
         if (type.WalletName != _typeBackup.WalletName)
             type.WalletId = Wallets.First(w => w.Name == type.WalletName).Id;
@@ -201,7 +201,7 @@ public class FinanceOperationsPageViewModel : BaseViewModel<FinanceOperationsPag
         _snackBar.Add(Localizer["Financial type updated successfully!"], Severity.Success);
     }
 
-    public async Task OnRowEditCancel(FinanceOperationTypeDTO type)
+    public async Task OnRowEditCancel(FinanceOperationDTO type)
     {
         type.WalletId = _typeBackup.WalletId;
         type.WalletName = _typeBackup.WalletName;

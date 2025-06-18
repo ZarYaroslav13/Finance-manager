@@ -2,13 +2,15 @@
 using FinanceManager.Application.UseCases.FinanceOperationTypes.Commands.UpdateFinanceOperationTypeCommand;
 using FinanceManager.Web.Components.Pages.Personal.FinanceOperationTypes;
 using FinanceManager.Web.Extentions;
+using FinanceManager.Web.Pages;
 using FinanceManager.Web.Services;
 using FinanceManager.Web.Services.APIServices.Managers.FinanceOperationType;
 using FinanceManager.Web.Services.APIServices.Managers.WalletManager;
+using FinanceManager.Web.Shared.Dialogs.FinancialOperationTypes;
 using Microsoft.Extensions.Localization;
 using MudBlazor;
 
-namespace FinanceManager.Web.ViewModels.Components.Pages.Tools.FinanceOperationTypes;
+namespace FinanceManager.Web.ViewModels.Components.Pages.Personal.FinanceOperationTypes;
 
 public class FinanceOperationTypesPageViewModel : BaseViewModel<FinanceOperationTypesPage>
 {
@@ -151,6 +153,24 @@ public class FinanceOperationTypesPageViewModel : BaseViewModel<FinanceOperation
 
     }
 
+    public async Task CreateFinancialType()
+    {
+        var dialog = (DialogReference)await _dialogService.ShowAsync<AddFinancialTypeDialog>(Localizer["Create"]);
+
+        var result = await dialog.Result;
+
+        if (!result.Canceled)
+        {
+            _snackBar.Add(string.Format(Localizer["Wallet added successfully!"]), Severity.Success);
+
+            var walletId = (Guid)result.Data;
+
+            _tableData.RemoveAll(w => w.WalletId == walletId);
+
+            _tableData.AddRange((await _financeOperationTypeManager.GetAllTypesOfWalletAsync(walletId)).Data);
+        }
+    }
+
     public async Task OnRowEditPreview(FinanceOperationTypeDTO type)
     {
         _typeBackup = new()
@@ -214,5 +234,15 @@ public class FinanceOperationTypesPageViewModel : BaseViewModel<FinanceOperation
         TableData.Items = _tableData;
 
         _snackBar.Add(Localizer["Deleting successfully"], Severity.Success);
+    }
+
+    public void ItemClicked(TableRowClickEventArgs<FinanceOperationTypeDTO> args)
+    {
+        if (args.MouseEventArgs.Detail == 2)
+        {
+            var type = args.Item;
+
+            _navigationManager.NavigateTo(PagesHref.Personal.FinanceOperation.FinanceOperations + '/' + type.Id);
+        }
     }
 }

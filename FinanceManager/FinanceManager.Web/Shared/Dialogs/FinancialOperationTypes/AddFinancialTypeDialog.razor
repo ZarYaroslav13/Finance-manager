@@ -1,0 +1,74 @@
+﻿@using FinanceManager.Application.Models
+@using FinanceManager.Application.UseCases.FinanceOperationTypes.Commands.AddFinanceOperationTypeCommand
+@namespace FinanceManager.Web.Shared.Dialogs.FinancialOperationTypes
+@attribute [Authorize]
+@inject FinanceManager.Web.ViewModels.Dialogs.FinanceOperationTypes.AddFinancialTypeDialogViewModel _viewModel;
+<MudDialog>
+    <TitleContent>
+        <div class="d-flex justify-center">
+            <MudText Typo="Typo.h4"> <MudIcon Icon="@Icons.Material.Sharp.PersonAddAlt1" Class="mr-3 mb-n1" /> @_viewModel.Localizer["Create finance operation type"]</MudText>
+        </div>
+    </TitleContent>
+    <DialogContent>
+        <EditForm EditContext="@_viewModel.EditContext" OnValidSubmit="@Submit">
+            <DataAnnotationsValidator />
+            <MudGrid>
+                <MudItem xs="12">
+                    <MudTextField Immediate=true For="@(() => _viewModel.CreationModel.Name)" @bind-Value="_viewModel.CreationModel.Name" Label="@_viewModel.Localizer["Name"]" />
+                </MudItem>
+                <MudItem xs="12">
+                    <MudTextField Immediate=true For="@(() => _viewModel.CreationModel.Description)" @bind-Value="_viewModel.CreationModel.Description" Label="@_viewModel.Localizer["Description"]" />
+                </MudItem>
+                <MudItem xs="6">
+                    <MudSelect T="@EntryType" @bind-Value="_viewModel.CreationModel.EntryType" Label="@_viewModel.Localizer["Entry Type"]">
+                        @foreach (EntryType item in typeof(EntryType).GetEnumValues())
+                        {
+                            <MudSelectItem T="@EntryType" Value="item">@_viewModel.Localizer[$"{item.ToString()}"]</MudSelectItem>
+                        }
+                    </MudSelect>
+                </MudItem>
+                <MudItem xs="6">
+                    <MudSelect T="Guid" @bind-Value="_viewModel.CreationModel.WalletId" Label="@_viewModel.Localizer["Select Wallet"]">
+                        @foreach (var item in _viewModel.Wallets)
+                        {
+                            <MudSelectItem T="Guid" Value="@item.Id">
+                                <MudText Class="mud-text-body2 mb-0">@_viewModel.Localizer["Wallet name:"] @item.Name</MudText>
+                                <MudText Class="mud-text-caption">@_viewModel.Localizer["balance:"] @item.Balance</MudText>
+                            </MudSelectItem>
+                        }
+                    </MudSelect>
+                </MudItem>
+            </MudGrid>
+        </EditForm>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">@_viewModel.Localizer["Cancel"]</MudButton>
+        <MudButton Variant="Variant.Filled" OnClick="Submit" Disabled="!_viewModel.IsModelValid">
+            @if (_viewModel.Adding)
+            {
+                <MudProgressCircular Class="ms-n1" Size="MudBlazor.Size.Small" Indeterminate="true" />
+                <MudText Class="ms-2">@_viewModel.Localizer["Adding..."]</MudText>
+            }
+            else
+            {
+                <MudText>@_viewModel.Localizer["Add"]</MudText>
+            }
+        </MudButton>
+    </DialogActions>
+</MudDialog>
+@code {
+    [CascadingParameter] IMudDialogInstance MudDialog { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await _viewModel.OnInitializedAsync();
+    }
+
+    async Task Submit()
+    {
+        await _viewModel.TryToCreate();
+
+        MudDialog.Close(DialogResult.Ok(_viewModel.CreationModel.WalletId));
+    }
+    void Cancel() => MudDialog.Cancel();
+}

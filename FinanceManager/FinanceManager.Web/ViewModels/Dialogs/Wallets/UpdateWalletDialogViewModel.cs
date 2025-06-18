@@ -4,7 +4,6 @@ using FinanceManager.Web.Services.APIServices.Managers.WalletManager;
 using FinanceManager.Web.Shared.Dialogs.Wallets;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.Extensions.Localization;
-using System.Security.Claims;
 
 namespace FinanceManager.Web.ViewModels.Dialogs.Wallets;
 

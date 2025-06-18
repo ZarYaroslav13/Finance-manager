@@ -1,9 +1,9 @@
-﻿@page "/finance-operation-types"
-@page "/finance-operation-types/{WalletId:guid}"
-@using FinanceManager.Application.UseCases.FinanceOperationTypes.Commands.UpdateFinanceOperationTypeCommand
-@using FinanceManager.Web.ViewModels.Components.Pages.Personal.FinanceOperationTypes
+﻿@page "/finance-operations"
+@page "/finance-operations/{TypeId:guid}"
+@using FinanceManager.Application.UseCases.FinanceOperations.Commands.UpdateFinanceOperationCommand
+@using FinanceManager.Web.ViewModels.Components.Pages.Personal.FinanceOperations
 @using FinanceManager.Application.Models
-@inject FinanceOperationTypesPageViewModel _viewModel
+@inject FinanceOperationsPageViewModel _viewModel
 
 
 <style>
@@ -36,8 +36,7 @@
           GroupHeaderStyle="background-color:var(--mud-palette-background-gray)"
 
           HeaderClass="mt-8"
-          Class="my-5 pt-10"
-          OnRowClick="@((TableRowClickEventArgs<FinanceOperationTypeDTO> args) => _viewModel.ItemClicked(args))">
+          Class="my-5 pt-10">
     <ToolBarContent>
         <div class="d-flex align-center justify-space-between mud-width-full py-4">
             <MudText Typo="Typo.h3">@_viewModel.Localizer["Your finincial types"]</MudText>
@@ -146,10 +145,10 @@
 
 @code {
     [Parameter]
-    public Guid WalletId
+    public Guid TypeId
     {
-        get => _viewModel.WalletId;
-        set => _viewModel.WalletId = value;
+        get => _viewModel.TypeId;
+        set => _viewModel.TypeId = value;
     }
 
     protected override async Task OnInitializedAsync()
@@ -161,4 +160,5 @@
     {
         return item.EntryType == EntryType.Income ? MudBlazor.Color.Success : MudBlazor.Color.Error;
     }
+
 }

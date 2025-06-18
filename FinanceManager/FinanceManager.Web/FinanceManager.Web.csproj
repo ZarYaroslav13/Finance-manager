@@ -23,7 +23,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Shared\Dialogs\FinancialOperationTypes\" />
     <Folder Include="wwwroot\images\" />
   </ItemGroup>
 

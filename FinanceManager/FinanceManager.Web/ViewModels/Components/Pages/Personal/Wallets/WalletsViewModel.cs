@@ -1,11 +1,9 @@
 ﻿using FinanceManager.Application.Models;
-using FinanceManager.Application.UseCases.Accounts.Commands.Commands.UpdateAccountCommand;
 using FinanceManager.Application.UseCases.Wallets.Commands.UpdateWalletCommand;
 using FinanceManager.Web.Extentions;
 using FinanceManager.Web.Pages;
 using FinanceManager.Web.Services;
 using FinanceManager.Web.Services.APIServices.Managers.WalletManager;
-using FinanceManager.Web.Shared.Dialogs.Accounts;
 using FinanceManager.Web.Shared.Dialogs.Wallets;
 using Microsoft.Extensions.Localization;
 using MudBlazor;

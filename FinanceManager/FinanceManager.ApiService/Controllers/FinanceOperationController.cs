@@ -16,7 +16,7 @@ public class FinanceOperationController : BaseController
     {
     }
 
-    [HttpGet("wallet/{walletId}")]
+    [HttpGet("wallets/{walletId}")]
     public async Task<IActionResult> GetAllOfWalletAsync(Guid walletId, [FromQuery] int index, [FromQuery] int count)
     {
         return await SendRequestAsync(new GetAllOperationsOfWalletQuery
@@ -27,7 +27,7 @@ public class FinanceOperationController : BaseController
         });
     }
 
-    [HttpGet("type/{query.TypeId}")]
+    [HttpGet("types/{query.TypeId}")]
     public async Task<IActionResult> GetAllOfTypeAsync(Guid typeId, [FromQuery] int index, [FromQuery] int count)
     {
         return await SendRequestAsync(new GetAllOperationsOfTypeQuery

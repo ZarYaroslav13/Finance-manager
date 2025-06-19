@@ -1,0 +1,28 @@
+﻿.mud-time-picker-custom-white-text .mud-picker-calendar-header-transition,
+.mud-time-picker-custom-white-text .mud-timepicker-hour-text,
+.mud-time-picker-custom-white-text .mud-timepicker-minute-text,
+.mud-time-picker-custom-white-text .mud-timepicker-period-text,
+.mud-time-picker-custom-white-text .mud-button-base.mud-timepicker-selector.mud-selected,
+.mud-time-picker-custom-white-text .mud-picker-open,
+.mud-time-picker-custom-white-text .mud-timepicker-meridiem-toggle .mud-button-base,
+.mud-time-picker-custom-white-text .mud-timepicker-button-text {
+    color: white !important;
+}
+
+.mud-time-picker-custom-white-text .mud-timepicker-hour,
+.mud-time-picker-custom-white-text .mud-timepicker-minute {
+    background-color: var(--mud-palette-primary-darken) !important;
+    color: white !important;
+}
+
+.mud-time-picker-custom-white-text .mud-input-base {
+    color: white !important;
+}
+
+.mud-time-picker-custom-white-text .mud-input-label {
+    color: white !important;
+}
+
+.mud-time-picker-custom-white-text .mud-timepicker-picker-container {
+    background: linear-gradient(109.6deg, rgba(22,126,91,1) 11.2%, rgba(223,82,36,1) 91.1%) !important;
+}

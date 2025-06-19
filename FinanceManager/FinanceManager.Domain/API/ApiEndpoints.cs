@@ -188,20 +188,20 @@ public static class APIEndpoints
         /// <summary>
         /// method where are you using that endpoint must take id with name walletId
         /// </summary>
-        public const string GetAllByWallet = BaseControllerUrl + "/{walletId}";
+        public const string GetAllByWallet = BaseControllerUrl + "/wallets/{walletId}";
         /// <summary>
         /// method where are you using that endpoint must take id with name walletId
         /// </summary>
-        public const string GetAllByWalletFull = FullBaseControllerUrl + "/{walletId}";
+        public const string GetAllByWalletFull = FullBaseControllerUrl + "/wallets/{walletId}";
 
         /// <summary>
         /// method where are you using that endpoint must take id with name typeId
         /// </summary>
-        public const string GetAllByType = BaseControllerUrl + "/{typeId}";
+        public const string GetAllByType = BaseControllerUrl + "/types/{typeId}";
         /// <summary>
         /// method where are you using that endpoint must take id with name typeId
         /// </summary>
-        public const string GetAllByTypeFull = FullBaseControllerUrl + "/{typeId}";
+        public const string GetAllByTypeFull = FullBaseControllerUrl + "/types/{typeId}";
 
         /// <summary>
         /// method where are you using that endpoint must take id with name id

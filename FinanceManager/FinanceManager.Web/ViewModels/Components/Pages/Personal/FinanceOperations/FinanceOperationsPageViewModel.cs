@@ -1,8 +1,9 @@
 ﻿using FinanceManager.Application.Models;
-using FinanceManager.Application.UseCases.FinanceOperationTypes.Commands.UpdateFinanceOperationTypeCommand;
+using FinanceManager.Application.UseCases.FinanceOperations.Commands.UpdateFinanceOperationCommand;
 using FinanceManager.Web.Components.Pages.Personal.FinanceOperations;
 using FinanceManager.Web.Extentions;
 using FinanceManager.Web.Services;
+using FinanceManager.Web.Services.APIServices.Managers.FinanceOperations;
 using FinanceManager.Web.Services.APIServices.Managers.FinanceOperationType;
 using FinanceManager.Web.Services.APIServices.Managers.WalletManager;
 using FinanceManager.Web.Shared.Dialogs.FinancialOperationTypes;
@@ -15,30 +16,31 @@ public class FinanceOperationsPageViewModel : BaseViewModel<FinanceOperationsPag
 {
     public static class TableLabels
     {
-        public const string Name = nameof(FinanceOperationTypeDTO.Name);
-        public const string Description = nameof(FinanceOperationTypeDTO.Description);
-        public const string EntryType = nameof(FinanceOperationTypeDTO.EntryType);
-        public const string WalletName = nameof(FinanceOperationTypeDTO.WalletName);
+        public const string WalletName = nameof(FinanceOperationDTO.Type.WalletName);
+        public const string TypeName = nameof(FinanceOperationDTO.Type.Name);
+        public const string Amount = nameof(FinanceOperationDTO.Amount);
+        public const string Date = nameof(FinanceOperationDTO.Date);
 
         public readonly static List<string> Labels = new()
         {
-            Name, Description, EntryType, WalletName
+            WalletName, TypeName, Amount, Date
         };
     }
 
     public Guid TypeId { get; set; }
 
     public List<WalletDTO> Wallets { get; private set; } = new();
+    public List<FinanceOperationTypeDTO> FinancialOperationsTypes { get; private set; } = new();
 
-    private List<FinanceOperationTypeDTO> _tableData = new();
-    public MudTable<FinanceOperationTypeDTO> TableData { get; set; } = new();
+    private List<FinanceOperationDTO> _tableData = new();
+    public MudTable<FinanceOperationDTO> TableData { get; set; } = new();
 
-    public Dictionary<string, Func<FinanceOperationTypeDTO, object>> SortFunctions { get; } = new()
+    public Dictionary<string, Func<FinanceOperationDTO, object>> SortFunctions { get; } = new()
     {
-        { TableLabels.Name, type => type.Name },
-        { TableLabels.Description, type => type.Description },
-        { TableLabels.EntryType, type => type.EntryType },
-        { TableLabels.WalletName, type => type.WalletName },
+        { TableLabels.WalletName, operation => operation.Type.WalletName },
+        { TableLabels.TypeName, operation => operation.Type.Name },
+        { TableLabels.Amount, operation => operation.Amount },
+        { TableLabels.Date, operation => operation.Date }
     };
 
     public Dictionary<string, string> LocalizedTableLabels { get; } = new();
@@ -71,26 +73,78 @@ public class FinanceOperationsPageViewModel : BaseViewModel<FinanceOperationsPag
             Filter();
         }
     }
+
+    private DateTime? _filterStartDate = DateTime.Now;
+    public DateTime? FilterStartDate
+    {
+        get => _filterStartDate;
+        set
+        {
+            _filterStartDate = value.Value.Date.Add(_filterStartDate.Value.TimeOfDay);
+            Filter();
+        }
+    }
+
+    private TimeSpan? _filterStartDateTime;
+    public TimeSpan? FilterStartDateTime
+    {
+        get => _filterStartDateTime;
+        set
+        {
+            _filterStartDateTime = value;
+            TimeSpan time = _filterStartDateTime ?? TimeSpan.MinValue;
+            _filterStartDate = _filterStartDate.Value.Date.Add(time);
+            Filter();
+        }
+    }
+
+    private DateTime? _filterEndDate = DateTime.Now;
+    public DateTime? FilterEndDate
+    {
+        get => _filterEndDate;
+        set
+        {
+            _filterEndDate = value.Value.Date.Add(_filterEndDate.Value.TimeOfDay);
+            Filter();
+        }
+    }
+
+    private TimeSpan? _filterEndDateTime;
+    public TimeSpan? FilterEndDateTime
+    {
+        get => _filterEndDateTime;
+        set
+        {
+            _filterEndDateTime = value;
+            TimeSpan time = _filterEndDateTime ?? TimeSpan.MinValue;
+            _filterEndDate = _filterEndDate.Value.Date.Add(time);
+        }
+    }
     #endregion
 
     #region Grouping
 
-    public TableGroupDefinition<FinanceOperationTypeDTO> GroupDefinition { get; }
+    public TableGroupDefinition<FinanceOperationDTO> GroupDefinition { get; }
 
     #endregion
 
     #region Updating
-    private FinanceOperationDTO _typeBackup { get; set; }
+    public DateTime? NewDate { get; set; }
+    public TimeSpan? NewTime { get; set; }
+
+    private FinanceOperationDTO _typeBackup { get; set; } = new();
 
 
     #endregion
 
     private readonly IWalletManager _walletManager;
     private readonly IFinanceOperationTypeManager _financeOperationTypeManager;
+    private readonly IFinanceOperationsManager _financeOperationsManager;
 
-    public FinanceOperationsPageViewModel(IFinanceOperationTypeManager financeOperationTypeManager, IWalletManager walletManager,
+    public FinanceOperationsPageViewModel(IFinanceOperationsManager financeOperationsManager, IFinanceOperationTypeManager financeOperationTypeManager, IWalletManager walletManager,
         ViewModelServicesLocator locator, IStringLocalizer<FinanceOperationsPage> localizer) : base(locator, localizer)
     {
+        _financeOperationsManager = financeOperationsManager ?? throw new ArgumentNullException(nameof(financeOperationsManager));
         _financeOperationTypeManager = financeOperationTypeManager ?? throw new ArgumentNullException(nameof(financeOperationTypeManager));
         _walletManager = walletManager ?? throw new ArgumentNullException(nameof(walletManager));
 
@@ -100,7 +154,14 @@ public class FinanceOperationsPageViewModel : BaseViewModel<FinanceOperationsPag
             Indentation = false,
             Expandable = true,
             IsInitiallyExpanded = false,
-            Selector = (e) => e.WalletName
+            Selector = (e) => e.Type.WalletName,
+            InnerGroup = new()
+            {
+                GroupName = Localizer["Type"],
+                IsInitiallyExpanded = false,
+                Expandable = true,
+                Selector = e => e.Type.Name
+            }
         };
 
         LocalizedTableLabels.Add(String.Empty, String.Empty);
@@ -119,38 +180,53 @@ public class FinanceOperationsPageViewModel : BaseViewModel<FinanceOperationsPag
 
         foreach (var wallet in Wallets)
         {
-            _tableData.AddRange((await _financeOperationTypeManager.GetAllTypesOfWalletAsync(wallet.Id)).Data);
+            FinancialOperationsTypes.AddRange((await _financeOperationTypeManager.GetAllTypesOfWalletAsync(wallet.Id)).Data);
+            var operations = await _financeOperationsManager.GetAllOperationsOfWalletAsync(wallet.Id);
+            operations.Data.ForEach(d => d.Type.WalletName = wallet.Name);
+            _tableData.AddRange(operations.Data);
         }
 
         if (TypeId != Guid.Empty)
         {
-            TableData.Items = _tableData.Where(t => t.WalletId == TypeId);
+            TableData.Items = _tableData.Where(t => t.Type.Id == TypeId);
             return;
         }
 
         TableData.Items = _tableData;
-    }
 
+        _filterStartDate = _tableData.Aggregate((first, next) => first.Date > next.Date ? next : first).Date;
+    }
+    #region Filtering
     public void Filter()
     {
-        if (FilterValue == String.Empty || FilterProperty == String.Empty)
+        if (((FilterValue == String.Empty) && (FilterProperty != TableLabels.Date)) || FilterProperty == String.Empty)
         {
             TableData.Items = _tableData;
             return;
         }
 
-        TableData.Items = _tableData.Where(
-                type =>
-                {
-                    var t = type.GetType();
-                    var field = LocalizedTableLabels.FirstOrDefault(l => l.Value == _filterProperty).Key;
-                    var value = t.GetProperty(field).GetValue(type).ToString().ToLower();
-
-                    return value.Contains(_filterValue.ToLower());
-                })
+        TableData.Items = _tableData.Where(Filter)
             .ToList();
 
     }
+
+    private bool Filter(FinanceOperationDTO operation)
+    {
+        switch (FilterProperty)
+        {
+            case TableLabels.WalletName:
+                return operation.Type.WalletName.ToLower().Contains(FilterValue.ToLower());
+            case TableLabels.TypeName:
+                return operation.Type.Name.ToLower().Contains(FilterValue.ToLower());
+            case TableLabels.Amount:
+                return operation.Amount.ToString().Contains(FilterValue);
+            case TableLabels.Date:
+                return _filterEndDate >= operation.Date && operation.Date >= _filterStartDate;
+            default:
+                return true;
+        }
+    }
+    #endregion
 
     public async Task CreateFinancialType()
     {
@@ -160,69 +236,70 @@ public class FinanceOperationsPageViewModel : BaseViewModel<FinanceOperationsPag
 
         if (!result.Canceled)
         {
-            _snackBar.Add(string.Format(Localizer["Wallet added successfully!"]), Severity.Success);
+            _snackBar.Add(string.Format(Localizer["Operation added successfully!"]), Severity.Success);
 
-            var walletId = (Guid)result.Data;
+            var typeId = (Guid)result.Data;
 
-            _tableData.RemoveAll(w => w.WalletId == walletId);
+            _tableData.RemoveAll(o => o.Type.Id == typeId);
 
-            _tableData.AddRange((await _financeOperationTypeManager.GetAllTypesOfWalletAsync(walletId)).Data);
+            _tableData.AddRange((await _financeOperationsManager.GetAllOperationsOfTypeAsync(typeId)).Data);
         }
     }
 
     #region Editing
 
-    public async Task OnRowEditPreview(FinanceOperationDTO type)
+    public async Task OnRowEditPreview(FinanceOperationDTO operation)
     {
         _typeBackup = new()
         {
-            Name = type.Name,
-            Description = type.Description,
-            EntryType = type.EntryType,
-            Id = type.Id,
-            WalletId = type.WalletId,
-            WalletName = type.WalletName,
+            Id = operation.Id,
+            Amount = operation.Amount,
+            Date = operation.Date,
+            Type = operation.Type
         };
+
+        NewDate = operation.Date;
+        NewTime = operation.Date.TimeOfDay;
     }
 
-    public async Task OnRowEditCommit(FinanceOperationDTO type)
+    public async Task OnRowEditCommit(FinanceOperationDTO operation)
     {
-        if (type.WalletName != _typeBackup.WalletName)
-            type.WalletId = Wallets.First(w => w.Name == type.WalletName).Id;
+        NewDate.Value.Add(NewTime.Value);
+        operation.Date = NewDate ?? operation.Date;
 
-        var result = await _financeOperationTypeManager.UpdateTypeAsync(
-                        _mapper.Map<UpdateFinanceOperationTypeCommand>(type));
+        var result = await _financeOperationsManager.UpdateOperationAsync(
+                        _mapper.Map<UpdateFinanceOperationCommand>(operation));
 
         if (!result.Succeeded)
         {
-            await OnRowEditCancel(type);
+            await OnRowEditCancel(operation);
+            return;
         }
 
-        _snackBar.Add(Localizer["Financial type updated successfully!"], Severity.Success);
+        _snackBar.Add(Localizer["Financial operation updated successfully!"], Severity.Success);
+        Filter();
     }
 
-    public async Task OnRowEditCancel(FinanceOperationDTO type)
+    public async Task OnRowEditCancel(FinanceOperationDTO operation)
     {
-        type.WalletId = _typeBackup.WalletId;
-        type.WalletName = _typeBackup.WalletName;
-        type.Name = _typeBackup.Name;
-        type.EntryType = _typeBackup.EntryType;
-        type.Description = _typeBackup.Description;
+        operation.ChangeFinanceOperationType(_typeBackup.Type);
+        operation.Amount = _typeBackup.Amount;
+        operation.Date = _typeBackup.Date;
 
         _snackBar.Add(Localizer["Updating canceled"], Severity.Warning);
     }
 
-    public async Task DeleteItem(FinanceOperationTypeDTO type)
+    public async Task DeleteItem(FinanceOperationDTO operation)
     {
         bool confirm = await _dialogService.ShowMessageBox(
             Localizer["Warning"],
-            Localizer["Are you realy want to delete this financial type?"],
+            Localizer["Are you realy want to delete this financial operation?"],
             yesText: Localizer["Delete!"], cancelText: Localizer["Cancel"]) ?? false;
 
         if (!confirm)
             return;
 
-        var result = await _financeOperationTypeManager.DeleteTypeAsync(type.Id);
+        var result = await _financeOperationsManager.DeleteOperationAsync(operation.Id);
 
         if (!result.Succeeded)
         {
@@ -230,7 +307,7 @@ public class FinanceOperationsPageViewModel : BaseViewModel<FinanceOperationsPag
             return;
         }
 
-        _tableData.Remove(type);
+        _tableData.Remove(operation);
 
         TableData.Items = _tableData;
 

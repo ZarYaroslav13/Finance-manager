@@ -4,6 +4,7 @@
 @using FinanceManager.Web.ViewModels.Components.Pages.Personal.FinanceOperations
 @using FinanceManager.Application.Models
 @inject FinanceOperationsPageViewModel _viewModel
+@attribute [Authorize]
 
 
 <style>
@@ -26,10 +27,9 @@
           CanCancelEdit="true" 
           EditTrigger="TableEditTrigger.EditButton" 
           EditButtonPosition="TableEditButtonPosition.End"
-
-          RowEditPreview="@((type) => _viewModel.OnRowEditPreview((FinanceOperationDTO)type))"
-          RowEditCommit="@((type) => _viewModel.OnRowEditCommit((FinanceOperationDTO)type))"
-          RowEditCancel="@((type) => _viewModel.OnRowEditCancel((FinanceOperationDTO)type))"
+          RowEditPreview="@((operation) => _viewModel.OnRowEditPreview((FinanceOperationDTO)operation))"
+          RowEditCommit="@((operation) => _viewModel.OnRowEditCommit((FinanceOperationDTO)operation))"
+          RowEditCancel="@((operation) => _viewModel.OnRowEditCancel((FinanceOperationDTO)operation))"
 
           GroupFooterClass="mb-4"
           GroupBy="@_viewModel.GroupDefinition"
@@ -39,26 +39,53 @@
           Class="my-5 pt-10">
     <ToolBarContent>
         <div class="d-flex align-center justify-space-between mud-width-full py-4">
-            <MudText Typo="Typo.h3">@_viewModel.Localizer["Your finincial types"]</MudText>
-            <MudSpacer />
-            <MudStack Row="true">
+            <MudText Typo="Typo.h4">@_viewModel.Localizer["Your finincial operations"]</MudText>
+            <MudSpacer  />
+
+            <MudStack Row="true" Spacing="2" Justify="Justify.FlexEnd" Style="min-width: 40%; max-width: 55%;">
+                
                 <MudSelect T="string" Label="@_viewModel.Localizer["Filter properity"]" @bind-Value="@_viewModel.FilterProperty" Immediate="true"
                            Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.FilterList">
                     @foreach (var item in _viewModel.LocalizedTableLabels)
                     {
-                        <MudSelectItem Value="item.Value" />
+                        <MudSelectItem Value="item.Key">
+                            @item.Value
+                        </MudSelectItem>
                     }
                 </MudSelect>
 
-                <MudTextField T="string" Label="@_viewModel.Localizer["Filter value"]" Immediate="true"
-                              Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Sharp.FilterAlt" @bind-Value="@_viewModel.FilterValue" />
+                @if (_viewModel.FilterProperty != FinanceOperationsPageViewModel.TableLabels.Date)
+                {
+                    <MudTextField T="string" Label="@_viewModel.Localizer["Filter value"]" Immediate="true"
+                    Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Sharp.FilterAlt" @bind-Value="@_viewModel.FilterValue" />
+                }
+                else
+                {
+                    <MudDatePicker Label="@_viewModel.Localizer["Start Date"]" @bind-Date="@_viewModel.FilterStartDate" Editable="true"
+                           PickerVariant="PickerVariant.Dialog" DateFormat="dd/MM/yyyy" Immediate="true"
+                           Style=" background: linear-gradient(109.6deg, rgba(22,126,91,1) 11.2%, rgba(223,82,36,1) 91.1%) !important;
+                           color: white !important;" />
+                    <MudTimePicker Label="@_viewModel.Localizer["Start Time"]" @bind-Time="_viewModel.FilterStartDateTime" Editable="true"
+                           Culture="@System.Globalization.CultureInfo.CurrentCulture" Immediate="true"
+                           Style=" background: linear-gradient(109.6deg, rgba(22,126,91,1) 11.2%, rgba(223,82,36,1) 91.1%) !important;
+                           color: white !important;" />
+
+                    <MudDatePicker Label="@_viewModel.Localizer["End Date"]" @bind-Date="@_viewModel.FilterEndDate" Editable="true"
+                           PickerVariant="PickerVariant.Dialog" DateFormat="dd/MM/yyyy" Immediate="true"
+                           Style=" background: linear-gradient(109.6deg, rgba(22,126,91,1) 11.2%, rgba(223,82,36,1) 91.1%) !important;
+                           color: white !important;" />
+                    <MudTimePicker Label="@_viewModel.Localizer["End Time"]" @bind-Time="@_viewModel.FilterEndDateTime" Editable="true"
+                           Culture="@System.Globalization.CultureInfo.CurrentCulture" Immediate="true"
+                           Style=" background: linear-gradient(109.6deg, rgba(22,126,91,1) 11.2%, rgba(223,82,36,1) 91.1%) !important;
+                           color: white !important;" />
+                }
             </MudStack>
         </div>
     </ToolBarContent>
     <HeaderContent>
         @foreach (var item in _viewModel.SortFunctions)
         {
-            <MudTh><MudTableSortLabel SortBy=@item.Value T="FinanceOperationTypeDTO">@_viewModel.Localizer[item.Key]</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy=@item.Value T="FinanceOperationDTO">@_viewModel.LocalizedTableLabels[item.Key]</MudTableSortLabel></MudTh>
         }
         <MudTh/>
     </HeaderContent>
@@ -72,42 +99,59 @@
         <col />
         <col />
         <col />
-        <col />
     </ColGroup>
     <GroupFooterTemplate>
-        <MudTh Class="mud-table-cell-custom-group mud-table-cell-custom-group-footer" colspan="5">
-            @_viewModel.Localizer["Total types:"] @context.Items.Count()
+        @if (context.GroupName == _viewModel.GroupDefinition.GroupName)
+        {
+            <MudTh Class="mud-table-cell-custom-group mud-table-cell-custom-group-footer" colspan="5">
+                @_viewModel.Localizer["Total types:"] @context.Items.Count()
             </MudTh>
+        }
+        else
+        {
+            <MudTh Class="mud-table-cell-custom-group mud-table-cell-custom-group-footer" colspan="5">
+                @_viewModel.Localizer["Total operations:"] @context.Items.Count()
+            </MudTh>
+        }
     </GroupFooterTemplate>
     <RowTemplate>
-        @foreach (var item in _viewModel.SortFunctions)
-        {
-            var color = GetColor(context);
-            <MudTd DataLabel="@item.Key"><MudText Color="@color">@context.GetType().GetProperty(item.Key).GetValue(context)</MudText></MudTd>
-        }
+
+        <MudTd DataLabel="@FinanceOperationsPageViewModel.TableLabels.WalletName"><MudText Color="@GetColor(context)">@context.Type.WalletName</MudText></MudTd>
+        <MudTd DataLabel="@FinanceOperationsPageViewModel.TableLabels.TypeName"><MudText Color="@GetColor(context)">@context.Type.Name</MudText></MudTd>
+        <MudTd DataLabel="@FinanceOperationsPageViewModel.TableLabels.Amount"><MudText Color="@GetColor(context)">@context.Amount</MudText></MudTd>
+        <MudTd DataLabel="@FinanceOperationsPageViewModel.TableLabels.Date"><MudText Color="@GetColor(context)">@context.Date</MudText></MudTd>
         <MudTd/>
     </RowTemplate>
     <RowEditingTemplate>
-        <MudTd><MudTextField T="string" @bind-Value="context.Name"></MudTextField></MudTd>
-        <MudTd><MudTextField T="string" @bind-Value="context.Description"></MudTextField></MudTd>
         <MudTd>
-            <MudSelect T="@EntryType" @bind-Value="context.EntryType">
-                @foreach (EntryType item in typeof(EntryType).GetEnumValues())
+            <MudSelect T="FinanceOperationTypeDTO" @bind-Value="context.Type" Class="py-8" Label="@_viewModel.Localizer["Select Type"]">
+                @foreach (var item in _viewModel.FinancialOperationsTypes)
                 {
-                    <MudSelectItem T="@EntryType" Value="item">@_viewModel.Localizer[$"{item.ToString()}"]</MudSelectItem>
+                    <MudSelectItem T="FinanceOperationTypeDTO" Value="@item">
+                        <MudText Class="mud-text-body2 mb-0">@_viewModel.Localizer["Type name:"] @item.Name</MudText>
+                        <MudText Class="mud-text-caption">@_viewModel.Localizer["Type entry:"] @item.EntryType</MudText>
+                        <MudText Class="mud-text-caption">@_viewModel.Localizer["Type wallet:"] @item.WalletName</MudText>
+                    </MudSelectItem>
                 }
             </MudSelect>
         </MudTd>
         <MudTd>
-            <MudSelect T="string" @bind-Value="context.WalletName" Class="py-8" Label="@_viewModel.Localizer["Select Wallet"]">
-                @foreach (var item in _viewModel.Wallets)
-                {
-                    <MudSelectItem T="string" Value="@item.Name">
-                        <MudText Class="mud-text-body2 mb-0">@_viewModel.Localizer["Wallet name:"] @item.Name</MudText>
-                        <MudText Class="mud-text-caption">@_viewModel.Localizer["balance:"] @item.Balance</MudText>
-                    </MudSelectItem>
-                }
-            </MudSelect>
+            <MudTextField Immediate=true For="@(() => context.Amount)" @bind-Value="context.Amount" Label="@_viewModel.Localizer["Balance"]" />
+        </MudTd>
+        <MudTd>
+            <MudDatePicker Label="@_viewModel.Localizer["Date"]"
+                           @bind-Date="@_viewModel.NewDate"
+                           Culture="@System.Globalization.CultureInfo.CurrentCulture"
+                           MaxDate="@DateTime.Today"
+                           Style=" background: linear-gradient(109.6deg, rgba(22,126,91,1) 11.2%, rgba(223,82,36,1) 91.1%) !important;
+                            color: white !important" />
+
+            <MudTimePicker Label="@_viewModel.Localizer["Select time"]"
+                           @bind-Time="@(_viewModel.NewTime)"
+                           Culture="@System.Globalization.CultureInfo.CurrentCulture" 
+                           Editable="true"
+                           Style=" background: linear-gradient(109.6deg, rgba(22,126,91,1) 11.2%, rgba(223,82,36,1) 91.1%) !important;
+                           color: white !important;"/>
         </MudTd>
     </RowEditingTemplate>
     <EditButtonContent Context="button">
@@ -123,7 +167,7 @@
                        Color="MudBlazor.Color.Error" 
                        Style="background-color:#fce4ec"
                        Size=" MudBlazor.Size.Small"
-                       OnClick="@(() => _viewModel.DeleteItem((FinanceOperationTypeDTO)button.Item))" />
+                       OnClick="@(() => _viewModel.DeleteItem((FinanceOperationDTO)button.Item))" />
     </EditButtonContent>
     <LoadingContent>
         <MudText>@_viewModel.Localizer["Loading..."]</MudText>
@@ -156,9 +200,8 @@
         await _viewModel.OnInitializedAsync();
     }
 
-    protected MudBlazor.Color GetColor(FinanceOperationTypeDTO item)
+    protected MudBlazor.Color GetColor(FinanceOperationDTO item)
     {
-        return item.EntryType == EntryType.Income ? MudBlazor.Color.Success : MudBlazor.Color.Error;
+        return item.Type.EntryType == EntryType.Income ? MudBlazor.Color.Success : MudBlazor.Color.Error;
     }
-
 }

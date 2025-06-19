@@ -29,7 +29,7 @@ public class GetAllOperationsOfWalletHandler : BaseRequestHandler, IRequestHandl
             var data = (await _financeService
                 .GetAllFinanceOperationOfWalletAsync(request.WalletId, request.Index, request.Count))
                 .Select(_mapper.Map<FinanceOperationDTO>)
-                .ToList();
+                .ToList() ?? new();
 
             return Result<List<FinanceOperationDTO>>.Success(data, "Finance operations retrived successfully");
         });

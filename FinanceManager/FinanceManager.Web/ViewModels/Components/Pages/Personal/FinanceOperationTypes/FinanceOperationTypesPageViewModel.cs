@@ -83,7 +83,7 @@ public class FinanceOperationTypesPageViewModel : BaseViewModel<FinanceOperation
     #region Updating
     private FinanceOperationTypeDTO _typeBackup { get; set; }
 
-
+    public Guid NewWalletId { get; set; }
     #endregion
 
     private readonly IWalletManager _walletManager;
@@ -112,8 +112,10 @@ public class FinanceOperationTypesPageViewModel : BaseViewModel<FinanceOperation
         }
     }
 
-    public async Task OnInitializedAsync()
+    public async Task OnInitializedAsync(Action stateChanged)
     {
+        StateHasChanged = stateChanged ?? throw new ArgumentNullException(nameof(stateChanged));
+
         _tableData = new();
 
         Wallets = (await _walletManager.GetWalletsAsync(new(_httpContextAccessor.HttpContext.User.GetUserId()))).Data;
@@ -182,12 +184,17 @@ public class FinanceOperationTypesPageViewModel : BaseViewModel<FinanceOperation
             WalletId = type.WalletId,
             WalletName = type.WalletName,
         };
+
+        NewWalletId = type.WalletId;
     }
 
     public async Task OnRowEditCommit(FinanceOperationTypeDTO type)
     {
-        if (type.WalletName != _typeBackup.WalletName)
-            type.WalletId = Wallets.First(w => w.Name == type.WalletName).Id;
+        if (NewWalletId != _typeBackup.WalletId)
+        {
+            type.WalletId = NewWalletId;
+            type.WalletName = Wallets.First(w => w.Id == type.WalletId).Name;
+        }
 
         var result = await _financeOperationTypeManager.UpdateTypeAsync(
                         _mapper.Map<UpdateFinanceOperationTypeCommand>(type));
@@ -196,6 +203,11 @@ public class FinanceOperationTypesPageViewModel : BaseViewModel<FinanceOperation
         {
             await OnRowEditCancel(type);
         }
+
+        result.Data.WalletName = type.WalletName;
+        var index = _tableData.FindIndex(t => t.Id == result.Data.Id);
+        _tableData[index] = result.Data;
+        StateHasChanged();
 
         _snackBar.Add(Localizer["Financial type updated successfully!"], Severity.Success);
     }

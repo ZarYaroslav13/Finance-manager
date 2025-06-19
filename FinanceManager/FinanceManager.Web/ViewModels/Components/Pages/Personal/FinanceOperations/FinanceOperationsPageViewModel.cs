@@ -7,7 +7,6 @@ using FinanceManager.Web.Services.APIServices.Managers.FinanceOperations;
 using FinanceManager.Web.Services.APIServices.Managers.FinanceOperationsType;
 using FinanceManager.Web.Services.APIServices.Managers.WalletManager;
 using FinanceManager.Web.Shared.Dialogs.FinancialOperations;
-using FinanceManager.Web.Shared.Dialogs.FinancialOperationTypes;
 using Microsoft.Extensions.Localization;
 using MudBlazor;
 
@@ -135,7 +134,7 @@ public class FinanceOperationsPageViewModel : BaseViewModel<FinanceOperationsPag
 
     private FinanceOperationDTO _typeBackup { get; set; } = new();
 
-
+    public FinanceOperationTypeDTO NewType { get; set; } = new();
     #endregion
 
     private readonly IWalletManager _walletManager;
@@ -173,8 +172,10 @@ public class FinanceOperationsPageViewModel : BaseViewModel<FinanceOperationsPag
         }
     }
 
-    public async Task OnInitializedAsync()
+    public async Task OnInitializedAsync(Action hasChanged)
     {
+        StateHasChanged = hasChanged ?? throw new ArgumentNullException(nameof(hasChanged));
+
         _tableData = new();
 
         Wallets = (await _walletManager.GetWalletsAsync(new(_httpContextAccessor.HttpContext.User.GetUserId()))).Data;
@@ -197,6 +198,7 @@ public class FinanceOperationsPageViewModel : BaseViewModel<FinanceOperationsPag
 
         _filterStartDate = _tableData.Aggregate((first, next) => first.Date > next.Date ? next : first).Date;
     }
+
     #region Filtering
     public void Filter()
     {
@@ -241,7 +243,7 @@ public class FinanceOperationsPageViewModel : BaseViewModel<FinanceOperationsPag
 
             var typeId = (Guid)result.Data;
 
-            var predicate = (FinanceOperationDTO operation)=>operation.Type.Id == typeId;
+            var predicate = (FinanceOperationDTO operation) => operation.Type.Id == typeId;
 
             _tableData.RemoveAll(o => predicate(o));
 
@@ -265,12 +267,16 @@ public class FinanceOperationsPageViewModel : BaseViewModel<FinanceOperationsPag
 
         NewDate = operation.Date;
         NewTime = operation.Date.TimeOfDay;
+
+        NewType = operation.Type;
     }
 
     public async Task OnRowEditCommit(FinanceOperationDTO operation)
     {
         NewDate.Value.Add(NewTime.Value);
         operation.Date = NewDate ?? operation.Date;
+
+        operation.Type = NewType;
 
         var result = await _financeOperationsManager.UpdateOperationAsync(
                         _mapper.Map<UpdateFinanceOperationCommand>(operation));
@@ -280,6 +286,9 @@ public class FinanceOperationsPageViewModel : BaseViewModel<FinanceOperationsPag
             await OnRowEditCancel(operation);
             return;
         }
+        var index = _tableData.FindIndex(o => o.Id == operation.Id);
+        _tableData[index] = result.Data;
+        StateHasChanged.Invoke();
 
         _snackBar.Add(Localizer["Financial operation updated successfully!"], Severity.Success);
         Filter();

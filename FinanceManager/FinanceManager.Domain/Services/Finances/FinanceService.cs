@@ -2,7 +2,6 @@
 using FinanceManager.Domain.Models;
 using FinanceManager.Domain.Services.CurrentUserService;
 using FinanceManager.Domain.Services.Wallets;
-using FinanceManager.Domain.Wrapper;
 using FinanceManager.Infrastructure.Models;
 using FinanceManager.Infrastructure.Repository;
 using FinanceManager.Infrastructure.UnitOfWork;
@@ -212,7 +211,7 @@ public class FinanceService : BaseService, IFinanceService
 
         var result = _mapper.Map<FinanceOperationModel>(dbResult);
 
-        await UpdateWallet(result);
+        await UpdateWalletAfterCreatingOperation(result);
 
         return result;
     }
@@ -222,12 +221,18 @@ public class FinanceService : BaseService, IFinanceService
         ArgumentNullException.ThrowIfNull(financeOperation);
 
         if (financeOperation.Id == Guid.Empty) throw new ArgumentOutOfRangeException(nameof(financeOperation.Id));
+
+        var oldOperation = _mapper.Map<FinanceOperationModel>(await _financeOperationRepository.GetByIdAsync(financeOperation.Id));
+
+
         var dbResult = _financeOperationRepository.Update(
                             _mapper.Map<FinanceOperation>(financeOperation));
         await _unitOfWork.SaveChangesAsync();
 
         dbResult.Type = await _financeOperationTypeRepository.GetByIdAsync(dbResult.TypeId);
         var result = _mapper.Map<FinanceOperationModel>(dbResult);
+
+        await UpdateWalletAfterUpdatingOperation(result, oldOperation.Type.EntryType, oldOperation.Amount);
 
         return result;
     }
@@ -237,8 +242,23 @@ public class FinanceService : BaseService, IFinanceService
         if (id == Guid.Empty)
             throw new ArgumentNullException(nameof(id));
 
+        var operation = _mapper.Map<FinanceOperationModel>(
+                    await _financeOperationRepository.GetByIdAsync(id));
+
         _financeOperationRepository.Delete(id);
+
         await _unitOfWork.SaveChangesAsync();
+
+        var type = operation.Type;
+
+        var wallet = await _walletService.FindWalletAsync(type.WalletId);
+
+        if(type.EntryType == EntryType.Income)
+            wallet.Balance -= operation.Amount;
+        else
+            wallet.Balance += operation.Amount;
+
+        await _walletService.UpdateWalletAsync(wallet);
     }
     public async Task<bool> IsCallerFinanceOperationOperationOwner(Guid operationId)
     {
@@ -258,7 +278,7 @@ public class FinanceService : BaseService, IFinanceService
         return type == null;
     }
 
-    private async Task UpdateWallet(FinanceOperationModel financeOperation)
+    private async Task UpdateWalletAfterCreatingOperation(FinanceOperationModel financeOperation)
     {
         var type = financeOperation.Type;
         var wallet = await _walletService.FindWalletAsync(type.WalletId);
@@ -268,6 +288,20 @@ public class FinanceService : BaseService, IFinanceService
         else
             wallet.Balance -= financeOperation.Amount;
 
+        await _walletService.UpdateWalletAsync(wallet);
+    }
+
+    private async Task UpdateWalletAfterUpdatingOperation(FinanceOperationModel financeOperation, EntryType oldType, int oldAmount)
+    {
+        var type = financeOperation.Type;
+
+        if (oldAmount == financeOperation.Amount && oldType == type.EntryType)
+            return;
+
+        var wallet = await _walletService.FindWalletAsync(type.WalletId);
+
+        wallet.CalculateNewBalance(financeOperation, oldType, oldAmount);
+        
         await _walletService.UpdateWalletAsync(wallet);
     }
     #endregion

@@ -124,7 +124,7 @@
     </RowTemplate>
     <RowEditingTemplate>
         <MudTd>
-            <MudSelect T="FinanceOperationTypeDTO" @bind-Value="context.Type" Class="py-8" Label="@_viewModel.Localizer["Select Type"]">
+            <MudSelect T="FinanceOperationTypeDTO" @bind-Value="_viewModel.NewType" Class="py-8" Label="@_viewModel.Localizer["Select Type"]">
                 @foreach (var item in _viewModel.FinancialOperationsTypes)
                 {
                     <MudSelectItem T="FinanceOperationTypeDTO" Value="@item">
@@ -197,7 +197,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        await _viewModel.OnInitializedAsync();
+        await _viewModel.OnInitializedAsync(StateHasChanged);
     }
 
     protected MudBlazor.Color GetColor(FinanceOperationDTO item)

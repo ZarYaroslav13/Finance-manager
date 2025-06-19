@@ -35,7 +35,7 @@ public class Wallet : Entity
 
     public override void Copy<T>(T source)
     {
-        if(source.GetType() != typeof(Wallet))
+        if (source.GetType() != typeof(Wallet))
             return;
 
         var sourceWallet = source as Wallet;

@@ -22,6 +22,8 @@ public abstract class BaseViewModel<T> : IViewModel where T : class
     protected readonly ILocalStorageService _localStorage;
     protected readonly IMapper _mapper;
 
+    protected Action? StateHasChanged;
+
     protected BaseViewModel(ViewModelServicesLocator locator, IStringLocalizer<T> localizer)
     {
         ArgumentNullException.ThrowIfNull(locator);

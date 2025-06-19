@@ -107,10 +107,10 @@
             </MudSelect>
         </MudTd>
         <MudTd>
-            <MudSelect T="string" @bind-Value="context.WalletName" Class="py-8" Label="@_viewModel.Localizer["Select Wallet"]">
+            <MudSelect T="Guid" @bind-Value="_viewModel.NewWalletId" Class="py-8" Label="@_viewModel.Localizer["Select Wallet"]">
                 @foreach (var item in _viewModel.Wallets)
                 {
-                    <MudSelectItem T="string" Value="@item.Name">
+                    <MudSelectItem T="Guid" Value="@item.Id">
                         <MudText Class="mud-text-body2 mb-0">@_viewModel.Localizer["Wallet name:"] @item.Name</MudText>
                         <MudText Class="mud-text-caption">@_viewModel.Localizer["balance:"] @item.Balance</MudText>
                     </MudSelectItem>
@@ -161,7 +161,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        await _viewModel.OnInitializedAsync();
+        await _viewModel.OnInitializedAsync(StateHasChanged);
     }
 
     protected MudBlazor.Color GetColor(FinanceOperationTypeDTO item)

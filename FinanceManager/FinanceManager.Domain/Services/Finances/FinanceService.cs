@@ -89,22 +89,14 @@ public class FinanceService : BaseService, IFinanceService
                             _mapper.Map<FinanceOperationType>(type))));
         await _unitOfWork.SaveChangesAsync();
 
+        if(oldType.EntryType != type.EntryType)
+        {
+            await EntryTypeChanged(oldType, type);
+        }
+
         if(oldType.WalletId != type.WalletId)
         {
-            var oldWallet = await _walletService.FindWalletAsync(oldType.WalletId);
-            var newWallet = await _walletService.FindWalletAsync(type.WalletId);
-            var operations = await GetAllFinanceOperationOfTypeAsync(type.Id);
-
-            var modificator = (oldType.EntryType == EntryType.Income) ? 1 : -1;
-
-            foreach (var operation in operations)
-            {
-                newWallet.Balance += modificator*operation.Amount;
-                oldWallet.Balance -= modificator * operation.Amount;
-            }
-
-            await _walletService.UpdateWalletAsync(newWallet);
-            await _walletService.UpdateWalletAsync(oldWallet);
+            await WalletChanged(oldType, type);
         }
 
         return result;
@@ -132,6 +124,38 @@ public class FinanceService : BaseService, IFinanceService
         var type = await _financeOperationTypeRepository.GetByIdAsync(typeId);
 
         return await _walletService.IsCallerWalletOwner(type.WalletId);
+    }
+
+    private async Task EntryTypeChanged(FinanceOperationTypeModel oldType, FinanceOperationTypeModel type)
+    {
+        var wallet = await _walletService.FindWalletAsync(type.WalletId);
+        var operations = await GetAllFinanceOperationOfTypeAsync(type.Id);
+
+        foreach (var operation in operations)
+        {
+            wallet.CalculateNewBalance(operation, oldType.EntryType, operation.Amount);
+        }
+
+
+        await _walletService.UpdateWalletAsync(wallet);
+    }
+
+    private async Task WalletChanged(FinanceOperationTypeModel oldType, FinanceOperationTypeModel type)
+    {
+        var oldWallet = await _walletService.FindWalletAsync(oldType.WalletId);
+        var newWallet = await _walletService.FindWalletAsync(type.WalletId);
+        var operations = await GetAllFinanceOperationOfTypeAsync(type.Id);
+
+        var modificator = (oldType.EntryType == EntryType.Income) ? 1 : -1;
+
+        foreach (var operation in operations)
+        {
+            newWallet.Balance += modificator * operation.Amount;
+            oldWallet.Balance -= modificator * operation.Amount;
+        }
+
+        await _walletService.UpdateWalletAsync(newWallet);
+        await _walletService.UpdateWalletAsync(oldWallet);
     }
     #endregion
 

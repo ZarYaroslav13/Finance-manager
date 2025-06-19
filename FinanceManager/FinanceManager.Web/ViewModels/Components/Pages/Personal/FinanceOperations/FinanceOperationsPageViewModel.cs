@@ -241,15 +241,11 @@ public class FinanceOperationsPageViewModel : BaseViewModel<FinanceOperationsPag
         {
             _snackBar.Add(string.Format(Localizer["Operation added successfully!"]), Severity.Success);
 
-            var typeId = (Guid)result.Data;
+            var operation = (FinanceOperationDTO)result.Data;
 
-            var predicate = (FinanceOperationDTO operation) => operation.Type.Id == typeId;
+            _tableData.Add(operation);
 
-            _tableData.RemoveAll(o => predicate(o));
-
-            var f = (await _financeOperationsManager.GetAllOperationsOfTypeAsync(typeId)).Data;
-
-            _tableData.AddRange(f);
+            Filter();
         }
     }
 

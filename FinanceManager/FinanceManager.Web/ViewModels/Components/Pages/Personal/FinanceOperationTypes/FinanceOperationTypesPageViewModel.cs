@@ -165,11 +165,9 @@ public class FinanceOperationTypesPageViewModel : BaseViewModel<FinanceOperation
         {
             _snackBar.Add(Localizer["Financial type added successfully!"], MudBlazor.Severity.Success);
 
-            var walletId = (Guid)result.Data;
+            var type = (FinanceOperationTypeDTO)result.Data;
 
-            _tableData.RemoveAll(w => w.WalletId == walletId);
-
-            _tableData.AddRange((await _financeOperationTypeManager.GetAllTypesOfWalletAsync(walletId)).Data);
+            _tableData.Add(type);
         }
     }
 

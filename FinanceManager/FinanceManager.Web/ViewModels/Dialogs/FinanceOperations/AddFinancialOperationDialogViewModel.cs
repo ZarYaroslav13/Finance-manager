@@ -88,7 +88,7 @@ public class AddFinancialOperationDialogViewModel : BaseViewModel<AddFinancialOp
         _availableTypes = _types;
     }
 
-    public async Task TryToCreate()
+    public async Task<FinanceOperationDTO> TryToCreate()
     {
         Adding = true;
 
@@ -97,5 +97,7 @@ public class AddFinancialOperationDialogViewModel : BaseViewModel<AddFinancialOp
         var result = await _operationManager.AddOperationAsync(CreationModel);
 
         Adding = false;
+
+        return result.Data;
     }
 }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Azure;
 using FinanceManager.Domain.Models;
 using FinanceManager.Domain.Services.CurrentUserService;
 using FinanceManager.Domain.Services.Wallets;
@@ -80,10 +81,31 @@ public class FinanceService : BaseService, IFinanceService
         if (type.Id == Guid.Empty)
             throw new ArgumentException(nameof(type));
 
+        var oldType = _mapper.Map<FinanceOperationTypeModel>(
+                        await _financeOperationTypeRepository.GetByIdAsync(type.Id));
+
         var result = _mapper.Map<FinanceOperationTypeModel>(
                          (_financeOperationTypeRepository.Update(
                             _mapper.Map<FinanceOperationType>(type))));
         await _unitOfWork.SaveChangesAsync();
+
+        if(oldType.WalletId != type.WalletId)
+        {
+            var oldWallet = await _walletService.FindWalletAsync(oldType.WalletId);
+            var newWallet = await _walletService.FindWalletAsync(type.WalletId);
+            var operations = await GetAllFinanceOperationOfTypeAsync(type.Id);
+
+            var modificator = (oldType.EntryType == EntryType.Income) ? 1 : -1;
+
+            foreach (var operation in operations)
+            {
+                newWallet.Balance += modificator*operation.Amount;
+                oldWallet.Balance -= modificator * operation.Amount;
+            }
+
+            await _walletService.UpdateWalletAsync(newWallet);
+            await _walletService.UpdateWalletAsync(oldWallet);
+        }
 
         return result;
     }

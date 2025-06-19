@@ -84,9 +84,9 @@
 
     async Task Submit()
     {
-        await _viewModel.TryToCreate();
+        var operation = await _viewModel.TryToCreate();
 
-        MudDialog.Close(DialogResult.Ok(_viewModel.CreationModel.TypeId));
+        MudDialog.Close(DialogResult.Ok(operation));
     }
     void Cancel() => MudDialog.Cancel();
 

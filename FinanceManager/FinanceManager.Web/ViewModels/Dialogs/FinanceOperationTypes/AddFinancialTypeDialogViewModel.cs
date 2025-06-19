@@ -45,12 +45,14 @@ public class AddFinancialTypeDialogViewModel : BaseViewModel<AddFinancialTypeDia
         Wallets = result.Data;
     }
 
-    public async Task TryToCreate()
+    public async Task<FinanceOperationTypeDTO> TryToCreate()
     {
         Adding = true;
 
         var result = await _typeManager.AddTypeAsync(CreationModel);
 
         Adding = false;
+
+        return result.Data; 
     }
 }

@@ -27,7 +27,7 @@ public class FinanceOperationController : BaseController
         });
     }
 
-    [HttpGet("types/{query.TypeId}")]
+    [HttpGet("types/{TypeId}")]
     public async Task<IActionResult> GetAllOfTypeAsync(Guid typeId, [FromQuery] int index, [FromQuery] int count)
     {
         return await SendRequestAsync(new GetAllOperationsOfTypeQuery

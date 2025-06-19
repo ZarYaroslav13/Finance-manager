@@ -33,6 +33,19 @@ public class Wallet : Entity
         return result;
     }
 
+    public override void Copy<T>(T source)
+    {
+        if(source.GetType() != typeof(Wallet))
+            return;
+
+        var sourceWallet = source as Wallet;
+
+        Name = sourceWallet.Name;
+        Balance = sourceWallet.Balance;
+        UserId = sourceWallet.UserId;
+        User = sourceWallet.User;
+    }
+
     public override bool Equals(object? obj)
     {
         if (!base.Equals(obj))

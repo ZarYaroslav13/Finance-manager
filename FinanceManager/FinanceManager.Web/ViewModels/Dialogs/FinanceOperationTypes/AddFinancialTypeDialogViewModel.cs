@@ -2,7 +2,7 @@
 using FinanceManager.Application.UseCases.FinanceOperationTypes.Commands.AddFinanceOperationTypeCommand;
 using FinanceManager.Web.Extentions;
 using FinanceManager.Web.Services;
-using FinanceManager.Web.Services.APIServices.Managers.FinanceOperationType;
+using FinanceManager.Web.Services.APIServices.Managers.FinanceOperationsType;
 using FinanceManager.Web.Services.APIServices.Managers.WalletManager;
 using FinanceManager.Web.Shared.Dialogs.FinancialOperationTypes;
 using Microsoft.AspNetCore.Components.Forms;
@@ -28,9 +28,9 @@ public class AddFinancialTypeDialogViewModel : BaseViewModel<AddFinancialTypeDia
     public List<WalletDTO> Wallets { get; set; } = new();
 
     private readonly IWalletManager _walletManager;
-    private readonly IFinanceOperationTypeManager _typeManager;
+    private readonly IFinanceOperationsTypesManager _typeManager;
 
-    public AddFinancialTypeDialogViewModel(IWalletManager walletManager, IFinanceOperationTypeManager typeManager,
+    public AddFinancialTypeDialogViewModel(IWalletManager walletManager, IFinanceOperationsTypesManager typeManager,
         ViewModelServicesLocator locator, IStringLocalizer<AddFinancialTypeDialog> localizer) : base(locator, localizer)
     {
         _walletManager = walletManager ?? throw new ArgumentNullException(nameof(walletManager));
@@ -52,8 +52,5 @@ public class AddFinancialTypeDialogViewModel : BaseViewModel<AddFinancialTypeDia
         var result = await _typeManager.AddTypeAsync(CreationModel);
 
         Adding = false;
-
-        if (result.Succeeded)
-            _snackBar.Add(Localizer["Financial type added successfully!"], MudBlazor.Severity.Success);
     }
 }

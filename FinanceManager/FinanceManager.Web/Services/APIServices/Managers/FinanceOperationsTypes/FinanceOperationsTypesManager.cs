@@ -4,13 +4,18 @@ using FinanceManager.Application.UseCases.FinanceOperationTypes.Commands.UpdateF
 using FinanceManager.Domain.Wrapper;
 using FinanceManager.Web.Services.APIServices.APIHttpClient;
 
-namespace FinanceManager.Web.Services.APIServices.Managers.FinanceOperationType
+namespace FinanceManager.Web.Services.APIServices.Managers.FinanceOperationsType
 {
-    public class FinanceOperationTypeManager : BaseManager, IFinanceOperationTypeManager
+    public class FinanceOperationsTypesManager : BaseManager, IFinanceOperationsTypesManager
     {
-        public FinanceOperationTypeManager(IFinanceManagerApiHttpClient httpClient,
-            ILogger<FinanceOperationTypeManager> logger) : base(httpClient, logger)
+        public FinanceOperationsTypesManager(IFinanceManagerApiHttpClient httpClient,
+            ILogger<FinanceOperationsTypesManager> logger) : base(httpClient, logger)
         {
+        }
+
+        public async Task<Result<List<FinanceOperationTypeDTO>>> GetAllTypesOfUserAsync(Guid userId)
+        {
+            return await SendRequest(async () => await _apiHttpClient.GetAllUserFinanceOperationTypesAsync(userId));
         }
 
         public async Task<Result<List<FinanceOperationTypeDTO>>> GetAllTypesOfWalletAsync(Guid walletId)

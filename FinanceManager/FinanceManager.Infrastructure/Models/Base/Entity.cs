@@ -30,7 +30,7 @@ public abstract class Entity
         return !(left == right);
     }
 
-    public void Copy<T>(T source) where T : Entity
+    public virtual void Copy<T>(T source) where T : Entity
     {
         foreach (PropertyInfo property in GetType().GetProperties())
         {

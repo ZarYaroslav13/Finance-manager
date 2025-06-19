@@ -5,6 +5,7 @@ namespace FinanceManager.Domain.Services.Finances;
 public interface IFinanceService
 {
     public Task<bool> IsCallerWallerOwner(Guid walletId);
+    public Task<List<FinanceOperationTypeModel>> GetAllUserFinanceOperationTypesAsync(Guid userId);
 
     public Task<List<FinanceOperationTypeModel>> GetAllFinanceOperationTypesOfWalletAsync(Guid walletId);
 

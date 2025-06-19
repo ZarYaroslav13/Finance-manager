@@ -4,7 +4,7 @@ using FinanceManager.Web.Components.Pages.Personal.FinanceOperationTypes;
 using FinanceManager.Web.Extentions;
 using FinanceManager.Web.Pages;
 using FinanceManager.Web.Services;
-using FinanceManager.Web.Services.APIServices.Managers.FinanceOperationType;
+using FinanceManager.Web.Services.APIServices.Managers.FinanceOperationsType;
 using FinanceManager.Web.Services.APIServices.Managers.WalletManager;
 using FinanceManager.Web.Shared.Dialogs.FinancialOperationTypes;
 using Microsoft.Extensions.Localization;
@@ -87,9 +87,9 @@ public class FinanceOperationTypesPageViewModel : BaseViewModel<FinanceOperation
     #endregion
 
     private readonly IWalletManager _walletManager;
-    private readonly IFinanceOperationTypeManager _financeOperationTypeManager;
+    private readonly IFinanceOperationsTypesManager _financeOperationTypeManager;
 
-    public FinanceOperationTypesPageViewModel(IFinanceOperationTypeManager financeOperationTypeManager, IWalletManager walletManager,
+    public FinanceOperationTypesPageViewModel(IFinanceOperationsTypesManager financeOperationTypeManager, IWalletManager walletManager,
         ViewModelServicesLocator locator, IStringLocalizer<FinanceOperationTypesPage> localizer) : base(locator, localizer)
     {
         _financeOperationTypeManager = financeOperationTypeManager ?? throw new ArgumentNullException(nameof(financeOperationTypeManager));
@@ -161,7 +161,7 @@ public class FinanceOperationTypesPageViewModel : BaseViewModel<FinanceOperation
 
         if (!result.Canceled)
         {
-            _snackBar.Add(string.Format(Localizer["Wallet added successfully!"]), Severity.Success);
+            _snackBar.Add(Localizer["Financial type added successfully!"], MudBlazor.Severity.Success);
 
             var walletId = (Guid)result.Data;
 

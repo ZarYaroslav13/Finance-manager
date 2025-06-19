@@ -3,10 +3,12 @@ using FinanceManager.Application.UseCases.FinanceOperationTypes.Commands.AddFina
 using FinanceManager.Application.UseCases.FinanceOperationTypes.Commands.UpdateFinanceOperationTypeCommand;
 using FinanceManager.Domain.Wrapper;
 
-namespace FinanceManager.Web.Services.APIServices.Managers.FinanceOperationType;
+namespace FinanceManager.Web.Services.APIServices.Managers.FinanceOperationsType;
 
-public interface IFinanceOperationTypeManager : IManager
+public interface IFinanceOperationsTypesManager : IManager
 {
+    public Task<Result<List<FinanceOperationTypeDTO>>> GetAllTypesOfUserAsync(Guid userId);
+
     public Task<Result<List<FinanceOperationTypeDTO>>> GetAllTypesOfWalletAsync(Guid walletId);
 
     public Task<Result<List<FinanceOperationTypeDTO>>> GetTypeAsync(Guid id);

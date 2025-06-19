@@ -98,6 +98,9 @@ public interface IFinanceManagerApiHttpClient
     #endregion
 
     #region FinanceOperationTypes
+    [Get(APIEndpoints.FinanceOperationType.GetAllOfUser)]
+    public Task<Result<List<FinanceOperationTypeDTO>>> GetAllUserFinanceOperationTypesAsync(Guid userId, CancellationToken cancellationToken = default);
+
     [Get(APIEndpoints.FinanceOperationType.GetAll)]
     public Task<Result<List<FinanceOperationTypeDTO>>> GetAllFinanceOperationTypesAsync(Guid walletId, CancellationToken cancellationToken = default);
 

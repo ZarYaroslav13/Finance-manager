@@ -60,7 +60,13 @@
     <HeaderContent>
         @foreach (var item in _viewModel.SortFunctions)
         {
-            <MudTh><MudTableSortLabel SortBy=@item.Value T="FinanceOperationTypeDTO">@_viewModel.Localizer[item.Key]</MudTableSortLabel></MudTh>
+            <MudTh>
+                <MudTableSortLabel 
+                    SortBy=@item.Value T="FinanceOperationTypeDTO" 
+                    InitialDirection="@(item.Key == FinanceOperationTypesPageViewModel.TableLabels.WalletName ? SortDirection.Ascending : SortDirection.None)">
+                    @_viewModel.Localizer[item.Key]
+                </MudTableSortLabel>
+            </MudTh>
         }
         <MudTh/>
     </HeaderContent>

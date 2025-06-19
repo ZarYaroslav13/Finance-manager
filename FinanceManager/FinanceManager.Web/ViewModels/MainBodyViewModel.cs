@@ -21,7 +21,7 @@ public class MainBodyViewModel : BaseViewModel<MainBody>
 
     public bool DrawerOpen = true;
     public Guid CurrentUserId { get; set; }
-    public string FirstName { get; set; } = String.Empty;
+    public string FirstName { get; set; } = string.Empty;
     public string SecondName { get; set; }
     public string Email { get; set; }
     public char FirstLetterOfName { get; set; }
@@ -114,7 +114,7 @@ public class MainBodyViewModel : BaseViewModel<MainBody>
         {
                 {nameof(Shared.Dialogs.Logout.Logout.ContentText), $"{Localizer["Logout Confirmation"]}"},
                 {nameof(Shared.Dialogs.Logout.Logout.ButtonText), $"{Localizer["Logout"]}"},
-                {nameof(Shared.Dialogs.Logout.Logout.Color), MudBlazor.Color.Error}
+                {nameof(Shared.Dialogs.Logout.Logout.Color), Color.Error}
             };
 
         var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true };

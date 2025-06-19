@@ -104,7 +104,7 @@
         @if (context.GroupName == _viewModel.GroupDefinition.GroupName)
         {
             <MudTh Class="mud-table-cell-custom-group mud-table-cell-custom-group-footer" colspan="5">
-                @_viewModel.Localizer["Total types:"] @context.Items.Count()
+                @_viewModel.Localizer["Total types:"] @context.Items.DistinctBy(t => t.Type.Id).Count()
             </MudTh>
         }
         else
@@ -184,7 +184,7 @@
         StartIcon="@Icons.Material.Filled.Add"
         DropShadow="true"
         Style="position: fixed; bottom: 24px; right: 24px;"
-        OnClick="@_viewModel.CreateFinancialType"/>
+        OnClick="@_viewModel.CreateFinancialOperation"/>
 
 
 @code {

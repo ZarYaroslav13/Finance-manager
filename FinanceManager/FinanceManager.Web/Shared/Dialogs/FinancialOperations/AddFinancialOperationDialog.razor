@@ -1,0 +1,97 @@
+﻿@using FinanceManager.Application.Models
+@using FinanceManager.Application.UseCases.FinanceOperations.Commands.AddFinanceOperationCommand
+@namespace FinanceManager.Web.Shared.Dialogs.FinancialOperations
+@attribute [Authorize]
+@inject FinanceManager.Web.ViewModels.Dialogs.FinanceOperations.AddFinancialOperationDialogViewModel _viewModel;
+<MudDialog>
+    <TitleContent>
+        <div class="d-flex justify-center">
+            <MudText Typo="Typo.h4"> <MudIcon Icon="@Icons.Material.Sharp.PersonAddAlt1" Class="mr-3 mb-n1" /> @_viewModel.Localizer["Create finance operation"]</MudText>
+        </div>
+    </TitleContent>
+    <DialogContent>
+        <EditForm EditContext="@_viewModel.EditContext" OnValidSubmit="@Submit">
+            <DataAnnotationsValidator />
+            <MudGrid>
+                <MudItem xs="12">
+                    <MudSelect T="string" @bind-Value="_viewModel.WalletName" Placeholder="true" Label="@_viewModel.Localizer["Wallet"]">
+                        @foreach (var item in _viewModel.Types.Select(testc => testc.WalletName).Distinct())
+                        {
+                            <MudSelectItem T="string" Value="item">
+                                <MudText>@item</MudText>
+                            </MudSelectItem>
+                        }
+                    </MudSelect>
+                </MudItem>
+                <MudItem xs="12">
+                    <MudSelect T="Guid" @bind-Value="_viewModel.CreationModel.TypeId" Placeholder="true" Label="@_viewModel.Localizer["Financial type"]">
+                        @foreach (var item in _viewModel.AvailableTypes)
+                        {
+                            <MudSelectItem T="Guid" Value="item.Id">
+                                <MudText Color="GetColor(item)">@item.Name @_viewModel.Localizer[item.EntryType.ToString()]</MudText>
+                            </MudSelectItem>
+                        }
+                    </MudSelect>
+                </MudItem>
+                <MudItem xs="12">
+                    <MudTextField 
+                        For="() => _viewModel.CreationModel.Amount" 
+                        @bind-Value="_viewModel.CreationModel.Amount" 
+                        Label="@_viewModel.Localizer["Amount"]"
+                        Immediate="true"/>
+                </MudItem>
+                <MudItem xs="6">
+                    <MudDatePicker Label="@_viewModel.Localizer["Date"]"
+                                   @bind-Date="@_viewModel.OperationDate"
+                                   Culture="@System.Globalization.CultureInfo.CurrentCulture"
+                                   MaxDate="@DateTime.Today"
+                                   Style=" background: linear-gradient(109.6deg, rgba(22,126,91,1) 11.2%, rgba(223,82,36,1) 91.1%) !important;
+                        color: white !important" />
+                </MudItem>
+                <MudItem xs="6">
+                    <MudTimePicker Label="@_viewModel.Localizer["Select time"]"
+                                   @bind-Time="@(_viewModel.OperationTime)"
+                                   Culture="@System.Globalization.CultureInfo.CurrentCulture"
+                                   Editable="true"
+                                   Style=" background: linear-gradient(109.6deg, rgba(22,126,91,1) 11.2%, rgba(223,82,36,1) 91.1%) !important;
+                       color: white !important;" />
+                </MudItem>
+            </MudGrid>
+        </EditForm>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">@_viewModel.Localizer["Cancel"]</MudButton>
+        <MudButton Variant="Variant.Filled" OnClick="Submit" Disabled="!_viewModel.IsModelValid">
+            @if (_viewModel.Adding)
+            {
+                <MudProgressCircular Class="ms-n1" Size="MudBlazor.Size.Small" Indeterminate="true" />
+                <MudText Class="ms-2">@_viewModel.Localizer["Adding..."]</MudText>
+            }
+            else
+            {
+                <MudText>@_viewModel.Localizer["Add"]</MudText>
+            }
+        </MudButton>
+    </DialogActions>
+</MudDialog>
+@code {
+    [CascadingParameter] IMudDialogInstance MudDialog { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await _viewModel.OnInitializedAsync();
+    }
+
+    async Task Submit()
+    {
+        await _viewModel.TryToCreate();
+
+        MudDialog.Close(DialogResult.Ok(_viewModel.CreationModel.TypeId));
+    }
+    void Cancel() => MudDialog.Cancel();
+
+    protected MudBlazor.Color GetColor(FinanceOperationTypeDTO item)
+    {
+        return item.EntryType == EntryType.Income ? MudBlazor.Color.Success : MudBlazor.Color.Error;
+    }
+}

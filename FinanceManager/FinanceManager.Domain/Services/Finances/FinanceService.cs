@@ -2,6 +2,7 @@
 using FinanceManager.Domain.Models;
 using FinanceManager.Domain.Services.CurrentUserService;
 using FinanceManager.Domain.Services.Wallets;
+using FinanceManager.Domain.Wrapper;
 using FinanceManager.Infrastructure.Models;
 using FinanceManager.Infrastructure.Repository;
 using FinanceManager.Infrastructure.UnitOfWork;
@@ -30,6 +31,17 @@ public class FinanceService : BaseService, IFinanceService
     }
 
     #region FinanceOperationTypeMethods
+
+    public async Task<List<FinanceOperationTypeModel>> GetAllUserFinanceOperationTypesAsync(Guid userId)
+    {
+        var wallets = await _walletService.GetAllWalletsOfAccountAsync(userId);
+        List<FinanceOperationTypeModel> types = new();
+
+        foreach (var wallet in wallets)
+            types.AddRange(await GetAllFinanceOperationTypesOfWalletAsync(wallet.Id));
+
+        return types;
+    }
 
     public async Task<List<FinanceOperationTypeModel>> GetAllFinanceOperationTypesOfWalletAsync(Guid walletId)
     {
@@ -198,8 +210,9 @@ public class FinanceService : BaseService, IFinanceService
                 _mapper.Map<FinanceOperation>(financeOperation));
         await _unitOfWork.SaveChangesAsync();
 
-        dbResult.Type = await _financeOperationTypeRepository.GetByIdAsync(dbResult.TypeId);
         var result = _mapper.Map<FinanceOperationModel>(dbResult);
+
+        await UpdateWallet(result);
 
         return result;
     }
@@ -243,6 +256,19 @@ public class FinanceService : BaseService, IFinanceService
         var type = await _financeOperationTypeRepository.GetByIdAsync(id);
 
         return type == null;
+    }
+
+    private async Task UpdateWallet(FinanceOperationModel financeOperation)
+    {
+        var type = financeOperation.Type;
+        var wallet = await _walletService.FindWalletAsync(type.WalletId);
+
+        if (type.EntryType == EntryType.Income)
+            wallet.Balance += financeOperation.Amount;
+        else
+            wallet.Balance -= financeOperation.Amount;
+
+        await _walletService.UpdateWalletAsync(wallet);
     }
     #endregion
 }

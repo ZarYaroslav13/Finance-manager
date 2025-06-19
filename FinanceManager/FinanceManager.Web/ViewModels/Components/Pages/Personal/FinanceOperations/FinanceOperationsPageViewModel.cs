@@ -4,8 +4,9 @@ using FinanceManager.Web.Components.Pages.Personal.FinanceOperations;
 using FinanceManager.Web.Extentions;
 using FinanceManager.Web.Services;
 using FinanceManager.Web.Services.APIServices.Managers.FinanceOperations;
-using FinanceManager.Web.Services.APIServices.Managers.FinanceOperationType;
+using FinanceManager.Web.Services.APIServices.Managers.FinanceOperationsType;
 using FinanceManager.Web.Services.APIServices.Managers.WalletManager;
+using FinanceManager.Web.Shared.Dialogs.FinancialOperations;
 using FinanceManager.Web.Shared.Dialogs.FinancialOperationTypes;
 using Microsoft.Extensions.Localization;
 using MudBlazor;
@@ -138,10 +139,10 @@ public class FinanceOperationsPageViewModel : BaseViewModel<FinanceOperationsPag
     #endregion
 
     private readonly IWalletManager _walletManager;
-    private readonly IFinanceOperationTypeManager _financeOperationTypeManager;
+    private readonly IFinanceOperationsTypesManager _financeOperationTypeManager;
     private readonly IFinanceOperationsManager _financeOperationsManager;
 
-    public FinanceOperationsPageViewModel(IFinanceOperationsManager financeOperationsManager, IFinanceOperationTypeManager financeOperationTypeManager, IWalletManager walletManager,
+    public FinanceOperationsPageViewModel(IFinanceOperationsManager financeOperationsManager, IFinanceOperationsTypesManager financeOperationTypeManager, IWalletManager walletManager,
         ViewModelServicesLocator locator, IStringLocalizer<FinanceOperationsPage> localizer) : base(locator, localizer)
     {
         _financeOperationsManager = financeOperationsManager ?? throw new ArgumentNullException(nameof(financeOperationsManager));
@@ -228,9 +229,9 @@ public class FinanceOperationsPageViewModel : BaseViewModel<FinanceOperationsPag
     }
     #endregion
 
-    public async Task CreateFinancialType()
+    public async Task CreateFinancialOperation()
     {
-        var dialog = (DialogReference)await _dialogService.ShowAsync<AddFinancialTypeDialog>(Localizer["Create"]);
+        var dialog = (DialogReference)await _dialogService.ShowAsync<AddFinancialOperationDialog>(Localizer["Create"]);
 
         var result = await dialog.Result;
 
@@ -240,9 +241,13 @@ public class FinanceOperationsPageViewModel : BaseViewModel<FinanceOperationsPag
 
             var typeId = (Guid)result.Data;
 
-            _tableData.RemoveAll(o => o.Type.Id == typeId);
+            var predicate = (FinanceOperationDTO operation)=>operation.Type.Id == typeId;
 
-            _tableData.AddRange((await _financeOperationsManager.GetAllOperationsOfTypeAsync(typeId)).Data);
+            _tableData.RemoveAll(o => predicate(o));
+
+            var f = (await _financeOperationsManager.GetAllOperationsOfTypeAsync(typeId)).Data;
+
+            _tableData.AddRange(f);
         }
     }
 

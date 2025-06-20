@@ -1,4 +1,4 @@
-﻿namespace FinanceManager.Web.Services.Report
+﻿namespace FinanceManager.Web.Services.Reports
 {
     public enum FileType
     {

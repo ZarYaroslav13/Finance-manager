@@ -174,6 +174,7 @@ public static class AddServiceConfigurationHostBuilderExtension
         });
 
         services.AddScoped<CSVGenerator>();
+        services.AddScoped<WordGenerator>();
 
         services.AddScoped<ReportGeneretorsLocator>();
 

@@ -99,137 +99,138 @@
     {
     
     <MudDivider Class="my-2" Style="height: 7px;"/>
-        <MudCard Class="mx-auto my-4 p-4" Style="max-width: 800px;">
-            <MudCardHeader>
-                <MudText Align="MudBlazor.Align.Center" Typo="Typo.h4"><strong>@_viewModel.Localizer["Report for Wallet"] (@_viewModel.Report.WalletName)</strong></MudText>
 
-                <MudCardActions>
-                    <MudButtonGroup Color="MudBlazor.Color.Tertiary" Variant="Variant.Filled">
-                    <MudButton EndIcon="@Icons.Material.Rounded.Download">@_viewModel.Localizer["Export report"]</MudButton>
-                    <MudMenu Icon="@Icons.Material.Filled.ArrowDropDown" Style="align-self: auto;">
-                        <MudMenuItem OnClick="() => _viewModel.DownloadReport(FileType.Excel)" ><MudIcon Icon="@CustomIcons.ImportExportTypes.Excel"/>  @_viewModel.Localizer["Excel"]</MudMenuItem>
-                        <MudMenuItem OnClick="() => _viewModel.DownloadReport(FileType.Word)" ><MudIcon Icon="@CustomIcons.ImportExportTypes.Word"/>  @_viewModel.Localizer["Word"]</MudMenuItem>
-                        <MudMenuItem OnClick="() => _viewModel.DownloadReport(FileType.PDF)" ><MudIcon Icon="@CustomIcons.ImportExportTypes.PDF"/>  @_viewModel.Localizer["PDF"]</MudMenuItem>
-                    </MudMenu>
-                </MudButtonGroup>
-                </MudCardActions>
-            </MudCardHeader>
+    <MudCard Class="mx-auto my-4 p-4" Style="max-width: 800px;">
+        <MudCardHeader>
+            <MudText Align="MudBlazor.Align.Center" Typo="Typo.h4"><strong>@_viewModel.Localizer["Report for Wallet"] (@_viewModel.Report.WalletName)</strong></MudText>
 
-            <MudCardContent>
-                <MudStack Spacing="2">
-                    <MudText><strong>@_viewModel.Localizer["Wallet Name:"]</strong> @_viewModel.Report.WalletName</MudText>
-                    <MudText><strong>@_viewModel.Localizer["Balance:"]</strong> @_viewModel.Report.Balance <MudIcon Icon="@CustomIcons.Money.Banknote" /></MudText>
-                    <MudText><strong>@_viewModel.Localizer["Total Income:"]</strong> @_viewModel.Report.TotalIncome <MudIcon Icon="@CustomIcons.Money.Banknote" /></MudText>
-                    <MudText><strong>@_viewModel.Localizer["Total Expense:"]</strong> @_viewModel.Report.TotalExpense <MudIcon Icon="@CustomIcons.Money.Banknote" /></MudText>
-                    <MudText><strong>@_viewModel.Localizer["Period:"]</strong> @_viewModel.Report.Period.StartDate.ToShortDateString() - @_viewModel.Report.Period.EndDate.ToShortDateString()</MudText>
-                </MudStack>
+            <MudCardActions>
+                <MudButtonGroup Color="MudBlazor.Color.Tertiary" Variant="Variant.Filled">
+                <MudButton EndIcon="@Icons.Material.Rounded.Download">@_viewModel.Localizer["Export report"]</MudButton>
+                <MudMenu Icon="@Icons.Material.Filled.ArrowDropDown" Style="align-self: auto;">
+                    <MudMenuItem OnClick="() => _viewModel.DownloadReport(FileType.Excel)" ><MudIcon Icon="@CustomIcons.ImportExportTypes.Excel"/>  @_viewModel.Localizer["Excel"]</MudMenuItem>
+                    <MudMenuItem OnClick="() => _viewModel.DownloadReport(FileType.Word)" ><MudIcon Icon="@CustomIcons.ImportExportTypes.Word"/>  @_viewModel.Localizer["Word"]</MudMenuItem>
+                    <MudMenuItem OnClick="() => _viewModel.DownloadReport(FileType.PDF)" ><MudIcon Icon="@CustomIcons.ImportExportTypes.PDF"/>  @_viewModel.Localizer["PDF"]</MudMenuItem>
+                </MudMenu>
+            </MudButtonGroup>
+            </MudCardActions>
+        </MudCardHeader>
 
-                <MudDivider Class="my-2" Style="height: 3px;"/>
+        <MudCardContent>
+            <MudStack Spacing="2">
+                <MudText><strong>@_viewModel.Localizer["Wallet Name:"]</strong> @_viewModel.Report.WalletName</MudText>
+                <MudText><strong>@_viewModel.Localizer["Balance:"]</strong> @_viewModel.Report.Balance <MudIcon Icon="@CustomIcons.Money.Banknote" /></MudText>
+                <MudText><strong>@_viewModel.Localizer["Total Income:"]</strong> @_viewModel.Report.TotalIncome <MudIcon Icon="@CustomIcons.Money.Banknote" /></MudText>
+                <MudText><strong>@_viewModel.Localizer["Total Expense:"]</strong> @_viewModel.Report.TotalExpense <MudIcon Icon="@CustomIcons.Money.Banknote" /></MudText>
+                <MudText><strong>@_viewModel.Localizer["Period:"]</strong> @_viewModel.Report.Period.StartDate.ToShortDateString() - @_viewModel.Report.Period.EndDate.ToShortDateString()</MudText>
+            </MudStack>
 
-                <MudText Typo="Typo.subtitle1" Class="mt-2">@_viewModel.Localizer["Operations"]</MudText>
+            <MudDivider Class="my-2" Style="height: 3px;"/>
 
-                @if (_viewModel.Report.Operations is not null && _viewModel.Report.Operations.Any())
+            <MudText Typo="Typo.subtitle1" Class="mt-2">@_viewModel.Localizer["Operations"]</MudText>
+
+            @if (_viewModel.Report.Operations is not null && _viewModel.Report.Operations.Any())
+            {
+            <MudTable Items="_viewModel.Report.Operations" Elevation="0" Dense="true" Bordered="true" Hover="true">
+                <HeaderContent>
+                    <MudTh><MudText Typo="Typo.subtitle2">Name</MudText></MudTh>
+                    <MudTh><MudText Typo="Typo.subtitle2">Profit</MudText></MudTh>
+                    <MudTh><MudText Typo="Typo.subtitle2">Amount</MudText></MudTh>
+                    <MudTh><MudText Typo="Typo.subtitle2">Date</MudText></MudTh>
+                </HeaderContent>
+                <RowTemplate>
+                    @{
+                        var isProfit = context.Type.EntryType == EntryType.Income;
+                        var colorClass = isProfit ? "text-success" : "text-danger";
+                        var sign = isProfit ? "+" : "-";
+                    }
+                    <MudTd Class="@colorClass">@context.Type.Name</MudTd>
+                    <MudTd Class="@colorClass">@((isProfit) ? "Yes" : "No")</MudTd>
+                    <MudTd Class="@colorClass">@($"{sign}{context.Amount}") <MudIcon Icon="@CustomIcons.Money.Banknote" /></MudTd>
+                    <MudTd Class="@colorClass">@context.Date.ToShortDateString()</MudTd>
+                </RowTemplate>
+            </MudTable>                    
+
+            <MudDivider Class="my-2" Style="height: 5px;"/>
+                <MudText Align="MudBlazor.Align.Center" Typo="Typo.h5" Class="mt-2"><strong>@_viewModel.Localizer["Charts"]</strong></MudText>
+
+                <MudGrid>
+                    <MudItem xs="4" md="4" Class="d-flex justify-center align-center my-auto">
+                        <MudSwitch 
+                            T="bool" 
+                            @bind-Value="_viewModel.ShowOperationshistoryChart" 
+                            LabelPlacement="@Placement.Left" 
+                            Color="MudBlazor.Color.Success" UncheckedColor="MudBlazor.Color.Error">@_viewModel.Localizer["Show operation history chart"]</MudSwitch>
+                    </MudItem>
+                    <MudItem xs="4" md="4" Class="d-flex justify-center align-center my-auto">
+                        <MudSwitch 
+                            T="bool" 
+                            @bind-Value="_viewModel.ShowEntryTypesAmountChart" 
+                            LabelPlacement="@Placement.Left" 
+                            Color="MudBlazor.Color.Success" UncheckedColor="MudBlazor.Color.Error">@_viewModel.Localizer["Show financial types entries amounts chart"]</MudSwitch>
+                    </MudItem>
+                    <MudItem xs="4" md="4" Class="d-flex justify-center align-center my-auto">
+                        <MudSwitch 
+                            T="bool" 
+                            @bind-Value="_viewModel.ShowTypesAmountChart" 
+                            LabelPlacement="@Placement.Left" 
+                            Color="MudBlazor.Color.Success" UncheckedColor="MudBlazor.Color.Error">@_viewModel.Localizer["Show financial types amounts chart"]</MudSwitch>
+                    </MudItem>
+                </MudGrid>
+
+                if (_viewModel.ShowOperationshistoryChart)
                 {
-                <MudTable Items="_viewModel.Report.Operations" Elevation="0" Dense="true" Bordered="true" Hover="true">
-                    <HeaderContent>
-                        <MudTh><MudText Typo="Typo.subtitle2">Name</MudText></MudTh>
-                        <MudTh><MudText Typo="Typo.subtitle2">Profit</MudText></MudTh>
-                        <MudTh><MudText Typo="Typo.subtitle2">Amount</MudText></MudTh>
-                        <MudTh><MudText Typo="Typo.subtitle2">Date</MudText></MudTh>
-                    </HeaderContent>
-                    <RowTemplate>
-                        @{
-                            var isProfit = context.Type.EntryType == EntryType.Income;
-                            var colorClass = isProfit ? "text-success" : "text-danger";
-                            var sign = isProfit ? "+" : "-";
-                        }
-                        <MudTd Class="@colorClass">@context.Type.Name</MudTd>
-                        <MudTd Class="@colorClass">@((isProfit) ? "Yes" : "No")</MudTd>
-                        <MudTd Class="@colorClass">@($"{sign}{context.Amount}") <MudIcon Icon="@CustomIcons.Money.Banknote" /></MudTd>
-                        <MudTd Class="@colorClass">@context.Date.ToShortDateString()</MudTd>
-                    </RowTemplate>
-                </MudTable>                    
+                    <MudText Typo="Typo.h6" Class="mt-2"><strong>@_viewModel.Localizer["Operation history chart"]</strong></MudText>
+                    <MudDivider Class="my-2" Style="height: 3px;"/>
 
-                <MudDivider Class="my-2" Style="height: 5px;"/>
-                    <MudText Align="MudBlazor.Align.Center" Typo="Typo.h5" Class="mt-2"><strong>@_viewModel.Localizer["Charts"]</strong></MudText>
-
-                    <MudGrid>
-                        <MudItem xs="4" md="4" Class="d-flex justify-center align-center my-auto">
-                            <MudSwitch 
-                                T="bool" 
-                                @bind-Value="_viewModel.ShowOperationshistoryChart" 
-                                LabelPlacement="@Placement.Left" 
-                                Color="MudBlazor.Color.Success" UncheckedColor="MudBlazor.Color.Error">@_viewModel.Localizer["Show operation history chart"]</MudSwitch>
-                        </MudItem>
-                        <MudItem xs="4" md="4" Class="d-flex justify-center align-center my-auto">
-                            <MudSwitch 
-                                T="bool" 
-                                @bind-Value="_viewModel.ShowEntryTypesAmountChart" 
-                                LabelPlacement="@Placement.Left" 
-                                Color="MudBlazor.Color.Success" UncheckedColor="MudBlazor.Color.Error">@_viewModel.Localizer["Show financial types entries amounts chart"]</MudSwitch>
-                        </MudItem>
-                        <MudItem xs="4" md="4" Class="d-flex justify-center align-center my-auto">
-                            <MudSwitch 
-                                T="bool" 
-                                @bind-Value="_viewModel.ShowTypesAmountChart" 
-                                LabelPlacement="@Placement.Left" 
-                                Color="MudBlazor.Color.Success" UncheckedColor="MudBlazor.Color.Error">@_viewModel.Localizer["Show financial types amounts chart"]</MudSwitch>
-                        </MudItem>
-                    </MudGrid>
-
-                    if (_viewModel.ShowOperationshistoryChart)
-                    {
-                        <MudText Typo="Typo.h6" Class="mt-2"><strong>@_viewModel.Localizer["Operation history chart"]</strong></MudText>
-                        <MudDivider Class="my-2" Style="height: 3px;"/>
-
-                        <ApexChart 
-                            TItem="ApexChartValue<DateTime, int>"
-                            Options="@_viewModel.OperationsHistoryChartOptions" >
-                            <ApexPointSeries TItem="ApexChartValue<DateTime, int>"
-                                Items="_viewModel.OperationsHistoryValues"
-                                SeriesType="SeriesType.Bar"
-                                XValue="@(e => e.ValueX)"
-                                YValue="@(e => e.ValueY)"
-                                PointColor="e=> e.Color" ShowDataLabels />
-                        </ApexChart>
-                    }
-                    
-                    if (@_viewModel.ShowEntryTypesAmountChart)
-                    {
-                        <MudText Typo="Typo.h6" Class="mt-2"><strong>@_viewModel.Localizer["Entry types amount chart"]</strong></MudText>
-                        <MudDivider Class="my-2" Style="height: 3px;"/>
-
-                        <ApexChart TItem="ApexChartValue<int>" >
-                            <ApexPointSeries TItem="ApexChartValue<int>"
-                                Items="_viewModel.EntryTypesApexValues"
-                                SeriesType="SeriesType.Pie"
-                                XValue="@(e => e.Label)"
-                                YValue="@(e => e.Value)"
-                                PointColor="e=> e.Color" ShowDataLabels />
-                        </ApexChart>
-                    }
-                    
-                    if (_viewModel.ShowTypesAmountChart)
-                    {
-                        <MudText Typo="Typo.h6" Class="mt-2"><strong>@_viewModel.Localizer["Types amount chart"]</strong></MudText>
-                        <MudDivider Class="my-2" Style="height: 3px;"/>
-
-                        <ApexChart TItem="ApexChartValue<int>" >
-                            <ApexPointSeries TItem="ApexChartValue<int>"
-                                Items="_viewModel.TypesApexValues"
-                                SeriesType="SeriesType.Donut"
-                                XValue="@(e => e.Label)"
-                                YValue="@(e => e.Value)"
-                                PointColor="e=> e.Color" ShowDataLabels />
-                        </ApexChart>
-                    }
+                    <ApexChart 
+                        TItem="ApexChartValue<DateTime, int>"
+                        Options="@_viewModel.OperationsHistoryChartOptions" >
+                        <ApexPointSeries TItem="ApexChartValue<DateTime, int>"
+                            Items="_viewModel.OperationsHistoryValues"
+                            SeriesType="SeriesType.Bar"
+                            XValue="@(e => e.ValueX)"
+                            YValue="@(e => e.ValueY)"
+                            PointColor="e=> e.Color" ShowDataLabels />
+                    </ApexChart>
                 }
-                else
+                
+                if (@_viewModel.ShowEntryTypesAmountChart)
                 {
-                    <MudText>No operations available.</MudText>
+                    <MudText Typo="Typo.h6" Class="mt-2"><strong>@_viewModel.Localizer["Entry types amount chart"]</strong></MudText>
+                    <MudDivider Class="my-2" Style="height: 3px;"/>
+
+                    <ApexChart TItem="ApexChartValue<int>" >
+                        <ApexPointSeries TItem="ApexChartValue<int>"
+                            Items="_viewModel.EntryTypesApexValues"
+                            SeriesType="SeriesType.Pie"
+                            XValue="@(e => e.Label)"
+                            YValue="@(e => e.Value)"
+                            PointColor="e=> e.Color" ShowDataLabels />
+                    </ApexChart>
                 }
-            </MudCardContent>
-        </MudCard>
+                
+                if (_viewModel.ShowTypesAmountChart)
+                {
+                    <MudText Typo="Typo.h6" Class="mt-2"><strong>@_viewModel.Localizer["Types amount chart"]</strong></MudText>
+                    <MudDivider Class="my-2" Style="height: 3px;"/>
+
+                    <ApexChart TItem="ApexChartValue<int>" >
+                        <ApexPointSeries TItem="ApexChartValue<int>"
+                            Items="_viewModel.TypesApexValues"
+                            SeriesType="SeriesType.Donut"
+                            XValue="@(e => e.Label)"
+                            YValue="@(e => e.Value)"
+                            PointColor="e=> e.Color" ShowDataLabels />
+                    </ApexChart>
+                }
+            }
+            else
+            {
+                <MudText>No operations available.</MudText>
+            }
+        </MudCardContent>
+    </MudCard>
     }
 </MudContainer>
 

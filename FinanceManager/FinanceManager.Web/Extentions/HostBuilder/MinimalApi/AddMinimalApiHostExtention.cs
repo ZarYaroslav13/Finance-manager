@@ -14,6 +14,29 @@ public static class AddMinimalApiHostExtention
 
     public static void AddMinimalApi(this WebApplication? app)
     {
+        app.MapGet(MinimalApiEndpoints.Downloads.Report, async (
+            HttpContext context,
+            string name,
+            IWebHostEnvironment env) =>
+        {
+            var reportDirectory = Path.Combine(env.WebRootPath, "reports");
+            var fullPath = Path.Combine(reportDirectory, name);
+
+            if (!File.Exists(fullPath))
+            {
+                return Results.NotFound();
+            }
+
+            var provider = new Microsoft.AspNetCore.StaticFiles.FileExtensionContentTypeProvider();
+            if (!provider.TryGetContentType(fullPath, out var contentType))
+                contentType = "application/octet-stream";
+
+            var fileName = Path.GetFileName(fullPath);
+            var fileStream = File.OpenRead(fullPath);
+
+            return Results.File(fileStream, contentType, fileName);
+        });
+
         app.MapPost(MinimalApiEndpoints.Authentication.Login,
             async (GetTokenCommand model,
                 FinanceManagerStateProvider stateProvider,
@@ -57,5 +80,11 @@ public static class AddMinimalApiHostExtention
                 return Results.BadRequest(Result.Fail(e.Message));
             }
         }).AllowAnonymous();
+
+        app.MapPost(MinimalApiEndpoints.Authentication.Logout, async (HttpContext context) =>
+        {
+            await context.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            context.Response.Redirect("/authentication/login");
+        });
     }
 }

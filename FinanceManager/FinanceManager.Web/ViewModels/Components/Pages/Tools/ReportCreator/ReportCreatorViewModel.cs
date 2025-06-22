@@ -4,11 +4,15 @@ using FinanceManager.Application.UseCases.FinanceReports.Commands.CreateDailyRep
 using FinanceManager.Application.UseCases.FinanceReports.Commands.CreatePeriodReportCommand;
 using FinanceManager.Web.Components.Pages.Tools;
 using FinanceManager.Web.Extentions;
+using FinanceManager.Web.Extentions.HostBuilder.MinimalApi;
 using FinanceManager.Web.Helpers;
 using FinanceManager.Web.Services;
 using FinanceManager.Web.Services.APIServices.Managers.FinanceReportManager;
 using FinanceManager.Web.Services.APIServices.Managers.WalletManager;
+using FinanceManager.Web.Services.Reports;
+using FinanceManager.Web.Services.Reports.Generetors;
 using Microsoft.Extensions.Localization;
+using Microsoft.JSInterop;
 
 namespace FinanceManager.Web.ViewModels.Components.Pages.Tools.ReportCreator;
 
@@ -116,11 +120,15 @@ public class ReportCreatorViewModel : BaseViewModel<ReportsCreator>
 
     private readonly IWalletManager _walletManager;
     private readonly IFinanceReportManager _financeReportManager;
-    public ReportCreatorViewModel(IWalletManager walletManager, IFinanceReportManager financeReportManager,
+    private readonly ReportGeneretorsLocator _generetorsLocator;
+    private readonly IJSRuntime _jSRuntime;
+    public ReportCreatorViewModel(IWalletManager walletManager, IFinanceReportManager financeReportManager, ReportGeneretorsLocator generatorsLocator, IJSRuntime jSRuntime,
         ViewModelServicesLocator locator, IStringLocalizer<ReportsCreator> localizer) : base(locator, localizer)
     {
         _walletManager = walletManager ?? throw new ArgumentNullException(nameof(walletManager));
         _financeReportManager = financeReportManager ?? throw new ArgumentNullException(nameof(financeReportManager));
+        _generetorsLocator = generatorsLocator ?? throw new ArgumentNullException(nameof(generatorsLocator));
+        _jSRuntime = jSRuntime ?? throw new ArgumentNullException(nameof(jSRuntime));
 
         BuildReportRequests();
     }
@@ -136,6 +144,24 @@ public class ReportCreatorViewModel : BaseViewModel<ReportsCreator>
 
         PeriodReportRequestModel.StartDate = DateTime.Now;
         PeriodReportRequestModel.EndDate = DateTime.Now;
+    }
+
+    public async Task DownloadReport(FileType fileType)
+    {
+        try
+        {
+            string fileName = await _generetorsLocator.GetGeneretor(fileType).GenerateReport(Report);
+
+            var url = MinimalApiEndpoints.Downloads.ReportRequest + fileName;
+
+            await _jSRuntime.InvokeVoidAsync("open", url, "_blank");
+
+            _snackBar.Add(Localizer["File started downloading successfully"], MudBlazor.Severity.Success);
+        }
+        catch (Exception e)
+        {
+            _snackBar.Add(e.Message, MudBlazor.Severity.Error);
+        }
     }
 
     private void BuildReportRequests()
@@ -203,5 +229,4 @@ public class ReportCreatorViewModel : BaseViewModel<ReportsCreator>
 
         return result;
     }
-
 }

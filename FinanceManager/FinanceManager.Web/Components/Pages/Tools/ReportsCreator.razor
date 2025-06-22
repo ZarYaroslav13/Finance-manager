@@ -1,5 +1,6 @@
 ﻿@page "/report-creator"
 @attribute [Authorize]
+@using FinanceManager.Web.Services.Reports
 @using FinanceManager.Web.ViewModels.Components.Pages.Tools.ReportCreator
 @inject ReportCreatorViewModel _viewModel
 
@@ -106,9 +107,9 @@
                     <MudButtonGroup Color="MudBlazor.Color.Tertiary" Variant="Variant.Filled">
                     <MudButton EndIcon="@Icons.Material.Rounded.Download">@_viewModel.Localizer["Export report"]</MudButton>
                     <MudMenu Icon="@Icons.Material.Filled.ArrowDropDown" Style="align-self: auto;">
-                        <MudMenuItem ><MudIcon Icon="@CustomIcons.ImportExportTypes.Excel"/>  @_viewModel.Localizer["Excel"]</MudMenuItem>
-                        <MudMenuItem ><MudIcon Icon="@CustomIcons.ImportExportTypes.Word"/>  @_viewModel.Localizer["Word"]</MudMenuItem>
-                        <MudMenuItem ><MudIcon Icon="@CustomIcons.ImportExportTypes.PDF"/>  @_viewModel.Localizer["PDF"]</MudMenuItem>
+                        <MudMenuItem OnClick="() => _viewModel.DownloadReport(FileType.Excel)" ><MudIcon Icon="@CustomIcons.ImportExportTypes.Excel"/>  @_viewModel.Localizer["Excel"]</MudMenuItem>
+                        <MudMenuItem OnClick="() => _viewModel.DownloadReport(FileType.Word)" ><MudIcon Icon="@CustomIcons.ImportExportTypes.Word"/>  @_viewModel.Localizer["Word"]</MudMenuItem>
+                        <MudMenuItem OnClick="() => _viewModel.DownloadReport(FileType.PDF)" ><MudIcon Icon="@CustomIcons.ImportExportTypes.PDF"/>  @_viewModel.Localizer["PDF"]</MudMenuItem>
                     </MudMenu>
                 </MudButtonGroup>
                 </MudCardActions>
@@ -234,8 +235,9 @@
 
 @code {
     protected override async Task OnInitializedAsync()
-{
-    await _viewModel.OnInitialized();
-}
+    {
+        await _viewModel.OnInitialized();
+    }
 
+    
 }

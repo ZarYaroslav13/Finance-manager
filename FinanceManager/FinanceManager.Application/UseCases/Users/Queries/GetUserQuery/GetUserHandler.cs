@@ -12,6 +12,8 @@ namespace FinanceManager.Application.UseCases.Users.Queries.GetUserQuery;
 public class GetUserHandler : BaseRequestHandler, IRequestHandler<GetUserQuery, Result<UserDTO>>
 {
     private readonly IUserService _userService;
+
+    private static Result<UserDTO> _last = new() { Data = new() };
     public GetUserHandler(IUserService userService,
         ICurrentUserService currentUserService, IMapper mapper, ILogger<BaseRequestHandler> logger) : base(currentUserService, mapper, logger)
     {
@@ -25,9 +27,15 @@ public class GetUserHandler : BaseRequestHandler, IRequestHandler<GetUserQuery, 
             await CheckIsUserHaveAccesToResourseAsync(request,
                async () => await Task.FromResult(_currentUserService.UserId == request.Id.ToString()));
 
+            if (_last.Data.Id == request.Id) return _last;
+
             var response = await _userService.GetAsync(request.Id);
 
-            return _mapper.Map<Result<UserDTO>>(response);
+            var result = _mapper.Map<Result<UserDTO>>(response);
+
+            _last = result;
+
+            return result;
         });
     }
 }

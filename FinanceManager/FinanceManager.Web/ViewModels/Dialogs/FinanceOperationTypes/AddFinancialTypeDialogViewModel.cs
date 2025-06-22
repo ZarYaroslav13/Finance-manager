@@ -53,6 +53,6 @@ public class AddFinancialTypeDialogViewModel : BaseViewModel<AddFinancialTypeDia
 
         Adding = false;
 
-        return result.Data; 
+        return result.Data;
     }
 }

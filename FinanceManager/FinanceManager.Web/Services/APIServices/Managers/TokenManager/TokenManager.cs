@@ -3,6 +3,7 @@ using FinanceManager.Application.UseCases.Tokens.Commands.GetTokenCommand;
 using FinanceManager.Application.UseCases.Tokens.Commands.RefreshTokenCommand;
 using FinanceManager.Domain.Wrapper;
 using FinanceManager.Web.Extentions;
+using FinanceManager.Web.Extentions.HostBuilder.MinimalApi;
 using FinanceManager.Web.Services.APIServices.APIHttpClient;
 using FinanceManager.Web.Services.Autorization;
 using Microsoft.AspNetCore.Authentication;
@@ -100,12 +101,22 @@ public class TokenManager : BaseManager, ITokenManager
 
     public async Task<Domain.Wrapper.IResult> LogoutAsync()
     {
-        await _httpContextAccessor.HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+        try
+        {
+            var response = await _httpClient.PostAsync(MinimalApiEndpoints.BaseUrl + MinimalApiEndpoints.Authentication.Logout, null);
 
-        _authenticationStateProvider.MarkUserAsLoggedOut();
 
-        _httpClient.DefaultRequestHeaders.Authorization = null;
+            if (!response.IsSuccessStatusCode)
+            {
+                return Result.Fail("Server logout failed");
+            }
 
-        return Result.Success();
+            return Result.Success();
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Logout failed.");
+            return Result.Fail("Exception during logout");
+        }
     }
 }

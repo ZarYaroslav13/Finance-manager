@@ -28,7 +28,6 @@ public class LoginViewModel : BaseViewModel<Login>
     public async Task SubmitAsync()
     {
         await _jSRuntime.InvokeVoidAsync("loginUser", LoginModel.Email, LoginModel.Password);
-        var f = _stateProvider.AuthenticationStateUser;
     }
 
     public void FillUserAsync()

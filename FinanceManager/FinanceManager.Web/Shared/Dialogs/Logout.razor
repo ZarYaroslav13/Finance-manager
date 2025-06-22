@@ -29,7 +29,7 @@
     async Task Submit()
     {
         await _tokenManager.LogoutAsync();
-        _navigationManager.NavigateTo(PagesHref.Authentication.Login);
+        _navigationManager.NavigateTo(PagesHref.Authentication.Login, forceLoad:true);
         MudDialog.Close(DialogResult.Ok(true));
     }
     void Cancel() => MudDialog.Cancel();

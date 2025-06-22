@@ -1,7 +1,9 @@
 ﻿using Blazored.LocalStorage;
+using CsvHelper.Configuration;
 using FinanceManager.Application.UseCases.Commons.Mapping;
 using FinanceManager.Domain.API;
 using FinanceManager.Domain.Authorization;
+using FinanceManager.Domain.Services.CurrentUserService;
 using FinanceManager.Infrastructure.Constants.Localization;
 using FinanceManager.Web.Pages;
 using FinanceManager.Web.Preferences;
@@ -11,10 +13,12 @@ using FinanceManager.Web.Services.APIServices.APIHttpClient;
 using FinanceManager.Web.Services.APIServices.Managers;
 using FinanceManager.Web.Services.Autorization;
 using FinanceManager.Web.Services.HttpHandlers;
+using FinanceManager.Web.Services.Reports.Generetors;
 using FinanceManager.Web.ViewModels;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.AspNetCore.Localization;
 using MudBlazor.Services;
 using Refit;
 using System.Globalization;
@@ -136,16 +140,42 @@ public static class AddServiceConfigurationHostBuilderExtension
         services.AddAutoMapper(typeof(UsertProfile).Assembly);
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
+        services.AddScoped<ICurrentUserService, CurrentUserService>();
+
         services
             .AddScoped<IPreferencesManager, ClientPreferencesManager>()
             .AddScoped<FinanceManagerStateProvider>()
             .AddScoped<AuthenticationStateProvider, FinanceManagerStateProvider>();
 
-        services.AddScoped<ViewModelServicesLocator>();
-
         services
             .AddManagers()
+            .AddFinancialReportCreators()
+            .AddScoped<ViewModelServicesLocator>()
             .AddViewModels();
+
+        return services;
+    }
+
+    private static IServiceCollection AddFinancialReportCreators(this IServiceCollection services)
+    {
+        services.AddScoped(provider =>
+        {
+            var httpContext = provider.GetRequiredService<IHttpContextAccessor>().HttpContext;
+            var culture = httpContext?.Features.Get<IRequestCultureFeature>()?.RequestCulture.Culture
+                          ?? CultureInfo.CurrentCulture;
+
+            var delimiter = culture.NumberFormat.NumberDecimalSeparator;
+
+            return new CsvConfiguration(culture)
+            {
+                NewLine = Environment.NewLine,
+                Delimiter = delimiter
+            };
+        });
+
+        services.AddScoped<CSVGenerator>();
+
+        services.AddScoped<ReportGeneretorsLocator>();
 
         return services;
     }

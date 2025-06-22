@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Azure;
 using FinanceManager.Domain.Models;
 using FinanceManager.Domain.Services.CurrentUserService;
 using FinanceManager.Domain.Services.Wallets;
@@ -89,12 +88,12 @@ public class FinanceService : BaseService, IFinanceService
                             _mapper.Map<FinanceOperationType>(type))));
         await _unitOfWork.SaveChangesAsync();
 
-        if(oldType.EntryType != type.EntryType)
+        if (oldType.EntryType != type.EntryType)
         {
             await EntryTypeChanged(oldType, type);
         }
 
-        if(oldType.WalletId != type.WalletId)
+        if (oldType.WalletId != type.WalletId)
         {
             await WalletChanged(oldType, type);
         }
@@ -299,7 +298,7 @@ public class FinanceService : BaseService, IFinanceService
 
         var wallet = await _walletService.FindWalletAsync(type.WalletId);
 
-        if(type.EntryType == EntryType.Income)
+        if (type.EntryType == EntryType.Income)
             wallet.Balance -= operation.Amount;
         else
             wallet.Balance += operation.Amount;
@@ -347,7 +346,7 @@ public class FinanceService : BaseService, IFinanceService
         var wallet = await _walletService.FindWalletAsync(type.WalletId);
 
         wallet.CalculateNewBalance(financeOperation, oldType, oldAmount);
-        
+
         await _walletService.UpdateWalletAsync(wallet);
     }
     #endregion

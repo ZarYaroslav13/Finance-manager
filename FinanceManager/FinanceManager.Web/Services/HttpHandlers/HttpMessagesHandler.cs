@@ -1,5 +1,6 @@
 ﻿using FinanceManager.Domain.API;
 using FinanceManager.Web.Extentions;
+using FinanceManager.Web.Extentions.HostBuilder.MinimalApi;
 using FinanceManager.Web.Pages;
 using FinanceManager.Web.Services.APIServices.Managers.TokenManager;
 using Microsoft.AspNetCore.Components;
@@ -66,6 +67,7 @@ public class HttpMessagesHandler : DelegatingHandler
         return !(path.Contains(APIEndpoints.Token.BaseControllerUrl)
             || path.Contains(APIEndpoints.Users.ForgotPassword)
             || path.Contains(APIEndpoints.Users.ResetPassword)
-            || path.Contains(APIEndpoints.Users.ConfirmEmail));
+            || path.Contains(APIEndpoints.Users.ConfirmEmail)
+            || path.Contains(MinimalApiEndpoints.BaseUrl));
     }
 }

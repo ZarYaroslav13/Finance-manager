@@ -9,6 +9,7 @@ using FinanceManager.Web.Services.Autorization;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.Extensions.Localization;
+using System.Globalization;
 using System.Security.Claims;
 
 namespace FinanceManager.Web.Services.APIServices.Managers.TokenManager;
@@ -50,7 +51,7 @@ public class TokenManager : BaseManager, ITokenManager
 
         var authState = await _authenticationStateProvider.GetAuthenticationStateAsync();
         var user = authState.User;
-        var expTime = DateTime.Parse(user.GetExpireTime());
+        var expTime = DateTime.Parse(user.GetExpireTime(), CultureInfo.InvariantCulture);
         var timeUTC = DateTime.UtcNow;
         var diff = expTime - timeUTC;
 

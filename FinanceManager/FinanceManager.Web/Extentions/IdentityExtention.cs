@@ -2,6 +2,7 @@
 using FinanceManager.Application.Models.Base;
 using FinanceManager.Application.UseCases.Accounts.Commands.Commands.UpdateAccountCommand;
 using FinanceManager.Web.Shared.Constants.Identity;
+using System.Globalization;
 using System.Security.Claims;
 
 namespace FinanceManager.Web.Extentions;
@@ -66,7 +67,7 @@ public static class IdentityExtention
         {
             new(IdentityConstants.AuthToken, token.Token),
             new(IdentityConstants.RefreshToken, token.RefreshToken),
-            new(IdentityConstants.ExpireTime, token.RefreshTokenExpiryTime.ToString())
+            new(IdentityConstants.ExpireTime, token.RefreshTokenExpiryTime.ToString("o", CultureInfo.InvariantCulture))
         });
 
     internal static void DeleteToken(this ClaimsIdentity claimsIdentity)

@@ -1,9 +1,11 @@
 ﻿using Blazored.LocalStorage;
 using FinanceManager.Application.Models;
 using FinanceManager.Domain.Wrapper;
+using FinanceManager.Web.Extentions.HostBuilder.MinimalApi;
 using FinanceManager.Web.Settings;
 using FinanceManager.Web.Shared.Constants.Storage;
 using Microsoft.Extensions.Localization;
+using Microsoft.JSInterop;
 using MudBlazor;
 using System.Globalization;
 
@@ -14,15 +16,18 @@ public class ClientPreferencesManager : IPreferencesManager
     private readonly ILocalStorageService _localStorageService;
     private readonly IStringLocalizer<ClientPreferencesManager> _localizer;
     private readonly IHttpContextAccessor _contextAccessor;
+    private readonly IJSRuntime _jSRuntime;
 
     public ClientPreferencesManager(
         ILocalStorageService localStorageService,
         IStringLocalizer<ClientPreferencesManager> localizer,
-        IHttpContextAccessor contextAccessor)
+        IHttpContextAccessor contextAccessor,
+        IJSRuntime jSRuntime)
     {
         _localStorageService = localStorageService;
         _localizer = localizer;
         _contextAccessor = contextAccessor;
+        _jSRuntime = jSRuntime;
     }
 
     public async Task<bool> ToggleDarkModeAsync()
@@ -59,7 +64,8 @@ public class ClientPreferencesManager : IPreferencesManager
             CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
             CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
 
-            _contextAccessor.HttpContext.Response.Headers.AcceptLanguage.Append(languageCode);
+
+            await _jSRuntime.InvokeVoidAsync("setCultureCookie", languageCode);
 
             preference.LanguageCode = languageCode;
             await SetPreference(preference);

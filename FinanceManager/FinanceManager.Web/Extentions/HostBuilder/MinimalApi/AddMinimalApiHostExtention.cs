@@ -5,6 +5,8 @@ using FinanceManager.Web.Services.APIServices.Managers.TokenManager;
 using FinanceManager.Web.Services.Autorization;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
 namespace FinanceManager.Web.Extentions.HostBuilder.MinimalApi;
@@ -86,5 +88,26 @@ public static class AddMinimalApiHostExtention
             await context.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             context.Response.Redirect("/authentication/login");
         });
+
+        app.MapPost(MinimalApiEndpoints.Localization.ChangeCulture, (HttpContext context, [FromBody] string cultureCode) =>
+        {
+            var culture = new RequestCulture(cultureCode);
+            var cookieValue = CookieRequestCultureProvider.MakeCookieValue(culture);
+
+            context.Response.Cookies.Append(
+              CookieRequestCultureProvider.DefaultCookieName,
+              cookieValue,
+              new CookieOptions
+              {
+                  Expires = DateTimeOffset.UtcNow.AddYears(1),
+                  HttpOnly = true,
+                  IsEssential = true,
+                  Secure = true,
+                  SameSite = SameSiteMode.Lax
+              });
+
+            return Results.Ok();
+        }).AllowAnonymous();
+
     }
 }

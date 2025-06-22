@@ -24,4 +24,11 @@ public static class MinimalApiEndpoints
 
         public const string Logout = ControllerBaseUrl + "/logout";
     }
+
+    public static class Localization
+    {
+        public const string ControllerBaseUrl = "/localization";
+
+        public const string ChangeCulture = ControllerBaseUrl + "/set-culture";
+    }
 }

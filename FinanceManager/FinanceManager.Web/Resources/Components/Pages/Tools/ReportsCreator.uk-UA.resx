@@ -157,7 +157,7 @@
     <value>Звіт для віртуального гаманця</value>
   </data>
   <data name="Show financial types amounts chart" xml:space="preserve">
-    <value>Показати графік змін по типах </value>
+    <value>Показати графік змін по типах</value>
   </data>
   <data name="Show financial types entries amounts chart" xml:space="preserve">
     <value>Показати графік змін по дохід/витрати</value>
@@ -175,7 +175,7 @@
     <value>Загальні доходи:</value>
   </data>
   <data name="Types amount chart" xml:space="preserve">
-    <value>Графік витрат по типамтипів </value>
+    <value>Графік витрат по типамтипів</value>
   </data>
   <data name="Variant of financial report" xml:space="preserve">
     <value>Тип фінансового звіту</value>

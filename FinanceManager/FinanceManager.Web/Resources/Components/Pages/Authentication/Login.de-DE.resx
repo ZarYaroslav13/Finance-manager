@@ -117,9 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Description" xml:space="preserve">
-    <value>Mit Zugangsdaten anmelden</value>
-  </data>
   <data name="Don't have an account?" xml:space="preserve">
     <value>Don't have an account?</value>
   </data>
@@ -127,7 +124,7 @@
     <value>Email</value>
   </data>
   <data name="Email is required!" xml:space="preserve">
-    <value>E-Mail wird benötigt.</value>
+    <value>E-Mail wird benötigt!</value>
   </data>
   <data name="Forgot password?" xml:space="preserve">
     <value>Passwort vergessen?</value>

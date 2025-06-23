@@ -117,11 +117,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Description" xml:space="preserve">
-    <value>ឡុកចូលប្រព័ន្ធជាមួយលេខកូដសម្ងាត់អ្នក</value>
-  </data>
   <data name="Email is required!" xml:space="preserve">
-    <value>ត្រូវការបំពេញអ៊ីម៉ែល</value>
+    <value>ត្រូវការបំពេញអ៊ីម៉ែល!</value>
   </data>
   <data name="Forgot password?" xml:space="preserve">
     <value>ភ្លេចលេខកូដសម្ងាត់?</value>
@@ -130,7 +127,7 @@
     <value>លេខកូដសម្ងាត់</value>
   </data>
   <data name="Password is required!" xml:space="preserve">
-    <value>ត្រូវការបំពេញលេខកូដសម្ងាត់</value>
+    <value>ត្រូវការបំពេញលេខកូដសម្ងាត់!</value>
   </data>
   <data name="Remember me?" xml:space="preserve">
     <value>ចងចាំក្នុងប្រព័ន្ធ?</value>
@@ -140,5 +137,20 @@
   </data>
   <data name="Title" xml:space="preserve">
     <value>ឡុកចូល</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>អ៊ីមែល</value>
+  </data>
+  <data name="Welcome {0}" xml:space="preserve">
+    <value>សូមស្វាគមន៍{0}</value>
+  </data>
+  <data name="Don't have an account?" xml:space="preserve">
+    <value>មិនមានគណនីទេ?</value>
+  </data>
+  <data name="Register here" xml:space="preserve">
+    <value>ចុះឈ្មោះនៅទីនេះ</value>
+  </data>
+  <data name="Sorry {0}" xml:space="preserve">
+    <value>សុំទោស {0}</value>
   </data>
 </root>

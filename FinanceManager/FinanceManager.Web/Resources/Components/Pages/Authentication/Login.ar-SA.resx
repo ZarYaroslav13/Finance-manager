@@ -117,9 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Description" xml:space="preserve">
-    <value>تسجيل الدخول مع أوراق الاعتماد الخاصة بك.</value>
-  </data>
   <data name="Don't have an account?" xml:space="preserve">
     <value>ليس لديك حساب؟</value>
   </data>
@@ -151,7 +148,7 @@
     <value>آسف {0}</value>
   </data>
   <data name="Title" xml:space="preserve">
-    <value>عنوان </value>
+    <value>عنوان</value>
   </data>
   <data name="Welcome {0}" xml:space="preserve">
     <value>مرحبًا {0}</value>

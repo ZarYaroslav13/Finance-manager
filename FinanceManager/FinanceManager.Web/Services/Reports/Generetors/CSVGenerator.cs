@@ -86,7 +86,7 @@ public class CSVGenerator : ReportGeneretor
         csv.WriteField(_localizer[nameof(FinanceOperationDTO.Id)]);
         csv.WriteField(_localizer[nameof(FinanceOperationDTO.Amount)]);
         csv.WriteField(_localizer[nameof(FinanceOperationDTO.Date)]);
-        csv.WriteField(_localizer[nameof(FinanceOperationDTO.Type.Id)]);
+        csv.WriteField(_localizer["Type id"]);
         csv.WriteField(_localizer[nameof(FinanceOperationDTO.Type.Name)]);
         csv.WriteField(_localizer[nameof(FinanceOperationDTO.Type.Description)]);
         csv.WriteField(_localizer[nameof(FinanceOperationDTO.Type.EntryType)]);

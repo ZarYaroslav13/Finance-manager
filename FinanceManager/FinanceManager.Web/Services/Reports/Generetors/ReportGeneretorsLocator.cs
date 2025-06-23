@@ -1,4 +1,4 @@
-﻿namespace FinanceManager.Web.Services.Reports.Generetors;
+﻿namespace FinanceManager.Web.Services.Reports.Generators;
 
 public class ReportGeneretorsLocator
 {

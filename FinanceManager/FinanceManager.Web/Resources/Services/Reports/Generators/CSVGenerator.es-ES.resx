@@ -129,7 +129,7 @@
   <data name="Amount" xml:space="preserve">
     <value>Importe</value>
   </data>
-  <data name="End Date" xml:space="preserve">
+  <data name="EndDate" xml:space="preserve">
     <value>Fecha de fin</value>
   </data>
   <data name="EntryType" xml:space="preserve">
@@ -138,7 +138,7 @@
   <data name="Name" xml:space="preserve">
     <value>Nombre</value>
   </data>
-  <data name="Start Date" xml:space="preserve">
+  <data name="StartDate" xml:space="preserve">
     <value>Fecha de inicio</value>
   </data>
   <data name="TotalExpense" xml:space="preserve">

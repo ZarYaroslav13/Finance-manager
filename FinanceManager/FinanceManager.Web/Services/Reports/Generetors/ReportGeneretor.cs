@@ -2,7 +2,7 @@
 using FinanceManager.Domain.Services.CurrentUserService;
 using Microsoft.Extensions.Localization;
 
-namespace FinanceManager.Web.Services.Reports.Generetors;
+namespace FinanceManager.Web.Services.Reports.Generators;
 
 public abstract class ReportGeneretor : IReportGeneretor
 {

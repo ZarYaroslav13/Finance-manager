@@ -118,45 +118,45 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Date" xml:space="preserve">
-    <value>Datum</value>
+    <value>Дата</value>
   </data>
   <data name="Description" xml:space="preserve">
-    <value>Beskrivning</value>
+    <value>Опис</value>
   </data>
   <data name="Balance" xml:space="preserve">
-    <value>Balans</value>
+    <value>Баланс</value>
   </data>
   <data name="Amount" xml:space="preserve">
-    <value>Belopp</value>
+    <value>Кількість</value>
   </data>
-  <data name="End Date" xml:space="preserve">
-    <value>Slutdatum</value>
+  <data name="EndDate" xml:space="preserve">
+    <value>Дата завершення</value>
   </data>
   <data name="EntryType" xml:space="preserve">
-    <value>Typ av post</value>
+    <value>Тип запису</value>
   </data>
   <data name="Name" xml:space="preserve">
-    <value>Namn</value>
+    <value>Ім'я</value>
   </data>
-  <data name="Start Date" xml:space="preserve">
-    <value>Startdatum</value>
+  <data name="StartDate" xml:space="preserve">
+    <value>Дата початку</value>
   </data>
   <data name="TotalExpense" xml:space="preserve">
-    <value>Total kostnad:</value>
+    <value>Загальні витрати:</value>
   </data>
   <data name="WalletName" xml:space="preserve">
-    <value>Plånboksnamn</value>
+    <value>Ім'я гаманця</value>
   </data>
   <data name="Id" xml:space="preserve">
-    <value>Id</value>
+    <value>Ід</value>
   </data>
   <data name="TotalIncome" xml:space="preserve">
-    <value>TotalInkomst</value>
+    <value>Всього дохід</value>
   </data>
   <data name="Type id" xml:space="preserve">
-    <value>Typ-id</value>
+    <value>Введіть id</value>
   </data>
   <data name="WalletId" xml:space="preserve">
-    <value>Plånboks-id</value>
+    <value>Ідентифікатор гаманця</value>
   </data>
 </root>

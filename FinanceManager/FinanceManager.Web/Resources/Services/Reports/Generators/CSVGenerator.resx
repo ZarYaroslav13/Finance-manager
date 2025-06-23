@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,46 +117,46 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Date" xml:space="preserve">
-    <value>Tanggal</value>
-  </data>
-  <data name="Description" xml:space="preserve">
-    <value>Keterangan</value>
+  <data name="Amount" xml:space="preserve">
+    <value>Amount</value>
   </data>
   <data name="Balance" xml:space="preserve">
-    <value>&amp;#10;Saldo</value>
+    <value>Balance</value>
   </data>
-  <data name="Amount" xml:space="preserve">
-    <value>Jumlah</value>
+  <data name="Date" xml:space="preserve">
+    <value>Date</value>
   </data>
-  <data name="End Date" xml:space="preserve">
-    <value>Tanggal Selesai</value>
+  <data name="Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="EndDate" xml:space="preserve">
+    <value>End Date</value>
   </data>
   <data name="EntryType" xml:space="preserve">
-    <value>Jenis entri</value>
-  </data>
-  <data name="Name" xml:space="preserve">
-    <value>Nama</value>
-  </data>
-  <data name="Start Date" xml:space="preserve">
-    <value>Mulai Tanggal</value>
-  </data>
-  <data name="TotalExpense" xml:space="preserve">
-    <value>Total Biaya:</value>
-  </data>
-  <data name="WalletName" xml:space="preserve">
-    <value>Dompe tNama</value>
+    <value>Entry type</value>
   </data>
   <data name="Id" xml:space="preserve">
     <value>Id</value>
   </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="StartDate" xml:space="preserve">
+    <value>Start Date</value>
+  </data>
+  <data name="TotalExpense" xml:space="preserve">
+    <value>Total Expense:</value>
+  </data>
   <data name="TotalIncome" xml:space="preserve">
-    <value>TotalPendapatan</value>
+    <value>TotalIncome</value>
   </data>
   <data name="Type id" xml:space="preserve">
-    <value>Jenis id</value>
+    <value>Type id</value>
   </data>
   <data name="WalletId" xml:space="preserve">
-    <value>ID dompet</value>
+    <value>Wallet id</value>
+  </data>
+  <data name="WalletName" xml:space="preserve">
+    <value>WalletName</value>
   </data>
 </root>

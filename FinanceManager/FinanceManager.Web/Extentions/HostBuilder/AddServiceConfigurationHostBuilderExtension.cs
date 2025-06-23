@@ -13,7 +13,7 @@ using FinanceManager.Web.Services.APIServices.APIHttpClient;
 using FinanceManager.Web.Services.APIServices.Managers;
 using FinanceManager.Web.Services.Autorization;
 using FinanceManager.Web.Services.HttpHandlers;
-using FinanceManager.Web.Services.Reports.Generetors;
+using FinanceManager.Web.Services.Reports.Generators;
 using FinanceManager.Web.ViewModels;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;

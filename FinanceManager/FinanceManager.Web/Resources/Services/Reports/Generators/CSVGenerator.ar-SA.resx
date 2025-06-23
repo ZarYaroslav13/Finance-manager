@@ -118,45 +118,45 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Date" xml:space="preserve">
-    <value>Дата</value>
+    <value>التاريخ</value>
   </data>
   <data name="Description" xml:space="preserve">
-    <value>Опис</value>
+    <value>وصف</value>
   </data>
   <data name="Balance" xml:space="preserve">
-    <value>Баланс</value>
+    <value>الرصيد</value>
   </data>
   <data name="Amount" xml:space="preserve">
-    <value>Кількість</value>
+    <value>مبلغ</value>
   </data>
-  <data name="End Date" xml:space="preserve">
-    <value>Дата завершення</value>
+  <data name="EndDate" xml:space="preserve">
+    <value>تاريخ الانتهاء</value>
   </data>
   <data name="EntryType" xml:space="preserve">
-    <value>Тип запису</value>
+    <value>نوع الدخول</value>
   </data>
   <data name="Name" xml:space="preserve">
-    <value>Ім'я</value>
+    <value>اسم</value>
   </data>
-  <data name="Start Date" xml:space="preserve">
-    <value>Дата початку</value>
+  <data name="StartDate" xml:space="preserve">
+    <value>تاريخ البداية</value>
   </data>
   <data name="TotalExpense" xml:space="preserve">
-    <value>Загальні витрати:</value>
+    <value>إجمالي النفقا:</value>
   </data>
   <data name="WalletName" xml:space="preserve">
-    <value>Ім'я гаманця</value>
+    <value>اسم المحفظة</value>
   </data>
   <data name="Id" xml:space="preserve">
-    <value>Ід</value>
+    <value>معرف</value>
   </data>
   <data name="TotalIncome" xml:space="preserve">
-    <value>ВсьогоДохід</value>
+    <value>إجمالي الدخل</value>
   </data>
   <data name="Type id" xml:space="preserve">
-    <value>Введіть id</value>
+    <value>معرف النوع</value>
   </data>
   <data name="WalletId" xml:space="preserve">
-    <value>Ідентифікатор гаманця</value>
+    <value>معرف المحفظة</value>
   </data>
 </root>

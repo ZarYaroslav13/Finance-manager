@@ -118,45 +118,45 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Date" xml:space="preserve">
-    <value>Date</value>
+    <value>Datum</value>
   </data>
   <data name="Description" xml:space="preserve">
-    <value>Beschrijving</value>
+    <value>Beskrivning</value>
   </data>
   <data name="Balance" xml:space="preserve">
-    <value>Openstaand</value>
+    <value>Balans</value>
   </data>
   <data name="Amount" xml:space="preserve">
-    <value>Aantal</value>
+    <value>Belopp</value>
   </data>
-  <data name="End Date" xml:space="preserve">
-    <value>Einddatum</value>
+  <data name="EndDate" xml:space="preserve">
+    <value>Slutdatum</value>
   </data>
   <data name="EntryType" xml:space="preserve">
-    <value>Type invoer</value>
+    <value>Typ av post</value>
   </data>
   <data name="Name" xml:space="preserve">
-    <value>Naam</value>
+    <value>Namn</value>
   </data>
-  <data name="Start Date" xml:space="preserve">
-    <value>Begindatum</value>
+  <data name="StartDate" xml:space="preserve">
+    <value>Startdatum</value>
   </data>
   <data name="TotalExpense" xml:space="preserve">
-    <value>Totale kosten:</value>
+    <value>Total kostnad:</value>
   </data>
   <data name="WalletName" xml:space="preserve">
-    <value>Naam portemonnee</value>
+    <value>Plånboksnamn</value>
   </data>
   <data name="Id" xml:space="preserve">
-    <value>Legitimatiebewijs</value>
+    <value>Id</value>
   </data>
   <data name="TotalIncome" xml:space="preserve">
-    <value>Totaalinkomen</value>
+    <value>Total Inkomst</value>
   </data>
   <data name="Type id" xml:space="preserve">
-    <value>Soort id</value>
+    <value>Typ-id</value>
   </data>
   <data name="WalletId" xml:space="preserve">
-    <value>Portemonnee-ID</value>
+    <value>Plånboks-id</value>
   </data>
 </root>

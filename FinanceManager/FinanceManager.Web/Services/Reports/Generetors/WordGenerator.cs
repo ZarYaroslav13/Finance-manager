@@ -11,7 +11,7 @@ using FinanceManager.Infrastructure.Models;
 using Microsoft.Extensions.Localization;
 using System.Globalization;
 
-namespace FinanceManager.Web.Services.Reports.Generetors;
+namespace FinanceManager.Web.Services.Reports.Generators;
 
 public class WordGenerator : ReportGeneretor
 {

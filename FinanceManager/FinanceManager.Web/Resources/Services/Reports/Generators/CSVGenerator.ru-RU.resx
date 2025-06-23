@@ -118,45 +118,45 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Date" xml:space="preserve">
-    <value>Datum</value>
+    <value>Дата</value>
   </data>
   <data name="Description" xml:space="preserve">
-    <value>Beschreibung</value>
+    <value>Описание</value>
   </data>
   <data name="Balance" xml:space="preserve">
-    <value>Guthaben</value>
+    <value>Остаток</value>
   </data>
   <data name="Amount" xml:space="preserve">
-    <value>Menge</value>
+    <value>Количество</value>
   </data>
-  <data name="End Date" xml:space="preserve">
-    <value>Enddatum</value>
+  <data name="EndDate" xml:space="preserve">
+    <value>Дата окончания</value>
   </data>
   <data name="EntryType" xml:space="preserve">
-    <value>Art des Eintrags</value>
+    <value>Тип записи</value>
   </data>
   <data name="Name" xml:space="preserve">
-    <value>Name</value>
+    <value>Имя</value>
   </data>
-  <data name="Start Date" xml:space="preserve">
-    <value>Startdatum</value>
+  <data name="StartDate" xml:space="preserve">
+    <value>Дата начала</value>
   </data>
   <data name="TotalExpense" xml:space="preserve">
-    <value>Gesamtausgaben:</value>
+    <value>Общие расходы:</value>
   </data>
   <data name="WalletName" xml:space="preserve">
-    <value>Name der Geldbörse</value>
+    <value>Имя Кошелька</value>
   </data>
   <data name="Id" xml:space="preserve">
-    <value>Id</value>
+    <value>Идентификатор</value>
   </data>
   <data name="TotalIncome" xml:space="preserve">
-    <value>Gesamteinkommen</value>
+    <value>Общий доход</value>
   </data>
   <data name="Type id" xml:space="preserve">
-    <value>Typ-ID</value>
+    <value>Тип id</value>
   </data>
   <data name="WalletId" xml:space="preserve">
-    <value>Wallet-ID</value>
+    <value>ID кошелька</value>
   </data>
 </root>

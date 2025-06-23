@@ -10,7 +10,7 @@ using FinanceManager.Web.Services;
 using FinanceManager.Web.Services.APIServices.Managers.FinanceReportManager;
 using FinanceManager.Web.Services.APIServices.Managers.WalletManager;
 using FinanceManager.Web.Services.Reports;
-using FinanceManager.Web.Services.Reports.Generetors;
+using FinanceManager.Web.Services.Reports.Generators;
 using Microsoft.Extensions.Localization;
 using Microsoft.JSInterop;
 

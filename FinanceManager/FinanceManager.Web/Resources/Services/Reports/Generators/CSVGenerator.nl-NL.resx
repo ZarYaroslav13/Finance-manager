@@ -118,45 +118,45 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Date" xml:space="preserve">
-    <value>កាលបរិច្ឆេទ</value>
+    <value>Date</value>
   </data>
   <data name="Description" xml:space="preserve">
-    <value>ការបិបន៍នា</value>
+    <value>Beschrijving</value>
   </data>
   <data name="Balance" xml:space="preserve">
-    <value>សមតុល្យ</value>
+    <value>Openstaand</value>
   </data>
   <data name="Amount" xml:space="preserve">
-    <value>ចំនួនទឹកប្រាក់</value>
+    <value>Aantal</value>
   </data>
-  <data name="End Date" xml:space="preserve">
-    <value>កាលបរិច្ឆេទបញ្ចប់</value>
+  <data name="EndDate" xml:space="preserve">
+    <value>Einddatum</value>
   </data>
   <data name="EntryType" xml:space="preserve">
-    <value>ប្រភេទធាតុ</value>
+    <value>Type invoer</value>
   </data>
   <data name="Name" xml:space="preserve">
-    <value>ឈ្មោះ</value>
+    <value>Naam</value>
   </data>
-  <data name="Start Date" xml:space="preserve">
-    <value>កាលបរិច្ឆេទចាប់ផ្តើម</value>
+  <data name="StartDate" xml:space="preserve">
+    <value>Begindatum</value>
   </data>
   <data name="TotalExpense" xml:space="preserve">
-    <value>ការចំណាយសរុប:</value>
+    <value>Totale kosten:</value>
   </data>
   <data name="WalletName" xml:space="preserve">
-    <value>ឈ្មោះកាបូប</value>
+    <value>Naam portemonnee</value>
   </data>
   <data name="Id" xml:space="preserve">
-    <value>លេខសម្គាល់</value>
+    <value>Legitimatiebewijs</value>
   </data>
   <data name="TotalIncome" xml:space="preserve">
-    <value>ប្រាក់ចំណូលសរុប</value>
+    <value>Totaalinkomen</value>
   </data>
   <data name="Type id" xml:space="preserve">
-    <value>លេខសម្គាល់វាយ</value>
+    <value>Soort id</value>
   </data>
   <data name="WalletId" xml:space="preserve">
-    <value>លេខសម្គាល់កាបូប</value>
+    <value>Portemonnee-ID</value>
   </data>
 </root>

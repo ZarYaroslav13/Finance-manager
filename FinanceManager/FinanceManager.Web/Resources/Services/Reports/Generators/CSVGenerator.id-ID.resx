@@ -118,45 +118,45 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Date" xml:space="preserve">
-    <value>التاريخ</value>
+    <value>Tanggal</value>
   </data>
   <data name="Description" xml:space="preserve">
-    <value>وصف</value>
+    <value>Keterangan</value>
   </data>
   <data name="Balance" xml:space="preserve">
-    <value>الرصيد</value>
+    <value>&amp;#10;Saldo</value>
   </data>
   <data name="Amount" xml:space="preserve">
-    <value>مبلغ</value>
+    <value>Jumlah</value>
   </data>
-  <data name="End Date" xml:space="preserve">
-    <value>تاريخ الانتهاء</value>
+  <data name="EndDate" xml:space="preserve">
+    <value>Tanggal Selesai</value>
   </data>
   <data name="EntryType" xml:space="preserve">
-    <value>نوع الدخول</value>
+    <value>Jenis entri</value>
   </data>
   <data name="Name" xml:space="preserve">
-    <value>اسم</value>
+    <value>Nama</value>
   </data>
-  <data name="Start Date" xml:space="preserve">
-    <value>تاريخ البداية</value>
+  <data name="StartDate" xml:space="preserve">
+    <value>Mulai Tanggal</value>
   </data>
   <data name="TotalExpense" xml:space="preserve">
-    <value>إجمالي النفقا:</value>
+    <value>Total Biaya:</value>
   </data>
   <data name="WalletName" xml:space="preserve">
-    <value>اسم المحفظة</value>
+    <value>Dompe tNama</value>
   </data>
   <data name="Id" xml:space="preserve">
-    <value>معرف</value>
+    <value>Id</value>
   </data>
   <data name="TotalIncome" xml:space="preserve">
-    <value>إجمالي الدخل</value>
+    <value>TotalPendapatan</value>
   </data>
   <data name="Type id" xml:space="preserve">
-    <value>معرف النوع</value>
+    <value>Jenis id</value>
   </data>
   <data name="WalletId" xml:space="preserve">
-    <value>معرف المحفظة</value>
+    <value>ID dompet</value>
   </data>
 </root>

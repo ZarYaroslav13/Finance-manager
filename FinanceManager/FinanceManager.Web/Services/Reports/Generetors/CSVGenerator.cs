@@ -6,7 +6,7 @@ using FinanceManager.Domain.Wrapper;
 using Microsoft.Extensions.Localization;
 using System.Text;
 
-namespace FinanceManager.Web.Services.Reports.Generetors;
+namespace FinanceManager.Web.Services.Reports.Generators;
 
 public class CSVGenerator : ReportGeneretor
 {
@@ -15,7 +15,7 @@ public class CSVGenerator : ReportGeneretor
     private readonly CsvConfiguration _configuration;
 
     public CSVGenerator(CsvConfiguration configuration,
-        IWebHostEnvironment hostEnvironment, ICurrentUserService currentUserService, IStringLocalizer<ReportGeneretor> localizer) : base(hostEnvironment, currentUserService, localizer)
+        IWebHostEnvironment hostEnvironment, ICurrentUserService currentUserService, IStringLocalizer<CSVGenerator> localizer) : base(hostEnvironment, currentUserService, localizer)
     {
         _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
     }

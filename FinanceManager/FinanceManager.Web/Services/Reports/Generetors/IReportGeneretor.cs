@@ -1,6 +1,6 @@
 ﻿using FinanceManager.Application.Models;
 
-namespace FinanceManager.Web.Services.Reports.Generetors;
+namespace FinanceManager.Web.Services.Reports.Generators;
 
 public interface IReportGeneretor
 {

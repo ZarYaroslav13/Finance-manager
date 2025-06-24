@@ -117,10 +117,55 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Client Language has been changed" xml:space="preserve">
-    <value>Se ha cambiado el idioma del cliente</value>
+  <data name="Amount" xml:space="preserve">
+    <value>Quantité</value>
   </data>
-  <data name="Failed to get client preferences" xml:space="preserve">
-    <value>No se pudieron obtener las preferencias del cliente</value>
+  <data name="Balance: " xml:space="preserve">
+    <value>Solde:</value>
+  </data>
+  <data name="Charts" xml:space="preserve">
+    <value>Cartes</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Rencontez-vous</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Nom</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>Non</value>
+  </data>
+  <data name="Operation Chart" xml:space="preserve">
+    <value>Tableau d’opération</value>
+  </data>
+  <data name="Operation History Chart" xml:space="preserve">
+    <value>Tableau de l’historique des opérations</value>
+  </data>
+  <data name="Operations" xml:space="preserve">
+    <value>Opérations</value>
+  </data>
+  <data name="Period: " xml:space="preserve">
+    <value>Période:</value>
+  </data>
+  <data name="Profit" xml:space="preserve">
+    <value>Bénéfice</value>
+  </data>
+  <data name="Report for Wallet: " xml:space="preserve">
+    <value>Rapport pour Wallet :</value>
+  </data>
+  <data name="Total Expense: " xml:space="preserve">
+    <value>Dépense totale :</value>
+  </data>
+  <data name="Total Income: " xml:space="preserve">
+    <value>Revenu total :</value>
+  </data>
+  <data name="Wallet Name:  " xml:space="preserve">
+    <value>Nom du portefeuille :</value>
+  </data>
+  <data name="Word report created successfully" xml:space="preserve">
+    <value>Rapport Word créé avec succès</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Oui</value>
   </data>
 </root>

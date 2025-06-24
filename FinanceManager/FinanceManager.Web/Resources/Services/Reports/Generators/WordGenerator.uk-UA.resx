@@ -117,10 +117,55 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Client Language has been changed" xml:space="preserve">
-    <value>Se ha cambiado el idioma del cliente</value>
+  <data name="Amount" xml:space="preserve">
+    <value>Кількість</value>
   </data>
-  <data name="Failed to get client preferences" xml:space="preserve">
-    <value>No se pudieron obtener las preferencias del cliente</value>
+  <data name="Balance: " xml:space="preserve">
+    <value>Баланс:</value>
+  </data>
+  <data name="Charts" xml:space="preserve">
+    <value>Графіки</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Дата</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Ім'я</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>Ні</value>
+  </data>
+  <data name="Operation Chart" xml:space="preserve">
+    <value>Операційна схема</value>
+  </data>
+  <data name="Operation History Chart" xml:space="preserve">
+    <value>Діаграма історії операцій</value>
+  </data>
+  <data name="Operations" xml:space="preserve">
+    <value>Фінансові операції</value>
+  </data>
+  <data name="Period: " xml:space="preserve">
+    <value>Період:</value>
+  </data>
+  <data name="Profit" xml:space="preserve">
+    <value>Прибуток</value>
+  </data>
+  <data name="Report for Wallet: " xml:space="preserve">
+    <value>Звіт для гаманця:</value>
+  </data>
+  <data name="Total Expense: " xml:space="preserve">
+    <value>Загальні витрати:</value>
+  </data>
+  <data name="Total Income: " xml:space="preserve">
+    <value>Загальні доходи:</value>
+  </data>
+  <data name="Wallet Name:  " xml:space="preserve">
+    <value>Ім'я гаманця:</value>
+  </data>
+  <data name="Word report created successfully" xml:space="preserve">
+    <value>Звіт Word успішно створено</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Так</value>
   </data>
 </root>

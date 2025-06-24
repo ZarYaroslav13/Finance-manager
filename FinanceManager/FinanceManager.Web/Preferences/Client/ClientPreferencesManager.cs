@@ -1,7 +1,6 @@
 ﻿using Blazored.LocalStorage;
 using FinanceManager.Application.Models;
 using FinanceManager.Domain.Wrapper;
-using FinanceManager.Web.Extentions.HostBuilder.MinimalApi;
 using FinanceManager.Web.Settings;
 using FinanceManager.Web.Shared.Constants.Storage;
 using Microsoft.Extensions.Localization;

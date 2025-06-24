@@ -117,10 +117,55 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Client Language has been changed" xml:space="preserve">
-    <value>Se ha cambiado el idioma del cliente</value>
+  <data name="Amount" xml:space="preserve">
+    <value>Menge</value>
   </data>
-  <data name="Failed to get client preferences" xml:space="preserve">
-    <value>No se pudieron obtener las preferencias del cliente</value>
+  <data name="Balance: " xml:space="preserve">
+    <value>Guthaben:</value>
+  </data>
+  <data name="Charts" xml:space="preserve">
+    <value>Diagramme</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Datum</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>Nein</value>
+  </data>
+  <data name="Operation Chart" xml:space="preserve">
+    <value>Operations-Diagramm</value>
+  </data>
+  <data name="Operation History Chart" xml:space="preserve">
+    <value>Diagramm der Betriebshistorie</value>
+  </data>
+  <data name="Operations" xml:space="preserve">
+    <value>Betriebsabläufe</value>
+  </data>
+  <data name="Period: " xml:space="preserve">
+    <value>Zeitraum:</value>
+  </data>
+  <data name="Profit" xml:space="preserve">
+    <value>Gewinn</value>
+  </data>
+  <data name="Report for Wallet: " xml:space="preserve">
+    <value>Bericht für Wallet:</value>
+  </data>
+  <data name="Total Expense: " xml:space="preserve">
+    <value>Gesamtausgaben:</value>
+  </data>
+  <data name="Total Income: " xml:space="preserve">
+    <value>Gesamte Einnahmen:</value>
+  </data>
+  <data name="Wallet Name:  " xml:space="preserve">
+    <value>Name der Wallets:</value>
+  </data>
+  <data name="Word report created successfully" xml:space="preserve">
+    <value>Word-Bericht erfolgreich erstellt</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Ja</value>
   </data>
 </root>

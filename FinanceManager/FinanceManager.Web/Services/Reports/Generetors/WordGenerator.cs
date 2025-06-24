@@ -1,5 +1,4 @@
-﻿using Azure;
-using DocumentFormat.OpenXml;
+﻿using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Drawing.Charts;
 using DocumentFormat.OpenXml.Drawing.Wordprocessing;
 using DocumentFormat.OpenXml.Packaging;
@@ -15,7 +14,7 @@ namespace FinanceManager.Web.Services.Reports.Generators;
 
 public class WordGenerator : ReportGeneretor
 {
-    public WordGenerator(IWebHostEnvironment hostEnvironment, ICurrentUserService currentUserService, IStringLocalizer<ReportGeneretor> localizer) : base(hostEnvironment, currentUserService, localizer)
+    public WordGenerator(IWebHostEnvironment hostEnvironment, ICurrentUserService currentUserService, IStringLocalizer<WordGenerator> localizer) : base(hostEnvironment, currentUserService, localizer)
     {
     }
 
@@ -35,7 +34,7 @@ public class WordGenerator : ReportGeneretor
                 mainPart.Document.Save();
             }
 
-            return await Result.SuccessAsync("Word report created successfully");
+            return await Result.SuccessAsync(_localizer["Word report created successfully"]);
         }
         catch (Exception e)
         {
@@ -130,11 +129,11 @@ public class WordGenerator : ReportGeneretor
     body.AppendChild(
         new Paragraph(
             new Run(
-                new Text(text)) 
-            { 
+                new Text(text))
+            {
                 RunProperties = new RunProperties(
-                    new Bold(), 
-                    new FontSize() { Val= fontSize }) 
+                    new Bold(),
+                    new FontSize() { Val = fontSize })
             }
         ));
 
@@ -145,7 +144,7 @@ public class WordGenerator : ReportGeneretor
                     new Text(text))
                 {
                     RunProperties = new RunProperties(
-                        new FontSize() { Val = fontSize})
+                        new FontSize() { Val = fontSize })
                 }));
 
     private void AddHorizontalLine(
@@ -180,7 +179,7 @@ public class WordGenerator : ReportGeneretor
             {
                 ParagraphProperties = new()
                 {
-                    Justification = new() { Val = JustificationValues.Center}
+                    Justification = new() { Val = JustificationValues.Center }
                 }
             });
 

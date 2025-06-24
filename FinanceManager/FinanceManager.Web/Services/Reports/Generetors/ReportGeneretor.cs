@@ -10,7 +10,7 @@ public abstract class ReportGeneretor : IReportGeneretor
 
     protected readonly IStringLocalizer<ReportGeneretor> _localizer;
 
-    private readonly IWebHostEnvironment _envirement;
+    protected readonly IWebHostEnvironment _envirement;
     private readonly ICurrentUserService _currentUserService;
 
     public ReportGeneretor(IWebHostEnvironment hostEnvironment, ICurrentUserService currentUserService, IStringLocalizer<ReportGeneretor> localizer)

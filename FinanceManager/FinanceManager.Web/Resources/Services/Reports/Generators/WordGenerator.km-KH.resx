@@ -117,10 +117,55 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Client Language has been changed" xml:space="preserve">
-    <value>Se ha cambiado el idioma del cliente</value>
+  <data name="Amount" xml:space="preserve">
+    <value>ចំនួនទឹកប្រាក់</value>
   </data>
-  <data name="Failed to get client preferences" xml:space="preserve">
-    <value>No se pudieron obtener las preferencias del cliente</value>
+  <data name="Balance: " xml:space="preserve">
+    <value>តុល្យភាព:</value>
+  </data>
+  <data name="Charts" xml:space="preserve">
+    <value>តារាង</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>កាលបរិច្ឆេទ</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>ឈ្មោះ</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>ទេ</value>
+  </data>
+  <data name="Operation Chart" xml:space="preserve">
+    <value>គំនូសតាងប្រតិបត្តិការ</value>
+  </data>
+  <data name="Operation History Chart" xml:space="preserve">
+    <value>តារាងប្រវត្តិប្រតិបត្តិការ</value>
+  </data>
+  <data name="Operations" xml:space="preserve">
+    <value>ប្រតិបត្ដិការ</value>
+  </data>
+  <data name="Period: " xml:space="preserve">
+    <value>រយៈពេល:</value>
+  </data>
+  <data name="Profit" xml:space="preserve">
+    <value>ប្រាក់ចំណេញ</value>
+  </data>
+  <data name="Report for Wallet: " xml:space="preserve">
+    <value>របាយការណ៍សម្រាប់កាបូប:</value>
+  </data>
+  <data name="Total Expense: " xml:space="preserve">
+    <value>ការចំណាយសរុប:</value>
+  </data>
+  <data name="Total Income: " xml:space="preserve">
+    <value>ប្រាក់ចំណូលសរុប:</value>
+  </data>
+  <data name="Wallet Name:  " xml:space="preserve">
+    <value>ឈ្មោះកាបូប:</value>
+  </data>
+  <data name="Word report created successfully" xml:space="preserve">
+    <value>របាយការណ៍ពាក្យបានបង្កើតដោយជោគជ័យ</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>បាទ</value>
   </data>
 </root>

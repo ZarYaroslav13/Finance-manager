@@ -24,7 +24,7 @@
     }
 
     <MudListSubheader Class="mt-2 mb-n2">@_viewModel.Localizer["Exit"]</MudListSubheader>
-    <MudNavLink Href="@PagesHref.Logout" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Logout"> @_viewModel.Localizer["Logout"] </MudNavLink>
+    <MudNavLink Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Logout" OnClick="@_viewModel.Logout"> @_viewModel.Localizer["Logout"] </MudNavLink>
 
 
 </MudNavMenu>

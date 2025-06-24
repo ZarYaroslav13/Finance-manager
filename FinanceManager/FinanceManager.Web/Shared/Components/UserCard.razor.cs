@@ -35,7 +35,6 @@ public partial class UserCard
     private async Task LoadDataAsync()
     {
         var state = await _stateProvider.GetAuthenticationStateAsync();
-        var f = _httpContextAccessor.HttpContext;
         var user = state.User;
 
         Email = user.GetEmail().Replace(".com", string.Empty);

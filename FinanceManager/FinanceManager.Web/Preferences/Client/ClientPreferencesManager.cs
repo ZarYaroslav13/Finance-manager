@@ -1,6 +1,7 @@
 ﻿using Blazored.LocalStorage;
 using FinanceManager.Application.Models;
 using FinanceManager.Domain.Wrapper;
+using FinanceManager.Web.Services.APIServices.APIHttpClient;
 using FinanceManager.Web.Settings;
 using FinanceManager.Web.Shared.Constants.Storage;
 using Microsoft.Extensions.Localization;
@@ -12,6 +13,7 @@ namespace FinanceManager.Web.Preferences.Client;
 
 public class ClientPreferencesManager : IPreferencesManager
 {
+    private readonly IFinanceManagerApiHttpClient _apiClient;
     private readonly ILocalStorageService _localStorageService;
     private readonly IStringLocalizer<ClientPreferencesManager> _localizer;
     private readonly IHttpContextAccessor _contextAccessor;
@@ -21,12 +23,14 @@ public class ClientPreferencesManager : IPreferencesManager
         ILocalStorageService localStorageService,
         IStringLocalizer<ClientPreferencesManager> localizer,
         IHttpContextAccessor contextAccessor,
-        IJSRuntime jSRuntime)
+        IJSRuntime jSRuntime,
+        IFinanceManagerApiHttpClient apiClient)
     {
         _localStorageService = localStorageService;
         _localizer = localizer;
         _contextAccessor = contextAccessor;
         _jSRuntime = jSRuntime;
+        _apiClient = apiClient;
     }
 
     public async Task<bool> ToggleDarkModeAsync()
@@ -91,7 +95,11 @@ public class ClientPreferencesManager : IPreferencesManager
 
     public async Task SetPreference(UserPreferencesDTO preference)
     {
-        await _localStorageService.SetItemAsync(StorageConstants.Preferences, preference as UserPreferencesDTO);
+        await _localStorageService.SetItemAsync(StorageConstants.Preferences, preference);
+        await _apiClient.UpdateUserPreferences(new()
+        {
+            UserId = preference.UserId, DarkMode = preference.DarkMode, LanguageCode = preference.LanguageCode, RightToLeft = preference.RightToLeft
+        });
     }
 
     public async Task<bool> IsRTL()

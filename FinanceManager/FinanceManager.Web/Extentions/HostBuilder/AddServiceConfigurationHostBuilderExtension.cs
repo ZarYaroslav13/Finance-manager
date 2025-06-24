@@ -102,7 +102,6 @@ public static class AddServiceConfigurationHostBuilderExtension
                 options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
                 options.SlidingExpiration = true;
                 options.ExpireTimeSpan = TimeSpan.FromDays(7);
-                options.LoginPath = PagesHref.Authentication.Login;
             });
 
         services.AddCascadingAuthenticationState();

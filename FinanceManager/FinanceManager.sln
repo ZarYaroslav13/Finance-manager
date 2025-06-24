@@ -21,6 +21,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinanceManager.Infrastructure", "FinanceManager.Infrastructure\FinanceManager.Infrastructure.csproj", "{1891411C-C8FB-40B3-98E9-661748C63786}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server", "Server", "{5398163E-0756-4B16-BCE9-9EE176A9F7F7}"
+	ProjectSection(SolutionItems) = preProject
+		FinanceManager.Web\_Imports.razor = FinanceManager.Web\_Imports.razor
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{EDDF4502-7109-470B-8897-F69C7D333F88}"
 EndProject

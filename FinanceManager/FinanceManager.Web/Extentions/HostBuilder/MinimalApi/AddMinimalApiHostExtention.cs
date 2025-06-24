@@ -86,6 +86,7 @@ public static class AddMinimalApiHostExtention
         app.MapPost(MinimalApiEndpoints.Authentication.Logout, async (HttpContext context) =>
         {
             await context.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            context.Response.Cookies.Delete("FMAuthCookie");
             context.Response.Redirect("/authentication/login");
         });
 

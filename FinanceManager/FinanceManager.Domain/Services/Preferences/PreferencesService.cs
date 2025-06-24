@@ -43,7 +43,7 @@ public class PreferencesService : BaseService, IPreferencesService
             if (!LocalizationConstants.SupportedLanguages.Any(l => l.Code == preferences.LanguageCode))
                 throw new ArgumentException("Invalid language code!");
 
-            preferences.Id = preferences.UserId;
+            preferences.Id = (await _repository.FindBy(p => p.UserId == preferences.UserId)).Id;
 
             _repository.Update(_mapper.Map<UserPreference>(preferences));
 

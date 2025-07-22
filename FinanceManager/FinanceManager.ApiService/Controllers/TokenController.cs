@@ -1,6 +1,7 @@
 ﻿using FinanceManager.ApiService.Controllers.Base;
-using FinanceManager.Application.UseCases.Tokens.Commands.GetTokenCommand;
-using FinanceManager.Application.UseCases.Tokens.Commands.RefreshTokenCommand;
+using FinanceManager.Application.Services.Token;
+using FinanceManager.Domain.UseCases.Tokens.Commands.GetTokenCommand;
+using FinanceManager.Domain.UseCases.Tokens.Commands.RefreshTokenCommand;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -9,15 +10,18 @@ namespace FinanceManager.ApiService.Controllers;
 
 public class TokenController : BaseController
 {
-    public TokenController(IMediator mediator) : base(mediator)
+    private readonly ITokenService _tokenService;
+
+    public TokenController(ITokenService tokenService, IMediator mediator) : base(mediator)
     {
+        _tokenService = tokenService ?? throw new ArgumentNullException(nameof(tokenService));
     }
 
     [HttpPost]
     [AllowAnonymous]
     public async Task<IActionResult> Get([FromBody] GetTokenCommand command)
     {
-        return await SendRequestAsync(command);
+        return await ExecuteeRequet(async () => await _tokenService.LoginAsync(command));
     }
 
     /// <summary>
@@ -28,6 +32,6 @@ public class TokenController : BaseController
     [HttpPost("refresh")]
     public async Task<IActionResult> Refresh([FromBody] RefreshTokenCommand command)
     {
-        return await SendRequestAsync(command);
+        return await ExecuteeRequet(async () => await _tokenService.GetRefreshTokenAsync(command));
     }
 }

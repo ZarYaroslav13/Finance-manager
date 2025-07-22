@@ -13,13 +13,20 @@ public abstract class BaseController : ControllerBase
 
     public BaseController(IMediator mediator)
     {
-        _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator)); ;
+        _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
     }
 
     protected async Task<IActionResult> SendRequestAsync<TCommand>(TCommand command)
     where TCommand : IBaseRequest
     {
         dynamic result = await _mediator.Send(command);
+
+        return result.Succeeded ? Ok(result) : BadRequest(result);
+    }
+
+    protected async Task<IActionResult> ExecuteeRequet(Func<Task<dynamic>> request)
+    {
+        var result = await request();
 
         return result.Succeeded ? Ok(result) : BadRequest(result);
     }

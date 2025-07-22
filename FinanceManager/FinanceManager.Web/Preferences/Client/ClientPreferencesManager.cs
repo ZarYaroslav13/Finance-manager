@@ -98,7 +98,10 @@ public class ClientPreferencesManager : IPreferencesManager
         await _localStorageService.SetItemAsync(StorageConstants.Preferences, preference);
         await _apiClient.UpdateUserPreferences(new()
         {
-            UserId = preference.UserId, DarkMode = preference.DarkMode, LanguageCode = preference.LanguageCode, RightToLeft = preference.RightToLeft
+            UserId = preference.UserId,
+            DarkMode = preference.DarkMode,
+            LanguageCode = preference.LanguageCode,
+            RightToLeft = preference.RightToLeft
         });
     }
 

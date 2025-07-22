@@ -1,6 +1,6 @@
 ﻿using FinanceManager.Application.Models;
-using FinanceManager.Application.UseCases.Tokens.Commands.GetTokenCommand;
-using FinanceManager.Application.UseCases.Tokens.Commands.RefreshTokenCommand;
+using FinanceManager.Domain.UseCases.Tokens.Commands.GetTokenCommand;
+using FinanceManager.Domain.UseCases.Tokens.Commands.RefreshTokenCommand;
 using FinanceManager.Domain.Wrapper;
 using FinanceManager.Web.Extentions;
 using FinanceManager.Web.Extentions.HostBuilder.MinimalApi;

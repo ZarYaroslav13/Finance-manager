@@ -1,4 +1,4 @@
-﻿using FinanceManager.Application.UseCases.Tokens.Commands.GetTokenCommand;
+﻿using FinanceManager.Domain.UseCases.Tokens.Commands.GetTokenCommand;
 using FinanceManager.Web.Components.Pages.Authentication;
 using FinanceManager.Web.Services;
 using Microsoft.AspNetCore.Components.Forms;

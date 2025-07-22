@@ -1,97 +1,57 @@
-﻿using FinanceManager.Domain.Configurations;
+﻿using AutoMapper;
+using FinanceManager.Domain.Configurations;
 using FinanceManager.Domain.Models;
+using FinanceManager.Domain.Services.CurrentUserService;
+using FinanceManager.Domain.UseCases.Commons.Bases;
 using FinanceManager.Domain.Wrapper;
 using FinanceManager.Infrastructure.Models.Authorization;
+using MediatR;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 
-namespace FinanceManager.Domain.Services.Token;
+namespace FinanceManager.Domain.UseCases.Tokens.Commands.RefreshTokenCommand;
 
-public class TokenService : ITokenService
+public class RefreshTokenHandler : BaseRequestHandler, IRequestHandler<RefreshTokenCommand, Result<TokenModel>>
 {
     private readonly UserManager<FinanceManagerUser> _userManager;
     private readonly RoleManager<FinanceManagerRole> _roleManager;
     private readonly AuthConfiguration _authConfigs;
 
-    public TokenService(
-        UserManager<FinanceManagerUser> userManager,
+    public RefreshTokenHandler(UserManager<FinanceManagerUser> userManager,
         RoleManager<FinanceManagerRole> roleManager,
-        IOptions<AuthConfiguration> authConfig)
+        IOptions<AuthConfiguration> authConfig,
+        ICurrentUserService currentUserService, IMapper mapper, ILogger<BaseRequestHandler> logger) : base(currentUserService, mapper, logger)
     {
         _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
         _roleManager = roleManager ?? throw new ArgumentNullException(nameof(roleManager));
-        _authConfigs = authConfig.Value ?? throw new ArgumentNullException(nameof(authConfig.Value)); ;
-    }
-    public static ClaimsIdentity GetIdentityFromJwtToken(string jwt)
-    {
-        var handler = new JwtSecurityTokenHandler();
-
-        if (!handler.CanReadToken(jwt))
-            return new ClaimsIdentity();
-
-        var token = handler.ReadJwtToken(jwt);
-        return new(token.Claims, "jwt");
-    }
-    public async Task<Result<TokenModel>> LoginAsync(string email, string password)
-    {
-        if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
-            throw new ArgumentNullException(nameof(email) + "or" + nameof(password));
-
-        var user = await _userManager.FindByEmailAsync(email);
-        if (user == null)
-        {
-            return await Result<TokenModel>.FailAsync("User Not Found.");
-        }
-        if (!user.EmailConfirmed)
-        {
-            return await Result<TokenModel>.FailAsync("E-Mail not confirmed.");
-        }
-        var passwordValid = await _userManager.CheckPasswordAsync(user, password);
-        if (!passwordValid)
-        {
-            return await Result<TokenModel>.FailAsync("Invalid Credentials.");
-        }
-
-        user.RefreshToken = GenerateRefreshToken();
-        user.RefreshTokenExpiryTime = DateTime.Now.AddDays(7);
-        await _userManager.UpdateAsync(user);
-
-        var token = await GenerateJwtAsync(user);
-        var response = new TokenModel { Token = token, RefreshToken = user.RefreshToken, RefreshTokenExpiryTime = user.RefreshTokenExpiryTime };
-        return await Result<TokenModel>.SuccessAsync(response);
+        _authConfigs = authConfig.Value ?? throw new ArgumentNullException(nameof(authConfig.Value));
     }
 
-    public async Task<Result<TokenModel>> GetRefreshTokenAsync(string token, string refreshToken)
+    public async Task<Result<TokenModel>> Handle(RefreshTokenCommand request, CancellationToken cancellationToken)
     {
-        if (String.IsNullOrWhiteSpace(token) || String.IsNullOrWhiteSpace(refreshToken))
+        if (String.IsNullOrWhiteSpace(request.Token) || String.IsNullOrWhiteSpace(request.RefreshToken))
         {
             return await Result<TokenModel>.FailAsync("Invalid Client Token.");
         }
-        var userPrincipal = GetPrincipalFromExpiredToken(token);
+        var userPrincipal = GetPrincipalFromExpiredToken(request.Token);
         var userEmail = userPrincipal.FindFirstValue(ClaimTypes.Email);
         var user = await _userManager.FindByEmailAsync(userEmail);
         if (user == null)
             return await Result<TokenModel>.FailAsync("User Not Found.");
-        if (user.RefreshToken != refreshToken || user.RefreshTokenExpiryTime <= DateTime.Now)
+        if (user.RefreshToken != request.RefreshToken || user.RefreshTokenExpiryTime <= DateTime.Now)
             return await Result<TokenModel>.FailAsync("Invalid Client Token.");
         var newToken = GenerateEncryptedToken(GetSigningCredentials(), await GetClaimsAsync(user));
         user.RefreshToken = GenerateRefreshToken();
         await _userManager.UpdateAsync(user);
 
-        var response = new TokenModel { Token = token, RefreshToken = user.RefreshToken, RefreshTokenExpiryTime = user.RefreshTokenExpiryTime };
+        var response = new TokenModel { Token = request.Token, RefreshToken = user.RefreshToken, RefreshTokenExpiryTime = user.RefreshTokenExpiryTime };
         return await Result<TokenModel>.SuccessAsync(response);
     }
-
-    private async Task<string> GenerateJwtAsync(FinanceManagerUser user)
-    {
-        var token = GenerateEncryptedToken(GetSigningCredentials(), await GetClaimsAsync(user));
-        return token;
-    }
-
     private async Task<IEnumerable<Claim>> GetClaimsAsync(FinanceManagerUser user)
     {
         var userClaims = await _userManager.GetClaimsAsync(user);
@@ -166,4 +126,3 @@ public class TokenService : ITokenService
         return new(_authConfigs.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256);
     }
 }
-

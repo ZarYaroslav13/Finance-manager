@@ -1,11 +1,11 @@
-﻿using FinanceManager.Application.Models;
+﻿using FinanceManager.Domain.Models;
 using FinanceManager.Domain.Wrapper;
 using MediatR;
 using System.ComponentModel.DataAnnotations;
 
-namespace FinanceManager.Application.UseCases.Tokens.Commands.GetTokenCommand;
+namespace FinanceManager.Domain.UseCases.Tokens.Commands.GetTokenCommand;
 
-public class GetTokenCommand : IRequest<Result<TokenDTO>>
+public class GetTokenCommand : IRequest<Result<TokenModel>>
 {
     [Required]
     [EmailAddress]
@@ -16,3 +16,4 @@ public class GetTokenCommand : IRequest<Result<TokenDTO>>
     [DataType(DataType.Password)]
     public string Password { get; set; }
 }
+

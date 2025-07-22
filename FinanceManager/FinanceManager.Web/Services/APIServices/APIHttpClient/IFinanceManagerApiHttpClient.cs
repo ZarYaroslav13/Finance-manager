@@ -9,14 +9,14 @@ using FinanceManager.Application.UseCases.FinanceOperationTypes.Commands.UpdateF
 using FinanceManager.Application.UseCases.FinanceReports.Commands.CreateDailyReportCommand;
 using FinanceManager.Application.UseCases.FinanceReports.Commands.CreatePeriodReportCommand;
 using FinanceManager.Application.UseCases.Preferences.Command.UpdateUserPreferencesCommand;
-using FinanceManager.Application.UseCases.Tokens.Commands.GetTokenCommand;
-using FinanceManager.Application.UseCases.Tokens.Commands.RefreshTokenCommand;
 using FinanceManager.Application.UseCases.Users.Commands.ForgotPasswordCommand;
 using FinanceManager.Application.UseCases.Users.Commands.RegisterCommand;
 using FinanceManager.Application.UseCases.Users.Commands.ResetPasswordCommand;
 using FinanceManager.Application.UseCases.Wallets.Commands.CreateWalletCommand;
 using FinanceManager.Application.UseCases.Wallets.Commands.UpdateWalletCommand;
 using FinanceManager.Domain.API;
+using FinanceManager.Domain.UseCases.Tokens.Commands.GetTokenCommand;
+using FinanceManager.Domain.UseCases.Tokens.Commands.RefreshTokenCommand;
 using FinanceManager.Domain.Wrapper;
 using Refit;
 

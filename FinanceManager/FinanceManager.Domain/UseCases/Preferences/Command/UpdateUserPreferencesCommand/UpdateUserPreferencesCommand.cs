@@ -1,10 +1,10 @@
-﻿using FinanceManager.Application.DataAnnotations.Attributes;
+﻿using FinanceManager.Domain.DataAnnotations.Attributes;
 using FinanceManager.Domain.Wrapper;
 using FinanceManager.Infrastructure.Constants.Localization;
 using MediatR;
 using System.ComponentModel.DataAnnotations;
 
-namespace FinanceManager.Application.UseCases.Preferences.Command.UpdateUserPreferencesCommand;
+namespace FinanceManager.Domain.UseCases.Preferences.Command.UpdateUserPreferencesCommand;
 
 public class UpdateUserPreferencesCommand : IRequest<IResult>
 {

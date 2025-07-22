@@ -1,6 +1,6 @@
 ﻿using FinanceManager.ApiService.Controllers.Base;
-using FinanceManager.Application.UseCases.Preferences.Command.UpdateUserPreferencesCommand;
-using FinanceManager.Application.UseCases.Preferences.Query.GetUserPreferencesQuery;
+using FinanceManager.Application.Services.Preferences;
+using FinanceManager.Domain.UseCases.Preferences.Command.UpdateUserPreferencesCommand;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,22 +8,23 @@ namespace FinanceManager.ApiService.Controllers;
 
 public class UserPreferenceController : BaseController
 {
-    public UserPreferenceController(IMediator mediator) : base(mediator)
+    private readonly IPreferencesService _preferencesService;
+
+    public UserPreferenceController(IPreferencesService preferencesService,
+        IMediator mediator) : base(mediator)
     {
+        _preferencesService = preferencesService ?? throw new ArgumentNullException(nameof(preferencesService));
     }
 
     [HttpGet("{userId:guid}")]
     public async Task<IActionResult> GetUserPreferences(Guid userId)
     {
-        return await SendRequestAsync(new GetUserPreferencesQuery()
-        {
-            UserId = userId
-        });
+        return await ExecuteRequet(async () => await _preferencesService.GetPreferencesOfUserAsync(userId));
     }
 
     [HttpPut]
-    public async Task<IActionResult> UpdateUserPreferences(UpdateUserPreferencesCommand command)
+    public async Task<IActionResult> UpdateUserPreferences([FromBody] UpdateUserPreferencesCommand command)
     {
-        return await SendRequestAsync(command);
+        return await ExecuteRequet(async () => await _preferencesService.UpdatePreferncesAsync(command));
     }
 }

@@ -21,7 +21,7 @@ public class TokenController : BaseController
     [AllowAnonymous]
     public async Task<IActionResult> Get([FromBody] GetTokenCommand command)
     {
-        return await ExecuteeRequet(async () => await _tokenService.LoginAsync(command));
+        return await ExecuteRequet(async () => await _tokenService.LoginAsync(command));
     }
 
     /// <summary>
@@ -32,6 +32,6 @@ public class TokenController : BaseController
     [HttpPost("refresh")]
     public async Task<IActionResult> Refresh([FromBody] RefreshTokenCommand command)
     {
-        return await ExecuteeRequet(async () => await _tokenService.GetRefreshTokenAsync(command));
+        return await ExecuteRequet(async () => await _tokenService.GetRefreshTokenAsync(command));
     }
 }

@@ -1,13 +1,9 @@
-﻿using AutoMapper;
-using FinanceManager.Domain.Configurations;
+﻿using FinanceManager.Domain.Configurations;
 using FinanceManager.Domain.Models;
-using FinanceManager.Domain.Services.CurrentUserService;
-using FinanceManager.Domain.UseCases.Commons.Bases;
 using FinanceManager.Domain.Wrapper;
 using FinanceManager.Infrastructure.Models.Authorization;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -16,7 +12,7 @@ using System.Security.Cryptography;
 
 namespace FinanceManager.Domain.UseCases.Tokens.Commands.GetTokenCommand;
 
-public class GetTokenHandler : BaseRequestHandler, IRequestHandler<GetTokenCommand, Result<TokenModel>>
+public class GetTokenHandler : IRequestHandler<GetTokenCommand, Result<TokenModel>>
 {
     private readonly UserManager<FinanceManagerUser> _userManager;
     private readonly RoleManager<FinanceManagerRole> _roleManager;
@@ -24,8 +20,7 @@ public class GetTokenHandler : BaseRequestHandler, IRequestHandler<GetTokenComma
 
     public GetTokenHandler(UserManager<FinanceManagerUser> userManager,
         RoleManager<FinanceManagerRole> roleManager,
-        IOptions<AuthConfiguration> authConfig,
-        ICurrentUserService currentUserService, IMapper mapper, ILogger<BaseRequestHandler> logger) : base(currentUserService, mapper, logger)
+        IOptions<AuthConfiguration> authConfig)
     {
         _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
         _roleManager = roleManager ?? throw new ArgumentNullException(nameof(roleManager));

@@ -1,4 +1,5 @@
-﻿using FinanceManager.Application.Services.Token;
+﻿using FinanceManager.Application.Services.Preferences;
+using FinanceManager.Application.Services.Token;
 using FinanceManager.Application.UseCases.Commons.Behaviours;
 using FinanceManager.Domain.Authorization;
 using FinanceManager.Domain.Configurations;
@@ -6,7 +7,6 @@ using FinanceManager.Domain.Services.Accounts;
 using FinanceManager.Domain.Services.CurrentUserService;
 using FinanceManager.Domain.Services.Email;
 using FinanceManager.Domain.Services.Finances;
-using FinanceManager.Domain.Services.Preferences;
 using FinanceManager.Domain.Services.Roles;
 using FinanceManager.Domain.Services.Users;
 using FinanceManager.Domain.Services.Wallets;

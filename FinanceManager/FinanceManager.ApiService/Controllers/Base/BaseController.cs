@@ -24,7 +24,7 @@ public abstract class BaseController : ControllerBase
         return result.Succeeded ? Ok(result) : BadRequest(result);
     }
 
-    protected async Task<IActionResult> ExecuteeRequet(Func<Task<dynamic>> request)
+    protected async Task<IActionResult> ExecuteRequet(Func<Task<dynamic>> request)
     {
         var result = await request();
 

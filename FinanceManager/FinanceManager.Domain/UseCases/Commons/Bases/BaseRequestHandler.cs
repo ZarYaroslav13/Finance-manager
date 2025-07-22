@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using FinanceManager.Domain.Services.CurrentUserService;
 using FinanceManager.Domain.Wrapper;
+using FinanceManager.Infrastructure.UnitOfWork;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
@@ -8,12 +9,14 @@ namespace FinanceManager.Domain.UseCases.Commons.Bases;
 
 public class BaseRequestHandler
 {
+    protected readonly IUnitOfWork _unitOfWork;
     protected readonly ICurrentUserService _currentUserService;
     protected readonly ILogger<BaseRequestHandler> _logger;
     protected readonly IMapper _mapper;
 
-    public BaseRequestHandler(ICurrentUserService currentUserService, IMapper mapper, ILogger<BaseRequestHandler> logger)
+    public BaseRequestHandler(IUnitOfWork unitOfWork, ICurrentUserService currentUserService, IMapper mapper, ILogger<BaseRequestHandler> logger)
     {
+        _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
         _currentUserService = currentUserService ?? throw new ArgumentNullException(nameof(currentUserService));
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));

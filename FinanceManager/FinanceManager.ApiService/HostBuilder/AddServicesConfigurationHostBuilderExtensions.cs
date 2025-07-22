@@ -1,9 +1,9 @@
-﻿using FinanceManager.Application.Services.Preferences;
+﻿using FinanceManager.Application.Services.Accounts;
+using FinanceManager.Application.Services.Preferences;
 using FinanceManager.Application.Services.Token;
 using FinanceManager.Application.UseCases.Commons.Behaviours;
 using FinanceManager.Domain.Authorization;
 using FinanceManager.Domain.Configurations;
-using FinanceManager.Domain.Services.Accounts;
 using FinanceManager.Domain.Services.CurrentUserService;
 using FinanceManager.Domain.Services.Email;
 using FinanceManager.Domain.Services.Finances;

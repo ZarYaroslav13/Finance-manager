@@ -1,6 +1,6 @@
 ﻿using FinanceManager.Application.Models;
 using FinanceManager.Application.Models.Base;
-using FinanceManager.Application.UseCases.Accounts.Commands.Commands.UpdateAccountCommand;
+using FinanceManager.Domain.UseCases.Accounts.Commands.Commands.UpdateAccountCommand;
 using FinanceManager.Web.Shared.Constants.Identity;
 using System.Globalization;
 using System.Security.Claims;

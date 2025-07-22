@@ -1,4 +1,4 @@
-﻿using FinanceManager.Application.UseCases.Accounts.Commands.Commands.UpdatePasswordAccountCommand;
+﻿using FinanceManager.Domain.UseCases.Accounts.Commands.Commands.UpdatePasswordAccountCommand;
 using FinanceManager.Web.Services;
 using FinanceManager.Web.Services.APIServices.Managers.IAccountManager;
 using FinanceManager.Web.Shared.Dialogs.Accounts;

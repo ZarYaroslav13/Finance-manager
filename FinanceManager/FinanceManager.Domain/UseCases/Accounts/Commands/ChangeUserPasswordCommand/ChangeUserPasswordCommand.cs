@@ -1,9 +1,9 @@
-﻿using FinanceManager.Application.DataAnnotations.Attributes;
+﻿using FinanceManager.Domain.DataAnnotations.Attributes;
 using FinanceManager.Domain.Wrapper;
 using MediatR;
 using System.ComponentModel.DataAnnotations;
 
-namespace FinanceManager.Application.UseCases.Accounts.Commands.Commands.UpdatePasswordAccountCommand;
+namespace FinanceManager.Domain.UseCases.Accounts.Commands.Commands.UpdatePasswordAccountCommand;
 
 public class ChangeUserPasswordCommand : IRequest<IResult>
 {

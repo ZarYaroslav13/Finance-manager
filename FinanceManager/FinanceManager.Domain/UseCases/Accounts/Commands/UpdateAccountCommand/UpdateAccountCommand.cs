@@ -1,9 +1,9 @@
-﻿using FinanceManager.Application.DataAnnotations.Attributes;
+﻿using FinanceManager.Domain.DataAnnotations.Attributes;
 using FinanceManager.Domain.Wrapper;
 using MediatR;
 using System.ComponentModel.DataAnnotations;
 
-namespace FinanceManager.Application.UseCases.Accounts.Commands.Commands.UpdateAccountCommand;
+namespace FinanceManager.Domain.UseCases.Accounts.Commands.Commands.UpdateAccountCommand;
 
 public class UpdateAccountCommand : IRequest<IResult>
 {

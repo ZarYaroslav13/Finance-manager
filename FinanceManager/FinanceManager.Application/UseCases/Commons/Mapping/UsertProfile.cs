@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using FinanceManager.Application.Models.Base;
-using FinanceManager.Application.UseCases.Accounts.Commands.Commands.UpdateAccountCommand;
 using FinanceManager.Application.UseCases.Users.Commands.RegisterCommand;
 using FinanceManager.Domain.Models;
+using FinanceManager.Domain.UseCases.Accounts.Commands.Commands.UpdateAccountCommand;
 
 namespace FinanceManager.Application.UseCases.Commons.Mapping;
 

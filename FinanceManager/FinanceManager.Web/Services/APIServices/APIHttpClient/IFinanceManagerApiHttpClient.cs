@@ -1,7 +1,5 @@
 ﻿using FinanceManager.Application.Models;
 using FinanceManager.Application.Models.Base;
-using FinanceManager.Application.UseCases.Accounts.Commands.Commands.UpdateAccountCommand;
-using FinanceManager.Application.UseCases.Accounts.Commands.Commands.UpdatePasswordAccountCommand;
 using FinanceManager.Application.UseCases.FinanceOperations.Commands.AddFinanceOperationCommand;
 using FinanceManager.Application.UseCases.FinanceOperations.Commands.UpdateFinanceOperationCommand;
 using FinanceManager.Application.UseCases.FinanceOperationTypes.Commands.AddFinanceOperationTypeCommand;
@@ -14,6 +12,8 @@ using FinanceManager.Application.UseCases.Users.Commands.ResetPasswordCommand;
 using FinanceManager.Application.UseCases.Wallets.Commands.CreateWalletCommand;
 using FinanceManager.Application.UseCases.Wallets.Commands.UpdateWalletCommand;
 using FinanceManager.Domain.API;
+using FinanceManager.Domain.UseCases.Accounts.Commands.Commands.UpdateAccountCommand;
+using FinanceManager.Domain.UseCases.Accounts.Commands.Commands.UpdatePasswordAccountCommand;
 using FinanceManager.Domain.UseCases.Preferences.Command.UpdateUserPreferencesCommand;
 using FinanceManager.Domain.UseCases.Tokens.Commands.GetTokenCommand;
 using FinanceManager.Domain.UseCases.Tokens.Commands.RefreshTokenCommand;

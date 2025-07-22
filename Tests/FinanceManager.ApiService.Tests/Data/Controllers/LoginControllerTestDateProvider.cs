@@ -1,5 +1,4 @@
 ﻿using FakeItEasy;
-using FinanceManager.Domain.Services.Accounts;
 
 namespace FinanceManager.ApiService.Tests.Data.Controllers;
 

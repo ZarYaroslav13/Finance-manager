@@ -24,6 +24,6 @@ public class PreferencesService : BaseService, IPreferencesService
     {
         var result = await _mediator.Send(command);
 
-        return _mapper.Map<Result>(result);
+        return result;
     }
 }

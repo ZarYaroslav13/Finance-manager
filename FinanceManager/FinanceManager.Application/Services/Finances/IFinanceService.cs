@@ -1,36 +1,34 @@
-﻿using FinanceManager.Domain.Models;
+﻿using FinanceManager.Application.Models;
+using FinanceManager.Application.Models.Requests.FinanceOperationTypes.Commands;
+using FinanceManager.Domain.Wrapper;
 
-namespace FinanceManager.Domain.Services.Finances;
+namespace FinanceManager.Application.Services.Finances;
 
 public interface IFinanceService
 {
-    public Task<bool> IsCallerWallerOwner(Guid walletId);
-    public Task<List<FinanceOperationTypeModel>> GetAllUserFinanceOperationTypesAsync(Guid userId);
+    public Task<Result<List<FinanceOperationTypeDTO>>> GetAllUserFinanceOperationTypesAsync(Guid userId);
 
-    public Task<List<FinanceOperationTypeModel>> GetAllFinanceOperationTypesOfWalletAsync(Guid walletId);
+    public Task<Result<List<FinanceOperationTypeDTO>>> GetAllFinanceOperationTypesOfWalletAsync(Guid walletId);
 
-    public Task<FinanceOperationModel> GetFinanceOperation(Guid id);
+    public Task<Result<FinanceOperationTypeDTO>> GetFinanceOperationType(Guid id);
 
-    public Task<FinanceOperationTypeModel> AddFinanceOperationTypeAsync(FinanceOperationTypeModel type);
+    public Task<Result<FinanceOperationTypeDTO>> AddFinanceOperationTypeAsync(AddFinanceOperationTypeRequest request);
 
-    public Task<FinanceOperationTypeModel> UpdateFinanceOperationTypeAsync(FinanceOperationTypeModel type);
+    public Task<Result<FinanceOperationTypeDTO>> UpdateFinanceOperationTypeAsync(UpdateFinanceOperationTypeRequest request);
 
-    public Task DeleteFinanceOperationTypeAsync(Guid id);
+    public Task<IResult> DeleteFinanceOperationTypeAsync(Guid id);
 
-    public Task<bool> IsCallerFinanceOperationTypeOwner(Guid typeId);
+    public Task<Result<List<FinanceOperationDTO>>> GetAllFinanceOperationOfWalletAsync(Guid walletId, int index = 0, int count = 0);
 
-    public Task<List<FinanceOperationModel>> GetAllFinanceOperationOfWalletAsync(Guid walletId, int index = 0, int count = 0);
+    public Task<Result<List<FinanceOperationDTO>>> GetAllFinanceOperationOfWalletAsync(Guid walletId, DateTime startDate, DateTime endDate);
 
-    public Task<List<FinanceOperationModel>> GetAllFinanceOperationOfWalletAsync(Guid walletId, DateTime startDate, DateTime endDate);
+    public Task<Result<List<FinanceOperationDTO>>> GetAllFinanceOperationOfTypeAsync(Guid typeId, int index = 0, int count = 0);
 
-    public Task<List<FinanceOperationModel>> GetAllFinanceOperationOfTypeAsync(Guid typeId, int index = 0, int count = 0);
-    public Task<FinanceOperationTypeModel> GetFinanceOperationType(Guid id);
+    public Task<Result<FinanceOperationDTO>> GetFinanceOperation(Guid id);
 
-    public Task<FinanceOperationModel> AddFinanceOperationAsync(FinanceOperationModel financeOperation);
+    public Task<Result<FinanceOperationDTO>> AddFinanceOperationAsync(FinanceOperationDTO financeOperation);
 
-    public Task<FinanceOperationModel> UpdateFinanceOperationAsync(FinanceOperationModel financeOperation);
+    public Task<Result<FinanceOperationDTO>> UpdateFinanceOperationAsync(FinanceOperationDTO financeOperation);
 
-    public Task DeleteFinanceOperationAsync(Guid id);
-
-    public Task<bool> IsCallerFinanceOperationOperationOwner(Guid operationId);
+    public Task<IResult> DeleteFinanceOperationAsync(Guid id);
 }

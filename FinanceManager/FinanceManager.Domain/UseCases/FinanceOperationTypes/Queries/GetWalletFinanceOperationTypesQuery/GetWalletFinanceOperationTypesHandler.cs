@@ -1,14 +1,13 @@
 ﻿using AutoMapper;
 using FinanceManager.Domain.Models;
-using FinanceManager.Domain.UseCases.Commons.Bases;
 using FinanceManager.Domain.Services.CurrentUserService;
-using FinanceManager.Domain.Services.Finances;
+using FinanceManager.Domain.UseCases.Commons.Bases;
 using FinanceManager.Domain.Wrapper;
+using FinanceManager.Infrastructure.Models;
+using FinanceManager.Infrastructure.Repository;
+using FinanceManager.Infrastructure.UnitOfWork;
 using MediatR;
 using Microsoft.Extensions.Logging;
-using FinanceManager.Infrastructure.UnitOfWork;
-using FinanceManager.Infrastructure.Repository;
-using FinanceManager.Infrastructure.Models;
 
 namespace FinanceManager.Domain.UseCases.FinanceOperationTypes.Queries.GetAllFinanceOperationTypesQuery;
 
@@ -28,7 +27,7 @@ public class GetWalletFinanceOperationTypesHandler : BaseRequestHandler, IReques
                 () => request.IsCallerOwner);
 
             var data = (await _repository
-                .GetAllAsync(includeProperties: nameof(FinanceOperationType.Wallet), filter: fot => fot.WalletId == request.WalletId))
+                .GetAllAsync(filter: fot => fot.WalletId == request.WalletId))
                 .Select(_mapper.Map<FinanceOperationTypeModel>)
                 .ToList();
 

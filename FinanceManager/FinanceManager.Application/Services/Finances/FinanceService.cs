@@ -1,351 +1,161 @@
 ﻿using AutoMapper;
-using FinanceManager.Domain.Models;
+using FinanceManager.Application.Models;
+using FinanceManager.Application.Models.Requests.FinanceOperationTypes.Commands;
 using FinanceManager.Domain.Services.CurrentUserService;
-using FinanceManager.Infrastructure.Models;
-using FinanceManager.Infrastructure.Repository;
-using FinanceManager.Infrastructure.UnitOfWork;
+using FinanceManager.Domain.UseCases.FinanceOperations.Commands.UpdateFinanceOperationCommand;
+using FinanceManager.Domain.UseCases.FinanceOperationTypes.Commands.AddFinanceOperationTypeCommand;
+using FinanceManager.Domain.UseCases.FinanceOperationTypes.Commands.DeleteFinanceOperationTypeCommand;
+using FinanceManager.Domain.UseCases.FinanceOperationTypes.Queries.GetAllFinanceOperationTypesQuery;
+using FinanceManager.Domain.UseCases.FinanceOperationTypes.Queries.GetAllUserFinanceOperationTypesQuery;
+using FinanceManager.Domain.UseCases.FinanceOperationTypes.Queries.GetFinanceOperationTypeQuery;
+using FinanceManager.Domain.UseCases.FinanceOperationTypes.Queries.IsCallerTypeOwnerQuery;
+using FinanceManager.Domain.UseCases.Wallets.Commands.DeleteWalletCommand;
+using FinanceManager.Domain.UseCases.Wallets.Queries.IsCallerWalletOwnerQuery;
+using FinanceManager.Domain.Wrapper;
+using MediatR;
+using System.Collections.Generic;
 
-namespace FinanceManager.Domain.Services.Finances;
+namespace FinanceManager.Application.Services.Finances;
 
 public class FinanceService : BaseService, IFinanceService
 {
-    private readonly ICurrentUserService _currentUserService;
-    private readonly IRepository<FinanceOperation> _financeOperationRepository;
-    private readonly IRepository<FinanceOperationType> _financeOperationTypeRepository;
-
-    public FinanceService(ICurrentUserService currentUserService,
-        IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork, mapper)
+    public FinanceService(IMediator mediator, IMapper mapper) : base(mediator, mapper)
     {
-        _walletService = walletService ?? throw new ArgumentNullException(nameof(walletService));
-        _currentUserService = currentUserService ?? throw new ArgumentNullException(nameof(currentUserService));
-
-        _financeOperationRepository = _unitOfWork.GetRepository<FinanceOperation>();
-        _financeOperationTypeRepository = _unitOfWork.GetRepository<FinanceOperationType>();
-    }
-    public async Task<bool> IsCallerWallerOwner(Guid walletId)
-    {
-        return await _walletService.IsCallerWalletOwner(walletId);
     }
 
-    #region FinanceOperationTypeMethods
-
-    public async Task<List<FinanceOperationTypeModel>> GetAllUserFinanceOperationTypesAsync(Guid userId)
+    public async Task<Result<List<FinanceOperationTypeDTO>>> GetAllUserFinanceOperationTypesAsync(Guid userId)
     {
-        var wallets = await _walletService.GetAllWalletsOfAccountAsync(userId);
-        List<FinanceOperationTypeModel> types = new();
+        var result = await _mediator.Send(new GetAllUserFinanceOperationTypesQuery() { UserId = userId });
 
-        foreach (var wallet in wallets)
-            types.AddRange(await GetAllFinanceOperationTypesOfWalletAsync(wallet.Id));
-
-        return types;
+        return _mapper.Map<Result<List<FinanceOperationTypeDTO>>>(result);
     }
 
-    public async Task<List<FinanceOperationTypeModel>> GetAllFinanceOperationTypesOfWalletAsync(Guid walletId)
+    public async Task<Result<List<FinanceOperationTypeDTO>>> GetAllFinanceOperationTypesOfWalletAsync(Guid walletId)
     {
-        return (await _financeOperationTypeRepository
-                .GetAllAsync(includeProperties: nameof(FinanceOperationType.Wallet), filter: fot => fot.WalletId == walletId))
-                .Select(_mapper.Map<FinanceOperationTypeModel>)
-                .ToList();
+        var command = new GetWalletFinanceOperationTypesQuery() { WalletId = walletId };
+
+        var isCallerOwner = await IsCallerWallerOwnerAsync(walletId);
+
+        if (!isCallerOwner.Succeeded)
+            return Result<List<FinanceOperationTypeDTO>>.Fail(isCallerOwner.Messages);
+
+        command.IsCallerOwner = isCallerOwner.Data;
+
+        var result = await _mediator.Send(command);
+
+        return _mapper.Map<Result<List<FinanceOperationTypeDTO>>>(result);
     }
 
-    public async Task<FinanceOperationTypeModel> GetFinanceOperationType(Guid id)
+    public async Task<Result<FinanceOperationTypeDTO>> GetFinanceOperationType(Guid id)
     {
-        if (id == Guid.Empty)
-            throw new ArgumentNullException(nameof(id));
+        var command = new GetFinanceOperationTypeQuery() { Id = id };
 
-        return _mapper.Map<FinanceOperationTypeModel>(
-            await _financeOperationTypeRepository.GetByIdAsync(id));
+        var isCallerOwner = await IsCallerWallerOwnerAsync(id);
+
+        if (!isCallerOwner.Succeeded)
+            return Result<FinanceOperationTypeDTO>.Fail(isCallerOwner.Messages);
+
+        command.IsCallerOwner = isCallerOwner.Data;
+
+        var result = await _mediator.Send(command);
+
+        return _mapper.Map<Result<FinanceOperationTypeDTO>>(result);
     }
 
-    public async Task<FinanceOperationTypeModel> AddFinanceOperationTypeAsync(FinanceOperationTypeModel type)
+    public async Task<Result<FinanceOperationTypeDTO>> AddFinanceOperationTypeAsync(AddFinanceOperationTypeRequest request)
     {
-        ArgumentNullException.ThrowIfNull(type);
+        var command = _mapper.Map<AddFinanceOperationTypeCommand>(request);
 
-        if (type.Id != Guid.Empty)
-            throw new ArgumentException(nameof(type));
+        var isCallerOwner = await IsCallerWallerOwnerAsync(request.WalletId);
 
-        var result = _financeOperationTypeRepository.Insert(
-                             _mapper.Map<FinanceOperationType>(type));
-        await _unitOfWork.SaveChangesAsync();
+        if (!isCallerOwner.Succeeded)
+            return Result<FinanceOperationTypeDTO>.Fail(isCallerOwner.Messages);
 
-        return _mapper.Map<FinanceOperationTypeModel>(result);
+        command.IsCallerOwner = isCallerOwner.Data;
+
+        var result = await _mediator.Send(command);
+
+        return _mapper.Map<Result<FinanceOperationTypeDTO>>(result);
     }
 
-    public async Task<FinanceOperationTypeModel> UpdateFinanceOperationTypeAsync(FinanceOperationTypeModel type)
+    public async Task<Result<FinanceOperationTypeDTO>> UpdateFinanceOperationTypeAsync(UpdateFinanceOperationTypeRequest request)
     {
-        ArgumentNullException.ThrowIfNull(type);
+        var command = _mapper.Map<UpdateFinanceOperationCommand>(request);
 
-        if (type.Id == Guid.Empty)
-            throw new ArgumentException(nameof(type));
+        var isCallerOwner = await IsCallerWallerOwnerAsync(request.WalletId);
 
-        var oldType = _mapper.Map<FinanceOperationTypeModel>(
-                        await _financeOperationTypeRepository.GetByIdAsync(type.Id));
+        if (!isCallerOwner.Succeeded)
+            return Result<FinanceOperationTypeDTO>.Fail(isCallerOwner.Messages);
 
-        var result = _mapper.Map<FinanceOperationTypeModel>(
-                         (_financeOperationTypeRepository.Update(
-                            _mapper.Map<FinanceOperationType>(type))));
-        await _unitOfWork.SaveChangesAsync();
+        command.IsCallerOwner = isCallerOwner.Data;
 
-        if (oldType.EntryType != type.EntryType)
-        {
-            await EntryTypeChanged(oldType, type);
-        }
+        var result = await _mediator.Send(command);
 
-        if (oldType.WalletId != type.WalletId)
-        {
-            await WalletChanged(oldType, type);
-        }
-
-        return result;
+        return _mapper.Map<Result<FinanceOperationTypeDTO>>(result);
     }
 
-    public async Task DeleteFinanceOperationTypeAsync(Guid id)
+    public async Task<IResult> DeleteFinanceOperationTypeAsync(Guid id)
     {
-        if ((await _financeOperationRepository.GetAllAsync(
-                includeProperties: nameof(FinanceOperation.Type),
-                filter: fo => fo.Type.Id == id))
-            .Any())
-        {
-            throw new InvalidOperationException($"Deleting type with Id: {id} is imposible through operations with this type exists");
-        }
+        var command = new DeleteFinanceOperationTypeCommand() { Id = id };
 
-        _financeOperationTypeRepository.Delete(id);
-        await _unitOfWork.SaveChangesAsync();
+        var isCallerOwner = await IsCallerTypeOwnerAsync(id);
+
+        if (!isCallerOwner.Succeeded)
+            return Result.Fail(isCallerOwner.Messages);
+
+        command.IsCallerOwner = isCallerOwner.Data;
+
+        var result = await _mediator.Send(command);
+
+        return _mapper.Map<Result>(result);
     }
 
-    public async Task<bool> IsCallerFinanceOperationTypeOwner(Guid typeId)
+    public async Task<Result<List<FinanceOperationDTO>>> GetAllFinanceOperationOfWalletAsync(Guid walletId, DateTime startDate, DateTime endDate)
     {
-        if (typeId == Guid.Empty)
-            throw new ArgumentException(nameof(typeId));
-
-        var type = await _financeOperationTypeRepository.GetByIdAsync(typeId);
-
-        return await _walletService.IsCallerWalletOwner(type.WalletId);
+        throw new NotImplementedException();
     }
 
-    private async Task EntryTypeChanged(FinanceOperationTypeModel oldType, FinanceOperationTypeModel type)
+    public async Task<Result<List<FinanceOperationDTO>>> GetAllFinanceOperationOfWalletAsync(Guid walletId, int index = 0, int count = 0)
     {
-        var wallet = await _walletService.FindWalletAsync(type.WalletId);
-        var operations = await GetAllFinanceOperationOfTypeAsync(type.Id);
-
-        foreach (var operation in operations)
-        {
-            wallet.CalculateNewBalance(operation, oldType.EntryType, operation.Amount);
-        }
-
-
-        await _walletService.UpdateWalletAsync(wallet);
+        throw new NotImplementedException();
     }
 
-    private async Task WalletChanged(FinanceOperationTypeModel oldType, FinanceOperationTypeModel type)
+    public async Task<Result<List<FinanceOperationDTO>>> GetAllFinanceOperationOfTypeAsync(Guid typeId, int index = 0, int count = 0)
     {
-        var oldWallet = await _walletService.FindWalletAsync(oldType.WalletId);
-        var newWallet = await _walletService.FindWalletAsync(type.WalletId);
-        var operations = await GetAllFinanceOperationOfTypeAsync(type.Id);
-
-        var modificator = (oldType.EntryType == EntryType.Income) ? 1 : -1;
-
-        foreach (var operation in operations)
-        {
-            newWallet.Balance += modificator * operation.Amount;
-            oldWallet.Balance -= modificator * operation.Amount;
-        }
-
-        await _walletService.UpdateWalletAsync(newWallet);
-        await _walletService.UpdateWalletAsync(oldWallet);
-    }
-    #endregion
-
-    #region FinanceOperationMethods
-
-    public async Task<List<FinanceOperationModel>> GetAllFinanceOperationOfWalletAsync(Guid walletId, int index = 0, int count = 0)
-    {
-        if (walletId <= Guid.Empty)
-            throw new ArgumentOutOfRangeException(nameof(walletId));
-
-        if (count < 0)
-            throw new ArgumentOutOfRangeException(nameof(count));
-
-        if (index < 0)
-            throw new ArgumentOutOfRangeException(nameof(index));
-
-        List<FinanceOperationModel> result = (await _financeOperationRepository
-                .GetAllAsync(
-                   includeProperties: nameof(FinanceOperation.Type),
-                    filter: fo => fo.Type.WalletId == walletId,
-                    orderBy: iQ => iQ.OrderBy(fo => fo.Date),
-                    skip: index,
-                    take: count))
-                .Select(_mapper.Map<FinanceOperationModel>)
-                .ToList();
-
-        return result;
+        throw new NotImplementedException();
     }
 
-    public async Task<List<FinanceOperationModel>> GetAllFinanceOperationOfWalletAsync(Guid walletId, DateTime startDate, DateTime endDate)
+    public async Task<Result<FinanceOperationDTO>> GetFinanceOperation(Guid id)
     {
-        if (walletId <= Guid.Empty)
-            throw new ArgumentException(nameof(walletId));
-
-        ArgumentOutOfRangeException.ThrowIfGreaterThan(startDate, endDate);
-
-        var dayAfterEndDate = endDate.AddDays(1);
-        var dayBeforeStartDate = startDate.AddDays(-1);
-
-        var result = (await _financeOperationRepository
-                .GetAllAsync(
-                includeProperties: nameof(FinanceOperation.Type),
-                filter: fo =>
-                       fo.Type.WalletId == walletId
-                    && fo.Date <= dayAfterEndDate
-                    && fo.Date >= dayBeforeStartDate,
-                orderBy: foO =>
-                       foO.OrderBy(fo => fo.Date)))
-                .Select(_mapper.Map<FinanceOperationModel>)
-                .ToList();
-
-        return result;
+        throw new NotImplementedException();
     }
 
-    public async Task<List<FinanceOperationModel>> GetAllFinanceOperationOfTypeAsync(Guid typeId, int index = 0, int count = 0)
+    public async Task<Result<FinanceOperationDTO>> AddFinanceOperationAsync(FinanceOperationDTO financeOperation)
     {
-        if (typeId <= Guid.Empty)
-            throw new ArgumentOutOfRangeException(nameof(typeId));
-
-        if (index < 0)
-            throw new ArgumentOutOfRangeException(nameof(index));
-
-        if (count < 0)
-            throw new ArgumentOutOfRangeException(nameof(count));
-
-        return (await _financeOperationRepository
-                .GetAllAsync(
-                    includeProperties: nameof(FinanceOperation.Type),
-                    filter: fo => fo.Type.Id == typeId,
-                    orderBy: iQ => iQ.OrderBy(fo => fo.Date),
-                    skip: index,
-                    take: count))
-                .Select(_mapper.Map<FinanceOperationModel>)
-                .ToList();
+        throw new NotImplementedException();
     }
 
-    public async Task<FinanceOperationModel> GetFinanceOperation(Guid id)
+    public async Task<Result<FinanceOperationDTO>> UpdateFinanceOperationAsync(FinanceOperationDTO financeOperation)
     {
-        if (id == Guid.Empty)
-            throw new ArgumentNullException(nameof(id));
-
-        return _mapper.Map<FinanceOperationModel>(
-            await _financeOperationRepository.GetByIdAsync(id));
+        throw new NotImplementedException();
     }
 
-    public async Task<FinanceOperationModel> AddFinanceOperationAsync(FinanceOperationModel financeOperation)
+    public async Task<IResult> DeleteFinanceOperationAsync(Guid id)
     {
-        ArgumentNullException.ThrowIfNull(financeOperation);
-
-        if (financeOperation.Id != Guid.Empty)
-            throw new ArgumentException(nameof(financeOperation));
-
-        if (await IsNotExistFinanceOperationTypeWithIdAsync(financeOperation.Type.Id))
-            throw new InvalidOperationException("Finance operation type with this id don`t exist");
-
-        var dbResult = _financeOperationRepository.Insert(
-                _mapper.Map<FinanceOperation>(financeOperation));
-        await _unitOfWork.SaveChangesAsync();
-
-        var result = _mapper.Map<FinanceOperationModel>(dbResult);
-
-        await UpdateWalletAfterCreatingOperation(result);
-
-        return result;
+        throw new NotImplementedException();
     }
 
-    public async Task<FinanceOperationModel> UpdateFinanceOperationAsync(FinanceOperationModel financeOperation)
+    private async Task<IResult<bool>> IsCallerWallerOwnerAsync(Guid walletId)
     {
-        ArgumentNullException.ThrowIfNull(financeOperation);
+        var isCallerOwner = await _mediator.Send(new IsCallerWalletOwnerQuery() { WalletId = walletId });
 
-        if (financeOperation.Id == Guid.Empty) throw new ArgumentOutOfRangeException(nameof(financeOperation.Id));
-
-        var oldOperation = _mapper.Map<FinanceOperationModel>(await _financeOperationRepository.GetByIdAsync(financeOperation.Id));
-
-
-        var dbResult = _financeOperationRepository.Update(
-                            _mapper.Map<FinanceOperation>(financeOperation));
-        await _unitOfWork.SaveChangesAsync();
-
-        dbResult.Type = await _financeOperationTypeRepository.GetByIdAsync(dbResult.TypeId);
-        var result = _mapper.Map<FinanceOperationModel>(dbResult);
-
-        await UpdateWalletAfterUpdatingOperation(result, oldOperation.Type.EntryType, oldOperation.Amount);
-
-        return result;
+        return isCallerOwner;
     }
 
-    public async Task DeleteFinanceOperationAsync(Guid id)
+    private async Task<IResult<bool>> IsCallerTypeOwnerAsync(Guid typeId)
     {
-        if (id == Guid.Empty)
-            throw new ArgumentNullException(nameof(id));
+        var isCallerOwner = await _mediator.Send(new IsCallerTypeOwnerQuery() { Id = typeId });
 
-        var operation = _mapper.Map<FinanceOperationModel>(
-                    await _financeOperationRepository.GetByIdAsync(id));
-
-        _financeOperationRepository.Delete(id);
-
-        await _unitOfWork.SaveChangesAsync();
-
-        var type = operation.Type;
-
-        var wallet = await _walletService.FindWalletAsync(type.WalletId);
-
-        if (type.EntryType == EntryType.Income)
-            wallet.Balance -= operation.Amount;
-        else
-            wallet.Balance += operation.Amount;
-
-        await _walletService.UpdateWalletAsync(wallet);
+        return isCallerOwner;
     }
-    public async Task<bool> IsCallerFinanceOperationOperationOwner(Guid operationId)
-    {
-        if (operationId == Guid.Empty)
-            throw new ArgumentException(nameof(operationId));
-
-        var operation = await _financeOperationRepository.GetByIdAsync(operationId);
-
-        return await IsCallerFinanceOperationTypeOwner(operation.TypeId);
-
-    }
-
-    private async Task<bool> IsNotExistFinanceOperationTypeWithIdAsync(Guid id)
-    {
-        var type = await _financeOperationTypeRepository.GetByIdAsync(id);
-
-        return type == null;
-    }
-
-    private async Task UpdateWalletAfterCreatingOperation(FinanceOperationModel financeOperation)
-    {
-        var type = financeOperation.Type;
-        var wallet = await _walletService.FindWalletAsync(type.WalletId);
-
-        if (type.EntryType == EntryType.Income)
-            wallet.Balance += financeOperation.Amount;
-        else
-            wallet.Balance -= financeOperation.Amount;
-
-        await _walletService.UpdateWalletAsync(wallet);
-    }
-
-    private async Task UpdateWalletAfterUpdatingOperation(FinanceOperationModel financeOperation, EntryType oldType, int oldAmount)
-    {
-        var type = financeOperation.Type;
-
-        if (oldAmount == financeOperation.Amount && oldType == type.EntryType)
-            return;
-
-        var wallet = await _walletService.FindWalletAsync(type.WalletId);
-
-        wallet.CalculateNewBalance(financeOperation, oldType, oldAmount);
-
-        await _walletService.UpdateWalletAsync(wallet);
-    }
-    #endregion
 }

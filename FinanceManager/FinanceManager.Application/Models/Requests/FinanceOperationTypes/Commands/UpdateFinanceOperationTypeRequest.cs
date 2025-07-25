@@ -1,13 +1,15 @@
-﻿using FinanceManager.Application.DataAnnotations.Attributes;
-using FinanceManager.Application.Models;
-using FinanceManager.Domain.Wrapper;
+﻿using FinanceManager.Domain.DataAnnotations.Attributes;
 using FinanceManager.Infrastructure.Models;
-using MediatR;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace FinanceManager.Application.UseCases.FinanceOperationTypes.Commands.UpdateFinanceOperationTypeCommand;
+namespace FinanceManager.Application.Models.Requests.FinanceOperationTypes.Commands;
 
-public class UpdateFinanceOperationTypeCommand : IRequest<Result<FinanceOperationTypeDTO>>
+public class UpdateFinanceOperationTypeRequest
 {
     [GuidRequired]
     public Guid Id { get; set; }

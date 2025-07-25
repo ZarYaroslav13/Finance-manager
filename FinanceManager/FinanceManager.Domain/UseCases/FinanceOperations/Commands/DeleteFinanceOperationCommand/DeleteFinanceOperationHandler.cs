@@ -1,7 +1,5 @@
 ﻿using AutoMapper;
-using FinanceManager.Domain.Models;
 using FinanceManager.Domain.Services.CurrentUserService;
-using FinanceManager.Domain.Services.Finances;
 using FinanceManager.Domain.UseCases.Commons.Bases;
 using FinanceManager.Domain.Wrapper;
 using FinanceManager.Infrastructure.Models;

@@ -9,17 +9,17 @@ using FinanceManager.Infrastructure.UnitOfWork;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace FinanceManager.Domain.UseCases.FinanceOperations.Queries.GetAllOperationsOfTypeQuery;
+namespace FinanceManager.Domain.UseCases.FinanceOperations.Queries.GetAllOperationsOfWalletQuery;
 
-internal class GetAllOperationsOfTypeHandler : BaseRequestHandler, IRequestHandler<GetAllOperationsOfTypeQuery, Result<List<FinanceOperationModel>>>
+internal class GetAllOperationsOfWalletHandler : BaseRequestHandler, IRequestHandler<GetAllOperationsOfWalletQuery, Result<List<FinanceOperationModel>>>
 {
     private readonly IRepository<FinanceOperation> _repository;
-    public GetAllOperationsOfTypeHandler(IUnitOfWork unitOfWork, ICurrentUserService currentUserService, IMapper mapper, ILogger<BaseRequestHandler> logger) : base(unitOfWork, currentUserService, mapper, logger)
+    public GetAllOperationsOfWalletHandler(IUnitOfWork unitOfWork, ICurrentUserService currentUserService, IMapper mapper, ILogger<BaseRequestHandler> logger) : base(unitOfWork, currentUserService, mapper, logger)
     {
         _repository = _unitOfWork.GetRepository<FinanceOperation>();
     }
 
-    public async Task<Result<List<FinanceOperationModel>>> Handle(GetAllOperationsOfTypeQuery request, CancellationToken cancellationToken)
+    public async Task<Result<List<FinanceOperationModel>>> Handle(GetAllOperationsOfWalletQuery request, CancellationToken cancellationToken)
     {
         return await HandleAsync(async () =>
         {
@@ -27,7 +27,8 @@ internal class GetAllOperationsOfTypeHandler : BaseRequestHandler, IRequestHandl
 
             var data = (await _repository
                 .GetAllAsync(
-                    filter: fo => fo.TypeId == request.TypeId,
+                    includeProperties: nameof(FinanceOperation.Type),
+                    filter: fo => fo.Type.WalletId == request.WalletId,
                     orderBy: iQ => iQ.OrderBy(fo => fo.Date),
                     skip: request.Index,
                     take: request.Count))

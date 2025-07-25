@@ -2,7 +2,6 @@
 using FinanceManager.Domain.Models;
 using FinanceManager.Domain.Wrapper;
 using MediatR;
-using System.ComponentModel.DataAnnotations;
 
 namespace FinanceManager.Domain.UseCases.FinanceOperationTypes.Queries.GetAllUserFinanceOperationTypesQuery;
 

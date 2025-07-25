@@ -1,5 +1,4 @@
 ﻿using FinanceManager.Application.Models;
-using FinanceManager.Application.UseCases.FinanceOperations.Commands.AddFinanceOperationCommand;
 using FinanceManager.Web.Extentions;
 using FinanceManager.Web.Services;
 using FinanceManager.Web.Services.APIServices.Managers.FinanceOperations;

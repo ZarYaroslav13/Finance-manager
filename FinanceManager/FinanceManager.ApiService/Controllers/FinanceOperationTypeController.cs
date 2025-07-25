@@ -1,10 +1,4 @@
 ﻿using FinanceManager.ApiService.Controllers.Base;
-using FinanceManager.Application.UseCases.FinanceOperationTypes.Commands.AddFinanceOperationTypeCommand;
-using FinanceManager.Application.UseCases.FinanceOperationTypes.Commands.DeleteFinanceOperationTypeCommand;
-using FinanceManager.Application.UseCases.FinanceOperationTypes.Commands.UpdateFinanceOperationTypeCommand;
-using FinanceManager.Application.UseCases.FinanceOperationTypes.Queries.GetAllFinanceOperationTypesQuery;
-using FinanceManager.Application.UseCases.FinanceOperationTypes.Queries.GetAllUserFinanceOperationTypesQuery;
-using FinanceManager.Application.UseCases.FinanceOperationTypes.Queries.GetFinanceOperationTypeQuery;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

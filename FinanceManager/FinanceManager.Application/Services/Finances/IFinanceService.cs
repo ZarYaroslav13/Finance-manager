@@ -1,4 +1,6 @@
 ﻿using FinanceManager.Application.Models;
+using FinanceManager.Application.Models.Requests.FinanceOperations.Commands;
+using FinanceManager.Application.Models.Requests.FinanceOperations.Queries;
 using FinanceManager.Application.Models.Requests.FinanceOperationTypes.Commands;
 using FinanceManager.Domain.Wrapper;
 
@@ -18,17 +20,17 @@ public interface IFinanceService
 
     public Task<IResult> DeleteFinanceOperationTypeAsync(Guid id);
 
-    public Task<Result<List<FinanceOperationDTO>>> GetAllFinanceOperationOfWalletAsync(Guid walletId, int index = 0, int count = 0);
+    public Task<Result<List<FinanceOperationDTO>>> GetAllFinanceOperationOfWalletAsync(GetAllOperationsOfWalletRequest request);
 
-    public Task<Result<List<FinanceOperationDTO>>> GetAllFinanceOperationOfWalletAsync(Guid walletId, DateTime startDate, DateTime endDate);
+    public Task<Result<List<FinanceOperationDTO>>> GetAllFinanceOperationOfTypeAsync(GetAllOperationsOfTypeRequest request);
 
-    public Task<Result<List<FinanceOperationDTO>>> GetAllFinanceOperationOfTypeAsync(Guid typeId, int index = 0, int count = 0);
+    public Task<Result<List<FinanceOperationDTO>>> GetAllFinanceOperationOfWalletAsync(GetAllOperationsOfWalletInPeriodRequest request);
 
     public Task<Result<FinanceOperationDTO>> GetFinanceOperation(Guid id);
 
-    public Task<Result<FinanceOperationDTO>> AddFinanceOperationAsync(FinanceOperationDTO financeOperation);
+    public Task<Result<FinanceOperationDTO>> AddFinanceOperationAsync(AddFinanceOperationRequest request);
 
-    public Task<Result<FinanceOperationDTO>> UpdateFinanceOperationAsync(FinanceOperationDTO financeOperation);
+    public Task<Result<FinanceOperationDTO>> UpdateFinanceOperationAsync(UpdateFinanceOperationRequest request);
 
     public Task<IResult> DeleteFinanceOperationAsync(Guid id);
 }

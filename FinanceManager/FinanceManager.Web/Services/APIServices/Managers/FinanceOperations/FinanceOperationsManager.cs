@@ -1,6 +1,4 @@
 ﻿using FinanceManager.Application.Models;
-using FinanceManager.Application.UseCases.FinanceOperations.Commands.AddFinanceOperationCommand;
-using FinanceManager.Application.UseCases.FinanceOperations.Commands.UpdateFinanceOperationCommand;
 using FinanceManager.Domain.Wrapper;
 using FinanceManager.Web.Services.APIServices.APIHttpClient;
 

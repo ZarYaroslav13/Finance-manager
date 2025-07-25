@@ -1,6 +1,5 @@
 ﻿using FinanceManager.Application.Models;
-using FinanceManager.Application.UseCases.Wallets.Commands.CreateWalletCommand;
-using FinanceManager.Application.UseCases.Wallets.Commands.UpdateWalletCommand;
+using FinanceManager.Domain.UseCases.Wallets.Commands.CreateWalletCommand;
 using FinanceManager.Domain.Wrapper;
 
 namespace FinanceManager.Web.Services.APIServices.Managers.WalletManager;
@@ -13,7 +12,7 @@ public interface IWalletManager : IManager
 
     public Task<Result<WalletDTO>> AddWallet(CreateWalletCommand command);
 
-    public Task<Result<WalletDTO>> UpdateWallet(UpdateWalletCommand command);
+    public Task<Result<WalletDTO>> UpdateWallet(WalletDTO wallet);
 
     public Task<Domain.Wrapper.IResult> DeleteWalletAsync(Guid id);
 }

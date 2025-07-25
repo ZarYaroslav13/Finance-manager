@@ -31,9 +31,6 @@ public class FinanceService : BaseService, IFinanceService
 
     public async Task<List<FinanceOperationTypeModel>> GetAllUserFinanceOperationTypesAsync(Guid userId)
     {
-
-        var wallets = 
-
         var wallets = await _walletService.GetAllWalletsOfAccountAsync(userId);
         List<FinanceOperationTypeModel> types = new();
 

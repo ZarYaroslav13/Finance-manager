@@ -1,26 +1,22 @@
 ﻿using AutoMapper;
-using FinanceManager.Application.Models;
-using FinanceManager.Application.UseCases.Commons.Bases;
+using FinanceManager.Domain.Models;
+using FinanceManager.Domain.UseCases.Commons.Bases;
 using FinanceManager.Domain.Services.CurrentUserService;
 using FinanceManager.Domain.Services.Finances;
 using FinanceManager.Domain.Wrapper;
 using MediatR;
 using Microsoft.Extensions.Logging;
+using FinanceManager.Infrastructure.UnitOfWork;
 
-namespace FinanceManager.Application.UseCases.FinanceReports.Commands.CreatePeriodReportCommand;
+namespace FinanceManager.Domain.UseCases.FinanceReports.Commands.CreatePeriodReportCommand;
 
-public class CreatePeriodReportHandler : BaseRequestHandler, IRequestHandler<CreatePeriodReportCommand, Result<FinanceReportDTO>>
+public class CreatePeriodReportHandler : BaseRequestHandler, IRequestHandler<CreatePeriodReportCommand, Result<FinanceReportModel>>
 {
-    private readonly IFinanceReportCreator _creator;
-    private readonly IWalletService _walletService;
-
-    public CreatePeriodReportHandler(IFinanceReportCreator creator, IWalletService walletService, ICurrentUserService currentUserService, IMapper mapper, ILogger<BaseRequestHandler> logger) : base(currentUserService, mapper, logger)
+    public CreatePeriodReportHandler(IUnitOfWork unitOfWork, ICurrentUserService currentUserService, IMapper mapper, ILogger<BaseRequestHandler> logger) : base(unitOfWork, currentUserService, mapper, logger)
     {
-        _creator = creator ?? throw new ArgumentNullException(nameof(creator));
-        _walletService = walletService ?? throw new ArgumentNullException(nameof(walletService));
     }
 
-    public async Task<Result<FinanceReportDTO>> Handle(CreatePeriodReportCommand request, CancellationToken cancellationToken)
+    public async Task<Result<FinanceReportModel>> Handle(CreatePeriodReportCommand request, CancellationToken cancellationToken)
     {
         return await HandleAsync(async () =>
         {

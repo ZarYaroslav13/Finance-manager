@@ -102,6 +102,28 @@ public class BaseRequestHandler
         }
     }
 
+    protected void CheckIsUserHaveAccesToResourse<Request>(
+        Request request,
+        bool? callerIsOwnerPredicate = null,
+        string loggingMessage = "")
+        where Request : class, IBaseRequest
+    {
+        HandleLoggingMessage(request, loggingMessage);
+
+        bool IsCallerResourseOwner = true;
+
+        if (callerIsOwnerPredicate != null)
+        {
+            IsCallerResourseOwner = callerIsOwnerPredicate ?? false;
+        }
+
+        if (!_currentUserService.IsAdmin && !IsCallerResourseOwner)
+        {
+            _logger.LogWarning(loggingMessage);
+            throw new UnauthorizedAccessException($"Access denied");
+        }
+    }
+
     private string HandleLoggingMessage<Request>(
         Request request,
         string loggingMessage) where Request : class, IBaseRequest

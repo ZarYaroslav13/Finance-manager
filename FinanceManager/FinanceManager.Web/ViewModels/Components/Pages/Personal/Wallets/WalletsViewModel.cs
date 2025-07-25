@@ -1,5 +1,4 @@
 ﻿using FinanceManager.Application.Models;
-using FinanceManager.Application.UseCases.Wallets.Commands.UpdateWalletCommand;
 using FinanceManager.Web.Extentions;
 using FinanceManager.Web.Pages;
 using FinanceManager.Web.Services;

@@ -9,14 +9,13 @@ using FinanceManager.Application.UseCases.FinanceReports.Commands.CreatePeriodRe
 using FinanceManager.Application.UseCases.Users.Commands.ForgotPasswordCommand;
 using FinanceManager.Application.UseCases.Users.Commands.RegisterCommand;
 using FinanceManager.Application.UseCases.Users.Commands.ResetPasswordCommand;
-using FinanceManager.Application.UseCases.Wallets.Commands.CreateWalletCommand;
-using FinanceManager.Application.UseCases.Wallets.Commands.UpdateWalletCommand;
 using FinanceManager.Domain.API;
 using FinanceManager.Domain.UseCases.Accounts.Commands.Commands.UpdateAccountCommand;
 using FinanceManager.Domain.UseCases.Accounts.Commands.Commands.UpdatePasswordAccountCommand;
 using FinanceManager.Domain.UseCases.Preferences.Command.UpdateUserPreferencesCommand;
 using FinanceManager.Domain.UseCases.Tokens.Commands.GetTokenCommand;
 using FinanceManager.Domain.UseCases.Tokens.Commands.RefreshTokenCommand;
+using FinanceManager.Domain.UseCases.Wallets.Commands.CreateWalletCommand;
 using FinanceManager.Domain.Wrapper;
 using Refit;
 
@@ -83,7 +82,7 @@ public interface IFinanceManagerApiHttpClient
     public Task<Result<WalletDTO>> CreateWallet([Body] CreateWalletCommand command, CancellationToken cancellationToken = default);
 
     [Put(APIEndpoints.Wallets.Update)]
-    public Task<Result<WalletDTO>> UpdateWallet([Body] UpdateWalletCommand command, CancellationToken cancellationToken = default);
+    public Task<Result<WalletDTO>> UpdateWallet([Body] WalletDTO wallet, CancellationToken cancellationToken = default);
 
     [Delete(APIEndpoints.Wallets.DeleteWallet)]
     public Task<Result> DeleteWallet(Guid id, CancellationToken cancellationToken = default);

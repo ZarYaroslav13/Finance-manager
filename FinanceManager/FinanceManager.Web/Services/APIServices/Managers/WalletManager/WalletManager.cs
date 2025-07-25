@@ -1,6 +1,5 @@
 ﻿using FinanceManager.Application.Models;
-using FinanceManager.Application.UseCases.Wallets.Commands.CreateWalletCommand;
-using FinanceManager.Application.UseCases.Wallets.Commands.UpdateWalletCommand;
+using FinanceManager.Domain.UseCases.Wallets.Commands.CreateWalletCommand;
 using FinanceManager.Domain.Wrapper;
 using FinanceManager.Web.Services.APIServices.APIHttpClient;
 
@@ -27,9 +26,9 @@ public class WalletManager : BaseManager, IWalletManager
         return await SendRequest(async () => await _apiHttpClient.CreateWallet(command));
     }
 
-    public async Task<Result<WalletDTO>> UpdateWallet(UpdateWalletCommand command)
+    public async Task<Result<WalletDTO>> UpdateWallet(WalletDTO wallet)
     {
-        return await SendRequest(async () => await _apiHttpClient.UpdateWallet(command));
+        return await SendRequest(async () => await _apiHttpClient.UpdateWallet(wallet));
     }
 
     public async Task<Domain.Wrapper.IResult> DeleteWalletAsync(Guid id)

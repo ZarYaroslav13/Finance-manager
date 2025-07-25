@@ -1,7 +1,5 @@
 ﻿using ApexCharts;
 using FinanceManager.Application.Models;
-using FinanceManager.Application.UseCases.FinanceReports.Commands.CreateDailyReportCommand;
-using FinanceManager.Application.UseCases.FinanceReports.Commands.CreatePeriodReportCommand;
 using FinanceManager.Web.Components.Pages.Tools;
 using FinanceManager.Web.Extentions;
 using FinanceManager.Web.Extentions.HostBuilder.MinimalApi;

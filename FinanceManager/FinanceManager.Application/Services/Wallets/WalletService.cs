@@ -65,4 +65,11 @@ public class WalletService : BaseService, IWalletService
 
         return _mapper.Map<Result>(result);
     }
+
+    public async Task<IResult<bool>> IsCallerWalletOwnerAsync(Guid walletId)
+    {
+        var isCallerOwner = await _mediator.Send(new IsCallerWalletOwnerQuery() { WalletId = walletId });
+
+        return isCallerOwner;
+    }
 }

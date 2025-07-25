@@ -1,6 +1,4 @@
 ﻿using FinanceManager.Application.Models;
-using FinanceManager.Application.UseCases.FinanceReports.Commands.CreateDailyReportCommand;
-using FinanceManager.Application.UseCases.FinanceReports.Commands.CreatePeriodReportCommand;
 using FinanceManager.Domain.Wrapper;
 using FinanceManager.Web.Services.APIServices.APIHttpClient;
 

@@ -1,10 +1,12 @@
-﻿using FinanceManager.Domain.Models;
+﻿using FinanceManager.Application.Models;
+using FinanceManager.Application.Models.Requests.FinanceReports.Commands;
+using FinanceManager.Domain.Wrapper;
 
-namespace FinanceManager.Domain.Services.Finances;
+namespace FinanceManager.Application.Services.Finances;
 
 public interface IFinanceReportCreator
 {
-    public Task<FinanceReportModel> CreateFinanceReportAsync(WalletModel wallet, DateTime startDate, DateTime endDate);
+    public Task<Result<FinanceReportDTO>> CreateFinanceReportAsync(CreatePeriodReportRequest request);
 
-    public Task<FinanceReportModel> CreateFinanceReportAsync(WalletModel wallet, DateTime day);
+    public Task<Result<FinanceReportDTO>> CreateFinanceReportAsync(CreateDailyReportRequest request);
 }

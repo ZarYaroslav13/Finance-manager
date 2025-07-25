@@ -22,9 +22,9 @@ public interface IFinanceService
 
     public Task<Result<List<FinanceOperationDTO>>> GetAllFinanceOperationOfWalletAsync(GetAllOperationsOfWalletRequest request);
 
-    public Task<Result<List<FinanceOperationDTO>>> GetAllFinanceOperationOfTypeAsync(GetAllOperationsOfTypeRequest request);
-
     public Task<Result<List<FinanceOperationDTO>>> GetAllFinanceOperationOfWalletAsync(GetAllOperationsOfWalletInPeriodRequest request);
+
+    public Task<Result<List<FinanceOperationDTO>>> GetAllFinanceOperationOfTypeAsync(GetAllOperationsOfTypeRequest request);
 
     public Task<Result<FinanceOperationDTO>> GetFinanceOperation(Guid id);
 

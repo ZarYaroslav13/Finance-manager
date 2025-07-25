@@ -15,4 +15,6 @@ public interface IWalletService
     public Task<Result<WalletDTO>> UpdateWalletAsync(WalletDTO updatedWallet);
 
     public Task<IResult> DeleteWalletByIdAsync(Guid id);
+
+    public Task<IResult<bool>> IsCallerWalletOwnerAsync(Guid walletId);
 }

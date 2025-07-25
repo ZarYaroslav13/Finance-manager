@@ -3,6 +3,7 @@ using FinanceManager.Application.Models;
 using FinanceManager.Application.Models.Requests.FinanceOperations.Commands;
 using FinanceManager.Application.Models.Requests.FinanceOperations.Queries;
 using FinanceManager.Application.Models.Requests.FinanceOperationTypes.Commands;
+using FinanceManager.Application.Services.Wallets;
 using FinanceManager.Domain.UseCases.FinanceOperations.Commands.DeleteFinanceOperationCommand;
 using FinanceManager.Domain.UseCases.FinanceOperations.Commands.UpdateFinanceOperationCommand;
 using FinanceManager.Domain.UseCases.FinanceOperations.Queries.GetAllOperationsOfTypeQuery;
@@ -17,7 +18,6 @@ using FinanceManager.Domain.UseCases.FinanceOperationTypes.Queries.GetAllFinance
 using FinanceManager.Domain.UseCases.FinanceOperationTypes.Queries.GetAllUserFinanceOperationTypesQuery;
 using FinanceManager.Domain.UseCases.FinanceOperationTypes.Queries.GetFinanceOperationTypeQuery;
 using FinanceManager.Domain.UseCases.FinanceOperationTypes.Queries.IsCallerTypeOwnerQuery;
-using FinanceManager.Domain.UseCases.Wallets.Queries.IsCallerWalletOwnerQuery;
 using FinanceManager.Domain.Wrapper;
 using MediatR;
 
@@ -25,8 +25,11 @@ namespace FinanceManager.Application.Services.Finances;
 
 public class FinanceService : BaseService, IFinanceService
 {
-    public FinanceService(IMediator mediator, IMapper mapper) : base(mediator, mapper)
+    private readonly IWalletService _walletService;
+
+    public FinanceService(IWalletService walletService, IMediator mediator, IMapper mapper) : base(mediator, mapper)
     {
+        _walletService = walletService ?? throw new ArgumentNullException(nameof(walletService));
     }
 
     public async Task<Result<List<FinanceOperationTypeDTO>>> GetAllUserFinanceOperationTypesAsync(Guid userId)
@@ -40,7 +43,7 @@ public class FinanceService : BaseService, IFinanceService
     {
         var command = new GetWalletFinanceOperationTypesQuery() { WalletId = walletId };
 
-        var isCallerOwner = await IsCallerWallerOwnerAsync(walletId);
+        var isCallerOwner = await _walletService.IsCallerWalletOwnerAsync(walletId);
 
         if (!isCallerOwner.Succeeded)
             return Result<List<FinanceOperationTypeDTO>>.Fail(isCallerOwner.Messages);
@@ -56,7 +59,7 @@ public class FinanceService : BaseService, IFinanceService
     {
         var command = new GetFinanceOperationTypeQuery() { Id = id };
 
-        var isCallerOwner = await IsCallerWallerOwnerAsync(id);
+        var isCallerOwner = await _walletService.IsCallerWalletOwnerAsync(id);
 
         if (!isCallerOwner.Succeeded)
             return Result<FinanceOperationTypeDTO>.Fail(isCallerOwner.Messages);
@@ -72,7 +75,7 @@ public class FinanceService : BaseService, IFinanceService
     {
         var command = _mapper.Map<AddFinanceOperationTypeCommand>(request);
 
-        var isCallerOwner = await IsCallerWallerOwnerAsync(request.WalletId);
+        var isCallerOwner = await _walletService.IsCallerWalletOwnerAsync(request.WalletId);
 
         if (!isCallerOwner.Succeeded)
             return Result<FinanceOperationTypeDTO>.Fail(isCallerOwner.Messages);
@@ -88,7 +91,7 @@ public class FinanceService : BaseService, IFinanceService
     {
         var command = _mapper.Map<UpdateFinanceOperationTypeCommand>(request);
 
-        var isCallerOwner = await IsCallerWallerOwnerAsync(request.WalletId);
+        var isCallerOwner = await _walletService.IsCallerWalletOwnerAsync(request.WalletId);
 
         if (!isCallerOwner.Succeeded)
             return Result<FinanceOperationTypeDTO>.Fail(isCallerOwner.Messages);
@@ -120,7 +123,7 @@ public class FinanceService : BaseService, IFinanceService
     {
         var command = _mapper.Map<GetAllOperationsOfWalletQuery>(request);
 
-        var isCallerOwner = await IsCallerWallerOwnerAsync(request.WalletId);
+        var isCallerOwner = await _walletService.IsCallerWalletOwnerAsync(request.WalletId);
 
         if (!isCallerOwner.Succeeded)
             return Result<List<FinanceOperationDTO>>.Fail(isCallerOwner.Messages);
@@ -152,7 +155,7 @@ public class FinanceService : BaseService, IFinanceService
     {
         var command = _mapper.Map<GetAllOperationsOfWalletInPeriodQuery>(request);
 
-        var isCallerOwner = await IsCallerWallerOwnerAsync(request.WalletId);
+        var isCallerOwner = await _walletService.IsCallerWalletOwnerAsync(request.WalletId);
 
         if (!isCallerOwner.Succeeded)
             return Result<List<FinanceOperationDTO>>.Fail(isCallerOwner.Messages);
@@ -168,7 +171,7 @@ public class FinanceService : BaseService, IFinanceService
     {
         var command = new GetOperationQuery() { Id = id };
 
-        var isCallerOwner = await IsCallerWallerOwnerAsync(id);
+        var isCallerOwner = await _walletService.IsCallerWalletOwnerAsync(id);
 
         if (!isCallerOwner.Succeeded)
             return Result<FinanceOperationDTO>.Fail(isCallerOwner.Messages);
@@ -227,13 +230,6 @@ public class FinanceService : BaseService, IFinanceService
         var result = await _mediator.Send(command);
 
         return _mapper.Map<Result>(result);
-    }
-
-    private async Task<IResult<bool>> IsCallerWallerOwnerAsync(Guid walletId)
-    {
-        var isCallerOwner = await _mediator.Send(new IsCallerWalletOwnerQuery() { WalletId = walletId });
-
-        return isCallerOwner;
     }
 
     private async Task<IResult<bool>> IsCallerTypeOwnerAsync(Guid typeId)

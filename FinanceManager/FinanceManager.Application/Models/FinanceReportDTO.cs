@@ -18,6 +18,12 @@ public class FinanceReportDTO : Base.ModelDTO
     {
 
     }
+    public FinanceReportDTO(Guid walletId, string walletName, Period period)
+    {
+        WalletName = walletName ?? throw new ArgumentNullException(nameof(walletName));
+        WalletId = walletId;
+        Period = period;
+    }
 
     public FinanceReportDTO(
         Guid walletId,

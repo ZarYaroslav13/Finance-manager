@@ -1,12 +1,9 @@
 ﻿using FinanceManager.Domain.DataAnnotations.Attributes;
-using FinanceManager.Domain.Models;
-using FinanceManager.Domain.Wrapper;
-using MediatR;
 using System.ComponentModel.DataAnnotations;
 
-namespace FinanceManager.Domain.UseCases.FinanceReports.Commands.CreatePeriodReportCommand;
+namespace FinanceManager.Application.Models.Requests.FinanceReports.Commands;
 
-public class CreatePeriodReportCommand : IRequest<Result<FinanceReportModel>>
+public class CreatePeriodReportRequest
 {
     [GuidRequired]
     public Guid WalletId { get; set; }

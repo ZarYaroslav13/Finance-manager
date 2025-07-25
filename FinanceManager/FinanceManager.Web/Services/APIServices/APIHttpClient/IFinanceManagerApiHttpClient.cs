@@ -1,7 +1,5 @@
 ﻿using FinanceManager.Application.Models;
 using FinanceManager.Application.Models.Base;
-using FinanceManager.Application.UseCases.FinanceReports.Commands.CreateDailyReportCommand;
-using FinanceManager.Application.UseCases.FinanceReports.Commands.CreatePeriodReportCommand;
 using FinanceManager.Application.UseCases.Users.Commands.ForgotPasswordCommand;
 using FinanceManager.Application.UseCases.Users.Commands.RegisterCommand;
 using FinanceManager.Application.UseCases.Users.Commands.ResetPasswordCommand;

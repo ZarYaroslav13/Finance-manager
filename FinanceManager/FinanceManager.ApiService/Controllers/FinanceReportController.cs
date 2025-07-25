@@ -1,6 +1,6 @@
 ﻿using FinanceManager.ApiService.Controllers.Base;
-using FinanceManager.Application.UseCases.FinanceReports.Commands.CreateDailyReportCommand;
-using FinanceManager.Application.UseCases.FinanceReports.Commands.CreatePeriodReportCommand;
+using FinanceManager.Application.Models.Requests.FinanceReports.Commands;
+using FinanceManager.Application.Services.Finances;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,19 +8,21 @@ namespace FinanceManager.ApiService.Controllers;
 
 public class FinanceReportController : BaseController
 {
-    public FinanceReportController(IMediator mediator) : base(mediator)
+    private readonly IFinanceReportCreator _financeReportCreator;
+    public FinanceReportController(IFinanceReportCreator financeReportCreator, IMediator mediator) : base(mediator)
     {
+        _financeReportCreator = financeReportCreator ?? throw new ArgumentNullException(nameof(financeReportCreator));
     }
 
     [HttpPost("daily")]
-    public async Task<IActionResult> CreateReportAsync([FromBody] CreateDailyReportCommand command)
+    public async Task<IActionResult> CreateReportAsync([FromBody] CreateDailyReportRequest request)
     {
-        return await SendRequestAsync(command);
+        return await ExecuteRequet(async () => await _financeReportCreator.CreateFinanceReportAsync(request));
     }
 
     [HttpPost("period")]
-    public async Task<IActionResult> CreateReportAsync([FromBody] CreatePeriodReportCommand command)
+    public async Task<IActionResult> CreateReportAsync([FromBody] CreatePeriodReportRequest request)
     {
-        return await SendRequestAsync(command);
+        return await ExecuteRequet(async () => await _financeReportCreator.CreateFinanceReportAsync(request));
     }
 }

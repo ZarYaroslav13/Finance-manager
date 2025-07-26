@@ -8,7 +8,6 @@ using FinanceManager.Domain.Configurations;
 using FinanceManager.Domain.Services.CurrentUserService;
 using FinanceManager.Domain.Services.Email;
 using FinanceManager.Domain.Services.Roles;
-using FinanceManager.Domain.Services.Users;
 using FinanceManager.Domain.Wrapper;
 using FinanceManager.Infrastructure;
 using FinanceManager.Infrastructure.Models.Authorization;

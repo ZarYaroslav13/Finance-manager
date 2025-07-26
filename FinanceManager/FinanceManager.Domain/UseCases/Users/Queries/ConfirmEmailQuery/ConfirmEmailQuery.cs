@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace FinanceManager.Domain.UseCases.Users.Queries.ConfirmEmailQuery;
 
-public class ConfirmEmailQuery : IRequest<IResult>
+public class ConfirmEmailQuery : IRequest<IResult<Guid>>
 {
     [GuidRequired]
     public Guid UserId { get; set; }

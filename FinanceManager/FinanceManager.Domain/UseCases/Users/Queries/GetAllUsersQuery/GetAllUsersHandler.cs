@@ -28,7 +28,7 @@ public class GetAllUsersHandler : BaseRequestHandler, IRequestHandler<GetAllUser
         {
             await CheckIsUserHaveAccesToResourseAsync(request);
 
-            var users = await _userManager.Users.ToListAsync();
+            var users = (await _userManager.Users.Chunk(request.PageSize).ToListAsync())[request.PageNumber];
             var result = _mapper.Map<List<UserModel>>(users);
 
             return new PaginatedResult<UserModel>(true, result, new() { "Users retrived successfully!" });

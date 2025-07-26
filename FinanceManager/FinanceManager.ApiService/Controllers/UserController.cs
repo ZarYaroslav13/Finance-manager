@@ -1,11 +1,6 @@
 ﻿using FinanceManager.ApiService.Controllers.Base;
-using FinanceManager.Application.UseCases.Users.Commands.DeleteAccountByIdCommand;
-using FinanceManager.Application.UseCases.Users.Commands.ForgotPasswordCommand;
-using FinanceManager.Application.UseCases.Users.Commands.RegisterCommand;
-using FinanceManager.Application.UseCases.Users.Commands.ResetPasswordCommand;
-using FinanceManager.Application.UseCases.Users.Queries.ConfirmEmailQuery;
-using FinanceManager.Application.UseCases.Users.Queries.GetAllUsersQuery;
-using FinanceManager.Application.UseCases.Users.Queries.GetUserQuery;
+using FinanceManager.Application.Models.Requests.Users.Commands;
+using FinanceManager.Application.Services.Users;
 using FinanceManager.Domain.Authorization;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -15,28 +10,29 @@ namespace FinanceManager.ApiService.Controllers;
 
 public class UserController : BaseController
 {
-    public UserController(IMediator mediator) : base(mediator)
+    private readonly IUserService _userService;
+    public UserController(IUserService userService, IMediator mediator) : base(mediator)
     {
+        _userService = userService ?? throw new ArgumentNullException(nameof(userService));
     }
 
     [Authorize(Policy = PolicyManager.AdminPolicy)]
     [HttpGet]
-    public async Task<IActionResult> GetAllAsync(int pageNumber, int take)
+    public async Task<IActionResult> GetAllAsync(int pageNumber, int pageSize)
     {
-        return await SendRequestAsync(new GetAllUsersQuery
-        {
-            PageNumber = pageNumber,
-            Take = take
-        });
+        return await ExecuteRequet(async () => await _userService.GetAllAsync(pageNumber, pageSize));
     }
 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetAccount(Guid id)
     {
-        return await SendRequestAsync(new GetUserQuery()
-        {
-            Id = id
-        });
+        return await ExecuteRequet(async () => await _userService.GetAsync(id));
+    }
+
+    [HttpGet("{id}/roles")]
+    public async Task<IActionResult> GetUserRoles(Guid id)
+    {
+        return await ExecuteRequet(async () => await _userService.GetUserRolesAsync(id));
     }
 
     /// <summary>
@@ -48,11 +44,7 @@ public class UserController : BaseController
     [AllowAnonymous]
     public async Task<IActionResult> ConfirmEmailAsync([FromQuery] Guid userId, [FromQuery] string code)
     {
-        return await SendRequestAsync(new ConfirmEmailQuery
-        {
-            UserId = userId,
-            Code = code
-        });
+        return await ExecuteRequet(async () => await _userService.ConfirmEmailAsync(userId, code));
     }
 
     /// <summary>
@@ -62,9 +54,9 @@ public class UserController : BaseController
     /// <returns>Status 200 OK</returns>
     [AllowAnonymous]
     [HttpPost]
-    public async Task<IActionResult> RegisterAsync([FromBody] RegisterCommand command)
+    public async Task<IActionResult> RegisterAsync([FromBody] RegisterRequest request)
     {
-        return await SendRequestAsync(command);
+        return await ExecuteRequet(async () => await _userService.RegisterAsync(request));
     }
 
     /// <summary>
@@ -74,9 +66,9 @@ public class UserController : BaseController
     /// <returns>Status 200 OK</returns>
     [HttpPost("forgot-password")]
     [AllowAnonymous]
-    public async Task<IActionResult> ForgotPasswordAsync([FromBody] ForgotPasswordCommand command)
+    public async Task<IActionResult> ForgotPasswordAsync([FromBody] ForgotPasswordRequest request)
     {
-        return await SendRequestAsync(command);
+        return await ExecuteRequet(async () => await _userService.ForgotPasswordAsync(request));
     }
 
     /// <summary>
@@ -86,17 +78,21 @@ public class UserController : BaseController
     /// <returns>Status 200 OK</returns>
     [HttpPost("reset-password")]
     [AllowAnonymous]
-    public async Task<IActionResult> ResetPasswordAsync(ResetPasswordCommand command)
+    public async Task<IActionResult> ResetPasswordAsync([FromBody] ResetPasswordRequest request)
     {
-        return await SendRequestAsync(command);
+        return await ExecuteRequet(async () => await _userService.ResetPasswordAsync(request));
+    }
+
+    [Authorize(Policy = PolicyManager.AdminPolicy)]
+    [HttpPatch]
+    public async Task<IActionResult> UpdateUserRoles([FromBody] UpdateUserRolesRequest request)
+    {
+        return await ExecuteRequet(async () => await _userService.UpdateUserRolesAsync(request));
     }
 
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteUserById(Guid id)
     {
-        return await SendRequestAsync(new DeleteUserCommand()
-        {
-            Id = id
-        });
+        return await ExecuteRequet(async () => await _userService.DeleteUserAsync(id));
     }
 }

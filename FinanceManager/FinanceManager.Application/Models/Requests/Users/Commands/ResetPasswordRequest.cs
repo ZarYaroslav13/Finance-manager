@@ -1,10 +1,8 @@
-﻿using FinanceManager.Domain.Wrapper;
-using MediatR;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace FinanceManager.Application.UseCases.Users.Commands.ResetPasswordCommand;
+namespace FinanceManager.Application.Models.Requests.Users.Commands;
 
-public class ResetPasswordCommand : IRequest<IResult>
+public class ResetPasswordRequest
 {
     [Required]
     [EmailAddress]

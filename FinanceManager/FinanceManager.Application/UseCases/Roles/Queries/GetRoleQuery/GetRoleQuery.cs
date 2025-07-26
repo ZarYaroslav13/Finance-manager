@@ -1,5 +1,4 @@
-﻿using FinanceManager.Application.DataAnnotations.Attributes;
-using FinanceManager.Application.Models;
+﻿using FinanceManager.Application.Models;
 using FinanceManager.Domain.Wrapper;
 using MediatR;
 

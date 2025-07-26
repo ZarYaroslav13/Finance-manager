@@ -12,7 +12,7 @@ using System.Text;
 
 namespace FinanceManager.Domain.UseCases.Users.Queries.ConfirmEmailQuery;
 
-public class ConfirmEmailHandler : BaseRequestHandler, IRequestHandler<ConfirmEmailQuery, IResult>
+public class ConfirmEmailHandler : BaseRequestHandler, IRequestHandler<ConfirmEmailQuery, IResult<Guid>>
 {
     private readonly UserManager<FinanceManagerUser> _userManager;
 
@@ -22,7 +22,7 @@ public class ConfirmEmailHandler : BaseRequestHandler, IRequestHandler<ConfirmEm
         _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
     }
 
-    public async Task<IResult> Handle(ConfirmEmailQuery request, CancellationToken cancellationToken)
+    public async Task<IResult<Guid>> Handle(ConfirmEmailQuery request, CancellationToken cancellationToken)
     {
         return await HandleAsync(async () =>
         {

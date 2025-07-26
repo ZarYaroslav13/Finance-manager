@@ -1,10 +1,8 @@
-﻿using FinanceManager.Domain.Wrapper;
-using MediatR;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace FinanceManager.Application.UseCases.Users.Commands.RegisterCommand;
+namespace FinanceManager.Application.Models.Requests.Users.Commands;
 
-public class RegisterCommand : IRequest<IResult>
+public class RegisterRequest
 {
     [Required]
     public string LastName { get; set; }

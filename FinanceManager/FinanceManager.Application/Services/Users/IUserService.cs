@@ -1,26 +1,27 @@
-﻿using FinanceManager.Domain.Models;
-using FinanceManager.Domain.Modelsl;
+﻿using FinanceManager.Application.Models;
+using FinanceManager.Application.Models.Base;
+using FinanceManager.Application.Models.Requests.Users.Commands;
 using FinanceManager.Domain.Wrapper;
 
-namespace FinanceManager.Domain.Services.Users;
+namespace FinanceManager.Application.Services.Users;
 
 public interface IUserService
 {
-    Task<Result<List<UserModel>>> GetAllAsync();
+    Task<PaginatedResult<UserDTO>> GetAllAsync(int pageNumber, int pageSize);
 
-    Task<Result<UserModel>> GetAsync(Guid userId);
+    Task<Result<UserDTO>> GetAsync(Guid userId);
 
-    Task<IResult> RegisterAsync(UserModel model, string password);
+    Task<IResult> RegisterAsync(RegisterRequest request);
 
-    Task<IResult<List<UserRoleModel>>> GetRolesAsync(Guid id);
+    Task<IResult<List<RoleDTO>>> GetUserRolesAsync(Guid id);
 
-    Task<IResult> UpdateRolesAsync(Guid id, List<UserRoleModel> newRroles);
+    Task<IResult> UpdateUserRolesAsync(UpdateUserRolesRequest request);
 
     Task<IResult<Guid>> ConfirmEmailAsync(Guid userId, string code);
 
-    Task<IResult> ForgotPasswordAsync(string email);
+    Task<IResult> ForgotPasswordAsync(ForgotPasswordRequest request);
 
-    Task<IResult> ResetPasswordAsync(string email, string password, string token);
+    Task<IResult> ResetPasswordAsync(ResetPasswordRequest request);
 
     Task<IResult> DeleteUserAsync(Guid id);
 }

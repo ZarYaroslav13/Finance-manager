@@ -1,8 +1,4 @@
 ﻿using FinanceManager.Application.Models.Base;
-using FinanceManager.Application.UseCases.Users.Commands.ForgotPasswordCommand;
-using FinanceManager.Application.UseCases.Users.Commands.RegisterCommand;
-using FinanceManager.Application.UseCases.Users.Commands.ResetPasswordCommand;
-using FinanceManager.Application.UseCases.Users.Queries.GetAllUsersQuery;
 using FinanceManager.Domain.Wrapper;
 
 namespace FinanceManager.Web.Services.APIServices.Managers.IUserManager;

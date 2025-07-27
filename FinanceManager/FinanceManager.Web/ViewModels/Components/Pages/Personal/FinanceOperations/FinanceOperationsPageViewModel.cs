@@ -182,8 +182,13 @@ public class FinanceOperationsPageViewModel : BaseViewModel<FinanceOperationsPag
 
         foreach (var wallet in Wallets)
         {
-            FinancialOperationsTypes.AddRange((await _financeOperationTypeManager.GetAllTypesOfWalletAsync(wallet.Id)).Data);
             var operations = await _financeOperationsManager.GetAllOperationsOfWalletAsync(new() { WalletId = wallet.Id });
+            operations.Data.ForEach(d => d.Type.WalletName = wallet.Name);
+
+            var types = operations.Data.GroupBy(op => op.Type).Select(pair => pair.Key).ToList();
+
+            FinancialOperationsTypes.AddRange(types);
+
             operations.Data.ForEach(d => d.Type.WalletName = wallet.Name);
             _tableData.AddRange(operations.Data);
         }

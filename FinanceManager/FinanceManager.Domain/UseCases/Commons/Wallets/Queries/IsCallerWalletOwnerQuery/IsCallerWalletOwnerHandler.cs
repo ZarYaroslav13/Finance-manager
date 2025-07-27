@@ -25,7 +25,7 @@ public class IsCallerWalletOwnerHandler : BaseRequestHandler, IRequestHandler<Is
         {
             var wallet = await _repository.GetByIdAsync(request.WalletId);
 
-            return Result<bool>.Success(wallet.UserId == request.WalletId);
+            return Result<bool>.Success(wallet.UserId.ToString() == _currentUserService.UserId);
         });
     }
 }

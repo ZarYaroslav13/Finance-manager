@@ -15,7 +15,7 @@ public class FinanceOperationController : BaseController
         _financeService = financeService ?? throw new ArgumentNullException(nameof(financeService));
     }
 
-    [HttpGet("wallets/{walletId}")]
+    [HttpGet("wallets/{request.WalletId}")]
     public async Task<IActionResult> GetAllOfWalletAsync(GetAllOperationsOfWalletRequest request)
     {
         return await ExecuteRequet(async () => await _financeService.GetAllFinanceOperationOfWalletAsync(request));

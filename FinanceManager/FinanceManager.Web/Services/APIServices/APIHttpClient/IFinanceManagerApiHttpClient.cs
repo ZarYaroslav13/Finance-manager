@@ -113,10 +113,10 @@ public interface IFinanceManagerApiHttpClient
 
     #region FinanceOperations
     [Get(APIEndpoints.FinanceOperation.GetAllByWallet)]
-    public Task<Result<List<FinanceOperationDTO>>> GetAllOfWalletAsync(GetAllOperationsOfWalletRequest request, CancellationToken cancellationToken = default);
+    public Task<Result<List<FinanceOperationDTO>>> GetAllOfWalletAsync([Body] GetAllOperationsOfWalletRequest request, CancellationToken cancellationToken = default);
 
     [Get(APIEndpoints.FinanceOperation.GetAllByType)]
-    public Task<Result<List<FinanceOperationDTO>>> GetAllFinanceOperationsOfTypeAsync(GetAllOperationsOfTypeRequest request, CancellationToken cancellationToken = default);
+    public Task<Result<List<FinanceOperationDTO>>> GetAllFinanceOperationsOfTypeAsync([Body] GetAllOperationsOfTypeRequest request, CancellationToken cancellationToken = default);
 
     [Get(APIEndpoints.FinanceOperation.GetOperation)]
     public Task<Result<FinanceOperationDTO>> GetFinanceOperationAsync(Guid id, CancellationToken cancellationToken = default);

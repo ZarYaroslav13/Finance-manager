@@ -141,11 +141,11 @@ public static class APIEndpoints
         public const string FullControllerUrl = _baseUrl + ControllerUrl;
 
         /// <summary>
-        /// method where are you using that endpoint must take id with name walletId
+        /// method where are you using that endpoint must take id with name userId
         /// </summary>
         public const string GetAllOfUser = ControllerUrl + "/users/{userId}";
         /// <summary>
-        /// method where are you using that endpoint must take id with name walletId
+        /// method where are you using that endpoint must take id with name userId
         /// </summary>
         public const string GetAllOfUserFull = FullControllerUrl + "/users/{userId}";
 
@@ -185,20 +185,20 @@ public static class APIEndpoints
         /// <summary>
         /// method where are you using that endpoint must take id with name walletId
         /// </summary>
-        public const string GetAllByWallet = BaseControllerUrl + "/wallets/{walletId}";
+        public const string GetAllByWallet = BaseControllerUrl + "/wallets/{request.WalletId}";
         /// <summary>
         /// method where are you using that endpoint must take id with name walletId
         /// </summary>
-        public const string GetAllByWalletFull = FullBaseControllerUrl + "/wallets/{walletId}";
+        public const string GetAllByWalletFull = FullBaseControllerUrl + "/wallets/{request.WalletId}";
 
         /// <summary>
         /// method where are you using that endpoint must take id with name typeId
         /// </summary>
-        public const string GetAllByType = BaseControllerUrl + "/types/{typeId}";
+        public const string GetAllByType = BaseControllerUrl + "/types/{request.TypeId}";
         /// <summary>
         /// method where are you using that endpoint must take id with name typeId
         /// </summary>
-        public const string GetAllByTypeFull = FullBaseControllerUrl + "/types/{typeId}";
+        public const string GetAllByTypeFull = FullBaseControllerUrl + "/types/{request.TypeId}";
 
         /// <summary>
         /// method where are you using that endpoint must take id with name id

@@ -1,4 +1,11 @@
 ﻿using FinanceManager.Application.Services;
+using FinanceManager.Application.Services.Accounts;
+using FinanceManager.Application.Services.Finances;
+using FinanceManager.Application.Services.Preferences;
+using FinanceManager.Application.Services.Roles;
+using FinanceManager.Application.Services.Token;
+using FinanceManager.Application.Services.Users;
+using FinanceManager.Application.Services.Wallets;
 using FinanceManager.Domain.Authorization;
 using FinanceManager.Domain.Configurations;
 using FinanceManager.Domain.Services.CurrentUserService;
@@ -93,23 +100,16 @@ public static class AddServicesConfigurationHostBuilderExtensions
 
     private static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
-        var applicationServicesTypes = typeof(BaseService);
-
-        var applicationServices = applicationServicesTypes.Assembly
-            .GetExportedTypes()
-            .Where(t => t.IsClass && !t.IsAbstract)
-            .Select(t => new
-            {
-                Service = t.GetInterface($"I{t.Name}"),
-                Implementation = t
-            })
-            .Where(t => t != null);
-
-        foreach (var service in applicationServices)
-        {
-            if (applicationServicesTypes.IsAssignableFrom(service.Service))
-                services.AddTransient(service.Service, service.Implementation);
-        }
+        services.AddScoped<ICurrentUserService, CurrentUserService>();
+        services.AddScoped<IFinanceReportCreator, FinanceReportCreator>();
+        services.AddScoped<IEmailService, SMTPEmailService>();
+        services.AddScoped<IUserService, UserService>();
+        services.AddScoped<IRoleService, RoleService>();
+        services.AddScoped<IAccountService, AccountService>();
+        services.AddScoped<IWalletService, WalletService>();
+        services.AddScoped<IFinanceService, FinanceService>();
+        services.AddScoped<ITokenService, TokenService>();
+        services.AddScoped<IPreferencesService, PreferencesService>();
 
         return services;
     }

@@ -1,6 +1,5 @@
 ﻿using Blazored.LocalStorage;
 using CsvHelper.Configuration;
-using FinanceManager.Application.UseCases.Commons.Mapping;
 using FinanceManager.Domain.API;
 using FinanceManager.Domain.Authorization;
 using FinanceManager.Domain.Services.CurrentUserService;

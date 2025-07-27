@@ -1,9 +1,6 @@
 ﻿using FinanceManager.ApiService.Controllers.Base;
 using FinanceManager.Application.Models.Requests.Tokens.Commands;
 using FinanceManager.Application.Services.Token;
-using FinanceManager.Domain.UseCases.Tokens.Commands.GetTokenCommand;
-using FinanceManager.Domain.UseCases.Tokens.Commands.RefreshTokenCommand;
-using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

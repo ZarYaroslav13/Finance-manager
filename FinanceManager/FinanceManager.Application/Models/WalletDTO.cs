@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace FinanceManager.Application.Models;
+﻿namespace FinanceManager.Application.Models;
 
 public class WalletDTO : Base.ModelDTO
 {

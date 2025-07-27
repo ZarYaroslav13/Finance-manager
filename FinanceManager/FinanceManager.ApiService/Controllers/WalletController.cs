@@ -1,9 +1,6 @@
 ﻿using FinanceManager.ApiService.Controllers.Base;
-using FinanceManager.Application.Models;
 using FinanceManager.Application.Models.Requests.Wallets.Commands;
 using FinanceManager.Application.Services.Wallets;
-using FinanceManager.Domain.UseCases.Wallets.Commands.CreateWalletCommand;
-using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinanceManager.ApiService.Controllers;

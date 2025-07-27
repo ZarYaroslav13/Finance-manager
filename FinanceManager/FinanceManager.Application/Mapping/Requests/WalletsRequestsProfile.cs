@@ -1,0 +1,15 @@
+﻿using AutoMapper;
+using FinanceManager.Application.Models.Requests.Wallets.Commands;
+using FinanceManager.Domain.UseCases.Wallets.Commands.CreateWalletCommand;
+using FinanceManager.Domain.UseCases.Wallets.Commands.UpdateWalletCommand;
+
+namespace FinanceManager.Application.Mapping.Requests;
+
+public class WalletsRequestsProfile : Profile
+{
+    public WalletsRequestsProfile()
+    {
+        CreateMap<CreateWalletRequest, CreateWalletCommand>();
+        CreateMap<UpdateWalletRequest, UpdateWalletCommand>();
+    }
+}

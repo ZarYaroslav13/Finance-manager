@@ -1,6 +1,5 @@
 ﻿using FinanceManager.Application.Models;
 using FinanceManager.Application.Models.Requests.Wallets.Commands;
-using FinanceManager.Domain.UseCases.Wallets.Commands.CreateWalletCommand;
 using FinanceManager.Domain.Wrapper;
 
 namespace FinanceManager.Application.Services.Wallets;

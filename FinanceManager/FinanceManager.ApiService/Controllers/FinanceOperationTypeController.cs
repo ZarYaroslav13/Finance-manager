@@ -1,7 +1,6 @@
 ﻿using FinanceManager.ApiService.Controllers.Base;
 using FinanceManager.Application.Models.Requests.FinanceOperationTypes.Commands;
 using FinanceManager.Application.Services.Finances;
-using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinanceManager.ApiService.Controllers;

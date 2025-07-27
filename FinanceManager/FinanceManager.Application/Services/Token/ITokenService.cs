@@ -1,7 +1,5 @@
 ﻿using FinanceManager.Application.Models;
 using FinanceManager.Application.Models.Requests.Tokens.Commands;
-using FinanceManager.Domain.UseCases.Tokens.Commands.GetTokenCommand;
-using FinanceManager.Domain.UseCases.Tokens.Commands.RefreshTokenCommand;
 using FinanceManager.Domain.Wrapper;
 
 namespace FinanceManager.Application.Services.Token;

@@ -1,9 +1,6 @@
 ﻿using FinanceManager.ApiService.Controllers.Base;
 using FinanceManager.Application.Models.Requests.Account.Commands;
 using FinanceManager.Application.Services.Accounts;
-using FinanceManager.Domain.UseCases.Accounts.Commands.Commands.UpdateAccountCommand;
-using FinanceManager.Domain.UseCases.Accounts.Commands.Commands.UpdatePasswordAccountCommand;
-using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinanceManager.ApiService.Controllers;

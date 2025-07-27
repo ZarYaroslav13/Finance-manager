@@ -3,7 +3,6 @@ using FinanceManager.Application.Models.Requests.Roles.Commands;
 using FinanceManager.Application.Models.Requests.Users.Commands;
 using FinanceManager.Application.Services.Roles;
 using FinanceManager.Domain.Authorization;
-using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

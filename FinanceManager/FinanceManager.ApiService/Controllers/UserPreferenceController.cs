@@ -1,8 +1,6 @@
 ﻿using FinanceManager.ApiService.Controllers.Base;
 using FinanceManager.Application.Models.Requests.UserPreferences.Commands;
 using FinanceManager.Application.Services.Preferences;
-using FinanceManager.Domain.UseCases.Preferences.Command.UpdateUserPreferencesCommand;
-using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinanceManager.ApiService.Controllers;

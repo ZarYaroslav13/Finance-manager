@@ -1,6 +1,5 @@
 ﻿using FinanceManager.Application.Models;
 using FinanceManager.Application.Models.Requests.Tokens.Commands;
-using FinanceManager.Domain.UseCases.Commons.Tokens.Commands.GetTokenCommand;
 using FinanceManager.Domain.Wrapper;
 using System.Security.Claims;
 

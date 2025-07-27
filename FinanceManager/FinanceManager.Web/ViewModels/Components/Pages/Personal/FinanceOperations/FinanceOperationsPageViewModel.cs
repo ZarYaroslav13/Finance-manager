@@ -1,4 +1,5 @@
 ﻿using FinanceManager.Application.Models;
+using FinanceManager.Application.Models.Requests.FinanceOperations.Commands;
 using FinanceManager.Web.Components.Pages.Personal.FinanceOperations;
 using FinanceManager.Web.Extentions;
 using FinanceManager.Web.Services;
@@ -182,7 +183,7 @@ public class FinanceOperationsPageViewModel : BaseViewModel<FinanceOperationsPag
         foreach (var wallet in Wallets)
         {
             FinancialOperationsTypes.AddRange((await _financeOperationTypeManager.GetAllTypesOfWalletAsync(wallet.Id)).Data);
-            var operations = await _financeOperationsManager.GetAllOperationsOfWalletAsync(wallet.Id);
+            var operations = await _financeOperationsManager.GetAllOperationsOfWalletAsync(new() { WalletId = wallet.Id });
             operations.Data.ForEach(d => d.Type.WalletName = wallet.Name);
             _tableData.AddRange(operations.Data);
         }
@@ -274,7 +275,7 @@ public class FinanceOperationsPageViewModel : BaseViewModel<FinanceOperationsPag
         operation.Type = NewType;
 
         var result = await _financeOperationsManager.UpdateOperationAsync(
-                        _mapper.Map<UpdateFinanceOperationCommand>(operation));
+                        _mapper.Map<UpdateFinanceOperationRequest>(operation));
 
         if (!result.Succeeded)
         {

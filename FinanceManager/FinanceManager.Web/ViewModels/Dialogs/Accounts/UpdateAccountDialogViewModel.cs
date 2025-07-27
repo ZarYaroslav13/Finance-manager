@@ -1,4 +1,4 @@
-﻿using FinanceManager.Domain.UseCases.Commons.Accounts.Commands.UpdateAccountCommand;
+﻿using FinanceManager.Application.Models.Requests.Account.Commands;
 using FinanceManager.Web.Extentions;
 using FinanceManager.Web.Services;
 using FinanceManager.Web.Services.APIServices.Managers.IAccountManager;
@@ -11,8 +11,8 @@ namespace FinanceManager.Web.ViewModels.Dialogs.Accounts;
 
 public class UpdateAccountDialogViewModel : BaseViewModel<UpdateAccountDialog>
 {
-    private UpdateAccountCommand _updateModel = new();
-    public UpdateAccountCommand UpdateModel
+    private UpdateAccountRequest _updateModel = new();
+    public UpdateAccountRequest UpdateModel
     {
         get => _updateModel;
         set { _updateModel = value; EditContext = new(_updateModel); }

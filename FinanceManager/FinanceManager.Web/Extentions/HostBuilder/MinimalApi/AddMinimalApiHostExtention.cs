@@ -1,5 +1,5 @@
-﻿using FinanceManager.Application.Services.Token;
-using FinanceManager.Domain.UseCases.Commons.Tokens.Commands.GetTokenCommand;
+﻿using FinanceManager.Application.Models.Requests.Tokens.Commands;
+using FinanceManager.Application.Services.Token;
 using FinanceManager.Domain.Wrapper;
 using FinanceManager.Web.Services.APIServices.Managers.TokenManager;
 using FinanceManager.Web.Services.Autorization;
@@ -40,7 +40,7 @@ public static class AddMinimalApiHostExtention
         });
 
         app.MapPost(MinimalApiEndpoints.Authentication.Login,
-            async (GetTokenCommand model,
+            async (GetTokenRequest model,
                 FinanceManagerStateProvider stateProvider,
                 ITokenManager tokenManager,
                 HttpContext context,

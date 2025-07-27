@@ -1,6 +1,5 @@
 ﻿using FinanceManager.ApiService.Controllers.Base;
 using FinanceManager.Application.Models.Requests.Roles.Commands;
-using FinanceManager.Application.Models.Requests.Users.Commands;
 using FinanceManager.Application.Services.Roles;
 using FinanceManager.Domain.Authorization;
 using Microsoft.AspNetCore.Authorization;
@@ -54,7 +53,7 @@ public class RoleController : BaseController
     /// <param name="command"></param>
     /// <returns>Status 200 OK</returns>
     [HttpPut]
-    public async Task<IActionResult> Update([FromBody] UpdateUserRolesRequest request)
+    public async Task<IActionResult> Update([FromBody] UpdateRoleRequest request)
     {
         return await ExecuteRequet(async () => await _roleService.UpdateAsync(request));
     }

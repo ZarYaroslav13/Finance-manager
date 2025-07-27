@@ -1,4 +1,4 @@
-﻿using FinanceManager.Domain.UseCases.Commons.Wallets.Commands.CreateWalletCommand;
+﻿using FinanceManager.Application.Models.Requests.Wallets.Commands;
 using FinanceManager.Web.Extentions;
 using FinanceManager.Web.Services;
 using FinanceManager.Web.Services.APIServices.Managers.WalletManager;
@@ -10,8 +10,8 @@ namespace FinanceManager.Web.ViewModels.Dialogs.Wallets;
 
 public class AddWalletDialogViewModel : BaseViewModel<AddWalletDialog>
 {
-    private CreateWalletCommand _createModel = new();
-    public CreateWalletCommand CreationModel
+    private CreateWalletRequest _createModel = new();
+    public CreateWalletRequest CreationModel
     {
         get => _createModel;
         set { _createModel = value; EditContext = new(_createModel); }

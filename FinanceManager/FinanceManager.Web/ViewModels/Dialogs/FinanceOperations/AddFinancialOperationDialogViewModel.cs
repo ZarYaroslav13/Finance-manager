@@ -1,4 +1,5 @@
 ﻿using FinanceManager.Application.Models;
+using FinanceManager.Application.Models.Requests.FinanceOperations.Commands;
 using FinanceManager.Web.Extentions;
 using FinanceManager.Web.Services;
 using FinanceManager.Web.Services.APIServices.Managers.FinanceOperations;
@@ -11,8 +12,8 @@ namespace FinanceManager.Web.ViewModels.Dialogs.FinanceOperations;
 
 public class AddFinancialOperationDialogViewModel : BaseViewModel<AddFinancialOperationDialog>
 {
-    private AddFinanceOperationCommand _createModel = new();
-    public AddFinanceOperationCommand CreationModel
+    private AddFinanceOperationRequest _createModel = new();
+    public AddFinanceOperationRequest CreationModel
     {
         get => _createModel;
         set { _createModel = value; EditContext = new(_createModel); WalletName = _types.First(t => t.Id == _createModel.TypeId).WalletName; }

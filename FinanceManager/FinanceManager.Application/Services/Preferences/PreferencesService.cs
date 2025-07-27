@@ -2,7 +2,7 @@
 using FinanceManager.Application.Models;
 using FinanceManager.Application.Models.Requests.UserPreferences.Commands;
 using FinanceManager.Domain.UseCases.Commons.Preferences.Command.UpdateUserPreferencesCommand;
-using FinanceManager.Domain.UseCases.Preferences.Query.GetUserPreferencesQuery;
+using FinanceManager.Domain.UseCases.Commons.Preferences.Query.GetUserPreferencesQuery;
 using FinanceManager.Domain.Wrapper;
 using MediatR;
 

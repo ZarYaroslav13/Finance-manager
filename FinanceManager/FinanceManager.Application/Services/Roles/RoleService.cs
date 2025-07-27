@@ -2,10 +2,10 @@
 using FinanceManager.Application.Models;
 using FinanceManager.Application.Models.Requests.Roles.Commands;
 using FinanceManager.Domain.UseCases.Commons.Roles.Commands.CreateRoleCommand;
+using FinanceManager.Domain.UseCases.Commons.Roles.Commands.DeleteRoleCommand;
 using FinanceManager.Domain.UseCases.Commons.Roles.Commands.UpdateRoleCommand;
-using FinanceManager.Domain.UseCases.Roles.Commands.DeleteRoleCommand;
-using FinanceManager.Domain.UseCases.Roles.Queries.GetAllRolesQuery;
-using FinanceManager.Domain.UseCases.Roles.Queries.GetRoleQuery;
+using FinanceManager.Domain.UseCases.Commons.Roles.Queries.GetAllRolesQuery;
+using FinanceManager.Domain.UseCases.Commons.Roles.Queries.GetRoleQuery;
 using FinanceManager.Domain.Wrapper;
 using MediatR;
 

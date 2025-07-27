@@ -1,4 +1,5 @@
-﻿using FinanceManager.Web.Components.Pages.Authentication;
+﻿using FinanceManager.Application.Models.Requests.Users.Commands;
+using FinanceManager.Web.Components.Pages.Authentication;
 using FinanceManager.Web.Pages;
 using FinanceManager.Web.Services;
 using FinanceManager.Web.Services.APIServices.Managers.IUserManager;
@@ -10,7 +11,7 @@ namespace FinanceManager.Web.ViewModels.Components.Pages.Authorization;
 
 public class RegisterViewModel : BaseViewModel<Register>
 {
-    public RegisterCommand RegistrationModel { get; set; } = new();
+    public RegisterRequest RegistrationModel { get; set; } = new();
 
     public EditContext EditContext { get; set; }
 

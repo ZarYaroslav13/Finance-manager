@@ -2,11 +2,11 @@
 using FinanceManager.Application.Models;
 using FinanceManager.Application.Models.Requests.Wallets.Commands;
 using FinanceManager.Domain.UseCases.Commons.Wallets.Commands.CreateWalletCommand;
+using FinanceManager.Domain.UseCases.Commons.Wallets.Commands.DeleteWalletCommand;
 using FinanceManager.Domain.UseCases.Commons.Wallets.Commands.UpdateWalletCommand;
-using FinanceManager.Domain.UseCases.Wallets.Commands.DeleteWalletCommand;
-using FinanceManager.Domain.UseCases.Wallets.Queries.GetByIdWalletQuery;
-using FinanceManager.Domain.UseCases.Wallets.Queries.GetWalletsQuery;
-using FinanceManager.Domain.UseCases.Wallets.Queries.IsCallerWalletOwnerQuery;
+using FinanceManager.Domain.UseCases.Commons.Wallets.Queries.GetByIdWalletQuery;
+using FinanceManager.Domain.UseCases.Commons.Wallets.Queries.GetWalletsQuery;
+using FinanceManager.Domain.UseCases.Commons.Wallets.Queries.IsCallerWalletOwnerQuery;
 using FinanceManager.Domain.Wrapper;
 using MediatR;
 

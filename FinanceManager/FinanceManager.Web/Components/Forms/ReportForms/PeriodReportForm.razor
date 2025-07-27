@@ -1,5 +1,5 @@
 ﻿@using FinanceManager.Application.Models
-@using FinanceManager.Application.UseCases.FinanceReports.Commands.CreatePeriodReportCommand
+@using FinanceManager.Application.Models.Requests.FinanceReports.Commands
 @inject IStringLocalizer<PeriodReportForm> Localizer
 
 
@@ -47,7 +47,7 @@
     public List<WalletDTO> Wallets { get; set; } = new();
 
     [Parameter]
-    public CreatePeriodReportCommand Model { get; set; } = new();
+    public CreatePeriodReportRequest Model { get; set; } = new();
 
     [Parameter]
     public Func<Task> SubmitMethod { get; set; }

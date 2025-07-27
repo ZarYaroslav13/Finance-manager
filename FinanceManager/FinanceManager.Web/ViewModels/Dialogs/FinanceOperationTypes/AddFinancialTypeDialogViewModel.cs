@@ -1,4 +1,5 @@
 ﻿using FinanceManager.Application.Models;
+using FinanceManager.Application.Models.Requests.FinanceOperationTypes.Commands;
 using FinanceManager.Web.Extentions;
 using FinanceManager.Web.Services;
 using FinanceManager.Web.Services.APIServices.Managers.FinanceOperationsType;
@@ -11,8 +12,8 @@ namespace FinanceManager.Web.ViewModels.Dialogs.FinanceOperationTypes;
 
 public class AddFinancialTypeDialogViewModel : BaseViewModel<AddFinancialTypeDialog>
 {
-    private AddFinanceOperationTypeCommand _createModel = new();
-    public AddFinanceOperationTypeCommand CreationModel
+    private AddFinanceOperationTypeRequest _createModel = new();
+    public AddFinanceOperationTypeRequest CreationModel
     {
         get => _createModel;
         set { _createModel = value; EditContext = new(_createModel); }

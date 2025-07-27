@@ -1,5 +1,6 @@
 ﻿using ApexCharts;
 using FinanceManager.Application.Models;
+using FinanceManager.Application.Models.Requests.FinanceReports.Commands;
 using FinanceManager.Web.Components.Pages.Tools;
 using FinanceManager.Web.Extentions;
 using FinanceManager.Web.Extentions.HostBuilder.MinimalApi;
@@ -26,11 +27,11 @@ public class ReportCreatorViewModel : BaseViewModel<ReportsCreator>
     public List<WalletDTO> Wallets { get; set; } = new();
 
     #region DailyReport
-    public CreateDailyReportCommand DailyReportRequestModel { get; set; } = new();
+    public CreateDailyReportRequest DailyReportRequestModel { get; set; } = new();
     #endregion
 
     #region PeriodReport
-    public CreatePeriodReportCommand PeriodReportRequestModel { get; set; } = new();
+    public CreatePeriodReportRequest PeriodReportRequestModel { get; set; } = new();
     #endregion
 
     #region Report

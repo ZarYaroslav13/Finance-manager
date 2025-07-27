@@ -1,5 +1,5 @@
 ﻿@namespace FinanceManager.Web.Shared.Dialogs.Wallets
-@using FinanceManager.Application.UseCases.Wallets.Commands.UpdateWalletCommand
+@using FinanceManager.Application.Models.Requests.Wallets.Commands
 @attribute [Authorize]
 @inject FinanceManager.Web.ViewModels.Dialogs.Wallets.UpdateWalletDialogViewModel _viewModel;
 <MudDialog>
@@ -40,7 +40,7 @@
     [CascadingParameter] IMudDialogInstance MudDialog { get; set; }
 
     [Parameter] 
-    public UpdateWalletCommand CurrentInfo{ get => _viewModel.UpdateModel; set=> _viewModel.UpdateModel = value; }
+    public UpdateWalletRequest CurrentInfo{ get => _viewModel.UpdateModel; set=> _viewModel.UpdateModel = value; }
 
     async Task Submit()
     {

@@ -1,5 +1,6 @@
 ﻿using FinanceManager.Application.Models;
 using FinanceManager.Application.Models.Base;
+using FinanceManager.Application.Models.Requests.Account.Commands;
 using FinanceManager.Domain.UseCases.Commons.Accounts.Commands.UpdateAccountCommand;
 using FinanceManager.Web.Shared.Constants.Identity;
 using System.Globalization;
@@ -34,6 +35,15 @@ public static class IdentityExtention
         => claimsPrincipal.FindFirstValue(IdentityConstants.ExpireTime);
 
     internal static void SetUserInformatiom(this ClaimsIdentity claimsIdentity, UserDTO user)
+    {
+        claimsIdentity.RemoveUserInformation();
+
+        claimsIdentity.AddClaim(new(ClaimTypes.NameIdentifier, user.Id.ToString()));
+        claimsIdentity.AddClaim(new(ClaimTypes.Name, user.FirstName));
+        claimsIdentity.AddClaim(new(ClaimTypes.Surname, user.LastName));
+        claimsIdentity.AddClaim(new(ClaimTypes.Email, user.Email));
+    }
+    internal static void SetUserInformatiom(this ClaimsIdentity claimsIdentity, UpdateAccountRequest user)
     {
         claimsIdentity.RemoveUserInformation();
 

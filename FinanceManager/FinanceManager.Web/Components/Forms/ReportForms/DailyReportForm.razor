@@ -1,5 +1,5 @@
 ﻿@using FinanceManager.Application.Models
-@using FinanceManager.Application.UseCases.FinanceReports.Commands.CreateDailyReportCommand
+@using FinanceManager.Application.Models.Requests.FinanceReports.Commands
 @inject IStringLocalizer<DailyReportForm> Localizer
 
 <MudPaper Class="pa-4" Elevation="1">
@@ -38,7 +38,7 @@
     public List<WalletDTO> Wallets { get; set; } = new();
 
     [Parameter]
-    public CreateDailyReportCommand Model { get; set; } = new();
+    public CreateDailyReportRequest Model { get; set; } = new();
 
     [Parameter]
     public Task SubmitMethod { get; set; }

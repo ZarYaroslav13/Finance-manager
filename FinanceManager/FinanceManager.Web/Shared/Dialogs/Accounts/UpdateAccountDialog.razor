@@ -1,7 +1,5 @@
 ﻿@namespace FinanceManager.Web.Shared.Dialogs.Accounts
-@using FinanceManager.Domain.UseCases.Accounts.Commands.Commands.UpdateAccountCommand
-@using FinanceManager.Domain.UseCases.Commons.Accounts.Commands.UpdateAccountCommand
-@using FinanceManager.Domain.UseCases.Commons.Cases.Accounts.Commands.UpdateAccountCommand
+@using FinanceManager.Application.Models.Requests.Account.Commands
 @attribute [Authorize]
 @inject FinanceManager.Web.ViewModels.Dialogs.Accounts.UpdateAccountDialogViewModel _viewModel;
 <MudDialog>
@@ -45,7 +43,7 @@
     [CascadingParameter] IMudDialogInstance MudDialog { get; set; }
 
     [Parameter] 
-    public UpdateAccountCommand CurrentInfo{ get => _viewModel.UpdateModel; set=> _viewModel.UpdateModel = value; }
+    public UpdateAccountRequest CurrentInfo{ get => _viewModel.UpdateModel; set=> _viewModel.UpdateModel = value; }
 
     async Task Submit()
     {

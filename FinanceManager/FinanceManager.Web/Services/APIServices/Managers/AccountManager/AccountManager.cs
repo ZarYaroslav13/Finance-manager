@@ -1,6 +1,4 @@
 ﻿using FinanceManager.Application.Models.Requests.Account.Commands;
-using FinanceManager.Domain.UseCases.Commons.Accounts.Commands.ChangeUserPasswordCommand;
-using FinanceManager.Domain.UseCases.Commons.Accounts.Commands.UpdateAccountCommand;
 using FinanceManager.Web.Services.APIServices.APIHttpClient;
 using FinanceManager.Web.Services.Autorization;
 

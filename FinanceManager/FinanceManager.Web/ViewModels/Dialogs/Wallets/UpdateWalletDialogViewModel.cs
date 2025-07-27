@@ -1,4 +1,4 @@
-﻿using FinanceManager.Application.Models;
+﻿using FinanceManager.Application.Models.Requests.Wallets.Commands;
 using FinanceManager.Web.Services;
 using FinanceManager.Web.Services.APIServices.Managers.WalletManager;
 using FinanceManager.Web.Shared.Dialogs.Wallets;
@@ -9,8 +9,8 @@ namespace FinanceManager.Web.ViewModels.Dialogs.Wallets;
 
 public class UpdateWalletDialogViewModel : BaseViewModel<UpdateWalletDialog>
 {
-    private WalletDTO _updateModel = new();
-    public WalletDTO UpdateModel
+    private UpdateWalletRequest _updateModel = new();
+    public UpdateWalletRequest UpdateModel
     {
         get => _updateModel;
         set { _updateModel = value; EditContext = new(_updateModel); }

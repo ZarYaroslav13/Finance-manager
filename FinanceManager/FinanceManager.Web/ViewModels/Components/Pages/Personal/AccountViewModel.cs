@@ -1,5 +1,5 @@
 ﻿using FinanceManager.Application.Models.Base;
-using FinanceManager.Domain.UseCases.Commons.Accounts.Commands.UpdateAccountCommand;
+using FinanceManager.Application.Models.Requests.Account.Commands;
 using FinanceManager.Web.Components.Pages.Personal;
 using FinanceManager.Web.Extentions;
 using FinanceManager.Web.Services;
@@ -32,7 +32,7 @@ public class AccountViewModel : BaseViewModel<Account>
 
     public async Task UpdateAccount()
     {
-        var parameters = new DialogParameters<UpdateAccountDialog>() { { x => x.CurrentInfo, _mapper.Map<UpdateAccountCommand>(AccountModel) } };
+        var parameters = new DialogParameters<UpdateAccountDialog>() { { x => x.CurrentInfo, _mapper.Map<UpdateAccountRequest>(AccountModel) } };
 
         var dialog = (DialogReference)await _dialogService.ShowAsync<UpdateAccountDialog>("Update", parameters);
 

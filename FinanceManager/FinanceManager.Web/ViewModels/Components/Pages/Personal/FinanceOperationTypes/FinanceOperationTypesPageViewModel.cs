@@ -1,4 +1,5 @@
 ﻿using FinanceManager.Application.Models;
+using FinanceManager.Application.Models.Requests.FinanceOperationTypes.Commands;
 using FinanceManager.Web.Components.Pages.Personal.FinanceOperationTypes;
 using FinanceManager.Web.Extentions;
 using FinanceManager.Web.Pages;
@@ -194,7 +195,7 @@ public class FinanceOperationTypesPageViewModel : BaseViewModel<FinanceOperation
         }
 
         var result = await _financeOperationTypeManager.UpdateTypeAsync(
-                        _mapper.Map<UpdateFinanceOperationTypeCommand>(type));
+                        _mapper.Map<UpdateFinanceOperationTypeRequest>(type));
 
         if (!result.Succeeded)
         {

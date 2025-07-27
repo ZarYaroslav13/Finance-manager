@@ -31,13 +31,13 @@ public class FinanceReportCreator : BaseService, IFinanceReportCreator
 
         var wallet = await _walletService.FindWalletAsync(request.WalletId);
 
-        if (wallet.Succeeded)
+        if (!wallet.Succeeded)
             return Result<FinanceReportDTO>.Fail(wallet.Messages);
 
         var report = new FinanceReportDTO(request.WalletId, wallet.Data.Name, period);
         var allOperations = await _financeService.GetAllFinanceOperationOfWalletAsync(_mapper.Map<GetAllOperationsOfWalletInPeriodRequest>(request));
 
-        if (allOperations.Succeeded)
+        if (!allOperations.Succeeded)
             return Result<FinanceReportDTO>.Fail(allOperations.Messages);
 
         report.Operations = allOperations.Data;

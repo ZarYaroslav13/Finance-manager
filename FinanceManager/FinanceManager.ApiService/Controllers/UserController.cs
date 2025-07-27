@@ -1,5 +1,6 @@
 ﻿using FinanceManager.ApiService.Controllers.Base;
 using FinanceManager.Application.Models.Requests.Users.Commands;
+using FinanceManager.Application.Models.Requests.Users.Queries;
 using FinanceManager.Application.Services.Users;
 using FinanceManager.Domain.Authorization;
 using Microsoft.AspNetCore.Authorization;
@@ -17,9 +18,9 @@ public class UserController : BaseController
 
     [Authorize(Policy = PolicyManager.AdminPolicy)]
     [HttpGet]
-    public async Task<IActionResult> GetAllAsync(int pageNumber, int pageSize)
+    public async Task<IActionResult> GetAllAsync(GetAllUsersRequest request)
     {
-        return await ExecuteRequet(async () => await _userService.GetAllAsync(pageNumber, pageSize));
+        return await ExecuteRequet(async () => await _userService.GetAllAsync(request));
     }
 
     [HttpGet("{id}")]

@@ -1,6 +1,6 @@
 ﻿using FinanceManager.Application.Models;
-using FinanceManager.Domain.UseCases.Tokens.Commands.GetTokenCommand;
-using FinanceManager.Domain.UseCases.Tokens.Commands.RefreshTokenCommand;
+using FinanceManager.Application.Models.Requests.Tokens.Commands;
+using FinanceManager.Domain.UseCases.Commons.Tokens.Commands.GetTokenCommand;
 using FinanceManager.Domain.Wrapper;
 using FinanceManager.Web.Extentions;
 using FinanceManager.Web.Extentions.HostBuilder.MinimalApi;
@@ -38,7 +38,7 @@ public class TokenManager : BaseManager, ITokenManager
         return (await _authenticationStateProvider.GetAuthenticationStateAsync()).User;
     }
 
-    public async Task<Result<TokenDTO>> LoginAsync(GetTokenCommand model)
+    public async Task<Result<TokenDTO>> LoginAsync(GetTokenRequest model)
     {
         return await SendRequest(async () => await _apiHttpClient.GetTokenAsync(model));
     }
@@ -70,7 +70,7 @@ public class TokenManager : BaseManager, ITokenManager
         ArgumentNullException.ThrowIfNullOrWhiteSpace(token);
         ArgumentNullException.ThrowIfNullOrWhiteSpace(refreshToken);
 
-        var response = await SendRequest(async () => await _apiHttpClient.RefreshTokenAsync(new RefreshTokenCommand()
+        var response = await SendRequest(async () => await _apiHttpClient.RefreshTokenAsync(new RefreshTokenRequest()
         {
             Token = token,
             RefreshToken = refreshToken

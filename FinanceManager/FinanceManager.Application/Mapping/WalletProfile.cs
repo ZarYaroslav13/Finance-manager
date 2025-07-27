@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using FinanceManager.Application.Models;
 using FinanceManager.Domain.Models;
-using FinanceManager.Domain.UseCases.Wallets.Commands.UpdateWalletCommand;
+using FinanceManager.Domain.UseCases.Commons.Wallets.Commands.UpdateWalletCommand;
 
 namespace FinanceManager.Application.Mapping;
 

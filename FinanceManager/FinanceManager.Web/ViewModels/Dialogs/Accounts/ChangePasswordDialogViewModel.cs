@@ -1,4 +1,4 @@
-﻿using FinanceManager.Domain.UseCases.Accounts.Commands.Commands.UpdatePasswordAccountCommand;
+﻿using FinanceManager.Application.Models.Requests.Account.Commands;
 using FinanceManager.Web.Services;
 using FinanceManager.Web.Services.APIServices.Managers.IAccountManager;
 using FinanceManager.Web.Shared.Dialogs.Accounts;
@@ -9,8 +9,8 @@ namespace FinanceManager.Web.ViewModels.Dialogs.Accounts;
 
 public class ChangePasswordDialogViewModel : BaseViewModel<ChangePasswordDialog>
 {
-    private ChangeUserPasswordCommand _updateModel = new();
-    public ChangeUserPasswordCommand UpdateModel
+    private ChangeAccountPasswordRequest _updateModel = new();
+    public ChangeAccountPasswordRequest UpdateModel
     {
         get => _updateModel;
         set { _updateModel = value; EditContext = new(_updateModel); }

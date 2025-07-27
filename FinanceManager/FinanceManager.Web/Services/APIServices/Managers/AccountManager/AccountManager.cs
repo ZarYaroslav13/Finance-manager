@@ -1,5 +1,6 @@
-﻿using FinanceManager.Domain.UseCases.Accounts.Commands.Commands.UpdateAccountCommand;
-using FinanceManager.Domain.UseCases.Accounts.Commands.Commands.UpdatePasswordAccountCommand;
+﻿using FinanceManager.Application.Models.Requests.Account.Commands;
+using FinanceManager.Domain.UseCases.Commons.Accounts.Commands.ChangeUserPasswordCommand;
+using FinanceManager.Domain.UseCases.Commons.Accounts.Commands.UpdateAccountCommand;
 using FinanceManager.Web.Services.APIServices.APIHttpClient;
 using FinanceManager.Web.Services.Autorization;
 
@@ -14,14 +15,14 @@ namespace FinanceManager.Web.Services.APIServices.Managers.IAccountManager
             _stateProvider = stateProvider ?? throw new ArgumentNullException(nameof(stateProvider));
         }
 
-        public async Task<Domain.Wrapper.IResult> ChangePasswordAsync(ChangeUserPasswordCommand model)
-        {
-            return await SendRequest(async () => await _apiHttpClient.ChangeAccountPasswordAsync(model));
-        }
-
-        public async Task<Domain.Wrapper.IResult> UpdateProfileAsync(UpdateAccountCommand model)
+        public async Task<Domain.Wrapper.IResult> UpdateProfileAsync(UpdateAccountRequest model)
         {
             return await SendRequest(async () => await _apiHttpClient.UpdateAccountAsync(model));
+        }
+
+        public async Task<Domain.Wrapper.IResult> ChangePasswordAsync(ChangeAccountPasswordRequest model)
+        {
+            return await SendRequest(async () => await _apiHttpClient.ChangeAccountPasswordAsync(model));
         }
     }
 }

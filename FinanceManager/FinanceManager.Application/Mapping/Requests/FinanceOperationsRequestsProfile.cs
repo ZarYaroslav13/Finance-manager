@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
 using FinanceManager.Application.Models.Requests.FinanceOperations.Commands;
 using FinanceManager.Application.Models.Requests.FinanceOperations.Queries;
-using FinanceManager.Domain.UseCases.FinanceOperations.Commands.AddFinanceOperationCommand;
-using FinanceManager.Domain.UseCases.FinanceOperations.Commands.UpdateFinanceOperationCommand;
-using FinanceManager.Domain.UseCases.FinanceOperations.Queries.GetAllOperationsOfTypeQuery;
-using FinanceManager.Domain.UseCases.FinanceOperations.Queries.GetAllOperationsOfWalletInPeriodQuery;
-using FinanceManager.Domain.UseCases.FinanceOperations.Queries.GetAllOperationsOfWalletQuery;
+using FinanceManager.Domain.UseCases.Commons.FinanceOperations.Commands.AddFinanceOperationCommand;
+using FinanceManager.Domain.UseCases.Commons.FinanceOperations.Commands.UpdateFinanceOperationCommand;
+using FinanceManager.Domain.UseCases.Commons.FinanceOperations.Queries.GetAllOperationsOfTypeQuery;
+using FinanceManager.Domain.UseCases.Commons.FinanceOperations.Queries.GetAllOperationsOfWalletInPeriodQuery;
+using FinanceManager.Domain.UseCases.Commons.FinanceOperations.Queries.GetAllOperationsOfWalletQuery;
 
 namespace FinanceManager.Application.Mapping.Requests;
 

@@ -21,7 +21,7 @@ public class AccountController : BaseController
     }
 
     [HttpPatch("change-password")]
-    public async Task<IActionResult> ChangePasswordAsync([FromBody] ChangeUserPasswordRequest request)
+    public async Task<IActionResult> ChangePasswordAsync([FromBody] ChangeAccountPasswordRequest request)
     {
         return await ExecuteRequet(async () => await _accountService.ChangePasswordAsync(request));
     }

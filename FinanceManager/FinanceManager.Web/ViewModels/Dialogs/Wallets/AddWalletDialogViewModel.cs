@@ -1,4 +1,4 @@
-﻿using FinanceManager.Domain.UseCases.Wallets.Commands.CreateWalletCommand;
+﻿using FinanceManager.Domain.UseCases.Commons.Wallets.Commands.CreateWalletCommand;
 using FinanceManager.Web.Extentions;
 using FinanceManager.Web.Services;
 using FinanceManager.Web.Services.APIServices.Managers.WalletManager;

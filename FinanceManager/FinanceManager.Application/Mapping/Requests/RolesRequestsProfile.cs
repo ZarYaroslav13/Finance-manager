@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using FinanceManager.Application.Models.Requests.Roles.Commands;
-using FinanceManager.Domain.UseCases.Roles.Commands.CreateRoleCommand;
-using FinanceManager.Domain.UseCases.Roles.Commands.UpdateRoleCommand;
+using FinanceManager.Domain.UseCases.Commons.Roles.Commands.CreateRoleCommand;
+using FinanceManager.Domain.UseCases.Commons.Roles.Commands.UpdateRoleCommand;
 
 namespace FinanceManager.Application.Mapping.Requests;
 

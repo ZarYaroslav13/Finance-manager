@@ -1,4 +1,6 @@
 ﻿using FinanceManager.Application.Models;
+using FinanceManager.Application.Models.Requests.FinanceOperations.Commands;
+using FinanceManager.Application.Models.Requests.FinanceOperations.Queries;
 using FinanceManager.Domain.Wrapper;
 using FinanceManager.Web.Services.APIServices.APIHttpClient;
 
@@ -11,14 +13,14 @@ namespace FinanceManager.Web.Services.APIServices.Managers.FinanceOperations
         {
         }
 
-        public async Task<Result<List<FinanceOperationDTO>>> GetAllOperationsOfWalletAsync(Guid walletId, int index = 0, int take = 0)
+        public async Task<Result<List<FinanceOperationDTO>>> GetAllOperationsOfWalletAsync(GetAllOperationsOfWalletRequest request)
         {
-            return await SendRequest(async () => await _apiHttpClient.GetAllOfWalletAsync(walletId, index, take));
+            return await SendRequest(async () => await _apiHttpClient.GetAllOfWalletAsync(request));
         }
 
-        public async Task<Result<List<FinanceOperationDTO>>> GetAllOperationsOfTypeAsync(Guid typeId, int index = 0, int take = 0)
+        public async Task<Result<List<FinanceOperationDTO>>> GetAllOperationsOfTypeAsync(GetAllOperationsOfTypeRequest request)
         {
-            return await SendRequest(async () => await _apiHttpClient.GetAllFinanceOperationsOfTypeAsync(typeId, index, take));
+            return await SendRequest(async () => await _apiHttpClient.GetAllFinanceOperationsOfTypeAsync(request));
         }
 
         public async Task<Result<FinanceOperationDTO>> GetOperationAsync(Guid id)
@@ -26,14 +28,14 @@ namespace FinanceManager.Web.Services.APIServices.Managers.FinanceOperations
             return await SendRequest(async () => await _apiHttpClient.GetFinanceOperationAsync(id));
         }
 
-        public async Task<Result<FinanceOperationDTO>> AddOperationAsync(AddFinanceOperationCommand command)
+        public async Task<Result<FinanceOperationDTO>> AddOperationAsync(AddFinanceOperationRequest request)
         {
-            return await SendRequest(async () => await _apiHttpClient.AddFinanceOperationAsync(command));
+            return await SendRequest(async () => await _apiHttpClient.AddFinanceOperationAsync(request));
         }
 
-        public async Task<Result<FinanceOperationDTO>> UpdateOperationAsync(UpdateFinanceOperationCommand command)
+        public async Task<Result<FinanceOperationDTO>> UpdateOperationAsync(UpdateFinanceOperationRequest request)
         {
-            return await SendRequest(async () => await _apiHttpClient.UpdateFinanceOperationAsync(command));
+            return await SendRequest(async () => await _apiHttpClient.UpdateFinanceOperationAsync(request));
         }
 
         public async Task<Domain.Wrapper.IResult> DeleteOperationAsync(Guid id)

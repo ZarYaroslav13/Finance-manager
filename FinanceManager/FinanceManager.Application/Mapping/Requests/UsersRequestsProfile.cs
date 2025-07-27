@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
 using FinanceManager.Application.Models.Requests.Users.Commands;
 using FinanceManager.Application.Models.Requests.Users.Queries;
-using FinanceManager.Domain.UseCases.Users.Commands.ForgotPasswordCommand;
-using FinanceManager.Domain.UseCases.Users.Commands.RegisterCommand;
-using FinanceManager.Domain.UseCases.Users.Commands.ResetPasswordCommand;
-using FinanceManager.Domain.UseCases.Users.Commands.UpdateUserRolesCommand;
-using FinanceManager.Domain.UseCases.Users.Queries.GetAllUsersQuery;
+using FinanceManager.Domain.UseCases.Commons.Users.Commands.ForgotPasswordCommand;
+using FinanceManager.Domain.UseCases.Commons.Users.Commands.RegisterCommand;
+using FinanceManager.Domain.UseCases.Commons.Users.Commands.ResetPasswordCommand;
+using FinanceManager.Domain.UseCases.Commons.Users.Commands.UpdateUserRolesCommand;
+using FinanceManager.Domain.UseCases.Commons.Users.Queries.GetAllUsersQuery;
 
 namespace FinanceManager.Application.Mapping.Requests;
 

@@ -1,5 +1,5 @@
 ﻿using FinanceManager.Application.Services.Token;
-using FinanceManager.Domain.UseCases.Tokens.Commands.GetTokenCommand;
+using FinanceManager.Domain.UseCases.Commons.Tokens.Commands.GetTokenCommand;
 using FinanceManager.Domain.Wrapper;
 using FinanceManager.Web.Services.APIServices.Managers.TokenManager;
 using FinanceManager.Web.Services.Autorization;

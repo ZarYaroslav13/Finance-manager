@@ -1,6 +1,7 @@
 ﻿using Blazored.LocalStorage;
 using FinanceManager.Application.Models;
 using FinanceManager.Domain.Wrapper;
+using FinanceManager.Web.Extentions;
 using FinanceManager.Web.Services.APIServices.APIHttpClient;
 using FinanceManager.Web.Settings;
 using FinanceManager.Web.Shared.Constants.Storage;
@@ -90,7 +91,20 @@ public class ClientPreferencesManager : IPreferencesManager
 
     public async Task<UserPreferencesDTO> GetPreference()
     {
-        return await _localStorageService.GetItemAsync<UserPreferencesDTO>(StorageConstants.Preferences) ?? new UserPreferencesDTO();
+        var preferences = await _localStorageService.GetItemAsync<UserPreferencesDTO>(StorageConstants.Preferences) ?? new UserPreferencesDTO();
+
+        if (preferences == null)
+        {
+            var storedPreferences = await _apiClient.GetUserPreferences(new Guid(_contextAccessor.HttpContext.User.GetUserId()));
+
+            if (storedPreferences.Succeeded)
+            {
+                preferences = storedPreferences.Data;
+                await _localStorageService.SetItemAsync(StorageConstants.Preferences, preferences);
+            }
+        }
+
+        return preferences;
     }
 
     public async Task SetPreference(UserPreferencesDTO preference)

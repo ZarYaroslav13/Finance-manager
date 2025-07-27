@@ -2,15 +2,16 @@
 using FinanceManager.Application.Models;
 using FinanceManager.Application.Models.Base;
 using FinanceManager.Application.Models.Requests.Users.Commands;
-using FinanceManager.Domain.UseCases.Users.Commands.DeleteAccountByIdCommand;
-using FinanceManager.Domain.UseCases.Users.Commands.ForgotPasswordCommand;
-using FinanceManager.Domain.UseCases.Users.Commands.RegisterCommand;
-using FinanceManager.Domain.UseCases.Users.Commands.ResetPasswordCommand;
-using FinanceManager.Domain.UseCases.Users.Commands.UpdateUserRolesCommand;
-using FinanceManager.Domain.UseCases.Users.Queries.ConfirmEmailQuery;
-using FinanceManager.Domain.UseCases.Users.Queries.GetAllUsersQuery;
-using FinanceManager.Domain.UseCases.Users.Queries.GetUserQuery;
-using FinanceManager.Domain.UseCases.Users.Queries.GetUserRolesQuery;
+using FinanceManager.Application.Models.Requests.Users.Queries;
+using FinanceManager.Domain.UseCases.Commons.Users.Commands.DeleteUserCommand;
+using FinanceManager.Domain.UseCases.Commons.Users.Commands.ForgotPasswordCommand;
+using FinanceManager.Domain.UseCases.Commons.Users.Commands.RegisterCommand;
+using FinanceManager.Domain.UseCases.Commons.Users.Commands.ResetPasswordCommand;
+using FinanceManager.Domain.UseCases.Commons.Users.Commands.UpdateUserRolesCommand;
+using FinanceManager.Domain.UseCases.Commons.Users.Queries.ConfirmEmailQuery;
+using FinanceManager.Domain.UseCases.Commons.Users.Queries.GetAllUsersQuery;
+using FinanceManager.Domain.UseCases.Commons.Users.Queries.GetUserQuery;
+using FinanceManager.Domain.UseCases.Commons.Users.Queries.GetUserRolesQuery;
 using FinanceManager.Domain.Wrapper;
 using MediatR;
 
@@ -21,7 +22,12 @@ public class UserService : BaseService, IUserService
     public UserService(IMediator mediator, IMapper mapper) : base(mediator, mapper)
     {
     }
+    public async Task<PaginatedResult<UserDTO>> GetAllAsync(GetAllUsersRequest request)
+    {
+        var result = (await _mediator.Send(_mapper.Map<GetAllUsersQuery>(request)));
 
+        return _mapper.Map<PaginatedResult<UserDTO>>(result);
+    }
 
     public async Task<IResult<List<RoleDTO>>> GetUserRolesAsync(Guid id)
     {
@@ -35,13 +41,6 @@ public class UserService : BaseService, IUserService
         var result = await _mediator.Send(_mapper.Map<UpdateUserRolesCommand>(request));
 
         return result;
-    }
-
-    public async Task<PaginatedResult<UserDTO>> GetAllAsync(int pageNumber, int pageSize)
-    {
-        var result = (await _mediator.Send(new GetAllUsersQuery() { PageNumber = pageNumber, PageSize = pageNumber }));
-
-        return _mapper.Map<PaginatedResult<UserDTO>>(result);
     }
 
     public async Task<Result<UserDTO>> GetAsync(Guid userId)

@@ -1,13 +1,9 @@
-﻿using FinanceManager.Application.Services.Accounts;
-using FinanceManager.Application.Services.Finances;
-using FinanceManager.Application.Services.Preferences;
-using FinanceManager.Application.Services.Token;
-using FinanceManager.Application.Services.Users;
-using FinanceManager.Application.Services.Wallets;
+﻿using FinanceManager.Application.Services;
 using FinanceManager.Domain.Authorization;
 using FinanceManager.Domain.Configurations;
 using FinanceManager.Domain.Services.CurrentUserService;
 using FinanceManager.Domain.Services.Email;
+using FinanceManager.Domain.UseCases.Behaviours;
 using FinanceManager.Domain.Wrapper;
 using FinanceManager.Infrastructure;
 using FinanceManager.Infrastructure.Models.Authorization;
@@ -37,7 +33,6 @@ public static class AddServicesConfigurationHostBuilderExtensions
 
         services.AddMediator();
 
-
         services.AddDbConnection(configuration);
 
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
@@ -48,16 +43,10 @@ public static class AddServicesConfigurationHostBuilderExtensions
         services.AddHangfireServer();
 
         services.AddHttpContextAccessor();
-        services.AddScoped<ICurrentUserService, CurrentUserService>();
-        services.AddScoped<IFinanceReportCreator, FinanceReportCreator>();
-        services.AddScoped<IEmailService, SMTPEmailService>();
-        services.AddScoped<IUserService, UserService>();
-        services.AddScoped<IRoleService, RoleService>();
-        services.AddScoped<IAccountService, AccountService>();
-        services.AddScoped<IWalletService, WalletService>();
-        services.AddScoped<IFinanceService, FinanceService>();
-        services.AddScoped<ITokenService, TokenService>();
-        services.AddScoped<IPreferencesService, PreferencesService>();
+
+        services.AddDomainServices();
+
+        services.AddApplicationServices();
 
         services.AddJwtAuthentication(configuration);
 
@@ -91,6 +80,36 @@ public static class AddServicesConfigurationHostBuilderExtensions
                         GetConnectionString(connectionString)));
 
         services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+        return services;
+    }
+    private static IServiceCollection AddDomainServices(this IServiceCollection services)
+    {
+        services.AddScoped<ICurrentUserService, CurrentUserService>();
+        services.AddScoped<IEmailService, SMTPEmailService>();
+
+        return services;
+    }
+
+    private static IServiceCollection AddApplicationServices(this IServiceCollection services)
+    {
+        var applicationServicesTypes = typeof(BaseService);
+
+        var applicationServices = applicationServicesTypes.Assembly
+            .GetExportedTypes()
+            .Where(t => t.IsClass && !t.IsAbstract)
+            .Select(t => new
+            {
+                Service = t.GetInterface($"I{t.Name}"),
+                Implementation = t
+            })
+            .Where(t => t != null);
+
+        foreach (var service in applicationServices)
+        {
+            if (applicationServicesTypes.IsAssignableFrom(service.Service))
+                services.AddTransient(service.Service, service.Implementation);
+        }
 
         return services;
     }

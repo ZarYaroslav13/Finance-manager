@@ -1,13 +1,14 @@
 ﻿using FinanceManager.Application.Models;
 using FinanceManager.Application.Models.Base;
 using FinanceManager.Application.Models.Requests.Users.Commands;
+using FinanceManager.Application.Models.Requests.Users.Queries;
 using FinanceManager.Domain.Wrapper;
 
 namespace FinanceManager.Application.Services.Users;
 
 public interface IUserService
 {
-    Task<PaginatedResult<UserDTO>> GetAllAsync(int pageNumber, int pageSize);
+    Task<PaginatedResult<UserDTO>> GetAllAsync(GetAllUsersRequest request);
 
     Task<Result<UserDTO>> GetAsync(Guid userId);
 

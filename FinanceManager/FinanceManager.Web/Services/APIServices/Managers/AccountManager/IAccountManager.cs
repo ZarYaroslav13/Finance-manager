@@ -1,11 +1,12 @@
-﻿using FinanceManager.Domain.UseCases.Accounts.Commands.Commands.UpdateAccountCommand;
-using FinanceManager.Domain.UseCases.Accounts.Commands.Commands.UpdatePasswordAccountCommand;
+﻿using FinanceManager.Application.Models.Requests.Account.Commands;
+using FinanceManager.Domain.UseCases.Commons.Accounts.Commands.ChangeUserPasswordCommand;
+using FinanceManager.Domain.UseCases.Commons.Accounts.Commands.UpdateAccountCommand;
 
 namespace FinanceManager.Web.Services.APIServices.Managers.IAccountManager;
 
 public interface IAccountManager : IManager
 {
-    Task<Domain.Wrapper.IResult> ChangePasswordAsync(ChangeUserPasswordCommand model);
+    Task<Domain.Wrapper.IResult> UpdateProfileAsync(UpdateAccountRequest model);
 
-    Task<Domain.Wrapper.IResult> UpdateProfileAsync(UpdateAccountCommand model);
+    Task<Domain.Wrapper.IResult> ChangePasswordAsync(ChangeAccountPasswordRequest model);
 }

@@ -1,4 +1,5 @@
 ﻿using FinanceManager.Application.Models;
+using FinanceManager.Application.Models.Requests.FinanceOperationTypes.Commands;
 using FinanceManager.Domain.Wrapper;
 using FinanceManager.Web.Services.APIServices.APIHttpClient;
 
@@ -18,22 +19,22 @@ namespace FinanceManager.Web.Services.APIServices.Managers.FinanceOperationsType
 
         public async Task<Result<List<FinanceOperationTypeDTO>>> GetAllTypesOfWalletAsync(Guid walletId)
         {
-            return await SendRequest(async () => await _apiHttpClient.GetAllFinanceOperationTypesAsync(walletId));
+            return await SendRequest(async () => await _apiHttpClient.GetAllFinanceOperationTypesOfWalletAsync(walletId));
         }
 
         public async Task<Result<List<FinanceOperationTypeDTO>>> GetTypeAsync(Guid id)
         {
-            return await SendRequest(async () => await _apiHttpClient.GetAllFinanceOperationTypesAsync(id));
+            return await SendRequest(async () => await _apiHttpClient.GetAllFinanceOperationTypesOfWalletAsync(id));
         }
 
-        public async Task<Result<FinanceOperationTypeDTO>> AddTypeAsync(AddFinanceOperationTypeCommand command)
+        public async Task<Result<FinanceOperationTypeDTO>> AddTypeAsync(AddFinanceOperationTypeRequest request)
         {
-            return await SendRequest(async () => await _apiHttpClient.AddFinanceOperationTypeAsync(command));
+            return await SendRequest(async () => await _apiHttpClient.AddFinanceOperationTypeAsync(request));
         }
 
-        public async Task<Result<FinanceOperationTypeDTO>> UpdateTypeAsync(UpdateFinanceOperationTypeCommand command)
+        public async Task<Result<FinanceOperationTypeDTO>> UpdateTypeAsync(UpdateFinanceOperationTypeRequest request)
         {
-            return await SendRequest(async () => await _apiHttpClient.UpdateFinanceOperationTypeAsync(command));
+            return await SendRequest(async () => await _apiHttpClient.UpdateFinanceOperationTypeAsync(request));
         }
 
 

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using FinanceManager.Application.Models.Requests.UserPreferences.Commands;
-using FinanceManager.Domain.UseCases.Preferences.Command.UpdateUserPreferencesCommand;
+using FinanceManager.Domain.UseCases.Commons.Preferences.Command.UpdateUserPreferencesCommand;
 
 namespace FinanceManager.Application.Mapping.Requests;
 

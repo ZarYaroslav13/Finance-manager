@@ -20,7 +20,7 @@ public class FinanceOperationTypeController : BaseController
     }
 
     [HttpGet("wallet/{walletId}")]
-    public async Task<IActionResult> GetAllAsync(Guid walletId)
+    public async Task<IActionResult> GetAllOfWalletAsync(Guid walletId)
     {
         return await ExecuteRequet(async () => await _financeService.GetAllFinanceOperationTypesOfWalletAsync(walletId));
     }

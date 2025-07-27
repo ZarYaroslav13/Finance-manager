@@ -1,4 +1,6 @@
 ﻿using FinanceManager.Application.Models.Base;
+using FinanceManager.Application.Models.Requests.Users.Commands;
+using FinanceManager.Application.Models.Requests.Users.Queries;
 using FinanceManager.Domain.Wrapper;
 using FinanceManager.Web.Services.APIServices.APIHttpClient;
 
@@ -11,9 +13,9 @@ public class UserManager : BaseManager, IUserManager
     {
     }
 
-    public async Task<PaginatedResult<UserDTO>> GetAllAsync(GetAllUsersQuery query)
+    public async Task<PaginatedResult<UserDTO>> GetAllAsync(GetAllUsersRequest request)
     {
-        return await SendRequest(async () => await _apiHttpClient.GetAllUsersAsync(query.PageNumber, query.Take));
+        return await SendRequest(async () => await _apiHttpClient.GetAllUsersAsync(request));
     }
 
     public async Task<IResult<UserDTO>> GetAsync(Guid userId)
@@ -21,16 +23,16 @@ public class UserManager : BaseManager, IUserManager
         return await SendRequest(async () => await _apiHttpClient.GetUserAsync(userId));
     }
 
-    public async Task<Domain.Wrapper.IResult> ForgotPasswordAsync(ForgotPasswordCommand request)
+    public async Task<Domain.Wrapper.IResult> ForgotPasswordAsync(ForgotPasswordRequest request)
     {
         return await SendRequest(async () => await _apiHttpClient.ForgotPasswordAsync(request));
     }
-    public async Task<Domain.Wrapper.IResult> ResetPasswordAsync(ResetPasswordCommand request)
+    public async Task<Domain.Wrapper.IResult> ResetPasswordAsync(ResetPasswordRequest request)
     {
         return await SendRequest(async () => await _apiHttpClient.ResetPasswordAsync(request));
     }
 
-    public async Task<Domain.Wrapper.IResult> RegisterUserAsync(RegisterCommand request)
+    public async Task<Domain.Wrapper.IResult> RegisterUserAsync(RegisterRequest request)
     {
         return await SendRequest(async () => await _apiHttpClient.RegisterUserAsync(request));
     }

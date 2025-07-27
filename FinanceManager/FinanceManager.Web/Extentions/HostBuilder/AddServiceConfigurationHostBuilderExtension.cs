@@ -135,7 +135,6 @@ public static class AddServiceConfigurationHostBuilderExtension
 
     private static IServiceCollection AddClientServices(this IServiceCollection services)
     {
-        services.AddAutoMapper(typeof(UsertProfile).Assembly);
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
         services.AddScoped<ICurrentUserService, CurrentUserService>();

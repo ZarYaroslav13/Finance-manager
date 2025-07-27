@@ -1,4 +1,5 @@
 ﻿using FinanceManager.Application.Models;
+using FinanceManager.Application.Models.Requests.FinanceReports.Commands;
 using FinanceManager.Domain.Wrapper;
 using FinanceManager.Web.Services.APIServices.APIHttpClient;
 
@@ -11,13 +12,13 @@ public class FinanceReportManager : BaseManager, IFinanceReportManager
     {
     }
 
-    public async Task<Result<FinanceReportDTO>> CreateDailyReportAsync(CreateDailyReportCommand command)
+    public async Task<Result<FinanceReportDTO>> CreateDailyReportAsync(CreateDailyReportRequest request)
     {
-        return await SendRequest(async () => await _apiHttpClient.CreateDailyReport(command));
+        return await SendRequest(async () => await _apiHttpClient.CreateDailyReport(request));
     }
 
-    public async Task<Result<FinanceReportDTO>> CreatePeriodReportAsync(CreatePeriodReportCommand command)
+    public async Task<Result<FinanceReportDTO>> CreatePeriodReportAsync(CreatePeriodReportRequest request)
     {
-        return await SendRequest(async () => await _apiHttpClient.CreatePeriodReport(command));
+        return await SendRequest(async () => await _apiHttpClient.CreatePeriodReport(request));
     }
 }

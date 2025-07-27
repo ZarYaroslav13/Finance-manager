@@ -1,4 +1,4 @@
-﻿using FinanceManager.Domain.UseCases.Accounts.Commands.Commands.UpdateAccountCommand;
+﻿using FinanceManager.Domain.UseCases.Commons.Accounts.Commands.UpdateAccountCommand;
 using FinanceManager.Web.Extentions;
 using FinanceManager.Web.Services;
 using FinanceManager.Web.Services.APIServices.Managers.IAccountManager;

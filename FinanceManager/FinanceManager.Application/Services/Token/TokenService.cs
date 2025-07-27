@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using FinanceManager.Application.Models;
 using FinanceManager.Application.Models.Requests.Tokens.Commands;
-using FinanceManager.Domain.UseCases.Tokens.Commands.GetTokenCommand;
-using FinanceManager.Domain.UseCases.Tokens.Commands.RefreshTokenCommand;
+using FinanceManager.Domain.UseCases.Commons.Tokens.Commands.GetTokenCommand;
+using FinanceManager.Domain.UseCases.Commons.Tokens.Commands.RefreshTokenCommand;
 using FinanceManager.Domain.Wrapper;
 using MediatR;
 using System.IdentityModel.Tokens.Jwt;

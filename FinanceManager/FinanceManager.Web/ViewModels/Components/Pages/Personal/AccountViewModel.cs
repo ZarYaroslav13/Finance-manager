@@ -1,5 +1,5 @@
 ﻿using FinanceManager.Application.Models.Base;
-using FinanceManager.Domain.UseCases.Accounts.Commands.Commands.UpdateAccountCommand;
+using FinanceManager.Domain.UseCases.Commons.Accounts.Commands.UpdateAccountCommand;
 using FinanceManager.Web.Components.Pages.Personal;
 using FinanceManager.Web.Extentions;
 using FinanceManager.Web.Services;

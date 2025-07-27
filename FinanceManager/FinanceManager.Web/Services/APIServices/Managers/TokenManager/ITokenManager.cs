@@ -1,5 +1,6 @@
 ﻿using FinanceManager.Application.Models;
-using FinanceManager.Domain.UseCases.Tokens.Commands.GetTokenCommand;
+using FinanceManager.Application.Models.Requests.Tokens.Commands;
+using FinanceManager.Domain.UseCases.Commons.Tokens.Commands.GetTokenCommand;
 using FinanceManager.Domain.Wrapper;
 using System.Security.Claims;
 
@@ -7,7 +8,7 @@ namespace FinanceManager.Web.Services.APIServices.Managers.TokenManager;
 
 public interface ITokenManager : IManager
 {
-    Task<Result<TokenDTO>> LoginAsync(GetTokenCommand model);
+    Task<Result<TokenDTO>> LoginAsync(GetTokenRequest model);
 
     Task<string> RefreshTokenAsync();
 

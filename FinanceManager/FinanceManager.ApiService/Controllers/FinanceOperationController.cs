@@ -11,7 +11,7 @@ public class FinanceOperationController : BaseController
 {
     private readonly IFinanceService _financeService;
 
-    public FinanceOperationController(IFinanceService financeService, IMediator mediator) : base(mediator)
+    public FinanceOperationController(IFinanceService financeService)
     {
         _financeService = financeService ?? throw new ArgumentNullException(nameof(financeService));
     }

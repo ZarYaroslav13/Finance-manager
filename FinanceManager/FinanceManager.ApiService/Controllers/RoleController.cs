@@ -13,7 +13,7 @@ namespace FinanceManager.ApiService.Controllers;
 public class RoleController : BaseController
 {
     private readonly IRoleService _roleService;
-    public RoleController(IRoleService roleService, IMediator mediator) : base(mediator)
+    public RoleController(IRoleService roleService)
     {
         _roleService = roleService ?? throw new ArgumentNullException(nameof(roleService));
     }

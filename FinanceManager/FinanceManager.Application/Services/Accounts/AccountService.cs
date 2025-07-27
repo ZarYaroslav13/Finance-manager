@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FinanceManager.Application.Models.Requests.Account.Commands;
 using FinanceManager.Domain.UseCases.Accounts.Commands.Commands.UpdateAccountCommand;
 using FinanceManager.Domain.UseCases.Accounts.Commands.Commands.UpdatePasswordAccountCommand;
 using FinanceManager.Domain.Wrapper;
@@ -12,17 +13,17 @@ public class AccountService : BaseService, IAccountService
     {
     }
 
-    public async Task<IResult> ChangePasswordAsync(ChangeUserPasswordCommand command)
+    public async Task<IResult> UpdateAccountAsync(UpdateAccountRequest request)
     {
-
-        var result = await _mediator.Send(command);
+        var result = await _mediator.Send(_mapper.Map<UpdateAccountCommand>(request));
 
         return result;
     }
 
-    public async Task<IResult> UpdateAccountAsync(UpdateAccountCommand command)
+    public async Task<IResult> ChangePasswordAsync(ChangeUserPasswordRequest request)
     {
-        var result = await _mediator.Send(command);
+
+        var result = await _mediator.Send(_mapper.Map<ChangeUserPasswordCommand>(request));
 
         return result;
     }

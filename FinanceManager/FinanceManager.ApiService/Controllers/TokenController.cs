@@ -1,4 +1,5 @@
 ﻿using FinanceManager.ApiService.Controllers.Base;
+using FinanceManager.Application.Models.Requests.Tokens.Commands;
 using FinanceManager.Application.Services.Token;
 using FinanceManager.Domain.UseCases.Tokens.Commands.GetTokenCommand;
 using FinanceManager.Domain.UseCases.Tokens.Commands.RefreshTokenCommand;
@@ -12,16 +13,16 @@ public class TokenController : BaseController
 {
     private readonly ITokenService _tokenService;
 
-    public TokenController(ITokenService tokenService, IMediator mediator) : base(mediator)
+    public TokenController(ITokenService tokenService)
     {
         _tokenService = tokenService ?? throw new ArgumentNullException(nameof(tokenService));
     }
 
     [HttpPost]
     [AllowAnonymous]
-    public async Task<IActionResult> Get([FromBody] GetTokenCommand command)
+    public async Task<IActionResult> Get([FromBody] GetTokenRequest request)
     {
-        return await ExecuteRequet(async () => await _tokenService.LoginAsync(command));
+        return await ExecuteRequet(async () => await _tokenService.LoginAsync(request));
     }
 
     /// <summary>
@@ -30,8 +31,8 @@ public class TokenController : BaseController
     /// <param name="model"></param>
     /// <returns>Status 200 OK</returns>
     [HttpPost("refresh")]
-    public async Task<IActionResult> Refresh([FromBody] RefreshTokenCommand command)
+    public async Task<IActionResult> Refresh([FromBody] RefreshTokenRequest request)
     {
-        return await ExecuteRequet(async () => await _tokenService.GetRefreshTokenAsync(command));
+        return await ExecuteRequet(async () => await _tokenService.GetRefreshTokenAsync(request));
     }
 }

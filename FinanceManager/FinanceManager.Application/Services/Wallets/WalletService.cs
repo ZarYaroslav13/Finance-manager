@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FinanceManager.Application.Models;
+using FinanceManager.Application.Models.Requests.Wallets.Commands;
 using FinanceManager.Domain.UseCases.Wallets.Commands.CreateWalletCommand;
 using FinanceManager.Domain.UseCases.Wallets.Commands.DeleteWalletCommand;
 using FinanceManager.Domain.UseCases.Wallets.Commands.UpdateWalletCommand;
@@ -31,21 +32,21 @@ public class WalletService : BaseService, IWalletService
         return _mapper.Map<Result<WalletDTO>>(result);
     }
 
-    public async Task<Result<WalletDTO>> AddWalletAsync(CreateWalletCommand command)
+    public async Task<Result<WalletDTO>> AddWalletAsync(CreateWalletRequest request)
     {
-        var result = await _mediator.Send(command);
+        var result = await _mediator.Send(_mapper.Map<CreateWalletCommand>(request));
 
         return _mapper.Map<Result<WalletDTO>>(result);
     }
 
-    public async Task<Result<WalletDTO>> UpdateWalletAsync(WalletDTO updatedWallet)
+    public async Task<Result<WalletDTO>> UpdateWalletAsync(UpdateWalletRequest request)
     {
-        var isUserOwnerReport = await _mediator.Send(new IsCallerWalletOwnerQuery() { WalletId = updatedWallet.Id });
+        var isUserOwnerReport = await _mediator.Send(new IsCallerWalletOwnerQuery() { WalletId = request.Id });
 
         if (!isUserOwnerReport.Succeeded)
             return Result<WalletDTO>.Fail(isUserOwnerReport.Messages);
 
-        var updateCommand = _mapper.Map<UpdateWalletCommand>(updatedWallet);
+        var updateCommand = _mapper.Map<UpdateWalletCommand>(request);
 
         updateCommand.IsUserOwner = isUserOwnerReport.Data;
 

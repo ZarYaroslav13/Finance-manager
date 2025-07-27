@@ -10,7 +10,7 @@ public class FinanceOperationTypeController : BaseController
 {
     private readonly IFinanceService _financeService;
 
-    public FinanceOperationTypeController(IFinanceService financeService, IMediator mediator) : base(mediator)
+    public FinanceOperationTypeController(IFinanceService financeService)
     {
         _financeService = financeService ?? throw new ArgumentNullException(nameof(financeService));
     }

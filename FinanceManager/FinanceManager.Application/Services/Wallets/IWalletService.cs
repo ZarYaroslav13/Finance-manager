@@ -1,4 +1,5 @@
 ﻿using FinanceManager.Application.Models;
+using FinanceManager.Application.Models.Requests.Wallets.Commands;
 using FinanceManager.Domain.UseCases.Wallets.Commands.CreateWalletCommand;
 using FinanceManager.Domain.Wrapper;
 
@@ -10,9 +11,9 @@ public interface IWalletService
 
     public Task<Result<WalletDTO>> FindWalletAsync(Guid id);
 
-    public Task<Result<WalletDTO>> AddWalletAsync(CreateWalletCommand command);
+    public Task<Result<WalletDTO>> AddWalletAsync(CreateWalletRequest request);
 
-    public Task<Result<WalletDTO>> UpdateWalletAsync(WalletDTO updatedWallet);
+    public Task<Result<WalletDTO>> UpdateWalletAsync(UpdateWalletRequest request);
 
     public Task<IResult> DeleteWalletByIdAsync(Guid id);
 

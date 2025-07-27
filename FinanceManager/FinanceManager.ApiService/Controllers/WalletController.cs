@@ -1,5 +1,6 @@
 ﻿using FinanceManager.ApiService.Controllers.Base;
 using FinanceManager.Application.Models;
+using FinanceManager.Application.Models.Requests.Wallets.Commands;
 using FinanceManager.Application.Services.Wallets;
 using FinanceManager.Domain.UseCases.Wallets.Commands.CreateWalletCommand;
 using MediatR;
@@ -11,7 +12,7 @@ public class WalletController : BaseController
 {
     private readonly IWalletService _walletService;
 
-    public WalletController(IWalletService walletService, IMediator mediator) : base(mediator)
+    public WalletController(IWalletService walletService)
     {
         _walletService = walletService ?? throw new ArgumentNullException(nameof(walletService));
     }
@@ -29,15 +30,15 @@ public class WalletController : BaseController
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateAsync([FromBody] CreateWalletCommand command)
+    public async Task<IActionResult> CreateAsync([FromBody] CreateWalletRequest request)
     {
-        return await ExecuteRequet(async () => await _walletService.AddWalletAsync(command));
+        return await ExecuteRequet(async () => await _walletService.AddWalletAsync(request));
     }
 
     [HttpPut]
-    public async Task<IActionResult> UpdateAsync([FromBody] WalletDTO wallet)
+    public async Task<IActionResult> UpdateAsync([FromBody] UpdateWalletRequest request)
     {
-        return await ExecuteRequet(async () => await _walletService.UpdateWalletAsync(wallet));
+        return await ExecuteRequet(async () => await _walletService.UpdateWalletAsync(request));
     }
 
     [HttpDelete]

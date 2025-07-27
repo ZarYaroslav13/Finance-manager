@@ -1,4 +1,5 @@
 ﻿using FinanceManager.ApiService.Controllers.Base;
+using FinanceManager.Application.Models.Requests.Account.Commands;
 using FinanceManager.Application.Services.Accounts;
 using FinanceManager.Domain.UseCases.Accounts.Commands.Commands.UpdateAccountCommand;
 using FinanceManager.Domain.UseCases.Accounts.Commands.Commands.UpdatePasswordAccountCommand;
@@ -11,20 +12,20 @@ public class AccountController : BaseController
 {
     private readonly IAccountService _accountService;
 
-    public AccountController(IAccountService accountService, IMediator mediator) : base(mediator)
+    public AccountController(IAccountService accountService)
     {
         _accountService = accountService ?? throw new ArgumentNullException(nameof(accountService));
     }
 
     [HttpPut]
-    public async Task<IActionResult> UpdateAsync([FromBody] UpdateAccountCommand command)
+    public async Task<IActionResult> UpdateAsync([FromBody] UpdateAccountRequest request)
     {
-        return await ExecuteRequet(async () => await _accountService.UpdateAccountAsync(command));
+        return await ExecuteRequet(async () => await _accountService.UpdateAccountAsync(request));
     }
 
     [HttpPatch("change-password")]
-    public async Task<IActionResult> ChangePasswordAsync([FromBody] ChangeUserPasswordCommand command)
+    public async Task<IActionResult> ChangePasswordAsync([FromBody] ChangeUserPasswordRequest request)
     {
-        return await ExecuteRequet(async () => await _accountService.ChangePasswordAsync(command));
+        return await ExecuteRequet(async () => await _accountService.ChangePasswordAsync(request));
     }
 }

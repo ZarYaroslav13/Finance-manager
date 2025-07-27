@@ -4,8 +4,6 @@ namespace FinanceManager.Application.Models;
 
 public class WalletDTO : Base.ModelDTO
 {
-    [Required]
-    [Length(2, 50)]
     public string Name
     {
         get { return _name; }

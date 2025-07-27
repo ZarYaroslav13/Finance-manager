@@ -9,7 +9,7 @@ namespace FinanceManager.ApiService.Controllers;
 public class FinanceReportController : BaseController
 {
     private readonly IFinanceReportCreator _financeReportCreator;
-    public FinanceReportController(IFinanceReportCreator financeReportCreator, IMediator mediator) : base(mediator)
+    public FinanceReportController(IFinanceReportCreator financeReportCreator)
     {
         _financeReportCreator = financeReportCreator ?? throw new ArgumentNullException(nameof(financeReportCreator));
     }

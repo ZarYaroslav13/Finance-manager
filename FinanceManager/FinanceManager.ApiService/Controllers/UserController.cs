@@ -11,7 +11,7 @@ namespace FinanceManager.ApiService.Controllers;
 public class UserController : BaseController
 {
     private readonly IUserService _userService;
-    public UserController(IUserService userService, IMediator mediator) : base(mediator)
+    public UserController(IUserService userService)
     {
         _userService = userService ?? throw new ArgumentNullException(nameof(userService));
     }

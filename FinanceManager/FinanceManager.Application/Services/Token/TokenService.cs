@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FinanceManager.Application.Models;
+using FinanceManager.Application.Models.Requests.Tokens.Commands;
 using FinanceManager.Domain.UseCases.Tokens.Commands.GetTokenCommand;
 using FinanceManager.Domain.UseCases.Tokens.Commands.RefreshTokenCommand;
 using FinanceManager.Domain.Wrapper;
@@ -26,16 +27,16 @@ public class TokenService : BaseService, ITokenService
         return new(token.Claims, "jwt");
     }
 
-    public async Task<Result<TokenDTO>> LoginAsync(GetTokenCommand command)
+    public async Task<Result<TokenDTO>> LoginAsync(GetTokenRequest request)
     {
-        var result = await _mediator.Send(command);
+        var result = await _mediator.Send(_mapper.Map<GetTokenCommand>(request));
 
         return _mapper.Map<Result<TokenDTO>>(result);
     }
 
-    public async Task<Result<TokenDTO>> GetRefreshTokenAsync(RefreshTokenCommand command)
+    public async Task<Result<TokenDTO>> GetRefreshTokenAsync(RefreshTokenRequest request)
     {
-        var result = await _mediator.Send(command);
+        var result = await _mediator.Send(_mapper.Map<RefreshTokenCommand>(request));
 
         return _mapper.Map<Result<TokenDTO>>(result);
     }

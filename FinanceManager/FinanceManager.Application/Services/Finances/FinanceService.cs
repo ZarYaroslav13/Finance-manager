@@ -4,6 +4,7 @@ using FinanceManager.Application.Models.Requests.FinanceOperations.Commands;
 using FinanceManager.Application.Models.Requests.FinanceOperations.Queries;
 using FinanceManager.Application.Models.Requests.FinanceOperationTypes.Commands;
 using FinanceManager.Application.Services.Wallets;
+using FinanceManager.Domain.UseCases.Commons.FinanceOperations.Commands.AddFinanceOperationCommand;
 using FinanceManager.Domain.UseCases.Commons.FinanceOperations.Commands.DeleteFinanceOperationCommand;
 using FinanceManager.Domain.UseCases.Commons.FinanceOperations.Commands.UpdateFinanceOperationCommand;
 using FinanceManager.Domain.UseCases.Commons.FinanceOperations.Queries.GetAllOperationsOfTypeQuery;
@@ -185,7 +186,7 @@ public class FinanceService : BaseService, IFinanceService
 
     public async Task<Result<FinanceOperationDTO>> AddFinanceOperationAsync(AddFinanceOperationRequest request)
     {
-        var command = _mapper.Map<AddFinanceOperationTypeCommand>(request);
+        var command = _mapper.Map<AddFinanceOperationCommand>(request);
 
         var isCallerOwner = await IsCallerTypeOwnerAsync(request.TypeId);
 

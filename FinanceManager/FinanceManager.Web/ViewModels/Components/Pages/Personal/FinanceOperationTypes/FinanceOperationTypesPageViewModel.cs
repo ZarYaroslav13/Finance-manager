@@ -5,7 +5,6 @@ using FinanceManager.Web.Extentions;
 using FinanceManager.Web.Pages;
 using FinanceManager.Web.Services;
 using FinanceManager.Web.Services.APIServices.Managers.FinanceOperationsType;
-using FinanceManager.Web.Services.APIServices.Managers.WalletManager;
 using FinanceManager.Web.Shared.Dialogs.FinancialOperationTypes;
 using Microsoft.Extensions.Localization;
 using MudBlazor;
@@ -86,14 +85,12 @@ public class FinanceOperationTypesPageViewModel : BaseViewModel<FinanceOperation
     public Guid NewWalletId { get; set; }
     #endregion
 
-    private readonly IWalletManager _walletManager;
     private readonly IFinanceOperationsTypesManager _financeOperationTypeManager;
 
-    public FinanceOperationTypesPageViewModel(IFinanceOperationsTypesManager financeOperationTypeManager, IWalletManager walletManager,
+    public FinanceOperationTypesPageViewModel(IFinanceOperationsTypesManager financeOperationTypeManager,
         ViewModelServicesLocator locator, IStringLocalizer<FinanceOperationTypesPage> localizer) : base(locator, localizer)
     {
         _financeOperationTypeManager = financeOperationTypeManager ?? throw new ArgumentNullException(nameof(financeOperationTypeManager));
-        _walletManager = walletManager ?? throw new ArgumentNullException(nameof(walletManager));
 
         GroupDefinition = new()
         {
@@ -118,12 +115,21 @@ public class FinanceOperationTypesPageViewModel : BaseViewModel<FinanceOperation
 
         _tableData = new();
 
-        Wallets = (await _walletManager.GetWalletsAsync(new(_httpContextAccessor.HttpContext.User.GetUserId()))).Data;
+        var getTypesReport = await _financeOperationTypeManager.GetAllTypesOfUserAsync(new(_httpContextAccessor.HttpContext.User.GetUserId()));
 
-        foreach (var wallet in Wallets)
+        if (!getTypesReport.Succeeded)
         {
-            _tableData.AddRange((await _financeOperationTypeManager.GetAllTypesOfWalletAsync(wallet.Id)).Data);
+            _snackBar.Add("Something wrong, we can not find your finance operation types", Severity.Error);
+            return;
         }
+
+        _tableData = getTypesReport.Data;
+
+        Wallets = _tableData
+            .GroupBy(fot => fot.WalletId)
+            .Select(group =>
+                        new WalletDTO() { Id = group.First().WalletId, Name = group.First().WalletName })
+            .ToList();
 
         if (WalletId != Guid.Empty)
         {

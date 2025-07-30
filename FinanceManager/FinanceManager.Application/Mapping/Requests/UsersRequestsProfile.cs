@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using FinanceManager.Application.Models.Base;
+using FinanceManager.Application.Models.Requests.Account.Commands;
 using FinanceManager.Application.Models.Requests.Users.Commands;
 using FinanceManager.Application.Models.Requests.Users.Queries;
 using FinanceManager.Domain.UseCases.Commons.Users.Commands.ForgotPasswordCommand;
@@ -13,6 +15,8 @@ public class UsersRequestsProfile : Profile
 {
     public UsersRequestsProfile()
     {
+        CreateMap<UserDTO, UpdateAccountRequest>();
+
         CreateMap<GetAllUsersRequest, GetAllUsersQuery>();
 
         CreateMap<ForgotPasswordRequest, ForgotPasswordCommand>();

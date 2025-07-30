@@ -1,5 +1,7 @@
-﻿using Blazored.LocalStorage;
+﻿using AutoMapper;
+using Blazored.LocalStorage;
 using CsvHelper.Configuration;
+using FinanceManager.Application.Mapping.Requests;
 using FinanceManager.Domain.API;
 using FinanceManager.Domain.Authorization;
 using FinanceManager.Domain.Services.CurrentUserService;
@@ -18,9 +20,11 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Localization;
+
 using MudBlazor.Services;
 using Refit;
 using System.Globalization;
+using System.Reflection;
 
 namespace FinanceManager.Web.Extentions.HostBuilder;
 
@@ -135,6 +139,24 @@ public static class AddServiceConfigurationHostBuilderExtension
 
     private static IServiceCollection AddClientServices(this IServiceCollection services)
     {
+        var profile2 = new AccountRequestsProfile();
+        var profiles = new List<Type>();
+
+        foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+        {
+            try
+            {
+                var types = assembly.GetTypes()
+                    .Where(t => typeof(Profile).IsAssignableFrom(t) && !t.IsAbstract && t.IsClass);
+                profiles.AddRange(types);
+            }
+            catch (ReflectionTypeLoadException ex)
+            {
+                // In case some types can't be loaded (e.g., dynamic assemblies)
+                profiles.AddRange(ex.Types
+                    .Where(t => t != null && typeof(Profile).IsAssignableFrom(t)));
+            }
+        }
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
         services.AddScoped<ICurrentUserService, CurrentUserService>();

@@ -1,11 +1,6 @@
 ﻿using AutoMapper;
 using FinanceManager.Application.Models.Requests.FinanceOperations.Queries;
 using FinanceManager.Application.Models.Requests.FinanceReports.Commands;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FinanceManager.Application.Mapping.Requests;
 

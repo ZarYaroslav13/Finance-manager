@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FinanceManager.Application.Models;
 using FinanceManager.Application.Models.Requests.FinanceOperations.Commands;
 using FinanceManager.Application.Models.Requests.FinanceOperations.Queries;
 using FinanceManager.Domain.UseCases.Commons.FinanceOperations.Commands.AddFinanceOperationCommand;
@@ -19,5 +20,7 @@ public class FinanceOperationsRequestsProfile : Profile
 
         CreateMap<AddFinanceOperationRequest, AddFinanceOperationCommand>();
         CreateMap<UpdateFinanceOperationRequest, UpdateFinanceOperationCommand>();
+
+        CreateMap<FinanceOperationDTO, UpdateFinanceOperationRequest>();
     }
 }

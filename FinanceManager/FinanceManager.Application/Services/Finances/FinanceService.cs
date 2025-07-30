@@ -204,7 +204,7 @@ public class FinanceService : BaseService, IFinanceService
     {
         var command = _mapper.Map<UpdateFinanceOperationCommand>(request);
 
-        var isCallerOwner = await IsCallerOperationOwnerAsync(request.TypeId);
+        var isCallerOwner = await IsCallerOperationOwnerAsync(request.Id);
 
         if (!isCallerOwner.Succeeded)
             return Result<FinanceOperationDTO>.Fail(isCallerOwner.Messages);

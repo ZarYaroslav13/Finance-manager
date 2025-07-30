@@ -178,17 +178,27 @@ public class FinanceOperationsPageViewModel : BaseViewModel<FinanceOperationsPag
 
         _tableData = new();
 
-        Wallets = (await _walletManager.GetWalletsAsync(new(_httpContextAccessor.HttpContext.User.GetUserId()))).Data;
+        var userId = new Guid(_httpContextAccessor.HttpContext.User.GetUserId());
+
+        var getWalletsReport = await _walletManager.GetWalletsAsync(userId);
+        if (!getWalletsReport.Succeeded)
+        {
+            _snackBar.Add("Something wrong, we can not find your wallets", Severity.Error);
+            return;
+        }
+        Wallets = getWalletsReport.Data;
+
+        var getTypesReport = await _financeOperationTypeManager.GetAllTypesOfUserAsync(userId);
+        if (!getTypesReport.Succeeded)
+        {
+            _snackBar.Add("Something wrong, we can not find your finance operation types", Severity.Error);
+            return;
+        }
+        FinancialOperationsTypes = getTypesReport.Data;
 
         foreach (var wallet in Wallets)
         {
             var operations = await _financeOperationsManager.GetAllOperationsOfWalletAsync(new() { WalletId = wallet.Id });
-            operations.Data.ForEach(d => d.Type.WalletName = wallet.Name);
-
-            var types = operations.Data.GroupBy(op => op.Type).Select(pair => pair.Key).ToList();
-
-            FinancialOperationsTypes.AddRange(types);
-
             operations.Data.ForEach(d => d.Type.WalletName = wallet.Name);
             _tableData.AddRange(operations.Data);
         }

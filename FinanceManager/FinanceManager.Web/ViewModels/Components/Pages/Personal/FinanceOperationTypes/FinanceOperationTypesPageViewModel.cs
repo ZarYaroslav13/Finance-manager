@@ -5,6 +5,7 @@ using FinanceManager.Web.Extentions;
 using FinanceManager.Web.Pages;
 using FinanceManager.Web.Services;
 using FinanceManager.Web.Services.APIServices.Managers.FinanceOperationsType;
+using FinanceManager.Web.Services.APIServices.Managers.WalletManager;
 using FinanceManager.Web.Shared.Dialogs.FinancialOperationTypes;
 using Microsoft.Extensions.Localization;
 using MudBlazor;
@@ -85,12 +86,14 @@ public class FinanceOperationTypesPageViewModel : BaseViewModel<FinanceOperation
     public Guid NewWalletId { get; set; }
     #endregion
 
+    private readonly IWalletManager _walletManager;
     private readonly IFinanceOperationsTypesManager _financeOperationTypeManager;
 
-    public FinanceOperationTypesPageViewModel(IFinanceOperationsTypesManager financeOperationTypeManager,
+    public FinanceOperationTypesPageViewModel(IFinanceOperationsTypesManager financeOperationTypeManager, IWalletManager walletManager,
         ViewModelServicesLocator locator, IStringLocalizer<FinanceOperationTypesPage> localizer) : base(locator, localizer)
     {
         _financeOperationTypeManager = financeOperationTypeManager ?? throw new ArgumentNullException(nameof(financeOperationTypeManager));
+        _walletManager = walletManager ?? throw new ArgumentNullException(nameof(walletManager));
 
         GroupDefinition = new()
         {
@@ -115,8 +118,17 @@ public class FinanceOperationTypesPageViewModel : BaseViewModel<FinanceOperation
 
         _tableData = new();
 
-        var getTypesReport = await _financeOperationTypeManager.GetAllTypesOfUserAsync(new(_httpContextAccessor.HttpContext.User.GetUserId()));
+        var userId = new Guid(_httpContextAccessor.HttpContext.User.GetUserId());
 
+        var getWalletsReport = await _walletManager.GetWalletsAsync(userId);
+        if (!getWalletsReport.Succeeded)
+        {
+            _snackBar.Add("Something wrong, we can not find your wallets", Severity.Error);
+            return;
+        }
+        Wallets = getWalletsReport.Data;
+
+        var getTypesReport = await _financeOperationTypeManager.GetAllTypesOfUserAsync(userId);
         if (!getTypesReport.Succeeded)
         {
             _snackBar.Add("Something wrong, we can not find your finance operation types", Severity.Error);
@@ -124,12 +136,6 @@ public class FinanceOperationTypesPageViewModel : BaseViewModel<FinanceOperation
         }
 
         _tableData = getTypesReport.Data;
-
-        Wallets = _tableData
-            .GroupBy(fot => fot.WalletId)
-            .Select(group =>
-                        new WalletDTO() { Id = group.First().WalletId, Name = group.First().WalletName })
-            .ToList();
 
         if (WalletId != Guid.Empty)
         {

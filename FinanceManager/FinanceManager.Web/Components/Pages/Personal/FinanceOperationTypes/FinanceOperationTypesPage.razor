@@ -111,7 +111,7 @@
                 {
                     <MudSelectItem T="Guid" Value="@item.Id">
                         <MudText Class="mud-text-body2 mb-0">@_viewModel.Localizer["Wallet name:"] @item.Name</MudText>
-                        <MudText Class="mud-text-caption">@_viewModel.Localizer["balance:"] @item.Balance</MudText>
+                        @* <MudText Class="mud-text-caption">@_viewModel.Localizer["balance:"] @item.Balance</MudText> *@
                     </MudSelectItem>
                 }
             </MudSelect>

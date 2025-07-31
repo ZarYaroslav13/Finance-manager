@@ -20,6 +20,8 @@ namespace FinanceManager.Domain.UseCases.Commons.Users.Commands.RegisterCommand;
 
 public class RegisterHandler : BaseRequestHandler, IRequestHandler<RegisterCommand, IResult>
 {
+    private const bool UseEmailVerification = false;
+
     private readonly UserManager<FinanceManagerUser> _userManager;
     private readonly IEmailService _emailService;
 
@@ -52,16 +54,25 @@ public class RegisterHandler : BaseRequestHandler, IRequestHandler<RegisterComma
                     if (!updateResult.Succeeded)
                         return updateResult;
 
-                    var verificationUri = await SendVerificationEmail(user);
-                    var mailRequest = new MailRequest
+
+                    if (UseEmailVerification)
                     {
-                        From = "mail@codewithmukesh.com",
-                        To = user.Email,
-                        Body = $"Please confirm your account by <a href='{verificationUri}'>clicking here</a>.",
-                        Subject = "Confirm Registration"
-                    };
-                    BackgroundJob.Enqueue(() => _emailService.SendAsync(mailRequest));
-                    return await Result<Guid>.SuccessAsync(user.Id, $"User {user.UserName} Registered. Please check your Emailbox to verify!");
+                        var verificationUri = await SendVerificationEmail(user);
+                        var mailRequest = new MailRequest
+                        {
+                            From = "mail@codewithmukesh.com",
+                            To = user.Email,
+                            Body = $"Please confirm your account by <a href='{verificationUri}'>clicking here</a>.",
+                            Subject = "Confirm Registration"
+                        };
+                        BackgroundJob.Enqueue(() => _emailService.SendAsync(mailRequest));
+                        return await Result<Guid>.SuccessAsync(user.Id, $"User {user.UserName} Registered. Please check your Emailbox to verify!");
+                    }
+
+                    user.EmailConfirmed = true;
+                    await _userManager.UpdateAsync(user);
+
+                    return await Result<Guid>.SuccessAsync(user.Id, $"User {user.UserName} Registered!");
                 }
 
                 return await Result.FailAsync(result.Errors.Select(a => a.Description).ToList());

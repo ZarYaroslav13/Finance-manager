@@ -210,8 +210,9 @@ public class FinanceOperationsPageViewModel : BaseViewModel<FinanceOperationsPag
         }
 
         TableData.Items = _tableData;
-
-        _filterStartDate = _tableData.Aggregate((first, next) => first.Date > next.Date ? next : first).Date;
+        _filterStartDate = _tableData.Any()
+            ? _tableData.Aggregate((first, next) => first.Date > next.Date ? next : first).Date 
+            : DateTime.Now;
     }
 
     #region Filtering
